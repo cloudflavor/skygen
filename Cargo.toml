@@ -1,20 +1,21 @@
 [package]
-name = "cloudflavor-rust-template"
+name = "skygen"
 version = "0.1.0"
 edition = "2021"
 authors = ["Victor Palade <victor@cloudflavor.io>"]
-description = "Placeholder application description"
+description = "Skygen generates WASI-compatible Rust bindings from OpenAPI specs"
 license = "Apache-2.0"
-repository = "https://github.com/cloudflavor/placeholder"
+repository = "https://github.com/cloudflavor/skygen"
 readme = "README.md"
 
 [[bin]]
-name = "placeholder"
-path = "src/bin/placeholder.rs"
+name = "skygen"
+path = "src/bin/skygen.rs"
 
 [dependencies]
-anyhow = "1.0.79"
+anyhow = "1.0.98"
 structopt = "0.3.26"
-tokio = { version = "1.35.1", features = ["rt-multi-thread", "macros", "fs"] }
-tracing = "0.1.40"
-tracing-subscriber = { version = "0.3.18", features = ["env-filter"] }
+tokio = { version = "1.45.1", features = ["rt-multi-thread", "macros", "fs"] }
+tracing = "0.1.41"
+tracing-subscriber = { version = "0.3.19", features = ["env-filter"] }
+reqwest = { version = "0.12.4", features = ["json"] }
