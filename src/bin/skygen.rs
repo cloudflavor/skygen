@@ -1,4 +1,4 @@
-// Copyright 2024 Cloudflavor GmbH
+// Copyright 2025 Cloudflavor GmbH
 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -13,17 +13,27 @@
 // limitations under the License.
 
 use anyhow::Result;
-use cloudflavor_rust_template::Opts;
+use skygen::{generate, Cli};
 use structopt::StructOpt;
+use tracing_subscriber::EnvFilter;
 
 #[tokio::main]
 async fn main() -> Result<()> {
-    let opts = Opts::from_args();
+    let opts = Cli::from_args();
+
+    let opts_level = opts.log_level;
+    let env_filter = EnvFilter::new(opts_level.as_str());
 
     let subscriber = tracing_subscriber::fmt::Subscriber::builder()
-        .with_max_level(opts.log_level)
+        .with_ansi(true)
+        .with_env_filter(env_filter)
+        .with_writer(std::io::stdout)
         .finish();
     tracing::subscriber::set_global_default(subscriber)?;
+
+    match opts.commands {
+        skygen::Commands::Generate(args) => generate::run_generate(args).await?,
+    }
 
     Ok(())
 }
