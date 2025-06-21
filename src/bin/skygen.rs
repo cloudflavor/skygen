@@ -13,7 +13,8 @@
 // limitations under the License.
 
 use anyhow::Result;
-use skygen::{generate, Cli};
+use skygen::generator;
+use skygen::Cli;
 use structopt::StructOpt;
 use tracing_subscriber::EnvFilter;
 
@@ -32,7 +33,7 @@ async fn main() -> Result<()> {
     tracing::subscriber::set_global_default(subscriber)?;
 
     match opts.commands {
-        skygen::Commands::Generate(args) => generate::run_generate(args).await?,
+        skygen::Commands::Generate(args) => generator::generate(args.schema, args.output).await?,
     }
 
     Ok(())
