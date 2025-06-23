@@ -15,6 +15,11 @@ jobs:
     container:
       image: ubuntu:22.04
     steps:
+    - name: Install dependencies
+      run: |
+        apt-get update
+        DEBIAN_FRONTEND=noninteractive apt-get install -y \
+          curl ca-certificates build-essential git
     - uses: actions/checkout@v3
     - name: Install rust toolchain
       uses: actions-rs/toolchain@v1
