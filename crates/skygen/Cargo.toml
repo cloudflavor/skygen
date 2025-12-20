@@ -1,0 +1,30 @@
+[package]
+name = "skygen"
+version = "0.1.0"
+edition = "2021"
+authors = ["Victor Palade <victor@cloudflavor.io>"]
+description = "Skygen generates WASI-compatible Rust bindings from OpenAPI specs"
+license = "Apache-2.0"
+repository = "https://github.com/cloudflavor/skygen"
+readme = "README.md"
+
+[[bin]]
+name = "skygen"
+path = "src/bin/skygen.rs"
+
+[dependencies]
+anyhow = "1.0.98"
+structopt = "0.3.26"
+tokio = { version = "1.46.1", features = ["rt-multi-thread", "macros", "fs", "process"] }
+tracing = "0.1.41"
+tracing-subscriber = { version = "0.3.19", features = ["env-filter"] }
+reqwest = { version = "0.12.4", features = ["json"] }
+serde = "1.0.219"
+serde_json = "1.0.140"
+openapiv3 = "2.2.0"
+serde_yaml = "0.9.34"
+heck = "0.5.0"
+once_cell = "1.21.3"
+tera = "1.20.0"
+include_dir = "0.7.4"
+serde_path_to_error = "0.1"
