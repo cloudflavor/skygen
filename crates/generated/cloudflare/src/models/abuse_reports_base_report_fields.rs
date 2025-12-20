@@ -19,7 +19,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct AbuseReportsBaseReportFields {
-    pub act: serde_json::Value,
+    pub act: crate::models::abuse_reports_report_type::AbuseReportsReportType,
     pub address1: Option<String>,
     pub agent_name: Option<String>,
     pub agree: Option<i64>,
@@ -30,13 +30,16 @@ pub struct AbuseReportsBaseReportFields {
     pub destination_ips: Option<String>,
     pub email: String,
     pub email2: String,
-    pub host_notification: Option<serde_json::Value>,
+    pub host_notification:
+        Option<crate::models::abuse_reports_notification::AbuseReportsNotification>,
     pub justification: Option<String>,
     pub name: String,
-    pub ncmec_notification: Option<serde_json::Value>,
+    pub ncmec_notification:
+        Option<crate::models::abuse_reports_notification::AbuseReportsNotification>,
     pub ncsei_subject_representation: Option<bool>,
     pub original_work: Option<String>,
-    pub owner_notification: Option<serde_json::Value>,
+    pub owner_notification:
+        Option<crate::models::abuse_reports_notification::AbuseReportsNotification>,
     pub ports_protocols: Option<String>,
     pub reported_country: Option<String>,
     pub reported_user_agent: Option<String>,

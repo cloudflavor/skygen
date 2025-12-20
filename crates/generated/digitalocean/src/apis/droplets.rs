@@ -15,7 +15,9 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-use crate::models::droplet_backup_policy::DropletBackupPolicy;
+use crate::models::associated_resource_status::AssociatedResourceStatus;
+use crate::models::error::Error;
+use crate::models::neighbor_ids::NeighborIds;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
@@ -34,13 +36,34 @@ impl<'a> ListRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// List All Droplets
+///
+/// To list all Droplets in your account, send a GET request to `/v2/droplets`.
+///
+/// The response body will be a JSON object with a key of `droplets`. This will be
+/// set to an array containing objects each representing a Droplet. These will
+/// contain the standard Droplet attributes.
+///
+/// ### Filtering Results by Tag
+///
+/// It's possible to request filtered results by including certain query parameters.
+/// To only list Droplets assigned to a specific tag, include the `tag_name` query
+/// parameter set to the name of the tag in your GET request. For example,
+/// `/v2/droplets?tag_name=$TAG_NAME`.
+///
+/// ### GPU Droplets
+///
+/// By default, only non-GPU Droplets are returned. To list only GPU Droplets, set
+/// the `type` query parameter to `gpus`. For example, `/v2/droplets?type=gpus`.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/droplets`
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::droplets };
+/// use digitalocean::{ ApiClient, apis::droplets };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list(&api)
+/// let response = list(&api)
 ///     .send()
 ///     .await?;
 /// ```
@@ -50,7 +73,7 @@ pub fn list(api: &ApiClient) -> ListRequest<'_> {
 
 #[derive(Debug)]
 pub struct CreateRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, Error>,
 }
 
 impl<'a> CreateRequest<'a> {
@@ -63,17 +86,48 @@ impl<'a> CreateRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<Error> {
         self.builder.send().await
     }
 }
-
 /// Create a New Droplet
+///
+/// To create a new Droplet, send a POST request to `/v2/droplets` setting the
+/// required attributes.
+///
+/// A Droplet will be created using the provided information. The response body
+/// will contain a JSON object with a key called `droplet`. The value will be an
+/// object containing the standard attributes for your new Droplet. The response
+/// code, 202 Accepted, does not indicate the success or failure of the operation,
+/// just that the request has been accepted for processing. The `actions` returned
+/// as part of the response's `links` object can be used to check the status
+/// of the Droplet create event.
+///
+/// ### Create Multiple Droplets
+///
+/// Creating multiple Droplets is very similar to creating a single Droplet.
+/// Instead of sending `name` as a string, send `names` as an array of strings. A
+/// Droplet will be created for each name you send using the associated
+/// information. Up to ten Droplets may be created this way at a time.
+///
+/// Rather than returning a single Droplet, the response body will contain a JSON
+/// array with a key called `droplets`. This will be set to an array of JSON
+/// objects, each of which will contain the standard Droplet attributes. The
+/// response code, 202 Accepted, does not indicate the success or failure of any
+/// operation, just that the request has been accepted for processing. The array
+/// of `actions` returned as part of the response's `links` object can be used to
+/// check the status of each individual Droplet create event.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/v2/droplets`
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::droplets };
+/// use digitalocean::{ ApiClient, apis::droplets };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = create(&api)
+/// # let body: serde_json::Value = todo!();
+/// let response = create(&api)
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -83,7 +137,7 @@ pub fn create(api: &ApiClient) -> CreateRequest<'_> {
 
 #[derive(Debug)]
 pub struct DestroyRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, Error>,
 }
 
 impl<'a> DestroyRequest<'a> {
@@ -92,17 +146,27 @@ impl<'a> DestroyRequest<'a> {
 
         Self { builder }
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<Error> {
         self.builder.send().await
     }
 }
-
 /// Deleting Droplets by Tag
+///
+/// To delete **all** Droplets assigned to a specific tag, include the `tag_name`
+/// query parameter set to the name of the tag in your DELETE request. For
+/// example,  `/v2/droplets?tag_name=$TAG_NAME`.
+///
+/// A successful request will receive a 204 status code with no body in response.
+/// This indicates that the request was processed successfully.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/v2/droplets`
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::droplets };
+/// use digitalocean::{ ApiClient, apis::droplets };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = destroy(&api)
+/// let response = destroy(&api)
 ///     .send()
 ///     .await?;
 /// ```
@@ -125,13 +189,19 @@ impl<'a> ListBackupPoliciesRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// List Backup Policies for All Existing Droplets
+///
+/// To list information about the backup policies for all Droplets in the account,
+/// send a GET request to `/v2/droplets/backups/policies`.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/droplets/backups/policies`
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::droplets };
+/// use digitalocean::{ ApiClient, apis::droplets };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_backup_policies(&api)
+/// let response = list_backup_policies(&api)
 ///     .send()
 ///     .await?;
 /// ```
@@ -141,7 +211,7 @@ pub fn list_backup_policies(api: &ApiClient) -> ListBackupPoliciesRequest<'_> {
 
 #[derive(Debug)]
 pub struct ListSupportedBackupPoliciesRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, std::collections::BTreeMap<String, serde_json::Value>>,
 }
 
 impl<'a> ListSupportedBackupPoliciesRequest<'a> {
@@ -151,17 +221,23 @@ impl<'a> ListSupportedBackupPoliciesRequest<'a> {
 
         Self { builder }
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<std::collections::BTreeMap<String, serde_json::Value>> {
         self.builder.send().await
     }
 }
-
 /// List Supported Droplet Backup Policies
+///
+/// To retrieve a list of all supported Droplet backup policies, send a GET
+/// request to `/v2/droplets/backups/supported_policies`.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/droplets/backups/supported_policies`
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::droplets };
+/// use digitalocean::{ ApiClient, apis::droplets };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_supported_backup_policies(&api)
+/// let response = list_supported_backup_policies(&api)
 ///     .send()
 ///     .await?;
 /// ```
@@ -189,14 +265,23 @@ impl<'a> GetRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Retrieve an Existing Droplet
+///
+/// To show information about an individual Droplet, send a GET request to
+/// `/v2/droplets/$DROPLET_ID`.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/droplets/{droplet_id}`
+///
+/// **Parameters**
+/// - `droplet_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::droplets };
+/// use digitalocean::{ ApiClient, apis::droplets };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get(&api)
-///     .with_droplet_id("value")
+/// let response = get(&api)
+///     .with_droplet_id("droplet_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -206,7 +291,7 @@ pub fn get(api: &ApiClient) -> GetRequest<'_> {
 
 #[derive(Debug)]
 pub struct DestroyDeleteRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, Error>,
 }
 
 impl<'a> DestroyDeleteRequest<'a> {
@@ -220,18 +305,29 @@ impl<'a> DestroyDeleteRequest<'a> {
         self.builder = self.builder.path_param("droplet_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<Error> {
         self.builder.send().await
     }
 }
-
 /// Delete an Existing Droplet
+///
+/// To delete a Droplet, send a DELETE request to `/v2/droplets/$DROPLET_ID`.
+///
+/// A successful request will receive a 204 status code with no body in response.
+/// This indicates that the request was processed successfully.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/v2/droplets/{droplet_id}`
+///
+/// **Parameters**
+/// - `droplet_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::droplets };
+/// use digitalocean::{ ApiClient, apis::droplets };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = destroy_delete(&api)
-///     .with_droplet_id("value")
+/// let response = destroy_delete(&api)
+///     .with_droplet_id("droplet_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -259,14 +355,27 @@ impl<'a> ListBackupsRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// List Backups for a Droplet
+///
+/// To retrieve any backups associated with a Droplet, send a GET request to
+/// `/v2/droplets/$DROPLET_ID/backups`.
+///
+/// You will get back a JSON object that has a `backups` key. This will be set to
+/// an array of backup objects, each of which contain the standard
+/// Droplet backup attributes.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/droplets/{droplet_id}/backups`
+///
+/// **Parameters**
+/// - `droplet_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::droplets };
+/// use digitalocean::{ ApiClient, apis::droplets };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_backups(&api)
-///     .with_droplet_id("value")
+/// let response = list_backups(&api)
+///     .with_droplet_id("droplet_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -276,7 +385,7 @@ pub fn list_backups(api: &ApiClient) -> ListBackupsRequest<'_> {
 
 #[derive(Debug)]
 pub struct GetBackupPolicyRequest<'a> {
-    builder: ApiRequestBuilder<'a, DropletBackupPolicy>,
+    builder: ApiRequestBuilder<'a, serde_json::Value>,
 }
 
 impl<'a> GetBackupPolicyRequest<'a> {
@@ -291,18 +400,27 @@ impl<'a> GetBackupPolicyRequest<'a> {
         self.builder = self.builder.path_param("droplet_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<DropletBackupPolicy> {
+    pub async fn send(self) -> ApiResult<serde_json::Value> {
         self.builder.send().await
     }
 }
-
 /// Retrieve the Backup Policy for an Existing Droplet
+///
+/// To show information about an individual Droplet's backup policy, send a GET
+/// request to `/v2/droplets/$DROPLET_ID/backups/policy`.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/droplets/{droplet_id}/backups/policy`
+///
+/// **Parameters**
+/// - `droplet_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::droplets };
+/// use digitalocean::{ ApiClient, apis::droplets };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_backup_policy(&api)
-///     .with_droplet_id("value")
+/// let response = get_backup_policy(&api)
+///     .with_droplet_id("droplet_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -334,14 +452,28 @@ impl<'a> ListAssociatedResourcesRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// List Associated Resources for a Droplet
+///
+/// To list the associated billable resources that can be destroyed along with a
+/// Droplet, send a GET request to the
+/// `/v2/droplets/$DROPLET_ID/destroy_with_associated_resources` endpoint.
+///
+/// The response will be a JSON object containing `snapshots`, `volumes`, and
+/// `volume_snapshots` keys. Each will be set to an array of objects containing
+/// information about the associated resources.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/droplets/{droplet_id}/destroy_with_associated_resources`
+///
+/// **Parameters**
+/// - `droplet_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::droplets };
+/// use digitalocean::{ ApiClient, apis::droplets };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_associated_resources(&api)
-///     .with_droplet_id("value")
+/// let response = list_associated_resources(&api)
+///     .with_droplet_id("droplet_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -351,7 +483,7 @@ pub fn list_associated_resources(api: &ApiClient) -> ListAssociatedResourcesRequ
 
 #[derive(Debug)]
 pub struct DestroyAssociatedResourcesDangerousRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, Error>,
 }
 
 impl<'a> DestroyAssociatedResourcesDangerousRequest<'a> {
@@ -369,18 +501,35 @@ impl<'a> DestroyAssociatedResourcesDangerousRequest<'a> {
         self.builder = self.builder.path_param("droplet_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<Error> {
         self.builder.send().await
     }
 }
-
 /// Destroy a Droplet and All of its Associated Resources (Dangerous)
+///
+/// To destroy a Droplet along with all of its associated resources, send a DELETE
+/// request to the `/v2/droplets/$DROPLET_ID/destroy_with_associated_resources/dangerous`
+/// endpoint. The headers of this request must include an `X-Dangerous` key set to
+/// `true`. To preview which resources will be destroyed, first query the
+/// Droplet's associated resources. This operation _can not_ be reverse and should
+/// be used with caution.
+///
+/// A successful response will include a 202 response code and no content. Use the
+/// status endpoint to check on the success or failure of the destruction of the
+/// individual resources.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/v2/droplets/{droplet_id}/destroy_with_associated_resources/dangerous`
+///
+/// **Parameters**
+/// - `droplet_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::droplets };
+/// use digitalocean::{ ApiClient, apis::droplets };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = destroy_associated_resources_dangerous(&api)
-///     .with_droplet_id("value")
+/// let response = destroy_associated_resources_dangerous(&api)
+///     .with_droplet_id("droplet_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -392,7 +541,7 @@ pub fn destroy_associated_resources_dangerous(
 
 #[derive(Debug)]
 pub struct DestroyRetryAssociatedResourcesRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, Error>,
 }
 
 impl<'a> DestroyRetryAssociatedResourcesRequest<'a> {
@@ -410,18 +559,33 @@ impl<'a> DestroyRetryAssociatedResourcesRequest<'a> {
         self.builder = self.builder.path_param("droplet_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<Error> {
         self.builder.send().await
     }
 }
-
 /// Retry a Droplet Destroy with Associated Resources Request
+///
+/// If the status of a request to destroy a Droplet with its associated resources
+/// reported any errors, it can be retried by sending a POST request to the
+/// `/v2/droplets/$DROPLET_ID/destroy_with_associated_resources/retry` endpoint.
+///
+/// Only one destroy can be active at a time per Droplet. If a retry is issued
+/// while another destroy is in progress for the Droplet a 409 status code will
+/// be returned. A successful response will include a 202 response code and no
+/// content.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/v2/droplets/{droplet_id}/destroy_with_associated_resources/retry`
+///
+/// **Parameters**
+/// - `droplet_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::droplets };
+/// use digitalocean::{ ApiClient, apis::droplets };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = destroy_retry_associated_resources(&api)
-///     .with_droplet_id("value")
+/// let response = destroy_retry_associated_resources(&api)
+///     .with_droplet_id("droplet_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -433,7 +597,7 @@ pub fn destroy_retry_associated_resources(
 
 #[derive(Debug)]
 pub struct DestroyAssociatedResourcesSelectiveRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, Error>,
 }
 
 impl<'a> DestroyAssociatedResourcesSelectiveRequest<'a> {
@@ -458,18 +622,38 @@ impl<'a> DestroyAssociatedResourcesSelectiveRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<Error> {
         self.builder.send().await
     }
 }
-
 /// Selectively Destroy a Droplet and its Associated Resources
+///
+/// To destroy a Droplet along with a sub-set of its associated resources, send a
+/// DELETE request to the `/v2/droplets/$DROPLET_ID/destroy_with_associated_resources/selective`
+/// endpoint. The JSON body of the request should include `reserved_ips`, `snapshots`, `volumes`,
+/// or `volume_snapshots` keys each set to an array of IDs for the associated
+/// resources to be destroyed. The IDs can be found by querying the Droplet's
+/// associated resources. Any associated resource not included in the request
+/// will remain and continue to accrue changes on your account.
+///
+/// A successful response will include a 202 response code and no content. Use
+/// the status endpoint to check on the success or failure of the destruction of
+/// the individual resources.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/v2/droplets/{droplet_id}/destroy_with_associated_resources/selective`
+///
+/// **Parameters**
+/// - `droplet_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::droplets };
+/// use digitalocean::{ ApiClient, apis::droplets };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = destroy_associated_resources_selective(&api)
-///     .with_droplet_id("value")
+/// # let body: crate::models::selective_destroy_associated_resource::SelectiveDestroyAssociatedResource = todo!();
+/// let response = destroy_associated_resources_selective(&api)
+///     .with_droplet_id("droplet_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -481,7 +665,7 @@ pub fn destroy_associated_resources_selective(
 
 #[derive(Debug)]
 pub struct GetDestroyAssociatedResourcesRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, AssociatedResourceStatus>,
 }
 
 impl<'a> GetDestroyAssociatedResourcesRequest<'a> {
@@ -499,18 +683,28 @@ impl<'a> GetDestroyAssociatedResourcesRequest<'a> {
         self.builder = self.builder.path_param("droplet_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<AssociatedResourceStatus> {
         self.builder.send().await
     }
 }
-
 /// Check Status of a Droplet Destroy with Associated Resources Request
+///
+/// To check on the status of a request to destroy a Droplet with its associated
+/// resources, send a GET request to the
+/// `/v2/droplets/$DROPLET_ID/destroy_with_associated_resources/status` endpoint.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/droplets/{droplet_id}/destroy_with_associated_resources/status`
+///
+/// **Parameters**
+/// - `droplet_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::droplets };
+/// use digitalocean::{ ApiClient, apis::droplets };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_destroy_associated_resources(&api)
-///     .with_droplet_id("value")
+/// let response = get_destroy_associated_resources(&api)
+///     .with_droplet_id("droplet_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -541,14 +735,27 @@ impl<'a> ListFirewallsRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// List all Firewalls Applied to a Droplet
+///
+/// To retrieve a list of all firewalls available to a Droplet, send a GET request
+/// to `/v2/droplets/$DROPLET_ID/firewalls`
+///
+/// The response will be a JSON object that has a key called `firewalls`. This will
+/// be set to an array of `firewall` objects, each of which contain the standard
+/// `firewall` attributes.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/droplets/{droplet_id}/firewalls`
+///
+/// **Parameters**
+/// - `droplet_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::droplets };
+/// use digitalocean::{ ApiClient, apis::droplets };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_firewalls(&api)
-///     .with_droplet_id("value")
+/// let response = list_firewalls(&api)
+///     .with_droplet_id("droplet_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -576,14 +783,27 @@ impl<'a> ListKernelsRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// List All Available Kernels for a Droplet
+///
+/// To retrieve a list of all kernels available to a Droplet, send a GET request
+/// to `/v2/droplets/$DROPLET_ID/kernels`
+///
+/// The response will be a JSON object that has a key called `kernels`. This will
+/// be set to an array of `kernel` objects, each of which contain the standard
+/// `kernel` attributes.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/droplets/{droplet_id}/kernels`
+///
+/// **Parameters**
+/// - `droplet_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::droplets };
+/// use digitalocean::{ ApiClient, apis::droplets };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_kernels(&api)
-///     .with_droplet_id("value")
+/// let response = list_kernels(&api)
+///     .with_droplet_id("droplet_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -612,14 +832,29 @@ impl<'a> ListNeighborsRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// List Neighbors for a Droplet
+///
+/// To retrieve a list of any "neighbors" (i.e. Droplets that are co-located on
+/// the same physical hardware) for a specific Droplet, send a GET request to
+/// `/v2/droplets/$DROPLET_ID/neighbors`.
+///
+/// The results will be returned as a JSON object with a key of `droplets`. This
+/// will be set to an array containing objects representing any other Droplets
+/// that share the same physical hardware. An empty array indicates that the
+/// Droplet is not co-located any other Droplets associated with your account.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/droplets/{droplet_id}/neighbors`
+///
+/// **Parameters**
+/// - `droplet_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::droplets };
+/// use digitalocean::{ ApiClient, apis::droplets };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_neighbors(&api)
-///     .with_droplet_id("value")
+/// let response = list_neighbors(&api)
+///     .with_droplet_id("droplet_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -648,14 +883,27 @@ impl<'a> ListSnapshotsRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// List Snapshots for a Droplet
+///
+/// To retrieve the snapshots that have been created from a Droplet, send a GET
+/// request to `/v2/droplets/$DROPLET_ID/snapshots`.
+///
+/// You will get back a JSON object that has a `snapshots` key. This will be set
+/// to an array of snapshot objects, each of which contain the standard Droplet
+/// snapshot attributes.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/droplets/{droplet_id}/snapshots`
+///
+/// **Parameters**
+/// - `droplet_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::droplets };
+/// use digitalocean::{ ApiClient, apis::droplets };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_snapshots(&api)
-///     .with_droplet_id("value")
+/// let response = list_snapshots(&api)
+///     .with_droplet_id("droplet_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -665,7 +913,7 @@ pub fn list_snapshots(api: &ApiClient) -> ListSnapshotsRequest<'_> {
 
 #[derive(Debug)]
 pub struct ListNeighborsGetRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, NeighborIds>,
 }
 
 impl<'a> ListNeighborsGetRequest<'a> {
@@ -674,17 +922,29 @@ impl<'a> ListNeighborsGetRequest<'a> {
 
         Self { builder }
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<NeighborIds> {
         self.builder.send().await
     }
 }
-
 /// List All Droplet Neighbors
+///
+/// To retrieve a list of all Droplets that are co-located on the same physical
+/// hardware, send a GET request to `/v2/reports/droplet_neighbors_ids`.
+///
+/// The results will be returned as a JSON object with a key of `neighbor_ids`.
+/// This will be set to an array of arrays. Each array will contain a set of
+/// Droplet IDs for Droplets that share a physical server. An empty array
+/// indicates that all Droplets associated with your account are located on
+/// separate physical hardware.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/reports/droplet_neighbors_ids`
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::droplets };
+/// use digitalocean::{ ApiClient, apis::droplets };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_neighbors_get(&api)
+/// let response = list_neighbors_get(&api)
 ///     .send()
 ///     .await?;
 /// ```

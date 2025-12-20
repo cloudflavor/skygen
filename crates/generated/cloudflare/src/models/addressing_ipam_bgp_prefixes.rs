@@ -19,13 +19,15 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct AddressingIpamBgpPrefixes {
-    pub asn: Option<serde_json::Value>,
-    pub asn_prepend_count: Option<serde_json::Value>,
+    pub asn: Option<crate::models::addressing_asn::AddressingAsn>,
+    pub asn_prepend_count:
+        Option<crate::models::addressing_asn_prepend_count::AddressingAsnPrependCount>,
     pub bgp_signal_opts: Option<crate::models::addressing_bgp_signal_opts::AddressingBgpSignalOpts>,
-    pub cidr: Option<serde_json::Value>,
-    pub created_at: Option<serde_json::Value>,
-    pub id: Option<serde_json::Value>,
-    pub modified_at: Option<serde_json::Value>,
+    pub cidr: Option<crate::models::addressing_cidr::AddressingCidr>,
+    pub created_at: Option<crate::models::addressing_timestamp::AddressingTimestamp>,
+    pub id: Option<crate::models::addressing_bgp_prefix_identifier::AddressingBgpPrefixIdentifier>,
+    pub modified_at: Option<crate::models::addressing_timestamp::AddressingTimestamp>,
     pub on_demand: Option<crate::models::addressing_bgp_on_demand::AddressingBgpOnDemand>,
-    pub withdraw_if_no_route: Option<serde_json::Value>,
+    pub withdraw_if_no_route:
+        Option<crate::models::addressing_withdraw_if_no_route::AddressingWithdrawIfNoRoute>,
 }

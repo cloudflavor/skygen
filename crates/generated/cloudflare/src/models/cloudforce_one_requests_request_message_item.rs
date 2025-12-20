@@ -20,7 +20,8 @@ use serde::{Deserialize, Serialize};
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct CloudforceOneRequestsRequestMessageItem {
     pub author: String,
-    pub content: serde_json::Value,
+    pub content:
+        crate::models::cloudforce_one_requests_message_content::CloudforceOneRequestsMessageContent,
     pub created: Option<serde_json::Value>,
     pub id: i64,
     pub is_follow_on_request: bool,

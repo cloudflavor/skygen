@@ -19,9 +19,10 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct AccessBasePolicyReq {
-    pub decision: serde_json::Value,
-    pub exclude: Option<serde_json::Value>,
-    pub include: serde_json::Value,
-    pub name: serde_json::Value,
-    pub require: Option<serde_json::Value>,
+    pub decision: crate::models::access_decision::AccessDecision,
+    pub exclude: Option<crate::models::access_schemas_exclude::AccessSchemasExclude>,
+    pub include: crate::models::access_schemas_include::AccessSchemasInclude,
+    pub name:
+        crate::models::access_policy_components_schemas_name::AccessPolicyComponentsSchemasName,
+    pub require: Option<crate::models::access_schemas_require::AccessSchemasRequire>,
 }

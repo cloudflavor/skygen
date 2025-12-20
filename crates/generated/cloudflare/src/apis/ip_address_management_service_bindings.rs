@@ -48,15 +48,25 @@ impl<'a> ListServiceBindingsRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// List Service Bindings
+///
+/// List the Cloudflare services this prefix is currently bound to. Traffic sent to an address within an IP prefix will be routed to the Cloudflare service of the most-specific Service Binding matching the address.
+/// **Example:** binding `192.0.2.0/24` to Cloudflare Magic Transit and `192.0.2.1/32` to the Cloudflare CDN would route traffic for `192.0.2.1` to the CDN, and traffic for all other IPs in the prefix to Cloudflare Magic Transit.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/addressing/prefixes/{prefix_id}/bindings`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `prefix_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::ip_address_management_service_bindings };
+/// use cloudflare::{ ApiClient, apis::ip_address_management_service_bindings };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_service_bindings(&api)
-///     .with_account_id("value")
-///     .with_prefix_id("value")
+/// let response = list_service_bindings(&api)
+///     .with_account_id("account_id")
+///     .with_prefix_id("prefix_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -100,15 +110,27 @@ impl<'a> CreateServiceBindingRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Create Service Binding
+///
+/// Creates a new Service Binding, routing traffic to IPs within the given CIDR to a service running on Cloudflare's network.
+/// **Note:** This API may only be used on prefixes currently configured with a Magic Transit/Cloudflare CDN/Cloudflare Spectrum service binding, and only allows creating upgrade service bindings for the Cloudflare CDN or Cloudflare Spectrum.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/addressing/prefixes/{prefix_id}/bindings`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `prefix_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::ip_address_management_service_bindings };
+/// use cloudflare::{ ApiClient, apis::ip_address_management_service_bindings };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = create_service_binding(&api)
-///     .with_account_id("value")
-///     .with_prefix_id("value")
+/// # let body: crate::models::addressing_create_binding_request::AddressingCreateBindingRequest = todo!();
+/// let response = create_service_binding(&api)
+///     .with_account_id("account_id")
+///     .with_prefix_id("prefix_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -150,16 +172,26 @@ impl<'a> GetServiceBindingRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get Service Binding
+///
+/// Fetch a single Service Binding
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/addressing/prefixes/{prefix_id}/bindings/{binding_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `prefix_id` (path, required)
+/// - `binding_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::ip_address_management_service_bindings };
+/// use cloudflare::{ ApiClient, apis::ip_address_management_service_bindings };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_service_binding(&api)
-///     .with_account_id("value")
-///     .with_prefix_id("value")
-///     .with_binding_id("value")
+/// let response = get_service_binding(&api)
+///     .with_account_id("account_id")
+///     .with_prefix_id("prefix_id")
+///     .with_binding_id("binding_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -201,16 +233,26 @@ impl<'a> DeleteServiceBindingRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Delete Service Binding
+///
+/// Delete a Service Binding
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/accounts/{account_id}/addressing/prefixes/{prefix_id}/bindings/{binding_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `prefix_id` (path, required)
+/// - `binding_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::ip_address_management_service_bindings };
+/// use cloudflare::{ ApiClient, apis::ip_address_management_service_bindings };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete_service_binding(&api)
-///     .with_account_id("value")
-///     .with_prefix_id("value")
-///     .with_binding_id("value")
+/// let response = delete_service_binding(&api)
+///     .with_account_id("account_id")
+///     .with_prefix_id("prefix_id")
+///     .with_binding_id("binding_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -242,14 +284,22 @@ impl<'a> ListServicesRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// List Services
+///
+/// Bring-Your-Own IP (BYOIP) prefixes onboarded to Cloudflare must be bound to a service running on the Cloudflare network to enable a Cloudflare product on the IP addresses. This endpoint can be used as a reference of available services on the Cloudflare network, and their service IDs.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/addressing/services`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::ip_address_management_service_bindings };
+/// use cloudflare::{ ApiClient, apis::ip_address_management_service_bindings };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_services(&api)
-///     .with_account_id("value")
+/// let response = list_services(&api)
+///     .with_account_id("account_id")
 ///     .send()
 ///     .await?;
 /// ```

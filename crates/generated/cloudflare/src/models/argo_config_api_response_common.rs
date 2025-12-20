@@ -19,8 +19,8 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct ArgoConfigApiResponseCommon {
-    pub errors: serde_json::Value,
-    pub messages: serde_json::Value,
+    pub errors: crate::models::argo_config_messages::ArgoConfigMessages,
+    pub messages: crate::models::argo_config_messages::ArgoConfigMessages,
     pub result: serde_json::Value,
     pub success: bool,
 }

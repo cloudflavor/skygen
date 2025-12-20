@@ -19,7 +19,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct DlpEmailRuleCondition {
-    pub operator: serde_json::Value,
-    pub selector: serde_json::Value,
-    pub value: serde_json::Value,
+    pub operator: crate::models::dlp_email_rule_operator::DlpEmailRuleOperator,
+    pub selector: crate::models::dlp_email_rule_selector::DlpEmailRuleSelector,
+    pub value: crate::models::dlp_email_rule_value::DlpEmailRuleValue,
 }

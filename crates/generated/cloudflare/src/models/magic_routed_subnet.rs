@@ -20,6 +20,6 @@ use serde::{Deserialize, Serialize};
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct MagicRoutedSubnet {
     pub nat: Option<crate::models::magic_nat::MagicNat>,
-    pub next_hop: serde_json::Value,
-    pub prefix: serde_json::Value,
+    pub next_hop: crate::models::magic_ip_address::MagicIpAddress,
+    pub prefix: crate::models::magic_cidr::MagicCidr,
 }

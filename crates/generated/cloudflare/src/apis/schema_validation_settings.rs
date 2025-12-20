@@ -42,14 +42,20 @@ impl<'a> GetSettingsRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get global schema validation settings
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/schema_validation/settings`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::schema_validation_settings };
+/// use cloudflare::{ ApiClient, apis::schema_validation_settings };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_settings(&api)
-///     .with_zone_id("value")
+/// let response = get_settings(&api)
+///     .with_zone_id("zone_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -86,14 +92,22 @@ impl<'a> UpdateSettingsRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Update global schema validation settings
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/zones/{zone_id}/schema_validation/settings`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::schema_validation_settings };
+/// use cloudflare::{ ApiClient, apis::schema_validation_settings };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = update_settings(&api)
-///     .with_zone_id("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = update_settings(&api)
+///     .with_zone_id("zone_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -122,7 +136,10 @@ impl<'a> EditSettingsRequest<'a> {
         self.builder = self.builder.path_param("zone_id", value);
         self
     }
-    pub fn with_body(mut self, body: serde_json::Value) -> Self {
+    pub fn with_body(
+        mut self,
+        body: crate::models::api_shield_global_setting_change_base::ApiShieldGlobalSettingChangeBase,
+    ) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
@@ -130,14 +147,22 @@ impl<'a> EditSettingsRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Edit global schema validation settings
+///
+/// **HTTP Method:** `PATCH`
+/// **Path:** `/zones/{zone_id}/schema_validation/settings`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::schema_validation_settings };
+/// use cloudflare::{ ApiClient, apis::schema_validation_settings };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = edit_settings(&api)
-///     .with_zone_id("value")
+/// # let body: crate::models::api_shield_global_setting_change_base::ApiShieldGlobalSettingChangeBase = todo!();
+/// let response = edit_settings(&api)
+///     .with_zone_id("zone_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -169,14 +194,20 @@ impl<'a> ListPerOperationSettingsRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// List per-operation schema validation settings
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/schema_validation/settings/operations`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::schema_validation_settings };
+/// use cloudflare::{ ApiClient, apis::schema_validation_settings };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_per_operation_settings(&api)
-///     .with_zone_id("value")
+/// let response = list_per_operation_settings(&api)
+///     .with_zone_id("zone_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -205,7 +236,10 @@ impl<'a> BulkEditPerOperationRequest<'a> {
         self.builder = self.builder.path_param("zone_id", value);
         self
     }
-    pub fn with_body(mut self, body: serde_json::Value) -> Self {
+    pub fn with_body(
+        mut self,
+        body: std::collections::BTreeMap<String, serde_json::Value>,
+    ) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
@@ -213,14 +247,22 @@ impl<'a> BulkEditPerOperationRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Bulk edit per-operation schema validation settings
+///
+/// **HTTP Method:** `PATCH`
+/// **Path:** `/zones/{zone_id}/schema_validation/settings/operations`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::schema_validation_settings };
+/// use cloudflare::{ ApiClient, apis::schema_validation_settings };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = bulk_edit_per_operation(&api)
-///     .with_zone_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = bulk_edit_per_operation(&api)
+///     .with_zone_id("zone_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -257,15 +299,22 @@ impl<'a> GetPerOperationSettingRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get per-operation schema validation setting
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/schema_validation/settings/operations/{operation_id}`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `operation_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::schema_validation_settings };
+/// use cloudflare::{ ApiClient, apis::schema_validation_settings };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_per_operation_setting(&api)
-///     .with_zone_id("value")
-///     .with_operation_id("value")
+/// let response = get_per_operation_setting(&api)
+///     .with_zone_id("zone_id")
+///     .with_operation_id("operation_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -307,15 +356,24 @@ impl<'a> UpdatePerOperationSettingRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Update per-operation schema validation setting
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/zones/{zone_id}/schema_validation/settings/operations/{operation_id}`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `operation_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::schema_validation_settings };
+/// use cloudflare::{ ApiClient, apis::schema_validation_settings };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = update_per_operation_setting(&api)
-///     .with_zone_id("value")
-///     .with_operation_id("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = update_per_operation_setting(&api)
+///     .with_zone_id("zone_id")
+///     .with_operation_id("operation_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -352,15 +410,22 @@ impl<'a> DeletePerOperationSettingRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Delete per-operation schema validation setting
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/zones/{zone_id}/schema_validation/settings/operations/{operation_id}`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `operation_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::schema_validation_settings };
+/// use cloudflare::{ ApiClient, apis::schema_validation_settings };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete_per_operation_setting(&api)
-///     .with_zone_id("value")
-///     .with_operation_id("value")
+/// let response = delete_per_operation_setting(&api)
+///     .with_zone_id("zone_id")
+///     .with_operation_id("operation_id")
 ///     .send()
 ///     .await?;
 /// ```

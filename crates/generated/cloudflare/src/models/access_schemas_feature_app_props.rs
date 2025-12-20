@@ -19,10 +19,10 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct AccessSchemasFeatureAppProps {
-    pub allowed_idps: Option<serde_json::Value>,
-    pub auto_redirect_to_identity: Option<serde_json::Value>,
-    pub domain: Option<serde_json::Value>,
-    pub name: Option<serde_json::Value>,
-    pub r#type: serde_json::Value,
-    pub session_duration: Option<serde_json::Value>,
+    pub allowed_idps: Option<crate::models::access_allowed_idps::AccessAllowedIdps>,
+    pub auto_redirect_to_identity: Option<crate::models::access_schemas_auto_redirect_to_identity::AccessSchemasAutoRedirectToIdentity>,
+    pub domain: Option<crate::models::access_components_schemas_domain::AccessComponentsSchemasDomain>,
+    pub name: Option<crate::models::access_apps_components_schemas_name::AccessAppsComponentsSchemasName>,
+    pub r#type: crate::models::access_components_schemas_type::AccessComponentsSchemasType,
+    pub session_duration: Option<crate::models::access_apps_components_schemas_session_duration::AccessAppsComponentsSchemasSessionDuration>,
 }

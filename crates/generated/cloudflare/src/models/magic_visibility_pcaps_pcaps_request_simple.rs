@@ -19,12 +19,10 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct MagicVisibilityPcapsPcapsRequestSimple {
-    pub filter_v1: Option<
-        crate::models::magic_visibility_pcaps_pcaps_filter_v1::MagicVisibilityPcapsPcapsFilterV1,
-    >,
-    pub offset_time: Option<serde_json::Value>,
-    pub packet_limit: serde_json::Value,
-    pub r#type: serde_json::Value,
-    pub system: serde_json::Value,
-    pub time_limit: serde_json::Value,
+    pub filter_v1: Option<crate::models::magic_visibility_pcaps_pcaps_filter_v1::MagicVisibilityPcapsPcapsFilterV1>,
+    pub offset_time: Option<crate::models::magic_visibility_pcaps_pcaps_offset_time::MagicVisibilityPcapsPcapsOffsetTime>,
+    pub packet_limit: crate::models::magic_visibility_pcaps_pcaps_packet_limit::MagicVisibilityPcapsPcapsPacketLimit,
+    pub r#type: crate::models::magic_visibility_pcaps_pcaps_type::MagicVisibilityPcapsPcapsType,
+    pub system: crate::models::magic_visibility_pcaps_pcaps_system::MagicVisibilityPcapsPcapsSystem,
+    pub time_limit: crate::models::magic_visibility_pcaps_pcaps_time_limit_sampled::MagicVisibilityPcapsPcapsTimeLimitSampled,
 }

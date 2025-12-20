@@ -15,12 +15,15 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::addressing_id_response::AddressingIdResponse;
+use crate::models::addressing_schemas_response_collection::AddressingSchemasResponseCollection;
+use crate::models::addressing_schemas_single_response::AddressingSchemasSingleResponse;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct ListPrefixDelegationsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, AddressingSchemasResponseCollection>,
 }
 
 impl<'a> ListPrefixDelegationsRequest<'a> {
@@ -43,19 +46,28 @@ impl<'a> ListPrefixDelegationsRequest<'a> {
         self.builder = self.builder.path_param("prefix_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<AddressingSchemasResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// List Prefix Delegations
+///
+/// List all delegations for a given account IP prefix.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/addressing/prefixes/{prefix_id}/delegations`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `prefix_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::ip_address_management_prefix_delegation };
+/// use cloudflare::{ ApiClient, apis::ip_address_management_prefix_delegation };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_prefix_delegations(&api)
-///     .with_account_id("value")
-///     .with_prefix_id("value")
+/// let response = list_prefix_delegations(&api)
+///     .with_account_id("account_id")
+///     .with_prefix_id("prefix_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -65,7 +77,7 @@ pub fn list_prefix_delegations(api: &ApiClient) -> ListPrefixDelegationsRequest<
 
 #[derive(Debug)]
 pub struct CreatePrefixDelegationRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, AddressingSchemasSingleResponse>,
 }
 
 impl<'a> CreatePrefixDelegationRequest<'a> {
@@ -93,19 +105,30 @@ impl<'a> CreatePrefixDelegationRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<AddressingSchemasSingleResponse> {
         self.builder.send().await
     }
 }
-
 /// Create Prefix Delegation
+///
+/// Create a new account delegation for a given IP prefix.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/addressing/prefixes/{prefix_id}/delegations`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `prefix_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::ip_address_management_prefix_delegation };
+/// use cloudflare::{ ApiClient, apis::ip_address_management_prefix_delegation };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = create_prefix_delegation(&api)
-///     .with_account_id("value")
-///     .with_prefix_id("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = create_prefix_delegation(&api)
+///     .with_account_id("account_id")
+///     .with_prefix_id("prefix_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -115,7 +138,7 @@ pub fn create_prefix_delegation(api: &ApiClient) -> CreatePrefixDelegationReques
 
 #[derive(Debug)]
 pub struct DeletePrefixDelegationRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, AddressingIdResponse>,
 }
 
 impl<'a> DeletePrefixDelegationRequest<'a> {
@@ -143,20 +166,30 @@ impl<'a> DeletePrefixDelegationRequest<'a> {
         self.builder = self.builder.path_param("delegation_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<AddressingIdResponse> {
         self.builder.send().await
     }
 }
-
 /// Delete Prefix Delegation
+///
+/// Delete an account delegation for a given IP prefix.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/accounts/{account_id}/addressing/prefixes/{prefix_id}/delegations/{delegation_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `prefix_id` (path, required)
+/// - `delegation_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::ip_address_management_prefix_delegation };
+/// use cloudflare::{ ApiClient, apis::ip_address_management_prefix_delegation };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete_prefix_delegation(&api)
-///     .with_account_id("value")
-///     .with_prefix_id("value")
-///     .with_delegation_id("value")
+/// let response = delete_prefix_delegation(&api)
+///     .with_account_id("account_id")
+///     .with_prefix_id("prefix_id")
+///     .with_delegation_id("delegation_id")
 ///     .send()
 ///     .await?;
 /// ```

@@ -15,6 +15,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::page_shield_get_zone_connection_response::PageShieldGetZoneConnectionResponse;
+use crate::models::page_shield_get_zone_cookie_response::PageShieldGetZoneCookieResponse;
+use crate::models::page_shield_get_zone_policy_response::PageShieldGetZonePolicyResponse;
+use crate::models::page_shield_get_zone_script_response::PageShieldGetZoneScriptResponse;
+use crate::models::page_shield_list_zone_connections_response::PageShieldListZoneConnectionsResponse;
+use crate::models::page_shield_list_zone_cookies_response::PageShieldListZoneCookiesResponse;
+use crate::models::page_shield_list_zone_policies_response::PageShieldListZonePoliciesResponse;
+use crate::models::page_shield_list_zone_scripts_response::PageShieldListZoneScriptsResponse;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
@@ -38,14 +46,22 @@ impl<'a> GetSettingsRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get Page Shield settings
+///
+/// Fetches the Page Shield settings.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/page_shield`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::page_shield };
+/// use cloudflare::{ ApiClient, apis::page_shield };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_settings(&api)
-///     .with_zone_id("value")
+/// let response = get_settings(&api)
+///     .with_zone_id("zone_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -78,14 +94,24 @@ impl<'a> UpdateSettingsRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Update Page Shield settings
+///
+/// Updates Page Shield settings.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/zones/{zone_id}/page_shield`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::page_shield };
+/// use cloudflare::{ ApiClient, apis::page_shield };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = update_settings(&api)
-///     .with_zone_id("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = update_settings(&api)
+///     .with_zone_id("zone_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -95,7 +121,7 @@ pub fn update_settings(api: &ApiClient) -> UpdateSettingsRequest<'_> {
 
 #[derive(Debug)]
 pub struct ListConnectionsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, PageShieldListZoneConnectionsResponse>,
 }
 
 impl<'a> ListConnectionsRequest<'a> {
@@ -158,18 +184,50 @@ impl<'a> ListConnectionsRequest<'a> {
         self.builder = self.builder.header_param("export", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<PageShieldListZoneConnectionsResponse> {
         self.builder.send().await
     }
 }
-
 /// List Page Shield connections
+///
+/// Lists all connections detected by Page Shield.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/page_shield/connections`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `exclude_urls` (query,optional)
+/// - `urls` (query,optional)
+/// - `hosts` (query,optional)
+/// - `page` (query,optional)
+/// - `per_page` (query,optional)
+/// - `order_by` (query,optional)
+/// - `direction` (query,optional)
+/// - `prioritize_malicious` (query,optional)
+/// - `exclude_cdn_cgi` (query,optional)
+/// - `status` (query,optional)
+/// - `page_url` (query,optional)
+/// - `export` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::page_shield };
+/// use cloudflare::{ ApiClient, apis::page_shield };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_connections(&api)
-///     .with_zone_id("value")
+/// let response = list_connections(&api)
+///     .with_zone_id("zone_id")
+///     .with_exclude_urls("exclude_urls")
+///     .with_urls("urls")
+///     .with_hosts("hosts")
+///     .with_page("page")
+///     .with_per_page("per_page")
+///     .with_order_by("order_by")
+///     .with_direction("direction")
+///     .with_prioritize_malicious("prioritize_malicious")
+///     .with_exclude_cdn_cgi("exclude_cdn_cgi")
+///     .with_status("status")
+///     .with_page_url("page_url")
+///     .with_export("export")
 ///     .send()
 ///     .await?;
 /// ```
@@ -179,7 +237,7 @@ pub fn list_connections(api: &ApiClient) -> ListConnectionsRequest<'_> {
 
 #[derive(Debug)]
 pub struct GetConnectionRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, PageShieldGetZoneConnectionResponse>,
 }
 
 impl<'a> GetConnectionRequest<'a> {
@@ -202,19 +260,28 @@ impl<'a> GetConnectionRequest<'a> {
         self.builder = self.builder.path_param("connection_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<PageShieldGetZoneConnectionResponse> {
         self.builder.send().await
     }
 }
-
 /// Get a Page Shield connection
+///
+/// Fetches a connection detected by Page Shield by connection ID.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/page_shield/connections/{connection_id}`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `connection_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::page_shield };
+/// use cloudflare::{ ApiClient, apis::page_shield };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_connection(&api)
-///     .with_zone_id("value")
-///     .with_connection_id("value")
+/// let response = get_connection(&api)
+///     .with_zone_id("zone_id")
+///     .with_connection_id("connection_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -224,7 +291,7 @@ pub fn get_connection(api: &ApiClient) -> GetConnectionRequest<'_> {
 
 #[derive(Debug)]
 pub struct ListCookiesRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, PageShieldListZoneCookiesResponse>,
 }
 
 impl<'a> ListCookiesRequest<'a> {
@@ -295,18 +362,54 @@ impl<'a> ListCookiesRequest<'a> {
         self.builder = self.builder.header_param("domain", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<PageShieldListZoneCookiesResponse> {
         self.builder.send().await
     }
 }
-
 /// List Page Shield Cookies
+///
+/// Lists all cookies collected by Page Shield.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/page_shield/cookies`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `hosts` (query,optional)
+/// - `page` (query,optional)
+/// - `per_page` (query,optional)
+/// - `order_by` (query,optional)
+/// - `direction` (query,optional)
+/// - `page_url` (query,optional)
+/// - `export` (query,optional)
+/// - `name` (query,optional)
+/// - `secure` (query,optional)
+/// - `http_only` (query,optional)
+/// - `same_site` (query,optional)
+/// - `type` (query,optional)
+/// - `path` (query,optional)
+/// - `domain` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::page_shield };
+/// use cloudflare::{ ApiClient, apis::page_shield };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_cookies(&api)
-///     .with_zone_id("value")
+/// let response = list_cookies(&api)
+///     .with_zone_id("zone_id")
+///     .with_hosts("hosts")
+///     .with_page("page")
+///     .with_per_page("per_page")
+///     .with_order_by("order_by")
+///     .with_direction("direction")
+///     .with_page_url("page_url")
+///     .with_export("export")
+///     .with_name("name")
+///     .with_secure("secure")
+///     .with_http_only("http_only")
+///     .with_same_site("same_site")
+///     .with_type_param("type")
+///     .with_path("path")
+///     .with_domain("domain")
 ///     .send()
 ///     .await?;
 /// ```
@@ -316,7 +419,7 @@ pub fn list_cookies(api: &ApiClient) -> ListCookiesRequest<'_> {
 
 #[derive(Debug)]
 pub struct GetCookieRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, PageShieldGetZoneCookieResponse>,
 }
 
 impl<'a> GetCookieRequest<'a> {
@@ -339,19 +442,28 @@ impl<'a> GetCookieRequest<'a> {
         self.builder = self.builder.path_param("cookie_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<PageShieldGetZoneCookieResponse> {
         self.builder.send().await
     }
 }
-
 /// Get a Page Shield cookie
+///
+/// Fetches a cookie collected by Page Shield by cookie ID.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/page_shield/cookies/{cookie_id}`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `cookie_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::page_shield };
+/// use cloudflare::{ ApiClient, apis::page_shield };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_cookie(&api)
-///     .with_zone_id("value")
-///     .with_cookie_id("value")
+/// let response = get_cookie(&api)
+///     .with_zone_id("zone_id")
+///     .with_cookie_id("cookie_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -361,7 +473,7 @@ pub fn get_cookie(api: &ApiClient) -> GetCookieRequest<'_> {
 
 #[derive(Debug)]
 pub struct ListPoliciesRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, PageShieldListZonePoliciesResponse>,
 }
 
 impl<'a> ListPoliciesRequest<'a> {
@@ -376,18 +488,26 @@ impl<'a> ListPoliciesRequest<'a> {
         self.builder = self.builder.path_param("zone_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<PageShieldListZonePoliciesResponse> {
         self.builder.send().await
     }
 }
-
 /// List Page Shield policies
+///
+/// Lists all Page Shield policies.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/page_shield/policies`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::page_shield };
+/// use cloudflare::{ ApiClient, apis::page_shield };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_policies(&api)
-///     .with_zone_id("value")
+/// let response = list_policies(&api)
+///     .with_zone_id("zone_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -397,7 +517,7 @@ pub fn list_policies(api: &ApiClient) -> ListPoliciesRequest<'_> {
 
 #[derive(Debug)]
 pub struct CreatePolicyRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, PageShieldGetZonePolicyResponse>,
 }
 
 impl<'a> CreatePolicyRequest<'a> {
@@ -413,22 +533,32 @@ impl<'a> CreatePolicyRequest<'a> {
         self.builder = self.builder.path_param("zone_id", value);
         self
     }
-    pub fn with_body(mut self, body: serde_json::Value) -> Self {
+    pub fn with_body(mut self, body: crate::models::page_shield_policy::PageShieldPolicy) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<PageShieldGetZonePolicyResponse> {
         self.builder.send().await
     }
 }
-
 /// Create a Page Shield policy
+///
+/// Create a Page Shield policy.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/zones/{zone_id}/page_shield/policies`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::page_shield };
+/// use cloudflare::{ ApiClient, apis::page_shield };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = create_policy(&api)
-///     .with_zone_id("value")
+/// # let body: crate::models::page_shield_policy::PageShieldPolicy = todo!();
+/// let response = create_policy(&api)
+///     .with_zone_id("zone_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -438,7 +568,7 @@ pub fn create_policy(api: &ApiClient) -> CreatePolicyRequest<'_> {
 
 #[derive(Debug)]
 pub struct GetPolicyRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, PageShieldGetZonePolicyResponse>,
 }
 
 impl<'a> GetPolicyRequest<'a> {
@@ -461,19 +591,28 @@ impl<'a> GetPolicyRequest<'a> {
         self.builder = self.builder.path_param("policy_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<PageShieldGetZonePolicyResponse> {
         self.builder.send().await
     }
 }
-
 /// Get a Page Shield policy
+///
+/// Fetches a Page Shield policy by ID.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/page_shield/policies/{policy_id}`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `policy_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::page_shield };
+/// use cloudflare::{ ApiClient, apis::page_shield };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_policy(&api)
-///     .with_zone_id("value")
-///     .with_policy_id("value")
+/// let response = get_policy(&api)
+///     .with_zone_id("zone_id")
+///     .with_policy_id("policy_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -483,7 +622,7 @@ pub fn get_policy(api: &ApiClient) -> GetPolicyRequest<'_> {
 
 #[derive(Debug)]
 pub struct UpdatePolicyRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, PageShieldGetZonePolicyResponse>,
 }
 
 impl<'a> UpdatePolicyRequest<'a> {
@@ -511,19 +650,30 @@ impl<'a> UpdatePolicyRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<PageShieldGetZonePolicyResponse> {
         self.builder.send().await
     }
 }
-
 /// Update a Page Shield policy
+///
+/// Update a Page Shield policy by ID.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/zones/{zone_id}/page_shield/policies/{policy_id}`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `policy_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::page_shield };
+/// use cloudflare::{ ApiClient, apis::page_shield };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = update_policy(&api)
-///     .with_zone_id("value")
-///     .with_policy_id("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = update_policy(&api)
+///     .with_zone_id("zone_id")
+///     .with_policy_id("policy_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -560,15 +710,24 @@ impl<'a> DeletePolicyRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Delete a Page Shield policy
+///
+/// Delete a Page Shield policy by ID.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/zones/{zone_id}/page_shield/policies/{policy_id}`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `policy_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::page_shield };
+/// use cloudflare::{ ApiClient, apis::page_shield };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete_policy(&api)
-///     .with_zone_id("value")
-///     .with_policy_id("value")
+/// let response = delete_policy(&api)
+///     .with_zone_id("zone_id")
+///     .with_policy_id("policy_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -578,7 +737,7 @@ pub fn delete_policy(api: &ApiClient) -> DeletePolicyRequest<'_> {
 
 #[derive(Debug)]
 pub struct ListScriptsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, PageShieldListZoneScriptsResponse>,
 }
 
 impl<'a> ListScriptsRequest<'a> {
@@ -645,18 +804,52 @@ impl<'a> ListScriptsRequest<'a> {
         self.builder = self.builder.header_param("export", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<PageShieldListZoneScriptsResponse> {
         self.builder.send().await
     }
 }
-
 /// List Page Shield scripts
+///
+/// Lists all scripts detected by Page Shield.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/page_shield/scripts`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `exclude_urls` (query,optional)
+/// - `urls` (query,optional)
+/// - `hosts` (query,optional)
+/// - `page` (query,optional)
+/// - `per_page` (query,optional)
+/// - `order_by` (query,optional)
+/// - `direction` (query,optional)
+/// - `prioritize_malicious` (query,optional)
+/// - `exclude_cdn_cgi` (query,optional)
+/// - `exclude_duplicates` (query,optional)
+/// - `status` (query,optional)
+/// - `page_url` (query,optional)
+/// - `export` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::page_shield };
+/// use cloudflare::{ ApiClient, apis::page_shield };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_scripts(&api)
-///     .with_zone_id("value")
+/// let response = list_scripts(&api)
+///     .with_zone_id("zone_id")
+///     .with_exclude_urls("exclude_urls")
+///     .with_urls("urls")
+///     .with_hosts("hosts")
+///     .with_page("page")
+///     .with_per_page("per_page")
+///     .with_order_by("order_by")
+///     .with_direction("direction")
+///     .with_prioritize_malicious("prioritize_malicious")
+///     .with_exclude_cdn_cgi("exclude_cdn_cgi")
+///     .with_exclude_duplicates("exclude_duplicates")
+///     .with_status("status")
+///     .with_page_url("page_url")
+///     .with_export("export")
 ///     .send()
 ///     .await?;
 /// ```
@@ -666,7 +859,7 @@ pub fn list_scripts(api: &ApiClient) -> ListScriptsRequest<'_> {
 
 #[derive(Debug)]
 pub struct GetScriptRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, PageShieldGetZoneScriptResponse>,
 }
 
 impl<'a> GetScriptRequest<'a> {
@@ -689,19 +882,28 @@ impl<'a> GetScriptRequest<'a> {
         self.builder = self.builder.path_param("script_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<PageShieldGetZoneScriptResponse> {
         self.builder.send().await
     }
 }
-
 /// Get a Page Shield script
+///
+/// Fetches a script detected by Page Shield by script ID.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/page_shield/scripts/{script_id}`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `script_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::page_shield };
+/// use cloudflare::{ ApiClient, apis::page_shield };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_script(&api)
-///     .with_zone_id("value")
-///     .with_script_id("value")
+/// let response = get_script(&api)
+///     .with_zone_id("zone_id")
+///     .with_script_id("script_id")
 ///     .send()
 ///     .await?;
 /// ```

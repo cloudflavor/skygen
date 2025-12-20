@@ -23,7 +23,7 @@ pub struct AccessUsers {
     pub display_name: Option<String>,
     pub emails: Option<Vec<std::collections::BTreeMap<String, serde_json::Value>>>,
     pub external_id: Option<String>,
-    pub id: Option<serde_json::Value>,
+    pub id: Option<crate::models::access_id::AccessId>,
     pub meta: Option<crate::models::access_meta::AccessMeta>,
     pub schemas: Option<Vec<String>>,
 }

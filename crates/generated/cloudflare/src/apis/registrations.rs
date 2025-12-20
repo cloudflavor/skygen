@@ -42,14 +42,22 @@ impl<'a> ListRegistrationsRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// List registrations
+///
+/// Lists WARP registrations.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/devices/registrations`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::registrations };
+/// use cloudflare::{ ApiClient, apis::registrations };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_registrations(&api)
-///     .with_account_id("value")
+/// let response = list_registrations(&api)
+///     .with_account_id("account_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -85,14 +93,24 @@ impl<'a> RevokeRegistrationsRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Revoke registrations
+///
+/// Revokes a list of WARP registrations.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/devices/registrations/revoke`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `id` (query,required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::registrations };
+/// use cloudflare::{ ApiClient, apis::registrations };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = revoke_registrations(&api)
-///     .with_account_id("value")
+/// let response = revoke_registrations(&api)
+///     .with_account_id("account_id")
+///     .with_id("id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -128,14 +146,24 @@ impl<'a> UnrevokeRegistrationsRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Unrevoke registrations
+///
+/// Unrevokes a list of WARP registrations.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/devices/registrations/unrevoke`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `id` (query,required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::registrations };
+/// use cloudflare::{ ApiClient, apis::registrations };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = unrevoke_registrations(&api)
-///     .with_account_id("value")
+/// let response = unrevoke_registrations(&api)
+///     .with_account_id("account_id")
+///     .with_id("id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -172,15 +200,24 @@ impl<'a> RegistrationRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get registration
+///
+/// Fetches a single WARP registration.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/devices/registrations/{registration_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `registration_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::registrations };
+/// use cloudflare::{ ApiClient, apis::registrations };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = registration(&api)
-///     .with_account_id("value")
-///     .with_registration_id("value")
+/// let response = registration(&api)
+///     .with_account_id("account_id")
+///     .with_registration_id("registration_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -217,15 +254,24 @@ impl<'a> RegistrationDeleteRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Delete registration
+///
+/// Deletes a WARP registration.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/accounts/{account_id}/devices/registrations/{registration_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `registration_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::registrations };
+/// use cloudflare::{ ApiClient, apis::registrations };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = registration_delete(&api)
-///     .with_account_id("value")
-///     .with_registration_id("value")
+/// let response = registration_delete(&api)
+///     .with_account_id("account_id")
+///     .with_registration_id("registration_id")
 ///     .send()
 ///     .await?;
 /// ```

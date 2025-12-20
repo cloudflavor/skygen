@@ -85,13 +85,46 @@ impl<'a> GetDnsSummaryRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get DNS queries by cache status summary
+///
+/// Retrieves the distribution of DNS queries by cache status.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/dns/summary/cache_hit`
+///
+/// **Parameters**
+/// - `name` (query,optional)
+/// - `dateRange` (query,optional)
+/// - `dateStart` (query,optional)
+/// - `dateEnd` (query,optional)
+/// - `asn` (query,optional)
+/// - `location` (query,optional)
+/// - `continent` (query,optional)
+/// - `tld` (query,optional)
+/// - `queryType` (query,optional)
+/// - `protocol` (query,optional)
+/// - `responseCode` (query,optional)
+/// - `nodata` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_dns };
+/// use cloudflare::{ ApiClient, apis::radar_dns };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_dns_summary(&api)
+/// let response = get_dns_summary(&api)
+///     .with_name("name")
+///     .with_date_range("dateRange")
+///     .with_date_start("dateStart")
+///     .with_date_end("dateEnd")
+///     .with_asn("asn")
+///     .with_location("location")
+///     .with_continent("continent")
+///     .with_tld("tld")
+///     .with_query_type("queryType")
+///     .with_protocol("protocol")
+///     .with_response_code("responseCode")
+///     .with_nodata("nodata")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```
@@ -166,13 +199,46 @@ impl<'a> GetDnsSummaryGetRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get DNS queries by DNSSEC support summary
+///
+/// Retrieves the distribution of DNS responses by DNSSEC (DNS Security Extensions) support.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/dns/summary/dnssec`
+///
+/// **Parameters**
+/// - `name` (query,optional)
+/// - `dateRange` (query,optional)
+/// - `dateStart` (query,optional)
+/// - `dateEnd` (query,optional)
+/// - `asn` (query,optional)
+/// - `location` (query,optional)
+/// - `continent` (query,optional)
+/// - `tld` (query,optional)
+/// - `queryType` (query,optional)
+/// - `protocol` (query,optional)
+/// - `responseCode` (query,optional)
+/// - `nodata` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_dns };
+/// use cloudflare::{ ApiClient, apis::radar_dns };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_dns_summary_get(&api)
+/// let response = get_dns_summary_get(&api)
+///     .with_name("name")
+///     .with_date_range("dateRange")
+///     .with_date_start("dateStart")
+///     .with_date_end("dateEnd")
+///     .with_asn("asn")
+///     .with_location("location")
+///     .with_continent("continent")
+///     .with_tld("tld")
+///     .with_query_type("queryType")
+///     .with_protocol("protocol")
+///     .with_response_code("responseCode")
+///     .with_nodata("nodata")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```
@@ -247,13 +313,46 @@ impl<'a> GetDnsSummaryGet3Request<'a> {
         self.builder.send().await
     }
 }
-
 /// Get DNS queries by DNSSEC awareness summary
+///
+/// Retrieves the distribution of DNS queries by DNSSEC (DNS Security Extensions) client awareness.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/dns/summary/dnssec_aware`
+///
+/// **Parameters**
+/// - `name` (query,optional)
+/// - `dateRange` (query,optional)
+/// - `dateStart` (query,optional)
+/// - `dateEnd` (query,optional)
+/// - `asn` (query,optional)
+/// - `location` (query,optional)
+/// - `continent` (query,optional)
+/// - `tld` (query,optional)
+/// - `queryType` (query,optional)
+/// - `protocol` (query,optional)
+/// - `responseCode` (query,optional)
+/// - `nodata` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_dns };
+/// use cloudflare::{ ApiClient, apis::radar_dns };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_dns_summary_get_3(&api)
+/// let response = get_dns_summary_get_3(&api)
+///     .with_name("name")
+///     .with_date_range("dateRange")
+///     .with_date_start("dateStart")
+///     .with_date_end("dateEnd")
+///     .with_asn("asn")
+///     .with_location("location")
+///     .with_continent("continent")
+///     .with_tld("tld")
+///     .with_query_type("queryType")
+///     .with_protocol("protocol")
+///     .with_response_code("responseCode")
+///     .with_nodata("nodata")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```
@@ -328,13 +427,46 @@ impl<'a> GetDnsSummaryGet4Request<'a> {
         self.builder.send().await
     }
 }
-
 /// Get DNS queries by DNSSEC end-to-end summary
+///
+/// Retrieves the distribution of DNSSEC-validated answers by end-to-end security status.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/dns/summary/dnssec_e2e`
+///
+/// **Parameters**
+/// - `name` (query,optional)
+/// - `dateRange` (query,optional)
+/// - `dateStart` (query,optional)
+/// - `dateEnd` (query,optional)
+/// - `asn` (query,optional)
+/// - `location` (query,optional)
+/// - `continent` (query,optional)
+/// - `tld` (query,optional)
+/// - `queryType` (query,optional)
+/// - `protocol` (query,optional)
+/// - `responseCode` (query,optional)
+/// - `nodata` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_dns };
+/// use cloudflare::{ ApiClient, apis::radar_dns };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_dns_summary_get_4(&api)
+/// let response = get_dns_summary_get_4(&api)
+///     .with_name("name")
+///     .with_date_range("dateRange")
+///     .with_date_start("dateStart")
+///     .with_date_end("dateEnd")
+///     .with_asn("asn")
+///     .with_location("location")
+///     .with_continent("continent")
+///     .with_tld("tld")
+///     .with_query_type("queryType")
+///     .with_protocol("protocol")
+///     .with_response_code("responseCode")
+///     .with_nodata("nodata")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```
@@ -409,13 +541,46 @@ impl<'a> GetDnsSummaryGet5Request<'a> {
         self.builder.send().await
     }
 }
-
 /// Get DNS queries by IP version summary
+///
+/// Retrieves the distribution of DNS queries by IP version.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/dns/summary/ip_version`
+///
+/// **Parameters**
+/// - `name` (query,optional)
+/// - `dateRange` (query,optional)
+/// - `dateStart` (query,optional)
+/// - `dateEnd` (query,optional)
+/// - `asn` (query,optional)
+/// - `location` (query,optional)
+/// - `continent` (query,optional)
+/// - `tld` (query,optional)
+/// - `queryType` (query,optional)
+/// - `protocol` (query,optional)
+/// - `responseCode` (query,optional)
+/// - `nodata` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_dns };
+/// use cloudflare::{ ApiClient, apis::radar_dns };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_dns_summary_get_5(&api)
+/// let response = get_dns_summary_get_5(&api)
+///     .with_name("name")
+///     .with_date_range("dateRange")
+///     .with_date_start("dateStart")
+///     .with_date_end("dateEnd")
+///     .with_asn("asn")
+///     .with_location("location")
+///     .with_continent("continent")
+///     .with_tld("tld")
+///     .with_query_type("queryType")
+///     .with_protocol("protocol")
+///     .with_response_code("responseCode")
+///     .with_nodata("nodata")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```
@@ -490,13 +655,46 @@ impl<'a> GetDnsSummaryGet6Request<'a> {
         self.builder.send().await
     }
 }
-
 /// Get DNS queries by matching answer summary
+///
+/// Retrieves the distribution of DNS queries by matching answers.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/dns/summary/matching_answer`
+///
+/// **Parameters**
+/// - `name` (query,optional)
+/// - `dateRange` (query,optional)
+/// - `dateStart` (query,optional)
+/// - `dateEnd` (query,optional)
+/// - `asn` (query,optional)
+/// - `location` (query,optional)
+/// - `continent` (query,optional)
+/// - `tld` (query,optional)
+/// - `queryType` (query,optional)
+/// - `protocol` (query,optional)
+/// - `responseCode` (query,optional)
+/// - `nodata` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_dns };
+/// use cloudflare::{ ApiClient, apis::radar_dns };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_dns_summary_get_6(&api)
+/// let response = get_dns_summary_get_6(&api)
+///     .with_name("name")
+///     .with_date_range("dateRange")
+///     .with_date_start("dateStart")
+///     .with_date_end("dateEnd")
+///     .with_asn("asn")
+///     .with_location("location")
+///     .with_continent("continent")
+///     .with_tld("tld")
+///     .with_query_type("queryType")
+///     .with_protocol("protocol")
+///     .with_response_code("responseCode")
+///     .with_nodata("nodata")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```
@@ -567,13 +765,44 @@ impl<'a> GetDnsSummaryGet7Request<'a> {
         self.builder.send().await
     }
 }
-
 /// Get DNS queries by protocol summary
+///
+/// Retrieves the distribution of DNS queries by DNS transport protocol.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/dns/summary/protocol`
+///
+/// **Parameters**
+/// - `name` (query,optional)
+/// - `dateRange` (query,optional)
+/// - `dateStart` (query,optional)
+/// - `dateEnd` (query,optional)
+/// - `asn` (query,optional)
+/// - `location` (query,optional)
+/// - `continent` (query,optional)
+/// - `tld` (query,optional)
+/// - `queryType` (query,optional)
+/// - `responseCode` (query,optional)
+/// - `nodata` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_dns };
+/// use cloudflare::{ ApiClient, apis::radar_dns };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_dns_summary_get_7(&api)
+/// let response = get_dns_summary_get_7(&api)
+///     .with_name("name")
+///     .with_date_range("dateRange")
+///     .with_date_start("dateStart")
+///     .with_date_end("dateEnd")
+///     .with_asn("asn")
+///     .with_location("location")
+///     .with_continent("continent")
+///     .with_tld("tld")
+///     .with_query_type("queryType")
+///     .with_response_code("responseCode")
+///     .with_nodata("nodata")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```
@@ -648,13 +877,46 @@ impl<'a> GetDnsSummaryGet8Request<'a> {
         self.builder.send().await
     }
 }
-
 /// Get DNS queries by type summary
+///
+/// Retrieves the distribution of DNS queries by type.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/dns/summary/query_type`
+///
+/// **Parameters**
+/// - `name` (query,optional)
+/// - `dateRange` (query,optional)
+/// - `dateStart` (query,optional)
+/// - `dateEnd` (query,optional)
+/// - `asn` (query,optional)
+/// - `location` (query,optional)
+/// - `continent` (query,optional)
+/// - `tld` (query,optional)
+/// - `protocol` (query,optional)
+/// - `responseCode` (query,optional)
+/// - `nodata` (query,optional)
+/// - `limitPerGroup` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_dns };
+/// use cloudflare::{ ApiClient, apis::radar_dns };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_dns_summary_get_8(&api)
+/// let response = get_dns_summary_get_8(&api)
+///     .with_name("name")
+///     .with_date_range("dateRange")
+///     .with_date_start("dateStart")
+///     .with_date_end("dateEnd")
+///     .with_asn("asn")
+///     .with_location("location")
+///     .with_continent("continent")
+///     .with_tld("tld")
+///     .with_protocol("protocol")
+///     .with_response_code("responseCode")
+///     .with_nodata("nodata")
+///     .with_limit_per_group("limitPerGroup")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```
@@ -729,13 +991,46 @@ impl<'a> GetDnsSummaryGet9Request<'a> {
         self.builder.send().await
     }
 }
-
 /// Get DNS queries by response code summary
+///
+/// Retrieves the distribution of DNS queries by response code.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/dns/summary/response_code`
+///
+/// **Parameters**
+/// - `name` (query,optional)
+/// - `dateRange` (query,optional)
+/// - `dateStart` (query,optional)
+/// - `dateEnd` (query,optional)
+/// - `asn` (query,optional)
+/// - `location` (query,optional)
+/// - `continent` (query,optional)
+/// - `tld` (query,optional)
+/// - `queryType` (query,optional)
+/// - `protocol` (query,optional)
+/// - `nodata` (query,optional)
+/// - `limitPerGroup` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_dns };
+/// use cloudflare::{ ApiClient, apis::radar_dns };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_dns_summary_get_9(&api)
+/// let response = get_dns_summary_get_9(&api)
+///     .with_name("name")
+///     .with_date_range("dateRange")
+///     .with_date_start("dateStart")
+///     .with_date_end("dateEnd")
+///     .with_asn("asn")
+///     .with_location("location")
+///     .with_continent("continent")
+///     .with_tld("tld")
+///     .with_query_type("queryType")
+///     .with_protocol("protocol")
+///     .with_nodata("nodata")
+///     .with_limit_per_group("limitPerGroup")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```
@@ -810,13 +1105,46 @@ impl<'a> GetDnsSummaryGet10Request<'a> {
         self.builder.send().await
     }
 }
-
 /// Get DNS queries by response TTL summary
+///
+/// Retrieves the distribution of DNS queries by minimum response TTL.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/dns/summary/response_ttl`
+///
+/// **Parameters**
+/// - `name` (query,optional)
+/// - `dateRange` (query,optional)
+/// - `dateStart` (query,optional)
+/// - `dateEnd` (query,optional)
+/// - `asn` (query,optional)
+/// - `location` (query,optional)
+/// - `continent` (query,optional)
+/// - `tld` (query,optional)
+/// - `queryType` (query,optional)
+/// - `protocol` (query,optional)
+/// - `responseCode` (query,optional)
+/// - `nodata` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_dns };
+/// use cloudflare::{ ApiClient, apis::radar_dns };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_dns_summary_get_10(&api)
+/// let response = get_dns_summary_get_10(&api)
+///     .with_name("name")
+///     .with_date_range("dateRange")
+///     .with_date_start("dateStart")
+///     .with_date_end("dateEnd")
+///     .with_asn("asn")
+///     .with_location("location")
+///     .with_continent("continent")
+///     .with_tld("tld")
+///     .with_query_type("queryType")
+///     .with_protocol("protocol")
+///     .with_response_code("responseCode")
+///     .with_nodata("nodata")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```
@@ -895,13 +1223,48 @@ impl<'a> GetDnsTimeseriesRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get DNS queries time series
+///
+/// Retrieves normalized query volume to the 1.1.1.1 DNS resolver over time.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/dns/timeseries`
+///
+/// **Parameters**
+/// - `aggInterval` (query,optional)
+/// - `name` (query,optional)
+/// - `dateRange` (query,optional)
+/// - `dateStart` (query,optional)
+/// - `dateEnd` (query,optional)
+/// - `asn` (query,optional)
+/// - `location` (query,optional)
+/// - `continent` (query,optional)
+/// - `tld` (query,optional)
+/// - `queryType` (query,optional)
+/// - `protocol` (query,optional)
+/// - `responseCode` (query,optional)
+/// - `nodata` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_dns };
+/// use cloudflare::{ ApiClient, apis::radar_dns };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_dns_timeseries(&api)
+/// let response = get_dns_timeseries(&api)
+///     .with_agg_interval("aggInterval")
+///     .with_name("name")
+///     .with_date_range("dateRange")
+///     .with_date_start("dateStart")
+///     .with_date_end("dateEnd")
+///     .with_asn("asn")
+///     .with_location("location")
+///     .with_continent("continent")
+///     .with_tld("tld")
+///     .with_query_type("queryType")
+///     .with_protocol("protocol")
+///     .with_response_code("responseCode")
+///     .with_nodata("nodata")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```
@@ -981,13 +1344,48 @@ impl<'a> GetDnsTimeseriesGroupRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get DNS queries by cache status time series
+///
+/// Retrieves the distribution of DNS queries by cache status over time.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/dns/timeseries_groups/cache_hit`
+///
+/// **Parameters**
+/// - `aggInterval` (query,optional)
+/// - `name` (query,optional)
+/// - `dateRange` (query,optional)
+/// - `dateStart` (query,optional)
+/// - `dateEnd` (query,optional)
+/// - `asn` (query,optional)
+/// - `location` (query,optional)
+/// - `continent` (query,optional)
+/// - `tld` (query,optional)
+/// - `queryType` (query,optional)
+/// - `protocol` (query,optional)
+/// - `responseCode` (query,optional)
+/// - `nodata` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_dns };
+/// use cloudflare::{ ApiClient, apis::radar_dns };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_dns_timeseries_group(&api)
+/// let response = get_dns_timeseries_group(&api)
+///     .with_agg_interval("aggInterval")
+///     .with_name("name")
+///     .with_date_range("dateRange")
+///     .with_date_start("dateStart")
+///     .with_date_end("dateEnd")
+///     .with_asn("asn")
+///     .with_location("location")
+///     .with_continent("continent")
+///     .with_tld("tld")
+///     .with_query_type("queryType")
+///     .with_protocol("protocol")
+///     .with_response_code("responseCode")
+///     .with_nodata("nodata")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```
@@ -1067,13 +1465,48 @@ impl<'a> GetDnsTimeseriesGroupGetRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get DNS queries by DNSSEC support time series
+///
+/// Retrieves the distribution of DNS responses by DNSSEC (DNS Security Extensions) support over time.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/dns/timeseries_groups/dnssec`
+///
+/// **Parameters**
+/// - `aggInterval` (query,optional)
+/// - `name` (query,optional)
+/// - `dateRange` (query,optional)
+/// - `dateStart` (query,optional)
+/// - `dateEnd` (query,optional)
+/// - `asn` (query,optional)
+/// - `location` (query,optional)
+/// - `continent` (query,optional)
+/// - `tld` (query,optional)
+/// - `queryType` (query,optional)
+/// - `protocol` (query,optional)
+/// - `responseCode` (query,optional)
+/// - `nodata` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_dns };
+/// use cloudflare::{ ApiClient, apis::radar_dns };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_dns_timeseries_group_get(&api)
+/// let response = get_dns_timeseries_group_get(&api)
+///     .with_agg_interval("aggInterval")
+///     .with_name("name")
+///     .with_date_range("dateRange")
+///     .with_date_start("dateStart")
+///     .with_date_end("dateEnd")
+///     .with_asn("asn")
+///     .with_location("location")
+///     .with_continent("continent")
+///     .with_tld("tld")
+///     .with_query_type("queryType")
+///     .with_protocol("protocol")
+///     .with_response_code("responseCode")
+///     .with_nodata("nodata")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```
@@ -1153,13 +1586,48 @@ impl<'a> GetDnsTimeseriesGroupGet3Request<'a> {
         self.builder.send().await
     }
 }
-
 /// Get DNS queries by DNSSEC awareness time series
+///
+/// Retrieves the distribution of DNS queries by DNSSEC (DNS Security Extensions) client awareness over time.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/dns/timeseries_groups/dnssec_aware`
+///
+/// **Parameters**
+/// - `aggInterval` (query,optional)
+/// - `name` (query,optional)
+/// - `dateRange` (query,optional)
+/// - `dateStart` (query,optional)
+/// - `dateEnd` (query,optional)
+/// - `asn` (query,optional)
+/// - `location` (query,optional)
+/// - `continent` (query,optional)
+/// - `tld` (query,optional)
+/// - `queryType` (query,optional)
+/// - `protocol` (query,optional)
+/// - `responseCode` (query,optional)
+/// - `nodata` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_dns };
+/// use cloudflare::{ ApiClient, apis::radar_dns };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_dns_timeseries_group_get_3(&api)
+/// let response = get_dns_timeseries_group_get_3(&api)
+///     .with_agg_interval("aggInterval")
+///     .with_name("name")
+///     .with_date_range("dateRange")
+///     .with_date_start("dateStart")
+///     .with_date_end("dateEnd")
+///     .with_asn("asn")
+///     .with_location("location")
+///     .with_continent("continent")
+///     .with_tld("tld")
+///     .with_query_type("queryType")
+///     .with_protocol("protocol")
+///     .with_response_code("responseCode")
+///     .with_nodata("nodata")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```
@@ -1239,13 +1707,48 @@ impl<'a> GetDnsTimeseriesGroupGet4Request<'a> {
         self.builder.send().await
     }
 }
-
 /// Get DNS queries by DNSSEC end-to-end time series
+///
+/// Retrieves the distribution of DNSSEC-validated answers by end-to-end security status over time.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/dns/timeseries_groups/dnssec_e2e`
+///
+/// **Parameters**
+/// - `aggInterval` (query,optional)
+/// - `name` (query,optional)
+/// - `dateRange` (query,optional)
+/// - `dateStart` (query,optional)
+/// - `dateEnd` (query,optional)
+/// - `asn` (query,optional)
+/// - `location` (query,optional)
+/// - `continent` (query,optional)
+/// - `tld` (query,optional)
+/// - `queryType` (query,optional)
+/// - `protocol` (query,optional)
+/// - `responseCode` (query,optional)
+/// - `nodata` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_dns };
+/// use cloudflare::{ ApiClient, apis::radar_dns };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_dns_timeseries_group_get_4(&api)
+/// let response = get_dns_timeseries_group_get_4(&api)
+///     .with_agg_interval("aggInterval")
+///     .with_name("name")
+///     .with_date_range("dateRange")
+///     .with_date_start("dateStart")
+///     .with_date_end("dateEnd")
+///     .with_asn("asn")
+///     .with_location("location")
+///     .with_continent("continent")
+///     .with_tld("tld")
+///     .with_query_type("queryType")
+///     .with_protocol("protocol")
+///     .with_response_code("responseCode")
+///     .with_nodata("nodata")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```
@@ -1325,13 +1828,48 @@ impl<'a> GetDnsTimeseriesGroupGet5Request<'a> {
         self.builder.send().await
     }
 }
-
 /// Get DNS queries by IP version time series
+///
+/// Retrieves the distribution of DNS queries by IP version over time.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/dns/timeseries_groups/ip_version`
+///
+/// **Parameters**
+/// - `aggInterval` (query,optional)
+/// - `name` (query,optional)
+/// - `dateRange` (query,optional)
+/// - `dateStart` (query,optional)
+/// - `dateEnd` (query,optional)
+/// - `asn` (query,optional)
+/// - `location` (query,optional)
+/// - `continent` (query,optional)
+/// - `tld` (query,optional)
+/// - `queryType` (query,optional)
+/// - `protocol` (query,optional)
+/// - `responseCode` (query,optional)
+/// - `nodata` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_dns };
+/// use cloudflare::{ ApiClient, apis::radar_dns };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_dns_timeseries_group_get_5(&api)
+/// let response = get_dns_timeseries_group_get_5(&api)
+///     .with_agg_interval("aggInterval")
+///     .with_name("name")
+///     .with_date_range("dateRange")
+///     .with_date_start("dateStart")
+///     .with_date_end("dateEnd")
+///     .with_asn("asn")
+///     .with_location("location")
+///     .with_continent("continent")
+///     .with_tld("tld")
+///     .with_query_type("queryType")
+///     .with_protocol("protocol")
+///     .with_response_code("responseCode")
+///     .with_nodata("nodata")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```
@@ -1414,13 +1952,48 @@ impl<'a> GetDnsTimeseriesGroupGet6Request<'a> {
         self.builder.send().await
     }
 }
-
 /// Get DNS queries by matching answer time series
+///
+/// Retrieves the distribution of DNS queries by matching answers over time.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/dns/timeseries_groups/matching_answer`
+///
+/// **Parameters**
+/// - `aggInterval` (query,optional)
+/// - `name` (query,optional)
+/// - `dateRange` (query,optional)
+/// - `dateStart` (query,optional)
+/// - `dateEnd` (query,optional)
+/// - `asn` (query,optional)
+/// - `location` (query,optional)
+/// - `continent` (query,optional)
+/// - `tld` (query,optional)
+/// - `queryType` (query,optional)
+/// - `protocol` (query,optional)
+/// - `responseCode` (query,optional)
+/// - `nodata` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_dns };
+/// use cloudflare::{ ApiClient, apis::radar_dns };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_dns_timeseries_group_get_6(&api)
+/// let response = get_dns_timeseries_group_get_6(&api)
+///     .with_agg_interval("aggInterval")
+///     .with_name("name")
+///     .with_date_range("dateRange")
+///     .with_date_start("dateStart")
+///     .with_date_end("dateEnd")
+///     .with_asn("asn")
+///     .with_location("location")
+///     .with_continent("continent")
+///     .with_tld("tld")
+///     .with_query_type("queryType")
+///     .with_protocol("protocol")
+///     .with_response_code("responseCode")
+///     .with_nodata("nodata")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```
@@ -1496,13 +2069,46 @@ impl<'a> GetDnsTimeseriesGroupGet7Request<'a> {
         self.builder.send().await
     }
 }
-
 /// Get DNS queries by protocol time series
+///
+/// Retrieves the distribution of DNS queries by DNS transport protocol over time.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/dns/timeseries_groups/protocol`
+///
+/// **Parameters**
+/// - `aggInterval` (query,optional)
+/// - `name` (query,optional)
+/// - `dateRange` (query,optional)
+/// - `dateStart` (query,optional)
+/// - `dateEnd` (query,optional)
+/// - `asn` (query,optional)
+/// - `location` (query,optional)
+/// - `continent` (query,optional)
+/// - `tld` (query,optional)
+/// - `queryType` (query,optional)
+/// - `responseCode` (query,optional)
+/// - `nodata` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_dns };
+/// use cloudflare::{ ApiClient, apis::radar_dns };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_dns_timeseries_group_get_7(&api)
+/// let response = get_dns_timeseries_group_get_7(&api)
+///     .with_agg_interval("aggInterval")
+///     .with_name("name")
+///     .with_date_range("dateRange")
+///     .with_date_start("dateStart")
+///     .with_date_end("dateEnd")
+///     .with_asn("asn")
+///     .with_location("location")
+///     .with_continent("continent")
+///     .with_tld("tld")
+///     .with_query_type("queryType")
+///     .with_response_code("responseCode")
+///     .with_nodata("nodata")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```
@@ -1582,13 +2188,48 @@ impl<'a> GetDnsTimeseriesGroupGet8Request<'a> {
         self.builder.send().await
     }
 }
-
 /// Get DNS queries by type time series
+///
+/// Retrieves the distribution of DNS queries by type over time.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/dns/timeseries_groups/query_type`
+///
+/// **Parameters**
+/// - `aggInterval` (query,optional)
+/// - `name` (query,optional)
+/// - `dateRange` (query,optional)
+/// - `dateStart` (query,optional)
+/// - `dateEnd` (query,optional)
+/// - `asn` (query,optional)
+/// - `location` (query,optional)
+/// - `continent` (query,optional)
+/// - `tld` (query,optional)
+/// - `protocol` (query,optional)
+/// - `responseCode` (query,optional)
+/// - `nodata` (query,optional)
+/// - `limitPerGroup` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_dns };
+/// use cloudflare::{ ApiClient, apis::radar_dns };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_dns_timeseries_group_get_8(&api)
+/// let response = get_dns_timeseries_group_get_8(&api)
+///     .with_agg_interval("aggInterval")
+///     .with_name("name")
+///     .with_date_range("dateRange")
+///     .with_date_start("dateStart")
+///     .with_date_end("dateEnd")
+///     .with_asn("asn")
+///     .with_location("location")
+///     .with_continent("continent")
+///     .with_tld("tld")
+///     .with_protocol("protocol")
+///     .with_response_code("responseCode")
+///     .with_nodata("nodata")
+///     .with_limit_per_group("limitPerGroup")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```
@@ -1671,13 +2312,48 @@ impl<'a> GetDnsTimeseriesGroupGet9Request<'a> {
         self.builder.send().await
     }
 }
-
 /// Get DNS queries by response code time series
+///
+/// Retrieves the distribution of DNS queries by response code over time.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/dns/timeseries_groups/response_code`
+///
+/// **Parameters**
+/// - `aggInterval` (query,optional)
+/// - `name` (query,optional)
+/// - `dateRange` (query,optional)
+/// - `dateStart` (query,optional)
+/// - `dateEnd` (query,optional)
+/// - `asn` (query,optional)
+/// - `location` (query,optional)
+/// - `continent` (query,optional)
+/// - `tld` (query,optional)
+/// - `queryType` (query,optional)
+/// - `protocol` (query,optional)
+/// - `nodata` (query,optional)
+/// - `limitPerGroup` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_dns };
+/// use cloudflare::{ ApiClient, apis::radar_dns };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_dns_timeseries_group_get_9(&api)
+/// let response = get_dns_timeseries_group_get_9(&api)
+///     .with_agg_interval("aggInterval")
+///     .with_name("name")
+///     .with_date_range("dateRange")
+///     .with_date_start("dateStart")
+///     .with_date_end("dateEnd")
+///     .with_asn("asn")
+///     .with_location("location")
+///     .with_continent("continent")
+///     .with_tld("tld")
+///     .with_query_type("queryType")
+///     .with_protocol("protocol")
+///     .with_nodata("nodata")
+///     .with_limit_per_group("limitPerGroup")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```
@@ -1757,13 +2433,48 @@ impl<'a> GetDnsTimeseriesGroupGet10Request<'a> {
         self.builder.send().await
     }
 }
-
 /// Get DNS queries by response TTL time series
+///
+/// Retrieves the distribution of DNS queries by minimum answer TTL over time.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/dns/timeseries_groups/response_ttl`
+///
+/// **Parameters**
+/// - `aggInterval` (query,optional)
+/// - `name` (query,optional)
+/// - `dateRange` (query,optional)
+/// - `dateStart` (query,optional)
+/// - `dateEnd` (query,optional)
+/// - `asn` (query,optional)
+/// - `location` (query,optional)
+/// - `continent` (query,optional)
+/// - `tld` (query,optional)
+/// - `queryType` (query,optional)
+/// - `protocol` (query,optional)
+/// - `responseCode` (query,optional)
+/// - `nodata` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_dns };
+/// use cloudflare::{ ApiClient, apis::radar_dns };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_dns_timeseries_group_get_10(&api)
+/// let response = get_dns_timeseries_group_get_10(&api)
+///     .with_agg_interval("aggInterval")
+///     .with_name("name")
+///     .with_date_range("dateRange")
+///     .with_date_start("dateStart")
+///     .with_date_end("dateEnd")
+///     .with_asn("asn")
+///     .with_location("location")
+///     .with_continent("continent")
+///     .with_tld("tld")
+///     .with_query_type("queryType")
+///     .with_protocol("protocol")
+///     .with_response_code("responseCode")
+///     .with_nodata("nodata")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```
@@ -1826,13 +2537,40 @@ impl<'a> GetDnsTopAsesRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get top ASes by DNS queries
+///
+/// Retrieves the top autonomous systems by DNS queries made to 1.1.1.1 DNS resolver.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/dns/top/ases`
+///
+/// **Parameters**
+/// - `limit` (query,optional)
+/// - `name` (query,optional)
+/// - `dateRange` (query,optional)
+/// - `dateStart` (query,optional)
+/// - `dateEnd` (query,optional)
+/// - `asn` (query,optional)
+/// - `location` (query,optional)
+/// - `continent` (query,optional)
+/// - `domain` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_dns };
+/// use cloudflare::{ ApiClient, apis::radar_dns };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_dns_top_ases(&api)
+/// let response = get_dns_top_ases(&api)
+///     .with_limit("limit")
+///     .with_name("name")
+///     .with_date_range("dateRange")
+///     .with_date_start("dateStart")
+///     .with_date_end("dateEnd")
+///     .with_asn("asn")
+///     .with_location("location")
+///     .with_continent("continent")
+///     .with_domain("domain")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```
@@ -1895,13 +2633,40 @@ impl<'a> GetDnsTopLocationsRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get top locations by DNS queries
+///
+/// Retrieves the top locations by DNS queries made to 1.1.1.1 DNS resolver.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/dns/top/locations`
+///
+/// **Parameters**
+/// - `limit` (query,optional)
+/// - `name` (query,optional)
+/// - `dateRange` (query,optional)
+/// - `dateStart` (query,optional)
+/// - `dateEnd` (query,optional)
+/// - `asn` (query,optional)
+/// - `location` (query,optional)
+/// - `continent` (query,optional)
+/// - `domain` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_dns };
+/// use cloudflare::{ ApiClient, apis::radar_dns };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_dns_top_locations(&api)
+/// let response = get_dns_top_locations(&api)
+///     .with_limit("limit")
+///     .with_name("name")
+///     .with_date_range("dateRange")
+///     .with_date_start("dateStart")
+///     .with_date_end("dateEnd")
+///     .with_asn("asn")
+///     .with_location("location")
+///     .with_continent("continent")
+///     .with_domain("domain")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```

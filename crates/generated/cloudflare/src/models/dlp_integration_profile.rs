@@ -21,7 +21,7 @@ use serde::{Deserialize, Serialize};
 pub struct DlpIntegrationProfile {
     pub created_at: String,
     pub description: Option<String>,
-    pub entries: Vec<serde_json::Value>,
+    pub entries: Vec<crate::models::dlp_entry::DlpEntry>,
     pub id: String,
     pub name: String,
     pub updated_at: String,

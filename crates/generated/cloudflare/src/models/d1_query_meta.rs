@@ -26,7 +26,7 @@ pub struct D1QueryMeta {
     pub rows_read: Option<f64>,
     pub rows_written: Option<f64>,
     pub served_by_primary: Option<bool>,
-    pub served_by_region: Option<serde_json::Value>,
+    pub served_by_region: Option<crate::models::d1_served_by_region::D1ServedByRegion>,
     pub size_after: Option<f64>,
     pub timings: Option<std::collections::BTreeMap<String, serde_json::Value>>,
 }

@@ -15,12 +15,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::load_balancing_components_schemas_single_response::LoadBalancingComponentsSchemasSingleResponse;
+use crate::models::load_balancing_region_components_schemas_response_collection::LoadBalancingRegionComponentsSchemasResponseCollection;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct ListRegionsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, LoadBalancingRegionComponentsSchemasResponseCollection>,
 }
 
 impl<'a> ListRegionsRequest<'a> {
@@ -50,18 +52,32 @@ impl<'a> ListRegionsRequest<'a> {
         self.builder = self.builder.header_param("country_code_a2", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<LoadBalancingRegionComponentsSchemasResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// List Regions
+///
+/// List all region mappings.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/load_balancers/regions`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `subdivision_code` (query,optional)
+/// - `subdivision_code_a2` (query,optional)
+/// - `country_code_a2` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::load_balancer_regions };
+/// use cloudflare::{ ApiClient, apis::load_balancer_regions };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_regions(&api)
-///     .with_account_id("value")
+/// let response = list_regions(&api)
+///     .with_account_id("account_id")
+///     .with_subdivision_code("subdivision_code")
+///     .with_subdivision_code_a2("subdivision_code_a2")
+///     .with_country_code_a2("country_code_a2")
 ///     .send()
 ///     .await?;
 /// ```
@@ -71,7 +87,7 @@ pub fn list_regions(api: &ApiClient) -> ListRegionsRequest<'_> {
 
 #[derive(Debug)]
 pub struct GetRegionRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, LoadBalancingComponentsSchemasSingleResponse>,
 }
 
 impl<'a> GetRegionRequest<'a> {
@@ -94,19 +110,28 @@ impl<'a> GetRegionRequest<'a> {
         self.builder = self.builder.path_param("region_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<LoadBalancingComponentsSchemasSingleResponse> {
         self.builder.send().await
     }
 }
-
 /// Get Region
+///
+/// Get a single region mapping.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/load_balancers/regions/{region_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `region_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::load_balancer_regions };
+/// use cloudflare::{ ApiClient, apis::load_balancer_regions };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_region(&api)
-///     .with_account_id("value")
-///     .with_region_id("value")
+/// let response = get_region(&api)
+///     .with_account_id("account_id")
+///     .with_region_id("region_id")
 ///     .send()
 ///     .await?;
 /// ```

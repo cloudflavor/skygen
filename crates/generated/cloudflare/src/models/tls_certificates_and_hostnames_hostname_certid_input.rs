@@ -19,7 +19,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct TlsCertificatesAndHostnamesHostnameCertidInput {
-    pub cert_id: Option<serde_json::Value>,
-    pub enabled: Option<serde_json::Value>,
-    pub hostname: Option<serde_json::Value>,
+    pub cert_id: Option<crate::models::tls_certificates_and_hostnames_cert_id::TlsCertificatesAndHostnamesCertId>,
+    pub enabled: Option<crate::models::tls_certificates_and_hostnames_hostname_authenticated_origin_pull_components_schemas_enabled::TlsCertificatesAndHostnamesHostnameAuthenticatedOriginPullComponentsSchemasEnabled>,
+    pub hostname: Option<crate::models::tls_certificates_and_hostnames_schemas_hostname::TlsCertificatesAndHostnamesSchemasHostname>,
 }

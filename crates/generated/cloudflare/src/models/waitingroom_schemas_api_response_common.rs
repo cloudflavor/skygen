@@ -19,7 +19,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct WaitingroomSchemasApiResponseCommon {
-    pub errors: serde_json::Value,
-    pub messages: serde_json::Value,
+    pub errors: crate::models::waitingroom_messages::WaitingroomMessages,
+    pub messages: crate::models::waitingroom_messages::WaitingroomMessages,
     pub success: bool,
 }

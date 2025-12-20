@@ -19,8 +19,11 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct AddressingBgpOnDemand {
-    pub advertised: Option<serde_json::Value>,
-    pub advertised_modified_at: Option<serde_json::Value>,
-    pub on_demand_enabled: Option<serde_json::Value>,
-    pub on_demand_locked: Option<serde_json::Value>,
+    pub advertised: Option<crate::models::addressing_advertised::AddressingAdvertised>,
+    pub advertised_modified_at:
+        Option<crate::models::addressing_modified_at_nullable::AddressingModifiedAtNullable>,
+    pub on_demand_enabled:
+        Option<crate::models::addressing_on_demand_enabled::AddressingOnDemandEnabled>,
+    pub on_demand_locked:
+        Option<crate::models::addressing_on_demand_locked::AddressingOnDemandLocked>,
 }

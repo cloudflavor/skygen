@@ -15,12 +15,15 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::access_policy_init_resp::AccessPolicyInitResp;
+use crate::models::access_policy_update_resp::AccessPolicyUpdateResp;
+use crate::models::access_policy_users_resp::AccessPolicyUsersResp;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct TestsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, AccessPolicyInitResp>,
 }
 
 impl<'a> TestsRequest<'a> {
@@ -46,18 +49,28 @@ impl<'a> TestsRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<AccessPolicyInitResp> {
         self.builder.send().await
     }
 }
-
 /// Start Access policy test
+///
+/// Starts an Access policy test.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/access/policy-tests`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::access_policy_tester };
+/// use cloudflare::{ ApiClient, apis::access_policy_tester };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = tests(&api)
-///     .with_account_id("value")
+/// # let body: crate::models::access_policy_init_req::AccessPolicyInitReq = todo!();
+/// let response = tests(&api)
+///     .with_account_id("account_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -67,7 +80,7 @@ pub fn tests(api: &ApiClient) -> TestsRequest<'_> {
 
 #[derive(Debug)]
 pub struct TestsGetUpdateRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, AccessPolicyUpdateResp>,
 }
 
 impl<'a> TestsGetUpdateRequest<'a> {
@@ -90,19 +103,28 @@ impl<'a> TestsGetUpdateRequest<'a> {
         self.builder = self.builder.path_param("policy_test_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<AccessPolicyUpdateResp> {
         self.builder.send().await
     }
 }
-
 /// Get the current status of a given Access policy test
+///
+/// Fetches the current status of a given Access policy test.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/access/policy-tests/{policy_test_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `policy_test_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::access_policy_tester };
+/// use cloudflare::{ ApiClient, apis::access_policy_tester };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = tests_get_update(&api)
-///     .with_account_id("value")
-///     .with_policy_test_id("value")
+/// let response = tests_get_update(&api)
+///     .with_account_id("account_id")
+///     .with_policy_test_id("policy_test_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -112,7 +134,7 @@ pub fn tests_get_update(api: &ApiClient) -> TestsGetUpdateRequest<'_> {
 
 #[derive(Debug)]
 pub struct TestsGetPageRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, AccessPolicyUsersResp>,
 }
 
 impl<'a> TestsGetPageRequest<'a> {
@@ -147,19 +169,34 @@ impl<'a> TestsGetPageRequest<'a> {
         self.builder = self.builder.header_param("status", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<AccessPolicyUsersResp> {
         self.builder.send().await
     }
 }
-
 /// Get an Access policy test users page
+///
+/// Fetches a single page of user results from an Access policy test.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/access/policy-tests/{policy_test_id}/users`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `policy_test_id` (path, required)
+/// - `page` (query,optional)
+/// - `per_page` (query,optional)
+/// - `status` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::access_policy_tester };
+/// use cloudflare::{ ApiClient, apis::access_policy_tester };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = tests_get_page(&api)
-///     .with_account_id("value")
-///     .with_policy_test_id("value")
+/// let response = tests_get_page(&api)
+///     .with_account_id("account_id")
+///     .with_policy_test_id("policy_test_id")
+///     .with_page("page")
+///     .with_per_page("per_page")
+///     .with_status("status")
 ///     .send()
 ///     .await?;
 /// ```

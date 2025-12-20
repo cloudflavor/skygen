@@ -27,6 +27,8 @@ pub struct AppsDeploymentProgressStep {
         crate::models::apps_deployment_progress_step_reason::AppsDeploymentProgressStepReason,
     >,
     pub started_at: Option<String>,
-    pub status: Option<serde_json::Value>,
+    pub status: Option<
+        crate::models::apps_deployment_progress_step_status::AppsDeploymentProgressStepStatus,
+    >,
     pub steps: Option<Vec<std::collections::BTreeMap<String, serde_json::Value>>>,
 }

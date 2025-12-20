@@ -19,10 +19,10 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct DnsRecordsDnsRecordSharedFields {
-    pub comment: Option<serde_json::Value>,
-    pub name: Option<serde_json::Value>,
-    pub proxied: Option<serde_json::Value>,
+    pub comment: Option<crate::models::dns_records_comment::DnsRecordsComment>,
+    pub name: Option<crate::models::dns_records_name::DnsRecordsName>,
+    pub proxied: Option<crate::models::dns_records_proxied::DnsRecordsProxied>,
     pub settings: Option<crate::models::dns_records_settings::DnsRecordsSettings>,
-    pub tags: Option<serde_json::Value>,
-    pub ttl: Option<serde_json::Value>,
+    pub tags: Option<crate::models::dns_records_tags::DnsRecordsTags>,
+    pub ttl: Option<crate::models::dns_records_ttl::DnsRecordsTtl>,
 }

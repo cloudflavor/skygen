@@ -15,12 +15,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::zero_trust_gateway_app_types_components_schemas_response_collection::ZeroTrustGatewayAppTypesComponentsSchemasResponseCollection;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct ListApplicationTypeMappingsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, ZeroTrustGatewayAppTypesComponentsSchemasResponseCollection>,
 }
 
 impl<'a> ListApplicationTypeMappingsRequest<'a> {
@@ -35,18 +36,28 @@ impl<'a> ListApplicationTypeMappingsRequest<'a> {
         self.builder = self.builder.path_param("account_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(
+        self,
+    ) -> ApiResult<ZeroTrustGatewayAppTypesComponentsSchemasResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// List application and application type mappings
+///
+/// Fetches all application and application type mappings.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/gateway/app_types`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zero_trust_gateway_application_and_application_type_mappings };
+/// use cloudflare::{ ApiClient, apis::zero_trust_gateway_application_and_application_type_mappings };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_application_type_mappings(&api)
-///     .with_account_id("value")
+/// let response = list_application_type_mappings(&api)
+///     .with_account_id("account_id")
 ///     .send()
 ///     .await?;
 /// ```

@@ -19,9 +19,9 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct MagicLanDhcpServer {
-    pub dhcp_pool_end: Option<serde_json::Value>,
-    pub dhcp_pool_start: Option<serde_json::Value>,
-    pub dns_server: Option<serde_json::Value>,
-    pub dns_servers: Option<Vec<serde_json::Value>>,
+    pub dhcp_pool_end: Option<crate::models::magic_ip_address::MagicIpAddress>,
+    pub dhcp_pool_start: Option<crate::models::magic_ip_address::MagicIpAddress>,
+    pub dns_server: Option<crate::models::magic_ip_address::MagicIpAddress>,
+    pub dns_servers: Option<Vec<crate::models::magic_ip_address::MagicIpAddress>>,
     pub reservations: Option<std::collections::BTreeMap<String, serde_json::Value>>,
 }

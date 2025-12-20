@@ -15,12 +15,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::tls_certificates_and_hostnames_dcv_delegation_response::TlsCertificatesAndHostnamesDcvDelegationResponse;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct UuidGetRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, TlsCertificatesAndHostnamesDcvDelegationResponse>,
 }
 
 impl<'a> UuidGetRequest<'a> {
@@ -35,18 +36,26 @@ impl<'a> UuidGetRequest<'a> {
         self.builder = self.builder.path_param("zone_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<TlsCertificatesAndHostnamesDcvDelegationResponse> {
         self.builder.send().await
     }
 }
-
 /// Retrieve the DCV Delegation unique identifier.
+///
+/// Retrieve the account and zone specific unique identifier used as part of the CNAME target for DCV Delegation.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/dcv_delegation/uuid`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::dcv_delegation };
+/// use cloudflare::{ ApiClient, apis::dcv_delegation };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = uuid_get(&api)
-///     .with_zone_id("value")
+/// let response = uuid_get(&api)
+///     .with_zone_id("zone_id")
 ///     .send()
 ///     .await?;
 /// ```

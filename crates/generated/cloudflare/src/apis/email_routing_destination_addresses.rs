@@ -15,12 +15,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::email_destination_address_response_single::EmailDestinationAddressResponseSingle;
+use crate::models::email_destination_addresses_response_collection::EmailDestinationAddressesResponseCollection;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct ListDestinationAddressesRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, EmailDestinationAddressesResponseCollection>,
 }
 
 impl<'a> ListDestinationAddressesRequest<'a> {
@@ -54,18 +56,34 @@ impl<'a> ListDestinationAddressesRequest<'a> {
         self.builder = self.builder.header_param("verified", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<EmailDestinationAddressesResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// List destination addresses
+///
+/// Lists existing destination addresses.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/email/routing/addresses`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `page` (query,optional)
+/// - `per_page` (query,optional)
+/// - `direction` (query,optional)
+/// - `verified` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::email_routing_destination_addresses };
+/// use cloudflare::{ ApiClient, apis::email_routing_destination_addresses };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_destination_addresses(&api)
-///     .with_account_id("value")
+/// let response = list_destination_addresses(&api)
+///     .with_account_id("account_id")
+///     .with_page("page")
+///     .with_per_page("per_page")
+///     .with_direction("direction")
+///     .with_verified("verified")
 ///     .send()
 ///     .await?;
 /// ```
@@ -75,7 +93,7 @@ pub fn list_destination_addresses(api: &ApiClient) -> ListDestinationAddressesRe
 
 #[derive(Debug)]
 pub struct CreateDestinationAddressRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, EmailDestinationAddressResponseSingle>,
 }
 
 impl<'a> CreateDestinationAddressRequest<'a> {
@@ -101,18 +119,28 @@ impl<'a> CreateDestinationAddressRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<EmailDestinationAddressResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Create a destination address
+///
+/// Create a destination address to forward your emails to. Destination addresses need to be verified before they can be used.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/email/routing/addresses`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::email_routing_destination_addresses };
+/// use cloudflare::{ ApiClient, apis::email_routing_destination_addresses };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = create_destination_address(&api)
-///     .with_account_id("value")
+/// # let body: crate::models::email_create_destination_address_properties::EmailCreateDestinationAddressProperties = todo!();
+/// let response = create_destination_address(&api)
+///     .with_account_id("account_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -122,7 +150,7 @@ pub fn create_destination_address(api: &ApiClient) -> CreateDestinationAddressRe
 
 #[derive(Debug)]
 pub struct GetDestinationAddressRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, EmailDestinationAddressResponseSingle>,
 }
 
 impl<'a> GetDestinationAddressRequest<'a> {
@@ -147,19 +175,28 @@ impl<'a> GetDestinationAddressRequest<'a> {
             .path_param("destination_address_identifier", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<EmailDestinationAddressResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Get a destination address
+///
+/// Gets information for a specific destination email already created.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/email/routing/addresses/{destination_address_identifier}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `destination_address_identifier` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::email_routing_destination_addresses };
+/// use cloudflare::{ ApiClient, apis::email_routing_destination_addresses };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_destination_address(&api)
-///     .with_account_id("value")
-///     .with_destination_address_identifier("value")
+/// let response = get_destination_address(&api)
+///     .with_account_id("account_id")
+///     .with_destination_address_identifier("destination_address_identifier")
 ///     .send()
 ///     .await?;
 /// ```
@@ -169,7 +206,7 @@ pub fn get_destination_address(api: &ApiClient) -> GetDestinationAddressRequest<
 
 #[derive(Debug)]
 pub struct DeleteDestinationAddressRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, EmailDestinationAddressResponseSingle>,
 }
 
 impl<'a> DeleteDestinationAddressRequest<'a> {
@@ -194,19 +231,28 @@ impl<'a> DeleteDestinationAddressRequest<'a> {
             .path_param("destination_address_identifier", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<EmailDestinationAddressResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Delete destination address
+///
+/// Deletes a specific destination address.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/accounts/{account_id}/email/routing/addresses/{destination_address_identifier}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `destination_address_identifier` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::email_routing_destination_addresses };
+/// use cloudflare::{ ApiClient, apis::email_routing_destination_addresses };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete_destination_address(&api)
-///     .with_account_id("value")
-///     .with_destination_address_identifier("value")
+/// let response = delete_destination_address(&api)
+///     .with_account_id("account_id")
+///     .with_destination_address_identifier("destination_address_identifier")
 ///     .send()
 ///     .await?;
 /// ```

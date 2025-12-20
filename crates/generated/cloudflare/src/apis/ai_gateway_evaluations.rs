@@ -58,14 +58,28 @@ impl<'a> AigConfigListEvaluatorsRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// List Evaluators
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/ai-gateway/evaluation-types`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `page` (query,optional)
+/// - `per_page` (query,optional)
+/// - `order_by` (query,optional)
+/// - `order_by_direction` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::ai_gateway_evaluations };
+/// use cloudflare::{ ApiClient, apis::ai_gateway_evaluations };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = aig_config_list_evaluators(&api)
-///     .with_account_id("value")
+/// let response = aig_config_list_evaluators(&api)
+///     .with_account_id("account_id")
+///     .with_page("page")
+///     .with_per_page("per_page")
+///     .with_order_by("order_by")
+///     .with_order_by_direction("order_by_direction")
 ///     .send()
 ///     .await?;
 /// ```
@@ -122,15 +136,32 @@ impl<'a> AigConfigListEvaluationsRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// List Evaluations
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/ai-gateway/gateways/{gateway_id}/evaluations`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `gateway_id` (path, required)
+/// - `page` (query,optional)
+/// - `per_page` (query,optional)
+/// - `name` (query,optional)
+/// - `processed` (query,optional)
+/// - `search` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::ai_gateway_evaluations };
+/// use cloudflare::{ ApiClient, apis::ai_gateway_evaluations };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = aig_config_list_evaluations(&api)
-///     .with_account_id("value")
-///     .with_gateway_id("value")
+/// let response = aig_config_list_evaluations(&api)
+///     .with_account_id("account_id")
+///     .with_gateway_id("gateway_id")
+///     .with_page("page")
+///     .with_per_page("per_page")
+///     .with_name("name")
+///     .with_processed("processed")
+///     .with_search("search")
 ///     .send()
 ///     .await?;
 /// ```
@@ -174,15 +205,24 @@ impl<'a> AigConfigCreateEvaluationsRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Create a new Evaluation
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/ai-gateway/gateways/{gateway_id}/evaluations`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `gateway_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::ai_gateway_evaluations };
+/// use cloudflare::{ ApiClient, apis::ai_gateway_evaluations };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = aig_config_create_evaluations(&api)
-///     .with_account_id("value")
-///     .with_gateway_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = aig_config_create_evaluations(&api)
+///     .with_account_id("account_id")
+///     .with_gateway_id("gateway_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -224,16 +264,24 @@ impl<'a> AigConfigFetchEvaluationsRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Fetch a Evaluation
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/ai-gateway/gateways/{gateway_id}/evaluations/{id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `gateway_id` (path, required)
+/// - `id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::ai_gateway_evaluations };
+/// use cloudflare::{ ApiClient, apis::ai_gateway_evaluations };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = aig_config_fetch_evaluations(&api)
-///     .with_account_id("value")
-///     .with_gateway_id("value")
-///     .with_id("value")
+/// let response = aig_config_fetch_evaluations(&api)
+///     .with_account_id("account_id")
+///     .with_gateway_id("gateway_id")
+///     .with_id("id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -275,16 +323,24 @@ impl<'a> AigConfigDeleteEvaluationsRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Delete a Evaluation
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/accounts/{account_id}/ai-gateway/gateways/{gateway_id}/evaluations/{id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `gateway_id` (path, required)
+/// - `id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::ai_gateway_evaluations };
+/// use cloudflare::{ ApiClient, apis::ai_gateway_evaluations };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = aig_config_delete_evaluations(&api)
-///     .with_account_id("value")
-///     .with_gateway_id("value")
-///     .with_id("value")
+/// let response = aig_config_delete_evaluations(&api)
+///     .with_account_id("account_id")
+///     .with_gateway_id("gateway_id")
+///     .with_id("id")
 ///     .send()
 ///     .await?;
 /// ```

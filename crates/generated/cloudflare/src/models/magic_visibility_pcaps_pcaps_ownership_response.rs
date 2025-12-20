@@ -19,8 +19,8 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct MagicVisibilityPcapsPcapsOwnershipResponse {
-    pub destination_conf: serde_json::Value,
-    pub filename: serde_json::Value,
+    pub destination_conf: crate::models::magic_visibility_pcaps_pcaps_destination_conf::MagicVisibilityPcapsPcapsDestinationConf,
+    pub filename: crate::models::magic_visibility_pcaps_pcaps_ownership_challenge::MagicVisibilityPcapsPcapsOwnershipChallenge,
     pub id: String,
     pub status: String,
     pub submitted: String,

@@ -15,12 +15,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::intel_schemas_response::IntelSchemasResponse;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct GetIpOverviewRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, IntelSchemasResponse>,
 }
 
 impl<'a> GetIpOverviewRequest<'a> {
@@ -42,18 +43,30 @@ impl<'a> GetIpOverviewRequest<'a> {
         self.builder = self.builder.header_param("ipv6", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<IntelSchemasResponse> {
         self.builder.send().await
     }
 }
-
 /// Get IP Overview
+///
+/// Gets the geolocation, ASN, infrastructure type of the ASN, and any security threat categories of an IP address. **Must provide ip query parameters.** For example, `/intel/ip?ipv4=1.1.1.1` or `/intel/ip?ipv6=2001:db8::1`.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/intel/ip`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `ipv4` (query,optional)
+/// - `ipv6` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::ip_intelligence };
+/// use cloudflare::{ ApiClient, apis::ip_intelligence };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_ip_overview(&api)
-///     .with_account_id("value")
+/// let response = get_ip_overview(&api)
+///     .with_account_id("account_id")
+///     .with_ipv4("ipv4")
+///     .with_ipv6("ipv6")
 ///     .send()
 ///     .await?;
 /// ```

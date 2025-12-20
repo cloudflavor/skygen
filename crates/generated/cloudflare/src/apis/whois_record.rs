@@ -15,12 +15,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::cloudforce_one_whois_schemas_single_response::CloudforceOneWhoisSchemasSingleResponse;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct GetWhoisRecordRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, CloudforceOneWhoisSchemasSingleResponse>,
 }
 
 impl<'a> GetWhoisRecordRequest<'a> {
@@ -38,18 +39,26 @@ impl<'a> GetWhoisRecordRequest<'a> {
         self.builder = self.builder.header_param("domain", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<CloudforceOneWhoisSchemasSingleResponse> {
         self.builder.send().await
     }
 }
-
 /// Get WHOIS Record
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/intel/whois`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `domain` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::whois_record };
+/// use cloudflare::{ ApiClient, apis::whois_record };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_whois_record(&api)
-///     .with_account_id("value")
+/// let response = get_whois_record(&api)
+///     .with_account_id("account_id")
+///     .with_domain("domain")
 ///     .send()
 ///     .await?;
 /// ```

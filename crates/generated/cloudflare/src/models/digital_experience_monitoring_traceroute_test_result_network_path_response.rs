@@ -21,7 +21,9 @@ use serde::{Deserialize, Serialize};
 pub struct DigitalExperienceMonitoringTracerouteTestResultNetworkPathResponse {
     pub device_name: Option<String>,
     pub hops: Vec<std::collections::BTreeMap<String, serde_json::Value>>,
-    pub result_id: serde_json::Value,
-    pub test_id: Option<serde_json::Value>,
+    pub result_id:
+        crate::models::digital_experience_monitoring_uuid::DigitalExperienceMonitoringUuid,
+    pub test_id:
+        Option<crate::models::digital_experience_monitoring_uuid::DigitalExperienceMonitoringUuid>,
     pub test_name: Option<String>,
 }

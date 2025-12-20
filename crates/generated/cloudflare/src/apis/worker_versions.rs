@@ -15,12 +15,15 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::workers_versions_list_response::WorkersVersionsListResponse;
+use crate::models::workers_versions_single_response::WorkersVersionsSingleResponse;
+use crate::models::workers_versions_upload_response::WorkersVersionsUploadResponse;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct ListVersionsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, WorkersVersionsListResponse>,
 }
 
 impl<'a> ListVersionsRequest<'a> {
@@ -55,19 +58,34 @@ impl<'a> ListVersionsRequest<'a> {
         self.builder = self.builder.header_param("per_page", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<WorkersVersionsListResponse> {
         self.builder.send().await
     }
 }
-
 /// List Versions
+///
+/// List of Worker Versions. The first version in the list is the latest version.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/workers/scripts/{script_name}/versions`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `script_name` (path, required)
+/// - `deployable` (query,optional)
+/// - `page` (query,optional)
+/// - `per_page` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::worker_versions };
+/// use cloudflare::{ ApiClient, apis::worker_versions };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_versions(&api)
-///     .with_account_id("value")
-///     .with_script_name("value")
+/// let response = list_versions(&api)
+///     .with_account_id("account_id")
+///     .with_script_name("script_name")
+///     .with_deployable("deployable")
+///     .with_page("page")
+///     .with_per_page("per_page")
 ///     .send()
 ///     .await?;
 /// ```
@@ -77,7 +95,7 @@ pub fn list_versions(api: &ApiClient) -> ListVersionsRequest<'_> {
 
 #[derive(Debug)]
 pub struct UploadVersionRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, WorkersVersionsUploadResponse>,
 }
 
 impl<'a> UploadVersionRequest<'a> {
@@ -88,8 +106,7 @@ impl<'a> UploadVersionRequest<'a> {
             "accounts/{account_id}/workers/scripts/{script_name}/versions",
         )
         .require_path("account_id")
-        .require_path("script_name")
-        .require_body();
+        .require_path("script_name");
 
         Self { builder }
     }
@@ -101,23 +118,28 @@ impl<'a> UploadVersionRequest<'a> {
         self.builder = self.builder.path_param("script_name", value);
         self
     }
-    pub fn with_body(mut self, body: serde_json::Value) -> Self {
-        self.builder = self.builder.json_body(body).expect("body serialization");
-        self
-    }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<WorkersVersionsUploadResponse> {
         self.builder.send().await
     }
 }
-
 /// Upload Version
+///
+/// Upload a Worker Version without deploying to Cloudflare's network. You can find more about the multipart metadata on our docs: <https://developers.cloudflare.com/workers/configuration/multipart-upload-metadata/.>
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/workers/scripts/{script_name}/versions`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `script_name` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::worker_versions };
+/// use cloudflare::{ ApiClient, apis::worker_versions };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = upload_version(&api)
-///     .with_account_id("value")
-///     .with_script_name("value")
+/// let response = upload_version(&api)
+///     .with_account_id("account_id")
+///     .with_script_name("script_name")
 ///     .send()
 ///     .await?;
 /// ```
@@ -127,7 +149,7 @@ pub fn upload_version(api: &ApiClient) -> UploadVersionRequest<'_> {
 
 #[derive(Debug)]
 pub struct GetVersionDetailRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, WorkersVersionsSingleResponse>,
 }
 
 impl<'a> GetVersionDetailRequest<'a> {
@@ -155,20 +177,28 @@ impl<'a> GetVersionDetailRequest<'a> {
         self.builder = self.builder.path_param("version_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<WorkersVersionsSingleResponse> {
         self.builder.send().await
     }
 }
-
 /// Get Version Detail
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/workers/scripts/{script_name}/versions/{version_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `script_name` (path, required)
+/// - `version_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::worker_versions };
+/// use cloudflare::{ ApiClient, apis::worker_versions };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_version_detail(&api)
-///     .with_account_id("value")
-///     .with_script_name("value")
-///     .with_version_id("value")
+/// let response = get_version_detail(&api)
+///     .with_account_id("account_id")
+///     .with_script_name("script_name")
+///     .with_version_id("version_id")
 ///     .send()
 ///     .await?;
 /// ```

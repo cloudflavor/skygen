@@ -19,7 +19,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct PublicIpApiResponseCommon {
-    pub errors: serde_json::Value,
-    pub messages: serde_json::Value,
+    pub errors: crate::models::public_ip_messages::PublicIpMessages,
+    pub messages: crate::models::public_ip_messages::PublicIpMessages,
     pub success: bool,
 }

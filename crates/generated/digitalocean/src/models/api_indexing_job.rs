@@ -24,7 +24,7 @@ pub struct ApiIndexingJob {
     pub data_source_uuids: Option<Vec<String>>,
     pub finished_at: Option<String>,
     pub knowledge_base_uuid: Option<String>,
-    pub phase: Option<serde_json::Value>,
+    pub phase: Option<crate::models::api_batch_job_phase::ApiBatchJobPhase>,
     pub started_at: Option<String>,
     pub tokens: Option<i64>,
     pub total_datasources: Option<i64>,

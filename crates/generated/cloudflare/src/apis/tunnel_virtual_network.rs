@@ -15,12 +15,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::tunnel_vnet_response_collection::TunnelVnetResponseCollection;
+use crate::models::tunnel_vnet_response_single::TunnelVnetResponseSingle;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct ListVirtualNetworksRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, TunnelVnetResponseCollection>,
 }
 
 impl<'a> ListVirtualNetworksRequest<'a> {
@@ -54,18 +56,34 @@ impl<'a> ListVirtualNetworksRequest<'a> {
         self.builder = self.builder.header_param("is_deleted", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<TunnelVnetResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// List virtual networks
+///
+/// Lists and filters virtual networks in an account.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/teamnet/virtual_networks`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `id` (query,optional)
+/// - `name` (query,optional)
+/// - `is_default` (query,optional)
+/// - `is_deleted` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::tunnel_virtual_network };
+/// use cloudflare::{ ApiClient, apis::tunnel_virtual_network };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_virtual_networks(&api)
-///     .with_account_id("value")
+/// let response = list_virtual_networks(&api)
+///     .with_account_id("account_id")
+///     .with_id("id")
+///     .with_name("name")
+///     .with_is_default("is_default")
+///     .with_is_deleted("is_deleted")
 ///     .send()
 ///     .await?;
 /// ```
@@ -75,7 +93,7 @@ pub fn list_virtual_networks(api: &ApiClient) -> ListVirtualNetworksRequest<'_> 
 
 #[derive(Debug)]
 pub struct CreateVirtualNetworkRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, TunnelVnetResponseSingle>,
 }
 
 impl<'a> CreateVirtualNetworkRequest<'a> {
@@ -101,18 +119,28 @@ impl<'a> CreateVirtualNetworkRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<TunnelVnetResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Create a virtual network
+///
+/// Adds a new virtual network to an account.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/teamnet/virtual_networks`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::tunnel_virtual_network };
+/// use cloudflare::{ ApiClient, apis::tunnel_virtual_network };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = create_virtual_network(&api)
-///     .with_account_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = create_virtual_network(&api)
+///     .with_account_id("account_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -122,7 +150,7 @@ pub fn create_virtual_network(api: &ApiClient) -> CreateVirtualNetworkRequest<'_
 
 #[derive(Debug)]
 pub struct GetRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, TunnelVnetResponseSingle>,
 }
 
 impl<'a> GetRequest<'a> {
@@ -153,19 +181,30 @@ impl<'a> GetRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<TunnelVnetResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Get a virtual network
+///
+/// Get a virtual network.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/teamnet/virtual_networks/{virtual_network_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `virtual_network_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::tunnel_virtual_network };
+/// use cloudflare::{ ApiClient, apis::tunnel_virtual_network };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get(&api)
-///     .with_account_id("value")
-///     .with_virtual_network_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = get(&api)
+///     .with_account_id("account_id")
+///     .with_virtual_network_id("virtual_network_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -175,7 +214,7 @@ pub fn get(api: &ApiClient) -> GetRequest<'_> {
 
 #[derive(Debug)]
 pub struct DeleteRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, TunnelVnetResponseSingle>,
 }
 
 impl<'a> DeleteRequest<'a> {
@@ -198,19 +237,28 @@ impl<'a> DeleteRequest<'a> {
         self.builder = self.builder.path_param("virtual_network_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<TunnelVnetResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Delete a virtual network
+///
+/// Deletes an existing virtual network.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/accounts/{account_id}/teamnet/virtual_networks/{virtual_network_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `virtual_network_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::tunnel_virtual_network };
+/// use cloudflare::{ ApiClient, apis::tunnel_virtual_network };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete(&api)
-///     .with_account_id("value")
-///     .with_virtual_network_id("value")
+/// let response = delete(&api)
+///     .with_account_id("account_id")
+///     .with_virtual_network_id("virtual_network_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -220,7 +268,7 @@ pub fn delete(api: &ApiClient) -> DeleteRequest<'_> {
 
 #[derive(Debug)]
 pub struct UpdateRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, TunnelVnetResponseSingle>,
 }
 
 impl<'a> UpdateRequest<'a> {
@@ -251,19 +299,30 @@ impl<'a> UpdateRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<TunnelVnetResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Update a virtual network
+///
+/// Updates an existing virtual network.
+///
+/// **HTTP Method:** `PATCH`
+/// **Path:** `/accounts/{account_id}/teamnet/virtual_networks/{virtual_network_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `virtual_network_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::tunnel_virtual_network };
+/// use cloudflare::{ ApiClient, apis::tunnel_virtual_network };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = update(&api)
-///     .with_account_id("value")
-///     .with_virtual_network_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = update(&api)
+///     .with_account_id("account_id")
+///     .with_virtual_network_id("virtual_network_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```

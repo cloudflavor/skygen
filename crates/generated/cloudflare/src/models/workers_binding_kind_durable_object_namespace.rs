@@ -21,7 +21,7 @@ use serde::{Deserialize, Serialize};
 pub struct WorkersBindingKindDurableObjectNamespace {
     pub class_name: Option<String>,
     pub environment: Option<String>,
-    pub name: serde_json::Value,
+    pub name: crate::models::workers_binding_name::WorkersBindingName,
     pub namespace_id: Option<serde_json::Value>,
     pub r#type: String,
     pub script_name: Option<String>,

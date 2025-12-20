@@ -19,12 +19,13 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct EmailEmailSettingsProperties {
-    pub created: Option<serde_json::Value>,
-    pub enabled: serde_json::Value,
-    pub id: serde_json::Value,
-    pub modified: Option<serde_json::Value>,
-    pub name: serde_json::Value,
-    pub skip_wizard: Option<serde_json::Value>,
-    pub status: Option<serde_json::Value>,
-    pub tag: Option<serde_json::Value>,
+    pub created: Option<crate::models::email_email_setting_created::EmailEmailSettingCreated>,
+    pub enabled: crate::models::email_email_setting_enabled::EmailEmailSettingEnabled,
+    pub id: crate::models::email_email_setting_identifier::EmailEmailSettingIdentifier,
+    pub modified: Option<crate::models::email_email_setting_modified::EmailEmailSettingModified>,
+    pub name: crate::models::email_email_setting_name::EmailEmailSettingName,
+    pub skip_wizard:
+        Option<crate::models::email_email_setting_skip_wizard::EmailEmailSettingSkipWizard>,
+    pub status: Option<crate::models::email_email_setting_status::EmailEmailSettingStatus>,
+    pub tag: Option<crate::models::email_email_setting_tag::EmailEmailSettingTag>,
 }

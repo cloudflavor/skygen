@@ -69,13 +69,38 @@ impl<'a> GetEmailSecuritySummaryRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get email ARC validation summary
+///
+/// Retrieves the distribution of emails by ARC (Authenticated Received Chain) validation.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/email/security/summary/arc`
+///
+/// **Parameters**
+/// - `name` (query,optional)
+/// - `dateRange` (query,optional)
+/// - `dateStart` (query,optional)
+/// - `dateEnd` (query,optional)
+/// - `dkim` (query,optional)
+/// - `dmarc` (query,optional)
+/// - `spf` (query,optional)
+/// - `tlsVersion` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_email_security };
+/// use cloudflare::{ ApiClient, apis::radar_email_security };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_email_security_summary(&api)
+/// let response = get_email_security_summary(&api)
+///     .with_name("name")
+///     .with_date_range("dateRange")
+///     .with_date_start("dateStart")
+///     .with_date_end("dateEnd")
+///     .with_dkim("dkim")
+///     .with_dmarc("dmarc")
+///     .with_spf("spf")
+///     .with_tls_version("tlsVersion")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```
@@ -134,13 +159,38 @@ impl<'a> GetEmailSecuritySummaryGetRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get email DKIM validation summary
+///
+/// Retrieves the distribution of emails by DKIM (DomainKeys Identified Mail) validation.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/email/security/summary/dkim`
+///
+/// **Parameters**
+/// - `name` (query,optional)
+/// - `dateRange` (query,optional)
+/// - `dateStart` (query,optional)
+/// - `dateEnd` (query,optional)
+/// - `arc` (query,optional)
+/// - `dmarc` (query,optional)
+/// - `spf` (query,optional)
+/// - `tlsVersion` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_email_security };
+/// use cloudflare::{ ApiClient, apis::radar_email_security };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_email_security_summary_get(&api)
+/// let response = get_email_security_summary_get(&api)
+///     .with_name("name")
+///     .with_date_range("dateRange")
+///     .with_date_start("dateStart")
+///     .with_date_end("dateEnd")
+///     .with_arc("arc")
+///     .with_dmarc("dmarc")
+///     .with_spf("spf")
+///     .with_tls_version("tlsVersion")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```
@@ -200,13 +250,38 @@ impl<'a> GetEmailSecuritySummaryGet3Request<'a> {
         self.builder.send().await
     }
 }
-
 /// Get email DMARC validation summary
+///
+/// Retrieves the distribution of emails by DMARC (Domain-based Message Authentication, Reporting and Conformance) validation.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/email/security/summary/dmarc`
+///
+/// **Parameters**
+/// - `name` (query,optional)
+/// - `dateRange` (query,optional)
+/// - `dateStart` (query,optional)
+/// - `dateEnd` (query,optional)
+/// - `arc` (query,optional)
+/// - `dkim` (query,optional)
+/// - `spf` (query,optional)
+/// - `tlsVersion` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_email_security };
+/// use cloudflare::{ ApiClient, apis::radar_email_security };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_email_security_summary_get_3(&api)
+/// let response = get_email_security_summary_get_3(&api)
+///     .with_name("name")
+///     .with_date_range("dateRange")
+///     .with_date_start("dateStart")
+///     .with_date_end("dateEnd")
+///     .with_arc("arc")
+///     .with_dkim("dkim")
+///     .with_spf("spf")
+///     .with_tls_version("tlsVersion")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```
@@ -270,13 +345,40 @@ impl<'a> GetEmailSecuritySummaryGet4Request<'a> {
         self.builder.send().await
     }
 }
-
 /// Get email malicious classification summary
+///
+/// Retrieves the distribution of emails by malicious classification.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/email/security/summary/malicious`
+///
+/// **Parameters**
+/// - `name` (query,optional)
+/// - `dateRange` (query,optional)
+/// - `dateStart` (query,optional)
+/// - `dateEnd` (query,optional)
+/// - `arc` (query,optional)
+/// - `dkim` (query,optional)
+/// - `dmarc` (query,optional)
+/// - `spf` (query,optional)
+/// - `tlsVersion` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_email_security };
+/// use cloudflare::{ ApiClient, apis::radar_email_security };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_email_security_summary_get_4(&api)
+/// let response = get_email_security_summary_get_4(&api)
+///     .with_name("name")
+///     .with_date_range("dateRange")
+///     .with_date_start("dateStart")
+///     .with_date_end("dateEnd")
+///     .with_arc("arc")
+///     .with_dkim("dkim")
+///     .with_dmarc("dmarc")
+///     .with_spf("spf")
+///     .with_tls_version("tlsVersion")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```
@@ -339,13 +441,40 @@ impl<'a> GetEmailSecuritySummaryGet5Request<'a> {
         self.builder.send().await
     }
 }
-
 /// Get email spam classification summary
+///
+/// Retrieves the proportion of emails by spam classification (spam vs. non-spam).
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/email/security/summary/spam`
+///
+/// **Parameters**
+/// - `name` (query,optional)
+/// - `dateRange` (query,optional)
+/// - `dateStart` (query,optional)
+/// - `dateEnd` (query,optional)
+/// - `arc` (query,optional)
+/// - `dkim` (query,optional)
+/// - `dmarc` (query,optional)
+/// - `spf` (query,optional)
+/// - `tlsVersion` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_email_security };
+/// use cloudflare::{ ApiClient, apis::radar_email_security };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_email_security_summary_get_5(&api)
+/// let response = get_email_security_summary_get_5(&api)
+///     .with_name("name")
+///     .with_date_range("dateRange")
+///     .with_date_start("dateStart")
+///     .with_date_end("dateEnd")
+///     .with_arc("arc")
+///     .with_dkim("dkim")
+///     .with_dmarc("dmarc")
+///     .with_spf("spf")
+///     .with_tls_version("tlsVersion")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```
@@ -404,13 +533,38 @@ impl<'a> GetEmailSecuritySummaryGet6Request<'a> {
         self.builder.send().await
     }
 }
-
 /// Get email SPF validation summary
+///
+/// Retrieves the distribution of emails by SPF (Sender Policy Framework) validation.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/email/security/summary/spf`
+///
+/// **Parameters**
+/// - `name` (query,optional)
+/// - `dateRange` (query,optional)
+/// - `dateStart` (query,optional)
+/// - `dateEnd` (query,optional)
+/// - `arc` (query,optional)
+/// - `dkim` (query,optional)
+/// - `dmarc` (query,optional)
+/// - `tlsVersion` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_email_security };
+/// use cloudflare::{ ApiClient, apis::radar_email_security };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_email_security_summary_get_6(&api)
+/// let response = get_email_security_summary_get_6(&api)
+///     .with_name("name")
+///     .with_date_range("dateRange")
+///     .with_date_start("dateStart")
+///     .with_date_end("dateEnd")
+///     .with_arc("arc")
+///     .with_dkim("dkim")
+///     .with_dmarc("dmarc")
+///     .with_tls_version("tlsVersion")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```
@@ -474,13 +628,40 @@ impl<'a> GetEmailSecuritySummaryGet7Request<'a> {
         self.builder.send().await
     }
 }
-
 /// Get email spoof classification summary
+///
+/// Retrieves the proportion of emails by spoof classification (spoof vs. non-spoof).
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/email/security/summary/spoof`
+///
+/// **Parameters**
+/// - `name` (query,optional)
+/// - `dateRange` (query,optional)
+/// - `dateStart` (query,optional)
+/// - `dateEnd` (query,optional)
+/// - `arc` (query,optional)
+/// - `dkim` (query,optional)
+/// - `dmarc` (query,optional)
+/// - `spf` (query,optional)
+/// - `tlsVersion` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_email_security };
+/// use cloudflare::{ ApiClient, apis::radar_email_security };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_email_security_summary_get_7(&api)
+/// let response = get_email_security_summary_get_7(&api)
+///     .with_name("name")
+///     .with_date_range("dateRange")
+///     .with_date_start("dateStart")
+///     .with_date_end("dateEnd")
+///     .with_arc("arc")
+///     .with_dkim("dkim")
+///     .with_dmarc("dmarc")
+///     .with_spf("spf")
+///     .with_tls_version("tlsVersion")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```
@@ -547,13 +728,40 @@ impl<'a> GetEmailSecuritySummaryGet8Request<'a> {
         self.builder.send().await
     }
 }
-
 /// Get email threat category summary
+///
+/// Retrieves the distribution of emails by threat categories.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/email/security/summary/threat_category`
+///
+/// **Parameters**
+/// - `name` (query,optional)
+/// - `dateRange` (query,optional)
+/// - `dateStart` (query,optional)
+/// - `dateEnd` (query,optional)
+/// - `arc` (query,optional)
+/// - `dkim` (query,optional)
+/// - `dmarc` (query,optional)
+/// - `spf` (query,optional)
+/// - `tlsVersion` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_email_security };
+/// use cloudflare::{ ApiClient, apis::radar_email_security };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_email_security_summary_get_8(&api)
+/// let response = get_email_security_summary_get_8(&api)
+///     .with_name("name")
+///     .with_date_range("dateRange")
+///     .with_date_start("dateStart")
+///     .with_date_end("dateEnd")
+///     .with_arc("arc")
+///     .with_dkim("dkim")
+///     .with_dmarc("dmarc")
+///     .with_spf("spf")
+///     .with_tls_version("tlsVersion")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```
@@ -613,13 +821,38 @@ impl<'a> GetEmailSecuritySummaryGet9Request<'a> {
         self.builder.send().await
     }
 }
-
 /// Get email TLS version summary
+///
+/// Retrieves the distribution of emails by TLS version.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/email/security/summary/tls_version`
+///
+/// **Parameters**
+/// - `name` (query,optional)
+/// - `dateRange` (query,optional)
+/// - `dateStart` (query,optional)
+/// - `dateEnd` (query,optional)
+/// - `arc` (query,optional)
+/// - `dkim` (query,optional)
+/// - `dmarc` (query,optional)
+/// - `spf` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_email_security };
+/// use cloudflare::{ ApiClient, apis::radar_email_security };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_email_security_summary_get_9(&api)
+/// let response = get_email_security_summary_get_9(&api)
+///     .with_name("name")
+///     .with_date_range("dateRange")
+///     .with_date_start("dateStart")
+///     .with_date_end("dateEnd")
+///     .with_arc("arc")
+///     .with_dkim("dkim")
+///     .with_dmarc("dmarc")
+///     .with_spf("spf")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```
@@ -686,13 +919,40 @@ impl<'a> GetEmailSecurityTimeseriesRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get email ARC validation time series
+///
+/// Retrieves the distribution of emails by ARC (Authenticated Received Chain) validation over time.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/email/security/timeseries_groups/arc`
+///
+/// **Parameters**
+/// - `aggInterval` (query,optional)
+/// - `name` (query,optional)
+/// - `dateRange` (query,optional)
+/// - `dateStart` (query,optional)
+/// - `dateEnd` (query,optional)
+/// - `dkim` (query,optional)
+/// - `dmarc` (query,optional)
+/// - `spf` (query,optional)
+/// - `tlsVersion` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_email_security };
+/// use cloudflare::{ ApiClient, apis::radar_email_security };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_email_security_timeseries(&api)
+/// let response = get_email_security_timeseries(&api)
+///     .with_agg_interval("aggInterval")
+///     .with_name("name")
+///     .with_date_range("dateRange")
+///     .with_date_start("dateStart")
+///     .with_date_end("dateEnd")
+///     .with_dkim("dkim")
+///     .with_dmarc("dmarc")
+///     .with_spf("spf")
+///     .with_tls_version("tlsVersion")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```
@@ -759,13 +1019,40 @@ impl<'a> GetEmailSecurityTimeseriesGetRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get email DKIM validation time series
+///
+/// Retrieves the distribution of emails by DKIM (DomainKeys Identified Mail) validation over time.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/email/security/timeseries_groups/dkim`
+///
+/// **Parameters**
+/// - `aggInterval` (query,optional)
+/// - `name` (query,optional)
+/// - `dateRange` (query,optional)
+/// - `dateStart` (query,optional)
+/// - `dateEnd` (query,optional)
+/// - `arc` (query,optional)
+/// - `dmarc` (query,optional)
+/// - `spf` (query,optional)
+/// - `tlsVersion` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_email_security };
+/// use cloudflare::{ ApiClient, apis::radar_email_security };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_email_security_timeseries_get(&api)
+/// let response = get_email_security_timeseries_get(&api)
+///     .with_agg_interval("aggInterval")
+///     .with_name("name")
+///     .with_date_range("dateRange")
+///     .with_date_start("dateStart")
+///     .with_date_end("dateEnd")
+///     .with_arc("arc")
+///     .with_dmarc("dmarc")
+///     .with_spf("spf")
+///     .with_tls_version("tlsVersion")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```
@@ -834,13 +1121,40 @@ impl<'a> GetEmailSecurityTimeseriesGet3Request<'a> {
         self.builder.send().await
     }
 }
-
 /// Get email DMARC validation time series
+///
+/// Retrieves the distribution of emails by DMARC (Domain-based Message Authentication, Reporting and Conformance) validation over time.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/email/security/timeseries_groups/dmarc`
+///
+/// **Parameters**
+/// - `aggInterval` (query,optional)
+/// - `name` (query,optional)
+/// - `dateRange` (query,optional)
+/// - `dateStart` (query,optional)
+/// - `dateEnd` (query,optional)
+/// - `arc` (query,optional)
+/// - `dkim` (query,optional)
+/// - `spf` (query,optional)
+/// - `tlsVersion` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_email_security };
+/// use cloudflare::{ ApiClient, apis::radar_email_security };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_email_security_timeseries_get_3(&api)
+/// let response = get_email_security_timeseries_get_3(&api)
+///     .with_agg_interval("aggInterval")
+///     .with_name("name")
+///     .with_date_range("dateRange")
+///     .with_date_start("dateStart")
+///     .with_date_end("dateEnd")
+///     .with_arc("arc")
+///     .with_dkim("dkim")
+///     .with_spf("spf")
+///     .with_tls_version("tlsVersion")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```
@@ -913,13 +1227,42 @@ impl<'a> GetEmailSecurityTimeseriesGet4Request<'a> {
         self.builder.send().await
     }
 }
-
 /// Get email malicious classification time series
+///
+/// Retrieves the distribution of emails by malicious classification over time.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/email/security/timeseries_groups/malicious`
+///
+/// **Parameters**
+/// - `aggInterval` (query,optional)
+/// - `name` (query,optional)
+/// - `dateRange` (query,optional)
+/// - `dateStart` (query,optional)
+/// - `dateEnd` (query,optional)
+/// - `arc` (query,optional)
+/// - `dkim` (query,optional)
+/// - `dmarc` (query,optional)
+/// - `spf` (query,optional)
+/// - `tlsVersion` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_email_security };
+/// use cloudflare::{ ApiClient, apis::radar_email_security };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_email_security_timeseries_get_4(&api)
+/// let response = get_email_security_timeseries_get_4(&api)
+///     .with_agg_interval("aggInterval")
+///     .with_name("name")
+///     .with_date_range("dateRange")
+///     .with_date_start("dateStart")
+///     .with_date_end("dateEnd")
+///     .with_arc("arc")
+///     .with_dkim("dkim")
+///     .with_dmarc("dmarc")
+///     .with_spf("spf")
+///     .with_tls_version("tlsVersion")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```
@@ -992,13 +1335,42 @@ impl<'a> GetEmailSecurityTimeseriesGet5Request<'a> {
         self.builder.send().await
     }
 }
-
 /// Get email spam classification time series
+///
+/// Retrieves the distribution of emails by spam classification (spam vs. non-spam) over time.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/email/security/timeseries_groups/spam`
+///
+/// **Parameters**
+/// - `aggInterval` (query,optional)
+/// - `name` (query,optional)
+/// - `dateRange` (query,optional)
+/// - `dateStart` (query,optional)
+/// - `dateEnd` (query,optional)
+/// - `arc` (query,optional)
+/// - `dkim` (query,optional)
+/// - `dmarc` (query,optional)
+/// - `spf` (query,optional)
+/// - `tlsVersion` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_email_security };
+/// use cloudflare::{ ApiClient, apis::radar_email_security };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_email_security_timeseries_get_5(&api)
+/// let response = get_email_security_timeseries_get_5(&api)
+///     .with_agg_interval("aggInterval")
+///     .with_name("name")
+///     .with_date_range("dateRange")
+///     .with_date_start("dateStart")
+///     .with_date_end("dateEnd")
+///     .with_arc("arc")
+///     .with_dkim("dkim")
+///     .with_dmarc("dmarc")
+///     .with_spf("spf")
+///     .with_tls_version("tlsVersion")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```
@@ -1067,13 +1439,40 @@ impl<'a> GetEmailSecurityTimeseriesGet6Request<'a> {
         self.builder.send().await
     }
 }
-
 /// Get email SPF validation time series
+///
+/// Retrieves the distribution of emails by SPF (Sender Policy Framework) validation over time.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/email/security/timeseries_groups/spf`
+///
+/// **Parameters**
+/// - `aggInterval` (query,optional)
+/// - `name` (query,optional)
+/// - `dateRange` (query,optional)
+/// - `dateStart` (query,optional)
+/// - `dateEnd` (query,optional)
+/// - `arc` (query,optional)
+/// - `dkim` (query,optional)
+/// - `dmarc` (query,optional)
+/// - `tlsVersion` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_email_security };
+/// use cloudflare::{ ApiClient, apis::radar_email_security };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_email_security_timeseries_get_6(&api)
+/// let response = get_email_security_timeseries_get_6(&api)
+///     .with_agg_interval("aggInterval")
+///     .with_name("name")
+///     .with_date_range("dateRange")
+///     .with_date_start("dateStart")
+///     .with_date_end("dateEnd")
+///     .with_arc("arc")
+///     .with_dkim("dkim")
+///     .with_dmarc("dmarc")
+///     .with_tls_version("tlsVersion")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```
@@ -1146,13 +1545,42 @@ impl<'a> GetEmailSecurityTimeseriesGet7Request<'a> {
         self.builder.send().await
     }
 }
-
 /// Get email spoof classification time series
+///
+/// Retrieves the distribution of emails by spoof classification (spoof vs. non-spoof) over time.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/email/security/timeseries_groups/spoof`
+///
+/// **Parameters**
+/// - `aggInterval` (query,optional)
+/// - `name` (query,optional)
+/// - `dateRange` (query,optional)
+/// - `dateStart` (query,optional)
+/// - `dateEnd` (query,optional)
+/// - `arc` (query,optional)
+/// - `dkim` (query,optional)
+/// - `dmarc` (query,optional)
+/// - `spf` (query,optional)
+/// - `tlsVersion` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_email_security };
+/// use cloudflare::{ ApiClient, apis::radar_email_security };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_email_security_timeseries_get_7(&api)
+/// let response = get_email_security_timeseries_get_7(&api)
+///     .with_agg_interval("aggInterval")
+///     .with_name("name")
+///     .with_date_range("dateRange")
+///     .with_date_start("dateStart")
+///     .with_date_end("dateEnd")
+///     .with_arc("arc")
+///     .with_dkim("dkim")
+///     .with_dmarc("dmarc")
+///     .with_spf("spf")
+///     .with_tls_version("tlsVersion")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```
@@ -1225,13 +1653,42 @@ impl<'a> GetEmailSecurityTimeseriesGet8Request<'a> {
         self.builder.send().await
     }
 }
-
 /// Get email threat category time series
+///
+/// Retrieves the distribution of emails by threat category over time.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/email/security/timeseries_groups/threat_category`
+///
+/// **Parameters**
+/// - `aggInterval` (query,optional)
+/// - `name` (query,optional)
+/// - `dateRange` (query,optional)
+/// - `dateStart` (query,optional)
+/// - `dateEnd` (query,optional)
+/// - `arc` (query,optional)
+/// - `dkim` (query,optional)
+/// - `dmarc` (query,optional)
+/// - `spf` (query,optional)
+/// - `tlsVersion` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_email_security };
+/// use cloudflare::{ ApiClient, apis::radar_email_security };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_email_security_timeseries_get_8(&api)
+/// let response = get_email_security_timeseries_get_8(&api)
+///     .with_agg_interval("aggInterval")
+///     .with_name("name")
+///     .with_date_range("dateRange")
+///     .with_date_start("dateStart")
+///     .with_date_end("dateEnd")
+///     .with_arc("arc")
+///     .with_dkim("dkim")
+///     .with_dmarc("dmarc")
+///     .with_spf("spf")
+///     .with_tls_version("tlsVersion")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```
@@ -1300,13 +1757,40 @@ impl<'a> GetEmailSecurityTimeseriesGet9Request<'a> {
         self.builder.send().await
     }
 }
-
 /// Get email TLS version time series
+///
+/// Retrieves the distribution of emails by TLS version over time.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/email/security/timeseries_groups/tls_version`
+///
+/// **Parameters**
+/// - `aggInterval` (query,optional)
+/// - `name` (query,optional)
+/// - `dateRange` (query,optional)
+/// - `dateStart` (query,optional)
+/// - `dateEnd` (query,optional)
+/// - `arc` (query,optional)
+/// - `dkim` (query,optional)
+/// - `dmarc` (query,optional)
+/// - `spf` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_email_security };
+/// use cloudflare::{ ApiClient, apis::radar_email_security };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_email_security_timeseries_get_9(&api)
+/// let response = get_email_security_timeseries_get_9(&api)
+///     .with_agg_interval("aggInterval")
+///     .with_name("name")
+///     .with_date_range("dateRange")
+///     .with_date_start("dateStart")
+///     .with_date_end("dateEnd")
+///     .with_arc("arc")
+///     .with_dkim("dkim")
+///     .with_dmarc("dmarc")
+///     .with_spf("spf")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```
@@ -1379,13 +1863,44 @@ impl<'a> GetEmailSecurityTopRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get top TLDs by email message volume
+///
+/// Retrieves the top TLDs by number of email messages.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/email/security/top/tlds`
+///
+/// **Parameters**
+/// - `limit` (query,optional)
+/// - `name` (query,optional)
+/// - `dateRange` (query,optional)
+/// - `dateStart` (query,optional)
+/// - `dateEnd` (query,optional)
+/// - `arc` (query,optional)
+/// - `dkim` (query,optional)
+/// - `dmarc` (query,optional)
+/// - `spf` (query,optional)
+/// - `tlsVersion` (query,optional)
+/// - `tldCategory` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_email_security };
+/// use cloudflare::{ ApiClient, apis::radar_email_security };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_email_security_top(&api)
+/// let response = get_email_security_top(&api)
+///     .with_limit("limit")
+///     .with_name("name")
+///     .with_date_range("dateRange")
+///     .with_date_start("dateStart")
+///     .with_date_end("dateEnd")
+///     .with_arc("arc")
+///     .with_dkim("dkim")
+///     .with_dmarc("dmarc")
+///     .with_spf("spf")
+///     .with_tls_version("tlsVersion")
+///     .with_tld_category("tldCategory")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```
@@ -1465,14 +1980,46 @@ impl<'a> GetEmailSecurityTopGetRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get top TLDs by email malicious classification
+///
+/// Retrieves the top TLDs by emails classified as malicious or not.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/email/security/top/tlds/malicious/{malicious}`
+///
+/// **Parameters**
+/// - `malicious` (path, required)
+/// - `limit` (query,optional)
+/// - `name` (query,optional)
+/// - `dateRange` (query,optional)
+/// - `dateStart` (query,optional)
+/// - `dateEnd` (query,optional)
+/// - `arc` (query,optional)
+/// - `dkim` (query,optional)
+/// - `dmarc` (query,optional)
+/// - `spf` (query,optional)
+/// - `tlsVersion` (query,optional)
+/// - `tldCategory` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_email_security };
+/// use cloudflare::{ ApiClient, apis::radar_email_security };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_email_security_top_get(&api)
-///     .with_malicious("value")
+/// let response = get_email_security_top_get(&api)
+///     .with_malicious("malicious")
+///     .with_limit("limit")
+///     .with_name("name")
+///     .with_date_range("dateRange")
+///     .with_date_start("dateStart")
+///     .with_date_end("dateEnd")
+///     .with_arc("arc")
+///     .with_dkim("dkim")
+///     .with_dmarc("dmarc")
+///     .with_spf("spf")
+///     .with_tls_version("tlsVersion")
+///     .with_tld_category("tldCategory")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```
@@ -1552,14 +2099,46 @@ impl<'a> GetEmailSecurityTopGet3Request<'a> {
         self.builder.send().await
     }
 }
-
 /// Get top TLDs by email spam classification
+///
+/// Retrieves the top TLDs by emails classified as spam or not.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/email/security/top/tlds/spam/{spam}`
+///
+/// **Parameters**
+/// - `spam` (path, required)
+/// - `limit` (query,optional)
+/// - `name` (query,optional)
+/// - `dateRange` (query,optional)
+/// - `dateStart` (query,optional)
+/// - `dateEnd` (query,optional)
+/// - `arc` (query,optional)
+/// - `dkim` (query,optional)
+/// - `dmarc` (query,optional)
+/// - `spf` (query,optional)
+/// - `tlsVersion` (query,optional)
+/// - `tldCategory` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_email_security };
+/// use cloudflare::{ ApiClient, apis::radar_email_security };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_email_security_top_get_3(&api)
-///     .with_spam("value")
+/// let response = get_email_security_top_get_3(&api)
+///     .with_spam("spam")
+///     .with_limit("limit")
+///     .with_name("name")
+///     .with_date_range("dateRange")
+///     .with_date_start("dateStart")
+///     .with_date_end("dateEnd")
+///     .with_arc("arc")
+///     .with_dkim("dkim")
+///     .with_dmarc("dmarc")
+///     .with_spf("spf")
+///     .with_tls_version("tlsVersion")
+///     .with_tld_category("tldCategory")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```
@@ -1639,14 +2218,46 @@ impl<'a> GetEmailSecurityTopGet4Request<'a> {
         self.builder.send().await
     }
 }
-
 /// Get top TLDs by email spoof classification
+///
+/// Retrieves the top TLDs by emails classified as spoof or not.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/email/security/top/tlds/spoof/{spoof}`
+///
+/// **Parameters**
+/// - `spoof` (path, required)
+/// - `limit` (query,optional)
+/// - `name` (query,optional)
+/// - `dateRange` (query,optional)
+/// - `dateStart` (query,optional)
+/// - `dateEnd` (query,optional)
+/// - `arc` (query,optional)
+/// - `dkim` (query,optional)
+/// - `dmarc` (query,optional)
+/// - `spf` (query,optional)
+/// - `tlsVersion` (query,optional)
+/// - `tldCategory` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_email_security };
+/// use cloudflare::{ ApiClient, apis::radar_email_security };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_email_security_top_get_4(&api)
-///     .with_spoof("value")
+/// let response = get_email_security_top_get_4(&api)
+///     .with_spoof("spoof")
+///     .with_limit("limit")
+///     .with_name("name")
+///     .with_date_range("dateRange")
+///     .with_date_start("dateStart")
+///     .with_date_end("dateEnd")
+///     .with_arc("arc")
+///     .with_dkim("dkim")
+///     .with_dmarc("dmarc")
+///     .with_spf("spf")
+///     .with_tls_version("tlsVersion")
+///     .with_tld_category("tldCategory")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```

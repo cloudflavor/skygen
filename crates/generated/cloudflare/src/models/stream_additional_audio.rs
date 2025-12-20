@@ -19,8 +19,8 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct StreamAdditionalAudio {
-    pub default: Option<serde_json::Value>,
-    pub label: Option<serde_json::Value>,
-    pub status: Option<serde_json::Value>,
-    pub uid: Option<serde_json::Value>,
+    pub default: Option<crate::models::stream_audio_default::StreamAudioDefault>,
+    pub label: Option<crate::models::stream_audio_label::StreamAudioLabel>,
+    pub status: Option<crate::models::stream_audio_state::StreamAudioState>,
+    pub uid: Option<crate::models::stream_identifier::StreamIdentifier>,
 }

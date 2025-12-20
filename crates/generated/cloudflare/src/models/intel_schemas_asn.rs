@@ -19,10 +19,10 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct IntelSchemasAsn {
-    pub asn: Option<serde_json::Value>,
-    pub country: Option<serde_json::Value>,
-    pub description: Option<serde_json::Value>,
+    pub asn: Option<crate::models::intel_asn::IntelAsn>,
+    pub country: Option<crate::models::intel_asn_country::IntelAsnCountry>,
+    pub description: Option<crate::models::intel_asn_description::IntelAsnDescription>,
     pub domain_count: Option<i64>,
-    pub r#type: Option<serde_json::Value>,
+    pub r#type: Option<crate::models::intel_asn_type::IntelAsnType>,
     pub top_domains: Option<Vec<String>>,
 }

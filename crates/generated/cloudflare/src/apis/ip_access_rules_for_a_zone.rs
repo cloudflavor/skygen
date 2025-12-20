@@ -15,12 +15,15 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::firewall_rule_collection_response::FirewallRuleCollectionResponse;
+use crate::models::firewall_rule_single_id_response::FirewallRuleSingleIdResponse;
+use crate::models::firewall_rule_single_response::FirewallRuleSingleResponse;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct ListIpAccessRulesRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, FirewallRuleCollectionResponse>,
 }
 
 impl<'a> ListIpAccessRulesRequest<'a> {
@@ -74,18 +77,44 @@ impl<'a> ListIpAccessRulesRequest<'a> {
         self.builder = self.builder.header_param("direction", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<FirewallRuleCollectionResponse> {
         self.builder.send().await
     }
 }
-
 /// List IP Access rules
+///
+/// Fetches IP Access rules of a zone. You can filter the results using several optional parameters.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/firewall/access_rules/rules`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `mode` (query,optional)
+/// - `configuration.target` (query,optional)
+/// - `configuration.value` (query,optional)
+/// - `notes` (query,optional)
+/// - `match` (query,optional)
+/// - `page` (query,optional)
+/// - `per_page` (query,optional)
+/// - `order` (query,optional)
+/// - `direction` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::ip_access_rules_for_a_zone };
+/// use cloudflare::{ ApiClient, apis::ip_access_rules_for_a_zone };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_ip_access_rules(&api)
-///     .with_zone_id("value")
+/// let response = list_ip_access_rules(&api)
+///     .with_zone_id("zone_id")
+///     .with_mode("mode")
+///     .with_configuration_target("configuration.target")
+///     .with_configuration_value("configuration.value")
+///     .with_notes("notes")
+///     .with_match_param("match")
+///     .with_page("page")
+///     .with_per_page("per_page")
+///     .with_order("order")
+///     .with_direction("direction")
 ///     .send()
 ///     .await?;
 /// ```
@@ -95,7 +124,7 @@ pub fn list_ip_access_rules(api: &ApiClient) -> ListIpAccessRulesRequest<'_> {
 
 #[derive(Debug)]
 pub struct CreateIpAccessRuleRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, FirewallRuleSingleResponse>,
 }
 
 impl<'a> CreateIpAccessRuleRequest<'a> {
@@ -121,18 +150,30 @@ impl<'a> CreateIpAccessRuleRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<FirewallRuleSingleResponse> {
         self.builder.send().await
     }
 }
-
 /// Create an IP Access rule
+///
+/// Creates a new IP Access rule for a zone.
+///
+/// Note: To create an IP Access rule that applies to multiple zones, refer to [IP Access rules for a user](#ip-access-rules-for-a-user) or [IP Access rules for an account](#ip-access-rules-for-an-account) as appropriate.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/zones/{zone_id}/firewall/access_rules/rules`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::ip_access_rules_for_a_zone };
+/// use cloudflare::{ ApiClient, apis::ip_access_rules_for_a_zone };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = create_ip_access_rule(&api)
-///     .with_zone_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = create_ip_access_rule(&api)
+///     .with_zone_id("zone_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -142,7 +183,7 @@ pub fn create_ip_access_rule(api: &ApiClient) -> CreateIpAccessRuleRequest<'_> {
 
 #[derive(Debug)]
 pub struct DeleteIpAccessRuleRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, FirewallRuleSingleIdResponse>,
 }
 
 impl<'a> DeleteIpAccessRuleRequest<'a> {
@@ -173,19 +214,32 @@ impl<'a> DeleteIpAccessRuleRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<FirewallRuleSingleIdResponse> {
         self.builder.send().await
     }
 }
-
 /// Delete an IP Access rule
+///
+/// Deletes an IP Access rule defined at the zone level.
+///
+/// Optionally, you can use the `cascade` property to specify that you wish to delete similar rules in other zones managed by the same zone owner.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/zones/{zone_id}/firewall/access_rules/rules/{rule_id}`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `rule_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::ip_access_rules_for_a_zone };
+/// use cloudflare::{ ApiClient, apis::ip_access_rules_for_a_zone };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete_ip_access_rule(&api)
-///     .with_zone_id("value")
-///     .with_rule_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = delete_ip_access_rule(&api)
+///     .with_zone_id("zone_id")
+///     .with_rule_id("rule_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -195,7 +249,7 @@ pub fn delete_ip_access_rule(api: &ApiClient) -> DeleteIpAccessRuleRequest<'_> {
 
 #[derive(Debug)]
 pub struct UpdateIpAccessRuleRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, FirewallRuleSingleResponse>,
 }
 
 impl<'a> UpdateIpAccessRuleRequest<'a> {
@@ -226,19 +280,30 @@ impl<'a> UpdateIpAccessRuleRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<FirewallRuleSingleResponse> {
         self.builder.send().await
     }
 }
-
 /// Update an IP Access rule
+///
+/// Updates an IP Access rule defined at the zone level. You can only update the rule action (`mode` parameter) and notes.
+///
+/// **HTTP Method:** `PATCH`
+/// **Path:** `/zones/{zone_id}/firewall/access_rules/rules/{rule_id}`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `rule_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::ip_access_rules_for_a_zone };
+/// use cloudflare::{ ApiClient, apis::ip_access_rules_for_a_zone };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = update_ip_access_rule(&api)
-///     .with_zone_id("value")
-///     .with_rule_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = update_ip_access_rule(&api)
+///     .with_zone_id("zone_id")
+///     .with_rule_id("rule_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```

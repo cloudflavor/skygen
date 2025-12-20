@@ -19,11 +19,11 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct HyperdriveHyperdriveConfig {
-    pub caching: Option<serde_json::Value>,
+    pub caching: Option<crate::models::hyperdrive_hyperdrive_caching::HyperdriveHyperdriveCaching>,
     pub created_on: Option<String>,
-    pub id: serde_json::Value,
+    pub id: crate::models::hyperdrive_identifier::HyperdriveIdentifier,
     pub modified_on: Option<String>,
     pub mtls: Option<crate::models::hyperdrive_hyperdrive_mtls::HyperdriveHyperdriveMtls>,
-    pub name: serde_json::Value,
+    pub name: crate::models::hyperdrive_hyperdrive_name::HyperdriveHyperdriveName,
     pub origin: serde_json::Value,
 }

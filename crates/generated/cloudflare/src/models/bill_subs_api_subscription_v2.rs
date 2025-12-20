@@ -20,14 +20,17 @@ use serde::{Deserialize, Serialize};
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct BillSubsApiSubscriptionV2 {
     pub app: Option<serde_json::Value>,
-    pub component_values: Option<serde_json::Value>,
-    pub currency: Option<serde_json::Value>,
-    pub current_period_end: Option<serde_json::Value>,
-    pub current_period_start: Option<serde_json::Value>,
-    pub frequency: Option<serde_json::Value>,
-    pub id: Option<serde_json::Value>,
-    pub price: Option<serde_json::Value>,
-    pub rate_plan: Option<crate::models::bill_subs_api_rate_plan::BillSubsApiRatePlan>,
-    pub state: Option<serde_json::Value>,
+    pub component_values:
+        Option<crate::models::bill_subs_api_component_values::BillSubsApiComponentValues>,
+    pub currency: Option<crate::models::bill_subs_api_currency::BillSubsApiCurrency>,
+    pub current_period_end:
+        Option<crate::models::bill_subs_api_current_period_end::BillSubsApiCurrentPeriodEnd>,
+    pub current_period_start:
+        Option<crate::models::bill_subs_api_current_period_start::BillSubsApiCurrentPeriodStart>,
+    pub frequency: Option<crate::models::bill_subs_api_frequency::BillSubsApiFrequency>,
+    pub id: Option<crate::models::bill_subs_api_schemas_identifier::BillSubsApiSchemasIdentifier>,
+    pub price: Option<crate::models::bill_subs_api_price::BillSubsApiPrice>,
+    pub rate_plan: Option<crate::models::bill_subs_api_rate_plan_1::BillSubsApiRatePlan>,
+    pub state: Option<crate::models::bill_subs_api_state::BillSubsApiState>,
     pub zone: Option<crate::models::bill_subs_api_zone::BillSubsApiZone>,
 }

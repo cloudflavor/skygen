@@ -19,7 +19,8 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct DlpCreateIntegrationBody {
-    pub integration_type: serde_json::Value,
+    pub integration_type:
+        crate::models::dlp_risk_score_integration_type::DlpRiskScoreIntegrationType,
     pub reference_id: Option<String>,
     pub tenant_url: String,
 }

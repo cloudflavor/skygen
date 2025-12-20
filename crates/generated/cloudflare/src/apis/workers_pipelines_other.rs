@@ -50,14 +50,28 @@ impl<'a> V4Request<'a> {
         self.builder.send().await
     }
 }
-
 /// List Pipelines
+///
+/// List, filter, and paginate pipelines in an account.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/pipelines`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `search` (query,optional)
+/// - `page` (query,optional)
+/// - `per_page` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::workers_pipelines_other };
+/// use cloudflare::{ ApiClient, apis::workers_pipelines_other };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = v4(&api)
-///     .with_account_id("value")
+/// let response = v4(&api)
+///     .with_account_id("account_id")
+///     .with_search("search")
+///     .with_page("page")
+///     .with_per_page("per_page")
 ///     .send()
 ///     .await?;
 /// ```
@@ -92,14 +106,24 @@ impl<'a> V4PostRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Create Pipeline
+///
+/// Create a new pipeline.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/pipelines`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::workers_pipelines_other };
+/// use cloudflare::{ ApiClient, apis::workers_pipelines_other };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = v4_post(&api)
-///     .with_account_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = v4_post(&api)
+///     .with_account_id("account_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -136,15 +160,24 @@ impl<'a> V4GetRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get Pipeline
+///
+/// Get configuration of a pipeline.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/pipelines/{pipeline_name}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `pipeline_name` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::workers_pipelines_other };
+/// use cloudflare::{ ApiClient, apis::workers_pipelines_other };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = v4_get(&api)
-///     .with_account_id("value")
-///     .with_pipeline_name("value")
+/// let response = v4_get(&api)
+///     .with_account_id("account_id")
+///     .with_pipeline_name("pipeline_name")
 ///     .send()
 ///     .await?;
 /// ```
@@ -188,15 +221,26 @@ impl<'a> V4PutRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Update Pipeline
+///
+/// Update an existing pipeline.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/accounts/{account_id}/pipelines/{pipeline_name}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `pipeline_name` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::workers_pipelines_other };
+/// use cloudflare::{ ApiClient, apis::workers_pipelines_other };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = v4_put(&api)
-///     .with_account_id("value")
-///     .with_pipeline_name("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = v4_put(&api)
+///     .with_account_id("account_id")
+///     .with_pipeline_name("pipeline_name")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -233,15 +277,24 @@ impl<'a> V4DeleteRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Delete Pipeline
+///
+/// Delete a pipeline.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/accounts/{account_id}/pipelines/{pipeline_name}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `pipeline_name` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::workers_pipelines_other };
+/// use cloudflare::{ ApiClient, apis::workers_pipelines_other };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = v4_delete(&api)
-///     .with_account_id("value")
-///     .with_pipeline_name("value")
+/// let response = v4_delete(&api)
+///     .with_account_id("account_id")
+///     .with_pipeline_name("pipeline_name")
 ///     .send()
 ///     .await?;
 /// ```

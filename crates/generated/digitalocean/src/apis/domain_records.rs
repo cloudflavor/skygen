@@ -15,7 +15,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-use crate::models::domain_record::DomainRecord;
+use crate::models::error::Error;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
@@ -39,14 +39,24 @@ impl<'a> DomainsListRecordsRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// List All Domain Records
+///
+/// To get a listing of all records configured for a domain, send a GET request to `/v2/domains/$DOMAIN_NAME/records`.
+/// The list of records returned can be filtered by using the `name` and `type` query parameters. For example, to only include A records for a domain, send a GET request to `/v2/domains/$DOMAIN_NAME/records?type=A`. `name` must be a fully qualified record name. For example, to only include records matching `sub.example.com`, send a GET request to `/v2/domains/$DOMAIN_NAME/records?name=sub.example.com`. Both name and type may be used together.
+///
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/domains/{domain_name}/records`
+///
+/// **Parameters**
+/// - `domain_name` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::domain_records };
+/// use digitalocean::{ ApiClient, apis::domain_records };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = domains_list_records(&api)
-///     .with_domain_name("value")
+/// let response = domains_list_records(&api)
+///     .with_domain_name("domain_name")
 ///     .send()
 ///     .await?;
 /// ```
@@ -78,14 +88,31 @@ impl<'a> DomainsCreateRecordRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Create a New Domain Record
+///
+/// To create a new record to a domain, send a POST request to
+/// `/v2/domains/$DOMAIN_NAME/records`.
+///
+/// The request must include all of the required fields for the domain record type
+/// being added.
+///
+/// See the [attribute table](#tag/Domain-Records) for details regarding record
+/// types and their respective required attributes.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/v2/domains/{domain_name}/records`
+///
+/// **Parameters**
+/// - `domain_name` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::domain_records };
+/// use digitalocean::{ ApiClient, apis::domain_records };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = domains_create_record(&api)
-///     .with_domain_name("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = domains_create_record(&api)
+///     .with_domain_name("domain_name")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -95,7 +122,7 @@ pub fn domains_create_record(api: &ApiClient) -> DomainsCreateRecordRequest<'_> 
 
 #[derive(Debug)]
 pub struct DomainsGetRecordRequest<'a> {
-    builder: ApiRequestBuilder<'a, DomainRecord>,
+    builder: ApiRequestBuilder<'a, serde_json::Value>,
 }
 
 impl<'a> DomainsGetRecordRequest<'a> {
@@ -118,19 +145,28 @@ impl<'a> DomainsGetRecordRequest<'a> {
         self.builder = self.builder.path_param("domain_record_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<DomainRecord> {
+    pub async fn send(self) -> ApiResult<serde_json::Value> {
         self.builder.send().await
     }
 }
-
 /// Retrieve an Existing Domain Record
+///
+/// To retrieve a specific domain record, send a GET request to `/v2/domains/$DOMAIN_NAME/records/$RECORD_ID`.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/domains/{domain_name}/records/{domain_record_id}`
+///
+/// **Parameters**
+/// - `domain_name` (path, required)
+/// - `domain_record_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::domain_records };
+/// use digitalocean::{ ApiClient, apis::domain_records };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = domains_get_record(&api)
-///     .with_domain_name("value")
-///     .with_domain_record_id("value")
+/// let response = domains_get_record(&api)
+///     .with_domain_name("domain_name")
+///     .with_domain_record_id("domain_record_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -140,7 +176,7 @@ pub fn domains_get_record(api: &ApiClient) -> DomainsGetRecordRequest<'_> {
 
 #[derive(Debug)]
 pub struct DomainsUpdateRecordRequest<'a> {
-    builder: ApiRequestBuilder<'a, DomainRecord>,
+    builder: ApiRequestBuilder<'a, serde_json::Value>,
 }
 
 impl<'a> DomainsUpdateRecordRequest<'a> {
@@ -163,23 +199,39 @@ impl<'a> DomainsUpdateRecordRequest<'a> {
         self.builder = self.builder.path_param("domain_record_id", value);
         self
     }
-    pub fn with_body(mut self, body: DomainRecord) -> Self {
+    pub fn with_body(mut self, body: crate::models::domain_record::DomainRecord) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<DomainRecord> {
+    pub async fn send(self) -> ApiResult<serde_json::Value> {
         self.builder.send().await
     }
 }
-
 /// Update a Domain Record
+///
+/// To update an existing record, send a PUT request to
+/// `/v2/domains/$DOMAIN_NAME/records/$DOMAIN_RECORD_ID`. Any attribute valid for
+/// the record type can be set to a new value for the record.
+///
+/// See the [attribute table](#tag/Domain-Records) for details regarding record
+/// types and their respective attributes.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/v2/domains/{domain_name}/records/{domain_record_id}`
+///
+/// **Parameters**
+/// - `domain_name` (path, required)
+/// - `domain_record_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::domain_records };
+/// use digitalocean::{ ApiClient, apis::domain_records };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = domains_update_record(&api)
-///     .with_domain_name("value")
-///     .with_domain_record_id("value")
+/// # let body: crate::models::domain_record::DomainRecord = todo!();
+/// let response = domains_update_record(&api)
+///     .with_domain_name("domain_name")
+///     .with_domain_record_id("domain_record_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -189,7 +241,7 @@ pub fn domains_update_record(api: &ApiClient) -> DomainsUpdateRecordRequest<'_> 
 
 #[derive(Debug)]
 pub struct DomainsDeleteRecordRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, Error>,
 }
 
 impl<'a> DomainsDeleteRecordRequest<'a> {
@@ -212,19 +264,32 @@ impl<'a> DomainsDeleteRecordRequest<'a> {
         self.builder = self.builder.path_param("domain_record_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<Error> {
         self.builder.send().await
     }
 }
-
 /// Delete a Domain Record
+///
+/// To delete a record for a domain, send a DELETE request to
+/// `/v2/domains/$DOMAIN_NAME/records/$DOMAIN_RECORD_ID`.
+///
+/// The record will be deleted and the response status will be a 204. This
+/// indicates a successful request with no body returned.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/v2/domains/{domain_name}/records/{domain_record_id}`
+///
+/// **Parameters**
+/// - `domain_name` (path, required)
+/// - `domain_record_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::domain_records };
+/// use digitalocean::{ ApiClient, apis::domain_records };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = domains_delete_record(&api)
-///     .with_domain_name("value")
-///     .with_domain_record_id("value")
+/// let response = domains_delete_record(&api)
+///     .with_domain_name("domain_name")
+///     .with_domain_record_id("domain_record_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -234,7 +299,7 @@ pub fn domains_delete_record(api: &ApiClient) -> DomainsDeleteRecordRequest<'_> 
 
 #[derive(Debug)]
 pub struct DomainsPatchRecordRequest<'a> {
-    builder: ApiRequestBuilder<'a, DomainRecord>,
+    builder: ApiRequestBuilder<'a, serde_json::Value>,
 }
 
 impl<'a> DomainsPatchRecordRequest<'a> {
@@ -257,23 +322,39 @@ impl<'a> DomainsPatchRecordRequest<'a> {
         self.builder = self.builder.path_param("domain_record_id", value);
         self
     }
-    pub fn with_body(mut self, body: DomainRecord) -> Self {
+    pub fn with_body(mut self, body: crate::models::domain_record::DomainRecord) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<DomainRecord> {
+    pub async fn send(self) -> ApiResult<serde_json::Value> {
         self.builder.send().await
     }
 }
-
 /// Update a Domain Record
+///
+/// To update an existing record, send a PATCH request to
+/// `/v2/domains/$DOMAIN_NAME/records/$DOMAIN_RECORD_ID`. Any attribute valid for
+/// the record type can be set to a new value for the record.
+///
+/// See the [attribute table](#tag/Domain-Records) for details regarding record
+/// types and their respective attributes.
+///
+/// **HTTP Method:** `PATCH`
+/// **Path:** `/v2/domains/{domain_name}/records/{domain_record_id}`
+///
+/// **Parameters**
+/// - `domain_name` (path, required)
+/// - `domain_record_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::domain_records };
+/// use digitalocean::{ ApiClient, apis::domain_records };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = domains_patch_record(&api)
-///     .with_domain_name("value")
-///     .with_domain_record_id("value")
+/// # let body: crate::models::domain_record::DomainRecord = todo!();
+/// let response = domains_patch_record(&api)
+///     .with_domain_name("domain_name")
+///     .with_domain_record_id("domain_record_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```

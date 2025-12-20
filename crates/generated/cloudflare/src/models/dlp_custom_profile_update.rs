@@ -24,8 +24,8 @@ pub struct DlpCustomProfileUpdate {
     pub confidence_threshold: Option<String>,
     pub context_awareness: Option<crate::models::dlp_context_awareness::DlpContextAwareness>,
     pub description: Option<String>,
-    pub entries: Option<Vec<serde_json::Value>>,
+    pub entries: Option<Vec<crate::models::dlp_profile_entry_update::DlpProfileEntryUpdate>>,
     pub name: String,
     pub ocr_enabled: Option<bool>,
-    pub shared_entries: Option<Vec<serde_json::Value>>,
+    pub shared_entries: Option<Vec<crate::models::dlp_shared_entry_update::DlpSharedEntryUpdate>>,
 }

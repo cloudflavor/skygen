@@ -15,12 +15,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::pages_project_response::PagesProjectResponse;
+use crate::models::pages_projects_response::PagesProjectsResponse;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct GetProjectsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, PagesProjectsResponse>,
 }
 
 impl<'a> GetProjectsRequest<'a> {
@@ -35,18 +37,26 @@ impl<'a> GetProjectsRequest<'a> {
         self.builder = self.builder.path_param("account_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<PagesProjectsResponse> {
         self.builder.send().await
     }
 }
-
 /// Get projects
+///
+/// Fetch a list of all user projects.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/pages/projects`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::pages_project };
+/// use cloudflare::{ ApiClient, apis::pages_project };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_projects(&api)
-///     .with_account_id("value")
+/// let response = get_projects(&api)
+///     .with_account_id("account_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -56,7 +66,7 @@ pub fn get_projects(api: &ApiClient) -> GetProjectsRequest<'_> {
 
 #[derive(Debug)]
 pub struct CreateProjectRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, PagesProjectResponse>,
 }
 
 impl<'a> CreateProjectRequest<'a> {
@@ -79,18 +89,28 @@ impl<'a> CreateProjectRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<PagesProjectResponse> {
         self.builder.send().await
     }
 }
-
 /// Create project
+///
+/// Create a new project.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/pages/projects`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::pages_project };
+/// use cloudflare::{ ApiClient, apis::pages_project };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = create_project(&api)
-///     .with_account_id("value")
+/// # let body: crate::models::pages_project_object::PagesProjectObject = todo!();
+/// let response = create_project(&api)
+///     .with_account_id("account_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -100,7 +120,7 @@ pub fn create_project(api: &ApiClient) -> CreateProjectRequest<'_> {
 
 #[derive(Debug)]
 pub struct GetProjectRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, PagesProjectResponse>,
 }
 
 impl<'a> GetProjectRequest<'a> {
@@ -123,19 +143,28 @@ impl<'a> GetProjectRequest<'a> {
         self.builder = self.builder.path_param("project_name", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<PagesProjectResponse> {
         self.builder.send().await
     }
 }
-
 /// Get project
+///
+/// Fetch a project by name.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/pages/projects/{project_name}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `project_name` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::pages_project };
+/// use cloudflare::{ ApiClient, apis::pages_project };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_project(&api)
-///     .with_account_id("value")
-///     .with_project_name("value")
+/// let response = get_project(&api)
+///     .with_account_id("account_id")
+///     .with_project_name("project_name")
 ///     .send()
 ///     .await?;
 /// ```
@@ -172,15 +201,24 @@ impl<'a> DeleteProjectRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Delete project
+///
+/// Delete a project by name.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/accounts/{account_id}/pages/projects/{project_name}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `project_name` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::pages_project };
+/// use cloudflare::{ ApiClient, apis::pages_project };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete_project(&api)
-///     .with_account_id("value")
-///     .with_project_name("value")
+/// let response = delete_project(&api)
+///     .with_account_id("account_id")
+///     .with_project_name("project_name")
 ///     .send()
 ///     .await?;
 /// ```
@@ -190,7 +228,7 @@ pub fn delete_project(api: &ApiClient) -> DeleteProjectRequest<'_> {
 
 #[derive(Debug)]
 pub struct UpdateProjectRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, PagesProjectResponse>,
 }
 
 impl<'a> UpdateProjectRequest<'a> {
@@ -214,23 +252,37 @@ impl<'a> UpdateProjectRequest<'a> {
         self.builder = self.builder.path_param("project_name", value);
         self
     }
-    pub fn with_body(mut self, body: serde_json::Value) -> Self {
+    pub fn with_body(
+        mut self,
+        body: crate::models::pages_project_patch::PagesProjectPatch,
+    ) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<PagesProjectResponse> {
         self.builder.send().await
     }
 }
-
 /// Update project
+///
+/// Set new attributes for an existing project. Modify environment variables. To delete an environment variable, set the key to null.
+///
+/// **HTTP Method:** `PATCH`
+/// **Path:** `/accounts/{account_id}/pages/projects/{project_name}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `project_name` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::pages_project };
+/// use cloudflare::{ ApiClient, apis::pages_project };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = update_project(&api)
-///     .with_account_id("value")
-///     .with_project_name("value")
+/// # let body: crate::models::pages_project_patch::PagesProjectPatch = todo!();
+/// let response = update_project(&api)
+///     .with_account_id("account_id")
+///     .with_project_name("project_name")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```

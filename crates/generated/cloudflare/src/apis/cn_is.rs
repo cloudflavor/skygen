@@ -56,14 +56,28 @@ impl<'a> ListCnisRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// List existing CNI objects
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/cni/cnis`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `slot` (query,optional)
+/// - `tunnel_id` (query,optional)
+/// - `cursor` (query,optional)
+/// - `limit` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::cn_is };
+/// use cloudflare::{ ApiClient, apis::cn_is };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_cnis(&api)
-///     .with_account_id("value")
+/// let response = list_cnis(&api)
+///     .with_account_id("account_id")
+///     .with_slot("slot")
+///     .with_tunnel_id("tunnel_id")
+///     .with_cursor("cursor")
+///     .with_limit("limit")
 ///     .send()
 ///     .await?;
 /// ```
@@ -96,14 +110,22 @@ impl<'a> CreateCniRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Create a new CNI object
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/cni/cnis`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::cn_is };
+/// use cloudflare::{ ApiClient, apis::cn_is };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = create_cni(&api)
-///     .with_account_id("value")
+/// # let body: crate::models::nsc_cni_create::NscCniCreate = todo!();
+/// let response = create_cni(&api)
+///     .with_account_id("account_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -137,15 +159,22 @@ impl<'a> CniRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get information about a CNI object
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/cni/cnis/{cni}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `cni` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::cn_is };
+/// use cloudflare::{ ApiClient, apis::cn_is };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = cni(&api)
-///     .with_account_id("value")
-///     .with_cni("value")
+/// let response = cni(&api)
+///     .with_account_id("account_id")
+///     .with_cni("cni")
 ///     .send()
 ///     .await?;
 /// ```
@@ -184,15 +213,24 @@ impl<'a> UpdateCniRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Modify stored information about a CNI object
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/accounts/{account_id}/cni/cnis/{cni}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `cni` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::cn_is };
+/// use cloudflare::{ ApiClient, apis::cn_is };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = update_cni(&api)
-///     .with_account_id("value")
-///     .with_cni("value")
+/// # let body: NscCni = todo!();
+/// let response = update_cni(&api)
+///     .with_account_id("account_id")
+///     .with_cni("cni")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -226,15 +264,22 @@ impl<'a> CniDeleteRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Delete a specified CNI object
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/accounts/{account_id}/cni/cnis/{cni}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `cni` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::cn_is };
+/// use cloudflare::{ ApiClient, apis::cn_is };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = cni_delete(&api)
-///     .with_account_id("value")
-///     .with_cni("value")
+/// let response = cni_delete(&api)
+///     .with_account_id("account_id")
+///     .with_cni("cni")
 ///     .send()
 ///     .await?;
 /// ```

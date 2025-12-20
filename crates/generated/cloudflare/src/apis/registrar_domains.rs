@@ -15,12 +15,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::registrar_api_domain_response_collection::RegistrarApiDomainResponseCollection;
+use crate::models::registrar_api_domain_response_single::RegistrarApiDomainResponseSingle;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct ListDomainsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, RegistrarApiDomainResponseCollection>,
 }
 
 impl<'a> ListDomainsRequest<'a> {
@@ -35,18 +37,26 @@ impl<'a> ListDomainsRequest<'a> {
         self.builder = self.builder.path_param("account_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<RegistrarApiDomainResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// List domains
+///
+/// List domains handled by Registrar.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/registrar/domains`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::registrar_domains };
+/// use cloudflare::{ ApiClient, apis::registrar_domains };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_domains(&api)
-///     .with_account_id("value")
+/// let response = list_domains(&api)
+///     .with_account_id("account_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -56,7 +66,7 @@ pub fn list_domains(api: &ApiClient) -> ListDomainsRequest<'_> {
 
 #[derive(Debug)]
 pub struct GetDomainRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, RegistrarApiDomainResponseSingle>,
 }
 
 impl<'a> GetDomainRequest<'a> {
@@ -79,19 +89,28 @@ impl<'a> GetDomainRequest<'a> {
         self.builder = self.builder.path_param("domain_name", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<RegistrarApiDomainResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Get domain
+///
+/// Show individual domain.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/registrar/domains/{domain_name}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `domain_name` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::registrar_domains };
+/// use cloudflare::{ ApiClient, apis::registrar_domains };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_domain(&api)
-///     .with_account_id("value")
-///     .with_domain_name("value")
+/// let response = get_domain(&api)
+///     .with_account_id("account_id")
+///     .with_domain_name("domain_name")
 ///     .send()
 ///     .await?;
 /// ```
@@ -101,7 +120,7 @@ pub fn get_domain(api: &ApiClient) -> GetDomainRequest<'_> {
 
 #[derive(Debug)]
 pub struct UpdateDomainRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, RegistrarApiDomainResponseSingle>,
 }
 
 impl<'a> UpdateDomainRequest<'a> {
@@ -129,19 +148,30 @@ impl<'a> UpdateDomainRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<RegistrarApiDomainResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Update domain
+///
+/// Update individual domain.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/accounts/{account_id}/registrar/domains/{domain_name}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `domain_name` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::registrar_domains };
+/// use cloudflare::{ ApiClient, apis::registrar_domains };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = update_domain(&api)
-///     .with_account_id("value")
-///     .with_domain_name("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = update_domain(&api)
+///     .with_account_id("account_id")
+///     .with_domain_name("domain_name")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```

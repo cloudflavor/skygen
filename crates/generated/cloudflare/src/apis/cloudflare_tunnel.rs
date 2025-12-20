@@ -15,12 +15,18 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::tunnel_empty_response::TunnelEmptyResponse;
+use crate::models::tunnel_tunnel_client_response::TunnelTunnelClientResponse;
+use crate::models::tunnel_tunnel_connections_response::TunnelTunnelConnectionsResponse;
+use crate::models::tunnel_tunnel_response_collection::TunnelTunnelResponseCollection;
+use crate::models::tunnel_tunnel_response_single::TunnelTunnelResponseSingle;
+use crate::models::tunnel_tunnel_response_token::TunnelTunnelResponseToken;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct ListCloudflareTunnelsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, TunnelTunnelResponseCollection>,
 }
 
 impl<'a> ListCloudflareTunnelsRequest<'a> {
@@ -78,18 +84,48 @@ impl<'a> ListCloudflareTunnelsRequest<'a> {
         self.builder = self.builder.header_param("page", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<TunnelTunnelResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// List Cloudflare Tunnels
+///
+/// Lists and filters Cloudflare Tunnels in an account.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/cfd_tunnel`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `name` (query,optional)
+/// - `is_deleted` (query,optional)
+/// - `existed_at` (query,optional)
+/// - `uuid` (query,optional)
+/// - `was_active_at` (query,optional)
+/// - `was_inactive_at` (query,optional)
+/// - `include_prefix` (query,optional)
+/// - `exclude_prefix` (query,optional)
+/// - `status` (query,optional)
+/// - `per_page` (query,optional)
+/// - `page` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::cloudflare_tunnel };
+/// use cloudflare::{ ApiClient, apis::cloudflare_tunnel };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_cloudflare_tunnels(&api)
-///     .with_account_id("value")
+/// let response = list_cloudflare_tunnels(&api)
+///     .with_account_id("account_id")
+///     .with_name("name")
+///     .with_is_deleted("is_deleted")
+///     .with_existed_at("existed_at")
+///     .with_uuid("uuid")
+///     .with_was_active_at("was_active_at")
+///     .with_was_inactive_at("was_inactive_at")
+///     .with_include_prefix("include_prefix")
+///     .with_exclude_prefix("exclude_prefix")
+///     .with_status("status")
+///     .with_per_page("per_page")
+///     .with_page("page")
 ///     .send()
 ///     .await?;
 /// ```
@@ -99,7 +135,7 @@ pub fn list_cloudflare_tunnels(api: &ApiClient) -> ListCloudflareTunnelsRequest<
 
 #[derive(Debug)]
 pub struct CreateCloudflareTunnelRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, TunnelTunnelResponseSingle>,
 }
 
 impl<'a> CreateCloudflareTunnelRequest<'a> {
@@ -121,18 +157,28 @@ impl<'a> CreateCloudflareTunnelRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<TunnelTunnelResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Create a Cloudflare Tunnel
+///
+/// Creates a new Cloudflare Tunnel in an account.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/cfd_tunnel`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::cloudflare_tunnel };
+/// use cloudflare::{ ApiClient, apis::cloudflare_tunnel };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = create_cloudflare_tunnel(&api)
-///     .with_account_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = create_cloudflare_tunnel(&api)
+///     .with_account_id("account_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -142,7 +188,7 @@ pub fn create_cloudflare_tunnel(api: &ApiClient) -> CreateCloudflareTunnelReques
 
 #[derive(Debug)]
 pub struct GetCloudflareTunnelRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, TunnelTunnelResponseSingle>,
 }
 
 impl<'a> GetCloudflareTunnelRequest<'a> {
@@ -165,19 +211,28 @@ impl<'a> GetCloudflareTunnelRequest<'a> {
         self.builder = self.builder.path_param("tunnel_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<TunnelTunnelResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Get a Cloudflare Tunnel
+///
+/// Fetches a single Cloudflare Tunnel.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/cfd_tunnel/{tunnel_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `tunnel_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::cloudflare_tunnel };
+/// use cloudflare::{ ApiClient, apis::cloudflare_tunnel };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_cloudflare_tunnel(&api)
-///     .with_account_id("value")
-///     .with_tunnel_id("value")
+/// let response = get_cloudflare_tunnel(&api)
+///     .with_account_id("account_id")
+///     .with_tunnel_id("tunnel_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -187,7 +242,7 @@ pub fn get_cloudflare_tunnel(api: &ApiClient) -> GetCloudflareTunnelRequest<'_> 
 
 #[derive(Debug)]
 pub struct DeleteCloudflareTunnelRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, TunnelTunnelResponseSingle>,
 }
 
 impl<'a> DeleteCloudflareTunnelRequest<'a> {
@@ -218,19 +273,30 @@ impl<'a> DeleteCloudflareTunnelRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<TunnelTunnelResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Delete a Cloudflare Tunnel
+///
+/// Deletes a Cloudflare Tunnel from an account.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/accounts/{account_id}/cfd_tunnel/{tunnel_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `tunnel_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::cloudflare_tunnel };
+/// use cloudflare::{ ApiClient, apis::cloudflare_tunnel };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete_cloudflare_tunnel(&api)
-///     .with_account_id("value")
-///     .with_tunnel_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = delete_cloudflare_tunnel(&api)
+///     .with_account_id("account_id")
+///     .with_tunnel_id("tunnel_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -240,7 +306,7 @@ pub fn delete_cloudflare_tunnel(api: &ApiClient) -> DeleteCloudflareTunnelReques
 
 #[derive(Debug)]
 pub struct UpdateCloudflareTunnelRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, TunnelTunnelResponseSingle>,
 }
 
 impl<'a> UpdateCloudflareTunnelRequest<'a> {
@@ -271,19 +337,30 @@ impl<'a> UpdateCloudflareTunnelRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<TunnelTunnelResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Update a Cloudflare Tunnel
+///
+/// Updates an existing Cloudflare Tunnel.
+///
+/// **HTTP Method:** `PATCH`
+/// **Path:** `/accounts/{account_id}/cfd_tunnel/{tunnel_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `tunnel_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::cloudflare_tunnel };
+/// use cloudflare::{ ApiClient, apis::cloudflare_tunnel };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = update_cloudflare_tunnel(&api)
-///     .with_account_id("value")
-///     .with_tunnel_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = update_cloudflare_tunnel(&api)
+///     .with_account_id("account_id")
+///     .with_tunnel_id("tunnel_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -293,7 +370,7 @@ pub fn update_cloudflare_tunnel(api: &ApiClient) -> UpdateCloudflareTunnelReques
 
 #[derive(Debug)]
 pub struct ListCloudflareTunnelConnectionsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, TunnelTunnelConnectionsResponse>,
 }
 
 impl<'a> ListCloudflareTunnelConnectionsRequest<'a> {
@@ -316,19 +393,28 @@ impl<'a> ListCloudflareTunnelConnectionsRequest<'a> {
         self.builder = self.builder.path_param("tunnel_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<TunnelTunnelConnectionsResponse> {
         self.builder.send().await
     }
 }
-
 /// List Cloudflare Tunnel connections
+///
+/// Fetches connection details for a Cloudflare Tunnel.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/cfd_tunnel/{tunnel_id}/connections`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `tunnel_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::cloudflare_tunnel };
+/// use cloudflare::{ ApiClient, apis::cloudflare_tunnel };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_cloudflare_tunnel_connections(&api)
-///     .with_account_id("value")
-///     .with_tunnel_id("value")
+/// let response = list_cloudflare_tunnel_connections(&api)
+///     .with_account_id("account_id")
+///     .with_tunnel_id("tunnel_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -340,7 +426,7 @@ pub fn list_cloudflare_tunnel_connections(
 
 #[derive(Debug)]
 pub struct CleanUpCloudflareTunnelRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, TunnelEmptyResponse>,
 }
 
 impl<'a> CleanUpCloudflareTunnelRequest<'a> {
@@ -375,19 +461,32 @@ impl<'a> CleanUpCloudflareTunnelRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<TunnelEmptyResponse> {
         self.builder.send().await
     }
 }
-
 /// Clean up Cloudflare Tunnel connections
+///
+/// Removes a connection (aka Cloudflare Tunnel Connector) from a Cloudflare Tunnel independently of its current state. If no connector id (client_id) is provided all connectors will be removed. We recommend running this command after rotating tokens.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/accounts/{account_id}/cfd_tunnel/{tunnel_id}/connections`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `tunnel_id` (path, required)
+/// - `client_id` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::cloudflare_tunnel };
+/// use cloudflare::{ ApiClient, apis::cloudflare_tunnel };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = clean_up_cloudflare_tunnel(&api)
-///     .with_account_id("value")
-///     .with_tunnel_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = clean_up_cloudflare_tunnel(&api)
+///     .with_account_id("account_id")
+///     .with_tunnel_id("tunnel_id")
+///     .with_client_id("client_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -397,7 +496,7 @@ pub fn clean_up_cloudflare_tunnel(api: &ApiClient) -> CleanUpCloudflareTunnelReq
 
 #[derive(Debug)]
 pub struct GetCloudflareTunnelConnectorRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, TunnelTunnelClientResponse>,
 }
 
 impl<'a> GetCloudflareTunnelConnectorRequest<'a> {
@@ -425,20 +524,30 @@ impl<'a> GetCloudflareTunnelConnectorRequest<'a> {
         self.builder = self.builder.path_param("connector_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<TunnelTunnelClientResponse> {
         self.builder.send().await
     }
 }
-
 /// Get Cloudflare Tunnel connector
+///
+/// Fetches connector and connection details for a Cloudflare Tunnel.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/cfd_tunnel/{tunnel_id}/connectors/{connector_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `tunnel_id` (path, required)
+/// - `connector_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::cloudflare_tunnel };
+/// use cloudflare::{ ApiClient, apis::cloudflare_tunnel };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_cloudflare_tunnel_connector(&api)
-///     .with_account_id("value")
-///     .with_tunnel_id("value")
-///     .with_connector_id("value")
+/// let response = get_cloudflare_tunnel_connector(&api)
+///     .with_account_id("account_id")
+///     .with_tunnel_id("tunnel_id")
+///     .with_connector_id("connector_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -448,7 +557,7 @@ pub fn get_cloudflare_tunnel_connector(api: &ApiClient) -> GetCloudflareTunnelCo
 
 #[derive(Debug)]
 pub struct GetCloudflareTunnelManagementRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, TunnelTunnelResponseToken>,
 }
 
 impl<'a> GetCloudflareTunnelManagementRequest<'a> {
@@ -479,19 +588,30 @@ impl<'a> GetCloudflareTunnelManagementRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<TunnelTunnelResponseToken> {
         self.builder.send().await
     }
 }
-
 /// Get a Cloudflare Tunnel management token
+///
+/// Gets a management token used to access the management resources (i.e. Streaming Logs) of a tunnel.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/cfd_tunnel/{tunnel_id}/management`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `tunnel_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::cloudflare_tunnel };
+/// use cloudflare::{ ApiClient, apis::cloudflare_tunnel };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_cloudflare_tunnel_management(&api)
-///     .with_account_id("value")
-///     .with_tunnel_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = get_cloudflare_tunnel_management(&api)
+///     .with_account_id("account_id")
+///     .with_tunnel_id("tunnel_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -503,7 +623,7 @@ pub fn get_cloudflare_tunnel_management(
 
 #[derive(Debug)]
 pub struct GetCloudflareTunnelTokenRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, TunnelTunnelResponseToken>,
 }
 
 impl<'a> GetCloudflareTunnelTokenRequest<'a> {
@@ -526,19 +646,28 @@ impl<'a> GetCloudflareTunnelTokenRequest<'a> {
         self.builder = self.builder.path_param("tunnel_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<TunnelTunnelResponseToken> {
         self.builder.send().await
     }
 }
-
 /// Get a Cloudflare Tunnel token
+///
+/// Gets the token used to associate cloudflared with a specific tunnel.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/cfd_tunnel/{tunnel_id}/token`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `tunnel_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::cloudflare_tunnel };
+/// use cloudflare::{ ApiClient, apis::cloudflare_tunnel };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_cloudflare_tunnel_token(&api)
-///     .with_account_id("value")
-///     .with_tunnel_id("value")
+/// let response = get_cloudflare_tunnel_token(&api)
+///     .with_account_id("account_id")
+///     .with_tunnel_id("tunnel_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -548,7 +677,7 @@ pub fn get_cloudflare_tunnel_token(api: &ApiClient) -> GetCloudflareTunnelTokenR
 
 #[derive(Debug)]
 pub struct ListAllTunnelsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, TunnelTunnelResponseCollection>,
 }
 
 impl<'a> ListAllTunnelsRequest<'a> {
@@ -610,18 +739,50 @@ impl<'a> ListAllTunnelsRequest<'a> {
         self.builder = self.builder.header_param("page", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<TunnelTunnelResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// List All Tunnels
+///
+/// Lists and filters all types of Tunnels in an account.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/tunnels`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `name` (query,optional)
+/// - `is_deleted` (query,optional)
+/// - `existed_at` (query,optional)
+/// - `uuid` (query,optional)
+/// - `was_active_at` (query,optional)
+/// - `was_inactive_at` (query,optional)
+/// - `include_prefix` (query,optional)
+/// - `exclude_prefix` (query,optional)
+/// - `tun_types` (query,optional)
+/// - `status` (query,optional)
+/// - `per_page` (query,optional)
+/// - `page` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::cloudflare_tunnel };
+/// use cloudflare::{ ApiClient, apis::cloudflare_tunnel };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_all_tunnels(&api)
-///     .with_account_id("value")
+/// let response = list_all_tunnels(&api)
+///     .with_account_id("account_id")
+///     .with_name("name")
+///     .with_is_deleted("is_deleted")
+///     .with_existed_at("existed_at")
+///     .with_uuid("uuid")
+///     .with_was_active_at("was_active_at")
+///     .with_was_inactive_at("was_inactive_at")
+///     .with_include_prefix("include_prefix")
+///     .with_exclude_prefix("exclude_prefix")
+///     .with_tun_types("tun_types")
+///     .with_status("status")
+///     .with_per_page("per_page")
+///     .with_page("page")
 ///     .send()
 ///     .await?;
 /// ```
@@ -631,7 +792,7 @@ pub fn list_all_tunnels(api: &ApiClient) -> ListAllTunnelsRequest<'_> {
 
 #[derive(Debug)]
 pub struct ListWarpConnectorTunnelsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, TunnelTunnelResponseCollection>,
 }
 
 impl<'a> ListWarpConnectorTunnelsRequest<'a> {
@@ -690,18 +851,48 @@ impl<'a> ListWarpConnectorTunnelsRequest<'a> {
         self.builder = self.builder.header_param("page", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<TunnelTunnelResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// List Warp Connector Tunnels
+///
+/// Lists and filters Warp Connector Tunnels in an account.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/warp_connector`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `name` (query,optional)
+/// - `is_deleted` (query,optional)
+/// - `existed_at` (query,optional)
+/// - `uuid` (query,optional)
+/// - `was_active_at` (query,optional)
+/// - `was_inactive_at` (query,optional)
+/// - `include_prefix` (query,optional)
+/// - `exclude_prefix` (query,optional)
+/// - `status` (query,optional)
+/// - `per_page` (query,optional)
+/// - `page` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::cloudflare_tunnel };
+/// use cloudflare::{ ApiClient, apis::cloudflare_tunnel };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_warp_connector_tunnels(&api)
-///     .with_account_id("value")
+/// let response = list_warp_connector_tunnels(&api)
+///     .with_account_id("account_id")
+///     .with_name("name")
+///     .with_is_deleted("is_deleted")
+///     .with_existed_at("existed_at")
+///     .with_uuid("uuid")
+///     .with_was_active_at("was_active_at")
+///     .with_was_inactive_at("was_inactive_at")
+///     .with_include_prefix("include_prefix")
+///     .with_exclude_prefix("exclude_prefix")
+///     .with_status("status")
+///     .with_per_page("per_page")
+///     .with_page("page")
 ///     .send()
 ///     .await?;
 /// ```
@@ -711,7 +902,7 @@ pub fn list_warp_connector_tunnels(api: &ApiClient) -> ListWarpConnectorTunnelsR
 
 #[derive(Debug)]
 pub struct CreateWarpConnectorTunnelRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, TunnelTunnelResponseSingle>,
 }
 
 impl<'a> CreateWarpConnectorTunnelRequest<'a> {
@@ -734,18 +925,28 @@ impl<'a> CreateWarpConnectorTunnelRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<TunnelTunnelResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Create a Warp Connector Tunnel
+///
+/// Creates a new Warp Connector Tunnel in an account.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/warp_connector`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::cloudflare_tunnel };
+/// use cloudflare::{ ApiClient, apis::cloudflare_tunnel };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = create_warp_connector_tunnel(&api)
-///     .with_account_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = create_warp_connector_tunnel(&api)
+///     .with_account_id("account_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -755,7 +956,7 @@ pub fn create_warp_connector_tunnel(api: &ApiClient) -> CreateWarpConnectorTunne
 
 #[derive(Debug)]
 pub struct GetWarpConnectorTunnelRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, TunnelTunnelResponseSingle>,
 }
 
 impl<'a> GetWarpConnectorTunnelRequest<'a> {
@@ -778,19 +979,28 @@ impl<'a> GetWarpConnectorTunnelRequest<'a> {
         self.builder = self.builder.path_param("tunnel_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<TunnelTunnelResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Get a Warp Connector Tunnel
+///
+/// Fetches a single Warp Connector Tunnel.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/warp_connector/{tunnel_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `tunnel_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::cloudflare_tunnel };
+/// use cloudflare::{ ApiClient, apis::cloudflare_tunnel };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_warp_connector_tunnel(&api)
-///     .with_account_id("value")
-///     .with_tunnel_id("value")
+/// let response = get_warp_connector_tunnel(&api)
+///     .with_account_id("account_id")
+///     .with_tunnel_id("tunnel_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -800,7 +1010,7 @@ pub fn get_warp_connector_tunnel(api: &ApiClient) -> GetWarpConnectorTunnelReque
 
 #[derive(Debug)]
 pub struct DeleteWarpConnectorTunnelRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, TunnelTunnelResponseSingle>,
 }
 
 impl<'a> DeleteWarpConnectorTunnelRequest<'a> {
@@ -831,19 +1041,30 @@ impl<'a> DeleteWarpConnectorTunnelRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<TunnelTunnelResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Delete a Warp Connector Tunnel
+///
+/// Deletes a Warp Connector Tunnel from an account.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/accounts/{account_id}/warp_connector/{tunnel_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `tunnel_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::cloudflare_tunnel };
+/// use cloudflare::{ ApiClient, apis::cloudflare_tunnel };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete_warp_connector_tunnel(&api)
-///     .with_account_id("value")
-///     .with_tunnel_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = delete_warp_connector_tunnel(&api)
+///     .with_account_id("account_id")
+///     .with_tunnel_id("tunnel_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -853,7 +1074,7 @@ pub fn delete_warp_connector_tunnel(api: &ApiClient) -> DeleteWarpConnectorTunne
 
 #[derive(Debug)]
 pub struct UpdateWarpConnectorTunnelRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, TunnelTunnelResponseSingle>,
 }
 
 impl<'a> UpdateWarpConnectorTunnelRequest<'a> {
@@ -884,19 +1105,30 @@ impl<'a> UpdateWarpConnectorTunnelRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<TunnelTunnelResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Update a Warp Connector Tunnel
+///
+/// Updates an existing Warp Connector Tunnel.
+///
+/// **HTTP Method:** `PATCH`
+/// **Path:** `/accounts/{account_id}/warp_connector/{tunnel_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `tunnel_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::cloudflare_tunnel };
+/// use cloudflare::{ ApiClient, apis::cloudflare_tunnel };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = update_warp_connector_tunnel(&api)
-///     .with_account_id("value")
-///     .with_tunnel_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = update_warp_connector_tunnel(&api)
+///     .with_account_id("account_id")
+///     .with_tunnel_id("tunnel_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -906,7 +1138,7 @@ pub fn update_warp_connector_tunnel(api: &ApiClient) -> UpdateWarpConnectorTunne
 
 #[derive(Debug)]
 pub struct GetWarpConnectorTunnelGetRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, TunnelTunnelResponseToken>,
 }
 
 impl<'a> GetWarpConnectorTunnelGetRequest<'a> {
@@ -929,19 +1161,28 @@ impl<'a> GetWarpConnectorTunnelGetRequest<'a> {
         self.builder = self.builder.path_param("tunnel_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<TunnelTunnelResponseToken> {
         self.builder.send().await
     }
 }
-
 /// Get a Warp Connector Tunnel token
+///
+/// Gets the token used to associate warp device with a specific Warp Connector tunnel.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/warp_connector/{tunnel_id}/token`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `tunnel_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::cloudflare_tunnel };
+/// use cloudflare::{ ApiClient, apis::cloudflare_tunnel };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_warp_connector_tunnel_get(&api)
-///     .with_account_id("value")
-///     .with_tunnel_id("value")
+/// let response = get_warp_connector_tunnel_get(&api)
+///     .with_account_id("account_id")
+///     .with_tunnel_id("tunnel_id")
 ///     .send()
 ///     .await?;
 /// ```

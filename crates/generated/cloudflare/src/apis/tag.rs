@@ -49,14 +49,22 @@ impl<'a> CreateRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Creates a new tag
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/cloudforce-one/events/tags/create`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::tag };
+/// use cloudflare::{ ApiClient, apis::tag };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = create(&api)
-///     .with_account_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = create(&api)
+///     .with_account_id("account_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```

@@ -19,13 +19,14 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct AccessAccessRequests {
-    pub action: Option<serde_json::Value>,
-    pub allowed: Option<serde_json::Value>,
-    pub app_domain: Option<serde_json::Value>,
-    pub app_uid: Option<serde_json::Value>,
-    pub connection: Option<serde_json::Value>,
-    pub created_at: Option<serde_json::Value>,
-    pub ip_address: Option<serde_json::Value>,
-    pub ray_id: Option<serde_json::Value>,
-    pub user_email: Option<serde_json::Value>,
+    pub action: Option<crate::models::access_action::AccessAction>,
+    pub allowed: Option<crate::models::access_allowed::AccessAllowed>,
+    pub app_domain: Option<crate::models::access_app_domain::AccessAppDomain>,
+    pub app_uid: Option<crate::models::access_app_uid::AccessAppUid>,
+    pub connection: Option<crate::models::access_connection::AccessConnection>,
+    pub created_at: Option<crate::models::access_timestamp::AccessTimestamp>,
+    pub ip_address: Option<crate::models::access_ip::AccessIp>,
+    pub ray_id: Option<crate::models::access_ray_id::AccessRayId>,
+    pub user_email:
+        Option<crate::models::access_components_schemas_email::AccessComponentsSchemasEmail>,
 }

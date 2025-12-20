@@ -19,7 +19,9 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct BillSubsApiComponentValue {
-    pub default: Option<serde_json::Value>,
-    pub name: Option<serde_json::Value>,
-    pub unit_price: Option<serde_json::Value>,
+    pub default: Option<crate::models::bill_subs_api_default::BillSubsApiDefault>,
+    pub name: Option<
+        crate::models::bill_subs_api_components_schemas_name::BillSubsApiComponentsSchemasName,
+    >,
+    pub unit_price: Option<crate::models::bill_subs_api_unit_price::BillSubsApiUnitPrice>,
 }

@@ -19,11 +19,13 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct LoadBalancingOriginAnalytics {
-    pub address: Option<serde_json::Value>,
-    pub changed: Option<serde_json::Value>,
-    pub enabled: Option<serde_json::Value>,
-    pub failure_reason: Option<serde_json::Value>,
-    pub healthy: Option<serde_json::Value>,
-    pub ip: Option<serde_json::Value>,
-    pub name: Option<serde_json::Value>,
+    pub address: Option<crate::models::load_balancing_address::LoadBalancingAddress>,
+    pub changed: Option<crate::models::load_balancing_origin_changed::LoadBalancingOriginChanged>,
+    pub enabled: Option<crate::models::load_balancing_schemas_enabled::LoadBalancingSchemasEnabled>,
+    pub failure_reason: Option<
+        crate::models::load_balancing_origin_failure_reason::LoadBalancingOriginFailureReason,
+    >,
+    pub healthy: Option<crate::models::load_balancing_origin_healthy::LoadBalancingOriginHealthy>,
+    pub ip: Option<crate::models::load_balancing_origin_ip::LoadBalancingOriginIp>,
+    pub name: Option<crate::models::load_balancing_schemas_name::LoadBalancingSchemasName>,
 }

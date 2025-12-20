@@ -72,14 +72,36 @@ impl<'a> ListGetRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Filter and list events
+///
+/// The `datasetId` must be defined (to list existing datasets (and their IDs), use the [`List Datasets`](<https://developers.cloudflare.com/api/resources/cloudforce_one/subresources/threat_events/subresources/datasets/methods/list/)> endpoint). Also, must provide query parameters.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/cloudforce-one/events`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `search` (query,optional)
+/// - `page` (query,optional)
+/// - `pageSize` (query,optional)
+/// - `orderBy` (query,optional)
+/// - `order` (query,optional)
+/// - `datasetId` (query,optional)
+/// - `forceRefresh` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::event };
+/// use cloudflare::{ ApiClient, apis::event };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_get(&api)
-///     .with_account_id("value")
+/// let response = list_get(&api)
+///     .with_account_id("account_id")
+///     .with_search("search")
+///     .with_page("page")
+///     .with_page_size("pageSize")
+///     .with_order_by("orderBy")
+///     .with_order("order")
+///     .with_dataset_id("datasetId")
+///     .with_force_refresh("forceRefresh")
 ///     .send()
 ///     .await?;
 /// ```
@@ -124,14 +146,26 @@ impl<'a> ListRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Filter and list events
+///
+/// The `datasetId` parameter must be defined. To list existing datasets (and their IDs) in your account, use the [`List Datasets`](<https://developers.cloudflare.com/api/resources/cloudforce_one/subresources/threat_events/subresources/datasets/methods/list/)> endpoint.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/cloudforce-one/events`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `forceRefresh` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::event };
+/// use cloudflare::{ ApiClient, apis::event };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list(&api)
-///     .with_account_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = list(&api)
+///     .with_account_id("account_id")
+///     .with_force_refresh("forceRefresh")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -170,14 +204,24 @@ impl<'a> CreateRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Creates a new event
+///
+/// Events must be created in a client-specific dataset, which means the `datasetId` parameter must be defined. To create a dataset, see the [`Create Dataset`](<https://developers.cloudflare.com/api/resources/cloudforce_one/subresources/threat_events/subresources/datasets/methods/create/)> endpoint.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/cloudforce-one/events/create`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::event };
+/// use cloudflare::{ ApiClient, apis::event };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = create(&api)
-///     .with_account_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = create(&api)
+///     .with_account_id("account_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -218,14 +262,24 @@ impl<'a> CreateBulkRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Creates bulk events
+///
+/// The `datasetId` parameter must be defined. To list existing datasets (and their IDs) in your account, use the [`List Datasets`](<https://developers.cloudflare.com/api/resources/cloudforce_one/subresources/threat_events/subresources/datasets/methods/list/)> endpoint.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/cloudforce-one/events/create/bulk`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::event };
+/// use cloudflare::{ ApiClient, apis::event };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = create_bulk(&api)
-///     .with_account_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = create_bulk(&api)
+///     .with_account_id("account_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -269,15 +323,24 @@ impl<'a> TagDeleteRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Removes a tag from an event
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/accounts/{account_id}/cloudforce-one/events/event_tag/{event_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `event_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::event };
+/// use cloudflare::{ ApiClient, apis::event };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = tag_delete(&api)
-///     .with_account_id("value")
-///     .with_event_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = tag_delete(&api)
+///     .with_account_id("account_id")
+///     .with_event_id("event_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -321,15 +384,24 @@ impl<'a> TagCreateRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Adds a tag to an event
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/cloudforce-one/events/event_tag/{event_id}/create`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `event_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::event };
+/// use cloudflare::{ ApiClient, apis::event };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = tag_create(&api)
-///     .with_account_id("value")
-///     .with_event_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = tag_create(&api)
+///     .with_account_id("account_id")
+///     .with_event_id("event_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -371,16 +443,24 @@ impl<'a> RawReadDsRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Reads data for a raw event
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/cloudforce-one/events/raw/{dataset_id}/{event_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `dataset_id` (path, required)
+/// - `event_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::event };
+/// use cloudflare::{ ApiClient, apis::event };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = raw_read_ds(&api)
-///     .with_account_id("value")
-///     .with_dataset_id("value")
-///     .with_event_id("value")
+/// let response = raw_read_ds(&api)
+///     .with_account_id("account_id")
+///     .with_dataset_id("dataset_id")
+///     .with_event_id("event_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -424,15 +504,24 @@ impl<'a> ReferenceDeleteRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Removes an event reference
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/accounts/{account_id}/cloudforce-one/events/relate/{event_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `event_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::event };
+/// use cloudflare::{ ApiClient, apis::event };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = reference_delete(&api)
-///     .with_account_id("value")
-///     .with_event_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = reference_delete(&api)
+///     .with_account_id("account_id")
+///     .with_event_id("event_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -476,15 +565,24 @@ impl<'a> ReferenceCreateRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Creates event references for a event
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/cloudforce-one/events/relate/{event_id}/create`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `event_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::event };
+/// use cloudflare::{ ApiClient, apis::event };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = reference_create(&api)
-///     .with_account_id("value")
-///     .with_event_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = reference_create(&api)
+///     .with_account_id("account_id")
+///     .with_event_id("event_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -521,15 +619,22 @@ impl<'a> ReadRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Reads an event
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/cloudforce-one/events/{event_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `event_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::event };
+/// use cloudflare::{ ApiClient, apis::event };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = read(&api)
-///     .with_account_id("value")
-///     .with_event_id("value")
+/// let response = read(&api)
+///     .with_account_id("account_id")
+///     .with_event_id("event_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -573,15 +678,24 @@ impl<'a> UpdateRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Updates an event
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/cloudforce-one/events/{event_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `event_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::event };
+/// use cloudflare::{ ApiClient, apis::event };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = update(&api)
-///     .with_account_id("value")
-///     .with_event_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = update(&api)
+///     .with_account_id("account_id")
+///     .with_event_id("event_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -618,15 +732,24 @@ impl<'a> DeleteRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Deletes an event
+///
+/// The `datasetId` parameter must be defined. To list existing datasets (and their IDs) in your account, use the [`List Datasets`](<https://developers.cloudflare.com/api/resources/cloudforce_one/subresources/threat_events/subresources/datasets/methods/list/)> endpoint.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/accounts/{account_id}/cloudforce-one/events/{event_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `event_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::event };
+/// use cloudflare::{ ApiClient, apis::event };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete(&api)
-///     .with_account_id("value")
-///     .with_event_id("value")
+/// let response = delete(&api)
+///     .with_account_id("account_id")
+///     .with_event_id("event_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -670,15 +793,24 @@ impl<'a> UpdatePatchRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Updates an event
+///
+/// **HTTP Method:** `PATCH`
+/// **Path:** `/accounts/{account_id}/cloudforce-one/events/{event_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `event_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::event };
+/// use cloudflare::{ ApiClient, apis::event };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = update_patch(&api)
-///     .with_account_id("value")
-///     .with_event_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = update_patch(&api)
+///     .with_account_id("account_id")
+///     .with_event_id("event_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -722,15 +854,24 @@ impl<'a> InsightCreateRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Adds an insight to an event
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/cloudforce-one/events/{event_id}/insight/create`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `event_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::event };
+/// use cloudflare::{ ApiClient, apis::event };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = insight_create(&api)
-///     .with_account_id("value")
-///     .with_event_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = insight_create(&api)
+///     .with_account_id("account_id")
+///     .with_event_id("event_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -772,16 +913,24 @@ impl<'a> InsightReadRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Reads an event insight
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/cloudforce-one/events/{event_id}/insight/{insight_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `event_id` (path, required)
+/// - `insight_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::event };
+/// use cloudflare::{ ApiClient, apis::event };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = insight_read(&api)
-///     .with_account_id("value")
-///     .with_event_id("value")
-///     .with_insight_id("value")
+/// let response = insight_read(&api)
+///     .with_account_id("account_id")
+///     .with_event_id("event_id")
+///     .with_insight_id("insight_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -830,16 +979,26 @@ impl<'a> InsightUpdateRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Updates an event insight
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/cloudforce-one/events/{event_id}/insight/{insight_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `event_id` (path, required)
+/// - `insight_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::event };
+/// use cloudflare::{ ApiClient, apis::event };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = insight_update(&api)
-///     .with_account_id("value")
-///     .with_event_id("value")
-///     .with_insight_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = insight_update(&api)
+///     .with_account_id("account_id")
+///     .with_event_id("event_id")
+///     .with_insight_id("insight_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -881,16 +1040,24 @@ impl<'a> InsightDeleteRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Deletes an event insight
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/accounts/{account_id}/cloudforce-one/events/{event_id}/insight/{insight_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `event_id` (path, required)
+/// - `insight_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::event };
+/// use cloudflare::{ ApiClient, apis::event };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = insight_delete(&api)
-///     .with_account_id("value")
-///     .with_event_id("value")
-///     .with_insight_id("value")
+/// let response = insight_delete(&api)
+///     .with_account_id("account_id")
+///     .with_event_id("event_id")
+///     .with_insight_id("insight_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -939,16 +1106,26 @@ impl<'a> InsightUpdatePatchRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Updates an event insight
+///
+/// **HTTP Method:** `PATCH`
+/// **Path:** `/accounts/{account_id}/cloudforce-one/events/{event_id}/insight/{insight_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `event_id` (path, required)
+/// - `insight_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::event };
+/// use cloudflare::{ ApiClient, apis::event };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = insight_update_patch(&api)
-///     .with_account_id("value")
-///     .with_event_id("value")
-///     .with_insight_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = insight_update_patch(&api)
+///     .with_account_id("account_id")
+///     .with_event_id("event_id")
+///     .with_insight_id("insight_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -990,16 +1167,24 @@ impl<'a> RawReadRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Reads data for a raw event
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/cloudforce-one/events/{event_id}/raw/{raw_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `event_id` (path, required)
+/// - `raw_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::event };
+/// use cloudflare::{ ApiClient, apis::event };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = raw_read(&api)
-///     .with_account_id("value")
-///     .with_event_id("value")
-///     .with_raw_id("value")
+/// let response = raw_read(&api)
+///     .with_account_id("account_id")
+///     .with_event_id("event_id")
+///     .with_raw_id("raw_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -1048,16 +1233,26 @@ impl<'a> RawUpdateRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Updates a raw event
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/cloudforce-one/events/{event_id}/raw/{raw_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `event_id` (path, required)
+/// - `raw_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::event };
+/// use cloudflare::{ ApiClient, apis::event };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = raw_update(&api)
-///     .with_account_id("value")
-///     .with_event_id("value")
-///     .with_raw_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = raw_update(&api)
+///     .with_account_id("account_id")
+///     .with_event_id("event_id")
+///     .with_raw_id("raw_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -1106,16 +1301,26 @@ impl<'a> RawUpdatePatchRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Updates a raw event
+///
+/// **HTTP Method:** `PATCH`
+/// **Path:** `/accounts/{account_id}/cloudforce-one/events/{event_id}/raw/{raw_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `event_id` (path, required)
+/// - `raw_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::event };
+/// use cloudflare::{ ApiClient, apis::event };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = raw_update_patch(&api)
-///     .with_account_id("value")
-///     .with_event_id("value")
-///     .with_raw_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = raw_update_patch(&api)
+///     .with_account_id("account_id")
+///     .with_event_id("event_id")
+///     .with_raw_id("raw_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```

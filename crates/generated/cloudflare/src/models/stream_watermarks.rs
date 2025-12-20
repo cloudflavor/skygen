@@ -19,15 +19,15 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct StreamWatermarks {
-    pub created: Option<serde_json::Value>,
-    pub downloaded_from: Option<serde_json::Value>,
-    pub height: Option<serde_json::Value>,
-    pub name: Option<serde_json::Value>,
-    pub opacity: Option<serde_json::Value>,
-    pub padding: Option<serde_json::Value>,
-    pub position: Option<serde_json::Value>,
-    pub scale: Option<serde_json::Value>,
-    pub size: Option<serde_json::Value>,
-    pub uid: Option<serde_json::Value>,
-    pub width: Option<serde_json::Value>,
+    pub created: Option<crate::models::stream_watermark_created::StreamWatermarkCreated>,
+    pub downloaded_from: Option<crate::models::stream_downloaded_from::StreamDownloadedFrom>,
+    pub height: Option<crate::models::stream_height::StreamHeight>,
+    pub name: Option<crate::models::stream_name::StreamName>,
+    pub opacity: Option<crate::models::stream_opacity::StreamOpacity>,
+    pub padding: Option<crate::models::stream_padding::StreamPadding>,
+    pub position: Option<crate::models::stream_position::StreamPosition>,
+    pub scale: Option<crate::models::stream_scale::StreamScale>,
+    pub size: Option<crate::models::stream_watermark_size::StreamWatermarkSize>,
+    pub uid: Option<crate::models::stream_watermark_identifier::StreamWatermarkIdentifier>,
+    pub width: Option<crate::models::stream_width::StreamWidth>,
 }

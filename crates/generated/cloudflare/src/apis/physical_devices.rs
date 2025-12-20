@@ -42,14 +42,22 @@ impl<'a> ListDevicesRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// List devices
+///
+/// Lists WARP devices.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/devices/physical-devices`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::physical_devices };
+/// use cloudflare::{ ApiClient, apis::physical_devices };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_devices(&api)
-///     .with_account_id("value")
+/// let response = list_devices(&api)
+///     .with_account_id("account_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -86,15 +94,24 @@ impl<'a> DeviceRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get device
+///
+/// Fetches a single WARP device.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/devices/physical-devices/{device_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `device_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::physical_devices };
+/// use cloudflare::{ ApiClient, apis::physical_devices };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = device(&api)
-///     .with_account_id("value")
-///     .with_device_id("value")
+/// let response = device(&api)
+///     .with_account_id("account_id")
+///     .with_device_id("device_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -131,15 +148,24 @@ impl<'a> DeviceDeleteRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Delete device
+///
+/// Deletes a WARP device.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/accounts/{account_id}/devices/physical-devices/{device_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `device_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::physical_devices };
+/// use cloudflare::{ ApiClient, apis::physical_devices };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = device_delete(&api)
-///     .with_account_id("value")
-///     .with_device_id("value")
+/// let response = device_delete(&api)
+///     .with_account_id("account_id")
+///     .with_device_id("device_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -176,15 +202,24 @@ impl<'a> RevokeDeviceRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Revoke device registrations
+///
+/// Revokes all WARP registrations associated with the specified device.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/devices/physical-devices/{device_id}/revoke`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `device_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::physical_devices };
+/// use cloudflare::{ ApiClient, apis::physical_devices };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = revoke_device(&api)
-///     .with_account_id("value")
-///     .with_device_id("value")
+/// let response = revoke_device(&api)
+///     .with_account_id("account_id")
+///     .with_device_id("device_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -220,14 +255,24 @@ impl<'a> RegistrationsRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Delete registrations
+///
+/// Deletes a list of WARP registrations.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/accounts/{account_id}/devices/registrations`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `id` (query,required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::physical_devices };
+/// use cloudflare::{ ApiClient, apis::physical_devices };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = registrations(&api)
-///     .with_account_id("value")
+/// let response = registrations(&api)
+///     .with_account_id("account_id")
+///     .with_id("id")
 ///     .send()
 ///     .await?;
 /// ```

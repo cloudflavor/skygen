@@ -20,8 +20,8 @@ use serde::{Deserialize, Serialize};
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct IamCreatePayload {
     pub condition: Option<crate::models::iam_condition::IamCondition>,
-    pub expires_on: Option<serde_json::Value>,
-    pub name: serde_json::Value,
-    pub not_before: Option<serde_json::Value>,
-    pub policies: serde_json::Value,
+    pub expires_on: Option<crate::models::iam_expires_on::IamExpiresOn>,
+    pub name: crate::models::iam_name::IamName,
+    pub not_before: Option<crate::models::iam_not_before::IamNotBefore>,
+    pub policies: crate::models::iam_token_policies::IamTokenPolicies,
 }

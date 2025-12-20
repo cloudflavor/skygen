@@ -20,5 +20,5 @@ use serde::{Deserialize, Serialize};
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct ApiUpdateAgentDeploymentVisibilityInputPublic {
     pub uuid: Option<String>,
-    pub visibility: Option<serde_json::Value>,
+    pub visibility: Option<crate::models::api_deployment_visibility::ApiDeploymentVisibility>,
 }

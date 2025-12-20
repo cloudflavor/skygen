@@ -19,7 +19,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct ImageUpdate {
-    pub description: Option<serde_json::Value>,
-    pub distribution: Option<serde_json::Value>,
-    pub name: Option<serde_json::Value>,
+    pub description: Option<crate::models::image_description::ImageDescription>,
+    pub distribution: Option<crate::models::distribution::Distribution>,
+    pub name: Option<crate::models::image_name::ImageName>,
 }

@@ -19,6 +19,6 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct ImagesImagesStatsCount {
-    pub allowed: Option<serde_json::Value>,
-    pub current: Option<serde_json::Value>,
+    pub allowed: Option<crate::models::images_images_stats_allowed::ImagesImagesStatsAllowed>,
+    pub current: Option<crate::models::images_images_stats_current::ImagesImagesStatsCurrent>,
 }

@@ -15,12 +15,16 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::aaa_api_response_collection::AaaApiResponseCollection;
+use crate::models::aaa_components_schemas_response_collection::AaaComponentsSchemasResponseCollection;
+use crate::models::aaa_id_response::AaaIdResponse;
+use crate::models::aaa_sensitive_id_response::AaaSensitiveIdResponse;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct ListPagerDutyServicesRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, AaaComponentsSchemasResponseCollection>,
 }
 
 impl<'a> ListPagerDutyServicesRequest<'a> {
@@ -38,18 +42,26 @@ impl<'a> ListPagerDutyServicesRequest<'a> {
         self.builder = self.builder.path_param("account_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<AaaComponentsSchemasResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// List PagerDuty services
+///
+/// Get a list of all configured PagerDuty services.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/alerting/v3/destinations/pagerduty`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::notification_destinations_with_pager_duty };
+/// use cloudflare::{ ApiClient, apis::notification_destinations_with_pager_duty };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_pager_duty_services(&api)
-///     .with_account_id("value")
+/// let response = list_pager_duty_services(&api)
+///     .with_account_id("account_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -59,7 +71,7 @@ pub fn list_pager_duty_services(api: &ApiClient) -> ListPagerDutyServicesRequest
 
 #[derive(Debug)]
 pub struct DeletePagerDutyServicesRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, AaaApiResponseCollection>,
 }
 
 impl<'a> DeletePagerDutyServicesRequest<'a> {
@@ -77,18 +89,26 @@ impl<'a> DeletePagerDutyServicesRequest<'a> {
         self.builder = self.builder.path_param("account_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<AaaApiResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// Delete PagerDuty Services
+///
+/// Deletes all the PagerDuty Services connected to the account.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/accounts/{account_id}/alerting/v3/destinations/pagerduty`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::notification_destinations_with_pager_duty };
+/// use cloudflare::{ ApiClient, apis::notification_destinations_with_pager_duty };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete_pager_duty_services(&api)
-///     .with_account_id("value")
+/// let response = delete_pager_duty_services(&api)
+///     .with_account_id("account_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -98,7 +118,7 @@ pub fn delete_pager_duty_services(api: &ApiClient) -> DeletePagerDutyServicesReq
 
 #[derive(Debug)]
 pub struct ConnectPagerDutyRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, AaaSensitiveIdResponse>,
 }
 
 impl<'a> ConnectPagerDutyRequest<'a> {
@@ -116,18 +136,26 @@ impl<'a> ConnectPagerDutyRequest<'a> {
         self.builder = self.builder.path_param("account_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<AaaSensitiveIdResponse> {
         self.builder.send().await
     }
 }
-
 /// Create PagerDuty integration token
+///
+/// Creates a new token for integrating with PagerDuty.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/alerting/v3/destinations/pagerduty/connect`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::notification_destinations_with_pager_duty };
+/// use cloudflare::{ ApiClient, apis::notification_destinations_with_pager_duty };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = connect_pager_duty(&api)
-///     .with_account_id("value")
+/// let response = connect_pager_duty(&api)
+///     .with_account_id("account_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -137,7 +165,7 @@ pub fn connect_pager_duty(api: &ApiClient) -> ConnectPagerDutyRequest<'_> {
 
 #[derive(Debug)]
 pub struct ConnectPagerDutyTokenRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, AaaIdResponse>,
 }
 
 impl<'a> ConnectPagerDutyTokenRequest<'a> {
@@ -160,19 +188,28 @@ impl<'a> ConnectPagerDutyTokenRequest<'a> {
         self.builder = self.builder.path_param("token_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<AaaIdResponse> {
         self.builder.send().await
     }
 }
-
 /// Connect PagerDuty
+///
+/// Links PagerDuty with the account using the integration token.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/alerting/v3/destinations/pagerduty/connect/{token_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `token_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::notification_destinations_with_pager_duty };
+/// use cloudflare::{ ApiClient, apis::notification_destinations_with_pager_duty };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = connect_pager_duty_token(&api)
-///     .with_account_id("value")
-///     .with_token_id("value")
+/// let response = connect_pager_duty_token(&api)
+///     .with_account_id("account_id")
+///     .with_token_id("token_id")
 ///     .send()
 ///     .await?;
 /// ```

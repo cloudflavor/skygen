@@ -15,12 +15,18 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::load_balancing_health_details::LoadBalancingHealthDetails;
+use crate::models::load_balancing_pools_references_response::LoadBalancingPoolsReferencesResponse;
+use crate::models::load_balancing_preview_response::LoadBalancingPreviewResponse;
+use crate::models::load_balancing_schemas_id_response::LoadBalancingSchemasIdResponse;
+use crate::models::load_balancing_schemas_response_collection::LoadBalancingSchemasResponseCollection;
+use crate::models::load_balancing_schemas_single_response::LoadBalancingSchemasSingleResponse;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct ListPoolsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, LoadBalancingSchemasResponseCollection>,
 }
 
 impl<'a> ListPoolsRequest<'a> {
@@ -33,17 +39,26 @@ impl<'a> ListPoolsRequest<'a> {
         self.builder = self.builder.header_param("monitor", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<LoadBalancingSchemasResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// List Pools
+///
+/// List configured pools.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/user/load_balancers/pools`
+///
+/// **Parameters**
+/// - `monitor` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::load_balancer_pools };
+/// use cloudflare::{ ApiClient, apis::load_balancer_pools };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_pools(&api)
+/// let response = list_pools(&api)
+///     .with_monitor("monitor")
 ///     .send()
 ///     .await?;
 /// ```
@@ -53,7 +68,7 @@ pub fn list_pools(api: &ApiClient) -> ListPoolsRequest<'_> {
 
 #[derive(Debug)]
 pub struct CreatePoolRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, LoadBalancingSchemasSingleResponse>,
 }
 
 impl<'a> CreatePoolRequest<'a> {
@@ -67,17 +82,24 @@ impl<'a> CreatePoolRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<LoadBalancingSchemasSingleResponse> {
         self.builder.send().await
     }
 }
-
 /// Create Pool
+///
+/// Create a new pool.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/user/load_balancers/pools`
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::load_balancer_pools };
+/// use cloudflare::{ ApiClient, apis::load_balancer_pools };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = create_pool(&api)
+/// # let body: serde_json::Value = todo!();
+/// let response = create_pool(&api)
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -87,7 +109,7 @@ pub fn create_pool(api: &ApiClient) -> CreatePoolRequest<'_> {
 
 #[derive(Debug)]
 pub struct PatchPoolsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, LoadBalancingSchemasResponseCollection>,
 }
 
 impl<'a> PatchPoolsRequest<'a> {
@@ -101,17 +123,24 @@ impl<'a> PatchPoolsRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<LoadBalancingSchemasResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// Patch Pools
+///
+/// Apply changes to a number of existing pools, overwriting the supplied properties. Pools are ordered by ascending `name`. Returns the list of affected pools. Supports the standard pagination query parameters, either `limit`/`offset` or `per_page`/`page`.
+///
+/// **HTTP Method:** `PATCH`
+/// **Path:** `/user/load_balancers/pools`
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::load_balancer_pools };
+/// use cloudflare::{ ApiClient, apis::load_balancer_pools };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = patch_pools(&api)
+/// # let body: serde_json::Value = todo!();
+/// let response = patch_pools(&api)
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -121,7 +150,7 @@ pub fn patch_pools(api: &ApiClient) -> PatchPoolsRequest<'_> {
 
 #[derive(Debug)]
 pub struct PoolDetailsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, LoadBalancingSchemasSingleResponse>,
 }
 
 impl<'a> PoolDetailsRequest<'a> {
@@ -136,18 +165,26 @@ impl<'a> PoolDetailsRequest<'a> {
         self.builder = self.builder.path_param("pool_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<LoadBalancingSchemasSingleResponse> {
         self.builder.send().await
     }
 }
-
 /// Pool Details
+///
+/// Fetch a single configured pool.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/user/load_balancers/pools/{pool_id}`
+///
+/// **Parameters**
+/// - `pool_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::load_balancer_pools };
+/// use cloudflare::{ ApiClient, apis::load_balancer_pools };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = pool_details(&api)
-///     .with_pool_id("value")
+/// let response = pool_details(&api)
+///     .with_pool_id("pool_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -157,7 +194,7 @@ pub fn pool_details(api: &ApiClient) -> PoolDetailsRequest<'_> {
 
 #[derive(Debug)]
 pub struct UpdatePoolRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, LoadBalancingSchemasSingleResponse>,
 }
 
 impl<'a> UpdatePoolRequest<'a> {
@@ -177,18 +214,28 @@ impl<'a> UpdatePoolRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<LoadBalancingSchemasSingleResponse> {
         self.builder.send().await
     }
 }
-
 /// Update Pool
+///
+/// Modify a configured pool.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/user/load_balancers/pools/{pool_id}`
+///
+/// **Parameters**
+/// - `pool_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::load_balancer_pools };
+/// use cloudflare::{ ApiClient, apis::load_balancer_pools };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = update_pool(&api)
-///     .with_pool_id("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = update_pool(&api)
+///     .with_pool_id("pool_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -198,7 +245,7 @@ pub fn update_pool(api: &ApiClient) -> UpdatePoolRequest<'_> {
 
 #[derive(Debug)]
 pub struct DeletePoolRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, LoadBalancingSchemasIdResponse>,
 }
 
 impl<'a> DeletePoolRequest<'a> {
@@ -213,18 +260,26 @@ impl<'a> DeletePoolRequest<'a> {
         self.builder = self.builder.path_param("pool_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<LoadBalancingSchemasIdResponse> {
         self.builder.send().await
     }
 }
-
 /// Delete Pool
+///
+/// Delete a configured pool.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/user/load_balancers/pools/{pool_id}`
+///
+/// **Parameters**
+/// - `pool_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::load_balancer_pools };
+/// use cloudflare::{ ApiClient, apis::load_balancer_pools };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete_pool(&api)
-///     .with_pool_id("value")
+/// let response = delete_pool(&api)
+///     .with_pool_id("pool_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -234,7 +289,7 @@ pub fn delete_pool(api: &ApiClient) -> DeletePoolRequest<'_> {
 
 #[derive(Debug)]
 pub struct PatchPoolRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, LoadBalancingSchemasSingleResponse>,
 }
 
 impl<'a> PatchPoolRequest<'a> {
@@ -254,18 +309,28 @@ impl<'a> PatchPoolRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<LoadBalancingSchemasSingleResponse> {
         self.builder.send().await
     }
 }
-
 /// Patch Pool
+///
+/// Apply changes to an existing pool, overwriting the supplied properties.
+///
+/// **HTTP Method:** `PATCH`
+/// **Path:** `/user/load_balancers/pools/{pool_id}`
+///
+/// **Parameters**
+/// - `pool_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::load_balancer_pools };
+/// use cloudflare::{ ApiClient, apis::load_balancer_pools };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = patch_pool(&api)
-///     .with_pool_id("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = patch_pool(&api)
+///     .with_pool_id("pool_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -275,7 +340,7 @@ pub fn patch_pool(api: &ApiClient) -> PatchPoolRequest<'_> {
 
 #[derive(Debug)]
 pub struct PoolHealthDetailsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, LoadBalancingHealthDetails>,
 }
 
 impl<'a> PoolHealthDetailsRequest<'a> {
@@ -293,18 +358,26 @@ impl<'a> PoolHealthDetailsRequest<'a> {
         self.builder = self.builder.path_param("pool_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<LoadBalancingHealthDetails> {
         self.builder.send().await
     }
 }
-
 /// Pool Health Details
+///
+/// Fetch the latest pool health status for a single pool.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/user/load_balancers/pools/{pool_id}/health`
+///
+/// **Parameters**
+/// - `pool_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::load_balancer_pools };
+/// use cloudflare::{ ApiClient, apis::load_balancer_pools };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = pool_health_details(&api)
-///     .with_pool_id("value")
+/// let response = pool_health_details(&api)
+///     .with_pool_id("pool_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -314,7 +387,7 @@ pub fn pool_health_details(api: &ApiClient) -> PoolHealthDetailsRequest<'_> {
 
 #[derive(Debug)]
 pub struct PreviewPoolRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, LoadBalancingPreviewResponse>,
 }
 
 impl<'a> PreviewPoolRequest<'a> {
@@ -337,18 +410,28 @@ impl<'a> PreviewPoolRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<LoadBalancingPreviewResponse> {
         self.builder.send().await
     }
 }
-
 /// Preview Pool
+///
+/// Preview pool health using provided monitor details. The returned preview_id can be used in the preview endpoint to retrieve the results.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/user/load_balancers/pools/{pool_id}/preview`
+///
+/// **Parameters**
+/// - `pool_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::load_balancer_pools };
+/// use cloudflare::{ ApiClient, apis::load_balancer_pools };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = preview_pool(&api)
-///     .with_pool_id("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = preview_pool(&api)
+///     .with_pool_id("pool_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -358,7 +441,7 @@ pub fn preview_pool(api: &ApiClient) -> PreviewPoolRequest<'_> {
 
 #[derive(Debug)]
 pub struct ListPoolReferencesRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, LoadBalancingPoolsReferencesResponse>,
 }
 
 impl<'a> ListPoolReferencesRequest<'a> {
@@ -376,18 +459,26 @@ impl<'a> ListPoolReferencesRequest<'a> {
         self.builder = self.builder.path_param("pool_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<LoadBalancingPoolsReferencesResponse> {
         self.builder.send().await
     }
 }
-
 /// List Pool References
+///
+/// Get the list of resources that reference the provided pool.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/user/load_balancers/pools/{pool_id}/references`
+///
+/// **Parameters**
+/// - `pool_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::load_balancer_pools };
+/// use cloudflare::{ ApiClient, apis::load_balancer_pools };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_pool_references(&api)
-///     .with_pool_id("value")
+/// let response = list_pool_references(&api)
+///     .with_pool_id("pool_id")
 ///     .send()
 ///     .await?;
 /// ```

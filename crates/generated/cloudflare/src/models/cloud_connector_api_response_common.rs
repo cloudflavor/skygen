@@ -19,7 +19,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct CloudConnectorApiResponseCommon {
-    pub errors: serde_json::Value,
-    pub messages: serde_json::Value,
+    pub errors: crate::models::cloud_connector_messages::CloudConnectorMessages,
+    pub messages: crate::models::cloud_connector_messages::CloudConnectorMessages,
     pub success: bool,
 }

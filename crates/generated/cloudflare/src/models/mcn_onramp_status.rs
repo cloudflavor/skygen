@@ -21,8 +21,8 @@ use serde::{Deserialize, Serialize};
 pub struct McnOnrampStatus {
     pub apply_progress: crate::models::mcn_apply_progress::McnApplyProgress,
     pub lifecycle_errors: Option<std::collections::BTreeMap<String, serde_json::Value>>,
-    pub lifecycle_state: serde_json::Value,
+    pub lifecycle_state: crate::models::mcn_onramp_lifecycle_state::McnOnrampLifecycleState,
     pub plan_progress: crate::models::mcn_plan_progress::McnPlanProgress,
-    pub routes: Vec<serde_json::Value>,
-    pub tunnels: Vec<serde_json::Value>,
+    pub routes: Vec<crate::models::mcn_conduit_route_id::McnConduitRouteId>,
+    pub tunnels: Vec<crate::models::mcn_conduit_tunnel_id::McnConduitTunnelId>,
 }

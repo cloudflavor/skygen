@@ -19,7 +19,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct CachePurgeApiResponseCommon {
-    pub errors: serde_json::Value,
-    pub messages: serde_json::Value,
+    pub errors: crate::models::cache_purge_messages::CachePurgeMessages,
+    pub messages: crate::models::cache_purge_messages::CachePurgeMessages,
     pub success: bool,
 }

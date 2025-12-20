@@ -19,6 +19,6 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct AccessConnectionRulesSsh {
-    pub allow_email_alias: Option<serde_json::Value>,
-    pub usernames: serde_json::Value,
+    pub allow_email_alias: Option<crate::models::access_allow_email_alias::AccessAllowEmailAlias>,
+    pub usernames: crate::models::access_usernames::AccessUsernames,
 }

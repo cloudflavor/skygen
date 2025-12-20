@@ -19,8 +19,8 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct MagicVisibilityMnmMnmConfig {
-    pub default_sampling: serde_json::Value,
-    pub name: serde_json::Value,
-    pub router_ips: serde_json::Value,
-    pub warp_devices: serde_json::Value,
+    pub default_sampling: crate::models::magic_visibility_mnm_mnm_config_default_sampling::MagicVisibilityMnmMnmConfigDefaultSampling,
+    pub name: crate::models::magic_visibility_mnm_mnm_config_name::MagicVisibilityMnmMnmConfigName,
+    pub router_ips: crate::models::magic_visibility_mnm_mnm_config_router_ips::MagicVisibilityMnmMnmConfigRouterIps,
+    pub warp_devices: crate::models::magic_visibility_mnm_mnm_config_warp_devices::MagicVisibilityMnmMnmConfigWarpDevices,
 }

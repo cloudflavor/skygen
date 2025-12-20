@@ -19,7 +19,9 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct TlsCertificatesAndHostnamesApiResponseCommon {
-    pub errors: serde_json::Value,
-    pub messages: serde_json::Value,
+    pub errors:
+        crate::models::tls_certificates_and_hostnames_messages::TlsCertificatesAndHostnamesMessages,
+    pub messages:
+        crate::models::tls_certificates_and_hostnames_messages::TlsCertificatesAndHostnamesMessages,
     pub success: bool,
 }

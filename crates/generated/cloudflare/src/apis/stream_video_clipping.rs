@@ -15,12 +15,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::stream_clip_response_single::StreamClipResponseSingle;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct ClipVideosGivenStartRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, StreamClipResponseSingle>,
 }
 
 impl<'a> ClipVideosGivenStartRequest<'a> {
@@ -43,18 +44,28 @@ impl<'a> ClipVideosGivenStartRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<StreamClipResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Clip videos given a start and end time
+///
+/// Clips a video based on the specified start and end times provided in seconds.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/stream/clip`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::stream_video_clipping };
+/// use cloudflare::{ ApiClient, apis::stream_video_clipping };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = clip_videos_given_start(&api)
-///     .with_account_id("value")
+/// # let body: crate::models::stream_video_clip_standard::StreamVideoClipStandard = todo!();
+/// let response = clip_videos_given_start(&api)
+///     .with_account_id("account_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```

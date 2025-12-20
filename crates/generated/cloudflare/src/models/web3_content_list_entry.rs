@@ -19,10 +19,12 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct Web3ContentListEntry {
-    pub content: Option<serde_json::Value>,
-    pub created_on: Option<serde_json::Value>,
-    pub description: Option<serde_json::Value>,
-    pub id: Option<serde_json::Value>,
-    pub modified_on: Option<serde_json::Value>,
-    pub r#type: Option<serde_json::Value>,
+    pub content:
+        Option<crate::models::web3_content_list_entry_content::Web3ContentListEntryContent>,
+    pub created_on: Option<crate::models::web3_timestamp::Web3Timestamp>,
+    pub description:
+        Option<crate::models::web3_content_list_entry_description::Web3ContentListEntryDescription>,
+    pub id: Option<crate::models::web3_identifier::Web3Identifier>,
+    pub modified_on: Option<crate::models::web3_timestamp::Web3Timestamp>,
+    pub r#type: Option<crate::models::web3_content_list_entry_type::Web3ContentListEntryType>,
 }

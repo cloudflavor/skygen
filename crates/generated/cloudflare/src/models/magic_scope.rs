@@ -19,6 +19,6 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct MagicScope {
-    pub colo_names: Option<serde_json::Value>,
-    pub colo_regions: Option<serde_json::Value>,
+    pub colo_names: Option<crate::models::magic_colo_names::MagicColoNames>,
+    pub colo_regions: Option<crate::models::magic_colo_regions::MagicColoRegions>,
 }

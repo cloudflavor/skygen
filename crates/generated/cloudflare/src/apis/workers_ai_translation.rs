@@ -50,14 +50,24 @@ impl<'a> PostRunCfMetaRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Execute @cf/meta/m2m100-1.2b model.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/ai/run/@cf/meta/m2m100-1.2b`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `queueRequest` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::workers_ai_translation };
+/// use cloudflare::{ ApiClient, apis::workers_ai_translation };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = post_run_cf_meta(&api)
-///     .with_account_id("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = post_run_cf_meta(&api)
+///     .with_account_id("account_id")
+///     .with_queue_request("queueRequest")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```

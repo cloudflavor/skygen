@@ -19,7 +19,6 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct DigitalExperienceMonitoringTimingAggregates {
-
     pub avg_ms: Option<i64>,
     pub history: Vec<crate::models::digital_experience_monitoring_aggregate_stat::DigitalExperienceMonitoringAggregateStat>,
     pub over_time: Option<std::collections::BTreeMap<String, serde_json::Value>>,

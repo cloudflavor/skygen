@@ -15,7 +15,9 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::waf_product_api_bundle_response_custom_scan_collection::WafProductApiBundleResponseCustomScanCollection;
 use crate::models::waf_product_api_bundle_schemas_api_response_common::WafProductApiBundleSchemasApiResponseCommon;
+use crate::models::waf_product_api_bundle_schemas_response_status::WafProductApiBundleSchemasResponseStatus;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
@@ -43,14 +45,22 @@ impl<'a> WafContentScanningDisableRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Disable Content Scanning
+///
+/// Disable Content Scanning.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/zones/{zone_id}/content-upload-scan/disable`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::content_scanning };
+/// use cloudflare::{ ApiClient, apis::content_scanning };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = waf_content_scanning_disable(&api)
-///     .with_zone_id("value")
+/// let response = waf_content_scanning_disable(&api)
+///     .with_zone_id("zone_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -82,14 +92,22 @@ impl<'a> WafContentScanningEnableRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Enable Content Scanning
+///
+/// Enable Content Scanning.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/zones/{zone_id}/content-upload-scan/enable`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::content_scanning };
+/// use cloudflare::{ ApiClient, apis::content_scanning };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = waf_content_scanning_enable(&api)
-///     .with_zone_id("value")
+/// let response = waf_content_scanning_enable(&api)
+///     .with_zone_id("zone_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -99,7 +117,7 @@ pub fn waf_content_scanning_enable(api: &ApiClient) -> WafContentScanningEnableR
 
 #[derive(Debug)]
 pub struct WafContentScanningListRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, WafProductApiBundleResponseCustomScanCollection>,
 }
 
 impl<'a> WafContentScanningListRequest<'a> {
@@ -117,18 +135,26 @@ impl<'a> WafContentScanningListRequest<'a> {
         self.builder = self.builder.path_param("zone_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<WafProductApiBundleResponseCustomScanCollection> {
         self.builder.send().await
     }
 }
-
 /// List Existing Custom Scan Expressions
+///
+/// Get a list of existing custom scan expressions for Content Scanning.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/content-upload-scan/payloads`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::content_scanning };
+/// use cloudflare::{ ApiClient, apis::content_scanning };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = waf_content_scanning_list(&api)
-///     .with_zone_id("value")
+/// let response = waf_content_scanning_list(&api)
+///     .with_zone_id("zone_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -138,7 +164,7 @@ pub fn waf_content_scanning_list(api: &ApiClient) -> WafContentScanningListReque
 
 #[derive(Debug)]
 pub struct WafContentScanningAddRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, WafProductApiBundleResponseCustomScanCollection>,
 }
 
 impl<'a> WafContentScanningAddRequest<'a> {
@@ -164,18 +190,28 @@ impl<'a> WafContentScanningAddRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<WafProductApiBundleResponseCustomScanCollection> {
         self.builder.send().await
     }
 }
-
 /// Add Custom Scan Expressions
+///
+/// Add custom scan expressions for Content Scanning.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/zones/{zone_id}/content-upload-scan/payloads`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::content_scanning };
+/// use cloudflare::{ ApiClient, apis::content_scanning };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = waf_content_scanning_add(&api)
-///     .with_zone_id("value")
+/// # let body: Vec<std::collections::BTreeMap<String, serde_json::Value>> = todo!();
+/// let response = waf_content_scanning_add(&api)
+///     .with_zone_id("zone_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -185,7 +221,7 @@ pub fn waf_content_scanning_add(api: &ApiClient) -> WafContentScanningAddRequest
 
 #[derive(Debug)]
 pub struct WafContentScanningDeleteRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, WafProductApiBundleResponseCustomScanCollection>,
 }
 
 impl<'a> WafContentScanningDeleteRequest<'a> {
@@ -208,19 +244,28 @@ impl<'a> WafContentScanningDeleteRequest<'a> {
         self.builder = self.builder.path_param("expression_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<WafProductApiBundleResponseCustomScanCollection> {
         self.builder.send().await
     }
 }
-
 /// Delete a Custom Scan Expression
+///
+/// Delete a Content Scan Custom Expression.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/zones/{zone_id}/content-upload-scan/payloads/{expression_id}`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `expression_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::content_scanning };
+/// use cloudflare::{ ApiClient, apis::content_scanning };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = waf_content_scanning_delete(&api)
-///     .with_zone_id("value")
-///     .with_expression_id("value")
+/// let response = waf_content_scanning_delete(&api)
+///     .with_zone_id("zone_id")
+///     .with_expression_id("expression_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -230,7 +275,7 @@ pub fn waf_content_scanning_delete(api: &ApiClient) -> WafContentScanningDeleteR
 
 #[derive(Debug)]
 pub struct WafContentScanningGetRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, WafProductApiBundleSchemasResponseStatus>,
 }
 
 impl<'a> WafContentScanningGetRequest<'a> {
@@ -248,18 +293,26 @@ impl<'a> WafContentScanningGetRequest<'a> {
         self.builder = self.builder.path_param("zone_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<WafProductApiBundleSchemasResponseStatus> {
         self.builder.send().await
     }
 }
-
 /// Get Content Scanning Status
+///
+/// Retrieve the current status of Content Scanning.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/content-upload-scan/settings`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::content_scanning };
+/// use cloudflare::{ ApiClient, apis::content_scanning };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = waf_content_scanning_get(&api)
-///     .with_zone_id("value")
+/// let response = waf_content_scanning_get(&api)
+///     .with_zone_id("zone_id")
 ///     .send()
 ///     .await?;
 /// ```

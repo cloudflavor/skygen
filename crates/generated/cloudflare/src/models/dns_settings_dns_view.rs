@@ -19,8 +19,8 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct DnsSettingsDnsView {
-    pub created_time: Option<serde_json::Value>,
-    pub modified_time: Option<serde_json::Value>,
-    pub name: Option<serde_json::Value>,
-    pub zones: Option<serde_json::Value>,
+    pub created_time: Option<crate::models::dns_settings_created_time::DnsSettingsCreatedTime>,
+    pub modified_time: Option<crate::models::dns_settings_modified_time::DnsSettingsModifiedTime>,
+    pub name: Option<crate::models::dns_settings_name::DnsSettingsName>,
+    pub zones: Option<crate::models::dns_settings_zones::DnsSettingsZones>,
 }

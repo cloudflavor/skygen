@@ -19,7 +19,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct StreamApiResponseCommon {
-    pub errors: serde_json::Value,
-    pub messages: serde_json::Value,
+    pub errors: crate::models::stream_messages::StreamMessages,
+    pub messages: crate::models::stream_messages::StreamMessages,
     pub success: bool,
 }

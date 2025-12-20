@@ -22,5 +22,5 @@ pub struct RulesetsManagedTransform {
     pub conflicts_with: Option<Vec<serde_json::Value>>,
     pub enabled: bool,
     pub has_conflict: bool,
-    pub id: serde_json::Value,
+    pub id: crate::models::rulesets_managed_transform_id::RulesetsManagedTransformId,
 }

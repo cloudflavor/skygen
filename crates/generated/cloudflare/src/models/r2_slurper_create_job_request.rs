@@ -20,6 +20,6 @@ use serde::{Deserialize, Serialize};
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct R2SlurperCreateJobRequest {
     pub overwrite: Option<bool>,
-    pub source: Option<serde_json::Value>,
-    pub target: Option<serde_json::Value>,
+    pub source: Option<crate::models::r2_slurper_source_job_schema::R2SlurperSourceJobSchema>,
+    pub target: Option<crate::models::r2_slurper_r2_target_schema::R2SlurperR2TargetSchema>,
 }

@@ -19,8 +19,8 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct ImagesApiResponseCommon {
-    pub errors: serde_json::Value,
-    pub messages: serde_json::Value,
+    pub errors: crate::models::images_messages::ImagesMessages,
+    pub messages: crate::models::images_messages::ImagesMessages,
     pub result: serde_json::Value,
     pub success: bool,
 }

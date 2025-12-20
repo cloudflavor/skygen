@@ -39,14 +39,22 @@ impl<'a> IPsActionListRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// List All Actions for a Floating IP
+///
+/// To retrieve all actions that have been executed on a floating IP, send a GET request to `/v2/floating_ips/$FLOATING_IP/actions`.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/floating_ips/{floating_ip}/actions`
+///
+/// **Parameters**
+/// - `floating_ip` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::floating_ip_actions };
+/// use digitalocean::{ ApiClient, apis::floating_ip_actions };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = i_ps_action_list(&api)
-///     .with_floating_ip("value")
+/// let response = i_ps_action_list(&api)
+///     .with_floating_ip("floating_ip")
 ///     .send()
 ///     .await?;
 /// ```
@@ -79,14 +87,31 @@ impl<'a> IPsActionPostRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Initiate a Floating IP Action
+///
+/// To initiate an action on a floating IP send a POST request to
+/// `/v2/floating_ips/$FLOATING_IP/actions`. In the JSON body to the request,
+/// set the `type` attribute to on of the supported action types:
+///
+/// | Action     | Details
+/// |------------|--------
+/// | `assign`   | Assigns a floating IP to a Droplet
+/// | `unassign` | Unassign a floating IP from a Droplet
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/v2/floating_ips/{floating_ip}/actions`
+///
+/// **Parameters**
+/// - `floating_ip` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::floating_ip_actions };
+/// use digitalocean::{ ApiClient, apis::floating_ip_actions };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = i_ps_action_post(&api)
-///     .with_floating_ip("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = i_ps_action_post(&api)
+///     .with_floating_ip("floating_ip")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -123,15 +148,24 @@ impl<'a> IPsActionGetRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Retrieve an Existing Floating IP Action
+///
+/// To retrieve the status of a floating IP action, send a GET request to `/v2/floating_ips/$FLOATING_IP/actions/$ACTION_ID`.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/floating_ips/{floating_ip}/actions/{action_id}`
+///
+/// **Parameters**
+/// - `floating_ip` (path, required)
+/// - `action_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::floating_ip_actions };
+/// use digitalocean::{ ApiClient, apis::floating_ip_actions };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = i_ps_action_get(&api)
-///     .with_floating_ip("value")
-///     .with_action_id("value")
+/// let response = i_ps_action_get(&api)
+///     .with_floating_ip("floating_ip")
+///     .with_action_id("action_id")
 ///     .send()
 ///     .await?;
 /// ```

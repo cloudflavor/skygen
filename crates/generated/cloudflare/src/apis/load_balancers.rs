@@ -15,12 +15,15 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::load_balancing_components_schemas_id_response::LoadBalancingComponentsSchemasIdResponse;
+use crate::models::load_balancing_load_balancer_components_schemas_response_collection::LoadBalancingLoadBalancerComponentsSchemasResponseCollection;
+use crate::models::load_balancing_load_balancer_components_schemas_single_response::LoadBalancingLoadBalancerComponentsSchemasSingleResponse;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct ListLoadBalancersRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, LoadBalancingLoadBalancerComponentsSchemasResponseCollection>,
 }
 
 impl<'a> ListLoadBalancersRequest<'a> {
@@ -34,18 +37,28 @@ impl<'a> ListLoadBalancersRequest<'a> {
         self.builder = self.builder.path_param("zone_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(
+        self,
+    ) -> ApiResult<LoadBalancingLoadBalancerComponentsSchemasResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// List Load Balancers
+///
+/// List configured load balancers.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/load_balancers`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::load_balancers };
+/// use cloudflare::{ ApiClient, apis::load_balancers };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_load_balancers(&api)
-///     .with_zone_id("value")
+/// let response = list_load_balancers(&api)
+///     .with_zone_id("zone_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -55,7 +68,7 @@ pub fn list_load_balancers(api: &ApiClient) -> ListLoadBalancersRequest<'_> {
 
 #[derive(Debug)]
 pub struct CreateLoadBalancerRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, LoadBalancingLoadBalancerComponentsSchemasSingleResponse>,
 }
 
 impl<'a> CreateLoadBalancerRequest<'a> {
@@ -74,18 +87,28 @@ impl<'a> CreateLoadBalancerRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<LoadBalancingLoadBalancerComponentsSchemasSingleResponse> {
         self.builder.send().await
     }
 }
-
 /// Create Load Balancer
+///
+/// Create a new load balancer.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/zones/{zone_id}/load_balancers`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::load_balancers };
+/// use cloudflare::{ ApiClient, apis::load_balancers };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = create_load_balancer(&api)
-///     .with_zone_id("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = create_load_balancer(&api)
+///     .with_zone_id("zone_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -95,7 +118,7 @@ pub fn create_load_balancer(api: &ApiClient) -> CreateLoadBalancerRequest<'_> {
 
 #[derive(Debug)]
 pub struct BalancerDetailsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, LoadBalancingLoadBalancerComponentsSchemasSingleResponse>,
 }
 
 impl<'a> BalancerDetailsRequest<'a> {
@@ -118,19 +141,28 @@ impl<'a> BalancerDetailsRequest<'a> {
         self.builder = self.builder.path_param("load_balancer_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<LoadBalancingLoadBalancerComponentsSchemasSingleResponse> {
         self.builder.send().await
     }
 }
-
 /// Load Balancer Details
+///
+/// Fetch a single configured load balancer.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/load_balancers/{load_balancer_id}`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `load_balancer_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::load_balancers };
+/// use cloudflare::{ ApiClient, apis::load_balancers };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = balancer_details(&api)
-///     .with_zone_id("value")
-///     .with_load_balancer_id("value")
+/// let response = balancer_details(&api)
+///     .with_zone_id("zone_id")
+///     .with_load_balancer_id("load_balancer_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -140,7 +172,7 @@ pub fn balancer_details(api: &ApiClient) -> BalancerDetailsRequest<'_> {
 
 #[derive(Debug)]
 pub struct UpdateLoadBalancerRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, LoadBalancingLoadBalancerComponentsSchemasSingleResponse>,
 }
 
 impl<'a> UpdateLoadBalancerRequest<'a> {
@@ -168,19 +200,30 @@ impl<'a> UpdateLoadBalancerRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<LoadBalancingLoadBalancerComponentsSchemasSingleResponse> {
         self.builder.send().await
     }
 }
-
 /// Update Load Balancer
+///
+/// Update a configured load balancer.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/zones/{zone_id}/load_balancers/{load_balancer_id}`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `load_balancer_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::load_balancers };
+/// use cloudflare::{ ApiClient, apis::load_balancers };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = update_load_balancer(&api)
-///     .with_zone_id("value")
-///     .with_load_balancer_id("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = update_load_balancer(&api)
+///     .with_zone_id("zone_id")
+///     .with_load_balancer_id("load_balancer_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -190,7 +233,7 @@ pub fn update_load_balancer(api: &ApiClient) -> UpdateLoadBalancerRequest<'_> {
 
 #[derive(Debug)]
 pub struct DeleteLoadBalancerRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, LoadBalancingComponentsSchemasIdResponse>,
 }
 
 impl<'a> DeleteLoadBalancerRequest<'a> {
@@ -213,19 +256,28 @@ impl<'a> DeleteLoadBalancerRequest<'a> {
         self.builder = self.builder.path_param("load_balancer_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<LoadBalancingComponentsSchemasIdResponse> {
         self.builder.send().await
     }
 }
-
 /// Delete Load Balancer
+///
+/// Delete a configured load balancer.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/zones/{zone_id}/load_balancers/{load_balancer_id}`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `load_balancer_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::load_balancers };
+/// use cloudflare::{ ApiClient, apis::load_balancers };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete_load_balancer(&api)
-///     .with_zone_id("value")
-///     .with_load_balancer_id("value")
+/// let response = delete_load_balancer(&api)
+///     .with_zone_id("zone_id")
+///     .with_load_balancer_id("load_balancer_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -235,7 +287,7 @@ pub fn delete_load_balancer(api: &ApiClient) -> DeleteLoadBalancerRequest<'_> {
 
 #[derive(Debug)]
 pub struct PatchLoadBalancerRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, LoadBalancingLoadBalancerComponentsSchemasSingleResponse>,
 }
 
 impl<'a> PatchLoadBalancerRequest<'a> {
@@ -263,19 +315,30 @@ impl<'a> PatchLoadBalancerRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<LoadBalancingLoadBalancerComponentsSchemasSingleResponse> {
         self.builder.send().await
     }
 }
-
 /// Patch Load Balancer
+///
+/// Apply changes to an existing load balancer, overwriting the supplied properties.
+///
+/// **HTTP Method:** `PATCH`
+/// **Path:** `/zones/{zone_id}/load_balancers/{load_balancer_id}`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `load_balancer_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::load_balancers };
+/// use cloudflare::{ ApiClient, apis::load_balancers };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = patch_load_balancer(&api)
-///     .with_zone_id("value")
-///     .with_load_balancer_id("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = patch_load_balancer(&api)
+///     .with_zone_id("zone_id")
+///     .with_load_balancer_id("load_balancer_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```

@@ -19,16 +19,19 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct RegistrarApiDomainProperties {
-    pub available: Option<serde_json::Value>,
-    pub can_register: Option<serde_json::Value>,
-    pub created_at: Option<serde_json::Value>,
-    pub current_registrar: Option<serde_json::Value>,
-    pub expires_at: Option<serde_json::Value>,
-    pub id: Option<serde_json::Value>,
-    pub locked: Option<serde_json::Value>,
-    pub registrant_contact: Option<serde_json::Value>,
-    pub registry_statuses: Option<serde_json::Value>,
-    pub supported_tld: Option<serde_json::Value>,
-    pub transfer_in: Option<serde_json::Value>,
-    pub updated_at: Option<serde_json::Value>,
+    pub available: Option<crate::models::registrar_api_available::RegistrarApiAvailable>,
+    pub can_register: Option<crate::models::registrar_api_can_register::RegistrarApiCanRegister>,
+    pub created_at: Option<crate::models::registrar_api_created_at::RegistrarApiCreatedAt>,
+    pub current_registrar:
+        Option<crate::models::registrar_api_current_registrar::RegistrarApiCurrentRegistrar>,
+    pub expires_at: Option<crate::models::registrar_api_expires_at::RegistrarApiExpiresAt>,
+    pub id: Option<crate::models::registrar_api_domain_identifier::RegistrarApiDomainIdentifier>,
+    pub locked: Option<crate::models::registrar_api_locked::RegistrarApiLocked>,
+    pub registrant_contact:
+        Option<crate::models::registrar_api_registrant_contact::RegistrarApiRegistrantContact>,
+    pub registry_statuses:
+        Option<crate::models::registrar_api_registry_statuses::RegistrarApiRegistryStatuses>,
+    pub supported_tld: Option<crate::models::registrar_api_supported_tld::RegistrarApiSupportedTld>,
+    pub transfer_in: Option<crate::models::registrar_api_transfer_in::RegistrarApiTransferIn>,
+    pub updated_at: Option<crate::models::registrar_api_updated_at::RegistrarApiUpdatedAt>,
 }

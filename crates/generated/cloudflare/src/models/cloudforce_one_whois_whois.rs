@@ -50,7 +50,7 @@ pub struct CloudforceOneWhoisWhois {
     pub created_date: Option<String>,
     pub created_date_raw: Option<String>,
     pub dnssec: bool,
-    pub domain: serde_json::Value,
+    pub domain: crate::models::cloudforce_one_whois_domain_name::CloudforceOneWhoisDomainName,
     pub expiration_date: Option<String>,
     pub expiration_date_raw: Option<String>,
     pub extension: String,

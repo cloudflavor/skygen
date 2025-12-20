@@ -19,5 +19,5 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct WorkersPlacementInfoNoStatus {
-    pub mode: Option<serde_json::Value>,
+    pub mode: Option<crate::models::workers_placement_mode::WorkersPlacementMode>,
 }

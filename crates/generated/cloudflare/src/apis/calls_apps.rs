@@ -15,12 +15,15 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::calls_app_response_collection::CallsAppResponseCollection;
+use crate::models::calls_app_response_single::CallsAppResponseSingle;
+use crate::models::calls_app_response_single_with_secret::CallsAppResponseSingleWithSecret;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct ListRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, CallsAppResponseCollection>,
 }
 
 impl<'a> ListRequest<'a> {
@@ -34,18 +37,26 @@ impl<'a> ListRequest<'a> {
         self.builder = self.builder.path_param("account_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<CallsAppResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// List apps
+///
+/// Lists all apps in the Cloudflare account
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/calls/apps`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::calls_apps };
+/// use cloudflare::{ ApiClient, apis::calls_apps };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list(&api)
-///     .with_account_id("value")
+/// let response = list(&api)
+///     .with_account_id("account_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -55,7 +66,7 @@ pub fn list(api: &ApiClient) -> ListRequest<'_> {
 
 #[derive(Debug)]
 pub struct CreateNewAppRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, CallsAppResponseSingleWithSecret>,
 }
 
 impl<'a> CreateNewAppRequest<'a> {
@@ -77,18 +88,28 @@ impl<'a> CreateNewAppRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<CallsAppResponseSingleWithSecret> {
         self.builder.send().await
     }
 }
-
 /// Create a new app
+///
+/// Creates a new Cloudflare calls app. An app is an unique enviroment where each Session can access all Tracks within the app.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/calls/apps`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::calls_apps };
+/// use cloudflare::{ ApiClient, apis::calls_apps };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = create_new_app(&api)
-///     .with_account_id("value")
+/// # let body: crate::models::calls_app_editable_fields::CallsAppEditableFields = todo!();
+/// let response = create_new_app(&api)
+///     .with_account_id("account_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -98,7 +119,7 @@ pub fn create_new_app(api: &ApiClient) -> CreateNewAppRequest<'_> {
 
 #[derive(Debug)]
 pub struct RetrieveAppDetailsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, CallsAppResponseSingle>,
 }
 
 impl<'a> RetrieveAppDetailsRequest<'a> {
@@ -121,19 +142,28 @@ impl<'a> RetrieveAppDetailsRequest<'a> {
         self.builder = self.builder.path_param("app_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<CallsAppResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Retrieve app details
+///
+/// Fetches details for a single Calls app.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/calls/apps/{app_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `app_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::calls_apps };
+/// use cloudflare::{ ApiClient, apis::calls_apps };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = retrieve_app_details(&api)
-///     .with_account_id("value")
-///     .with_app_id("value")
+/// let response = retrieve_app_details(&api)
+///     .with_account_id("account_id")
+///     .with_app_id("app_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -143,7 +173,7 @@ pub fn retrieve_app_details(api: &ApiClient) -> RetrieveAppDetailsRequest<'_> {
 
 #[derive(Debug)]
 pub struct UpdateAppDetailsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, CallsAppResponseSingle>,
 }
 
 impl<'a> UpdateAppDetailsRequest<'a> {
@@ -174,19 +204,30 @@ impl<'a> UpdateAppDetailsRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<CallsAppResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Edit app details
+///
+/// Edit details for a single app.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/accounts/{account_id}/calls/apps/{app_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `app_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::calls_apps };
+/// use cloudflare::{ ApiClient, apis::calls_apps };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = update_app_details(&api)
-///     .with_account_id("value")
-///     .with_app_id("value")
+/// # let body: crate::models::calls_app_editable_fields::CallsAppEditableFields = todo!();
+/// let response = update_app_details(&api)
+///     .with_account_id("account_id")
+///     .with_app_id("app_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -196,7 +237,7 @@ pub fn update_app_details(api: &ApiClient) -> UpdateAppDetailsRequest<'_> {
 
 #[derive(Debug)]
 pub struct DeleteAppRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, CallsAppResponseSingle>,
 }
 
 impl<'a> DeleteAppRequest<'a> {
@@ -219,19 +260,28 @@ impl<'a> DeleteAppRequest<'a> {
         self.builder = self.builder.path_param("app_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<CallsAppResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Delete app
+///
+/// Deletes an app from Cloudflare Calls
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/accounts/{account_id}/calls/apps/{app_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `app_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::calls_apps };
+/// use cloudflare::{ ApiClient, apis::calls_apps };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete_app(&api)
-///     .with_account_id("value")
-///     .with_app_id("value")
+/// let response = delete_app(&api)
+///     .with_account_id("account_id")
+///     .with_app_id("app_id")
 ///     .send()
 ///     .await?;
 /// ```

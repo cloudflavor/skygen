@@ -15,12 +15,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::iam_collection_organization_response::IamCollectionOrganizationResponse;
+use crate::models::iam_single_organization_response::IamSingleOrganizationResponse;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct ListOrganizationsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, IamCollectionOrganizationResponse>,
 }
 
 impl<'a> ListOrganizationsRequest<'a> {
@@ -57,17 +59,38 @@ impl<'a> ListOrganizationsRequest<'a> {
         self.builder = self.builder.header_param("status", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<IamCollectionOrganizationResponse> {
         self.builder.send().await
     }
 }
-
 /// List Organizations
+///
+/// Lists organizations the user is associated with.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/user/organizations`
+///
+/// **Parameters**
+/// - `name` (query,optional)
+/// - `page` (query,optional)
+/// - `per_page` (query,optional)
+/// - `order` (query,optional)
+/// - `direction` (query,optional)
+/// - `match` (query,optional)
+/// - `status` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::user_s_organizations };
+/// use cloudflare::{ ApiClient, apis::user_s_organizations };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_organizations(&api)
+/// let response = list_organizations(&api)
+///     .with_name("name")
+///     .with_page("page")
+///     .with_per_page("per_page")
+///     .with_order("order")
+///     .with_direction("direction")
+///     .with_match_param("match")
+///     .with_status("status")
 ///     .send()
 ///     .await?;
 /// ```
@@ -77,7 +100,7 @@ pub fn list_organizations(api: &ApiClient) -> ListOrganizationsRequest<'_> {
 
 #[derive(Debug)]
 pub struct OrganizationDetailsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, IamSingleOrganizationResponse>,
 }
 
 impl<'a> OrganizationDetailsRequest<'a> {
@@ -92,18 +115,26 @@ impl<'a> OrganizationDetailsRequest<'a> {
         self.builder = self.builder.path_param("organization_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<IamSingleOrganizationResponse> {
         self.builder.send().await
     }
 }
-
 /// Organization Details
+///
+/// Gets a specific organization the user is associated with.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/user/organizations/{organization_id}`
+///
+/// **Parameters**
+/// - `organization_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::user_s_organizations };
+/// use cloudflare::{ ApiClient, apis::user_s_organizations };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = organization_details(&api)
-///     .with_organization_id("value")
+/// let response = organization_details(&api)
+///     .with_organization_id("organization_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -132,14 +163,22 @@ impl<'a> LeaveOrganizationRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Leave Organization
+///
+/// Removes association to an organization.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/user/organizations/{organization_id}`
+///
+/// **Parameters**
+/// - `organization_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::user_s_organizations };
+/// use cloudflare::{ ApiClient, apis::user_s_organizations };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = leave_organization(&api)
-///     .with_organization_id("value")
+/// let response = leave_organization(&api)
+///     .with_organization_id("organization_id")
 ///     .send()
 ///     .await?;
 /// ```

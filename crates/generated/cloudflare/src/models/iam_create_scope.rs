@@ -19,7 +19,6 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct IamCreateScope {
-
-    pub key: serde_json::Value,
+    pub key: crate::models::iam_create_resource_group_scope_scope_key::IamCreateResourceGroupScopeScopeKey,
     pub objects: Vec<crate::models::iam_create_resource_group_scope_scope_object::IamCreateResourceGroupScopeScopeObject>,
 }

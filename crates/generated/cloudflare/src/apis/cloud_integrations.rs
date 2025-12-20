@@ -15,12 +15,18 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::mcn_create_provider_response::McnCreateProviderResponse;
+use crate::models::mcn_delete_provider_response::McnDeleteProviderResponse;
+use crate::models::mcn_provider_initial_setup_response::McnProviderInitialSetupResponse;
+use crate::models::mcn_read_account_provider_response::McnReadAccountProviderResponse;
+use crate::models::mcn_read_account_providers_response::McnReadAccountProvidersResponse;
+use crate::models::mcn_update_provider_response::McnUpdateProviderResponse;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct ProvidersListRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, McnReadAccountProvidersResponse>,
 }
 
 impl<'a> ProvidersListRequest<'a> {
@@ -54,18 +60,34 @@ impl<'a> ProvidersListRequest<'a> {
         self.builder = self.builder.header_param("cloudflare", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<McnReadAccountProvidersResponse> {
         self.builder.send().await
     }
 }
-
 /// List Cloud Integrations
+///
+/// List Cloud Integrations (Closed Beta).
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/magic/cloud/providers`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `status` (query,optional)
+/// - `order_by` (query,optional)
+/// - `desc` (query,optional)
+/// - `cloudflare` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::cloud_integrations };
+/// use cloudflare::{ ApiClient, apis::cloud_integrations };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = providers_list(&api)
-///     .with_account_id("value")
+/// let response = providers_list(&api)
+///     .with_account_id("account_id")
+///     .with_status("status")
+///     .with_order_by("order_by")
+///     .with_desc("desc")
+///     .with_cloudflare("cloudflare")
 ///     .send()
 ///     .await?;
 /// ```
@@ -75,7 +97,7 @@ pub fn providers_list(api: &ApiClient) -> ProvidersListRequest<'_> {
 
 #[derive(Debug)]
 pub struct ProvidersCreateRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, McnCreateProviderResponse>,
 }
 
 impl<'a> ProvidersCreateRequest<'a> {
@@ -105,18 +127,30 @@ impl<'a> ProvidersCreateRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<McnCreateProviderResponse> {
         self.builder.send().await
     }
 }
-
 /// Create Cloud Integration
+///
+/// Create a new Cloud Integration (Closed Beta).
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/magic/cloud/providers`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `forwarded` (header,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::cloud_integrations };
+/// use cloudflare::{ ApiClient, apis::cloud_integrations };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = providers_create(&api)
-///     .with_account_id("value")
+/// # let body: crate::models::mcn_create_provider_request::McnCreateProviderRequest = todo!();
+/// let response = providers_create(&api)
+///     .with_account_id("account_id")
+///     .with_forwarded("forwarded")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -148,14 +182,22 @@ impl<'a> ProvidersDiscoverAllRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Run Discovery for All Integrations
+///
+/// Run discovery for all Cloud Integrations in an account (Closed Beta).
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/magic/cloud/providers/discover`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::cloud_integrations };
+/// use cloudflare::{ ApiClient, apis::cloud_integrations };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = providers_discover_all(&api)
-///     .with_account_id("value")
+/// let response = providers_discover_all(&api)
+///     .with_account_id("account_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -165,7 +207,7 @@ pub fn providers_discover_all(api: &ApiClient) -> ProvidersDiscoverAllRequest<'_
 
 #[derive(Debug)]
 pub struct ProvidersReadRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, McnReadAccountProviderResponse>,
 }
 
 impl<'a> ProvidersReadRequest<'a> {
@@ -192,19 +234,30 @@ impl<'a> ProvidersReadRequest<'a> {
         self.builder = self.builder.header_param("status", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<McnReadAccountProviderResponse> {
         self.builder.send().await
     }
 }
-
 /// Read Cloud Integration
+///
+/// Read a Cloud Integration (Closed Beta).
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/magic/cloud/providers/{provider_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `provider_id` (path, required)
+/// - `status` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::cloud_integrations };
+/// use cloudflare::{ ApiClient, apis::cloud_integrations };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = providers_read(&api)
-///     .with_account_id("value")
-///     .with_provider_id("value")
+/// let response = providers_read(&api)
+///     .with_account_id("account_id")
+///     .with_provider_id("provider_id")
+///     .with_status("status")
 ///     .send()
 ///     .await?;
 /// ```
@@ -214,7 +267,7 @@ pub fn providers_read(api: &ApiClient) -> ProvidersReadRequest<'_> {
 
 #[derive(Debug)]
 pub struct ProvidersUpdateRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, McnUpdateProviderResponse>,
 }
 
 impl<'a> ProvidersUpdateRequest<'a> {
@@ -245,19 +298,30 @@ impl<'a> ProvidersUpdateRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<McnUpdateProviderResponse> {
         self.builder.send().await
     }
 }
-
 /// Update Cloud Integration
+///
+/// Update a Cloud Integration (Closed Beta).
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/accounts/{account_id}/magic/cloud/providers/{provider_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `provider_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::cloud_integrations };
+/// use cloudflare::{ ApiClient, apis::cloud_integrations };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = providers_update(&api)
-///     .with_account_id("value")
-///     .with_provider_id("value")
+/// # let body: crate::models::mcn_update_provider_request::McnUpdateProviderRequest = todo!();
+/// let response = providers_update(&api)
+///     .with_account_id("account_id")
+///     .with_provider_id("provider_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -267,7 +331,7 @@ pub fn providers_update(api: &ApiClient) -> ProvidersUpdateRequest<'_> {
 
 #[derive(Debug)]
 pub struct ProvidersDeleteRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, McnDeleteProviderResponse>,
 }
 
 impl<'a> ProvidersDeleteRequest<'a> {
@@ -290,19 +354,28 @@ impl<'a> ProvidersDeleteRequest<'a> {
         self.builder = self.builder.path_param("provider_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<McnDeleteProviderResponse> {
         self.builder.send().await
     }
 }
-
 /// Delete Cloud Integration
+///
+/// Delete a Cloud Integration (Closed Beta).
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/accounts/{account_id}/magic/cloud/providers/{provider_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `provider_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::cloud_integrations };
+/// use cloudflare::{ ApiClient, apis::cloud_integrations };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = providers_delete(&api)
-///     .with_account_id("value")
-///     .with_provider_id("value")
+/// let response = providers_delete(&api)
+///     .with_account_id("account_id")
+///     .with_provider_id("provider_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -312,7 +385,7 @@ pub fn providers_delete(api: &ApiClient) -> ProvidersDeleteRequest<'_> {
 
 #[derive(Debug)]
 pub struct ProvidersPatchRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, McnUpdateProviderResponse>,
 }
 
 impl<'a> ProvidersPatchRequest<'a> {
@@ -343,19 +416,30 @@ impl<'a> ProvidersPatchRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<McnUpdateProviderResponse> {
         self.builder.send().await
     }
 }
-
 /// Patch Cloud Integration
+///
+/// Update a Cloud Integration (Closed Beta).
+///
+/// **HTTP Method:** `PATCH`
+/// **Path:** `/accounts/{account_id}/magic/cloud/providers/{provider_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `provider_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::cloud_integrations };
+/// use cloudflare::{ ApiClient, apis::cloud_integrations };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = providers_patch(&api)
-///     .with_account_id("value")
-///     .with_provider_id("value")
+/// # let body: crate::models::mcn_update_provider_request::McnUpdateProviderRequest = todo!();
+/// let response = providers_patch(&api)
+///     .with_account_id("account_id")
+///     .with_provider_id("provider_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -396,15 +480,26 @@ impl<'a> ProvidersDiscoverRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Run Discovery
+///
+/// Run discovery for a Cloud Integration (Closed Beta).
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/magic/cloud/providers/{provider_id}/discover`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `provider_id` (path, required)
+/// - `v2` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::cloud_integrations };
+/// use cloudflare::{ ApiClient, apis::cloud_integrations };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = providers_discover(&api)
-///     .with_account_id("value")
-///     .with_provider_id("value")
+/// let response = providers_discover(&api)
+///     .with_account_id("account_id")
+///     .with_provider_id("provider_id")
+///     .with_v2("v2")
 ///     .send()
 ///     .await?;
 /// ```
@@ -414,7 +509,7 @@ pub fn providers_discover(api: &ApiClient) -> ProvidersDiscoverRequest<'_> {
 
 #[derive(Debug)]
 pub struct ProvidersInitialSetupRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, McnProviderInitialSetupResponse>,
 }
 
 impl<'a> ProvidersInitialSetupRequest<'a> {
@@ -437,19 +532,28 @@ impl<'a> ProvidersInitialSetupRequest<'a> {
         self.builder = self.builder.path_param("provider_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<McnProviderInitialSetupResponse> {
         self.builder.send().await
     }
 }
-
 /// Get Cloud Integration Setup Config
+///
+/// Get initial configuration to complete Cloud Integration setup (Closed Beta).
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/magic/cloud/providers/{provider_id}/initial_setup`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `provider_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::cloud_integrations };
+/// use cloudflare::{ ApiClient, apis::cloud_integrations };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = providers_initial_setup(&api)
-///     .with_account_id("value")
-///     .with_provider_id("value")
+/// let response = providers_initial_setup(&api)
+///     .with_account_id("account_id")
+///     .with_provider_id("provider_id")
 ///     .send()
 ///     .await?;
 /// ```

@@ -15,12 +15,18 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::web3_api_response_single_id::Web3ApiResponseSingleId;
+use crate::models::web3_collection_response::Web3CollectionResponse;
+use crate::models::web3_content_list_details_response::Web3ContentListDetailsResponse;
+use crate::models::web3_content_list_entry_collection_response::Web3ContentListEntryCollectionResponse;
+use crate::models::web3_content_list_entry_single_response::Web3ContentListEntrySingleResponse;
+use crate::models::web3_single_response::Web3SingleResponse;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct ListWeb3HostnamesRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, Web3CollectionResponse>,
 }
 
 impl<'a> ListWeb3HostnamesRequest<'a> {
@@ -34,18 +40,24 @@ impl<'a> ListWeb3HostnamesRequest<'a> {
         self.builder = self.builder.path_param("zone_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<Web3CollectionResponse> {
         self.builder.send().await
     }
 }
-
 /// List Web3 Hostnames
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/web3/hostnames`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::web3_hostname };
+/// use cloudflare::{ ApiClient, apis::web3_hostname };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_web3_hostnames(&api)
-///     .with_zone_id("value")
+/// let response = list_web3_hostnames(&api)
+///     .with_zone_id("zone_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -55,7 +67,7 @@ pub fn list_web3_hostnames(api: &ApiClient) -> ListWeb3HostnamesRequest<'_> {
 
 #[derive(Debug)]
 pub struct CreateWeb3HostnameRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, Web3SingleResponse>,
 }
 
 impl<'a> CreateWeb3HostnameRequest<'a> {
@@ -77,18 +89,26 @@ impl<'a> CreateWeb3HostnameRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<Web3SingleResponse> {
         self.builder.send().await
     }
 }
-
 /// Create Web3 Hostname
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/zones/{zone_id}/web3/hostnames`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::web3_hostname };
+/// use cloudflare::{ ApiClient, apis::web3_hostname };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = create_web3_hostname(&api)
-///     .with_zone_id("value")
+/// # let body: crate::models::web3_create_request::Web3CreateRequest = todo!();
+/// let response = create_web3_hostname(&api)
+///     .with_zone_id("zone_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -98,7 +118,7 @@ pub fn create_web3_hostname(api: &ApiClient) -> CreateWeb3HostnameRequest<'_> {
 
 #[derive(Debug)]
 pub struct DetailsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, Web3SingleResponse>,
 }
 
 impl<'a> DetailsRequest<'a> {
@@ -121,19 +141,26 @@ impl<'a> DetailsRequest<'a> {
         self.builder = self.builder.path_param("identifier", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<Web3SingleResponse> {
         self.builder.send().await
     }
 }
-
 /// Web3 Hostname Details
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/web3/hostnames/{identifier}`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `identifier` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::web3_hostname };
+/// use cloudflare::{ ApiClient, apis::web3_hostname };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = details(&api)
-///     .with_zone_id("value")
-///     .with_identifier("value")
+/// let response = details(&api)
+///     .with_zone_id("zone_id")
+///     .with_identifier("identifier")
 ///     .send()
 ///     .await?;
 /// ```
@@ -143,7 +170,7 @@ pub fn details(api: &ApiClient) -> DetailsRequest<'_> {
 
 #[derive(Debug)]
 pub struct DeleteWeb3HostnameRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, Web3ApiResponseSingleId>,
 }
 
 impl<'a> DeleteWeb3HostnameRequest<'a> {
@@ -166,19 +193,26 @@ impl<'a> DeleteWeb3HostnameRequest<'a> {
         self.builder = self.builder.path_param("identifier", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<Web3ApiResponseSingleId> {
         self.builder.send().await
     }
 }
-
 /// Delete Web3 Hostname
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/zones/{zone_id}/web3/hostnames/{identifier}`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `identifier` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::web3_hostname };
+/// use cloudflare::{ ApiClient, apis::web3_hostname };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete_web3_hostname(&api)
-///     .with_zone_id("value")
-///     .with_identifier("value")
+/// let response = delete_web3_hostname(&api)
+///     .with_zone_id("zone_id")
+///     .with_identifier("identifier")
 ///     .send()
 ///     .await?;
 /// ```
@@ -188,7 +222,7 @@ pub fn delete_web3_hostname(api: &ApiClient) -> DeleteWeb3HostnameRequest<'_> {
 
 #[derive(Debug)]
 pub struct EditWeb3HostnameRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, Web3SingleResponse>,
 }
 
 impl<'a> EditWeb3HostnameRequest<'a> {
@@ -219,19 +253,28 @@ impl<'a> EditWeb3HostnameRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<Web3SingleResponse> {
         self.builder.send().await
     }
 }
-
 /// Edit Web3 Hostname
+///
+/// **HTTP Method:** `PATCH`
+/// **Path:** `/zones/{zone_id}/web3/hostnames/{identifier}`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `identifier` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::web3_hostname };
+/// use cloudflare::{ ApiClient, apis::web3_hostname };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = edit_web3_hostname(&api)
-///     .with_zone_id("value")
-///     .with_identifier("value")
+/// # let body: crate::models::web3_modify_request::Web3ModifyRequest = todo!();
+/// let response = edit_web3_hostname(&api)
+///     .with_zone_id("zone_id")
+///     .with_identifier("identifier")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -241,7 +284,7 @@ pub fn edit_web3_hostname(api: &ApiClient) -> EditWeb3HostnameRequest<'_> {
 
 #[derive(Debug)]
 pub struct IpfsUniversalPathGatewayRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, Web3ContentListDetailsResponse>,
 }
 
 impl<'a> IpfsUniversalPathGatewayRequest<'a> {
@@ -264,19 +307,26 @@ impl<'a> IpfsUniversalPathGatewayRequest<'a> {
         self.builder = self.builder.path_param("identifier", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<Web3ContentListDetailsResponse> {
         self.builder.send().await
     }
 }
-
 /// IPFS Universal Path Gateway Content List Details
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/web3/hostnames/{identifier}/ipfs_universal_path/content_list`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `identifier` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::web3_hostname };
+/// use cloudflare::{ ApiClient, apis::web3_hostname };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = ipfs_universal_path_gateway(&api)
-///     .with_zone_id("value")
-///     .with_identifier("value")
+/// let response = ipfs_universal_path_gateway(&api)
+///     .with_zone_id("zone_id")
+///     .with_identifier("identifier")
 ///     .send()
 ///     .await?;
 /// ```
@@ -286,7 +336,7 @@ pub fn ipfs_universal_path_gateway(api: &ApiClient) -> IpfsUniversalPathGatewayR
 
 #[derive(Debug)]
 pub struct UpdateIpfsUniversalPathRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, Web3ContentListDetailsResponse>,
 }
 
 impl<'a> UpdateIpfsUniversalPathRequest<'a> {
@@ -317,19 +367,28 @@ impl<'a> UpdateIpfsUniversalPathRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<Web3ContentListDetailsResponse> {
         self.builder.send().await
     }
 }
-
 /// Update IPFS Universal Path Gateway Content List
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/zones/{zone_id}/web3/hostnames/{identifier}/ipfs_universal_path/content_list`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `identifier` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::web3_hostname };
+/// use cloudflare::{ ApiClient, apis::web3_hostname };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = update_ipfs_universal_path(&api)
-///     .with_zone_id("value")
-///     .with_identifier("value")
+/// # let body: crate::models::web3_content_list_update_request::Web3ContentListUpdateRequest = todo!();
+/// let response = update_ipfs_universal_path(&api)
+///     .with_zone_id("zone_id")
+///     .with_identifier("identifier")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -339,7 +398,7 @@ pub fn update_ipfs_universal_path(api: &ApiClient) -> UpdateIpfsUniversalPathReq
 
 #[derive(Debug)]
 pub struct ListIpfsUniversalPathRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, Web3ContentListEntryCollectionResponse>,
 }
 
 impl<'a> ListIpfsUniversalPathRequest<'a> {
@@ -362,19 +421,26 @@ impl<'a> ListIpfsUniversalPathRequest<'a> {
         self.builder = self.builder.path_param("identifier", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<Web3ContentListEntryCollectionResponse> {
         self.builder.send().await
     }
 }
-
 /// List IPFS Universal Path Gateway Content List Entries
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/web3/hostnames/{identifier}/ipfs_universal_path/content_list/entries`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `identifier` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::web3_hostname };
+/// use cloudflare::{ ApiClient, apis::web3_hostname };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_ipfs_universal_path(&api)
-///     .with_zone_id("value")
-///     .with_identifier("value")
+/// let response = list_ipfs_universal_path(&api)
+///     .with_zone_id("zone_id")
+///     .with_identifier("identifier")
 ///     .send()
 ///     .await?;
 /// ```
@@ -384,7 +450,7 @@ pub fn list_ipfs_universal_path(api: &ApiClient) -> ListIpfsUniversalPathRequest
 
 #[derive(Debug)]
 pub struct CreateIpfsUniversalPathRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, Web3ContentListEntrySingleResponse>,
 }
 
 impl<'a> CreateIpfsUniversalPathRequest<'a> {
@@ -415,19 +481,28 @@ impl<'a> CreateIpfsUniversalPathRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<Web3ContentListEntrySingleResponse> {
         self.builder.send().await
     }
 }
-
 /// Create IPFS Universal Path Gateway Content List Entry
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/zones/{zone_id}/web3/hostnames/{identifier}/ipfs_universal_path/content_list/entries`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `identifier` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::web3_hostname };
+/// use cloudflare::{ ApiClient, apis::web3_hostname };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = create_ipfs_universal_path(&api)
-///     .with_zone_id("value")
-///     .with_identifier("value")
+/// # let body: crate::models::web3_content_list_entry_create_request::Web3ContentListEntryCreateRequest = todo!();
+/// let response = create_ipfs_universal_path(&api)
+///     .with_zone_id("zone_id")
+///     .with_identifier("identifier")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -437,7 +512,7 @@ pub fn create_ipfs_universal_path(api: &ApiClient) -> CreateIpfsUniversalPathReq
 
 #[derive(Debug)]
 pub struct IpfsUniversalPathGatewayGetRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, Web3ContentListEntrySingleResponse>,
 }
 
 impl<'a> IpfsUniversalPathGatewayGetRequest<'a> {
@@ -463,20 +538,28 @@ impl<'a> IpfsUniversalPathGatewayGetRequest<'a> {
             .path_param("content_list_entry_identifier", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<Web3ContentListEntrySingleResponse> {
         self.builder.send().await
     }
 }
-
 /// IPFS Universal Path Gateway Content List Entry Details
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/web3/hostnames/{identifier}/ipfs_universal_path/content_list/entries/{content_list_entry_identifier}`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `identifier` (path, required)
+/// - `content_list_entry_identifier` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::web3_hostname };
+/// use cloudflare::{ ApiClient, apis::web3_hostname };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = ipfs_universal_path_gateway_get(&api)
-///     .with_zone_id("value")
-///     .with_identifier("value")
-///     .with_content_list_entry_identifier("value")
+/// let response = ipfs_universal_path_gateway_get(&api)
+///     .with_zone_id("zone_id")
+///     .with_identifier("identifier")
+///     .with_content_list_entry_identifier("content_list_entry_identifier")
 ///     .send()
 ///     .await?;
 /// ```
@@ -486,7 +569,7 @@ pub fn ipfs_universal_path_gateway_get(api: &ApiClient) -> IpfsUniversalPathGate
 
 #[derive(Debug)]
 pub struct EditIpfsUniversalPathRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, Web3ContentListEntrySingleResponse>,
 }
 
 impl<'a> EditIpfsUniversalPathRequest<'a> {
@@ -520,20 +603,30 @@ impl<'a> EditIpfsUniversalPathRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<Web3ContentListEntrySingleResponse> {
         self.builder.send().await
     }
 }
-
 /// Edit IPFS Universal Path Gateway Content List Entry
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/zones/{zone_id}/web3/hostnames/{identifier}/ipfs_universal_path/content_list/entries/{content_list_entry_identifier}`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `identifier` (path, required)
+/// - `content_list_entry_identifier` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::web3_hostname };
+/// use cloudflare::{ ApiClient, apis::web3_hostname };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = edit_ipfs_universal_path(&api)
-///     .with_zone_id("value")
-///     .with_identifier("value")
-///     .with_content_list_entry_identifier("value")
+/// # let body: crate::models::web3_content_list_entry_create_request::Web3ContentListEntryCreateRequest = todo!();
+/// let response = edit_ipfs_universal_path(&api)
+///     .with_zone_id("zone_id")
+///     .with_identifier("identifier")
+///     .with_content_list_entry_identifier("content_list_entry_identifier")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -543,7 +636,7 @@ pub fn edit_ipfs_universal_path(api: &ApiClient) -> EditIpfsUniversalPathRequest
 
 #[derive(Debug)]
 pub struct DeleteIpfsUniversalPathRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, Web3ApiResponseSingleId>,
 }
 
 impl<'a> DeleteIpfsUniversalPathRequest<'a> {
@@ -569,20 +662,28 @@ impl<'a> DeleteIpfsUniversalPathRequest<'a> {
             .path_param("content_list_entry_identifier", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<Web3ApiResponseSingleId> {
         self.builder.send().await
     }
 }
-
 /// Delete IPFS Universal Path Gateway Content List Entry
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/zones/{zone_id}/web3/hostnames/{identifier}/ipfs_universal_path/content_list/entries/{content_list_entry_identifier}`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `identifier` (path, required)
+/// - `content_list_entry_identifier` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::web3_hostname };
+/// use cloudflare::{ ApiClient, apis::web3_hostname };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete_ipfs_universal_path(&api)
-///     .with_zone_id("value")
-///     .with_identifier("value")
-///     .with_content_list_entry_identifier("value")
+/// let response = delete_ipfs_universal_path(&api)
+///     .with_zone_id("zone_id")
+///     .with_identifier("identifier")
+///     .with_content_list_entry_identifier("content_list_entry_identifier")
 ///     .send()
 ///     .await?;
 /// ```

@@ -15,12 +15,16 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::access_certificates_components_schemas_response_collection_2::AccessCertificatesComponentsSchemasResponseCollection2;
+use crate::models::access_certificates_components_schemas_single_response_2::AccessCertificatesComponentsSchemasSingleResponse2;
+use crate::models::access_components_schemas_id_response::AccessComponentsSchemasIdResponse;
+use crate::models::access_schemas_response_collection_hostnames::AccessSchemasResponseCollectionHostnames;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct MtlsAuthenticationListMtlsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, AccessCertificatesComponentsSchemasResponseCollection2>,
 }
 
 impl<'a> MtlsAuthenticationListMtlsRequest<'a> {
@@ -35,18 +39,26 @@ impl<'a> MtlsAuthenticationListMtlsRequest<'a> {
         self.builder = self.builder.path_param("zone_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<AccessCertificatesComponentsSchemasResponseCollection2> {
         self.builder.send().await
     }
 }
-
 /// List mTLS certificates
+///
+/// Lists all mTLS certificates.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/access/certificates`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zone_level_access_m_tls_authentication };
+/// use cloudflare::{ ApiClient, apis::zone_level_access_m_tls_authentication };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = mtls_authentication_list_mtls(&api)
-///     .with_zone_id("value")
+/// let response = mtls_authentication_list_mtls(&api)
+///     .with_zone_id("zone_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -56,7 +68,7 @@ pub fn mtls_authentication_list_mtls(api: &ApiClient) -> MtlsAuthenticationListM
 
 #[derive(Debug)]
 pub struct MtlsAuthenticationAddMtlsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, AccessCertificatesComponentsSchemasSingleResponse2>,
 }
 
 impl<'a> MtlsAuthenticationAddMtlsRequest<'a> {
@@ -76,18 +88,28 @@ impl<'a> MtlsAuthenticationAddMtlsRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<AccessCertificatesComponentsSchemasSingleResponse2> {
         self.builder.send().await
     }
 }
-
 /// Add an mTLS certificate
+///
+/// Adds a new mTLS root certificate to Access.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/zones/{zone_id}/access/certificates`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zone_level_access_m_tls_authentication };
+/// use cloudflare::{ ApiClient, apis::zone_level_access_m_tls_authentication };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = mtls_authentication_add_mtls(&api)
-///     .with_zone_id("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = mtls_authentication_add_mtls(&api)
+///     .with_zone_id("zone_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -97,7 +119,7 @@ pub fn mtls_authentication_add_mtls(api: &ApiClient) -> MtlsAuthenticationAddMtl
 
 #[derive(Debug)]
 pub struct MtlsAuthenticationListMtlsGetRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, AccessSchemasResponseCollectionHostnames>,
 }
 
 impl<'a> MtlsAuthenticationListMtlsGetRequest<'a> {
@@ -115,18 +137,26 @@ impl<'a> MtlsAuthenticationListMtlsGetRequest<'a> {
         self.builder = self.builder.path_param("zone_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<AccessSchemasResponseCollectionHostnames> {
         self.builder.send().await
     }
 }
-
 /// List all mTLS hostname settings
+///
+/// List all mTLS hostname settings for this zone.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/access/certificates/settings`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zone_level_access_m_tls_authentication };
+/// use cloudflare::{ ApiClient, apis::zone_level_access_m_tls_authentication };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = mtls_authentication_list_mtls_get(&api)
-///     .with_zone_id("value")
+/// let response = mtls_authentication_list_mtls_get(&api)
+///     .with_zone_id("zone_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -168,14 +198,24 @@ impl<'a> MtlsAuthenticationUpdateMtlsRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Update an mTLS certificate's hostname settings
+///
+/// Updates an mTLS certificate's hostname settings.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/zones/{zone_id}/access/certificates/settings`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zone_level_access_m_tls_authentication };
+/// use cloudflare::{ ApiClient, apis::zone_level_access_m_tls_authentication };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = mtls_authentication_update_mtls(&api)
-///     .with_zone_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = mtls_authentication_update_mtls(&api)
+///     .with_zone_id("zone_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -185,7 +225,7 @@ pub fn mtls_authentication_update_mtls(api: &ApiClient) -> MtlsAuthenticationUpd
 
 #[derive(Debug)]
 pub struct MtlsAuthenticationGetMtlsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, AccessCertificatesComponentsSchemasSingleResponse2>,
 }
 
 impl<'a> MtlsAuthenticationGetMtlsRequest<'a> {
@@ -208,19 +248,28 @@ impl<'a> MtlsAuthenticationGetMtlsRequest<'a> {
         self.builder = self.builder.path_param("certificate_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<AccessCertificatesComponentsSchemasSingleResponse2> {
         self.builder.send().await
     }
 }
-
 /// Get an mTLS certificate
+///
+/// Fetches a single mTLS certificate.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/access/certificates/{certificate_id}`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `certificate_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zone_level_access_m_tls_authentication };
+/// use cloudflare::{ ApiClient, apis::zone_level_access_m_tls_authentication };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = mtls_authentication_get_mtls(&api)
-///     .with_zone_id("value")
-///     .with_certificate_id("value")
+/// let response = mtls_authentication_get_mtls(&api)
+///     .with_zone_id("zone_id")
+///     .with_certificate_id("certificate_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -230,7 +279,7 @@ pub fn mtls_authentication_get_mtls(api: &ApiClient) -> MtlsAuthenticationGetMtl
 
 #[derive(Debug)]
 pub struct MtlsAuthenticationUpdateMtlsPutRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, AccessCertificatesComponentsSchemasSingleResponse2>,
 }
 
 impl<'a> MtlsAuthenticationUpdateMtlsPutRequest<'a> {
@@ -258,19 +307,30 @@ impl<'a> MtlsAuthenticationUpdateMtlsPutRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<AccessCertificatesComponentsSchemasSingleResponse2> {
         self.builder.send().await
     }
 }
-
 /// Update an mTLS certificate
+///
+/// Updates a configured mTLS certificate.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/zones/{zone_id}/access/certificates/{certificate_id}`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `certificate_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zone_level_access_m_tls_authentication };
+/// use cloudflare::{ ApiClient, apis::zone_level_access_m_tls_authentication };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = mtls_authentication_update_mtls_put(&api)
-///     .with_zone_id("value")
-///     .with_certificate_id("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = mtls_authentication_update_mtls_put(&api)
+///     .with_zone_id("zone_id")
+///     .with_certificate_id("certificate_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -282,7 +342,7 @@ pub fn mtls_authentication_update_mtls_put(
 
 #[derive(Debug)]
 pub struct MtlsAuthenticationDeleteMtlsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, AccessComponentsSchemasIdResponse>,
 }
 
 impl<'a> MtlsAuthenticationDeleteMtlsRequest<'a> {
@@ -305,19 +365,28 @@ impl<'a> MtlsAuthenticationDeleteMtlsRequest<'a> {
         self.builder = self.builder.path_param("certificate_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<AccessComponentsSchemasIdResponse> {
         self.builder.send().await
     }
 }
-
 /// Delete an mTLS certificate
+///
+/// Deletes an mTLS certificate.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/zones/{zone_id}/access/certificates/{certificate_id}`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `certificate_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zone_level_access_m_tls_authentication };
+/// use cloudflare::{ ApiClient, apis::zone_level_access_m_tls_authentication };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = mtls_authentication_delete_mtls(&api)
-///     .with_zone_id("value")
-///     .with_certificate_id("value")
+/// let response = mtls_authentication_delete_mtls(&api)
+///     .with_zone_id("zone_id")
+///     .with_certificate_id("certificate_id")
 ///     .send()
 ///     .await?;
 /// ```

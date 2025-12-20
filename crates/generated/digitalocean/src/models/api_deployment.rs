@@ -21,9 +21,9 @@ use serde::{Deserialize, Serialize};
 pub struct ApiDeployment {
     pub created_at: Option<String>,
     pub name: Option<String>,
-    pub status: Option<serde_json::Value>,
+    pub status: Option<crate::models::api_deployment_status::ApiDeploymentStatus>,
     pub updated_at: Option<String>,
     pub url: Option<String>,
     pub uuid: Option<String>,
-    pub visibility: Option<serde_json::Value>,
+    pub visibility: Option<crate::models::api_deployment_visibility::ApiDeploymentVisibility>,
 }

@@ -19,13 +19,13 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct McnUpdateOnrampRequest {
-    pub attached_hubs: Option<Vec<serde_json::Value>>,
-    pub attached_vpcs: Option<Vec<serde_json::Value>>,
+    pub attached_hubs: Option<Vec<crate::models::mcn_resource_id::McnResourceId>>,
+    pub attached_vpcs: Option<Vec<crate::models::mcn_resource_id::McnResourceId>>,
     pub description: Option<String>,
     pub install_routes_in_cloud: Option<bool>,
     pub install_routes_in_magic_wan: Option<bool>,
     pub manage_hub_to_hub_attachments: Option<bool>,
     pub manage_vpc_to_hub_attachments: Option<bool>,
     pub name: Option<String>,
-    pub vpc: Option<serde_json::Value>,
+    pub vpc: Option<crate::models::mcn_resource_id::McnResourceId>,
 }

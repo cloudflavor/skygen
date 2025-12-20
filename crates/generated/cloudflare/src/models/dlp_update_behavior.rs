@@ -20,5 +20,5 @@ use serde::{Deserialize, Serialize};
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct DlpUpdateBehavior {
     pub enabled: bool,
-    pub risk_level: serde_json::Value,
+    pub risk_level: crate::models::dlp_risk_level::DlpRiskLevel,
 }

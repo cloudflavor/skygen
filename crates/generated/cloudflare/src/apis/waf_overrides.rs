@@ -15,12 +15,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::firewall_override_response_collection::FirewallOverrideResponseCollection;
+use crate::models::firewall_override_response_single::FirewallOverrideResponseSingle;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct ListWafOverridesRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, FirewallOverrideResponseCollection>,
 }
 
 impl<'a> ListWafOverridesRequest<'a> {
@@ -43,18 +45,32 @@ impl<'a> ListWafOverridesRequest<'a> {
         self.builder = self.builder.header_param("per_page", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<FirewallOverrideResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// List WAF overrides
+///
+/// Fetches the URI-based WAF overrides in a zone.
+///
+/// **Note:** Applies only to the [previous version of WAF managed rules](<https://developers.cloudflare.com/support/firewall/managed-rules-web-application-firewall-waf/understanding-waf-managed-rules-web-application-firewall/).>
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/firewall/waf/overrides`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `page` (query,optional)
+/// - `per_page` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::waf_overrides };
+/// use cloudflare::{ ApiClient, apis::waf_overrides };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_waf_overrides(&api)
-///     .with_zone_id("value")
+/// let response = list_waf_overrides(&api)
+///     .with_zone_id("zone_id")
+///     .with_page("page")
+///     .with_per_page("per_page")
 ///     .send()
 ///     .await?;
 /// ```
@@ -64,7 +80,7 @@ pub fn list_waf_overrides(api: &ApiClient) -> ListWafOverridesRequest<'_> {
 
 #[derive(Debug)]
 pub struct CreateWafOverrideRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, FirewallOverrideResponseSingle>,
 }
 
 impl<'a> CreateWafOverrideRequest<'a> {
@@ -87,18 +103,30 @@ impl<'a> CreateWafOverrideRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<FirewallOverrideResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Create a WAF override
+///
+/// Creates a URI-based WAF override for a zone.
+///
+/// **Note:** Applies only to the [previous version of WAF managed rules](<https://developers.cloudflare.com/support/firewall/managed-rules-web-application-firewall-waf/understanding-waf-managed-rules-web-application-firewall/).>
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/zones/{zone_id}/firewall/waf/overrides`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::waf_overrides };
+/// use cloudflare::{ ApiClient, apis::waf_overrides };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = create_waf_override(&api)
-///     .with_zone_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = create_waf_override(&api)
+///     .with_zone_id("zone_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -108,7 +136,7 @@ pub fn create_waf_override(api: &ApiClient) -> CreateWafOverrideRequest<'_> {
 
 #[derive(Debug)]
 pub struct GetWafOverrideRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, FirewallOverrideResponseSingle>,
 }
 
 impl<'a> GetWafOverrideRequest<'a> {
@@ -131,19 +159,30 @@ impl<'a> GetWafOverrideRequest<'a> {
         self.builder = self.builder.path_param("overrides_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<FirewallOverrideResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Get a WAF override
+///
+/// Fetches the details of a URI-based WAF override.
+///
+/// **Note:** Applies only to the [previous version of WAF managed rules](<https://developers.cloudflare.com/support/firewall/managed-rules-web-application-firewall-waf/understanding-waf-managed-rules-web-application-firewall/).>
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/firewall/waf/overrides/{overrides_id}`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `overrides_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::waf_overrides };
+/// use cloudflare::{ ApiClient, apis::waf_overrides };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_waf_override(&api)
-///     .with_zone_id("value")
-///     .with_overrides_id("value")
+/// let response = get_waf_override(&api)
+///     .with_zone_id("zone_id")
+///     .with_overrides_id("overrides_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -153,7 +192,7 @@ pub fn get_waf_override(api: &ApiClient) -> GetWafOverrideRequest<'_> {
 
 #[derive(Debug)]
 pub struct UpdateWafOverrideRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, FirewallOverrideResponseSingle>,
 }
 
 impl<'a> UpdateWafOverrideRequest<'a> {
@@ -184,19 +223,32 @@ impl<'a> UpdateWafOverrideRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<FirewallOverrideResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Update WAF override
+///
+/// Updates an existing URI-based WAF override.
+///
+/// **Note:** Applies only to the [previous version of WAF managed rules](<https://developers.cloudflare.com/support/firewall/managed-rules-web-application-firewall-waf/understanding-waf-managed-rules-web-application-firewall/).>
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/zones/{zone_id}/firewall/waf/overrides/{overrides_id}`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `overrides_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::waf_overrides };
+/// use cloudflare::{ ApiClient, apis::waf_overrides };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = update_waf_override(&api)
-///     .with_zone_id("value")
-///     .with_overrides_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = update_waf_override(&api)
+///     .with_zone_id("zone_id")
+///     .with_overrides_id("overrides_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -233,15 +285,26 @@ impl<'a> DeleteWafOverrideRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Delete a WAF override
+///
+/// Deletes an existing URI-based WAF override.
+///
+/// **Note:** Applies only to the [previous version of WAF managed rules](<https://developers.cloudflare.com/support/firewall/managed-rules-web-application-firewall-waf/understanding-waf-managed-rules-web-application-firewall/).>
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/zones/{zone_id}/firewall/waf/overrides/{overrides_id}`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `overrides_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::waf_overrides };
+/// use cloudflare::{ ApiClient, apis::waf_overrides };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete_waf_override(&api)
-///     .with_zone_id("value")
-///     .with_overrides_id("value")
+/// let response = delete_waf_override(&api)
+///     .with_zone_id("zone_id")
+///     .with_overrides_id("overrides_id")
 ///     .send()
 ///     .await?;
 /// ```

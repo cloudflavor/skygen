@@ -20,6 +20,7 @@ use serde::{Deserialize, Serialize};
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct DigitalExperienceMonitoringWarpConfigDetails {
     pub account_name: Option<String>,
-    pub account_tag: Option<serde_json::Value>,
+    pub account_tag:
+        Option<crate::models::digital_experience_monitoring_uuid::DigitalExperienceMonitoringUuid>,
     pub config_name: Option<String>,
 }

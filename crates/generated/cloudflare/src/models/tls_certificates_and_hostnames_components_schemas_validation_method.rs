@@ -19,5 +19,5 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct TlsCertificatesAndHostnamesComponentsSchemasValidationMethod {
-    pub validation_method: serde_json::Value,
+    pub validation_method: crate::models::tls_certificates_and_hostnames_validation_method_definition::TlsCertificatesAndHostnamesValidationMethodDefinition,
 }

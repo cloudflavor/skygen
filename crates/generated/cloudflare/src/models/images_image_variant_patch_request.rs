@@ -19,6 +19,6 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct ImagesImageVariantPatchRequest {
-    pub never_require_signed_ur_ls: Option<serde_json::Value>,
+    pub never_require_signed_ur_ls: Option<crate::models::images_image_variant_never_require_signed_ur_ls::ImagesImageVariantNeverRequireSignedUrLs>,
     pub options: crate::models::images_image_variant_options::ImagesImageVariantOptions,
 }

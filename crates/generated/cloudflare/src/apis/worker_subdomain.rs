@@ -39,14 +39,22 @@ impl<'a> GetSubdomainRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get Subdomain
+///
+/// Returns a Workers subdomain for an account.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/workers/subdomain`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::worker_subdomain };
+/// use cloudflare::{ ApiClient, apis::worker_subdomain };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_subdomain(&api)
-///     .with_account_id("value")
+/// let response = get_subdomain(&api)
+///     .with_account_id("account_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -83,14 +91,24 @@ impl<'a> CreateSubdomainRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Create Subdomain
+///
+/// Creates a Workers subdomain for an account.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/accounts/{account_id}/workers/subdomain`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::worker_subdomain };
+/// use cloudflare::{ ApiClient, apis::worker_subdomain };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = create_subdomain(&api)
-///     .with_account_id("value")
+/// # let body: crate::models::workers_schemas_subdomain::WorkersSchemasSubdomain = todo!();
+/// let response = create_subdomain(&api)
+///     .with_account_id("account_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```

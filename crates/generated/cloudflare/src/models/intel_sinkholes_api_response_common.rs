@@ -19,7 +19,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct IntelSinkholesApiResponseCommon {
-    pub errors: serde_json::Value,
-    pub messages: serde_json::Value,
+    pub errors: crate::models::intel_sinkholes_messages::IntelSinkholesMessages,
+    pub messages: crate::models::intel_sinkholes_messages::IntelSinkholesMessages,
     pub success: bool,
 }

@@ -15,12 +15,16 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::addressing_api_response_collection::AddressingApiResponseCollection;
+use crate::models::addressing_loa_upload_response::AddressingLoaUploadResponse;
+use crate::models::addressing_response_collection::AddressingResponseCollection;
+use crate::models::addressing_single_response::AddressingSingleResponse;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct UploadLoaDocumentRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, AddressingLoaUploadResponse>,
 }
 
 impl<'a> UploadLoaDocumentRequest<'a> {
@@ -38,18 +42,26 @@ impl<'a> UploadLoaDocumentRequest<'a> {
         self.builder = self.builder.path_param("account_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<AddressingLoaUploadResponse> {
         self.builder.send().await
     }
 }
-
 /// Upload LOA Document
+///
+/// Submit LOA document (pdf format) under the account.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/addressing/loa_documents`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::ip_address_management_prefixes };
+/// use cloudflare::{ ApiClient, apis::ip_address_management_prefixes };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = upload_loa_document(&api)
-///     .with_account_id("value")
+/// let response = upload_loa_document(&api)
+///     .with_account_id("account_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -86,15 +98,24 @@ impl<'a> DownloadLoaDocumentRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Download LOA Document
+///
+/// Download specified LOA document under the account.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/addressing/loa_documents/{loa_document_id}/download`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `loa_document_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::ip_address_management_prefixes };
+/// use cloudflare::{ ApiClient, apis::ip_address_management_prefixes };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = download_loa_document(&api)
-///     .with_account_id("value")
-///     .with_loa_document_id("value")
+/// let response = download_loa_document(&api)
+///     .with_account_id("account_id")
+///     .with_loa_document_id("loa_document_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -104,7 +125,7 @@ pub fn download_loa_document(api: &ApiClient) -> DownloadLoaDocumentRequest<'_> 
 
 #[derive(Debug)]
 pub struct ListPrefixesRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, AddressingResponseCollection>,
 }
 
 impl<'a> ListPrefixesRequest<'a> {
@@ -122,18 +143,26 @@ impl<'a> ListPrefixesRequest<'a> {
         self.builder = self.builder.path_param("account_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<AddressingResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// List Prefixes
+///
+/// List all prefixes owned by the account.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/addressing/prefixes`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::ip_address_management_prefixes };
+/// use cloudflare::{ ApiClient, apis::ip_address_management_prefixes };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_prefixes(&api)
-///     .with_account_id("value")
+/// let response = list_prefixes(&api)
+///     .with_account_id("account_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -143,7 +172,7 @@ pub fn list_prefixes(api: &ApiClient) -> ListPrefixesRequest<'_> {
 
 #[derive(Debug)]
 pub struct AddPrefixRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, AddressingSingleResponse>,
 }
 
 impl<'a> AddPrefixRequest<'a> {
@@ -166,18 +195,28 @@ impl<'a> AddPrefixRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<AddressingSingleResponse> {
         self.builder.send().await
     }
 }
-
 /// Add Prefix
+///
+/// Add a new prefix under the account.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/addressing/prefixes`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::ip_address_management_prefixes };
+/// use cloudflare::{ ApiClient, apis::ip_address_management_prefixes };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = add_prefix(&api)
-///     .with_account_id("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = add_prefix(&api)
+///     .with_account_id("account_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -187,7 +226,7 @@ pub fn add_prefix(api: &ApiClient) -> AddPrefixRequest<'_> {
 
 #[derive(Debug)]
 pub struct PrefixDetailsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, AddressingSingleResponse>,
 }
 
 impl<'a> PrefixDetailsRequest<'a> {
@@ -210,19 +249,28 @@ impl<'a> PrefixDetailsRequest<'a> {
         self.builder = self.builder.path_param("prefix_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<AddressingSingleResponse> {
         self.builder.send().await
     }
 }
-
 /// Prefix Details
+///
+/// List a particular prefix owned by the account.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/addressing/prefixes/{prefix_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `prefix_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::ip_address_management_prefixes };
+/// use cloudflare::{ ApiClient, apis::ip_address_management_prefixes };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = prefix_details(&api)
-///     .with_account_id("value")
-///     .with_prefix_id("value")
+/// let response = prefix_details(&api)
+///     .with_account_id("account_id")
+///     .with_prefix_id("prefix_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -232,7 +280,7 @@ pub fn prefix_details(api: &ApiClient) -> PrefixDetailsRequest<'_> {
 
 #[derive(Debug)]
 pub struct DeletePrefixRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, AddressingApiResponseCollection>,
 }
 
 impl<'a> DeletePrefixRequest<'a> {
@@ -255,19 +303,28 @@ impl<'a> DeletePrefixRequest<'a> {
         self.builder = self.builder.path_param("prefix_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<AddressingApiResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// Delete Prefix
+///
+/// Delete an unapproved prefix owned by the account.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/accounts/{account_id}/addressing/prefixes/{prefix_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `prefix_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::ip_address_management_prefixes };
+/// use cloudflare::{ ApiClient, apis::ip_address_management_prefixes };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete_prefix(&api)
-///     .with_account_id("value")
-///     .with_prefix_id("value")
+/// let response = delete_prefix(&api)
+///     .with_account_id("account_id")
+///     .with_prefix_id("prefix_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -277,7 +334,7 @@ pub fn delete_prefix(api: &ApiClient) -> DeletePrefixRequest<'_> {
 
 #[derive(Debug)]
 pub struct UpdatePrefixDescriptionRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, AddressingSingleResponse>,
 }
 
 impl<'a> UpdatePrefixDescriptionRequest<'a> {
@@ -305,19 +362,30 @@ impl<'a> UpdatePrefixDescriptionRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<AddressingSingleResponse> {
         self.builder.send().await
     }
 }
-
 /// Update Prefix Description
+///
+/// Modify the description for a prefix owned by the account.
+///
+/// **HTTP Method:** `PATCH`
+/// **Path:** `/accounts/{account_id}/addressing/prefixes/{prefix_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `prefix_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::ip_address_management_prefixes };
+/// use cloudflare::{ ApiClient, apis::ip_address_management_prefixes };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = update_prefix_description(&api)
-///     .with_account_id("value")
-///     .with_prefix_id("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = update_prefix_description(&api)
+///     .with_account_id("account_id")
+///     .with_prefix_id("prefix_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```

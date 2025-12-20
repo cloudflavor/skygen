@@ -15,12 +15,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::intel_components_schemas_response::IntelComponentsSchemasResponse;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct GetIpListsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, IntelComponentsSchemasResponse>,
 }
 
 impl<'a> GetIpListsRequest<'a> {
@@ -35,18 +36,26 @@ impl<'a> GetIpListsRequest<'a> {
         self.builder = self.builder.path_param("account_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<IntelComponentsSchemasResponse> {
         self.builder.send().await
     }
 }
-
 /// Get IP Lists
+///
+/// Get IP Lists.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/intel/ip-list`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::ip_list };
+/// use cloudflare::{ ApiClient, apis::ip_list };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_ip_lists(&api)
-///     .with_account_id("value")
+/// let response = get_ip_lists(&api)
+///     .with_account_id("account_id")
 ///     .send()
 ///     .await?;
 /// ```

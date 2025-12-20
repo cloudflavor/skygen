@@ -20,7 +20,7 @@ use serde::{Deserialize, Serialize};
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct IamUserGroup {
     pub created_on: String,
-    pub id: serde_json::Value,
+    pub id: crate::models::iam_user_group_identifier::IamUserGroupIdentifier,
     pub modified_on: String,
     pub name: String,
     pub policies: Option<Vec<serde_json::Value>>,

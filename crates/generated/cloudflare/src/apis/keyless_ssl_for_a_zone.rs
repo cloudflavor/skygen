@@ -15,12 +15,15 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::tls_certificates_and_hostnames_keyless_response_collection::TlsCertificatesAndHostnamesKeylessResponseCollection;
+use crate::models::tls_certificates_and_hostnames_keyless_response_single::TlsCertificatesAndHostnamesKeylessResponseSingle;
+use crate::models::tls_certificates_and_hostnames_keyless_response_single_id::TlsCertificatesAndHostnamesKeylessResponseSingleId;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct ListKeylessSslConfigurationsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, TlsCertificatesAndHostnamesKeylessResponseCollection>,
 }
 
 impl<'a> ListKeylessSslConfigurationsRequest<'a> {
@@ -35,18 +38,26 @@ impl<'a> ListKeylessSslConfigurationsRequest<'a> {
         self.builder = self.builder.path_param("zone_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<TlsCertificatesAndHostnamesKeylessResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// List Keyless SSL Configurations
+///
+/// List all Keyless SSL configurations for a given zone.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/keyless_certificates`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::keyless_ssl_for_a_zone };
+/// use cloudflare::{ ApiClient, apis::keyless_ssl_for_a_zone };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_keyless_ssl_configurations(&api)
-///     .with_zone_id("value")
+/// let response = list_keyless_ssl_configurations(&api)
+///     .with_zone_id("zone_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -56,7 +67,7 @@ pub fn list_keyless_ssl_configurations(api: &ApiClient) -> ListKeylessSslConfigu
 
 #[derive(Debug)]
 pub struct CreateKeylessSslConfigurationRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, TlsCertificatesAndHostnamesKeylessResponseSingle>,
 }
 
 impl<'a> CreateKeylessSslConfigurationRequest<'a> {
@@ -79,18 +90,26 @@ impl<'a> CreateKeylessSslConfigurationRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<TlsCertificatesAndHostnamesKeylessResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Create Keyless SSL Configuration
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/zones/{zone_id}/keyless_certificates`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::keyless_ssl_for_a_zone };
+/// use cloudflare::{ ApiClient, apis::keyless_ssl_for_a_zone };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = create_keyless_ssl_configuration(&api)
-///     .with_zone_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = create_keyless_ssl_configuration(&api)
+///     .with_zone_id("zone_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -102,7 +121,7 @@ pub fn create_keyless_ssl_configuration(
 
 #[derive(Debug)]
 pub struct GetKeylessSslConfigurationRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, TlsCertificatesAndHostnamesKeylessResponseSingle>,
 }
 
 impl<'a> GetKeylessSslConfigurationRequest<'a> {
@@ -125,19 +144,28 @@ impl<'a> GetKeylessSslConfigurationRequest<'a> {
         self.builder = self.builder.path_param("keyless_certificate_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<TlsCertificatesAndHostnamesKeylessResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Get Keyless SSL Configuration
+///
+/// Get details for one Keyless SSL configuration.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/keyless_certificates/{keyless_certificate_id}`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `keyless_certificate_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::keyless_ssl_for_a_zone };
+/// use cloudflare::{ ApiClient, apis::keyless_ssl_for_a_zone };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_keyless_ssl_configuration(&api)
-///     .with_zone_id("value")
-///     .with_keyless_certificate_id("value")
+/// let response = get_keyless_ssl_configuration(&api)
+///     .with_zone_id("zone_id")
+///     .with_keyless_certificate_id("keyless_certificate_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -147,7 +175,7 @@ pub fn get_keyless_ssl_configuration(api: &ApiClient) -> GetKeylessSslConfigurat
 
 #[derive(Debug)]
 pub struct DeleteKeylessSslConfigurationRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, TlsCertificatesAndHostnamesKeylessResponseSingleId>,
 }
 
 impl<'a> DeleteKeylessSslConfigurationRequest<'a> {
@@ -170,19 +198,26 @@ impl<'a> DeleteKeylessSslConfigurationRequest<'a> {
         self.builder = self.builder.path_param("keyless_certificate_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<TlsCertificatesAndHostnamesKeylessResponseSingleId> {
         self.builder.send().await
     }
 }
-
 /// Delete Keyless SSL Configuration
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/zones/{zone_id}/keyless_certificates/{keyless_certificate_id}`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `keyless_certificate_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::keyless_ssl_for_a_zone };
+/// use cloudflare::{ ApiClient, apis::keyless_ssl_for_a_zone };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete_keyless_ssl_configuration(&api)
-///     .with_zone_id("value")
-///     .with_keyless_certificate_id("value")
+/// let response = delete_keyless_ssl_configuration(&api)
+///     .with_zone_id("zone_id")
+///     .with_keyless_certificate_id("keyless_certificate_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -194,7 +229,7 @@ pub fn delete_keyless_ssl_configuration(
 
 #[derive(Debug)]
 pub struct EditKeylessSslConfigurationRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, TlsCertificatesAndHostnamesKeylessResponseSingle>,
 }
 
 impl<'a> EditKeylessSslConfigurationRequest<'a> {
@@ -225,19 +260,30 @@ impl<'a> EditKeylessSslConfigurationRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<TlsCertificatesAndHostnamesKeylessResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Edit Keyless SSL Configuration
+///
+/// This will update attributes of a Keyless SSL. Consists of one or more of the following:  host,name,port.
+///
+/// **HTTP Method:** `PATCH`
+/// **Path:** `/zones/{zone_id}/keyless_certificates/{keyless_certificate_id}`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `keyless_certificate_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::keyless_ssl_for_a_zone };
+/// use cloudflare::{ ApiClient, apis::keyless_ssl_for_a_zone };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = edit_keyless_ssl_configuration(&api)
-///     .with_zone_id("value")
-///     .with_keyless_certificate_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = edit_keyless_ssl_configuration(&api)
+///     .with_zone_id("zone_id")
+///     .with_keyless_certificate_id("keyless_certificate_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```

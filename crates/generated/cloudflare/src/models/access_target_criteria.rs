@@ -19,7 +19,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct AccessTargetCriteria {
-    pub port: serde_json::Value,
-    pub protocol: serde_json::Value,
+    pub port: crate::models::access_port::AccessPort,
+    pub protocol: crate::models::access_protocol::AccessProtocol,
     pub target_attributes: crate::models::access_target_attributes::AccessTargetAttributes,
 }

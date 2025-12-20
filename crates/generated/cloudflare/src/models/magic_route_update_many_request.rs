@@ -19,5 +19,6 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct MagicRouteUpdateManyRequest {
-    pub routes: Vec<serde_json::Value>,
+    pub routes:
+        Vec<crate::models::magic_route_update_single_request::MagicRouteUpdateSingleRequest>,
 }

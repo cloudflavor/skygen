@@ -19,8 +19,8 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct SecondaryDnsTsig {
-    pub algo: serde_json::Value,
-    pub id: serde_json::Value,
-    pub name: serde_json::Value,
-    pub secret: serde_json::Value,
+    pub algo: crate::models::secondary_dns_algo::SecondaryDnsAlgo,
+    pub id: crate::models::secondary_dns_schemas_identifier::SecondaryDnsSchemasIdentifier,
+    pub name: crate::models::secondary_dns_schemas_name::SecondaryDnsSchemasName,
+    pub secret: crate::models::secondary_dns_secret::SecondaryDnsSecret,
 }

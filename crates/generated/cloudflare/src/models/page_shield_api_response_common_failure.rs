@@ -19,8 +19,8 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct PageShieldApiResponseCommonFailure {
-    pub errors: serde_json::Value,
-    pub messages: Option<serde_json::Value>,
+    pub errors: crate::models::page_shield_messages::PageShieldMessages,
+    pub messages: Option<crate::models::page_shield_messages::PageShieldMessages>,
     pub result: Option<serde_json::Value>,
     pub success: bool,
 }

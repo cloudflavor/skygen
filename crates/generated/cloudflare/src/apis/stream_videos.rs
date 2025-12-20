@@ -15,12 +15,17 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::stream_direct_upload_response::StreamDirectUploadResponse;
+use crate::models::stream_signed_token_response::StreamSignedTokenResponse;
+use crate::models::stream_storage_use_response::StreamStorageUseResponse;
+use crate::models::stream_video_response_collection::StreamVideoResponseCollection;
+use crate::models::stream_video_response_single::StreamVideoResponseSingle;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct ListVideosRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, StreamVideoResponseCollection>,
 }
 
 impl<'a> ListVideosRequest<'a> {
@@ -66,18 +71,42 @@ impl<'a> ListVideosRequest<'a> {
         self.builder = self.builder.header_param("include_counts", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<StreamVideoResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// List videos
+///
+/// Lists up to 1000 videos from a single request. For a specific range, refer to the optional parameters.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/stream`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `status` (query,optional)
+/// - `creator` (query,optional)
+/// - `type` (query,optional)
+/// - `asc` (query,optional)
+/// - `search` (query,optional)
+/// - `start` (query,optional)
+/// - `end` (query,optional)
+/// - `include_counts` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::stream_videos };
+/// use cloudflare::{ ApiClient, apis::stream_videos };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_videos(&api)
-///     .with_account_id("value")
+/// let response = list_videos(&api)
+///     .with_account_id("account_id")
+///     .with_status("status")
+///     .with_creator("creator")
+///     .with_type_param("type")
+///     .with_asc("asc")
+///     .with_search("search")
+///     .with_start("start")
+///     .with_end("end")
+///     .with_include_counts("include_counts")
 ///     .send()
 ///     .await?;
 /// ```
@@ -125,14 +154,32 @@ impl<'a> InitiateVideoUploadsUsingRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Initiate video uploads using TUS
+///
+/// Initiates a video upload using the TUS protocol. On success, the server responds with a status code 201 (created) and includes a `location` header to indicate where the content should be uploaded. Refer to <https://tus.io> for protocol details.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/stream`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `Tus-Resumable` (header,required)
+/// - `Upload-Creator` (header,optional)
+/// - `Upload-Length` (header,required)
+/// - `Upload-Metadata` (header,optional)
+/// - `direct_user` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::stream_videos };
+/// use cloudflare::{ ApiClient, apis::stream_videos };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = initiate_video_uploads_using(&api)
-///     .with_account_id("value")
+/// let response = initiate_video_uploads_using(&api)
+///     .with_account_id("account_id")
+///     .with_tus_resumable("Tus-Resumable")
+///     .with_upload_creator("Upload-Creator")
+///     .with_upload_length("Upload-Length")
+///     .with_upload_metadata("Upload-Metadata")
+///     .with_direct_user("direct_user")
 ///     .send()
 ///     .await?;
 /// ```
@@ -142,7 +189,7 @@ pub fn initiate_video_uploads_using(api: &ApiClient) -> InitiateVideoUploadsUsin
 
 #[derive(Debug)]
 pub struct UploadVideosUrlRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, StreamVideoResponseSingle>,
 }
 
 impl<'a> UploadVideosUrlRequest<'a> {
@@ -162,22 +209,37 @@ impl<'a> UploadVideosUrlRequest<'a> {
         self.builder = self.builder.header_param("Upload-Creator", value);
         self
     }
-    pub fn with_body(mut self, body: serde_json::Value) -> Self {
+    pub fn with_body(
+        mut self,
+        body: crate::models::stream_video_copy_request::StreamVideoCopyRequest,
+    ) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<StreamVideoResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Upload videos from a URL
+///
+/// Uploads a video to Stream from a provided URL.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/stream/copy`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `Upload-Creator` (header,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::stream_videos };
+/// use cloudflare::{ ApiClient, apis::stream_videos };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = upload_videos_url(&api)
-///     .with_account_id("value")
+/// # let body: crate::models::stream_video_copy_request::StreamVideoCopyRequest = todo!();
+/// let response = upload_videos_url(&api)
+///     .with_account_id("account_id")
+///     .with_upload_creator("Upload-Creator")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -187,7 +249,7 @@ pub fn upload_videos_url(api: &ApiClient) -> UploadVideosUrlRequest<'_> {
 
 #[derive(Debug)]
 pub struct UploadVideosDirectUploadRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, StreamDirectUploadResponse>,
 }
 
 impl<'a> UploadVideosDirectUploadRequest<'a> {
@@ -217,18 +279,30 @@ impl<'a> UploadVideosDirectUploadRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<StreamDirectUploadResponse> {
         self.builder.send().await
     }
 }
-
 /// Upload videos via direct upload URLs
+///
+/// Creates a direct upload that allows video uploads without an API key.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/stream/direct_upload`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `Upload-Creator` (header,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::stream_videos };
+/// use cloudflare::{ ApiClient, apis::stream_videos };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = upload_videos_direct_upload(&api)
-///     .with_account_id("value")
+/// # let body: crate::models::stream_direct_upload_request::StreamDirectUploadRequest = todo!();
+/// let response = upload_videos_direct_upload(&api)
+///     .with_account_id("account_id")
+///     .with_upload_creator("Upload-Creator")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -238,7 +312,7 @@ pub fn upload_videos_direct_upload(api: &ApiClient) -> UploadVideosDirectUploadR
 
 #[derive(Debug)]
 pub struct StorageUsageRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, StreamStorageUseResponse>,
 }
 
 impl<'a> StorageUsageRequest<'a> {
@@ -260,18 +334,28 @@ impl<'a> StorageUsageRequest<'a> {
         self.builder = self.builder.header_param("creator", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<StreamStorageUseResponse> {
         self.builder.send().await
     }
 }
-
 /// Storage use
+///
+/// Returns information about an account's storage use.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/stream/storage-usage`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `creator` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::stream_videos };
+/// use cloudflare::{ ApiClient, apis::stream_videos };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = storage_usage(&api)
-///     .with_account_id("value")
+/// let response = storage_usage(&api)
+///     .with_account_id("account_id")
+///     .with_creator("creator")
 ///     .send()
 ///     .await?;
 /// ```
@@ -281,7 +365,7 @@ pub fn storage_usage(api: &ApiClient) -> StorageUsageRequest<'_> {
 
 #[derive(Debug)]
 pub struct RetrieveVideoDetailsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, StreamVideoResponseSingle>,
 }
 
 impl<'a> RetrieveVideoDetailsRequest<'a> {
@@ -304,19 +388,28 @@ impl<'a> RetrieveVideoDetailsRequest<'a> {
         self.builder = self.builder.path_param("identifier", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<StreamVideoResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Retrieve video details
+///
+/// Fetches details for a single video.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/stream/{identifier}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `identifier` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::stream_videos };
+/// use cloudflare::{ ApiClient, apis::stream_videos };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = retrieve_video_details(&api)
-///     .with_account_id("value")
-///     .with_identifier("value")
+/// let response = retrieve_video_details(&api)
+///     .with_account_id("account_id")
+///     .with_identifier("identifier")
 ///     .send()
 ///     .await?;
 /// ```
@@ -326,7 +419,7 @@ pub fn retrieve_video_details(api: &ApiClient) -> RetrieveVideoDetailsRequest<'_
 
 #[derive(Debug)]
 pub struct UpdateVideoDetailsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, StreamVideoResponseSingle>,
 }
 
 impl<'a> UpdateVideoDetailsRequest<'a> {
@@ -357,19 +450,30 @@ impl<'a> UpdateVideoDetailsRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<StreamVideoResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Edit video details
+///
+/// Edit details for a single video.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/stream/{identifier}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `identifier` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::stream_videos };
+/// use cloudflare::{ ApiClient, apis::stream_videos };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = update_video_details(&api)
-///     .with_account_id("value")
-///     .with_identifier("value")
+/// # let body: crate::models::stream_video_update::StreamVideoUpdate = todo!();
+/// let response = update_video_details(&api)
+///     .with_account_id("account_id")
+///     .with_identifier("identifier")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -406,15 +510,24 @@ impl<'a> DeleteVideoRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Delete video
+///
+/// Deletes a video and its copies from Cloudflare Stream.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/accounts/{account_id}/stream/{identifier}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `identifier` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::stream_videos };
+/// use cloudflare::{ ApiClient, apis::stream_videos };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete_video(&api)
-///     .with_account_id("value")
-///     .with_identifier("value")
+/// let response = delete_video(&api)
+///     .with_account_id("account_id")
+///     .with_identifier("identifier")
 ///     .send()
 ///     .await?;
 /// ```
@@ -451,15 +564,24 @@ impl<'a> RetreieveEmbedCodeHtmlRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Retrieve embed Code HTML
+///
+/// Fetches an HTML code snippet to embed a video in a web page delivered through Cloudflare. On success, returns an HTML fragment for use on web pages to display a video. On failure, returns a JSON response body.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/stream/{identifier}/embed`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `identifier` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::stream_videos };
+/// use cloudflare::{ ApiClient, apis::stream_videos };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = retreieve_embed_code_html(&api)
-///     .with_account_id("value")
-///     .with_identifier("value")
+/// let response = retreieve_embed_code_html(&api)
+///     .with_account_id("account_id")
+///     .with_identifier("identifier")
 ///     .send()
 ///     .await?;
 /// ```
@@ -469,7 +591,7 @@ pub fn retreieve_embed_code_html(api: &ApiClient) -> RetreieveEmbedCodeHtmlReque
 
 #[derive(Debug)]
 pub struct CreateSignedUrlTokensRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, StreamSignedTokenResponse>,
 }
 
 impl<'a> CreateSignedUrlTokensRequest<'a> {
@@ -500,19 +622,30 @@ impl<'a> CreateSignedUrlTokensRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<StreamSignedTokenResponse> {
         self.builder.send().await
     }
 }
-
 /// Create signed URL tokens for videos
+///
+/// Creates a signed URL token for a video. If a body is not provided in the request, a token is created with default values.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/stream/{identifier}/token`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `identifier` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::stream_videos };
+/// use cloudflare::{ ApiClient, apis::stream_videos };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = create_signed_url_tokens(&api)
-///     .with_account_id("value")
-///     .with_identifier("value")
+/// # let body: crate::models::stream_signed_token_request::StreamSignedTokenRequest = todo!();
+/// let response = create_signed_url_tokens(&api)
+///     .with_account_id("account_id")
+///     .with_identifier("identifier")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```

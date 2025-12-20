@@ -42,14 +42,20 @@ impl<'a> ConfigFetchRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// List Scan Configs
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/cloudforce-one/scans/config`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::scans };
+/// use cloudflare::{ ApiClient, apis::scans };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = config_fetch(&api)
-///     .with_account_id("value")
+/// let response = config_fetch(&api)
+///     .with_account_id("account_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -88,14 +94,22 @@ impl<'a> ConfigCreateRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Create a new Scan Config
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/cloudforce-one/scans/config`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::scans };
+/// use cloudflare::{ ApiClient, apis::scans };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = config_create(&api)
-///     .with_account_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = config_create(&api)
+///     .with_account_id("account_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -132,15 +146,22 @@ impl<'a> DeleteScansRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Delete a Scan Config
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/accounts/{account_id}/cloudforce-one/scans/config/{config_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `config_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::scans };
+/// use cloudflare::{ ApiClient, apis::scans };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete_scans(&api)
-///     .with_account_id("value")
-///     .with_config_id("value")
+/// let response = delete_scans(&api)
+///     .with_account_id("account_id")
+///     .with_config_id("config_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -184,15 +205,24 @@ impl<'a> PostConfigUpdateRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Update an existing Scan Config
+///
+/// **HTTP Method:** `PATCH`
+/// **Path:** `/accounts/{account_id}/cloudforce-one/scans/config/{config_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `config_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::scans };
+/// use cloudflare::{ ApiClient, apis::scans };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = post_config_update(&api)
-///     .with_account_id("value")
-///     .with_config_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = post_config_update(&api)
+///     .with_account_id("account_id")
+///     .with_config_id("config_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -229,15 +259,22 @@ impl<'a> GetOpenPortsRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get the Latest Scan Result
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/cloudforce-one/scans/results/{config_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `config_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::scans };
+/// use cloudflare::{ ApiClient, apis::scans };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_open_ports(&api)
-///     .with_account_id("value")
-///     .with_config_id("value")
+/// let response = get_open_ports(&api)
+///     .with_account_id("account_id")
+///     .with_config_id("config_id")
 ///     .send()
 ///     .await?;
 /// ```

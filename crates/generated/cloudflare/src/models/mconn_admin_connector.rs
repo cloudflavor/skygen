@@ -19,12 +19,12 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct MconnAdminConnector {
-    pub account_id: serde_json::Value,
+    pub account_id: crate::models::mconn_account_id::MconnAccountId,
     pub activated: bool,
     pub cohort: Option<String>,
     pub desired_version: Option<String>,
-    pub device_id: Option<serde_json::Value>,
-    pub id: serde_json::Value,
+    pub device_id: Option<crate::models::mconn_uuid::MconnUuid>,
+    pub id: crate::models::mconn_uuid::MconnUuid,
     pub interrupt_window_duration_hours: f64,
     pub interrupt_window_hour_of_day: f64,
     pub last_heartbeat: Option<String>,

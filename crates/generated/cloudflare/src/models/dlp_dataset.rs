@@ -28,7 +28,7 @@ pub struct DlpDataset {
     pub name: String,
     pub num_cells: i64,
     pub secret: bool,
-    pub status: serde_json::Value,
+    pub status: crate::models::dlp_dataset_upload_status::DlpDatasetUploadStatus,
     pub updated_at: String,
     pub uploads: Vec<crate::models::dlp_dataset_upload::DlpDatasetUpload>,
 }

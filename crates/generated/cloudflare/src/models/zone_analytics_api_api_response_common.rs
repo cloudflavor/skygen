@@ -19,8 +19,8 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct ZoneAnalyticsApiApiResponseCommon {
-    pub errors: serde_json::Value,
-    pub messages: serde_json::Value,
+    pub errors: crate::models::zone_analytics_api_messages::ZoneAnalyticsApiMessages,
+    pub messages: crate::models::zone_analytics_api_messages::ZoneAnalyticsApiMessages,
     pub result: serde_json::Value,
     pub success: bool,
 }

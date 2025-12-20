@@ -47,15 +47,24 @@ impl<'a> PurgeBuildCacheRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Purge build cache
+///
+/// Purge all cached build artifacts for a Pages project
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/pages/projects/{project_name}/purge_build_cache`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `project_name` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::pages_build_cache };
+/// use cloudflare::{ ApiClient, apis::pages_build_cache };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = purge_build_cache(&api)
-///     .with_account_id("value")
-///     .with_project_name("value")
+/// let response = purge_build_cache(&api)
+///     .with_account_id("account_id")
+///     .with_project_name("project_name")
 ///     .send()
 ///     .await?;
 /// ```

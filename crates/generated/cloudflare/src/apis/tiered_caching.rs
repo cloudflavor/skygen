@@ -39,14 +39,22 @@ impl<'a> GetTieredCachingSettingRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get Tiered Caching setting
+///
+/// Tiered Cache works by dividing Cloudflare's data centers into a hierarchy of lower-tiers and upper-tiers. If content is not cached in lower-tier data centers (generally the ones closest to a visitor), the lower-tier must ask an upper-tier to see if it has the content. If the upper-tier does not have the content, only the upper-tier can ask the origin for content. This practice improves bandwidth efficiency by limiting the number of data centers that can ask the origin for content, which reduces origin load and makes websites more cost-effective to operate. Additionally, Tiered Cache concentrates connections to origin servers so they come from a small number of data centers rather than the full set of network locations. This results in fewer open connections using server resources.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/argo/tiered_caching`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::tiered_caching };
+/// use cloudflare::{ ApiClient, apis::tiered_caching };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_tiered_caching_setting(&api)
-///     .with_zone_id("value")
+/// let response = get_tiered_caching_setting(&api)
+///     .with_zone_id("zone_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -80,14 +88,24 @@ impl<'a> PatchTieredCachingSettingRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Patch Tiered Caching setting
+///
+/// Tiered Cache works by dividing Cloudflare's data centers into a hierarchy of lower-tiers and upper-tiers. If content is not cached in lower-tier data centers (generally the ones closest to a visitor), the lower-tier must ask an upper-tier to see if it has the content. If the upper-tier does not have the content, only the upper-tier can ask the origin for content. This practice improves bandwidth efficiency by limiting the number of data centers that can ask the origin for content, which reduces origin load and makes websites more cost-effective to operate. Additionally, Tiered Cache concentrates connections to origin servers so they come from a small number of data centers rather than the full set of network locations. This results in fewer open connections using server resources.
+///
+/// **HTTP Method:** `PATCH`
+/// **Path:** `/zones/{zone_id}/argo/tiered_caching`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::tiered_caching };
+/// use cloudflare::{ ApiClient, apis::tiered_caching };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = patch_tiered_caching_setting(&api)
-///     .with_zone_id("value")
+/// # let body: crate::models::cache_rules_patch::CacheRulesPatch = todo!();
+/// let response = patch_tiered_caching_setting(&api)
+///     .with_zone_id("zone_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```

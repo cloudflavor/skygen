@@ -19,11 +19,12 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct WaitingroomRuleResult {
-    pub action: Option<serde_json::Value>,
-    pub description: Option<serde_json::Value>,
-    pub enabled: Option<serde_json::Value>,
-    pub expression: Option<serde_json::Value>,
-    pub id: Option<serde_json::Value>,
-    pub last_updated: Option<serde_json::Value>,
-    pub version: Option<serde_json::Value>,
+    pub action: Option<crate::models::waitingroom_rule_action::WaitingroomRuleAction>,
+    pub description:
+        Option<crate::models::waitingroom_rule_description::WaitingroomRuleDescription>,
+    pub enabled: Option<crate::models::waitingroom_rule_enabled::WaitingroomRuleEnabled>,
+    pub expression: Option<crate::models::waitingroom_rule_expression::WaitingroomRuleExpression>,
+    pub id: Option<crate::models::waitingroom_rule_id::WaitingroomRuleId>,
+    pub last_updated: Option<crate::models::waitingroom_timestamp::WaitingroomTimestamp>,
+    pub version: Option<crate::models::waitingroom_rule_version::WaitingroomRuleVersion>,
 }

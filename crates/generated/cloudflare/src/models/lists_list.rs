@@ -19,12 +19,13 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct ListsList {
-    pub created_on: Option<serde_json::Value>,
-    pub description: Option<serde_json::Value>,
-    pub id: Option<serde_json::Value>,
-    pub kind: Option<serde_json::Value>,
-    pub modified_on: Option<serde_json::Value>,
-    pub name: Option<serde_json::Value>,
-    pub num_items: Option<serde_json::Value>,
-    pub num_referencing_filters: Option<serde_json::Value>,
+    pub created_on: Option<crate::models::lists_created_on::ListsCreatedOn>,
+    pub description: Option<crate::models::lists_description::ListsDescription>,
+    pub id: Option<crate::models::lists_list_id::ListsListId>,
+    pub kind: Option<crate::models::lists_kind::ListsKind>,
+    pub modified_on: Option<crate::models::lists_modified_on::ListsModifiedOn>,
+    pub name: Option<crate::models::lists_name::ListsName>,
+    pub num_items: Option<crate::models::lists_num_items::ListsNumItems>,
+    pub num_referencing_filters:
+        Option<crate::models::lists_num_referencing_filters::ListsNumReferencingFilters>,
 }

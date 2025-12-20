@@ -19,7 +19,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct MconnRecordedEvent {
-    pub e: serde_json::Value,
+    pub e: crate::models::mconn_event::MconnEvent,
     pub n: f64,
     pub t: f64,
 }

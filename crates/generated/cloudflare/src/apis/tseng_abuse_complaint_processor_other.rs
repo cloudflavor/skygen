@@ -44,7 +44,10 @@ impl<'a> SubmitAbuseReportRequest<'a> {
         self.builder = self.builder.path_param("report_type", value);
         self
     }
-    pub fn with_body(mut self, body: serde_json::Value) -> Self {
+    pub fn with_body(
+        mut self,
+        body: crate::models::abuse_reports_submit_report_request::AbuseReportsSubmitReportRequest,
+    ) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
@@ -52,15 +55,24 @@ impl<'a> SubmitAbuseReportRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Submit the Abuse Report of a particular type
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/abuse-reports/{report_type}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `report_type` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::tseng_abuse_complaint_processor_other };
+/// use cloudflare::{ ApiClient, apis::tseng_abuse_complaint_processor_other };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = submit_abuse_report(&api)
-///     .with_account_id("value")
-///     .with_report_type("value")
+/// # let body: crate::models::abuse_reports_submit_report_request::AbuseReportsSubmitReportRequest = todo!();
+/// let response = submit_abuse_report(&api)
+///     .with_account_id("account_id")
+///     .with_report_type("report_type")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```

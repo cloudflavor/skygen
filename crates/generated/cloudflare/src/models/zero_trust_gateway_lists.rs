@@ -19,12 +19,17 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct ZeroTrustGatewayLists {
-    pub count: Option<serde_json::Value>,
-    pub created_at: Option<serde_json::Value>,
-    pub description: Option<serde_json::Value>,
-    pub id: Option<serde_json::Value>,
-    pub items: Option<serde_json::Value>,
-    pub name: Option<serde_json::Value>,
-    pub r#type: Option<serde_json::Value>,
-    pub updated_at: Option<serde_json::Value>,
+    pub count: Option<crate::models::zero_trust_gateway_count::ZeroTrustGatewayCount>,
+    pub created_at: Option<
+        crate::models::zero_trust_gateway_read_only_timestamp::ZeroTrustGatewayReadOnlyTimestamp,
+    >,
+    pub description:
+        Option<crate::models::zero_trust_gateway_description::ZeroTrustGatewayDescription>,
+    pub id: Option<crate::models::zero_trust_gateway_schemas_uuid::ZeroTrustGatewaySchemasUuid>,
+    pub items: Option<crate::models::zero_trust_gateway_items::ZeroTrustGatewayItems>,
+    pub name: Option<crate::models::zero_trust_gateway_name::ZeroTrustGatewayName>,
+    pub r#type: Option<crate::models::zero_trust_gateway_schemas_type::ZeroTrustGatewaySchemasType>,
+    pub updated_at: Option<
+        crate::models::zero_trust_gateway_read_only_timestamp::ZeroTrustGatewayReadOnlyTimestamp,
+    >,
 }

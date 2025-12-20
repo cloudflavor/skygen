@@ -33,13 +33,19 @@ impl<'a> ListRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// List All Droplet Sizes
+///
+/// To list all of available Droplet sizes, send a GET request to `/v2/sizes`.
+/// The response will be a JSON object with a key called `sizes`. The value of this will be an array of `size` objects each of which contain the standard size attributes.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/sizes`
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::sizes };
+/// use digitalocean::{ ApiClient, apis::sizes };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list(&api)
+/// let response = list(&api)
 ///     .send()
 ///     .await?;
 /// ```

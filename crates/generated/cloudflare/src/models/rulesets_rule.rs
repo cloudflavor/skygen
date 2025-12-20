@@ -19,14 +19,14 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct RulesetsRule {
-    pub action: Option<serde_json::Value>,
+    pub action: Option<crate::models::rulesets_rule_action::RulesetsRuleAction>,
     pub action_parameters: Option<serde_json::Value>,
-    pub categories: Option<Vec<serde_json::Value>>,
+    pub categories: Option<Vec<crate::models::rulesets_rule_category::RulesetsRuleCategory>>,
     pub description: Option<String>,
     pub enabled: Option<serde_json::Value>,
     pub exposed_credential_check: Option<serde_json::Value>,
     pub expression: Option<String>,
-    pub id: Option<serde_json::Value>,
+    pub id: Option<crate::models::rulesets_rule_id::RulesetsRuleId>,
     pub last_updated: String,
     pub logging: Option<serde_json::Value>,
     pub r#ref: Option<String>,

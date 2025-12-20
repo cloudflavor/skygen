@@ -19,9 +19,9 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct FirewallRewriteAction {
-    pub block: Option<serde_json::Value>,
-    pub challenge: Option<serde_json::Value>,
-    pub default: Option<serde_json::Value>,
-    pub disable: Option<serde_json::Value>,
-    pub simulate: Option<serde_json::Value>,
+    pub block: Option<crate::models::firewall_waf_rewrite_action::FirewallWafRewriteAction>,
+    pub challenge: Option<crate::models::firewall_waf_rewrite_action::FirewallWafRewriteAction>,
+    pub default: Option<crate::models::firewall_waf_rewrite_action::FirewallWafRewriteAction>,
+    pub disable: Option<crate::models::firewall_waf_rewrite_action::FirewallWafRewriteAction>,
+    pub simulate: Option<crate::models::firewall_waf_rewrite_action::FirewallWafRewriteAction>,
 }

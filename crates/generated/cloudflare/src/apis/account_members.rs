@@ -15,12 +15,15 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::iam_api_response_single_id::IamApiResponseSingleId;
+use crate::models::iam_collection_member_response_with_policies::IamCollectionMemberResponseWithPolicies;
+use crate::models::iam_single_member_response_with_policies::IamSingleMemberResponseWithPolicies;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct ListMembersRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, IamCollectionMemberResponseWithPolicies>,
 }
 
 impl<'a> ListMembersRequest<'a> {
@@ -54,18 +57,36 @@ impl<'a> ListMembersRequest<'a> {
         self.builder = self.builder.header_param("direction", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<IamCollectionMemberResponseWithPolicies> {
         self.builder.send().await
     }
 }
-
 /// List Members
+///
+/// List all members of an account.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/members`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `order` (query,optional)
+/// - `status` (query,optional)
+/// - `page` (query,optional)
+/// - `per_page` (query,optional)
+/// - `direction` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::account_members };
+/// use cloudflare::{ ApiClient, apis::account_members };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_members(&api)
-///     .with_account_id("value")
+/// let response = list_members(&api)
+///     .with_account_id("account_id")
+///     .with_order("order")
+///     .with_status("status")
+///     .with_page("page")
+///     .with_per_page("per_page")
+///     .with_direction("direction")
 ///     .send()
 ///     .await?;
 /// ```
@@ -75,7 +96,7 @@ pub fn list_members(api: &ApiClient) -> ListMembersRequest<'_> {
 
 #[derive(Debug)]
 pub struct AddMemberRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, IamSingleMemberResponseWithPolicies>,
 }
 
 impl<'a> AddMemberRequest<'a> {
@@ -94,18 +115,28 @@ impl<'a> AddMemberRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<IamSingleMemberResponseWithPolicies> {
         self.builder.send().await
     }
 }
-
 /// Add Member
+///
+/// Add a user to the list of members for this account.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/members`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::account_members };
+/// use cloudflare::{ ApiClient, apis::account_members };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = add_member(&api)
-///     .with_account_id("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = add_member(&api)
+///     .with_account_id("account_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -115,7 +146,7 @@ pub fn add_member(api: &ApiClient) -> AddMemberRequest<'_> {
 
 #[derive(Debug)]
 pub struct MemberDetailsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, IamSingleMemberResponseWithPolicies>,
 }
 
 impl<'a> MemberDetailsRequest<'a> {
@@ -138,19 +169,28 @@ impl<'a> MemberDetailsRequest<'a> {
         self.builder = self.builder.path_param("member_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<IamSingleMemberResponseWithPolicies> {
         self.builder.send().await
     }
 }
-
 /// Member Details
+///
+/// Get information about a specific member of an account.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/members/{member_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `member_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::account_members };
+/// use cloudflare::{ ApiClient, apis::account_members };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = member_details(&api)
-///     .with_account_id("value")
-///     .with_member_id("value")
+/// let response = member_details(&api)
+///     .with_account_id("account_id")
+///     .with_member_id("member_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -160,7 +200,7 @@ pub fn member_details(api: &ApiClient) -> MemberDetailsRequest<'_> {
 
 #[derive(Debug)]
 pub struct UpdateMemberRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, IamSingleMemberResponseWithPolicies>,
 }
 
 impl<'a> UpdateMemberRequest<'a> {
@@ -188,19 +228,30 @@ impl<'a> UpdateMemberRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<IamSingleMemberResponseWithPolicies> {
         self.builder.send().await
     }
 }
-
 /// Update Member
+///
+/// Modify an account member.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/accounts/{account_id}/members/{member_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `member_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::account_members };
+/// use cloudflare::{ ApiClient, apis::account_members };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = update_member(&api)
-///     .with_account_id("value")
-///     .with_member_id("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = update_member(&api)
+///     .with_account_id("account_id")
+///     .with_member_id("member_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -210,7 +261,7 @@ pub fn update_member(api: &ApiClient) -> UpdateMemberRequest<'_> {
 
 #[derive(Debug)]
 pub struct RemoveMemberRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, IamApiResponseSingleId>,
 }
 
 impl<'a> RemoveMemberRequest<'a> {
@@ -233,19 +284,28 @@ impl<'a> RemoveMemberRequest<'a> {
         self.builder = self.builder.path_param("member_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<IamApiResponseSingleId> {
         self.builder.send().await
     }
 }
-
 /// Remove Member
+///
+/// Remove a member from an account.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/accounts/{account_id}/members/{member_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `member_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::account_members };
+/// use cloudflare::{ ApiClient, apis::account_members };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = remove_member(&api)
-///     .with_account_id("value")
-///     .with_member_id("value")
+/// let response = remove_member(&api)
+///     .with_account_id("account_id")
+///     .with_member_id("member_id")
 ///     .send()
 ///     .await?;
 /// ```

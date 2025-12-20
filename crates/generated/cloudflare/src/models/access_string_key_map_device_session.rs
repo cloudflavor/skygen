@@ -15,7 +15,5 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-use serde::{Deserialize, Serialize};
-
-#[derive(Debug, Clone, Serialize, Deserialize)]
-pub struct AccessStringKeyMapDeviceSession {}
+pub type AccessStringKeyMapDeviceSession =
+    std::collections::BTreeMap<String, crate::models::access_device_session::AccessDeviceSession>;

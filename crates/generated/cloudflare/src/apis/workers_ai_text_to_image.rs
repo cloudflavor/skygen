@@ -53,14 +53,24 @@ impl<'a> PostRunCfBlackRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Execute @cf/black-forest-labs/flux-1-schnell model.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/ai/run/@cf/black-forest-labs/flux-1-schnell`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `queueRequest` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::workers_ai_text_to_image };
+/// use cloudflare::{ ApiClient, apis::workers_ai_text_to_image };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = post_run_cf_black(&api)
-///     .with_account_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = post_run_cf_black(&api)
+///     .with_account_id("account_id")
+///     .with_queue_request("queueRequest")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -103,14 +113,24 @@ impl<'a> PostRunCfBytedanceRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Execute @cf/bytedance/stable-diffusion-xl-lightning model.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/ai/run/@cf/bytedance/stable-diffusion-xl-lightning`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `queueRequest` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::workers_ai_text_to_image };
+/// use cloudflare::{ ApiClient, apis::workers_ai_text_to_image };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = post_run_cf_bytedance(&api)
-///     .with_account_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = post_run_cf_bytedance(&api)
+///     .with_account_id("account_id")
+///     .with_queue_request("queueRequest")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -153,14 +173,24 @@ impl<'a> PostRunCfLykonRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Execute @cf/lykon/dreamshaper-8-lcm model.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/ai/run/@cf/lykon/dreamshaper-8-lcm`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `queueRequest` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::workers_ai_text_to_image };
+/// use cloudflare::{ ApiClient, apis::workers_ai_text_to_image };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = post_run_cf_lykon(&api)
-///     .with_account_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = post_run_cf_lykon(&api)
+///     .with_account_id("account_id")
+///     .with_queue_request("queueRequest")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -203,14 +233,24 @@ impl<'a> PostRunCfRunwaymlRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Execute @cf/runwayml/stable-diffusion-v1-5-img2img model.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/ai/run/@cf/runwayml/stable-diffusion-v1-5-img2img`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `queueRequest` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::workers_ai_text_to_image };
+/// use cloudflare::{ ApiClient, apis::workers_ai_text_to_image };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = post_run_cf_runwayml(&api)
-///     .with_account_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = post_run_cf_runwayml(&api)
+///     .with_account_id("account_id")
+///     .with_queue_request("queueRequest")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -253,14 +293,24 @@ impl<'a> PostRunCfRunwaymlPostRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Execute @cf/runwayml/stable-diffusion-v1-5-inpainting model.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/ai/run/@cf/runwayml/stable-diffusion-v1-5-inpainting`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `queueRequest` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::workers_ai_text_to_image };
+/// use cloudflare::{ ApiClient, apis::workers_ai_text_to_image };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = post_run_cf_runwayml_post(&api)
-///     .with_account_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = post_run_cf_runwayml_post(&api)
+///     .with_account_id("account_id")
+///     .with_queue_request("queueRequest")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -303,14 +353,24 @@ impl<'a> PostRunCfStabilityaiRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Execute @cf/stabilityai/stable-diffusion-xl-base-1.0 model.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/ai/run/@cf/stabilityai/stable-diffusion-xl-base-1.0`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `queueRequest` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::workers_ai_text_to_image };
+/// use cloudflare::{ ApiClient, apis::workers_ai_text_to_image };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = post_run_cf_stabilityai(&api)
-///     .with_account_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = post_run_cf_stabilityai(&api)
+///     .with_account_id("account_id")
+///     .with_queue_request("queueRequest")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```

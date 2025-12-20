@@ -15,12 +15,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::access_scim_update_logs_response::AccessScimUpdateLogsResponse;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct ListAccessScimUpdateRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, AccessScimUpdateLogsResponse>,
 }
 
 impl<'a> ListAccessScimUpdateRequest<'a> {
@@ -86,18 +87,50 @@ impl<'a> ListAccessScimUpdateRequest<'a> {
         self.builder = self.builder.header_param("idp_resource_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<AccessScimUpdateLogsResponse> {
         self.builder.send().await
     }
 }
-
 /// List Access SCIM update logs
+///
+/// Lists Access SCIM update logs that maintain a record of updates made to User and Group resources synced to Cloudflare via the System for Cross-domain Identity Management (SCIM).
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/access/logs/scim/updates`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `limit` (query,optional)
+/// - `direction` (query,optional)
+/// - `since` (query,optional)
+/// - `until` (query,optional)
+/// - `idp_id` (query,required)
+/// - `status` (query,optional)
+/// - `resource_type` (query,optional)
+/// - `request_method` (query,optional)
+/// - `resource_user_email` (query,optional)
+/// - `resource_group_name` (query,optional)
+/// - `cf_resource_id` (query,optional)
+/// - `idp_resource_id` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::access_scim_update_logs };
+/// use cloudflare::{ ApiClient, apis::access_scim_update_logs };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_access_scim_update(&api)
-///     .with_account_id("value")
+/// let response = list_access_scim_update(&api)
+///     .with_account_id("account_id")
+///     .with_limit("limit")
+///     .with_direction("direction")
+///     .with_since("since")
+///     .with_until("until")
+///     .with_idp_id("idp_id")
+///     .with_status("status")
+///     .with_resource_type("resource_type")
+///     .with_request_method("request_method")
+///     .with_resource_user_email("resource_user_email")
+///     .with_resource_group_name("resource_group_name")
+///     .with_cf_resource_id("cf_resource_id")
+///     .with_idp_resource_id("idp_resource_id")
 ///     .send()
 ///     .await?;
 /// ```

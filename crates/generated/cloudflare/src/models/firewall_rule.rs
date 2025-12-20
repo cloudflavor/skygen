@@ -19,11 +19,11 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct FirewallRule {
-    pub allowed_modes: Vec<serde_json::Value>,
-    pub configuration: serde_json::Value,
+    pub allowed_modes: Vec<crate::models::firewall_schemas_mode::FirewallSchemasMode>,
+    pub configuration: crate::models::firewall_configuration::FirewallConfiguration,
     pub created_on: Option<String>,
-    pub id: serde_json::Value,
-    pub mode: serde_json::Value,
+    pub id: crate::models::firewall_schemas_identifier::FirewallSchemasIdentifier,
+    pub mode: crate::models::firewall_schemas_mode::FirewallSchemasMode,
     pub modified_on: Option<String>,
-    pub notes: Option<serde_json::Value>,
+    pub notes: Option<crate::models::firewall_notes::FirewallNotes>,
 }

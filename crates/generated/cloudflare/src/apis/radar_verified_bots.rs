@@ -69,13 +69,38 @@ impl<'a> GetVerifiedBotsTopRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get top verified bots by HTTP requests
+///
+/// Retrieves the top verified bots by HTTP requests, with owner and category.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/verified_bots/top/bots`
+///
+/// **Parameters**
+/// - `limit` (query,optional)
+/// - `name` (query,optional)
+/// - `dateRange` (query,optional)
+/// - `dateStart` (query,optional)
+/// - `dateEnd` (query,optional)
+/// - `asn` (query,optional)
+/// - `location` (query,optional)
+/// - `continent` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_verified_bots };
+/// use cloudflare::{ ApiClient, apis::radar_verified_bots };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_verified_bots_top(&api)
+/// let response = get_verified_bots_top(&api)
+///     .with_limit("limit")
+///     .with_name("name")
+///     .with_date_range("dateRange")
+///     .with_date_start("dateStart")
+///     .with_date_end("dateEnd")
+///     .with_asn("asn")
+///     .with_location("location")
+///     .with_continent("continent")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```
@@ -135,13 +160,38 @@ impl<'a> GetVerifiedBotsTopGetRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get top verified bot categories by HTTP requests
+///
+/// Retrieves the top verified bot categories by HTTP requests, along with their corresponding percentage, over the total verified bot HTTP requests.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/verified_bots/top/categories`
+///
+/// **Parameters**
+/// - `limit` (query,optional)
+/// - `name` (query,optional)
+/// - `dateRange` (query,optional)
+/// - `dateStart` (query,optional)
+/// - `dateEnd` (query,optional)
+/// - `asn` (query,optional)
+/// - `location` (query,optional)
+/// - `continent` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_verified_bots };
+/// use cloudflare::{ ApiClient, apis::radar_verified_bots };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_verified_bots_top_get(&api)
+/// let response = get_verified_bots_top_get(&api)
+///     .with_limit("limit")
+///     .with_name("name")
+///     .with_date_range("dateRange")
+///     .with_date_start("dateStart")
+///     .with_date_end("dateEnd")
+///     .with_asn("asn")
+///     .with_location("location")
+///     .with_continent("continent")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```

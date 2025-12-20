@@ -39,14 +39,20 @@ impl<'a> GetRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Rules
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/cloud_connector/rules`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zone_cloud_connector_rules_get };
+/// use cloudflare::{ ApiClient, apis::zone_cloud_connector_rules_get };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get(&api)
-///     .with_zone_id("value")
+/// let response = get(&api)
+///     .with_zone_id("zone_id")
 ///     .send()
 ///     .await?;
 /// ```

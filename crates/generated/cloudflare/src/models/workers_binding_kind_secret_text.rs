@@ -19,7 +19,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct WorkersBindingKindSecretText {
-    pub name: serde_json::Value,
+    pub name: crate::models::workers_binding_name::WorkersBindingName,
     pub r#type: String,
     pub text: String,
 }

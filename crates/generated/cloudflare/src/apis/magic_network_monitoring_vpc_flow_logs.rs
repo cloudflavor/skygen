@@ -15,12 +15,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::magic_visibility_mnm_mnm_vpc_flows_single_response::MagicVisibilityMnmMnmVpcFlowsSingleResponse;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct FlowsGenerateAuthenticationTokenRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, MagicVisibilityMnmMnmVpcFlowsSingleResponse>,
 }
 
 impl<'a> FlowsGenerateAuthenticationTokenRequest<'a> {
@@ -38,18 +39,26 @@ impl<'a> FlowsGenerateAuthenticationTokenRequest<'a> {
         self.builder = self.builder.path_param("account_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<MagicVisibilityMnmMnmVpcFlowsSingleResponse> {
         self.builder.send().await
     }
 }
-
 /// Generate authentication token for VPC flow logs export.
+///
+/// Generate authentication token for VPC flow logs export.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/mnm/vpc-flows/token`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::magic_network_monitoring_vpc_flow_logs };
+/// use cloudflare::{ ApiClient, apis::magic_network_monitoring_vpc_flow_logs };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = flows_generate_authentication_token(&api)
-///     .with_account_id("value")
+/// let response = flows_generate_authentication_token(&api)
+///     .with_account_id("account_id")
 ///     .send()
 ///     .await?;
 /// ```

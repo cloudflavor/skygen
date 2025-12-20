@@ -53,13 +53,30 @@ impl<'a> GetReportsDatasetsRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// List datasets
+///
+/// Retrieves a list of datasets.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/datasets`
+///
+/// **Parameters**
+/// - `limit` (query,optional)
+/// - `offset` (query,optional)
+/// - `datasetType` (query,optional)
+/// - `date` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_datasets };
+/// use cloudflare::{ ApiClient, apis::radar_datasets };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_reports_datasets(&api)
+/// let response = get_reports_datasets(&api)
+///     .with_limit("limit")
+///     .with_offset("offset")
+///     .with_dataset_type("datasetType")
+///     .with_date("date")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```
@@ -93,13 +110,24 @@ impl<'a> PostReportsDatasetDownloadRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get dataset download URL
+///
+/// Retrieves an URL to download a single dataset.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/radar/datasets/download`
+///
+/// **Parameters**
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_datasets };
+/// use cloudflare::{ ApiClient, apis::radar_datasets };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = post_reports_dataset_download(&api)
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = post_reports_dataset_download(&api)
+///     .with_format("format")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -127,14 +155,22 @@ impl<'a> GetReportsDatasetDownloadRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get dataset CSV stream
+///
+/// Retrieves the CSV content of a given dataset by alias or ID. When getting the content by alias the latest dataset is returned, optionally filtered by the latest available at a given date.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/datasets/{alias}`
+///
+/// **Parameters**
+/// - `alias` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_datasets };
+/// use cloudflare::{ ApiClient, apis::radar_datasets };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_reports_dataset_download(&api)
-///     .with_alias("value")
+/// let response = get_reports_dataset_download(&api)
+///     .with_alias("alias")
 ///     .send()
 ///     .await?;
 /// ```

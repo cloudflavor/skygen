@@ -19,5 +19,6 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct ApiShieldConfiguration {
-    pub auth_id_characteristics: serde_json::Value,
+    pub auth_id_characteristics:
+        crate::models::api_shield_auth_id_characteristics::ApiShieldAuthIdCharacteristics,
 }

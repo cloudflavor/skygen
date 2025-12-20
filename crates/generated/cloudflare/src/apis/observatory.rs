@@ -15,12 +15,20 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::observatory_availabilities_response::ObservatoryAvailabilitiesResponse;
+use crate::models::observatory_count_response::ObservatoryCountResponse;
+use crate::models::observatory_create_schedule_response::ObservatoryCreateScheduleResponse;
+use crate::models::observatory_page_test_response_collection::ObservatoryPageTestResponseCollection;
+use crate::models::observatory_page_test_response_single::ObservatoryPageTestResponseSingle;
+use crate::models::observatory_pages_response_collection::ObservatoryPagesResponseCollection;
+use crate::models::observatory_schedule_response_single::ObservatoryScheduleResponseSingle;
+use crate::models::observatory_trend_response::ObservatoryTrendResponse;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct SpeedGetAvailabilitiesRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, ObservatoryAvailabilitiesResponse>,
 }
 
 impl<'a> SpeedGetAvailabilitiesRequest<'a> {
@@ -35,18 +43,26 @@ impl<'a> SpeedGetAvailabilitiesRequest<'a> {
         self.builder = self.builder.path_param("zone_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<ObservatoryAvailabilitiesResponse> {
         self.builder.send().await
     }
 }
-
 /// Get quota and availability
+///
+/// Retrieves quota for all plans, as well as the current zone quota.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/speed_api/availabilities`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::observatory };
+/// use cloudflare::{ ApiClient, apis::observatory };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = speed_get_availabilities(&api)
-///     .with_zone_id("value")
+/// let response = speed_get_availabilities(&api)
+///     .with_zone_id("zone_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -56,7 +72,7 @@ pub fn speed_get_availabilities(api: &ApiClient) -> SpeedGetAvailabilitiesReques
 
 #[derive(Debug)]
 pub struct SpeedListPagesRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, ObservatoryPagesResponseCollection>,
 }
 
 impl<'a> SpeedListPagesRequest<'a> {
@@ -70,18 +86,26 @@ impl<'a> SpeedListPagesRequest<'a> {
         self.builder = self.builder.path_param("zone_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<ObservatoryPagesResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// List tested webpages
+///
+/// Lists all webpages which have been tested.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/speed_api/pages`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::observatory };
+/// use cloudflare::{ ApiClient, apis::observatory };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = speed_list_pages(&api)
-///     .with_zone_id("value")
+/// let response = speed_list_pages(&api)
+///     .with_zone_id("zone_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -91,7 +115,7 @@ pub fn speed_list_pages(api: &ApiClient) -> SpeedListPagesRequest<'_> {
 
 #[derive(Debug)]
 pub struct SpeedListTestHistoryRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, ObservatoryPageTestResponseCollection>,
 }
 
 impl<'a> SpeedListTestHistoryRequest<'a> {
@@ -126,19 +150,34 @@ impl<'a> SpeedListTestHistoryRequest<'a> {
         self.builder = self.builder.header_param("region", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<ObservatoryPageTestResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// List page test history
+///
+/// Test history (list of tests) for a specific webpage.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/speed_api/pages/{url}/tests`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `url` (path, required)
+/// - `page` (query,optional)
+/// - `per_page` (query,optional)
+/// - `region` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::observatory };
+/// use cloudflare::{ ApiClient, apis::observatory };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = speed_list_test_history(&api)
-///     .with_zone_id("value")
-///     .with_url("value")
+/// let response = speed_list_test_history(&api)
+///     .with_zone_id("zone_id")
+///     .with_url("url")
+///     .with_page("page")
+///     .with_per_page("per_page")
+///     .with_region("region")
 ///     .send()
 ///     .await?;
 /// ```
@@ -148,7 +187,7 @@ pub fn speed_list_test_history(api: &ApiClient) -> SpeedListTestHistoryRequest<'
 
 #[derive(Debug)]
 pub struct SpeedCreateTestRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, ObservatoryPageTestResponseSingle>,
 }
 
 impl<'a> SpeedCreateTestRequest<'a> {
@@ -178,19 +217,30 @@ impl<'a> SpeedCreateTestRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<ObservatoryPageTestResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Start page test
+///
+/// Starts a test for a specific webpage, in a specific region.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/zones/{zone_id}/speed_api/pages/{url}/tests`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `url` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::observatory };
+/// use cloudflare::{ ApiClient, apis::observatory };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = speed_create_test(&api)
-///     .with_zone_id("value")
-///     .with_url("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = speed_create_test(&api)
+///     .with_zone_id("zone_id")
+///     .with_url("url")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -200,7 +250,7 @@ pub fn speed_create_test(api: &ApiClient) -> SpeedCreateTestRequest<'_> {
 
 #[derive(Debug)]
 pub struct SpeedDeleteTestsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, ObservatoryCountResponse>,
 }
 
 impl<'a> SpeedDeleteTestsRequest<'a> {
@@ -227,19 +277,30 @@ impl<'a> SpeedDeleteTestsRequest<'a> {
         self.builder = self.builder.header_param("region", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<ObservatoryCountResponse> {
         self.builder.send().await
     }
 }
-
 /// Delete all page tests
+///
+/// Deletes all tests for a specific webpage from a specific region. Deleted tests are still counted as part of the quota.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/zones/{zone_id}/speed_api/pages/{url}/tests`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `url` (path, required)
+/// - `region` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::observatory };
+/// use cloudflare::{ ApiClient, apis::observatory };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = speed_delete_tests(&api)
-///     .with_zone_id("value")
-///     .with_url("value")
+/// let response = speed_delete_tests(&api)
+///     .with_zone_id("zone_id")
+///     .with_url("url")
+///     .with_region("region")
 ///     .send()
 ///     .await?;
 /// ```
@@ -249,7 +310,7 @@ pub fn speed_delete_tests(api: &ApiClient) -> SpeedDeleteTestsRequest<'_> {
 
 #[derive(Debug)]
 pub struct SpeedGetTestRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, ObservatoryPageTestResponseSingle>,
 }
 
 impl<'a> SpeedGetTestRequest<'a> {
@@ -277,20 +338,30 @@ impl<'a> SpeedGetTestRequest<'a> {
         self.builder = self.builder.path_param("test_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<ObservatoryPageTestResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Get a page test result
+///
+/// Retrieves the result of a specific test.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/speed_api/pages/{url}/tests/{test_id}`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `url` (path, required)
+/// - `test_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::observatory };
+/// use cloudflare::{ ApiClient, apis::observatory };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = speed_get_test(&api)
-///     .with_zone_id("value")
-///     .with_url("value")
-///     .with_test_id("value")
+/// let response = speed_get_test(&api)
+///     .with_zone_id("zone_id")
+///     .with_url("url")
+///     .with_test_id("test_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -300,7 +371,7 @@ pub fn speed_get_test(api: &ApiClient) -> SpeedGetTestRequest<'_> {
 
 #[derive(Debug)]
 pub struct SpeedListPageTrendRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, ObservatoryTrendResponse>,
 }
 
 impl<'a> SpeedListPageTrendRequest<'a> {
@@ -347,19 +418,40 @@ impl<'a> SpeedListPageTrendRequest<'a> {
         self.builder = self.builder.header_param("metrics", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<ObservatoryTrendResponse> {
         self.builder.send().await
     }
 }
-
 /// List core web vital metrics trend
+///
+/// Lists the core web vital metrics trend over time for a specific page.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/speed_api/pages/{url}/trend`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `url` (path, required)
+/// - `region` (query,required)
+/// - `deviceType` (query,required)
+/// - `start` (query,required)
+/// - `end` (query,optional)
+/// - `tz` (query,required)
+/// - `metrics` (query,required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::observatory };
+/// use cloudflare::{ ApiClient, apis::observatory };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = speed_list_page_trend(&api)
-///     .with_zone_id("value")
-///     .with_url("value")
+/// let response = speed_list_page_trend(&api)
+///     .with_zone_id("zone_id")
+///     .with_url("url")
+///     .with_region("region")
+///     .with_device_type("deviceType")
+///     .with_start("start")
+///     .with_end("end")
+///     .with_tz("tz")
+///     .with_metrics("metrics")
 ///     .send()
 ///     .await?;
 /// ```
@@ -369,7 +461,7 @@ pub fn speed_list_page_trend(api: &ApiClient) -> SpeedListPageTrendRequest<'_> {
 
 #[derive(Debug)]
 pub struct SpeedGetScheduledTestRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, ObservatoryScheduleResponseSingle>,
 }
 
 impl<'a> SpeedGetScheduledTestRequest<'a> {
@@ -393,19 +485,30 @@ impl<'a> SpeedGetScheduledTestRequest<'a> {
         self.builder = self.builder.header_param("region", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<ObservatoryScheduleResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Get a page test schedule
+///
+/// Retrieves the test schedule for a page in a specific region.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/speed_api/schedule/{url}`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `url` (path, required)
+/// - `region` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::observatory };
+/// use cloudflare::{ ApiClient, apis::observatory };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = speed_get_scheduled_test(&api)
-///     .with_zone_id("value")
-///     .with_url("value")
+/// let response = speed_get_scheduled_test(&api)
+///     .with_zone_id("zone_id")
+///     .with_url("url")
+///     .with_region("region")
 ///     .send()
 ///     .await?;
 /// ```
@@ -415,7 +518,7 @@ pub fn speed_get_scheduled_test(api: &ApiClient) -> SpeedGetScheduledTestRequest
 
 #[derive(Debug)]
 pub struct SpeedCreateScheduledTestRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, ObservatoryCreateScheduleResponse>,
 }
 
 impl<'a> SpeedCreateScheduledTestRequest<'a> {
@@ -442,19 +545,30 @@ impl<'a> SpeedCreateScheduledTestRequest<'a> {
         self.builder = self.builder.header_param("region", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<ObservatoryCreateScheduleResponse> {
         self.builder.send().await
     }
 }
-
 /// Create scheduled page test
+///
+/// Creates a scheduled test for a page.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/zones/{zone_id}/speed_api/schedule/{url}`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `url` (path, required)
+/// - `region` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::observatory };
+/// use cloudflare::{ ApiClient, apis::observatory };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = speed_create_scheduled_test(&api)
-///     .with_zone_id("value")
-///     .with_url("value")
+/// let response = speed_create_scheduled_test(&api)
+///     .with_zone_id("zone_id")
+///     .with_url("url")
+///     .with_region("region")
 ///     .send()
 ///     .await?;
 /// ```
@@ -464,7 +578,7 @@ pub fn speed_create_scheduled_test(api: &ApiClient) -> SpeedCreateScheduledTestR
 
 #[derive(Debug)]
 pub struct SpeedDeleteTestScheduleRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, ObservatoryCountResponse>,
 }
 
 impl<'a> SpeedDeleteTestScheduleRequest<'a> {
@@ -491,19 +605,30 @@ impl<'a> SpeedDeleteTestScheduleRequest<'a> {
         self.builder = self.builder.header_param("region", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<ObservatoryCountResponse> {
         self.builder.send().await
     }
 }
-
 /// Delete scheduled page test
+///
+/// Deletes a scheduled test for a page.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/zones/{zone_id}/speed_api/schedule/{url}`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `url` (path, required)
+/// - `region` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::observatory };
+/// use cloudflare::{ ApiClient, apis::observatory };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = speed_delete_test_schedule(&api)
-///     .with_zone_id("value")
-///     .with_url("value")
+/// let response = speed_delete_test_schedule(&api)
+///     .with_zone_id("zone_id")
+///     .with_url("url")
+///     .with_region("region")
 ///     .send()
 ///     .await?;
 /// ```

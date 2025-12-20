@@ -19,8 +19,8 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct HealthchecksApiResponseCommon {
-    pub errors: serde_json::Value,
-    pub messages: serde_json::Value,
+    pub errors: crate::models::healthchecks_messages::HealthchecksMessages,
+    pub messages: crate::models::healthchecks_messages::HealthchecksMessages,
     pub result: serde_json::Value,
     pub success: bool,
 }

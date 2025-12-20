@@ -15,12 +15,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::bill_subs_api_account_subscription_response_collection::BillSubsApiAccountSubscriptionResponseCollection;
+use crate::models::bill_subs_api_account_subscription_response_single::BillSubsApiAccountSubscriptionResponseSingle;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct ListSubscriptionsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, BillSubsApiAccountSubscriptionResponseCollection>,
 }
 
 impl<'a> ListSubscriptionsRequest<'a> {
@@ -35,18 +37,26 @@ impl<'a> ListSubscriptionsRequest<'a> {
         self.builder = self.builder.path_param("account_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<BillSubsApiAccountSubscriptionResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// List Subscriptions
+///
+/// Lists all of an account's subscriptions.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/subscriptions`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::account_subscriptions };
+/// use cloudflare::{ ApiClient, apis::account_subscriptions };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_subscriptions(&api)
-///     .with_account_id("value")
+/// let response = list_subscriptions(&api)
+///     .with_account_id("account_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -56,7 +66,7 @@ pub fn list_subscriptions(api: &ApiClient) -> ListSubscriptionsRequest<'_> {
 
 #[derive(Debug)]
 pub struct CreateSubscriptionRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, BillSubsApiAccountSubscriptionResponseSingle>,
 }
 
 impl<'a> CreateSubscriptionRequest<'a> {
@@ -79,18 +89,28 @@ impl<'a> CreateSubscriptionRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<BillSubsApiAccountSubscriptionResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Create Subscription
+///
+/// Creates an account subscription.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/subscriptions`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::account_subscriptions };
+/// use cloudflare::{ ApiClient, apis::account_subscriptions };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = create_subscription(&api)
-///     .with_account_id("value")
+/// # let body: crate::models::bill_subs_api_subscription_v2::BillSubsApiSubscriptionV2 = todo!();
+/// let response = create_subscription(&api)
+///     .with_account_id("account_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -100,7 +120,7 @@ pub fn create_subscription(api: &ApiClient) -> CreateSubscriptionRequest<'_> {
 
 #[derive(Debug)]
 pub struct UpdateSubscriptionRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, BillSubsApiAccountSubscriptionResponseSingle>,
 }
 
 impl<'a> UpdateSubscriptionRequest<'a> {
@@ -131,19 +151,30 @@ impl<'a> UpdateSubscriptionRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<BillSubsApiAccountSubscriptionResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Update Subscription
+///
+/// Updates an account subscription.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/accounts/{account_id}/subscriptions/{subscription_identifier}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `subscription_identifier` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::account_subscriptions };
+/// use cloudflare::{ ApiClient, apis::account_subscriptions };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = update_subscription(&api)
-///     .with_account_id("value")
-///     .with_subscription_identifier("value")
+/// # let body: crate::models::bill_subs_api_subscription_v2::BillSubsApiSubscriptionV2 = todo!();
+/// let response = update_subscription(&api)
+///     .with_account_id("account_id")
+///     .with_subscription_identifier("subscription_identifier")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -180,15 +211,24 @@ impl<'a> DeleteSubscriptionRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Delete Subscription
+///
+/// Deletes an account's subscription.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/accounts/{account_id}/subscriptions/{subscription_identifier}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `subscription_identifier` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::account_subscriptions };
+/// use cloudflare::{ ApiClient, apis::account_subscriptions };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete_subscription(&api)
-///     .with_account_id("value")
-///     .with_subscription_identifier("value")
+/// let response = delete_subscription(&api)
+///     .with_account_id("account_id")
+///     .with_subscription_identifier("subscription_identifier")
 ///     .send()
 ///     .await?;
 /// ```

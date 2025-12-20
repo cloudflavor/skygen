@@ -46,14 +46,22 @@ impl<'a> PostRunCfOpenaiRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Execute @cf/openai/whisper model.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/ai/run/@cf/openai/whisper`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `queueRequest` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::workers_ai_automatic_speech_recognition };
+/// use cloudflare::{ ApiClient, apis::workers_ai_automatic_speech_recognition };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = post_run_cf_openai(&api)
-///     .with_account_id("value")
+/// let response = post_run_cf_openai(&api)
+///     .with_account_id("account_id")
+///     .with_queue_request("queueRequest")
 ///     .send()
 ///     .await?;
 /// ```
@@ -96,14 +104,24 @@ impl<'a> PostRunCfOpenaiPostRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Execute @cf/openai/whisper-large-v3-turbo model.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/ai/run/@cf/openai/whisper-large-v3-turbo`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `queueRequest` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::workers_ai_automatic_speech_recognition };
+/// use cloudflare::{ ApiClient, apis::workers_ai_automatic_speech_recognition };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = post_run_cf_openai_post(&api)
-///     .with_account_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = post_run_cf_openai_post(&api)
+///     .with_account_id("account_id")
+///     .with_queue_request("queueRequest")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -139,14 +157,22 @@ impl<'a> PostRunCfOpenaiPost3Request<'a> {
         self.builder.send().await
     }
 }
-
 /// Execute @cf/openai/whisper-tiny-en model.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/ai/run/@cf/openai/whisper-tiny-en`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `queueRequest` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::workers_ai_automatic_speech_recognition };
+/// use cloudflare::{ ApiClient, apis::workers_ai_automatic_speech_recognition };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = post_run_cf_openai_post_3(&api)
-///     .with_account_id("value")
+/// let response = post_run_cf_openai_post_3(&api)
+///     .with_account_id("account_id")
+///     .with_queue_request("queueRequest")
 ///     .send()
 ///     .await?;
 /// ```

@@ -19,7 +19,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct R2Rule {
-    pub actions: Vec<serde_json::Value>,
+    pub actions: Vec<crate::models::r2_r2_action::R2R2Action>,
     pub description: Option<String>,
     pub prefix: Option<String>,
     pub suffix: Option<String>,

@@ -19,6 +19,6 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct AddressingAddressMapsIp {
-    pub created_at: Option<serde_json::Value>,
-    pub ip: Option<serde_json::Value>,
+    pub created_at: Option<crate::models::addressing_timestamp::AddressingTimestamp>,
+    pub ip: Option<crate::models::addressing_ip::AddressingIp>,
 }

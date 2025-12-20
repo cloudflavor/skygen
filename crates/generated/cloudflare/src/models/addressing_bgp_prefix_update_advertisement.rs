@@ -19,7 +19,9 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct AddressingBgpPrefixUpdateAdvertisement {
-    pub asn_prepend_count: Option<serde_json::Value>,
+    pub asn_prepend_count:
+        Option<crate::models::addressing_asn_prepend_count::AddressingAsnPrependCount>,
     pub on_demand: Option<std::collections::BTreeMap<String, serde_json::Value>>,
-    pub withdraw_if_no_route: Option<serde_json::Value>,
+    pub withdraw_if_no_route:
+        Option<crate::models::addressing_withdraw_if_no_route::AddressingWithdrawIfNoRoute>,
 }

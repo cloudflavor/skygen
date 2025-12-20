@@ -15,12 +15,15 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::dns_firewall_dns_firewall_response_collection::DnsFirewallDnsFirewallResponseCollection;
+use crate::models::dns_firewall_dns_firewall_reverse_dns_response_1::DnsFirewallDnsFirewallReverseDnsResponse;
+use crate::models::dns_firewall_dns_firewall_single_response::DnsFirewallDnsFirewallSingleResponse;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct ListDnsFirewallClustersRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, DnsFirewallDnsFirewallResponseCollection>,
 }
 
 impl<'a> ListDnsFirewallClustersRequest<'a> {
@@ -43,18 +46,30 @@ impl<'a> ListDnsFirewallClustersRequest<'a> {
         self.builder = self.builder.header_param("per_page", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<DnsFirewallDnsFirewallResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// List DNS Firewall Clusters
+///
+/// List DNS Firewall clusters for an account
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/dns_firewall`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `page` (query,optional)
+/// - `per_page` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::dns_firewall };
+/// use cloudflare::{ ApiClient, apis::dns_firewall };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_dns_firewall_clusters(&api)
-///     .with_account_id("value")
+/// let response = list_dns_firewall_clusters(&api)
+///     .with_account_id("account_id")
+///     .with_page("page")
+///     .with_per_page("per_page")
 ///     .send()
 ///     .await?;
 /// ```
@@ -64,7 +79,7 @@ pub fn list_dns_firewall_clusters(api: &ApiClient) -> ListDnsFirewallClustersReq
 
 #[derive(Debug)]
 pub struct CreateDnsFirewallClusterRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, DnsFirewallDnsFirewallSingleResponse>,
 }
 
 impl<'a> CreateDnsFirewallClusterRequest<'a> {
@@ -80,22 +95,35 @@ impl<'a> CreateDnsFirewallClusterRequest<'a> {
         self.builder = self.builder.path_param("account_id", value);
         self
     }
-    pub fn with_body(mut self, body: serde_json::Value) -> Self {
+    pub fn with_body(
+        mut self,
+        body: crate::models::dns_firewall_dns_firewall_cluster_post::DnsFirewallDnsFirewallClusterPost,
+    ) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<DnsFirewallDnsFirewallSingleResponse> {
         self.builder.send().await
     }
 }
-
 /// Create DNS Firewall Cluster
+///
+/// Create a DNS Firewall cluster
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/dns_firewall`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::dns_firewall };
+/// use cloudflare::{ ApiClient, apis::dns_firewall };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = create_dns_firewall_cluster(&api)
-///     .with_account_id("value")
+/// # let body: crate::models::dns_firewall_dns_firewall_cluster_post::DnsFirewallDnsFirewallClusterPost = todo!();
+/// let response = create_dns_firewall_cluster(&api)
+///     .with_account_id("account_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -105,7 +133,7 @@ pub fn create_dns_firewall_cluster(api: &ApiClient) -> CreateDnsFirewallClusterR
 
 #[derive(Debug)]
 pub struct ClusterDetailsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, DnsFirewallDnsFirewallSingleResponse>,
 }
 
 impl<'a> ClusterDetailsRequest<'a> {
@@ -128,19 +156,28 @@ impl<'a> ClusterDetailsRequest<'a> {
         self.builder = self.builder.path_param("dns_firewall_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<DnsFirewallDnsFirewallSingleResponse> {
         self.builder.send().await
     }
 }
-
 /// DNS Firewall Cluster Details
+///
+/// Show a single DNS Firewall cluster for an account
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/dns_firewall/{dns_firewall_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `dns_firewall_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::dns_firewall };
+/// use cloudflare::{ ApiClient, apis::dns_firewall };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = cluster_details(&api)
-///     .with_account_id("value")
-///     .with_dns_firewall_id("value")
+/// let response = cluster_details(&api)
+///     .with_account_id("account_id")
+///     .with_dns_firewall_id("dns_firewall_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -177,15 +214,24 @@ impl<'a> DeleteDnsFirewallClusterRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Delete DNS Firewall Cluster
+///
+/// Delete a DNS Firewall cluster
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/accounts/{account_id}/dns_firewall/{dns_firewall_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `dns_firewall_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::dns_firewall };
+/// use cloudflare::{ ApiClient, apis::dns_firewall };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete_dns_firewall_cluster(&api)
-///     .with_account_id("value")
-///     .with_dns_firewall_id("value")
+/// let response = delete_dns_firewall_cluster(&api)
+///     .with_account_id("account_id")
+///     .with_dns_firewall_id("dns_firewall_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -195,7 +241,7 @@ pub fn delete_dns_firewall_cluster(api: &ApiClient) -> DeleteDnsFirewallClusterR
 
 #[derive(Debug)]
 pub struct UpdateDnsFirewallClusterRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, DnsFirewallDnsFirewallSingleResponse>,
 }
 
 impl<'a> UpdateDnsFirewallClusterRequest<'a> {
@@ -219,23 +265,37 @@ impl<'a> UpdateDnsFirewallClusterRequest<'a> {
         self.builder = self.builder.path_param("dns_firewall_id", value);
         self
     }
-    pub fn with_body(mut self, body: serde_json::Value) -> Self {
+    pub fn with_body(
+        mut self,
+        body: crate::models::dns_firewall_dns_firewall_cluster_patch::DnsFirewallDnsFirewallClusterPatch,
+    ) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<DnsFirewallDnsFirewallSingleResponse> {
         self.builder.send().await
     }
 }
-
 /// Update DNS Firewall Cluster
+///
+/// Modify the configuration of a DNS Firewall cluster
+///
+/// **HTTP Method:** `PATCH`
+/// **Path:** `/accounts/{account_id}/dns_firewall/{dns_firewall_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `dns_firewall_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::dns_firewall };
+/// use cloudflare::{ ApiClient, apis::dns_firewall };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = update_dns_firewall_cluster(&api)
-///     .with_account_id("value")
-///     .with_dns_firewall_id("value")
+/// # let body: crate::models::dns_firewall_dns_firewall_cluster_patch::DnsFirewallDnsFirewallClusterPatch = todo!();
+/// let response = update_dns_firewall_cluster(&api)
+///     .with_account_id("account_id")
+///     .with_dns_firewall_id("dns_firewall_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -245,7 +305,7 @@ pub fn update_dns_firewall_cluster(api: &ApiClient) -> UpdateDnsFirewallClusterR
 
 #[derive(Debug)]
 pub struct ShowDnsFirewallClusterRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, DnsFirewallDnsFirewallReverseDnsResponse>,
 }
 
 impl<'a> ShowDnsFirewallClusterRequest<'a> {
@@ -268,19 +328,28 @@ impl<'a> ShowDnsFirewallClusterRequest<'a> {
         self.builder = self.builder.path_param("dns_firewall_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<DnsFirewallDnsFirewallReverseDnsResponse> {
         self.builder.send().await
     }
 }
-
 /// Show DNS Firewall Cluster Reverse DNS
+///
+/// Show reverse DNS configuration (PTR records) for a DNS Firewall cluster
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/dns_firewall/{dns_firewall_id}/reverse_dns`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `dns_firewall_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::dns_firewall };
+/// use cloudflare::{ ApiClient, apis::dns_firewall };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = show_dns_firewall_cluster(&api)
-///     .with_account_id("value")
-///     .with_dns_firewall_id("value")
+/// let response = show_dns_firewall_cluster(&api)
+///     .with_account_id("account_id")
+///     .with_dns_firewall_id("dns_firewall_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -290,7 +359,7 @@ pub fn show_dns_firewall_cluster(api: &ApiClient) -> ShowDnsFirewallClusterReque
 
 #[derive(Debug)]
 pub struct UpdateDnsFirewallClusterPatchRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, DnsFirewallDnsFirewallReverseDnsResponse>,
 }
 
 impl<'a> UpdateDnsFirewallClusterPatchRequest<'a> {
@@ -314,23 +383,37 @@ impl<'a> UpdateDnsFirewallClusterPatchRequest<'a> {
         self.builder = self.builder.path_param("dns_firewall_id", value);
         self
     }
-    pub fn with_body(mut self, body: serde_json::Value) -> Self {
+    pub fn with_body(
+        mut self,
+        body: crate::models::dns_firewall_dns_firewall_reverse_dns_patch::DnsFirewallDnsFirewallReverseDnsPatch,
+    ) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<DnsFirewallDnsFirewallReverseDnsResponse> {
         self.builder.send().await
     }
 }
-
 /// Update DNS Firewall Cluster Reverse DNS
+///
+/// Update reverse DNS configuration (PTR records) for a DNS Firewall cluster
+///
+/// **HTTP Method:** `PATCH`
+/// **Path:** `/accounts/{account_id}/dns_firewall/{dns_firewall_id}/reverse_dns`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `dns_firewall_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::dns_firewall };
+/// use cloudflare::{ ApiClient, apis::dns_firewall };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = update_dns_firewall_cluster_patch(&api)
-///     .with_account_id("value")
-///     .with_dns_firewall_id("value")
+/// # let body: crate::models::dns_firewall_dns_firewall_reverse_dns_patch::DnsFirewallDnsFirewallReverseDnsPatch = todo!();
+/// let response = update_dns_firewall_cluster_patch(&api)
+///     .with_account_id("account_id")
+///     .with_dns_firewall_id("dns_firewall_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```

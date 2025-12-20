@@ -19,13 +19,13 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct MagicRoute {
-    pub created_on: Option<serde_json::Value>,
-    pub description: Option<serde_json::Value>,
-    pub id: serde_json::Value,
-    pub modified_on: Option<serde_json::Value>,
-    pub nexthop: serde_json::Value,
-    pub prefix: serde_json::Value,
-    pub priority: serde_json::Value,
+    pub created_on: Option<crate::models::magic_created_on::MagicCreatedOn>,
+    pub description: Option<crate::models::magic_description::MagicDescription>,
+    pub id: crate::models::magic_identifier::MagicIdentifier,
+    pub modified_on: Option<crate::models::magic_modified_on::MagicModifiedOn>,
+    pub nexthop: crate::models::magic_nexthop::MagicNexthop,
+    pub prefix: crate::models::magic_prefix::MagicPrefix,
+    pub priority: crate::models::magic_priority::MagicPriority,
     pub scope: Option<crate::models::magic_scope::MagicScope>,
-    pub weight: Option<serde_json::Value>,
+    pub weight: Option<crate::models::magic_weight::MagicWeight>,
 }

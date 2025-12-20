@@ -20,7 +20,7 @@ use serde::{Deserialize, Serialize};
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct AppsInstanceSize {
     pub bandwidth_allowance_gib: Option<String>,
-    pub cpu_type: Option<serde_json::Value>,
+    pub cpu_type: Option<crate::models::instance_size_cpu_type::InstanceSizeCpuType>,
     pub cpus: Option<String>,
     pub deprecation_intent: Option<bool>,
     pub memory_bytes: Option<String>,

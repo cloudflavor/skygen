@@ -20,6 +20,6 @@ use serde::{Deserialize, Serialize};
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct ApiWebCrawlerDataSource {
     pub base_url: Option<String>,
-    pub crawling_option: Option<serde_json::Value>,
+    pub crawling_option: Option<crate::models::api_crawling_option::ApiCrawlingOption>,
     pub embed_media: Option<bool>,
 }

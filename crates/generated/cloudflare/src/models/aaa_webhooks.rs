@@ -19,12 +19,12 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct AaaWebhooks {
-    pub created_at: Option<serde_json::Value>,
-    pub id: Option<serde_json::Value>,
-    pub last_failure: Option<serde_json::Value>,
-    pub last_success: Option<serde_json::Value>,
-    pub name: Option<serde_json::Value>,
-    pub r#type: Option<serde_json::Value>,
-    pub secret: Option<serde_json::Value>,
-    pub url: Option<serde_json::Value>,
+    pub created_at: Option<crate::models::aaa_created_at::AaaCreatedAt>,
+    pub id: Option<crate::models::aaa_webhook_id::AaaWebhookId>,
+    pub last_failure: Option<crate::models::aaa_last_failure::AaaLastFailure>,
+    pub last_success: Option<crate::models::aaa_last_success::AaaLastSuccess>,
+    pub name: Option<crate::models::aaa_components_schemas_name::AaaComponentsSchemasName>,
+    pub r#type: Option<crate::models::aaa_components_schemas_type::AaaComponentsSchemasType>,
+    pub secret: Option<crate::models::aaa_secret::AaaSecret>,
+    pub url: Option<crate::models::aaa_url::AaaUrl>,
 }

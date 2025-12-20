@@ -33,13 +33,18 @@ impl<'a> ProjectsListResourcesDefaultRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// List Default Project Resources
+///
+/// To list all your resources in your default project, send a GET request to `/v2/projects/default/resources`.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/projects/default/resources`
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::project_resources };
+/// use digitalocean::{ ApiClient, apis::project_resources };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = projects_list_resources_default(&api)
+/// let response = projects_list_resources_default(&api)
 ///     .send()
 ///     .await?;
 /// ```
@@ -49,7 +54,7 @@ pub fn projects_list_resources_default(api: &ApiClient) -> ProjectsListResources
 
 #[derive(Debug)]
 pub struct ProjectsAssignResourcesDefaultRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, std::collections::BTreeMap<String, serde_json::Value>>,
 }
 
 impl<'a> ProjectsAssignResourcesDefaultRequest<'a> {
@@ -63,17 +68,24 @@ impl<'a> ProjectsAssignResourcesDefaultRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<std::collections::BTreeMap<String, serde_json::Value>> {
         self.builder.send().await
     }
 }
-
 /// Assign Resources to Default Project
+///
+/// To assign resources to your default project, send a POST request to `/v2/projects/default/resources`.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/v2/projects/default/resources`
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::project_resources };
+/// use digitalocean::{ ApiClient, apis::project_resources };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = projects_assign_resources_default(&api)
+/// # let body: crate::models::project_assignment::ProjectAssignment = todo!();
+/// let response = projects_assign_resources_default(&api)
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -104,14 +116,22 @@ impl<'a> ProjectsListResourcesRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// List Project Resources
+///
+/// To list all your resources in a project, send a GET request to `/v2/projects/$PROJECT_ID/resources`.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/projects/{project_id}/resources`
+///
+/// **Parameters**
+/// - `project_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::project_resources };
+/// use digitalocean::{ ApiClient, apis::project_resources };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = projects_list_resources(&api)
-///     .with_project_id("value")
+/// let response = projects_list_resources(&api)
+///     .with_project_id("project_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -121,7 +141,7 @@ pub fn projects_list_resources(api: &ApiClient) -> ProjectsListResourcesRequest<
 
 #[derive(Debug)]
 pub struct ProjectsAssignResourcesRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, std::collections::BTreeMap<String, serde_json::Value>>,
 }
 
 impl<'a> ProjectsAssignResourcesRequest<'a> {
@@ -141,18 +161,28 @@ impl<'a> ProjectsAssignResourcesRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<std::collections::BTreeMap<String, serde_json::Value>> {
         self.builder.send().await
     }
 }
-
 /// Assign Resources to a Project
+///
+/// To assign resources to a project, send a POST request to `/v2/projects/$PROJECT_ID/resources`.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/v2/projects/{project_id}/resources`
+///
+/// **Parameters**
+/// - `project_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::project_resources };
+/// use digitalocean::{ ApiClient, apis::project_resources };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = projects_assign_resources(&api)
-///     .with_project_id("value")
+/// # let body: crate::models::project_assignment::ProjectAssignment = todo!();
+/// let response = projects_assign_resources(&api)
+///     .with_project_id("project_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```

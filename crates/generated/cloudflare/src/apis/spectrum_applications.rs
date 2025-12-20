@@ -15,12 +15,15 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::spectrum_config_api_response_single_id::SpectrumConfigApiResponseSingleId;
+use crate::models::spectrum_config_app_config_collection::SpectrumConfigAppConfigCollection;
+use crate::models::spectrum_config_app_config_single::SpectrumConfigAppConfigSingle;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct ListSpectrumApplicationsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, SpectrumConfigAppConfigCollection>,
 }
 
 impl<'a> ListSpectrumApplicationsRequest<'a> {
@@ -50,18 +53,34 @@ impl<'a> ListSpectrumApplicationsRequest<'a> {
         self.builder = self.builder.header_param("order", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<SpectrumConfigAppConfigCollection> {
         self.builder.send().await
     }
 }
-
 /// List Spectrum applications
+///
+/// Retrieves a list of currently existing Spectrum applications inside a zone.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/spectrum/apps`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `page` (query,optional)
+/// - `per_page` (query,optional)
+/// - `direction` (query,optional)
+/// - `order` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::spectrum_applications };
+/// use cloudflare::{ ApiClient, apis::spectrum_applications };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_spectrum_applications(&api)
-///     .with_zone_id("value")
+/// let response = list_spectrum_applications(&api)
+///     .with_zone_id("zone_id")
+///     .with_page("page")
+///     .with_per_page("per_page")
+///     .with_direction("direction")
+///     .with_order("order")
 ///     .send()
 ///     .await?;
 /// ```
@@ -71,7 +90,7 @@ pub fn list_spectrum_applications(api: &ApiClient) -> ListSpectrumApplicationsRe
 
 #[derive(Debug)]
 pub struct CreateSpectrumApplicationUsingRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, SpectrumConfigAppConfigSingle>,
 }
 
 impl<'a> CreateSpectrumApplicationUsingRequest<'a> {
@@ -86,22 +105,35 @@ impl<'a> CreateSpectrumApplicationUsingRequest<'a> {
         self.builder = self.builder.path_param("zone_id", value);
         self
     }
-    pub fn with_body(mut self, body: serde_json::Value) -> Self {
+    pub fn with_body(
+        mut self,
+        body: crate::models::spectrum_config_update_app_config::SpectrumConfigUpdateAppConfig,
+    ) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<SpectrumConfigAppConfigSingle> {
         self.builder.send().await
     }
 }
-
 /// Create Spectrum application using a name for the origin
+///
+/// Creates a new Spectrum application from a configuration using a name for the origin.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/zones/{zone_id}/spectrum/apps`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::spectrum_applications };
+/// use cloudflare::{ ApiClient, apis::spectrum_applications };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = create_spectrum_application_using(&api)
-///     .with_zone_id("value")
+/// # let body: crate::models::spectrum_config_update_app_config::SpectrumConfigUpdateAppConfig = todo!();
+/// let response = create_spectrum_application_using(&api)
+///     .with_zone_id("zone_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -113,7 +145,7 @@ pub fn create_spectrum_application_using(
 
 #[derive(Debug)]
 pub struct GetSpectrumApplicationConfigurationRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, SpectrumConfigAppConfigSingle>,
 }
 
 impl<'a> GetSpectrumApplicationConfigurationRequest<'a> {
@@ -133,19 +165,28 @@ impl<'a> GetSpectrumApplicationConfigurationRequest<'a> {
         self.builder = self.builder.path_param("app_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<SpectrumConfigAppConfigSingle> {
         self.builder.send().await
     }
 }
-
 /// Get Spectrum application configuration
+///
+/// Gets the application configuration of a specific application inside a zone.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/spectrum/apps/{app_id}`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `app_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::spectrum_applications };
+/// use cloudflare::{ ApiClient, apis::spectrum_applications };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_spectrum_application_configuration(&api)
-///     .with_zone_id("value")
-///     .with_app_id("value")
+/// let response = get_spectrum_application_configuration(&api)
+///     .with_zone_id("zone_id")
+///     .with_app_id("app_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -157,7 +198,7 @@ pub fn get_spectrum_application_configuration(
 
 #[derive(Debug)]
 pub struct UpdateSpectrumApplicationConfigurationRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, SpectrumConfigAppConfigSingle>,
 }
 
 impl<'a> UpdateSpectrumApplicationConfigurationRequest<'a> {
@@ -178,23 +219,37 @@ impl<'a> UpdateSpectrumApplicationConfigurationRequest<'a> {
         self.builder = self.builder.path_param("app_id", value);
         self
     }
-    pub fn with_body(mut self, body: serde_json::Value) -> Self {
+    pub fn with_body(
+        mut self,
+        body: crate::models::spectrum_config_update_app_config::SpectrumConfigUpdateAppConfig,
+    ) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<SpectrumConfigAppConfigSingle> {
         self.builder.send().await
     }
 }
-
 /// Update Spectrum application configuration using a name for the origin
+///
+/// Updates a previously existing application's configuration that uses a name for the origin.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/zones/{zone_id}/spectrum/apps/{app_id}`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `app_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::spectrum_applications };
+/// use cloudflare::{ ApiClient, apis::spectrum_applications };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = update_spectrum_application_configuration(&api)
-///     .with_zone_id("value")
-///     .with_app_id("value")
+/// # let body: crate::models::spectrum_config_update_app_config::SpectrumConfigUpdateAppConfig = todo!();
+/// let response = update_spectrum_application_configuration(&api)
+///     .with_zone_id("zone_id")
+///     .with_app_id("app_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -206,7 +261,7 @@ pub fn update_spectrum_application_configuration(
 
 #[derive(Debug)]
 pub struct DeleteSpectrumApplicationRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, SpectrumConfigApiResponseSingleId>,
 }
 
 impl<'a> DeleteSpectrumApplicationRequest<'a> {
@@ -229,19 +284,28 @@ impl<'a> DeleteSpectrumApplicationRequest<'a> {
         self.builder = self.builder.path_param("app_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<SpectrumConfigApiResponseSingleId> {
         self.builder.send().await
     }
 }
-
 /// Delete Spectrum application
+///
+/// Deletes a previously existing application.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/zones/{zone_id}/spectrum/apps/{app_id}`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `app_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::spectrum_applications };
+/// use cloudflare::{ ApiClient, apis::spectrum_applications };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete_spectrum_application(&api)
-///     .with_zone_id("value")
-///     .with_app_id("value")
+/// let response = delete_spectrum_application(&api)
+///     .with_zone_id("zone_id")
+///     .with_app_id("app_id")
 ///     .send()
 ///     .await?;
 /// ```

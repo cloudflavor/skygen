@@ -22,8 +22,8 @@ pub struct ZoneAnalyticsApiTotals {
     pub bandwidth: Option<crate::models::zone_analytics_api_bandwidth::ZoneAnalyticsApiBandwidth>,
     pub pageviews: Option<crate::models::zone_analytics_api_pageviews::ZoneAnalyticsApiPageviews>,
     pub requests: Option<crate::models::zone_analytics_api_requests::ZoneAnalyticsApiRequests>,
-    pub since: Option<serde_json::Value>,
+    pub since: Option<crate::models::zone_analytics_api_since::ZoneAnalyticsApiSince>,
     pub threats: Option<crate::models::zone_analytics_api_threats::ZoneAnalyticsApiThreats>,
     pub uniques: Option<crate::models::zone_analytics_api_uniques::ZoneAnalyticsApiUniques>,
-    pub until: Option<serde_json::Value>,
+    pub until: Option<crate::models::zone_analytics_api_until::ZoneAnalyticsApiUntil>,
 }

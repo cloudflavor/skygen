@@ -19,5 +19,5 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct ProjectAssignment {
-    pub resources: Option<Vec<serde_json::Value>>,
+    pub resources: Option<Vec<crate::models::urn::Urn>>,
 }

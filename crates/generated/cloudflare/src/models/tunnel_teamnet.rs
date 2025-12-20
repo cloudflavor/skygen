@@ -19,14 +19,14 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct TunnelTeamnet {
-    pub comment: Option<serde_json::Value>,
-    pub created_at: Option<serde_json::Value>,
-    pub deleted_at: Option<serde_json::Value>,
-    pub id: Option<serde_json::Value>,
-    pub network: Option<serde_json::Value>,
-    pub tun_type: Option<serde_json::Value>,
-    pub tunnel_id: Option<serde_json::Value>,
-    pub tunnel_name: Option<serde_json::Value>,
-    pub virtual_network_id: Option<serde_json::Value>,
-    pub virtual_network_name: Option<serde_json::Value>,
+    pub comment: Option<crate::models::tunnel_route_comment::TunnelRouteComment>,
+    pub created_at: Option<crate::models::tunnel_created_at::TunnelCreatedAt>,
+    pub deleted_at: Option<crate::models::tunnel_deleted_at::TunnelDeletedAt>,
+    pub id: Option<crate::models::tunnel_route_id::TunnelRouteId>,
+    pub network: Option<crate::models::tunnel_ip_network::TunnelIpNetwork>,
+    pub tun_type: Option<crate::models::tunnel_tunnel_type::TunnelTunnelType>,
+    pub tunnel_id: Option<crate::models::tunnel_tunnel_id::TunnelTunnelId>,
+    pub tunnel_name: Option<crate::models::tunnel_tunnel_name::TunnelTunnelName>,
+    pub virtual_network_id: Option<crate::models::tunnel_virtual_network_id_computed_optional::TunnelVirtualNetworkIdComputedOptional>,
+    pub virtual_network_name: Option<crate::models::tunnel_virtual_network_name::TunnelVirtualNetworkName>,
 }

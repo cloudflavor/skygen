@@ -19,9 +19,9 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct MagicManagedApp {
-    pub hostnames: Option<serde_json::Value>,
-    pub ip_subnets: Option<serde_json::Value>,
-    pub managed_app_id: serde_json::Value,
-    pub name: Option<serde_json::Value>,
-    pub r#type: Option<serde_json::Value>,
+    pub hostnames: Option<crate::models::magic_app_hostnames::MagicAppHostnames>,
+    pub ip_subnets: Option<crate::models::magic_app_subnets::MagicAppSubnets>,
+    pub managed_app_id: crate::models::magic_managed_app_id::MagicManagedAppId,
+    pub name: Option<crate::models::magic_app_name::MagicAppName>,
+    pub r#type: Option<crate::models::magic_app_type::MagicAppType>,
 }

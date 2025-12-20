@@ -19,26 +19,41 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct WaitingroomQueryWaitingroom {
-    pub additional_routes: Option<serde_json::Value>,
+    pub additional_routes:
+        Option<crate::models::waitingroom_additional_routes::WaitingroomAdditionalRoutes>,
     pub cookie_attributes:
         Option<crate::models::waitingroom_cookie_attributes::WaitingroomCookieAttributes>,
-    pub cookie_suffix: Option<serde_json::Value>,
-    pub custom_page_html: Option<serde_json::Value>,
-    pub default_template_language: Option<serde_json::Value>,
-    pub description: Option<serde_json::Value>,
-    pub disable_session_renewal: Option<serde_json::Value>,
-    pub enabled_origin_commands: Option<serde_json::Value>,
-    pub host: serde_json::Value,
-    pub json_response_enabled: Option<serde_json::Value>,
-    pub name: serde_json::Value,
-    pub new_users_per_minute: serde_json::Value,
-    pub path: Option<serde_json::Value>,
-    pub queue_all: Option<serde_json::Value>,
-    pub queueing_method: Option<serde_json::Value>,
-    pub queueing_status_code: Option<serde_json::Value>,
-    pub session_duration: Option<serde_json::Value>,
-    pub suspended: Option<serde_json::Value>,
-    pub total_active_users: serde_json::Value,
-    pub turnstile_action: Option<serde_json::Value>,
-    pub turnstile_mode: Option<serde_json::Value>,
+    pub cookie_suffix: Option<crate::models::waitingroom_cookie_suffix::WaitingroomCookieSuffix>,
+    pub custom_page_html:
+        Option<crate::models::waitingroom_custom_page_html::WaitingroomCustomPageHtml>,
+    pub default_template_language: Option<
+        crate::models::waitingroom_default_template_language::WaitingroomDefaultTemplateLanguage,
+    >,
+    pub description: Option<crate::models::waitingroom_description::WaitingroomDescription>,
+    pub disable_session_renewal: Option<
+        crate::models::waitingroom_disable_session_renewal::WaitingroomDisableSessionRenewal,
+    >,
+    pub enabled_origin_commands: Option<
+        crate::models::waitingroom_enabled_origin_commands::WaitingroomEnabledOriginCommands,
+    >,
+    pub host: crate::models::waitingroom_host::WaitingroomHost,
+    pub json_response_enabled:
+        Option<crate::models::waitingroom_json_response_enabled::WaitingroomJsonResponseEnabled>,
+    pub name: crate::models::waitingroom_name::WaitingroomName,
+    pub new_users_per_minute:
+        crate::models::waitingroom_new_users_per_minute::WaitingroomNewUsersPerMinute,
+    pub path: Option<crate::models::waitingroom_path::WaitingroomPath>,
+    pub queue_all: Option<crate::models::waitingroom_queue_all::WaitingroomQueueAll>,
+    pub queueing_method:
+        Option<crate::models::waitingroom_queueing_method::WaitingroomQueueingMethod>,
+    pub queueing_status_code:
+        Option<crate::models::waitingroom_queueing_status_code::WaitingroomQueueingStatusCode>,
+    pub session_duration:
+        Option<crate::models::waitingroom_session_duration::WaitingroomSessionDuration>,
+    pub suspended: Option<crate::models::waitingroom_suspended::WaitingroomSuspended>,
+    pub total_active_users:
+        crate::models::waitingroom_total_active_users::WaitingroomTotalActiveUsers,
+    pub turnstile_action:
+        Option<crate::models::waitingroom_turnstile_action::WaitingroomTurnstileAction>,
+    pub turnstile_mode: Option<crate::models::waitingroom_turnstile_mode::WaitingroomTurnstileMode>,
 }

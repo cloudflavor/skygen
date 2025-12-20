@@ -15,6 +15,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::error::Error;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
@@ -33,13 +34,18 @@ impl<'a> ListRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// List All Firewalls
+///
+/// To list all of the firewalls available on your account, send a GET request to `/v2/firewalls`.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/firewalls`
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::firewalls };
+/// use digitalocean::{ ApiClient, apis::firewalls };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list(&api)
+/// let response = list(&api)
 ///     .send()
 ///     .await?;
 /// ```
@@ -49,7 +55,7 @@ pub fn list(api: &ApiClient) -> ListRequest<'_> {
 
 #[derive(Debug)]
 pub struct CreateRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, Error>,
 }
 
 impl<'a> CreateRequest<'a> {
@@ -62,17 +68,25 @@ impl<'a> CreateRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<Error> {
         self.builder.send().await
     }
 }
-
 /// Create a New Firewall
+///
+/// To create a new firewall, send a POST request to `/v2/firewalls`. The request
+/// must contain at least one inbound or outbound access rule.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/v2/firewalls`
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::firewalls };
+/// use digitalocean::{ ApiClient, apis::firewalls };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = create(&api)
+/// # let body: serde_json::Value = todo!();
+/// let response = create(&api)
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -100,14 +114,22 @@ impl<'a> GetRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Retrieve an Existing Firewall
+///
+/// To show information about an existing firewall, send a GET request to `/v2/firewalls/$FIREWALL_ID`.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/firewalls/{firewall_id}`
+///
+/// **Parameters**
+/// - `firewall_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::firewalls };
+/// use digitalocean::{ ApiClient, apis::firewalls };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get(&api)
-///     .with_firewall_id("value")
+/// let response = get(&api)
+///     .with_firewall_id("firewall_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -139,14 +161,27 @@ impl<'a> UpdateRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Update a Firewall
+///
+/// To update the configuration of an existing firewall, send a PUT request to
+/// `/v2/firewalls/$FIREWALL_ID`. The request should contain a full representation
+/// of the firewall including existing attributes. **Note that any attributes that
+/// are not provided will be reset to their default values.**
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/v2/firewalls/{firewall_id}`
+///
+/// **Parameters**
+/// - `firewall_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::firewalls };
+/// use digitalocean::{ ApiClient, apis::firewalls };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = update(&api)
-///     .with_firewall_id("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = update(&api)
+///     .with_firewall_id("firewall_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -156,7 +191,7 @@ pub fn update(api: &ApiClient) -> UpdateRequest<'_> {
 
 #[derive(Debug)]
 pub struct DeleteRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, Error>,
 }
 
 impl<'a> DeleteRequest<'a> {
@@ -170,18 +205,30 @@ impl<'a> DeleteRequest<'a> {
         self.builder = self.builder.path_param("firewall_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<Error> {
         self.builder.send().await
     }
 }
-
 /// Delete a Firewall
+///
+/// To delete a firewall send a DELETE request to `/v2/firewalls/$FIREWALL_ID`.
+///
+/// No response body will be sent back, but the response code will indicate
+/// success. Specifically, the response code will be a 204, which means that the
+/// action was successful with no returned body data.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/v2/firewalls/{firewall_id}`
+///
+/// **Parameters**
+/// - `firewall_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::firewalls };
+/// use digitalocean::{ ApiClient, apis::firewalls };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete(&api)
-///     .with_firewall_id("value")
+/// let response = delete(&api)
+///     .with_firewall_id("firewall_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -191,7 +238,7 @@ pub fn delete(api: &ApiClient) -> DeleteRequest<'_> {
 
 #[derive(Debug)]
 pub struct AssignDropletsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, Error>,
 }
 
 impl<'a> AssignDropletsRequest<'a> {
@@ -210,18 +257,34 @@ impl<'a> AssignDropletsRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<Error> {
         self.builder.send().await
     }
 }
-
 /// Add Droplets to a Firewall
+///
+/// To assign a Droplet to a firewall, send a POST request to
+/// `/v2/firewalls/$FIREWALL_ID/droplets`. In the body of the request, there
+/// should be a `droplet_ids` attribute containing a list of Droplet IDs.
+///
+/// No response body will be sent back, but the response code will indicate
+/// success. Specifically, the response code will be a 204, which means that the
+/// action was successful with no returned body data.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/v2/firewalls/{firewall_id}/droplets`
+///
+/// **Parameters**
+/// - `firewall_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::firewalls };
+/// use digitalocean::{ ApiClient, apis::firewalls };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = assign_droplets(&api)
-///     .with_firewall_id("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = assign_droplets(&api)
+///     .with_firewall_id("firewall_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -231,7 +294,7 @@ pub fn assign_droplets(api: &ApiClient) -> AssignDropletsRequest<'_> {
 
 #[derive(Debug)]
 pub struct DeleteDropletsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, Error>,
 }
 
 impl<'a> DeleteDropletsRequest<'a> {
@@ -250,18 +313,34 @@ impl<'a> DeleteDropletsRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<Error> {
         self.builder.send().await
     }
 }
-
 /// Remove Droplets from a Firewall
+///
+/// To remove a Droplet from a firewall, send a DELETE request to
+/// `/v2/firewalls/$FIREWALL_ID/droplets`. In the body of the request, there should
+/// be a `droplet_ids` attribute containing a list of Droplet IDs.
+///
+/// No response body will be sent back, but the response code will indicate
+/// success. Specifically, the response code will be a 204, which means that the
+/// action was successful with no returned body data.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/v2/firewalls/{firewall_id}/droplets`
+///
+/// **Parameters**
+/// - `firewall_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::firewalls };
+/// use digitalocean::{ ApiClient, apis::firewalls };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete_droplets(&api)
-///     .with_firewall_id("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = delete_droplets(&api)
+///     .with_firewall_id("firewall_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -271,7 +350,7 @@ pub fn delete_droplets(api: &ApiClient) -> DeleteDropletsRequest<'_> {
 
 #[derive(Debug)]
 pub struct AddRulesRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, Error>,
 }
 
 impl<'a> AddRulesRequest<'a> {
@@ -289,18 +368,35 @@ impl<'a> AddRulesRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<Error> {
         self.builder.send().await
     }
 }
-
 /// Add Rules to a Firewall
+///
+/// To add additional access rules to a firewall, send a POST request to
+/// `/v2/firewalls/$FIREWALL_ID/rules`. The body of the request may include an
+/// inbound_rules and/or outbound_rules attribute containing an array of rules to
+/// be added.
+///
+/// No response body will be sent back, but the response code will indicate
+/// success. Specifically, the response code will be a 204, which means that the
+/// action was successful with no returned body data.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/v2/firewalls/{firewall_id}/rules`
+///
+/// **Parameters**
+/// - `firewall_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::firewalls };
+/// use digitalocean::{ ApiClient, apis::firewalls };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = add_rules(&api)
-///     .with_firewall_id("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = add_rules(&api)
+///     .with_firewall_id("firewall_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -310,7 +406,7 @@ pub fn add_rules(api: &ApiClient) -> AddRulesRequest<'_> {
 
 #[derive(Debug)]
 pub struct DeleteRulesRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, Error>,
 }
 
 impl<'a> DeleteRulesRequest<'a> {
@@ -329,18 +425,35 @@ impl<'a> DeleteRulesRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<Error> {
         self.builder.send().await
     }
 }
-
 /// Remove Rules from a Firewall
+///
+/// To remove access rules from a firewall, send a DELETE request to
+/// `/v2/firewalls/$FIREWALL_ID/rules`. The body of the request may include an
+/// `inbound_rules` and/or `outbound_rules` attribute containing an array of rules
+/// to be removed.
+///
+/// No response body will be sent back, but the response code will indicate
+/// success. Specifically, the response code will be a 204, which means that the
+/// action was successful with no returned body data.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/v2/firewalls/{firewall_id}/rules`
+///
+/// **Parameters**
+/// - `firewall_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::firewalls };
+/// use digitalocean::{ ApiClient, apis::firewalls };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete_rules(&api)
-///     .with_firewall_id("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = delete_rules(&api)
+///     .with_firewall_id("firewall_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -350,7 +463,7 @@ pub fn delete_rules(api: &ApiClient) -> DeleteRulesRequest<'_> {
 
 #[derive(Debug)]
 pub struct AddTagsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, Error>,
 }
 
 impl<'a> AddTagsRequest<'a> {
@@ -368,18 +481,34 @@ impl<'a> AddTagsRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<Error> {
         self.builder.send().await
     }
 }
-
 /// Add Tags to a Firewall
+///
+/// To assign a tag representing a group of Droplets to a firewall, send a POST
+/// request to `/v2/firewalls/$FIREWALL_ID/tags`. In the body of the request,
+/// there should be a `tags` attribute containing a list of tag names.
+///
+/// No response body will be sent back, but the response code will indicate
+/// success. Specifically, the response code will be a 204, which means that the
+/// action was successful with no returned body data.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/v2/firewalls/{firewall_id}/tags`
+///
+/// **Parameters**
+/// - `firewall_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::firewalls };
+/// use digitalocean::{ ApiClient, apis::firewalls };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = add_tags(&api)
-///     .with_firewall_id("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = add_tags(&api)
+///     .with_firewall_id("firewall_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -389,7 +518,7 @@ pub fn add_tags(api: &ApiClient) -> AddTagsRequest<'_> {
 
 #[derive(Debug)]
 pub struct DeleteTagsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, Error>,
 }
 
 impl<'a> DeleteTagsRequest<'a> {
@@ -408,18 +537,34 @@ impl<'a> DeleteTagsRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<Error> {
         self.builder.send().await
     }
 }
-
 /// Remove Tags from a Firewall
+///
+/// To remove a tag representing a group of Droplets from a firewall, send a
+/// DELETE request to `/v2/firewalls/$FIREWALL_ID/tags`. In the body of the
+/// request, there should be a `tags` attribute containing a list of tag names.
+///
+/// No response body will be sent back, but the response code will indicate
+/// success. Specifically, the response code will be a 204, which means that the
+/// action was successful with no returned body data.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/v2/firewalls/{firewall_id}/tags`
+///
+/// **Parameters**
+/// - `firewall_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::firewalls };
+/// use digitalocean::{ ApiClient, apis::firewalls };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete_tags(&api)
-///     .with_firewall_id("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = delete_tags(&api)
+///     .with_firewall_id("firewall_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```

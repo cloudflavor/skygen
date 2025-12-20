@@ -19,12 +19,14 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct AddressingAddressMaps {
-    pub can_delete: Option<serde_json::Value>,
-    pub can_modify_ips: Option<serde_json::Value>,
-    pub created_at: Option<serde_json::Value>,
-    pub default_sni: Option<serde_json::Value>,
-    pub description: Option<serde_json::Value>,
-    pub enabled: Option<serde_json::Value>,
-    pub id: Option<serde_json::Value>,
-    pub modified_at: Option<serde_json::Value>,
+    pub can_delete: Option<crate::models::addressing_can_delete::AddressingCanDelete>,
+    pub can_modify_ips: Option<crate::models::addressing_can_modify_ips::AddressingCanModifyIps>,
+    pub created_at: Option<crate::models::addressing_timestamp::AddressingTimestamp>,
+    pub default_sni: Option<crate::models::addressing_default_sni::AddressingDefaultSni>,
+    pub description:
+        Option<crate::models::addressing_schemas_description::AddressingSchemasDescription>,
+    pub enabled: Option<crate::models::addressing_enabled::AddressingEnabled>,
+    pub id:
+        Option<crate::models::addressing_address_map_identifier::AddressingAddressMapIdentifier>,
+    pub modified_at: Option<crate::models::addressing_timestamp::AddressingTimestamp>,
 }

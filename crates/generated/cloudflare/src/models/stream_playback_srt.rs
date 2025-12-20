@@ -19,7 +19,9 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct StreamPlaybackSrt {
-    pub passphrase: Option<serde_json::Value>,
-    pub stream_id: Option<serde_json::Value>,
-    pub url: Option<serde_json::Value>,
+    pub passphrase: Option<
+        crate::models::stream_playback_srt_stream_passphrase::StreamPlaybackSrtStreamPassphrase,
+    >,
+    pub stream_id: Option<crate::models::stream_playback_srt_stream_id::StreamPlaybackSrtStreamId>,
+    pub url: Option<crate::models::stream_playback_srt_url::StreamPlaybackSrtUrl>,
 }

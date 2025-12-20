@@ -21,7 +21,7 @@ use serde::{Deserialize, Serialize};
 pub struct FirewallFilters {
     pub configuration_target: Option<String>,
     pub configuration_value: Option<String>,
-    pub mode: Option<serde_json::Value>,
+    pub mode: Option<crate::models::firewall_schemas_mode::FirewallSchemasMode>,
     pub notes: Option<String>,
     pub r#match: Option<String>,
 }

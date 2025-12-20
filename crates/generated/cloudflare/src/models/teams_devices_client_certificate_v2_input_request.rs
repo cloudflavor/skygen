@@ -22,7 +22,9 @@ pub struct TeamsDevicesClientCertificateV2InputRequest {
     pub certificate_id: String,
     pub check_private_key: bool,
     pub cn: Option<String>,
-    pub extended_key_usage: Option<Vec<serde_json::Value>>,
+    pub extended_key_usage: Option<
+        Vec<crate::models::teams_devices_extended_key_usage_enum::TeamsDevicesExtendedKeyUsageEnum>,
+    >,
     pub locations: Option<std::collections::BTreeMap<String, serde_json::Value>>,
     pub operating_system: String,
 }

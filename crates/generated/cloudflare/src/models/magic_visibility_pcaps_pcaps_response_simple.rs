@@ -19,14 +19,12 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct MagicVisibilityPcapsPcapsResponseSimple {
-    pub filter_v1: Option<
-        crate::models::magic_visibility_pcaps_pcaps_filter_v1::MagicVisibilityPcapsPcapsFilterV1,
-    >,
-    pub id: Option<serde_json::Value>,
-    pub offset_time: Option<serde_json::Value>,
-    pub r#type: Option<serde_json::Value>,
-    pub status: Option<serde_json::Value>,
-    pub submitted: Option<serde_json::Value>,
-    pub system: Option<serde_json::Value>,
-    pub time_limit: Option<serde_json::Value>,
+    pub filter_v1: Option<crate::models::magic_visibility_pcaps_pcaps_filter_v1::MagicVisibilityPcapsPcapsFilterV1>,
+    pub id: Option<crate::models::magic_visibility_pcaps_pcaps_id::MagicVisibilityPcapsPcapsId>,
+    pub offset_time: Option<crate::models::magic_visibility_pcaps_pcaps_offset_time::MagicVisibilityPcapsPcapsOffsetTime>,
+    pub r#type: Option<crate::models::magic_visibility_pcaps_pcaps_type::MagicVisibilityPcapsPcapsType>,
+    pub status: Option<crate::models::magic_visibility_pcaps_pcaps_status::MagicVisibilityPcapsPcapsStatus>,
+    pub submitted: Option<crate::models::magic_visibility_pcaps_pcaps_submitted::MagicVisibilityPcapsPcapsSubmitted>,
+    pub system: Option<crate::models::magic_visibility_pcaps_pcaps_system::MagicVisibilityPcapsPcapsSystem>,
+    pub time_limit: Option<crate::models::magic_visibility_pcaps_pcaps_time_limit_sampled::MagicVisibilityPcapsPcapsTimeLimitSampled>,
 }

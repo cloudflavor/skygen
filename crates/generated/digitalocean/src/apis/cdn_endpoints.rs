@@ -15,6 +15,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::error::Error;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
@@ -33,13 +34,18 @@ impl<'a> ListEndpointsRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// List All CDN Endpoints
+///
+/// To list all of the CDN endpoints available on your account, send a GET request to `/v2/cdn/endpoints`.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/cdn/endpoints`
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::cdn_endpoints };
+/// use digitalocean::{ ApiClient, apis::cdn_endpoints };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_endpoints(&api)
+/// let response = list_endpoints(&api)
 ///     .send()
 ///     .await?;
 /// ```
@@ -66,13 +72,26 @@ impl<'a> CreateEndpointRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Create a New CDN Endpoint
+///
+/// To create a new CDN endpoint, send a POST request to `/v2/cdn/endpoints`. The
+/// origin attribute must be set to the fully qualified domain name (FQDN) of a
+/// DigitalOcean Space. Optionally, the TTL may be configured by setting the `ttl`
+/// attribute.
+///
+/// A custom subdomain may be configured by specifying the `custom_domain` and
+/// `certificate_id` attributes.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/v2/cdn/endpoints`
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::cdn_endpoints };
+/// use digitalocean::{ ApiClient, apis::cdn_endpoints };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = create_endpoint(&api)
+/// # let body: crate::models::cdn_endpoint::CdnEndpoint = todo!();
+/// let response = create_endpoint(&api)
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -100,14 +119,22 @@ impl<'a> GetEndpointRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Retrieve an Existing CDN Endpoint
+///
+/// To show information about an existing CDN endpoint, send a GET request to `/v2/cdn/endpoints/$ENDPOINT_ID`.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/cdn/endpoints/{cdn_id}`
+///
+/// **Parameters**
+/// - `cdn_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::cdn_endpoints };
+/// use digitalocean::{ ApiClient, apis::cdn_endpoints };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_endpoint(&api)
-///     .with_cdn_id("value")
+/// let response = get_endpoint(&api)
+///     .with_cdn_id("cdn_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -140,14 +167,26 @@ impl<'a> UpdateEndpointsRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Update a CDN Endpoint
+///
+/// To update the TTL, certificate ID, or the FQDN of the custom subdomain for
+/// an existing CDN endpoint, send a PUT request to
+/// `/v2/cdn/endpoints/$ENDPOINT_ID`.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/v2/cdn/endpoints/{cdn_id}`
+///
+/// **Parameters**
+/// - `cdn_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::cdn_endpoints };
+/// use digitalocean::{ ApiClient, apis::cdn_endpoints };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = update_endpoints(&api)
-///     .with_cdn_id("value")
+/// # let body: crate::models::update_endpoint::UpdateEndpoint = todo!();
+/// let response = update_endpoints(&api)
+///     .with_cdn_id("cdn_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -157,7 +196,7 @@ pub fn update_endpoints(api: &ApiClient) -> UpdateEndpointsRequest<'_> {
 
 #[derive(Debug)]
 pub struct DeleteEndpointRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, Error>,
 }
 
 impl<'a> DeleteEndpointRequest<'a> {
@@ -171,18 +210,30 @@ impl<'a> DeleteEndpointRequest<'a> {
         self.builder = self.builder.path_param("cdn_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<Error> {
         self.builder.send().await
     }
 }
-
 /// Delete a CDN Endpoint
+///
+/// To delete a specific CDN endpoint, send a DELETE request to
+/// `/v2/cdn/endpoints/$ENDPOINT_ID`.
+///
+/// A status of 204 will be given. This indicates that the request was processed
+/// successfully, but that no response body is needed.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/v2/cdn/endpoints/{cdn_id}`
+///
+/// **Parameters**
+/// - `cdn_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::cdn_endpoints };
+/// use digitalocean::{ ApiClient, apis::cdn_endpoints };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete_endpoint(&api)
-///     .with_cdn_id("value")
+/// let response = delete_endpoint(&api)
+///     .with_cdn_id("cdn_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -192,7 +243,7 @@ pub fn delete_endpoint(api: &ApiClient) -> DeleteEndpointRequest<'_> {
 
 #[derive(Debug)]
 pub struct PurgeCacheRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, Error>,
 }
 
 impl<'a> PurgeCacheRequest<'a> {
@@ -212,18 +263,36 @@ impl<'a> PurgeCacheRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<Error> {
         self.builder.send().await
     }
 }
-
 /// Purge the Cache for an Existing CDN Endpoint
+///
+/// To purge cached content from a CDN endpoint, send a DELETE request to
+/// `/v2/cdn/endpoints/$ENDPOINT_ID/cache`. The body of the request should include
+/// a `files` attribute containing a list of cached file paths to be purged. A
+/// path may be for a single file or may contain a wildcard (`*`) to recursively
+/// purge all files under a directory. When only a wildcard is provided, all cached
+/// files will be purged. There is a rate limit of 50 files per 20 seconds that can
+/// be purged. CDN endpoints have a rate limit of 5 requests per 10 seconds.
+/// Purging files using a wildcard path counts as a single request against the API's
+/// rate limit. Two identical purge requests cannot be sent at the same time.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/v2/cdn/endpoints/{cdn_id}/cache`
+///
+/// **Parameters**
+/// - `cdn_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::cdn_endpoints };
+/// use digitalocean::{ ApiClient, apis::cdn_endpoints };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = purge_cache(&api)
-///     .with_cdn_id("value")
+/// # let body: crate::models::purge_cache::PurgeCache = todo!();
+/// let response = purge_cache(&api)
+///     .with_cdn_id("cdn_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```

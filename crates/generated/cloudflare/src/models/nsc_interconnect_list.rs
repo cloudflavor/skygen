@@ -19,6 +19,6 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct NscInterconnectList {
-    pub items: Vec<serde_json::Value>,
+    pub items: Vec<crate::models::nsc_interconnect::NscInterconnect>,
     pub next: Option<i64>,
 }

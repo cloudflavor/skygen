@@ -19,9 +19,9 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct EmailCreateRuleProperties {
-    pub actions: serde_json::Value,
-    pub enabled: Option<serde_json::Value>,
-    pub matchers: serde_json::Value,
-    pub name: Option<serde_json::Value>,
-    pub priority: Option<serde_json::Value>,
+    pub actions: crate::models::email_rule_actions::EmailRuleActions,
+    pub enabled: Option<crate::models::email_rule_enabled::EmailRuleEnabled>,
+    pub matchers: crate::models::email_rule_matchers::EmailRuleMatchers,
+    pub name: Option<crate::models::email_rule_name::EmailRuleName>,
+    pub priority: Option<crate::models::email_rule_priority::EmailRulePriority>,
 }

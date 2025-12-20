@@ -15,6 +15,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::action::Action;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
@@ -38,14 +39,22 @@ impl<'a> ListRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// List All Actions for an Image
+///
+/// To retrieve all actions that have been executed on an image, send a GET request to `/v2/images/$IMAGE_ID/actions`.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/images/{image_id}/actions`
+///
+/// **Parameters**
+/// - `image_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::image_actions };
+/// use digitalocean::{ ApiClient, apis::image_actions };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list(&api)
-///     .with_image_id("value")
+/// let response = list(&api)
+///     .with_image_id("image_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -55,7 +64,7 @@ pub fn list(api: &ApiClient) -> ListRequest<'_> {
 
 #[derive(Debug)]
 pub struct PostRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, Action>,
 }
 
 impl<'a> PostRequest<'a> {
@@ -73,18 +82,40 @@ impl<'a> PostRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<Action> {
         self.builder.send().await
     }
 }
-
 /// Initiate an Image Action
+///
+/// The following actions are available on an Image.
+///
+/// ## Convert an Image to a Snapshot
+///
+/// To convert an image, for example, a backup to a snapshot, send a POST request
+/// to `/v2/images/$IMAGE_ID/actions`. Set the `type` attribute to `convert`.
+///
+/// ## Transfer an Image
+///
+/// To transfer an image to another region, send a POST request to
+/// `/v2/images/$IMAGE_ID/actions`. Set the `type` attribute to `transfer` and set
+/// `region` attribute to the slug identifier of the region you wish to transfer
+/// to.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/v2/images/{image_id}/actions`
+///
+/// **Parameters**
+/// - `image_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::image_actions };
+/// use digitalocean::{ ApiClient, apis::image_actions };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = post(&api)
-///     .with_image_id("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = post(&api)
+///     .with_image_id("image_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -94,7 +125,7 @@ pub fn post(api: &ApiClient) -> PostRequest<'_> {
 
 #[derive(Debug)]
 pub struct GetRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, Action>,
 }
 
 impl<'a> GetRequest<'a> {
@@ -114,19 +145,28 @@ impl<'a> GetRequest<'a> {
         self.builder = self.builder.path_param("action_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<Action> {
         self.builder.send().await
     }
 }
-
 /// Retrieve an Existing Action
+///
+/// To retrieve the status of an image action, send a GET request to `/v2/images/$IMAGE_ID/actions/$IMAGE_ACTION_ID`.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/images/{image_id}/actions/{action_id}`
+///
+/// **Parameters**
+/// - `image_id` (path, required)
+/// - `action_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::image_actions };
+/// use digitalocean::{ ApiClient, apis::image_actions };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get(&api)
-///     .with_image_id("value")
-///     .with_action_id("value")
+/// let response = get(&api)
+///     .with_image_id("image_id")
+///     .with_action_id("action_id")
 ///     .send()
 ///     .await?;
 /// ```

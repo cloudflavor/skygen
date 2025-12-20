@@ -19,12 +19,12 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct AccessSchemasOrganizations {
-    pub auth_domain: Option<serde_json::Value>,
-    pub created_at: Option<serde_json::Value>,
-    pub is_ui_read_only: Option<serde_json::Value>,
-    pub login_design: Option<serde_json::Value>,
-    pub name: Option<serde_json::Value>,
-    pub ui_read_only_toggle_reason: Option<serde_json::Value>,
-    pub updated_at: Option<serde_json::Value>,
-    pub user_seat_expiration_inactive_time: Option<serde_json::Value>,
+    pub auth_domain: Option<crate::models::access_schemas_auth_domain::AccessSchemasAuthDomain>,
+    pub created_at: Option<crate::models::access_timestamp::AccessTimestamp>,
+    pub is_ui_read_only: Option<crate::models::access_schemas_is_ui_read_only::AccessSchemasIsUiReadOnly>,
+    pub login_design: Option<crate::models::access_schemas_login_design::AccessSchemasLoginDesign>,
+    pub name: Option<crate::models::access_organizations_components_schemas_name::AccessOrganizationsComponentsSchemasName>,
+    pub ui_read_only_toggle_reason: Option<crate::models::access_ui_read_only_toggle_reason::AccessUiReadOnlyToggleReason>,
+    pub updated_at: Option<crate::models::access_timestamp::AccessTimestamp>,
+    pub user_seat_expiration_inactive_time: Option<crate::models::access_schemas_user_seat_expiration_inactive_time::AccessSchemasUserSeatExpirationInactiveTime>,
 }

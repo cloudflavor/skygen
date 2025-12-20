@@ -19,15 +19,15 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct TurnstileWidgetList {
-    pub bot_fight_mode: serde_json::Value,
-    pub clearance_level: serde_json::Value,
-    pub created_on: serde_json::Value,
-    pub domains: serde_json::Value,
-    pub ephemeral_id: serde_json::Value,
-    pub mode: serde_json::Value,
-    pub modified_on: serde_json::Value,
-    pub name: serde_json::Value,
-    pub offlabel: serde_json::Value,
-    pub region: serde_json::Value,
-    pub sitekey: serde_json::Value,
+    pub bot_fight_mode: crate::models::turnstile_bot_fight_mode::TurnstileBotFightMode,
+    pub clearance_level: crate::models::turnstile_clearance_level::TurnstileClearanceLevel,
+    pub created_on: crate::models::turnstile_created_on::TurnstileCreatedOn,
+    pub domains: crate::models::turnstile_domains::TurnstileDomains,
+    pub ephemeral_id: crate::models::turnstile_ephemeral_id::TurnstileEphemeralId,
+    pub mode: crate::models::turnstile_widget_mode::TurnstileWidgetMode,
+    pub modified_on: crate::models::turnstile_modified_on::TurnstileModifiedOn,
+    pub name: crate::models::turnstile_name::TurnstileName,
+    pub offlabel: crate::models::turnstile_offlabel::TurnstileOfflabel,
+    pub region: crate::models::turnstile_region::TurnstileRegion,
+    pub sitekey: crate::models::turnstile_sitekey::TurnstileSitekey,
 }

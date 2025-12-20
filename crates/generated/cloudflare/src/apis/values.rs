@@ -50,14 +50,24 @@ impl<'a> TelemetryValuesListRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// List values
+///
+/// List unique values found in your events
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/workers/observability/telemetry/values`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::values };
+/// use cloudflare::{ ApiClient, apis::values };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = telemetry_values_list(&api)
-///     .with_account_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = telemetry_values_list(&api)
+///     .with_account_id("account_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```

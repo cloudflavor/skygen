@@ -19,11 +19,11 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct AccessCertificates {
-    pub associated_hostnames: Option<serde_json::Value>,
-    pub created_at: Option<serde_json::Value>,
-    pub expires_on: Option<serde_json::Value>,
-    pub fingerprint: Option<serde_json::Value>,
+    pub associated_hostnames: Option<crate::models::access_associated_hostnames::AccessAssociatedHostnames>,
+    pub created_at: Option<crate::models::access_timestamp::AccessTimestamp>,
+    pub expires_on: Option<crate::models::access_timestamp::AccessTimestamp>,
+    pub fingerprint: Option<crate::models::access_fingerprint::AccessFingerprint>,
     pub id: Option<String>,
-    pub name: Option<serde_json::Value>,
-    pub updated_at: Option<serde_json::Value>,
+    pub name: Option<crate::models::access_certificates_components_schemas_name::AccessCertificatesComponentsSchemasName>,
+    pub updated_at: Option<crate::models::access_timestamp::AccessTimestamp>,
 }

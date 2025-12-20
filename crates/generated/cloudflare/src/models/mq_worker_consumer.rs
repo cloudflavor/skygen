@@ -19,9 +19,9 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct MqWorkerConsumer {
-    pub consumer_id: Option<serde_json::Value>,
+    pub consumer_id: Option<crate::models::mq_identifier::MqIdentifier>,
     pub created_on: Option<String>,
-    pub queue_id: Option<serde_json::Value>,
+    pub queue_id: Option<crate::models::mq_identifier::MqIdentifier>,
     pub r#type: Option<String>,
     pub script: Option<serde_json::Value>,
     pub script_name: Option<serde_json::Value>,

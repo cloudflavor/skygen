@@ -15,12 +15,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::access_access_requests_components_schemas_response_collection::AccessAccessRequestsComponentsSchemasResponseCollection;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct GetAccessAuthenticationLogsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, AccessAccessRequestsComponentsSchemasResponseCollection>,
 }
 
 impl<'a> GetAccessAuthenticationLogsRequest<'a> {
@@ -54,18 +55,34 @@ impl<'a> GetAccessAuthenticationLogsRequest<'a> {
         self.builder = self.builder.header_param("until", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<AccessAccessRequestsComponentsSchemasResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// Get Access authentication logs
+///
+/// Gets a list of Access authentication audit logs for an account.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/access/logs/access_requests`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `limit` (query,optional)
+/// - `direction` (query,optional)
+/// - `since` (query,optional)
+/// - `until` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::access_authentication_logs };
+/// use cloudflare::{ ApiClient, apis::access_authentication_logs };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_access_authentication_logs(&api)
-///     .with_account_id("value")
+/// let response = get_access_authentication_logs(&api)
+///     .with_account_id("account_id")
+///     .with_limit("limit")
+///     .with_direction("direction")
+///     .with_since("since")
+///     .with_until("until")
 ///     .send()
 ///     .await?;
 /// ```

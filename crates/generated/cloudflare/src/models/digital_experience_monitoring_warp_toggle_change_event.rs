@@ -21,11 +21,11 @@ use serde::{Deserialize, Serialize};
 pub struct DigitalExperienceMonitoringWarpToggleChangeEvent {
     pub account_name: Option<String>,
     pub account_tag: Option<String>,
-    pub device_id: Option<serde_json::Value>,
-    pub device_registration: Option<serde_json::Value>,
+    pub device_id: Option<crate::models::digital_experience_monitoring_uuid::DigitalExperienceMonitoringUuid>,
+    pub device_registration: Option<crate::models::digital_experience_monitoring_uuid::DigitalExperienceMonitoringUuid>,
     pub hostname: Option<String>,
     pub serial_number: Option<String>,
-    pub timestamp: Option<serde_json::Value>,
+    pub timestamp: Option<crate::models::digital_experience_monitoring_timestamp::DigitalExperienceMonitoringTimestamp>,
     pub toggle: Option<String>,
     pub user_email: Option<String>,
 }

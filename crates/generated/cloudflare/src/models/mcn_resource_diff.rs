@@ -22,6 +22,6 @@ pub struct McnResourceDiff {
     pub diff: crate::models::mcn_yaml_diff::McnYamlDiff,
     pub keys_require_replace: Vec<String>,
     pub monthly_cost_estimate_diff: crate::models::mcn_cost_diff::McnCostDiff,
-    pub planned_action: serde_json::Value,
+    pub planned_action: crate::models::mcn_planned_action::McnPlannedAction,
     pub resource: crate::models::mcn_resource_preview::McnResourcePreview,
 }

@@ -15,12 +15,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::access_app_policies_components_schemas_response_collection::AccessAppPoliciesComponentsSchemasResponseCollection;
+use crate::models::access_app_policies_components_schemas_single_response::AccessAppPoliciesComponentsSchemasSingleResponse;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct ListAccessAppPoliciesRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, AccessAppPoliciesComponentsSchemasResponseCollection>,
 }
 
 impl<'a> ListAccessAppPoliciesRequest<'a> {
@@ -43,19 +45,28 @@ impl<'a> ListAccessAppPoliciesRequest<'a> {
         self.builder = self.builder.path_param("app_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<AccessAppPoliciesComponentsSchemasResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// List Access application policies
+///
+/// Lists Access policies configured for an application. Returns both exclusively scoped and reusable policies used by the application.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/access/apps/{app_id}/policies`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `app_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::access_application_scoped_policies };
+/// use cloudflare::{ ApiClient, apis::access_application_scoped_policies };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_access_app_policies(&api)
-///     .with_account_id("value")
-///     .with_app_id("value")
+/// let response = list_access_app_policies(&api)
+///     .with_account_id("account_id")
+///     .with_app_id("app_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -65,7 +76,7 @@ pub fn list_access_app_policies(api: &ApiClient) -> ListAccessAppPoliciesRequest
 
 #[derive(Debug)]
 pub struct CreateAccessPolicyRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, AccessAppPoliciesComponentsSchemasSingleResponse>,
 }
 
 impl<'a> CreateAccessPolicyRequest<'a> {
@@ -89,23 +100,37 @@ impl<'a> CreateAccessPolicyRequest<'a> {
         self.builder = self.builder.path_param("app_id", value);
         self
     }
-    pub fn with_body(mut self, body: serde_json::Value) -> Self {
+    pub fn with_body(
+        mut self,
+        body: crate::models::access_app_policy_request::AccessAppPolicyRequest,
+    ) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<AccessAppPoliciesComponentsSchemasSingleResponse> {
         self.builder.send().await
     }
 }
-
 /// Create an Access application policy
+///
+/// Creates a policy applying exclusive to a single application that defines the users or groups who can reach it. We recommend creating a reusable policy instead and subsequently referencing its ID in the application's 'policies' array.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/access/apps/{app_id}/policies`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `app_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::access_application_scoped_policies };
+/// use cloudflare::{ ApiClient, apis::access_application_scoped_policies };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = create_access_policy(&api)
-///     .with_account_id("value")
-///     .with_app_id("value")
+/// # let body: crate::models::access_app_policy_request::AccessAppPolicyRequest = todo!();
+/// let response = create_access_policy(&api)
+///     .with_account_id("account_id")
+///     .with_app_id("app_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -115,7 +140,7 @@ pub fn create_access_policy(api: &ApiClient) -> CreateAccessPolicyRequest<'_> {
 
 #[derive(Debug)]
 pub struct GetAccessPolicyRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, AccessAppPoliciesComponentsSchemasSingleResponse>,
 }
 
 impl<'a> GetAccessPolicyRequest<'a> {
@@ -143,20 +168,30 @@ impl<'a> GetAccessPolicyRequest<'a> {
         self.builder = self.builder.path_param("policy_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<AccessAppPoliciesComponentsSchemasSingleResponse> {
         self.builder.send().await
     }
 }
-
 /// Get an Access application policy
+///
+/// Fetches a single Access policy configured for an application. Returns both exclusively owned and reusable policies used by the application.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/access/apps/{app_id}/policies/{policy_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `app_id` (path, required)
+/// - `policy_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::access_application_scoped_policies };
+/// use cloudflare::{ ApiClient, apis::access_application_scoped_policies };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_access_policy(&api)
-///     .with_account_id("value")
-///     .with_app_id("value")
-///     .with_policy_id("value")
+/// let response = get_access_policy(&api)
+///     .with_account_id("account_id")
+///     .with_app_id("app_id")
+///     .with_policy_id("policy_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -166,7 +201,7 @@ pub fn get_access_policy(api: &ApiClient) -> GetAccessPolicyRequest<'_> {
 
 #[derive(Debug)]
 pub struct UpdateAccessPolicyRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, AccessAppPoliciesComponentsSchemasSingleResponse>,
 }
 
 impl<'a> UpdateAccessPolicyRequest<'a> {
@@ -195,24 +230,39 @@ impl<'a> UpdateAccessPolicyRequest<'a> {
         self.builder = self.builder.path_param("policy_id", value);
         self
     }
-    pub fn with_body(mut self, body: serde_json::Value) -> Self {
+    pub fn with_body(
+        mut self,
+        body: crate::models::access_app_policy_request::AccessAppPolicyRequest,
+    ) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<AccessAppPoliciesComponentsSchemasSingleResponse> {
         self.builder.send().await
     }
 }
-
 /// Update an Access application policy
+///
+/// Updates an Access policy specific to an application. To update a reusable policy, use the /accounts/{account_id}/policies/{uid} endpoint.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/accounts/{account_id}/access/apps/{app_id}/policies/{policy_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `app_id` (path, required)
+/// - `policy_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::access_application_scoped_policies };
+/// use cloudflare::{ ApiClient, apis::access_application_scoped_policies };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = update_access_policy(&api)
-///     .with_account_id("value")
-///     .with_app_id("value")
-///     .with_policy_id("value")
+/// # let body: crate::models::access_app_policy_request::AccessAppPolicyRequest = todo!();
+/// let response = update_access_policy(&api)
+///     .with_account_id("account_id")
+///     .with_app_id("app_id")
+///     .with_policy_id("policy_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -254,16 +304,26 @@ impl<'a> DeleteAccessPolicyRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Delete an Access application policy
+///
+/// Deletes an Access policy specific to an application. To delete a reusable policy, use the /accounts/{account_id}/policies/{uid} endpoint.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/accounts/{account_id}/access/apps/{app_id}/policies/{policy_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `app_id` (path, required)
+/// - `policy_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::access_application_scoped_policies };
+/// use cloudflare::{ ApiClient, apis::access_application_scoped_policies };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete_access_policy(&api)
-///     .with_account_id("value")
-///     .with_app_id("value")
-///     .with_policy_id("value")
+/// let response = delete_access_policy(&api)
+///     .with_account_id("account_id")
+///     .with_app_id("app_id")
+///     .with_policy_id("policy_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -273,7 +333,7 @@ pub fn delete_access_policy(api: &ApiClient) -> DeleteAccessPolicyRequest<'_> {
 
 #[derive(Debug)]
 pub struct ConvertReusableRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, AccessAppPoliciesComponentsSchemasResponseCollection>,
 }
 
 impl<'a> ConvertReusableRequest<'a> {
@@ -301,20 +361,30 @@ impl<'a> ConvertReusableRequest<'a> {
         self.builder = self.builder.path_param("policy_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<AccessAppPoliciesComponentsSchemasResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// Convert an Access application policy to a reusable policy
+///
+/// Converts an application-scoped policy to a reusable policy. The policy will no longer be exclusively scoped to the application. Further updates to the policy should go through the /accounts/{account_id}/policies/{uid} endpoint.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/accounts/{account_id}/access/apps/{app_id}/policies/{policy_id}/make_reusable`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `app_id` (path, required)
+/// - `policy_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::access_application_scoped_policies };
+/// use cloudflare::{ ApiClient, apis::access_application_scoped_policies };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = convert_reusable(&api)
-///     .with_account_id("value")
-///     .with_app_id("value")
-///     .with_policy_id("value")
+/// let response = convert_reusable(&api)
+///     .with_account_id("account_id")
+///     .with_app_id("app_id")
+///     .with_policy_id("policy_id")
 ///     .send()
 ///     .await?;
 /// ```

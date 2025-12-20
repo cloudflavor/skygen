@@ -20,5 +20,5 @@ use serde::{Deserialize, Serialize};
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct ApiShieldPerOperationSetting {
     pub mitigation_action: String,
-    pub operation_id: serde_json::Value,
+    pub operation_id: crate::models::api_shield_schemas_uuid::ApiShieldSchemasUuid,
 }

@@ -20,8 +20,8 @@ use serde::{Deserialize, Serialize};
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct AccessIdentityProvider {
     pub config: std::collections::BTreeMap<String, serde_json::Value>,
-    pub id: Option<serde_json::Value>,
-    pub name: serde_json::Value,
+    pub id: Option<crate::models::access_uuid::AccessUuid>,
+    pub name: crate::models::access_components_schemas_name::AccessComponentsSchemasName,
     pub r#type: String,
     pub scim_config: Option<std::collections::BTreeMap<String, serde_json::Value>>,
 }

@@ -15,12 +15,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::teams_devices_global_warp_override_response::TeamsDevicesGlobalWarpOverrideResponse;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct RetrieveGlobalWarpOverrideRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, TeamsDevicesGlobalWarpOverrideResponse>,
 }
 
 impl<'a> RetrieveGlobalWarpOverrideRequest<'a> {
@@ -38,18 +39,26 @@ impl<'a> RetrieveGlobalWarpOverrideRequest<'a> {
         self.builder = self.builder.path_param("account_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<TeamsDevicesGlobalWarpOverrideResponse> {
         self.builder.send().await
     }
 }
-
 /// Retrieve Global WARP override state
+///
+/// Fetch the Global WARP override state.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/devices/resilience/disconnect`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::devices_resilience };
+/// use cloudflare::{ ApiClient, apis::devices_resilience };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = retrieve_global_warp_override(&api)
-///     .with_account_id("value")
+/// let response = retrieve_global_warp_override(&api)
+///     .with_account_id("account_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -59,7 +68,7 @@ pub fn retrieve_global_warp_override(api: &ApiClient) -> RetrieveGlobalWarpOverr
 
 #[derive(Debug)]
 pub struct SetGlobalWarpOverrideRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, TeamsDevicesGlobalWarpOverrideResponse>,
 }
 
 impl<'a> SetGlobalWarpOverrideRequest<'a> {
@@ -85,18 +94,28 @@ impl<'a> SetGlobalWarpOverrideRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<TeamsDevicesGlobalWarpOverrideResponse> {
         self.builder.send().await
     }
 }
-
 /// Set Global WARP override state
+///
+/// Sets the Global WARP override state.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/devices/resilience/disconnect`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::devices_resilience };
+/// use cloudflare::{ ApiClient, apis::devices_resilience };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = set_global_warp_override(&api)
-///     .with_account_id("value")
+/// # let body: crate::models::teams_devices_global_warp_override_request::TeamsDevicesGlobalWarpOverrideRequest = todo!();
+/// let response = set_global_warp_override(&api)
+///     .with_account_id("account_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```

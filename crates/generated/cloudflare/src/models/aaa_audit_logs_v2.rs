@@ -22,7 +22,7 @@ pub struct AaaAuditLogsV2 {
     pub account: Option<std::collections::BTreeMap<String, serde_json::Value>>,
     pub action: Option<std::collections::BTreeMap<String, serde_json::Value>>,
     pub actor: Option<std::collections::BTreeMap<String, serde_json::Value>>,
-    pub id: Option<serde_json::Value>,
+    pub id: Option<crate::models::aaa_schemas_identifier::AaaSchemasIdentifier>,
     pub raw: Option<std::collections::BTreeMap<String, serde_json::Value>>,
     pub resource: Option<std::collections::BTreeMap<String, serde_json::Value>>,
     pub zone: Option<std::collections::BTreeMap<String, serde_json::Value>>,

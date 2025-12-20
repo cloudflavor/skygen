@@ -19,18 +19,18 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct McnCreateOnrampRequest {
-    pub adopted_hub_id: Option<serde_json::Value>,
-    pub attached_hubs: Option<Vec<serde_json::Value>>,
-    pub attached_vpcs: Option<Vec<serde_json::Value>>,
-    pub cloud_type: serde_json::Value,
+    pub adopted_hub_id: Option<crate::models::mcn_resource_id::McnResourceId>,
+    pub attached_hubs: Option<Vec<crate::models::mcn_resource_id::McnResourceId>>,
+    pub attached_vpcs: Option<Vec<crate::models::mcn_resource_id::McnResourceId>>,
+    pub cloud_type: crate::models::mcn_onramp_cloud_type::McnOnrampCloudType,
     pub description: Option<String>,
-    pub hub_provider_id: Option<serde_json::Value>,
+    pub hub_provider_id: Option<crate::models::mcn_provider_id::McnProviderId>,
     pub install_routes_in_cloud: bool,
     pub install_routes_in_magic_wan: bool,
     pub manage_hub_to_hub_attachments: Option<bool>,
     pub manage_vpc_to_hub_attachments: Option<bool>,
     pub name: String,
-    pub r#type: serde_json::Value,
+    pub r#type: crate::models::mcn_onramp_type::McnOnrampType,
     pub region: Option<String>,
-    pub vpc: Option<serde_json::Value>,
+    pub vpc: Option<crate::models::mcn_resource_id::McnResourceId>,
 }

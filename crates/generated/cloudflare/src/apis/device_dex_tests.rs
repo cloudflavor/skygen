@@ -15,12 +15,15 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::digital_experience_monitoring_dex_delete_response_collection::DigitalExperienceMonitoringDexDeleteResponseCollection;
+use crate::models::digital_experience_monitoring_dex_response_collection::DigitalExperienceMonitoringDexResponseCollection;
+use crate::models::digital_experience_monitoring_dex_single_response::DigitalExperienceMonitoringDexSingleResponse;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct TestDetailsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, DigitalExperienceMonitoringDexResponseCollection>,
 }
 
 impl<'a> TestDetailsRequest<'a> {
@@ -38,18 +41,26 @@ impl<'a> TestDetailsRequest<'a> {
         self.builder = self.builder.path_param("account_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<DigitalExperienceMonitoringDexResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// List Device DEX tests
+///
+/// Fetch all DEX tests.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/dex/devices/dex_tests`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::device_dex_tests };
+/// use cloudflare::{ ApiClient, apis::device_dex_tests };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = test_details(&api)
-///     .with_account_id("value")
+/// let response = test_details(&api)
+///     .with_account_id("account_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -59,7 +70,7 @@ pub fn test_details(api: &ApiClient) -> TestDetailsRequest<'_> {
 
 #[derive(Debug)]
 pub struct TestCreateDeviceDexRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, DigitalExperienceMonitoringDexSingleResponse>,
 }
 
 impl<'a> TestCreateDeviceDexRequest<'a> {
@@ -85,18 +96,28 @@ impl<'a> TestCreateDeviceDexRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<DigitalExperienceMonitoringDexSingleResponse> {
         self.builder.send().await
     }
 }
-
 /// Create Device DEX test
+///
+/// Create a DEX test.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/dex/devices/dex_tests`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::device_dex_tests };
+/// use cloudflare::{ ApiClient, apis::device_dex_tests };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = test_create_device_dex(&api)
-///     .with_account_id("value")
+/// # let body: crate::models::digital_experience_monitoring_device_dex_test_schemas_http::DigitalExperienceMonitoringDeviceDexTestSchemasHttp = todo!();
+/// let response = test_create_device_dex(&api)
+///     .with_account_id("account_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -106,7 +127,7 @@ pub fn test_create_device_dex(api: &ApiClient) -> TestCreateDeviceDexRequest<'_>
 
 #[derive(Debug)]
 pub struct TestGetDeviceDexRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, DigitalExperienceMonitoringDexSingleResponse>,
 }
 
 impl<'a> TestGetDeviceDexRequest<'a> {
@@ -129,19 +150,28 @@ impl<'a> TestGetDeviceDexRequest<'a> {
         self.builder = self.builder.path_param("dex_test_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<DigitalExperienceMonitoringDexSingleResponse> {
         self.builder.send().await
     }
 }
-
 /// Get Device DEX test
+///
+/// Fetch a single DEX test.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/dex/devices/dex_tests/{dex_test_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `dex_test_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::device_dex_tests };
+/// use cloudflare::{ ApiClient, apis::device_dex_tests };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = test_get_device_dex(&api)
-///     .with_account_id("value")
-///     .with_dex_test_id("value")
+/// let response = test_get_device_dex(&api)
+///     .with_account_id("account_id")
+///     .with_dex_test_id("dex_test_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -151,7 +181,7 @@ pub fn test_get_device_dex(api: &ApiClient) -> TestGetDeviceDexRequest<'_> {
 
 #[derive(Debug)]
 pub struct TestUpdateDeviceDexRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, DigitalExperienceMonitoringDexSingleResponse>,
 }
 
 impl<'a> TestUpdateDeviceDexRequest<'a> {
@@ -182,19 +212,30 @@ impl<'a> TestUpdateDeviceDexRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<DigitalExperienceMonitoringDexSingleResponse> {
         self.builder.send().await
     }
 }
-
 /// Update Device DEX test
+///
+/// Update a DEX test.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/accounts/{account_id}/dex/devices/dex_tests/{dex_test_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `dex_test_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::device_dex_tests };
+/// use cloudflare::{ ApiClient, apis::device_dex_tests };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = test_update_device_dex(&api)
-///     .with_account_id("value")
-///     .with_dex_test_id("value")
+/// # let body: crate::models::digital_experience_monitoring_device_dex_test_schemas_http::DigitalExperienceMonitoringDeviceDexTestSchemasHttp = todo!();
+/// let response = test_update_device_dex(&api)
+///     .with_account_id("account_id")
+///     .with_dex_test_id("dex_test_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -204,7 +245,7 @@ pub fn test_update_device_dex(api: &ApiClient) -> TestUpdateDeviceDexRequest<'_>
 
 #[derive(Debug)]
 pub struct TestDeleteDeviceDexRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, DigitalExperienceMonitoringDexDeleteResponseCollection>,
 }
 
 impl<'a> TestDeleteDeviceDexRequest<'a> {
@@ -227,19 +268,28 @@ impl<'a> TestDeleteDeviceDexRequest<'a> {
         self.builder = self.builder.path_param("dex_test_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<DigitalExperienceMonitoringDexDeleteResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// Delete Device DEX test
+///
+/// Delete a Device DEX test. Returns the remaining device dex tests for the account.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/accounts/{account_id}/dex/devices/dex_tests/{dex_test_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `dex_test_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::device_dex_tests };
+/// use cloudflare::{ ApiClient, apis::device_dex_tests };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = test_delete_device_dex(&api)
-///     .with_account_id("value")
-///     .with_dex_test_id("value")
+/// let response = test_delete_device_dex(&api)
+///     .with_account_id("account_id")
+///     .with_dex_test_id("dex_test_id")
 ///     .send()
 ///     .await?;
 /// ```

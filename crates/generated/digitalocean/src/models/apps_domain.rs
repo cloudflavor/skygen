@@ -21,9 +21,9 @@ use serde::{Deserialize, Serialize};
 pub struct AppsDomain {
     pub certificate_expires_at: Option<String>,
     pub id: Option<String>,
-    pub phase: Option<serde_json::Value>,
+    pub phase: Option<crate::models::apps_domain_phase::AppsDomainPhase>,
     pub progress: Option<crate::models::apps_domain_progress::AppsDomainProgress>,
     pub rotate_validation_records: Option<bool>,
     pub spec: Option<crate::models::app_domain_spec::AppDomainSpec>,
-    pub validations: Option<Vec<serde_json::Value>>,
+    pub validations: Option<Vec<crate::models::app_domain_validation::AppDomainValidation>>,
 }

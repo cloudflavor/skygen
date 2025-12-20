@@ -15,12 +15,28 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::app_health_response::AppHealthResponse;
+use crate::models::app_instances::AppInstances;
+use crate::models::app_metrics_bandwidth_usage::AppMetricsBandwidthUsage;
+use crate::models::app_propose_response::AppProposeResponse;
+use crate::models::app_response::AppResponse;
+use crate::models::apps_alert_response::AppsAlertResponse;
+use crate::models::apps_delete_app_response::AppsDeleteAppResponse;
+use crate::models::apps_deployment_response::AppsDeploymentResponse;
+use crate::models::apps_deployments_response::AppsDeploymentsResponse;
+use crate::models::apps_get_exec_response::AppsGetExecResponse;
+use crate::models::apps_get_instance_size_response::AppsGetInstanceSizeResponse;
+use crate::models::apps_get_logs_response::AppsGetLogsResponse;
+use crate::models::apps_list_alerts_response::AppsListAlertsResponse;
+use crate::models::apps_list_instance_sizes_response::AppsListInstanceSizesResponse;
+use crate::models::apps_list_regions_response::AppsListRegionsResponse;
+use crate::models::apps_response::AppsResponse;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct ListRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, AppsResponse>,
 }
 
 impl<'a> ListRequest<'a> {
@@ -29,17 +45,22 @@ impl<'a> ListRequest<'a> {
 
         Self { builder }
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<AppsResponse> {
         self.builder.send().await
     }
 }
-
 /// List All Apps
+///
+/// List all apps on your account. Information about the current active deployment as well as any in progress ones will also be included for each app.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/apps`
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::apps };
+/// use digitalocean::{ ApiClient, apis::apps };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list(&api)
+/// let response = list(&api)
 ///     .send()
 ///     .await?;
 /// ```
@@ -49,7 +70,7 @@ pub fn list(api: &ApiClient) -> ListRequest<'_> {
 
 #[derive(Debug)]
 pub struct CreateRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, AppResponse>,
 }
 
 impl<'a> CreateRequest<'a> {
@@ -65,17 +86,24 @@ impl<'a> CreateRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<AppResponse> {
         self.builder.send().await
     }
 }
-
 /// Create a New App
+///
+/// Create a new app by submitting an app specification. For documentation on app specifications (`AppSpec` objects), please refer to [the product documentation](<https://docs.digitalocean.com/products/app-platform/reference/app-spec/).>
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/v2/apps`
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::apps };
+/// use digitalocean::{ ApiClient, apis::apps };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = create(&api)
+/// # let body: crate::models::apps_create_app_request::AppsCreateAppRequest = todo!();
+/// let response = create(&api)
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -85,7 +113,7 @@ pub fn create(api: &ApiClient) -> CreateRequest<'_> {
 
 #[derive(Debug)]
 pub struct ListMetricsBandwidthDailyRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, AppMetricsBandwidthUsage>,
 }
 
 impl<'a> ListMetricsBandwidthDailyRequest<'a> {
@@ -102,17 +130,24 @@ impl<'a> ListMetricsBandwidthDailyRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<AppMetricsBandwidthUsage> {
         self.builder.send().await
     }
 }
-
 /// Retrieve Multiple Apps' Daily Bandwidth Metrics
+///
+/// Retrieve daily bandwidth usage metrics for multiple apps.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/v2/apps/metrics/bandwidth_daily`
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::apps };
+/// use digitalocean::{ ApiClient, apis::apps };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_metrics_bandwidth_daily(&api)
+/// # let body: crate::models::app_metrics_bandwidth_usage_request::AppMetricsBandwidthUsageRequest = todo!();
+/// let response = list_metrics_bandwidth_daily(&api)
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -122,7 +157,7 @@ pub fn list_metrics_bandwidth_daily(api: &ApiClient) -> ListMetricsBandwidthDail
 
 #[derive(Debug)]
 pub struct ValidateAppSpecRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, AppProposeResponse>,
 }
 
 impl<'a> ValidateAppSpecRequest<'a> {
@@ -135,17 +170,24 @@ impl<'a> ValidateAppSpecRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<AppProposeResponse> {
         self.builder.send().await
     }
 }
-
 /// Propose an App Spec
+///
+/// To propose and validate a spec for a new or existing app, send a POST request to the `/v2/apps/propose` endpoint. The request returns some information about the proposed app, including app cost and upgrade cost. If an existing app ID is specified, the app spec is treated as a proposed update to the existing app.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/v2/apps/propose`
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::apps };
+/// use digitalocean::{ ApiClient, apis::apps };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = validate_app_spec(&api)
+/// # let body: crate::models::app_propose::AppPropose = todo!();
+/// let response = validate_app_spec(&api)
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -155,7 +197,7 @@ pub fn validate_app_spec(api: &ApiClient) -> ValidateAppSpecRequest<'_> {
 
 #[derive(Debug)]
 pub struct ListRegionsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, AppsListRegionsResponse>,
 }
 
 impl<'a> ListRegionsRequest<'a> {
@@ -164,17 +206,22 @@ impl<'a> ListRegionsRequest<'a> {
 
         Self { builder }
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<AppsListRegionsResponse> {
         self.builder.send().await
     }
 }
-
 /// List App Regions
+///
+/// List all regions supported by App Platform.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/apps/regions`
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::apps };
+/// use digitalocean::{ ApiClient, apis::apps };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_regions(&api)
+/// let response = list_regions(&api)
 ///     .send()
 ///     .await?;
 /// ```
@@ -184,7 +231,7 @@ pub fn list_regions(api: &ApiClient) -> ListRegionsRequest<'_> {
 
 #[derive(Debug)]
 pub struct ListInstanceSizesRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, AppsListInstanceSizesResponse>,
 }
 
 impl<'a> ListInstanceSizesRequest<'a> {
@@ -193,17 +240,22 @@ impl<'a> ListInstanceSizesRequest<'a> {
 
         Self { builder }
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<AppsListInstanceSizesResponse> {
         self.builder.send().await
     }
 }
-
 /// List Instance Sizes
+///
+/// List all instance sizes for `service`, `worker`, and `job` components.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/apps/tiers/instance_sizes`
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::apps };
+/// use digitalocean::{ ApiClient, apis::apps };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_instance_sizes(&api)
+/// let response = list_instance_sizes(&api)
 ///     .send()
 ///     .await?;
 /// ```
@@ -213,7 +265,7 @@ pub fn list_instance_sizes(api: &ApiClient) -> ListInstanceSizesRequest<'_> {
 
 #[derive(Debug)]
 pub struct GetInstanceSizeRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, AppsGetInstanceSizeResponse>,
 }
 
 impl<'a> GetInstanceSizeRequest<'a> {
@@ -228,18 +280,26 @@ impl<'a> GetInstanceSizeRequest<'a> {
         self.builder = self.builder.path_param("slug", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<AppsGetInstanceSizeResponse> {
         self.builder.send().await
     }
 }
-
 /// Retrieve an Instance Size
+///
+/// Retrieve information about a specific instance size for `service`, `worker`, and `job` components.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/apps/tiers/instance_sizes/{slug}`
+///
+/// **Parameters**
+/// - `slug` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::apps };
+/// use digitalocean::{ ApiClient, apis::apps };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_instance_size(&api)
-///     .with_slug("value")
+/// let response = get_instance_size(&api)
+///     .with_slug("slug")
 ///     .send()
 ///     .await?;
 /// ```
@@ -249,7 +309,7 @@ pub fn get_instance_size(api: &ApiClient) -> GetInstanceSizeRequest<'_> {
 
 #[derive(Debug)]
 pub struct ListAlertsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, AppsListAlertsResponse>,
 }
 
 impl<'a> ListAlertsRequest<'a> {
@@ -263,18 +323,26 @@ impl<'a> ListAlertsRequest<'a> {
         self.builder = self.builder.path_param("app_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<AppsListAlertsResponse> {
         self.builder.send().await
     }
 }
-
 /// List all app alerts
+///
+/// List alerts associated to the app and any components. This includes configuration information about the alerts including emails, slack webhooks, and triggering events or conditions.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/apps/{app_id}/alerts`
+///
+/// **Parameters**
+/// - `app_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::apps };
+/// use digitalocean::{ ApiClient, apis::apps };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_alerts(&api)
-///     .with_app_id("value")
+/// let response = list_alerts(&api)
+///     .with_app_id("app_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -284,7 +352,7 @@ pub fn list_alerts(api: &ApiClient) -> ListAlertsRequest<'_> {
 
 #[derive(Debug)]
 pub struct AssignAlertDestinationsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, AppsAlertResponse>,
 }
 
 impl<'a> AssignAlertDestinationsRequest<'a> {
@@ -315,19 +383,30 @@ impl<'a> AssignAlertDestinationsRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<AppsAlertResponse> {
         self.builder.send().await
     }
 }
-
 /// Update destinations for alerts
+///
+/// Updates the emails and slack webhook destinations for app alerts. Emails must be associated to a user with access to the app.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/v2/apps/{app_id}/alerts/{alert_id}/destinations`
+///
+/// **Parameters**
+/// - `app_id` (path, required)
+/// - `alert_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::apps };
+/// use digitalocean::{ ApiClient, apis::apps };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = assign_alert_destinations(&api)
-///     .with_app_id("value")
-///     .with_alert_id("value")
+/// # let body: crate::models::apps_assign_app_alert_destinations_request::AppsAssignAppAlertDestinationsRequest = todo!();
+/// let response = assign_alert_destinations(&api)
+///     .with_app_id("app_id")
+///     .with_alert_id("alert_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -337,7 +416,7 @@ pub fn assign_alert_destinations(api: &ApiClient) -> AssignAlertDestinationsRequ
 
 #[derive(Debug)]
 pub struct GetExecActiveDeploymentRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, AppsGetExecResponse>,
 }
 
 impl<'a> GetExecActiveDeploymentRequest<'a> {
@@ -360,19 +439,28 @@ impl<'a> GetExecActiveDeploymentRequest<'a> {
         self.builder = self.builder.path_param("component_name", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<AppsGetExecResponse> {
         self.builder.send().await
     }
 }
-
 /// Retrieve Exec URL
+///
+/// Returns a websocket URL that allows sending/receiving console input and output to a component of the active deployment if one exists.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/apps/{app_id}/components/{component_name}/exec`
+///
+/// **Parameters**
+/// - `app_id` (path, required)
+/// - `component_name` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::apps };
+/// use digitalocean::{ ApiClient, apis::apps };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_exec_active_deployment(&api)
-///     .with_app_id("value")
-///     .with_component_name("value")
+/// let response = get_exec_active_deployment(&api)
+///     .with_app_id("app_id")
+///     .with_component_name("component_name")
 ///     .send()
 ///     .await?;
 /// ```
@@ -382,7 +470,7 @@ pub fn get_exec_active_deployment(api: &ApiClient) -> GetExecActiveDeploymentReq
 
 #[derive(Debug)]
 pub struct GetLogsActiveDeploymentRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, AppsGetLogsResponse>,
 }
 
 impl<'a> GetLogsActiveDeploymentRequest<'a> {
@@ -405,19 +493,28 @@ impl<'a> GetLogsActiveDeploymentRequest<'a> {
         self.builder = self.builder.path_param("component_name", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<AppsGetLogsResponse> {
         self.builder.send().await
     }
 }
-
 /// Retrieve Active Deployment Logs
+///
+/// Retrieve the logs of the active deployment if one exists. The response will include links to either real-time logs of an in-progress or active deployment or archived logs of a past deployment. Note log_type=BUILD logs will return logs associated with the current active deployment (being served). To view build logs associated with in-progress build, the query must explicitly reference the deployment id.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/apps/{app_id}/components/{component_name}/logs`
+///
+/// **Parameters**
+/// - `app_id` (path, required)
+/// - `component_name` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::apps };
+/// use digitalocean::{ ApiClient, apis::apps };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_logs_active_deployment(&api)
-///     .with_app_id("value")
-///     .with_component_name("value")
+/// let response = get_logs_active_deployment(&api)
+///     .with_app_id("app_id")
+///     .with_component_name("component_name")
 ///     .send()
 ///     .await?;
 /// ```
@@ -427,7 +524,7 @@ pub fn get_logs_active_deployment(api: &ApiClient) -> GetLogsActiveDeploymentReq
 
 #[derive(Debug)]
 pub struct ListDeploymentsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, AppsDeploymentsResponse>,
 }
 
 impl<'a> ListDeploymentsRequest<'a> {
@@ -441,18 +538,26 @@ impl<'a> ListDeploymentsRequest<'a> {
         self.builder = self.builder.path_param("app_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<AppsDeploymentsResponse> {
         self.builder.send().await
     }
 }
-
 /// List App Deployments
+///
+/// List all deployments of an app.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/apps/{app_id}/deployments`
+///
+/// **Parameters**
+/// - `app_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::apps };
+/// use digitalocean::{ ApiClient, apis::apps };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_deployments(&api)
-///     .with_app_id("value")
+/// let response = list_deployments(&api)
+///     .with_app_id("app_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -462,7 +567,7 @@ pub fn list_deployments(api: &ApiClient) -> ListDeploymentsRequest<'_> {
 
 #[derive(Debug)]
 pub struct CreateDeploymentRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, AppsDeploymentResponse>,
 }
 
 impl<'a> CreateDeploymentRequest<'a> {
@@ -484,18 +589,28 @@ impl<'a> CreateDeploymentRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<AppsDeploymentResponse> {
         self.builder.send().await
     }
 }
-
 /// Create an App Deployment
+///
+/// Creating an app deployment will pull the latest changes from your repository and schedule a new deployment for your app.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/v2/apps/{app_id}/deployments`
+///
+/// **Parameters**
+/// - `app_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::apps };
+/// use digitalocean::{ ApiClient, apis::apps };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = create_deployment(&api)
-///     .with_app_id("value")
+/// # let body: crate::models::apps_create_deployment_request::AppsCreateDeploymentRequest = todo!();
+/// let response = create_deployment(&api)
+///     .with_app_id("app_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -505,7 +620,7 @@ pub fn create_deployment(api: &ApiClient) -> CreateDeploymentRequest<'_> {
 
 #[derive(Debug)]
 pub struct GetDeploymentRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, AppsDeploymentResponse>,
 }
 
 impl<'a> GetDeploymentRequest<'a> {
@@ -528,19 +643,28 @@ impl<'a> GetDeploymentRequest<'a> {
         self.builder = self.builder.path_param("deployment_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<AppsDeploymentResponse> {
         self.builder.send().await
     }
 }
-
 /// Retrieve an App Deployment
+///
+/// Retrieve information about an app deployment.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/apps/{app_id}/deployments/{deployment_id}`
+///
+/// **Parameters**
+/// - `app_id` (path, required)
+/// - `deployment_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::apps };
+/// use digitalocean::{ ApiClient, apis::apps };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_deployment(&api)
-///     .with_app_id("value")
-///     .with_deployment_id("value")
+/// let response = get_deployment(&api)
+///     .with_app_id("app_id")
+///     .with_deployment_id("deployment_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -550,7 +674,7 @@ pub fn get_deployment(api: &ApiClient) -> GetDeploymentRequest<'_> {
 
 #[derive(Debug)]
 pub struct CancelDeploymentRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, AppsDeploymentResponse>,
 }
 
 impl<'a> CancelDeploymentRequest<'a> {
@@ -573,19 +697,28 @@ impl<'a> CancelDeploymentRequest<'a> {
         self.builder = self.builder.path_param("deployment_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<AppsDeploymentResponse> {
         self.builder.send().await
     }
 }
-
 /// Cancel a Deployment
+///
+/// Immediately cancel an in-progress deployment.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/v2/apps/{app_id}/deployments/{deployment_id}/cancel`
+///
+/// **Parameters**
+/// - `app_id` (path, required)
+/// - `deployment_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::apps };
+/// use digitalocean::{ ApiClient, apis::apps };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = cancel_deployment(&api)
-///     .with_app_id("value")
-///     .with_deployment_id("value")
+/// let response = cancel_deployment(&api)
+///     .with_app_id("app_id")
+///     .with_deployment_id("deployment_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -595,7 +728,7 @@ pub fn cancel_deployment(api: &ApiClient) -> CancelDeploymentRequest<'_> {
 
 #[derive(Debug)]
 pub struct GetExecRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, AppsGetExecResponse>,
 }
 
 impl<'a> GetExecRequest<'a> {
@@ -623,20 +756,30 @@ impl<'a> GetExecRequest<'a> {
         self.builder = self.builder.path_param("component_name", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<AppsGetExecResponse> {
         self.builder.send().await
     }
 }
-
 /// Retrieve Exec URL for Deployment
+///
+/// Returns a websocket URL that allows sending/receiving console input and output to a component of the specified deployment if one exists. Optionally, the instance_name parameter can be provided to retrieve the exec URL for a specific instance. Note that instances are ephemeral; therefore, we recommended to avoid making persistent changes or such scripting around them.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/apps/{app_id}/deployments/{deployment_id}/components/{component_name}/exec`
+///
+/// **Parameters**
+/// - `app_id` (path, required)
+/// - `deployment_id` (path, required)
+/// - `component_name` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::apps };
+/// use digitalocean::{ ApiClient, apis::apps };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_exec(&api)
-///     .with_app_id("value")
-///     .with_deployment_id("value")
-///     .with_component_name("value")
+/// let response = get_exec(&api)
+///     .with_app_id("app_id")
+///     .with_deployment_id("deployment_id")
+///     .with_component_name("component_name")
 ///     .send()
 ///     .await?;
 /// ```
@@ -646,7 +789,7 @@ pub fn get_exec(api: &ApiClient) -> GetExecRequest<'_> {
 
 #[derive(Debug)]
 pub struct GetLogsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, AppsGetLogsResponse>,
 }
 
 impl<'a> GetLogsRequest<'a> {
@@ -674,20 +817,30 @@ impl<'a> GetLogsRequest<'a> {
         self.builder = self.builder.path_param("component_name", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<AppsGetLogsResponse> {
         self.builder.send().await
     }
 }
-
 /// Retrieve Deployment Logs
+///
+/// Retrieve the logs of a past, in-progress, or active deployment. The response will include links to either real-time logs of an in-progress or active deployment or archived logs of a past deployment.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/apps/{app_id}/deployments/{deployment_id}/components/{component_name}/logs`
+///
+/// **Parameters**
+/// - `app_id` (path, required)
+/// - `deployment_id` (path, required)
+/// - `component_name` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::apps };
+/// use digitalocean::{ ApiClient, apis::apps };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_logs(&api)
-///     .with_app_id("value")
-///     .with_deployment_id("value")
-///     .with_component_name("value")
+/// let response = get_logs(&api)
+///     .with_app_id("app_id")
+///     .with_deployment_id("deployment_id")
+///     .with_component_name("component_name")
 ///     .send()
 ///     .await?;
 /// ```
@@ -697,7 +850,7 @@ pub fn get_logs(api: &ApiClient) -> GetLogsRequest<'_> {
 
 #[derive(Debug)]
 pub struct GetLogsAggregateRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, AppsGetLogsResponse>,
 }
 
 impl<'a> GetLogsAggregateRequest<'a> {
@@ -720,19 +873,28 @@ impl<'a> GetLogsAggregateRequest<'a> {
         self.builder = self.builder.path_param("deployment_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<AppsGetLogsResponse> {
         self.builder.send().await
     }
 }
-
 /// Retrieve Aggregate Deployment Logs
+///
+/// Retrieve the logs of a past, in-progress, or active deployment. If a component name is specified, the logs will be limited to only that component. The response will include links to either real-time logs of an in-progress or active deployment or archived logs of a past deployment.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/apps/{app_id}/deployments/{deployment_id}/logs`
+///
+/// **Parameters**
+/// - `app_id` (path, required)
+/// - `deployment_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::apps };
+/// use digitalocean::{ ApiClient, apis::apps };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_logs_aggregate(&api)
-///     .with_app_id("value")
-///     .with_deployment_id("value")
+/// let response = get_logs_aggregate(&api)
+///     .with_app_id("app_id")
+///     .with_deployment_id("deployment_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -742,7 +904,7 @@ pub fn get_logs_aggregate(api: &ApiClient) -> GetLogsAggregateRequest<'_> {
 
 #[derive(Debug)]
 pub struct GetHealthRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, AppHealthResponse>,
 }
 
 impl<'a> GetHealthRequest<'a> {
@@ -756,18 +918,26 @@ impl<'a> GetHealthRequest<'a> {
         self.builder = self.builder.path_param("app_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<AppHealthResponse> {
         self.builder.send().await
     }
 }
-
 /// Retrieve App Health
+///
+/// Retrieve information like health status, cpu and memory utilization of app components.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/apps/{app_id}/health`
+///
+/// **Parameters**
+/// - `app_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::apps };
+/// use digitalocean::{ ApiClient, apis::apps };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_health(&api)
-///     .with_app_id("value")
+/// let response = get_health(&api)
+///     .with_app_id("app_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -777,7 +947,7 @@ pub fn get_health(api: &ApiClient) -> GetHealthRequest<'_> {
 
 #[derive(Debug)]
 pub struct GetInstancesRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, AppInstances>,
 }
 
 impl<'a> GetInstancesRequest<'a> {
@@ -791,18 +961,26 @@ impl<'a> GetInstancesRequest<'a> {
         self.builder = self.builder.path_param("app_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<AppInstances> {
         self.builder.send().await
     }
 }
-
 /// Retrieve App Instances
+///
+/// Retrieve the list of running instances for a given application, including instance names and component types. Please note that these instances are ephemeral and may change over time. It is recommended not to make persistent changes or develop scripts that rely on their persistence.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/apps/{app_id}/instances`
+///
+/// **Parameters**
+/// - `app_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::apps };
+/// use digitalocean::{ ApiClient, apis::apps };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_instances(&api)
-///     .with_app_id("value")
+/// let response = get_instances(&api)
+///     .with_app_id("app_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -812,7 +990,7 @@ pub fn get_instances(api: &ApiClient) -> GetInstancesRequest<'_> {
 
 #[derive(Debug)]
 pub struct GetLogsActiveDeploymentGetRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, AppsGetLogsResponse>,
 }
 
 impl<'a> GetLogsActiveDeploymentGetRequest<'a> {
@@ -826,18 +1004,26 @@ impl<'a> GetLogsActiveDeploymentGetRequest<'a> {
         self.builder = self.builder.path_param("app_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<AppsGetLogsResponse> {
         self.builder.send().await
     }
 }
-
 /// Retrieve Active Deployment Aggregate Logs
+///
+/// Retrieve the logs of the active deployment if one exists. The response will include links to either real-time logs of an in-progress or active deployment or archived logs of a past deployment. Note log_type=BUILD logs will return logs associated with the current active deployment (being served). To view build logs associated with in-progress build, the query must explicitly reference the deployment id.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/apps/{app_id}/logs`
+///
+/// **Parameters**
+/// - `app_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::apps };
+/// use digitalocean::{ ApiClient, apis::apps };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_logs_active_deployment_get(&api)
-///     .with_app_id("value")
+/// let response = get_logs_active_deployment_get(&api)
+///     .with_app_id("app_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -847,7 +1033,7 @@ pub fn get_logs_active_deployment_get(api: &ApiClient) -> GetLogsActiveDeploymen
 
 #[derive(Debug)]
 pub struct GetMetricsBandwidthDailyRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, AppMetricsBandwidthUsage>,
 }
 
 impl<'a> GetMetricsBandwidthDailyRequest<'a> {
@@ -866,18 +1052,28 @@ impl<'a> GetMetricsBandwidthDailyRequest<'a> {
         self.builder = self.builder.header_param("date", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<AppMetricsBandwidthUsage> {
         self.builder.send().await
     }
 }
-
 /// Retrieve App Daily Bandwidth Metrics
+///
+/// Retrieve daily bandwidth usage metrics for a single app.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/apps/{app_id}/metrics/bandwidth_daily`
+///
+/// **Parameters**
+/// - `app_id` (path, required)
+/// - `date` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::apps };
+/// use digitalocean::{ ApiClient, apis::apps };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_metrics_bandwidth_daily(&api)
-///     .with_app_id("value")
+/// let response = get_metrics_bandwidth_daily(&api)
+///     .with_app_id("app_id")
+///     .with_date("date")
 ///     .send()
 ///     .await?;
 /// ```
@@ -887,7 +1083,7 @@ pub fn get_metrics_bandwidth_daily(api: &ApiClient) -> GetMetricsBandwidthDailyR
 
 #[derive(Debug)]
 pub struct RestartRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, AppsDeploymentResponse>,
 }
 
 impl<'a> RestartRequest<'a> {
@@ -908,18 +1104,28 @@ impl<'a> RestartRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<AppsDeploymentResponse> {
         self.builder.send().await
     }
 }
-
 /// Restart an App
+///
+/// Perform a rolling restart of all or specific components in an app.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/v2/apps/{app_id}/restart`
+///
+/// **Parameters**
+/// - `app_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::apps };
+/// use digitalocean::{ ApiClient, apis::apps };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = restart(&api)
-///     .with_app_id("value")
+/// # let body: crate::models::apps_restart_request::AppsRestartRequest = todo!();
+/// let response = restart(&api)
+///     .with_app_id("app_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -929,7 +1135,7 @@ pub fn restart(api: &ApiClient) -> RestartRequest<'_> {
 
 #[derive(Debug)]
 pub struct CreateRollbackRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, AppsDeploymentResponse>,
 }
 
 impl<'a> CreateRollbackRequest<'a> {
@@ -951,18 +1157,34 @@ impl<'a> CreateRollbackRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<AppsDeploymentResponse> {
         self.builder.send().await
     }
 }
-
 /// Rollback App
+///
+/// Rollback an app to a previous deployment. A new deployment will be created to perform the rollback.
+/// The app will be pinned to the rollback deployment preventing any new deployments from being created,
+/// either manually or through Auto Deploy on Push webhooks. To resume deployments, the rollback must be
+/// either committed or reverted.
+///
+/// It is recommended to use the Validate App Rollback endpoint to double check if the rollback is
+/// valid and if there are any warnings.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/v2/apps/{app_id}/rollback`
+///
+/// **Parameters**
+/// - `app_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::apps };
+/// use digitalocean::{ ApiClient, apis::apps };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = create_rollback(&api)
-///     .with_app_id("value")
+/// # let body: crate::models::apps_rollback_app_request::AppsRollbackAppRequest = todo!();
+/// let response = create_rollback(&api)
+///     .with_app_id("app_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -990,14 +1212,22 @@ impl<'a> CommitRollbackRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Commit App Rollback
+///
+/// Commit an app rollback. This action permanently applies the rollback and unpins the app to resume new deployments.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/v2/apps/{app_id}/rollback/commit`
+///
+/// **Parameters**
+/// - `app_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::apps };
+/// use digitalocean::{ ApiClient, apis::apps };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = commit_rollback(&api)
-///     .with_app_id("value")
+/// let response = commit_rollback(&api)
+///     .with_app_id("app_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -1007,7 +1237,7 @@ pub fn commit_rollback(api: &ApiClient) -> CommitRollbackRequest<'_> {
 
 #[derive(Debug)]
 pub struct RevertRollbackRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, AppsDeploymentResponse>,
 }
 
 impl<'a> RevertRollbackRequest<'a> {
@@ -1021,18 +1251,27 @@ impl<'a> RevertRollbackRequest<'a> {
         self.builder = self.builder.path_param("app_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<AppsDeploymentResponse> {
         self.builder.send().await
     }
 }
-
 /// Revert App Rollback
+///
+/// Revert an app rollback. This action reverts the active rollback by creating a new deployment from the
+/// latest app spec prior to the rollback and unpins the app to resume new deployments.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/v2/apps/{app_id}/rollback/revert`
+///
+/// **Parameters**
+/// - `app_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::apps };
+/// use digitalocean::{ ApiClient, apis::apps };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = revert_rollback(&api)
-///     .with_app_id("value")
+/// let response = revert_rollback(&api)
+///     .with_app_id("app_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -1042,7 +1281,7 @@ pub fn revert_rollback(api: &ApiClient) -> RevertRollbackRequest<'_> {
 
 #[derive(Debug)]
 pub struct ValidateRollbackRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, std::collections::BTreeMap<String, serde_json::Value>>,
 }
 
 impl<'a> ValidateRollbackRequest<'a> {
@@ -1065,18 +1304,31 @@ impl<'a> ValidateRollbackRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<std::collections::BTreeMap<String, serde_json::Value>> {
         self.builder.send().await
     }
 }
-
 /// Validate App Rollback
+///
+/// Check whether an app can be rolled back to a specific deployment. This endpoint can also be used
+/// to check if there are any warnings or validation conditions that will cause the rollback to proceed
+/// under unideal circumstances. For example, if a component must be rebuilt as part of the rollback
+/// causing it to take longer than usual.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/v2/apps/{app_id}/rollback/validate`
+///
+/// **Parameters**
+/// - `app_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::apps };
+/// use digitalocean::{ ApiClient, apis::apps };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = validate_rollback(&api)
-///     .with_app_id("value")
+/// # let body: crate::models::apps_rollback_app_request::AppsRollbackAppRequest = todo!();
+/// let response = validate_rollback(&api)
+///     .with_app_id("app_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -1086,7 +1338,7 @@ pub fn validate_rollback(api: &ApiClient) -> ValidateRollbackRequest<'_> {
 
 #[derive(Debug)]
 pub struct GetRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, AppResponse>,
 }
 
 impl<'a> GetRequest<'a> {
@@ -1099,18 +1351,26 @@ impl<'a> GetRequest<'a> {
         self.builder = self.builder.path_param("id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<AppResponse> {
         self.builder.send().await
     }
 }
-
 /// Retrieve an Existing App
+///
+/// Retrieve details about an existing app by either its ID or name. To retrieve an app by its name, do not include an ID in the request path. Information about the current active deployment as well as any in progress ones will also be included in the response.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/apps/{id}`
+///
+/// **Parameters**
+/// - `id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::apps };
+/// use digitalocean::{ ApiClient, apis::apps };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get(&api)
-///     .with_id("value")
+/// let response = get(&api)
+///     .with_id("id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -1120,7 +1380,7 @@ pub fn get(api: &ApiClient) -> GetRequest<'_> {
 
 #[derive(Debug)]
 pub struct UpdateRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, AppResponse>,
 }
 
 impl<'a> UpdateRequest<'a> {
@@ -1142,18 +1402,28 @@ impl<'a> UpdateRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<AppResponse> {
         self.builder.send().await
     }
 }
-
 /// Update an App
+///
+/// Update an existing app by submitting a new app specification. For documentation on app specifications (`AppSpec` objects), please refer to [the product documentation](<https://docs.digitalocean.com/products/app-platform/reference/app-spec/).>
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/v2/apps/{id}`
+///
+/// **Parameters**
+/// - `id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::apps };
+/// use digitalocean::{ ApiClient, apis::apps };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = update(&api)
-///     .with_id("value")
+/// # let body: crate::models::apps_update_app_request::AppsUpdateAppRequest = todo!();
+/// let response = update(&api)
+///     .with_id("id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -1163,7 +1433,7 @@ pub fn update(api: &ApiClient) -> UpdateRequest<'_> {
 
 #[derive(Debug)]
 pub struct DeleteRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, AppsDeleteAppResponse>,
 }
 
 impl<'a> DeleteRequest<'a> {
@@ -1177,18 +1447,26 @@ impl<'a> DeleteRequest<'a> {
         self.builder = self.builder.path_param("id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<AppsDeleteAppResponse> {
         self.builder.send().await
     }
 }
-
 /// Delete an App
+///
+/// Delete an existing app. Once deleted, all active deployments will be permanently shut down and the app deleted. If needed, be sure to back up your app specification so that you may re-create it at a later time.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/v2/apps/{id}`
+///
+/// **Parameters**
+/// - `id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::apps };
+/// use digitalocean::{ ApiClient, apis::apps };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete(&api)
-///     .with_id("value")
+/// let response = delete(&api)
+///     .with_id("id")
 ///     .send()
 ///     .await?;
 /// ```

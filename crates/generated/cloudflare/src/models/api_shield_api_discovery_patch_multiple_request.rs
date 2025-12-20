@@ -15,7 +15,4 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-use serde::{Deserialize, Serialize};
-
-#[derive(Debug, Clone, Serialize, Deserialize)]
-pub struct ApiShieldApiDiscoveryPatchMultipleRequest {}
+pub type ApiShieldApiDiscoveryPatchMultipleRequest = std::collections::BTreeMap<String, crate::models::api_shield_api_discovery_patch_multiple_request_entry::ApiShieldApiDiscoveryPatchMultipleRequestEntry>;

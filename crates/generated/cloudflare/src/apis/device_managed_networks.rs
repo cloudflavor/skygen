@@ -15,12 +15,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::teams_devices_components_schemas_response_collection::TeamsDevicesComponentsSchemasResponseCollection;
+use crate::models::teams_devices_components_schemas_single_response::TeamsDevicesComponentsSchemasSingleResponse;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct ListDeviceManagedNetworksRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, TeamsDevicesComponentsSchemasResponseCollection>,
 }
 
 impl<'a> ListDeviceManagedNetworksRequest<'a> {
@@ -35,18 +37,26 @@ impl<'a> ListDeviceManagedNetworksRequest<'a> {
         self.builder = self.builder.path_param("account_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<TeamsDevicesComponentsSchemasResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// List your device managed networks
+///
+/// Fetches a list of managed networks for an account.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/devices/networks`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::device_managed_networks };
+/// use cloudflare::{ ApiClient, apis::device_managed_networks };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_device_managed_networks(&api)
-///     .with_account_id("value")
+/// let response = list_device_managed_networks(&api)
+///     .with_account_id("account_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -56,7 +66,7 @@ pub fn list_device_managed_networks(api: &ApiClient) -> ListDeviceManagedNetwork
 
 #[derive(Debug)]
 pub struct CreateDeviceManagedNetworkRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, TeamsDevicesComponentsSchemasSingleResponse>,
 }
 
 impl<'a> CreateDeviceManagedNetworkRequest<'a> {
@@ -79,18 +89,28 @@ impl<'a> CreateDeviceManagedNetworkRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<TeamsDevicesComponentsSchemasSingleResponse> {
         self.builder.send().await
     }
 }
-
 /// Create a device managed network
+///
+/// Creates a new device managed network.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/devices/networks`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::device_managed_networks };
+/// use cloudflare::{ ApiClient, apis::device_managed_networks };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = create_device_managed_network(&api)
-///     .with_account_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = create_device_managed_network(&api)
+///     .with_account_id("account_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -100,7 +120,7 @@ pub fn create_device_managed_network(api: &ApiClient) -> CreateDeviceManagedNetw
 
 #[derive(Debug)]
 pub struct NetworkDetailsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, TeamsDevicesComponentsSchemasSingleResponse>,
 }
 
 impl<'a> NetworkDetailsRequest<'a> {
@@ -123,19 +143,28 @@ impl<'a> NetworkDetailsRequest<'a> {
         self.builder = self.builder.path_param("network_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<TeamsDevicesComponentsSchemasSingleResponse> {
         self.builder.send().await
     }
 }
-
 /// Get device managed network details
+///
+/// Fetches details for a single managed network.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/devices/networks/{network_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `network_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::device_managed_networks };
+/// use cloudflare::{ ApiClient, apis::device_managed_networks };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = network_details(&api)
-///     .with_account_id("value")
-///     .with_network_id("value")
+/// let response = network_details(&api)
+///     .with_account_id("account_id")
+///     .with_network_id("network_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -145,7 +174,7 @@ pub fn network_details(api: &ApiClient) -> NetworkDetailsRequest<'_> {
 
 #[derive(Debug)]
 pub struct UpdateDeviceManagedNetworkRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, TeamsDevicesComponentsSchemasSingleResponse>,
 }
 
 impl<'a> UpdateDeviceManagedNetworkRequest<'a> {
@@ -176,19 +205,30 @@ impl<'a> UpdateDeviceManagedNetworkRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<TeamsDevicesComponentsSchemasSingleResponse> {
         self.builder.send().await
     }
 }
-
 /// Update a device managed network
+///
+/// Updates a configured device managed network.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/accounts/{account_id}/devices/networks/{network_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `network_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::device_managed_networks };
+/// use cloudflare::{ ApiClient, apis::device_managed_networks };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = update_device_managed_network(&api)
-///     .with_account_id("value")
-///     .with_network_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = update_device_managed_network(&api)
+///     .with_account_id("account_id")
+///     .with_network_id("network_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -198,7 +238,7 @@ pub fn update_device_managed_network(api: &ApiClient) -> UpdateDeviceManagedNetw
 
 #[derive(Debug)]
 pub struct DeleteDeviceManagedNetworkRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, TeamsDevicesComponentsSchemasResponseCollection>,
 }
 
 impl<'a> DeleteDeviceManagedNetworkRequest<'a> {
@@ -221,19 +261,28 @@ impl<'a> DeleteDeviceManagedNetworkRequest<'a> {
         self.builder = self.builder.path_param("network_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<TeamsDevicesComponentsSchemasResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// Delete a device managed network
+///
+/// Deletes a device managed network and fetches a list of the remaining device managed networks for an account.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/accounts/{account_id}/devices/networks/{network_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `network_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::device_managed_networks };
+/// use cloudflare::{ ApiClient, apis::device_managed_networks };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete_device_managed_network(&api)
-///     .with_account_id("value")
-///     .with_network_id("value")
+/// let response = delete_device_managed_network(&api)
+///     .with_account_id("account_id")
+///     .with_network_id("network_id")
 ///     .send()
 ///     .await?;
 /// ```

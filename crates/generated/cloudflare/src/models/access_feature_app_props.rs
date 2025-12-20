@@ -19,17 +19,16 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct AccessFeatureAppProps {
-    pub allowed_idps: Option<serde_json::Value>,
-    pub app_launcher_logo_url: Option<serde_json::Value>,
-    pub auto_redirect_to_identity: Option<serde_json::Value>,
-    pub bg_color: Option<serde_json::Value>,
-    pub domain: Option<serde_json::Value>,
-    pub footer_links: Option<serde_json::Value>,
-    pub header_bg_color: Option<serde_json::Value>,
-    pub landing_page_design:
-        Option<crate::models::access_landing_page_design::AccessLandingPageDesign>,
-    pub name: Option<serde_json::Value>,
-    pub r#type: serde_json::Value,
-    pub session_duration: Option<serde_json::Value>,
-    pub skip_app_launcher_login_page: Option<serde_json::Value>,
+    pub allowed_idps: Option<crate::models::access_allowed_idps::AccessAllowedIdps>,
+    pub app_launcher_logo_url: Option<crate::models::access_app_launcher_logo_url::AccessAppLauncherLogoUrl>,
+    pub auto_redirect_to_identity: Option<crate::models::access_schemas_auto_redirect_to_identity::AccessSchemasAutoRedirectToIdentity>,
+    pub bg_color: Option<crate::models::access_bg_color::AccessBgColor>,
+    pub domain: Option<crate::models::access_domain::AccessDomain>,
+    pub footer_links: Option<crate::models::access_footer_links::AccessFooterLinks>,
+    pub header_bg_color: Option<crate::models::access_header_bg_color::AccessHeaderBgColor>,
+    pub landing_page_design: Option<crate::models::access_landing_page_design::AccessLandingPageDesign>,
+    pub name: Option<crate::models::access_apps_components_schemas_name::AccessAppsComponentsSchemasName>,
+    pub r#type: crate::models::access_type::AccessType,
+    pub session_duration: Option<crate::models::access_schemas_session_duration::AccessSchemasSessionDuration>,
+    pub skip_app_launcher_login_page: Option<crate::models::access_skip_app_launcher_login_page::AccessSkipAppLauncherLoginPage>,
 }

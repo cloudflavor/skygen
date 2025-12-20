@@ -15,12 +15,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::access_seats_components_schemas_response_collection::AccessSeatsComponentsSchemasResponseCollection;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct UpdateSeatRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, AccessSeatsComponentsSchemasResponseCollection>,
 }
 
 impl<'a> UpdateSeatRequest<'a> {
@@ -36,22 +37,35 @@ impl<'a> UpdateSeatRequest<'a> {
         self.builder = self.builder.path_param("account_id", value);
         self
     }
-    pub fn with_body(mut self, body: serde_json::Value) -> Self {
+    pub fn with_body(
+        mut self,
+        body: crate::models::access_seats_definition::AccessSeatsDefinition,
+    ) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<AccessSeatsComponentsSchemasResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// Update a user seat
+///
+/// Removes a user from a Zero Trust seat when both `access_seat` and `gateway_seat` are set to false.
+///
+/// **HTTP Method:** `PATCH`
+/// **Path:** `/accounts/{account_id}/access/seats`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zero_trust_seats };
+/// use cloudflare::{ ApiClient, apis::zero_trust_seats };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = update_seat(&api)
-///     .with_account_id("value")
+/// # let body: crate::models::access_seats_definition::AccessSeatsDefinition = todo!();
+/// let response = update_seat(&api)
+///     .with_account_id("account_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```

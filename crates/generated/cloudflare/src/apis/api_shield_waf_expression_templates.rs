@@ -50,14 +50,22 @@ impl<'a> FallthroughRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Generate fallthrough WAF expression template from a set of API hosts
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/zones/{zone_id}/api_gateway/expression-template/fallthrough`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::api_shield_waf_expression_templates };
+/// use cloudflare::{ ApiClient, apis::api_shield_waf_expression_templates };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = fallthrough(&api)
-///     .with_zone_id("value")
+/// # let body: crate::models::api_shield_request_expression_templates_fallthrough::ApiShieldRequestExpressionTemplatesFallthrough = todo!();
+/// let response = fallthrough(&api)
+///     .with_zone_id("zone_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```

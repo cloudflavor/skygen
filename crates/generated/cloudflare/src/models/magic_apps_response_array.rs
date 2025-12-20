@@ -19,8 +19,8 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct MagicAppsResponseArray {
-    pub errors: serde_json::Value,
-    pub messages: serde_json::Value,
+    pub errors: crate::models::magic_messages::MagicMessages,
+    pub messages: crate::models::magic_messages::MagicMessages,
     pub result: Vec<serde_json::Value>,
     pub success: bool,
 }

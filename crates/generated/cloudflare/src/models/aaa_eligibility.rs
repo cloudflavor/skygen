@@ -19,7 +19,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct AaaEligibility {
-    pub eligible: Option<serde_json::Value>,
-    pub r#type: Option<serde_json::Value>,
-    pub ready: Option<serde_json::Value>,
+    pub eligible: Option<crate::models::aaa_eligible::AaaEligible>,
+    pub r#type: Option<crate::models::aaa_schemas_type::AaaSchemasType>,
+    pub ready: Option<crate::models::aaa_ready::AaaReady>,
 }

@@ -42,14 +42,20 @@ impl<'a> ListRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Lists all target industries
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/cloudforce-one/events/targetIndustries`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::target_industry };
+/// use cloudflare::{ ApiClient, apis::target_industry };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list(&api)
-///     .with_account_id("value")
+/// let response = list(&api)
+///     .with_account_id("account_id")
 ///     .send()
 ///     .await?;
 /// ```

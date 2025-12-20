@@ -15,12 +15,15 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::images_deleted_response::ImagesDeletedResponse;
+use crate::models::images_image_variant_list_response::ImagesImageVariantListResponse;
+use crate::models::images_image_variant_simple_response::ImagesImageVariantSimpleResponse;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct ListVariantsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, ImagesImageVariantListResponse>,
 }
 
 impl<'a> ListVariantsRequest<'a> {
@@ -35,18 +38,26 @@ impl<'a> ListVariantsRequest<'a> {
         self.builder = self.builder.path_param("account_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<ImagesImageVariantListResponse> {
         self.builder.send().await
     }
 }
-
 /// List variants
+///
+/// Lists existing variants.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/images/v1/variants`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::cloudflare_images_variants };
+/// use cloudflare::{ ApiClient, apis::cloudflare_images_variants };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_variants(&api)
-///     .with_account_id("value")
+/// let response = list_variants(&api)
+///     .with_account_id("account_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -56,7 +67,7 @@ pub fn list_variants(api: &ApiClient) -> ListVariantsRequest<'_> {
 
 #[derive(Debug)]
 pub struct CreateVariantRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, ImagesImageVariantSimpleResponse>,
 }
 
 impl<'a> CreateVariantRequest<'a> {
@@ -82,18 +93,28 @@ impl<'a> CreateVariantRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<ImagesImageVariantSimpleResponse> {
         self.builder.send().await
     }
 }
-
 /// Create a variant
+///
+/// Specify variants that allow you to resize images for different use cases.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/images/v1/variants`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::cloudflare_images_variants };
+/// use cloudflare::{ ApiClient, apis::cloudflare_images_variants };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = create_variant(&api)
-///     .with_account_id("value")
+/// # let body: crate::models::images_image_variant_definition::ImagesImageVariantDefinition = todo!();
+/// let response = create_variant(&api)
+///     .with_account_id("account_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -103,7 +124,7 @@ pub fn create_variant(api: &ApiClient) -> CreateVariantRequest<'_> {
 
 #[derive(Debug)]
 pub struct VariantDetailsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, ImagesImageVariantSimpleResponse>,
 }
 
 impl<'a> VariantDetailsRequest<'a> {
@@ -126,19 +147,28 @@ impl<'a> VariantDetailsRequest<'a> {
         self.builder = self.builder.path_param("variant_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<ImagesImageVariantSimpleResponse> {
         self.builder.send().await
     }
 }
-
 /// Variant details
+///
+/// Fetch details for a single variant.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/images/v1/variants/{variant_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `variant_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::cloudflare_images_variants };
+/// use cloudflare::{ ApiClient, apis::cloudflare_images_variants };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = variant_details(&api)
-///     .with_account_id("value")
-///     .with_variant_id("value")
+/// let response = variant_details(&api)
+///     .with_account_id("account_id")
+///     .with_variant_id("variant_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -148,7 +178,7 @@ pub fn variant_details(api: &ApiClient) -> VariantDetailsRequest<'_> {
 
 #[derive(Debug)]
 pub struct DeleteVariantRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, ImagesDeletedResponse>,
 }
 
 impl<'a> DeleteVariantRequest<'a> {
@@ -171,19 +201,28 @@ impl<'a> DeleteVariantRequest<'a> {
         self.builder = self.builder.path_param("variant_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<ImagesDeletedResponse> {
         self.builder.send().await
     }
 }
-
 /// Delete a variant
+///
+/// Deleting a variant purges the cache for all images associated with the variant.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/accounts/{account_id}/images/v1/variants/{variant_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `variant_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::cloudflare_images_variants };
+/// use cloudflare::{ ApiClient, apis::cloudflare_images_variants };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete_variant(&api)
-///     .with_account_id("value")
-///     .with_variant_id("value")
+/// let response = delete_variant(&api)
+///     .with_account_id("account_id")
+///     .with_variant_id("variant_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -193,7 +232,7 @@ pub fn delete_variant(api: &ApiClient) -> DeleteVariantRequest<'_> {
 
 #[derive(Debug)]
 pub struct UpdateVariantRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, ImagesImageVariantSimpleResponse>,
 }
 
 impl<'a> UpdateVariantRequest<'a> {
@@ -224,19 +263,30 @@ impl<'a> UpdateVariantRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<ImagesImageVariantSimpleResponse> {
         self.builder.send().await
     }
 }
-
 /// Update a variant
+///
+/// Updating a variant purges the cache for all images associated with the variant.
+///
+/// **HTTP Method:** `PATCH`
+/// **Path:** `/accounts/{account_id}/images/v1/variants/{variant_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `variant_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::cloudflare_images_variants };
+/// use cloudflare::{ ApiClient, apis::cloudflare_images_variants };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = update_variant(&api)
-///     .with_account_id("value")
-///     .with_variant_id("value")
+/// # let body: crate::models::images_image_variant_patch_request::ImagesImageVariantPatchRequest = todo!();
+/// let response = update_variant(&api)
+///     .with_account_id("account_id")
+///     .with_variant_id("variant_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```

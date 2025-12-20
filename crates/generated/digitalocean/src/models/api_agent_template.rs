@@ -34,7 +34,7 @@ pub struct ApiAgentTemplate {
     pub summary: Option<String>,
     pub tags: Option<Vec<String>>,
     pub temperature: Option<f64>,
-    pub template_type: Option<serde_json::Value>,
+    pub template_type: Option<crate::models::api_agent_template_type::ApiAgentTemplateType>,
     pub top_p: Option<f64>,
     pub updated_at: Option<String>,
     pub uuid: Option<String>,

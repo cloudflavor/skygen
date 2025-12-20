@@ -19,12 +19,13 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct TunnelSubnet {
-    pub comment: Option<serde_json::Value>,
-    pub created_at: Option<serde_json::Value>,
-    pub deleted_at: Option<serde_json::Value>,
-    pub id: Option<serde_json::Value>,
-    pub is_default_network: Option<serde_json::Value>,
-    pub name: Option<serde_json::Value>,
-    pub network: Option<serde_json::Value>,
-    pub subnet_type: Option<serde_json::Value>,
+    pub comment: Option<crate::models::tunnel_subnet_comment::TunnelSubnetComment>,
+    pub created_at: Option<crate::models::tunnel_created_at::TunnelCreatedAt>,
+    pub deleted_at: Option<crate::models::tunnel_deleted_at::TunnelDeletedAt>,
+    pub id: Option<crate::models::tunnel_subnet_id::TunnelSubnetId>,
+    pub is_default_network:
+        Option<crate::models::tunnel_subnet_is_default_network::TunnelSubnetIsDefaultNetwork>,
+    pub name: Option<crate::models::tunnel_subnet_name::TunnelSubnetName>,
+    pub network: Option<crate::models::tunnel_subnet_ip_network::TunnelSubnetIpNetwork>,
+    pub subnet_type: Option<crate::models::tunnel_subnet_type::TunnelSubnetType>,
 }

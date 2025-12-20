@@ -19,7 +19,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct WorkersBindingKindDispatchNamespace {
-    pub name: serde_json::Value,
+    pub name: crate::models::workers_binding_name::WorkersBindingName,
     pub namespace: String,
     pub outbound: Option<std::collections::BTreeMap<String, serde_json::Value>>,
     pub r#type: String,

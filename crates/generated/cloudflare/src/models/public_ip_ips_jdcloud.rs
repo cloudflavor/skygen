@@ -19,8 +19,8 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct PublicIpIpsJdcloud {
-    pub etag: Option<serde_json::Value>,
-    pub ipv4_cidrs: Option<serde_json::Value>,
-    pub ipv6_cidrs: Option<serde_json::Value>,
-    pub jdcloud_cidrs: Option<serde_json::Value>,
+    pub etag: Option<crate::models::public_ip_etag::PublicIpEtag>,
+    pub ipv4_cidrs: Option<crate::models::public_ip_ipv4_cidrs::PublicIpIpv4Cidrs>,
+    pub ipv6_cidrs: Option<crate::models::public_ip_ipv6_cidrs::PublicIpIpv6Cidrs>,
+    pub jdcloud_cidrs: Option<crate::models::public_ip_jdcloud_cidrs::PublicIpJdcloudCidrs>,
 }

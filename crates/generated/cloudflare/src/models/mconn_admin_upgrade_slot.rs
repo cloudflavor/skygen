@@ -19,7 +19,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct MconnAdminUpgradeSlot {
-    pub connector_id: Option<serde_json::Value>,
+    pub connector_id: Option<crate::models::mconn_uuid::MconnUuid>,
     pub id: f64,
     pub started_at: Option<String>,
 }

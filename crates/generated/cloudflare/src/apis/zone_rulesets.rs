@@ -15,7 +15,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-use crate::models::rulesets_ruleset::RulesetsRuleset;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
@@ -47,14 +46,26 @@ impl<'a> ListRulesetsRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// List zone rulesets
+///
+/// Fetches all rulesets at the zone level.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/rulesets`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `cursor` (query,optional)
+/// - `per_page` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zone_rulesets };
+/// use cloudflare::{ ApiClient, apis::zone_rulesets };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_rulesets(&api)
-///     .with_zone_id("value")
+/// let response = list_rulesets(&api)
+///     .with_zone_id("zone_id")
+///     .with_cursor("cursor")
+///     .with_per_page("per_page")
 ///     .send()
 ///     .await?;
 /// ```
@@ -64,7 +75,7 @@ pub fn list_rulesets(api: &ApiClient) -> ListRulesetsRequest<'_> {
 
 #[derive(Debug)]
 pub struct CreateRulesetRequest<'a> {
-    builder: ApiRequestBuilder<'a, RulesetsRuleset>,
+    builder: ApiRequestBuilder<'a, serde_json::Value>,
 }
 
 impl<'a> CreateRulesetRequest<'a> {
@@ -83,18 +94,28 @@ impl<'a> CreateRulesetRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<RulesetsRuleset> {
+    pub async fn send(self) -> ApiResult<serde_json::Value> {
         self.builder.send().await
     }
 }
-
 /// Create a zone ruleset
+///
+/// Creates a ruleset at the zone level.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/zones/{zone_id}/rulesets`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zone_rulesets };
+/// use cloudflare::{ ApiClient, apis::zone_rulesets };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = create_ruleset(&api)
-///     .with_zone_id("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = create_ruleset(&api)
+///     .with_zone_id("zone_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -104,7 +125,7 @@ pub fn create_ruleset(api: &ApiClient) -> CreateRulesetRequest<'_> {
 
 #[derive(Debug)]
 pub struct EntrypointRulesetRequest<'a> {
-    builder: ApiRequestBuilder<'a, RulesetsRuleset>,
+    builder: ApiRequestBuilder<'a, serde_json::Value>,
 }
 
 impl<'a> EntrypointRulesetRequest<'a> {
@@ -127,19 +148,28 @@ impl<'a> EntrypointRulesetRequest<'a> {
         self.builder = self.builder.path_param("ruleset_phase", value);
         self
     }
-    pub async fn send(self) -> ApiResult<RulesetsRuleset> {
+    pub async fn send(self) -> ApiResult<serde_json::Value> {
         self.builder.send().await
     }
 }
-
 /// Get a zone entry point ruleset
+///
+/// Fetches the latest version of the zone entry point ruleset for a given phase.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/rulesets/phases/{ruleset_phase}/entrypoint`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `ruleset_phase` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zone_rulesets };
+/// use cloudflare::{ ApiClient, apis::zone_rulesets };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = entrypoint_ruleset(&api)
-///     .with_zone_id("value")
-///     .with_ruleset_phase("value")
+/// let response = entrypoint_ruleset(&api)
+///     .with_zone_id("zone_id")
+///     .with_ruleset_phase("ruleset_phase")
 ///     .send()
 ///     .await?;
 /// ```
@@ -149,7 +179,7 @@ pub fn entrypoint_ruleset(api: &ApiClient) -> EntrypointRulesetRequest<'_> {
 
 #[derive(Debug)]
 pub struct UpdateEntrypointRulesetRequest<'a> {
-    builder: ApiRequestBuilder<'a, RulesetsRuleset>,
+    builder: ApiRequestBuilder<'a, serde_json::Value>,
 }
 
 impl<'a> UpdateEntrypointRulesetRequest<'a> {
@@ -177,19 +207,30 @@ impl<'a> UpdateEntrypointRulesetRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<RulesetsRuleset> {
+    pub async fn send(self) -> ApiResult<serde_json::Value> {
         self.builder.send().await
     }
 }
-
 /// Update a zone entry point ruleset
+///
+/// Updates a zone entry point ruleset, creating a new version.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/zones/{zone_id}/rulesets/phases/{ruleset_phase}/entrypoint`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `ruleset_phase` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zone_rulesets };
+/// use cloudflare::{ ApiClient, apis::zone_rulesets };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = update_entrypoint_ruleset(&api)
-///     .with_zone_id("value")
-///     .with_ruleset_phase("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = update_entrypoint_ruleset(&api)
+///     .with_zone_id("zone_id")
+///     .with_ruleset_phase("ruleset_phase")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -226,15 +267,24 @@ impl<'a> ListEntrypointRulesetVersionsRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// List a zone entry point ruleset's versions
+///
+/// Fetches the versions of a zone entry point ruleset.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/rulesets/phases/{ruleset_phase}/entrypoint/versions`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `ruleset_phase` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zone_rulesets };
+/// use cloudflare::{ ApiClient, apis::zone_rulesets };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_entrypoint_ruleset_versions(&api)
-///     .with_zone_id("value")
-///     .with_ruleset_phase("value")
+/// let response = list_entrypoint_ruleset_versions(&api)
+///     .with_zone_id("zone_id")
+///     .with_ruleset_phase("ruleset_phase")
 ///     .send()
 ///     .await?;
 /// ```
@@ -246,7 +296,7 @@ pub fn list_entrypoint_ruleset_versions(
 
 #[derive(Debug)]
 pub struct EntrypointRulesetVersionRequest<'a> {
-    builder: ApiRequestBuilder<'a, RulesetsRuleset>,
+    builder: ApiRequestBuilder<'a, serde_json::Value>,
 }
 
 impl<'a> EntrypointRulesetVersionRequest<'a> {
@@ -274,20 +324,30 @@ impl<'a> EntrypointRulesetVersionRequest<'a> {
         self.builder = self.builder.path_param("ruleset_version", value);
         self
     }
-    pub async fn send(self) -> ApiResult<RulesetsRuleset> {
+    pub async fn send(self) -> ApiResult<serde_json::Value> {
         self.builder.send().await
     }
 }
-
 /// Get a zone entry point ruleset version
+///
+/// Fetches a specific version of a zone entry point ruleset.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/rulesets/phases/{ruleset_phase}/entrypoint/versions/{ruleset_version}`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `ruleset_phase` (path, required)
+/// - `ruleset_version` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zone_rulesets };
+/// use cloudflare::{ ApiClient, apis::zone_rulesets };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = entrypoint_ruleset_version(&api)
-///     .with_zone_id("value")
-///     .with_ruleset_phase("value")
-///     .with_ruleset_version("value")
+/// let response = entrypoint_ruleset_version(&api)
+///     .with_zone_id("zone_id")
+///     .with_ruleset_phase("ruleset_phase")
+///     .with_ruleset_version("ruleset_version")
 ///     .send()
 ///     .await?;
 /// ```
@@ -297,7 +357,7 @@ pub fn entrypoint_ruleset_version(api: &ApiClient) -> EntrypointRulesetVersionRe
 
 #[derive(Debug)]
 pub struct RulesetRequest<'a> {
-    builder: ApiRequestBuilder<'a, RulesetsRuleset>,
+    builder: ApiRequestBuilder<'a, serde_json::Value>,
 }
 
 impl<'a> RulesetRequest<'a> {
@@ -317,19 +377,28 @@ impl<'a> RulesetRequest<'a> {
         self.builder = self.builder.path_param("ruleset_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<RulesetsRuleset> {
+    pub async fn send(self) -> ApiResult<serde_json::Value> {
         self.builder.send().await
     }
 }
-
 /// Get a zone ruleset
+///
+/// Fetches the latest version of a zone ruleset.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/rulesets/{ruleset_id}`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `ruleset_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zone_rulesets };
+/// use cloudflare::{ ApiClient, apis::zone_rulesets };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = ruleset(&api)
-///     .with_zone_id("value")
-///     .with_ruleset_id("value")
+/// let response = ruleset(&api)
+///     .with_zone_id("zone_id")
+///     .with_ruleset_id("ruleset_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -339,7 +408,7 @@ pub fn ruleset(api: &ApiClient) -> RulesetRequest<'_> {
 
 #[derive(Debug)]
 pub struct UpdateRulesetRequest<'a> {
-    builder: ApiRequestBuilder<'a, RulesetsRuleset>,
+    builder: ApiRequestBuilder<'a, serde_json::Value>,
 }
 
 impl<'a> UpdateRulesetRequest<'a> {
@@ -364,19 +433,30 @@ impl<'a> UpdateRulesetRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<RulesetsRuleset> {
+    pub async fn send(self) -> ApiResult<serde_json::Value> {
         self.builder.send().await
     }
 }
-
 /// Update a zone ruleset
+///
+/// Updates a zone ruleset, creating a new version.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/zones/{zone_id}/rulesets/{ruleset_id}`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `ruleset_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zone_rulesets };
+/// use cloudflare::{ ApiClient, apis::zone_rulesets };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = update_ruleset(&api)
-///     .with_zone_id("value")
-///     .with_ruleset_id("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = update_ruleset(&api)
+///     .with_zone_id("zone_id")
+///     .with_ruleset_id("ruleset_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -410,15 +490,24 @@ impl<'a> RulesetDeleteRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Delete a zone ruleset
+///
+/// Deletes all versions of an existing zone ruleset.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/zones/{zone_id}/rulesets/{ruleset_id}`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `ruleset_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zone_rulesets };
+/// use cloudflare::{ ApiClient, apis::zone_rulesets };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = ruleset_delete(&api)
-///     .with_zone_id("value")
-///     .with_ruleset_id("value")
+/// let response = ruleset_delete(&api)
+///     .with_zone_id("zone_id")
+///     .with_ruleset_id("ruleset_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -428,7 +517,7 @@ pub fn ruleset_delete(api: &ApiClient) -> RulesetDeleteRequest<'_> {
 
 #[derive(Debug)]
 pub struct CreateRulesetRuleRequest<'a> {
-    builder: ApiRequestBuilder<'a, RulesetsRuleset>,
+    builder: ApiRequestBuilder<'a, serde_json::Value>,
 }
 
 impl<'a> CreateRulesetRuleRequest<'a> {
@@ -452,23 +541,34 @@ impl<'a> CreateRulesetRuleRequest<'a> {
         self.builder = self.builder.path_param("ruleset_id", value);
         self
     }
-    pub fn with_body(mut self, body: crate::models::rulesets_rule::RulesetsRule) -> Self {
+    pub fn with_body(mut self, body: serde_json::Value) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<RulesetsRuleset> {
+    pub async fn send(self) -> ApiResult<serde_json::Value> {
         self.builder.send().await
     }
 }
-
 /// Create a zone ruleset rule
+///
+/// Adds a new rule to a zone ruleset. The rule will be added to the end of the existing list of rules in the ruleset by default.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/zones/{zone_id}/rulesets/{ruleset_id}/rules`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `ruleset_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zone_rulesets };
+/// use cloudflare::{ ApiClient, apis::zone_rulesets };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = create_ruleset_rule(&api)
-///     .with_zone_id("value")
-///     .with_ruleset_id("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = create_ruleset_rule(&api)
+///     .with_zone_id("zone_id")
+///     .with_ruleset_id("ruleset_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -478,7 +578,7 @@ pub fn create_ruleset_rule(api: &ApiClient) -> CreateRulesetRuleRequest<'_> {
 
 #[derive(Debug)]
 pub struct RulesetRuleRequest<'a> {
-    builder: ApiRequestBuilder<'a, RulesetsRuleset>,
+    builder: ApiRequestBuilder<'a, serde_json::Value>,
 }
 
 impl<'a> RulesetRuleRequest<'a> {
@@ -506,20 +606,30 @@ impl<'a> RulesetRuleRequest<'a> {
         self.builder = self.builder.path_param("rule_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<RulesetsRuleset> {
+    pub async fn send(self) -> ApiResult<serde_json::Value> {
         self.builder.send().await
     }
 }
-
 /// Delete a zone ruleset rule
+///
+/// Deletes an existing rule from a zone ruleset.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/zones/{zone_id}/rulesets/{ruleset_id}/rules/{rule_id}`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `ruleset_id` (path, required)
+/// - `rule_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zone_rulesets };
+/// use cloudflare::{ ApiClient, apis::zone_rulesets };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = ruleset_rule(&api)
-///     .with_zone_id("value")
-///     .with_ruleset_id("value")
-///     .with_rule_id("value")
+/// let response = ruleset_rule(&api)
+///     .with_zone_id("zone_id")
+///     .with_ruleset_id("ruleset_id")
+///     .with_rule_id("rule_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -529,7 +639,7 @@ pub fn ruleset_rule(api: &ApiClient) -> RulesetRuleRequest<'_> {
 
 #[derive(Debug)]
 pub struct UpdateRulesetRuleRequest<'a> {
-    builder: ApiRequestBuilder<'a, RulesetsRuleset>,
+    builder: ApiRequestBuilder<'a, serde_json::Value>,
 }
 
 impl<'a> UpdateRulesetRuleRequest<'a> {
@@ -558,24 +668,36 @@ impl<'a> UpdateRulesetRuleRequest<'a> {
         self.builder = self.builder.path_param("rule_id", value);
         self
     }
-    pub fn with_body(mut self, body: crate::models::rulesets_rule::RulesetsRule) -> Self {
+    pub fn with_body(mut self, body: serde_json::Value) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<RulesetsRuleset> {
+    pub async fn send(self) -> ApiResult<serde_json::Value> {
         self.builder.send().await
     }
 }
-
 /// Update a zone ruleset rule
+///
+/// Updates an existing rule in a zone ruleset.
+///
+/// **HTTP Method:** `PATCH`
+/// **Path:** `/zones/{zone_id}/rulesets/{ruleset_id}/rules/{rule_id}`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `ruleset_id` (path, required)
+/// - `rule_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zone_rulesets };
+/// use cloudflare::{ ApiClient, apis::zone_rulesets };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = update_ruleset_rule(&api)
-///     .with_zone_id("value")
-///     .with_ruleset_id("value")
-///     .with_rule_id("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = update_ruleset_rule(&api)
+///     .with_zone_id("zone_id")
+///     .with_ruleset_id("ruleset_id")
+///     .with_rule_id("rule_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -612,15 +734,24 @@ impl<'a> ListRulesetVersionsRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// List a zone ruleset's versions
+///
+/// Fetches the versions of a zone ruleset.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/rulesets/{ruleset_id}/versions`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `ruleset_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zone_rulesets };
+/// use cloudflare::{ ApiClient, apis::zone_rulesets };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_ruleset_versions(&api)
-///     .with_zone_id("value")
-///     .with_ruleset_id("value")
+/// let response = list_ruleset_versions(&api)
+///     .with_zone_id("zone_id")
+///     .with_ruleset_id("ruleset_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -630,7 +761,7 @@ pub fn list_ruleset_versions(api: &ApiClient) -> ListRulesetVersionsRequest<'_> 
 
 #[derive(Debug)]
 pub struct RulesetVersionRequest<'a> {
-    builder: ApiRequestBuilder<'a, RulesetsRuleset>,
+    builder: ApiRequestBuilder<'a, serde_json::Value>,
 }
 
 impl<'a> RulesetVersionRequest<'a> {
@@ -658,20 +789,30 @@ impl<'a> RulesetVersionRequest<'a> {
         self.builder = self.builder.path_param("ruleset_version", value);
         self
     }
-    pub async fn send(self) -> ApiResult<RulesetsRuleset> {
+    pub async fn send(self) -> ApiResult<serde_json::Value> {
         self.builder.send().await
     }
 }
-
 /// Get a zone ruleset version
+///
+/// Fetches a specific version of a zone ruleset.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/rulesets/{ruleset_id}/versions/{ruleset_version}`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `ruleset_id` (path, required)
+/// - `ruleset_version` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zone_rulesets };
+/// use cloudflare::{ ApiClient, apis::zone_rulesets };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = ruleset_version(&api)
-///     .with_zone_id("value")
-///     .with_ruleset_id("value")
-///     .with_ruleset_version("value")
+/// let response = ruleset_version(&api)
+///     .with_zone_id("zone_id")
+///     .with_ruleset_id("ruleset_id")
+///     .with_ruleset_version("ruleset_version")
 ///     .send()
 ///     .await?;
 /// ```
@@ -713,16 +854,26 @@ impl<'a> RulesetVersionDeleteRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Delete a zone ruleset version
+///
+/// Deletes an existing version of a zone ruleset.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/zones/{zone_id}/rulesets/{ruleset_id}/versions/{ruleset_version}`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `ruleset_id` (path, required)
+/// - `ruleset_version` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zone_rulesets };
+/// use cloudflare::{ ApiClient, apis::zone_rulesets };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = ruleset_version_delete(&api)
-///     .with_zone_id("value")
-///     .with_ruleset_id("value")
-///     .with_ruleset_version("value")
+/// let response = ruleset_version_delete(&api)
+///     .with_zone_id("zone_id")
+///     .with_ruleset_id("ruleset_id")
+///     .with_ruleset_version("ruleset_version")
 ///     .send()
 ///     .await?;
 /// ```
@@ -732,7 +883,7 @@ pub fn ruleset_version_delete(api: &ApiClient) -> RulesetVersionDeleteRequest<'_
 
 #[derive(Debug)]
 pub struct ListRulesetVersionRulesRequest<'a> {
-    builder: ApiRequestBuilder<'a, RulesetsRuleset>,
+    builder: ApiRequestBuilder<'a, serde_json::Value>,
 }
 
 impl<'a> ListRulesetVersionRulesRequest<'a> {
@@ -765,21 +916,32 @@ impl<'a> ListRulesetVersionRulesRequest<'a> {
         self.builder = self.builder.path_param("rule_tag", value);
         self
     }
-    pub async fn send(self) -> ApiResult<RulesetsRuleset> {
+    pub async fn send(self) -> ApiResult<serde_json::Value> {
         self.builder.send().await
     }
 }
-
 /// List a zone ruleset version's rules by tag
+///
+/// Fetches the rules of a managed zone ruleset version for a given tag.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/rulesets/{ruleset_id}/versions/{ruleset_version}/by_tag/{rule_tag}`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `ruleset_id` (path, required)
+/// - `ruleset_version` (path, required)
+/// - `rule_tag` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zone_rulesets };
+/// use cloudflare::{ ApiClient, apis::zone_rulesets };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_ruleset_version_rules(&api)
-///     .with_zone_id("value")
-///     .with_ruleset_id("value")
-///     .with_ruleset_version("value")
-///     .with_rule_tag("value")
+/// let response = list_ruleset_version_rules(&api)
+///     .with_zone_id("zone_id")
+///     .with_ruleset_id("ruleset_id")
+///     .with_ruleset_version("ruleset_version")
+///     .with_rule_tag("rule_tag")
 ///     .send()
 ///     .await?;
 /// ```

@@ -15,7 +15,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-use crate::models::autoscale_pool_create::AutoscalePoolCreate;
+use crate::models::error::Error;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
@@ -34,13 +34,20 @@ impl<'a> AutoscalepoolsListRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// List All Autoscale Pools
+///
+/// To list all autoscale pools in your team, send a GET request to `/v2/droplets/autoscale`.
+/// The response body will be a JSON object with a key of `autoscale_pools` containing an array of autoscale pool objects.
+/// These each contain the standard autoscale pool attributes.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/droplets/autoscale`
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::droplet_autoscale_pools };
+/// use digitalocean::{ ApiClient, apis::droplet_autoscale_pools };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = autoscalepools_list(&api)
+/// let response = autoscalepools_list(&api)
 ///     .send()
 ///     .await?;
 /// ```
@@ -50,7 +57,7 @@ pub fn autoscalepools_list(api: &ApiClient) -> AutoscalepoolsListRequest<'_> {
 
 #[derive(Debug)]
 pub struct AutoscalepoolsCreateRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, Error>,
 }
 
 impl<'a> AutoscalepoolsCreateRequest<'a> {
@@ -59,21 +66,33 @@ impl<'a> AutoscalepoolsCreateRequest<'a> {
 
         Self { builder }
     }
-    pub fn with_body(mut self, body: AutoscalePoolCreate) -> Self {
+    pub fn with_body(
+        mut self,
+        body: crate::models::autoscale_pool_create::AutoscalePoolCreate,
+    ) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<Error> {
         self.builder.send().await
     }
 }
-
 /// Create a New Autoscale Pool
+///
+/// To create a new autoscale pool, send a POST request to `/v2/droplets/autoscale` setting the required attributes.
+///
+/// The response body will contain a JSON object with a key called `autoscale_pool` containing the standard attributes for the new autoscale pool.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/v2/droplets/autoscale`
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::droplet_autoscale_pools };
+/// use digitalocean::{ ApiClient, apis::droplet_autoscale_pools };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = autoscalepools_create(&api)
+/// # let body: crate::models::autoscale_pool_create::AutoscalePoolCreate = todo!();
+/// let response = autoscalepools_create(&api)
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -105,14 +124,23 @@ impl<'a> AutoscalepoolsGetRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Retrieve an Existing Autoscale Pool
+///
+/// To show information about an individual autoscale pool, send a GET request to
+/// `/v2/droplets/autoscale/$AUTOSCALE_POOL_ID`.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/droplets/autoscale/{autoscale_pool_id}`
+///
+/// **Parameters**
+/// - `autoscale_pool_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::droplet_autoscale_pools };
+/// use digitalocean::{ ApiClient, apis::droplet_autoscale_pools };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = autoscalepools_get(&api)
-///     .with_autoscale_pool_id("value")
+/// let response = autoscalepools_get(&api)
+///     .with_autoscale_pool_id("autoscale_pool_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -122,7 +150,7 @@ pub fn autoscalepools_get(api: &ApiClient) -> AutoscalepoolsGetRequest<'_> {
 
 #[derive(Debug)]
 pub struct AutoscalepoolsUpdateRequest<'a> {
-    builder: ApiRequestBuilder<'a, AutoscalePoolCreate>,
+    builder: ApiRequestBuilder<'a, serde_json::Value>,
 }
 
 impl<'a> AutoscalepoolsUpdateRequest<'a> {
@@ -140,22 +168,37 @@ impl<'a> AutoscalepoolsUpdateRequest<'a> {
         self.builder = self.builder.path_param("autoscale_pool_id", value);
         self
     }
-    pub fn with_body(mut self, body: AutoscalePoolCreate) -> Self {
+    pub fn with_body(
+        mut self,
+        body: crate::models::autoscale_pool_create::AutoscalePoolCreate,
+    ) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<AutoscalePoolCreate> {
+    pub async fn send(self) -> ApiResult<serde_json::Value> {
         self.builder.send().await
     }
 }
-
 /// Update Autoscale Pool
+///
+/// To update the configuration of an existing autoscale pool, send a PUT request to
+/// `/v2/droplets/autoscale/$AUTOSCALE_POOL_ID`. The request must contain a full representation
+/// of the autoscale pool including existing attributes.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/v2/droplets/autoscale/{autoscale_pool_id}`
+///
+/// **Parameters**
+/// - `autoscale_pool_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::droplet_autoscale_pools };
+/// use digitalocean::{ ApiClient, apis::droplet_autoscale_pools };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = autoscalepools_update(&api)
-///     .with_autoscale_pool_id("value")
+/// # let body: crate::models::autoscale_pool_create::AutoscalePoolCreate = todo!();
+/// let response = autoscalepools_update(&api)
+///     .with_autoscale_pool_id("autoscale_pool_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -165,7 +208,7 @@ pub fn autoscalepools_update(api: &ApiClient) -> AutoscalepoolsUpdateRequest<'_>
 
 #[derive(Debug)]
 pub struct AutoscalepoolsDeleteRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, Error>,
 }
 
 impl<'a> AutoscalepoolsDeleteRequest<'a> {
@@ -183,18 +226,28 @@ impl<'a> AutoscalepoolsDeleteRequest<'a> {
         self.builder = self.builder.path_param("autoscale_pool_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<Error> {
         self.builder.send().await
     }
 }
-
 /// Delete autoscale pool
+///
+/// To destroy an autoscale pool, send a DELETE request to the `/v2/droplets/autoscale/$AUTOSCALE_POOL_ID` endpoint.
+///
+/// A successful response will include a 202 response code and no content.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/v2/droplets/autoscale/{autoscale_pool_id}`
+///
+/// **Parameters**
+/// - `autoscale_pool_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::droplet_autoscale_pools };
+/// use digitalocean::{ ApiClient, apis::droplet_autoscale_pools };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = autoscalepools_delete(&api)
-///     .with_autoscale_pool_id("value")
+/// let response = autoscalepools_delete(&api)
+///     .with_autoscale_pool_id("autoscale_pool_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -204,7 +257,7 @@ pub fn autoscalepools_delete(api: &ApiClient) -> AutoscalepoolsDeleteRequest<'_>
 
 #[derive(Debug)]
 pub struct AutoscalepoolsDeleteDangerousRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, Error>,
 }
 
 impl<'a> AutoscalepoolsDeleteDangerousRequest<'a> {
@@ -222,18 +275,27 @@ impl<'a> AutoscalepoolsDeleteDangerousRequest<'a> {
         self.builder = self.builder.path_param("autoscale_pool_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<Error> {
         self.builder.send().await
     }
 }
-
 /// Delete autoscale pool and resources
+///
+/// To destroy an autoscale pool and its associated resources (Droplets),
+/// send a DELETE request to the `/v2/droplets/autoscale/$AUTOSCALE_POOL_ID/dangerous` endpoint.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/v2/droplets/autoscale/{autoscale_pool_id}/dangerous`
+///
+/// **Parameters**
+/// - `autoscale_pool_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::droplet_autoscale_pools };
+/// use digitalocean::{ ApiClient, apis::droplet_autoscale_pools };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = autoscalepools_delete_dangerous(&api)
-///     .with_autoscale_pool_id("value")
+/// let response = autoscalepools_delete_dangerous(&api)
+///     .with_autoscale_pool_id("autoscale_pool_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -267,14 +329,25 @@ impl<'a> AutoscalepoolsListHistoryRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// List history events
+///
+/// To list all of the scaling history events of an autoscale pool, send a GET request to `/v2/droplets/autoscale/$AUTOSCALE_POOL_ID/history`.
+///
+/// The response body will be a JSON object with a key of `history`. This will be
+/// set to an array containing objects each representing a history event.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/droplets/autoscale/{autoscale_pool_id}/history`
+///
+/// **Parameters**
+/// - `autoscale_pool_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::droplet_autoscale_pools };
+/// use digitalocean::{ ApiClient, apis::droplet_autoscale_pools };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = autoscalepools_list_history(&api)
-///     .with_autoscale_pool_id("value")
+/// let response = autoscalepools_list_history(&api)
+///     .with_autoscale_pool_id("autoscale_pool_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -306,14 +379,25 @@ impl<'a> AutoscalepoolsListMembersRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// List members
+///
+/// To list the Droplets in an autoscale pool, send a GET request to `/v2/droplets/autoscale/$AUTOSCALE_POOL_ID/members`.
+///
+/// The response body will be a JSON object with a key of `droplets`. This will be
+/// set to an array containing information about each of the Droplets in the autoscale pool.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/droplets/autoscale/{autoscale_pool_id}/members`
+///
+/// **Parameters**
+/// - `autoscale_pool_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::droplet_autoscale_pools };
+/// use digitalocean::{ ApiClient, apis::droplet_autoscale_pools };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = autoscalepools_list_members(&api)
-///     .with_autoscale_pool_id("value")
+/// let response = autoscalepools_list_members(&api)
+///     .with_autoscale_pool_id("autoscale_pool_id")
 ///     .send()
 ///     .await?;
 /// ```

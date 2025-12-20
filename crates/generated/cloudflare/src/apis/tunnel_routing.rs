@@ -15,12 +15,15 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::tunnel_route_response_single::TunnelRouteResponseSingle;
+use crate::models::tunnel_teamnet_response_collection::TunnelTeamnetResponseCollection;
+use crate::models::tunnel_teamnet_response_single::TunnelTeamnetResponseSingle;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct RouteListTunnelRoutesRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, TunnelTeamnetResponseCollection>,
 }
 
 impl<'a> RouteListTunnelRoutesRequest<'a> {
@@ -79,18 +82,48 @@ impl<'a> RouteListTunnelRoutesRequest<'a> {
         self.builder = self.builder.header_param("page", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<TunnelTeamnetResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// List tunnel routes
+///
+/// Lists and filters private network routes in an account.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/teamnet/routes`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `comment` (query,optional)
+/// - `is_deleted` (query,optional)
+/// - `network_subset` (query,optional)
+/// - `network_superset` (query,optional)
+/// - `existed_at` (query,optional)
+/// - `tunnel_id` (query,optional)
+/// - `route_id` (query,optional)
+/// - `tun_types` (query,optional)
+/// - `virtual_network_id` (query,optional)
+/// - `per_page` (query,optional)
+/// - `page` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::tunnel_routing };
+/// use cloudflare::{ ApiClient, apis::tunnel_routing };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = route_list_tunnel_routes(&api)
-///     .with_account_id("value")
+/// let response = route_list_tunnel_routes(&api)
+///     .with_account_id("account_id")
+///     .with_comment("comment")
+///     .with_is_deleted("is_deleted")
+///     .with_network_subset("network_subset")
+///     .with_network_superset("network_superset")
+///     .with_existed_at("existed_at")
+///     .with_tunnel_id("tunnel_id")
+///     .with_route_id("route_id")
+///     .with_tun_types("tun_types")
+///     .with_virtual_network_id("virtual_network_id")
+///     .with_per_page("per_page")
+///     .with_page("page")
 ///     .send()
 ///     .await?;
 /// ```
@@ -100,7 +133,7 @@ pub fn route_list_tunnel_routes(api: &ApiClient) -> RouteListTunnelRoutesRequest
 
 #[derive(Debug)]
 pub struct RouteCreateTunnelRouteRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, TunnelRouteResponseSingle>,
 }
 
 impl<'a> RouteCreateTunnelRouteRequest<'a> {
@@ -123,18 +156,28 @@ impl<'a> RouteCreateTunnelRouteRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<TunnelRouteResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Create a tunnel route
+///
+/// Routes a private network through a Cloudflare Tunnel.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/teamnet/routes`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::tunnel_routing };
+/// use cloudflare::{ ApiClient, apis::tunnel_routing };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = route_create_tunnel_route(&api)
-///     .with_account_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = route_create_tunnel_route(&api)
+///     .with_account_id("account_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -144,7 +187,7 @@ pub fn route_create_tunnel_route(api: &ApiClient) -> RouteCreateTunnelRouteReque
 
 #[derive(Debug)]
 pub struct RouteGetTunnelRouteRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, TunnelTeamnetResponseSingle>,
 }
 
 impl<'a> RouteGetTunnelRouteRequest<'a> {
@@ -177,19 +220,32 @@ impl<'a> RouteGetTunnelRouteRequest<'a> {
             .header_param("default_virtual_network_fallback", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<TunnelTeamnetResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Get tunnel route by IP
+///
+/// Fetches routes that contain the given IP address.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/teamnet/routes/ip/{ip}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `ip` (path, required)
+/// - `virtual_network_id` (query,optional)
+/// - `default_virtual_network_fallback` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::tunnel_routing };
+/// use cloudflare::{ ApiClient, apis::tunnel_routing };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = route_get_tunnel_route(&api)
-///     .with_account_id("value")
-///     .with_ip("value")
+/// let response = route_get_tunnel_route(&api)
+///     .with_account_id("account_id")
+///     .with_ip("ip")
+///     .with_virtual_network_id("virtual_network_id")
+///     .with_default_virtual_network_fallback("default_virtual_network_fallback")
 ///     .send()
 ///     .await?;
 /// ```
@@ -199,7 +255,7 @@ pub fn route_get_tunnel_route(api: &ApiClient) -> RouteGetTunnelRouteRequest<'_>
 
 #[derive(Debug)]
 pub struct RouteCreateTunnelRoutePostRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, TunnelRouteResponseSingle>,
 }
 
 impl<'a> RouteCreateTunnelRoutePostRequest<'a> {
@@ -230,19 +286,30 @@ impl<'a> RouteCreateTunnelRoutePostRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<TunnelRouteResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Create a tunnel route (CIDR Endpoint)
+///
+/// Routes a private network through a Cloudflare Tunnel. The CIDR in `ip_network_encoded` must be written in URL-encoded format.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/teamnet/routes/network/{ip_network_encoded}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `ip_network_encoded` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::tunnel_routing };
+/// use cloudflare::{ ApiClient, apis::tunnel_routing };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = route_create_tunnel_route_post(&api)
-///     .with_account_id("value")
-///     .with_ip_network_encoded("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = route_create_tunnel_route_post(&api)
+///     .with_account_id("account_id")
+///     .with_ip_network_encoded("ip_network_encoded")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -252,7 +319,7 @@ pub fn route_create_tunnel_route_post(api: &ApiClient) -> RouteCreateTunnelRoute
 
 #[derive(Debug)]
 pub struct RouteDeleteTunnelRouteRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, TunnelRouteResponseSingle>,
 }
 
 impl<'a> RouteDeleteTunnelRouteRequest<'a> {
@@ -287,19 +354,34 @@ impl<'a> RouteDeleteTunnelRouteRequest<'a> {
         self.builder = self.builder.header_param("tunnel_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<TunnelRouteResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Delete a tunnel route (CIDR Endpoint)
+///
+/// Deletes a private network route from an account. The CIDR in `ip_network_encoded` must be written in URL-encoded format. If no virtual_network_id is provided it will delete the route from the default vnet. If no tun_type is provided it will fetch the type from the tunnel_id or if that is missing it will assume Cloudflare Tunnel as default. If tunnel_id is provided it will delete the route from that tunnel, otherwise it will delete the route based on the vnet and tun_type.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/accounts/{account_id}/teamnet/routes/network/{ip_network_encoded}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `ip_network_encoded` (path, required)
+/// - `virtual_network_id` (query,optional)
+/// - `tun_type` (query,optional)
+/// - `tunnel_id` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::tunnel_routing };
+/// use cloudflare::{ ApiClient, apis::tunnel_routing };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = route_delete_tunnel_route(&api)
-///     .with_account_id("value")
-///     .with_ip_network_encoded("value")
+/// let response = route_delete_tunnel_route(&api)
+///     .with_account_id("account_id")
+///     .with_ip_network_encoded("ip_network_encoded")
+///     .with_virtual_network_id("virtual_network_id")
+///     .with_tun_type("tun_type")
+///     .with_tunnel_id("tunnel_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -309,7 +391,7 @@ pub fn route_delete_tunnel_route(api: &ApiClient) -> RouteDeleteTunnelRouteReque
 
 #[derive(Debug)]
 pub struct RouteUpdateTunnelRouteRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, TunnelRouteResponseSingle>,
 }
 
 impl<'a> RouteUpdateTunnelRouteRequest<'a> {
@@ -332,19 +414,28 @@ impl<'a> RouteUpdateTunnelRouteRequest<'a> {
         self.builder = self.builder.path_param("ip_network_encoded", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<TunnelRouteResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Update a tunnel route (CIDR Endpoint)
+///
+/// Updates an existing private network route in an account. The CIDR in `ip_network_encoded` must be written in URL-encoded format.
+///
+/// **HTTP Method:** `PATCH`
+/// **Path:** `/accounts/{account_id}/teamnet/routes/network/{ip_network_encoded}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `ip_network_encoded` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::tunnel_routing };
+/// use cloudflare::{ ApiClient, apis::tunnel_routing };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = route_update_tunnel_route(&api)
-///     .with_account_id("value")
-///     .with_ip_network_encoded("value")
+/// let response = route_update_tunnel_route(&api)
+///     .with_account_id("account_id")
+///     .with_ip_network_encoded("ip_network_encoded")
 ///     .send()
 ///     .await?;
 /// ```
@@ -354,7 +445,7 @@ pub fn route_update_tunnel_route(api: &ApiClient) -> RouteUpdateTunnelRouteReque
 
 #[derive(Debug)]
 pub struct RouteGetTunnelRouteGetRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, TunnelRouteResponseSingle>,
 }
 
 impl<'a> RouteGetTunnelRouteGetRequest<'a> {
@@ -377,19 +468,28 @@ impl<'a> RouteGetTunnelRouteGetRequest<'a> {
         self.builder = self.builder.path_param("route_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<TunnelRouteResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Get tunnel route
+///
+/// Get a private network route in an account.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/teamnet/routes/{route_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `route_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::tunnel_routing };
+/// use cloudflare::{ ApiClient, apis::tunnel_routing };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = route_get_tunnel_route_get(&api)
-///     .with_account_id("value")
-///     .with_route_id("value")
+/// let response = route_get_tunnel_route_get(&api)
+///     .with_account_id("account_id")
+///     .with_route_id("route_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -399,7 +499,7 @@ pub fn route_get_tunnel_route_get(api: &ApiClient) -> RouteGetTunnelRouteGetRequ
 
 #[derive(Debug)]
 pub struct RouteDeleteTunnelRouteDeleteRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, TunnelRouteResponseSingle>,
 }
 
 impl<'a> RouteDeleteTunnelRouteDeleteRequest<'a> {
@@ -422,19 +522,28 @@ impl<'a> RouteDeleteTunnelRouteDeleteRequest<'a> {
         self.builder = self.builder.path_param("route_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<TunnelRouteResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Delete a tunnel route
+///
+/// Deletes a private network route from an account.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/accounts/{account_id}/teamnet/routes/{route_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `route_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::tunnel_routing };
+/// use cloudflare::{ ApiClient, apis::tunnel_routing };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = route_delete_tunnel_route_delete(&api)
-///     .with_account_id("value")
-///     .with_route_id("value")
+/// let response = route_delete_tunnel_route_delete(&api)
+///     .with_account_id("account_id")
+///     .with_route_id("route_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -446,7 +555,7 @@ pub fn route_delete_tunnel_route_delete(
 
 #[derive(Debug)]
 pub struct RouteUpdateTunnelRoutePatchRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, TunnelRouteResponseSingle>,
 }
 
 impl<'a> RouteUpdateTunnelRoutePatchRequest<'a> {
@@ -477,19 +586,30 @@ impl<'a> RouteUpdateTunnelRoutePatchRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<TunnelRouteResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Update a tunnel route
+///
+/// Updates an existing private network route in an account. The fields that are meant to be updated should be provided in the body of the request.
+///
+/// **HTTP Method:** `PATCH`
+/// **Path:** `/accounts/{account_id}/teamnet/routes/{route_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `route_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::tunnel_routing };
+/// use cloudflare::{ ApiClient, apis::tunnel_routing };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = route_update_tunnel_route_patch(&api)
-///     .with_account_id("value")
-///     .with_route_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = route_update_tunnel_route_patch(&api)
+///     .with_account_id("account_id")
+///     .with_route_id("route_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```

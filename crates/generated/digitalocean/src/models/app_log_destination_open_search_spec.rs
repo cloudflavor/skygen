@@ -19,7 +19,6 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct AppLogDestinationOpenSearchSpec {
-
     pub basic_auth: Option<crate::models::app_log_destination_open_search_spec_basic_auth::AppLogDestinationOpenSearchSpecBasicAuth>,
     pub cluster_name: Option<String>,
     pub endpoint: Option<String>,

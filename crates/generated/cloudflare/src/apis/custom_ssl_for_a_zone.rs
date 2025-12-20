@@ -15,12 +15,15 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::tls_certificates_and_hostnames_certificate_response_collection::TlsCertificatesAndHostnamesCertificateResponseCollection;
+use crate::models::tls_certificates_and_hostnames_certificate_response_id_only::TlsCertificatesAndHostnamesCertificateResponseIdOnly;
+use crate::models::tls_certificates_and_hostnames_certificate_response_single::TlsCertificatesAndHostnamesCertificateResponseSingle;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct ListSslConfigurationsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, TlsCertificatesAndHostnamesCertificateResponseCollection>,
 }
 
 impl<'a> ListSslConfigurationsRequest<'a> {
@@ -51,18 +54,34 @@ impl<'a> ListSslConfigurationsRequest<'a> {
         self.builder = self.builder.header_param("status", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<TlsCertificatesAndHostnamesCertificateResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// List SSL Configurations
+///
+/// List, search, and filter all of your custom SSL certificates. The higher priority will break ties across overlapping 'legacy_custom' certificates, but 'legacy_custom' certificates will always supercede 'sni_custom' certificates.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/custom_certificates`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `page` (query,optional)
+/// - `per_page` (query,optional)
+/// - `match` (query,optional)
+/// - `status` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::custom_ssl_for_a_zone };
+/// use cloudflare::{ ApiClient, apis::custom_ssl_for_a_zone };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_ssl_configurations(&api)
-///     .with_zone_id("value")
+/// let response = list_ssl_configurations(&api)
+///     .with_zone_id("zone_id")
+///     .with_page("page")
+///     .with_per_page("per_page")
+///     .with_match_param("match")
+///     .with_status("status")
 ///     .send()
 ///     .await?;
 /// ```
@@ -72,7 +91,7 @@ pub fn list_ssl_configurations(api: &ApiClient) -> ListSslConfigurationsRequest<
 
 #[derive(Debug)]
 pub struct CreateSslConfigurationRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, TlsCertificatesAndHostnamesCertificateResponseSingle>,
 }
 
 impl<'a> CreateSslConfigurationRequest<'a> {
@@ -95,18 +114,28 @@ impl<'a> CreateSslConfigurationRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<TlsCertificatesAndHostnamesCertificateResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Create SSL Configuration
+///
+/// Upload a new SSL certificate for a zone.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/zones/{zone_id}/custom_certificates`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::custom_ssl_for_a_zone };
+/// use cloudflare::{ ApiClient, apis::custom_ssl_for_a_zone };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = create_ssl_configuration(&api)
-///     .with_zone_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = create_ssl_configuration(&api)
+///     .with_zone_id("zone_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -116,7 +145,7 @@ pub fn create_ssl_configuration(api: &ApiClient) -> CreateSslConfigurationReques
 
 #[derive(Debug)]
 pub struct RePrioritizeSslCertificatesRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, TlsCertificatesAndHostnamesCertificateResponseCollection>,
 }
 
 impl<'a> RePrioritizeSslCertificatesRequest<'a> {
@@ -139,18 +168,28 @@ impl<'a> RePrioritizeSslCertificatesRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<TlsCertificatesAndHostnamesCertificateResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// Re-prioritize SSL Certificates
+///
+/// If a zone has multiple SSL certificates, you can set the order in which they should be used during a request. The higher priority will break ties across overlapping 'legacy_custom' certificates.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/zones/{zone_id}/custom_certificates/prioritize`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::custom_ssl_for_a_zone };
+/// use cloudflare::{ ApiClient, apis::custom_ssl_for_a_zone };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = re_prioritize_ssl_certificates(&api)
-///     .with_zone_id("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = re_prioritize_ssl_certificates(&api)
+///     .with_zone_id("zone_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -160,7 +199,7 @@ pub fn re_prioritize_ssl_certificates(api: &ApiClient) -> RePrioritizeSslCertifi
 
 #[derive(Debug)]
 pub struct ConfigurationDetailsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, TlsCertificatesAndHostnamesCertificateResponseSingle>,
 }
 
 impl<'a> ConfigurationDetailsRequest<'a> {
@@ -183,19 +222,26 @@ impl<'a> ConfigurationDetailsRequest<'a> {
         self.builder = self.builder.path_param("custom_certificate_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<TlsCertificatesAndHostnamesCertificateResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// SSL Configuration Details
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/custom_certificates/{custom_certificate_id}`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `custom_certificate_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::custom_ssl_for_a_zone };
+/// use cloudflare::{ ApiClient, apis::custom_ssl_for_a_zone };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = configuration_details(&api)
-///     .with_zone_id("value")
-///     .with_custom_certificate_id("value")
+/// let response = configuration_details(&api)
+///     .with_zone_id("zone_id")
+///     .with_custom_certificate_id("custom_certificate_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -205,7 +251,7 @@ pub fn configuration_details(api: &ApiClient) -> ConfigurationDetailsRequest<'_>
 
 #[derive(Debug)]
 pub struct DeleteSslConfigurationRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, TlsCertificatesAndHostnamesCertificateResponseIdOnly>,
 }
 
 impl<'a> DeleteSslConfigurationRequest<'a> {
@@ -228,19 +274,28 @@ impl<'a> DeleteSslConfigurationRequest<'a> {
         self.builder = self.builder.path_param("custom_certificate_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<TlsCertificatesAndHostnamesCertificateResponseIdOnly> {
         self.builder.send().await
     }
 }
-
 /// Delete SSL Configuration
+///
+/// Remove a SSL certificate from a zone.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/zones/{zone_id}/custom_certificates/{custom_certificate_id}`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `custom_certificate_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::custom_ssl_for_a_zone };
+/// use cloudflare::{ ApiClient, apis::custom_ssl_for_a_zone };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete_ssl_configuration(&api)
-///     .with_zone_id("value")
-///     .with_custom_certificate_id("value")
+/// let response = delete_ssl_configuration(&api)
+///     .with_zone_id("zone_id")
+///     .with_custom_certificate_id("custom_certificate_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -250,7 +305,7 @@ pub fn delete_ssl_configuration(api: &ApiClient) -> DeleteSslConfigurationReques
 
 #[derive(Debug)]
 pub struct EditSslConfigurationRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, TlsCertificatesAndHostnamesCertificateResponseSingle>,
 }
 
 impl<'a> EditSslConfigurationRequest<'a> {
@@ -281,19 +336,30 @@ impl<'a> EditSslConfigurationRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<TlsCertificatesAndHostnamesCertificateResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Edit SSL Configuration
+///
+/// Upload a new private key and/or PEM/CRT for the SSL certificate. Note: PATCHing a configuration for sni_custom certificates will result in a new resource id being returned, and the previous one being deleted.
+///
+/// **HTTP Method:** `PATCH`
+/// **Path:** `/zones/{zone_id}/custom_certificates/{custom_certificate_id}`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `custom_certificate_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::custom_ssl_for_a_zone };
+/// use cloudflare::{ ApiClient, apis::custom_ssl_for_a_zone };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = edit_ssl_configuration(&api)
-///     .with_zone_id("value")
-///     .with_custom_certificate_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = edit_ssl_configuration(&api)
+///     .with_zone_id("zone_id")
+///     .with_custom_certificate_id("custom_certificate_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```

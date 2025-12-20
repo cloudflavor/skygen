@@ -15,12 +15,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::tunnel_zero_trust_connectivity_settings_response::TunnelZeroTrustConnectivitySettingsResponse;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct GetConnectivitySettingsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, TunnelZeroTrustConnectivitySettingsResponse>,
 }
 
 impl<'a> GetConnectivitySettingsRequest<'a> {
@@ -38,18 +39,26 @@ impl<'a> GetConnectivitySettingsRequest<'a> {
         self.builder = self.builder.path_param("account_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<TunnelZeroTrustConnectivitySettingsResponse> {
         self.builder.send().await
     }
 }
-
 /// Get Zero Trust Connectivity Settings
+///
+/// Gets the Zero Trust Connectivity Settings for the given account.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/zerotrust/connectivity_settings`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zero_trust_connectivity_settings };
+/// use cloudflare::{ ApiClient, apis::zero_trust_connectivity_settings };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_connectivity_settings(&api)
-///     .with_account_id("value")
+/// let response = get_connectivity_settings(&api)
+///     .with_account_id("account_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -59,7 +68,7 @@ pub fn get_connectivity_settings(api: &ApiClient) -> GetConnectivitySettingsRequ
 
 #[derive(Debug)]
 pub struct PatchConnectivitySettingsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, TunnelZeroTrustConnectivitySettingsResponse>,
 }
 
 impl<'a> PatchConnectivitySettingsRequest<'a> {
@@ -85,18 +94,28 @@ impl<'a> PatchConnectivitySettingsRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<TunnelZeroTrustConnectivitySettingsResponse> {
         self.builder.send().await
     }
 }
-
 /// Updates the Zero Trust Connectivity Settings
+///
+/// Updates the Zero Trust Connectivity Settings for the given account.
+///
+/// **HTTP Method:** `PATCH`
+/// **Path:** `/accounts/{account_id}/zerotrust/connectivity_settings`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zero_trust_connectivity_settings };
+/// use cloudflare::{ ApiClient, apis::zero_trust_connectivity_settings };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = patch_connectivity_settings(&api)
-///     .with_account_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = patch_connectivity_settings(&api)
+///     .with_account_id("account_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```

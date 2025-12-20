@@ -15,12 +15,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::magic_visibility_mnm_mnm_config_single_response::MagicVisibilityMnmMnmConfigSingleResponse;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct ListConfigurationRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, MagicVisibilityMnmMnmConfigSingleResponse>,
 }
 
 impl<'a> ListConfigurationRequest<'a> {
@@ -34,18 +35,26 @@ impl<'a> ListConfigurationRequest<'a> {
         self.builder = self.builder.path_param("account_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<MagicVisibilityMnmMnmConfigSingleResponse> {
         self.builder.send().await
     }
 }
-
 /// List account configuration
+///
+/// Lists default sampling, router IPs and warp devices for account.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/mnm/config`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::magic_network_monitoring_configuration };
+/// use cloudflare::{ ApiClient, apis::magic_network_monitoring_configuration };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_configuration(&api)
-///     .with_account_id("value")
+/// let response = list_configuration(&api)
+///     .with_account_id("account_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -55,7 +64,7 @@ pub fn list_configuration(api: &ApiClient) -> ListConfigurationRequest<'_> {
 
 #[derive(Debug)]
 pub struct CreateConfigurationRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, MagicVisibilityMnmMnmConfigSingleResponse>,
 }
 
 impl<'a> CreateConfigurationRequest<'a> {
@@ -77,18 +86,28 @@ impl<'a> CreateConfigurationRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<MagicVisibilityMnmMnmConfigSingleResponse> {
         self.builder.send().await
     }
 }
-
 /// Create account configuration
+///
+/// Create a new network monitoring configuration.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/mnm/config`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::magic_network_monitoring_configuration };
+/// use cloudflare::{ ApiClient, apis::magic_network_monitoring_configuration };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = create_configuration(&api)
-///     .with_account_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = create_configuration(&api)
+///     .with_account_id("account_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -98,7 +117,7 @@ pub fn create_configuration(api: &ApiClient) -> CreateConfigurationRequest<'_> {
 
 #[derive(Debug)]
 pub struct UpdateEntireConfigurationRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, MagicVisibilityMnmMnmConfigSingleResponse>,
 }
 
 impl<'a> UpdateEntireConfigurationRequest<'a> {
@@ -120,18 +139,28 @@ impl<'a> UpdateEntireConfigurationRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<MagicVisibilityMnmMnmConfigSingleResponse> {
         self.builder.send().await
     }
 }
-
 /// Update an entire account configuration
+///
+/// Update an existing network monitoring configuration, requires the entire configuration to be updated at once.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/accounts/{account_id}/mnm/config`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::magic_network_monitoring_configuration };
+/// use cloudflare::{ ApiClient, apis::magic_network_monitoring_configuration };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = update_entire_configuration(&api)
-///     .with_account_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = update_entire_configuration(&api)
+///     .with_account_id("account_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -141,7 +170,7 @@ pub fn update_entire_configuration(api: &ApiClient) -> UpdateEntireConfiguration
 
 #[derive(Debug)]
 pub struct DeleteConfigurationRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, MagicVisibilityMnmMnmConfigSingleResponse>,
 }
 
 impl<'a> DeleteConfigurationRequest<'a> {
@@ -156,18 +185,26 @@ impl<'a> DeleteConfigurationRequest<'a> {
         self.builder = self.builder.path_param("account_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<MagicVisibilityMnmMnmConfigSingleResponse> {
         self.builder.send().await
     }
 }
-
 /// Delete account configuration
+///
+/// Delete an existing network monitoring configuration.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/accounts/{account_id}/mnm/config`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::magic_network_monitoring_configuration };
+/// use cloudflare::{ ApiClient, apis::magic_network_monitoring_configuration };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete_configuration(&api)
-///     .with_account_id("value")
+/// let response = delete_configuration(&api)
+///     .with_account_id("account_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -177,7 +214,7 @@ pub fn delete_configuration(api: &ApiClient) -> DeleteConfigurationRequest<'_> {
 
 #[derive(Debug)]
 pub struct UpdateConfigurationFieldsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, MagicVisibilityMnmMnmConfigSingleResponse>,
 }
 
 impl<'a> UpdateConfigurationFieldsRequest<'a> {
@@ -200,18 +237,28 @@ impl<'a> UpdateConfigurationFieldsRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<MagicVisibilityMnmMnmConfigSingleResponse> {
         self.builder.send().await
     }
 }
-
 /// Update account configuration fields
+///
+/// Update fields in an existing network monitoring configuration.
+///
+/// **HTTP Method:** `PATCH`
+/// **Path:** `/accounts/{account_id}/mnm/config`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::magic_network_monitoring_configuration };
+/// use cloudflare::{ ApiClient, apis::magic_network_monitoring_configuration };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = update_configuration_fields(&api)
-///     .with_account_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = update_configuration_fields(&api)
+///     .with_account_id("account_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -221,7 +268,7 @@ pub fn update_configuration_fields(api: &ApiClient) -> UpdateConfigurationFields
 
 #[derive(Debug)]
 pub struct ListRulesConfigurationRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, MagicVisibilityMnmMnmConfigSingleResponse>,
 }
 
 impl<'a> ListRulesConfigurationRequest<'a> {
@@ -236,18 +283,26 @@ impl<'a> ListRulesConfigurationRequest<'a> {
         self.builder = self.builder.path_param("account_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<MagicVisibilityMnmMnmConfigSingleResponse> {
         self.builder.send().await
     }
 }
-
 /// List rules and account configuration
+///
+/// Lists default sampling, router IPs, warp devices, and rules for account.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/mnm/config/full`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::magic_network_monitoring_configuration };
+/// use cloudflare::{ ApiClient, apis::magic_network_monitoring_configuration };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_rules_configuration(&api)
-///     .with_account_id("value")
+/// let response = list_rules_configuration(&api)
+///     .with_account_id("account_id")
 ///     .send()
 ///     .await?;
 /// ```

@@ -19,6 +19,6 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct TlsCertificatesAndHostnamesKeylessTunnel {
-    pub private_ip: serde_json::Value,
-    pub vnet_id: serde_json::Value,
+    pub private_ip: crate::models::tls_certificates_and_hostnames_keyless_private_ip::TlsCertificatesAndHostnamesKeylessPrivateIp,
+    pub vnet_id: crate::models::tls_certificates_and_hostnames_keyless_vnet_id::TlsCertificatesAndHostnamesKeylessVnetId,
 }

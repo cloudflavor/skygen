@@ -19,7 +19,8 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct McnCatalogSyncsPrebuiltPolicy {
-    pub applicable_destinations: Vec<serde_json::Value>,
+    pub applicable_destinations:
+        Vec<crate::models::mcn_catalog_sync_destination_type::McnCatalogSyncDestinationType>,
     pub policy_description: String,
     pub policy_name: String,
     pub policy_string: String,

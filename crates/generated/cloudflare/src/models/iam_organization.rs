@@ -19,9 +19,9 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct IamOrganization {
-    pub id: Option<serde_json::Value>,
-    pub name: Option<serde_json::Value>,
-    pub permissions: Option<serde_json::Value>,
+    pub id: Option<crate::models::iam_common_components_schemas_identifier::IamCommonComponentsSchemasIdentifier>,
+    pub name: Option<crate::models::iam_schemas_name::IamSchemasName>,
+    pub permissions: Option<crate::models::iam_schemas_permissions::IamSchemasPermissions>,
     pub roles: Option<Vec<String>>,
-    pub status: Option<serde_json::Value>,
+    pub status: Option<crate::models::iam_components_schemas_status::IamComponentsSchemasStatus>,
 }

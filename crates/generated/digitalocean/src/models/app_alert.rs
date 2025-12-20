@@ -20,9 +20,9 @@ use serde::{Deserialize, Serialize};
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct AppAlert {
     pub component_name: Option<String>,
-    pub emails: Option<Vec<serde_json::Value>>,
+    pub emails: Option<Vec<crate::models::app_alert_email::AppAlertEmail>>,
     pub id: Option<String>,
-    pub phase: Option<serde_json::Value>,
+    pub phase: Option<crate::models::app_alert_phase::AppAlertPhase>,
     pub progress: Option<crate::models::app_alert_progress::AppAlertProgress>,
     pub slack_webhooks: Option<Vec<crate::models::app_alert_slack_webhook::AppAlertSlackWebhook>>,
     pub spec: Option<crate::models::app_alert_spec::AppAlertSpec>,

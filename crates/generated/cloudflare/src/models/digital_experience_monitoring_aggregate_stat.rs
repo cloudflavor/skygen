@@ -19,7 +19,6 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct DigitalExperienceMonitoringAggregateStat {
-
     pub avg_ms: Option<i64>,
     pub delta_pct: Option<f64>,
     pub time_period: crate::models::digital_experience_monitoring_aggregate_time_period::DigitalExperienceMonitoringAggregateTimePeriod,

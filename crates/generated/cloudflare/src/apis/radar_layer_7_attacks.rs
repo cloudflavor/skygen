@@ -82,13 +82,44 @@ impl<'a> GetAttacksLayer7SummaryRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get layer 7 attacks by HTTP method summary
+///
+/// Retrieves the distribution of layer 7 attacks by HTTP method.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/attacks/layer7/summary/http_method`
+///
+/// **Parameters**
+/// - `name` (query,optional)
+/// - `dateRange` (query,optional)
+/// - `dateStart` (query,optional)
+/// - `dateEnd` (query,optional)
+/// - `asn` (query,optional)
+/// - `location` (query,optional)
+/// - `continent` (query,optional)
+/// - `ipVersion` (query,optional)
+/// - `httpVersion` (query,optional)
+/// - `mitigationProduct` (query,optional)
+/// - `limitPerGroup` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_layer_7_attacks };
+/// use cloudflare::{ ApiClient, apis::radar_layer_7_attacks };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_attacks_layer7_summary(&api)
+/// let response = get_attacks_layer7_summary(&api)
+///     .with_name("name")
+///     .with_date_range("dateRange")
+///     .with_date_start("dateStart")
+///     .with_date_end("dateEnd")
+///     .with_asn("asn")
+///     .with_location("location")
+///     .with_continent("continent")
+///     .with_ip_version("ipVersion")
+///     .with_http_version("httpVersion")
+///     .with_mitigation_product("mitigationProduct")
+///     .with_limit_per_group("limitPerGroup")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```
@@ -159,13 +190,42 @@ impl<'a> GetAttacksLayer7SummaryGetRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get layer 7 attacks by HTTP version summary
+///
+/// Retrieves the distribution of layer 7 attacks by HTTP version.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/attacks/layer7/summary/http_version`
+///
+/// **Parameters**
+/// - `name` (query,optional)
+/// - `dateRange` (query,optional)
+/// - `dateStart` (query,optional)
+/// - `dateEnd` (query,optional)
+/// - `asn` (query,optional)
+/// - `location` (query,optional)
+/// - `continent` (query,optional)
+/// - `ipVersion` (query,optional)
+/// - `httpMethod` (query,optional)
+/// - `mitigationProduct` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_layer_7_attacks };
+/// use cloudflare::{ ApiClient, apis::radar_layer_7_attacks };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_attacks_layer7_summary_get(&api)
+/// let response = get_attacks_layer7_summary_get(&api)
+///     .with_name("name")
+///     .with_date_range("dateRange")
+///     .with_date_start("dateStart")
+///     .with_date_end("dateEnd")
+///     .with_asn("asn")
+///     .with_location("location")
+///     .with_continent("continent")
+///     .with_ip_version("ipVersion")
+///     .with_http_method("httpMethod")
+///     .with_mitigation_product("mitigationProduct")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```
@@ -241,13 +301,46 @@ impl<'a> GetAttacksLayer7SummaryGet3Request<'a> {
         self.builder.send().await
     }
 }
-
 /// Get layer 7 attacks by targeted industry summary
+///
+/// Retrieves the distribution of layer 7 attacks by targeted industry.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/attacks/layer7/summary/industry`
+///
+/// **Parameters**
+/// - `name` (query,optional)
+/// - `dateRange` (query,optional)
+/// - `dateStart` (query,optional)
+/// - `dateEnd` (query,optional)
+/// - `asn` (query,optional)
+/// - `location` (query,optional)
+/// - `continent` (query,optional)
+/// - `ipVersion` (query,optional)
+/// - `httpVersion` (query,optional)
+/// - `httpMethod` (query,optional)
+/// - `mitigationProduct` (query,optional)
+/// - `limitPerGroup` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_layer_7_attacks };
+/// use cloudflare::{ ApiClient, apis::radar_layer_7_attacks };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_attacks_layer7_summary_get_3(&api)
+/// let response = get_attacks_layer7_summary_get_3(&api)
+///     .with_name("name")
+///     .with_date_range("dateRange")
+///     .with_date_start("dateStart")
+///     .with_date_end("dateEnd")
+///     .with_asn("asn")
+///     .with_location("location")
+///     .with_continent("continent")
+///     .with_ip_version("ipVersion")
+///     .with_http_version("httpVersion")
+///     .with_http_method("httpMethod")
+///     .with_mitigation_product("mitigationProduct")
+///     .with_limit_per_group("limitPerGroup")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```
@@ -315,13 +408,42 @@ impl<'a> GetAttacksLayer7SummaryGet4Request<'a> {
         self.builder.send().await
     }
 }
-
 /// Get layer 7 attacks by IP version summary
+///
+/// Retrieves the distribution of layer 7 attacks by IP version.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/attacks/layer7/summary/ip_version`
+///
+/// **Parameters**
+/// - `name` (query,optional)
+/// - `dateRange` (query,optional)
+/// - `dateStart` (query,optional)
+/// - `dateEnd` (query,optional)
+/// - `asn` (query,optional)
+/// - `location` (query,optional)
+/// - `continent` (query,optional)
+/// - `httpVersion` (query,optional)
+/// - `httpMethod` (query,optional)
+/// - `mitigationProduct` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_layer_7_attacks };
+/// use cloudflare::{ ApiClient, apis::radar_layer_7_attacks };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_attacks_layer7_summary_get_4(&api)
+/// let response = get_attacks_layer7_summary_get_4(&api)
+///     .with_name("name")
+///     .with_date_range("dateRange")
+///     .with_date_start("dateStart")
+///     .with_date_end("dateEnd")
+///     .with_asn("asn")
+///     .with_location("location")
+///     .with_continent("continent")
+///     .with_http_version("httpVersion")
+///     .with_http_method("httpMethod")
+///     .with_mitigation_product("mitigationProduct")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```
@@ -400,13 +522,46 @@ impl<'a> GetAttacksLayer7SummaryGet5Request<'a> {
         self.builder.send().await
     }
 }
-
 /// Get layer 7 attacks by managed rules summary
+///
+/// Retrieves the distribution of layer 7 attacks by managed rules.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/attacks/layer7/summary/managed_rules`
+///
+/// **Parameters**
+/// - `name` (query,optional)
+/// - `dateRange` (query,optional)
+/// - `dateStart` (query,optional)
+/// - `dateEnd` (query,optional)
+/// - `asn` (query,optional)
+/// - `location` (query,optional)
+/// - `continent` (query,optional)
+/// - `ipVersion` (query,optional)
+/// - `httpVersion` (query,optional)
+/// - `httpMethod` (query,optional)
+/// - `mitigationProduct` (query,optional)
+/// - `limitPerGroup` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_layer_7_attacks };
+/// use cloudflare::{ ApiClient, apis::radar_layer_7_attacks };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_attacks_layer7_summary_get_5(&api)
+/// let response = get_attacks_layer7_summary_get_5(&api)
+///     .with_name("name")
+///     .with_date_range("dateRange")
+///     .with_date_start("dateStart")
+///     .with_date_end("dateEnd")
+///     .with_asn("asn")
+///     .with_location("location")
+///     .with_continent("continent")
+///     .with_ip_version("ipVersion")
+///     .with_http_version("httpVersion")
+///     .with_http_method("httpMethod")
+///     .with_mitigation_product("mitigationProduct")
+///     .with_limit_per_group("limitPerGroup")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```
@@ -481,13 +636,44 @@ impl<'a> GetAttacksLayer7SummaryGet6Request<'a> {
         self.builder.send().await
     }
 }
-
 /// Get layer 7 attacks by mitigation product summary
+///
+/// Retrieves the distribution of layer 7 attacks by mitigation product.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/attacks/layer7/summary/mitigation_product`
+///
+/// **Parameters**
+/// - `name` (query,optional)
+/// - `dateRange` (query,optional)
+/// - `dateStart` (query,optional)
+/// - `dateEnd` (query,optional)
+/// - `asn` (query,optional)
+/// - `location` (query,optional)
+/// - `continent` (query,optional)
+/// - `ipVersion` (query,optional)
+/// - `httpVersion` (query,optional)
+/// - `httpMethod` (query,optional)
+/// - `limitPerGroup` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_layer_7_attacks };
+/// use cloudflare::{ ApiClient, apis::radar_layer_7_attacks };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_attacks_layer7_summary_get_6(&api)
+/// let response = get_attacks_layer7_summary_get_6(&api)
+///     .with_name("name")
+///     .with_date_range("dateRange")
+///     .with_date_start("dateStart")
+///     .with_date_end("dateEnd")
+///     .with_asn("asn")
+///     .with_location("location")
+///     .with_continent("continent")
+///     .with_ip_version("ipVersion")
+///     .with_http_version("httpVersion")
+///     .with_http_method("httpMethod")
+///     .with_limit_per_group("limitPerGroup")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```
@@ -563,13 +749,46 @@ impl<'a> GetAttacksLayer7SummaryGet7Request<'a> {
         self.builder.send().await
     }
 }
-
 /// Get layer 7 attacks by targeted vertical summary
+///
+/// Retrieves the distribution of layer 7 attacks by targeted vertical.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/attacks/layer7/summary/vertical`
+///
+/// **Parameters**
+/// - `name` (query,optional)
+/// - `dateRange` (query,optional)
+/// - `dateStart` (query,optional)
+/// - `dateEnd` (query,optional)
+/// - `asn` (query,optional)
+/// - `location` (query,optional)
+/// - `continent` (query,optional)
+/// - `ipVersion` (query,optional)
+/// - `httpVersion` (query,optional)
+/// - `httpMethod` (query,optional)
+/// - `mitigationProduct` (query,optional)
+/// - `limitPerGroup` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_layer_7_attacks };
+/// use cloudflare::{ ApiClient, apis::radar_layer_7_attacks };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_attacks_layer7_summary_get_7(&api)
+/// let response = get_attacks_layer7_summary_get_7(&api)
+///     .with_name("name")
+///     .with_date_range("dateRange")
+///     .with_date_start("dateStart")
+///     .with_date_end("dateEnd")
+///     .with_asn("asn")
+///     .with_location("location")
+///     .with_continent("continent")
+///     .with_ip_version("ipVersion")
+///     .with_http_version("httpVersion")
+///     .with_http_method("httpMethod")
+///     .with_mitigation_product("mitigationProduct")
+///     .with_limit_per_group("limitPerGroup")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```
@@ -648,13 +867,48 @@ impl<'a> GetAttacksLayer7TimeseriesRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get layer 7 attacks time series
+///
+/// Retrieves layer 7 attacks over time.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/attacks/layer7/timeseries`
+///
+/// **Parameters**
+/// - `aggInterval` (query,optional)
+/// - `name` (query,optional)
+/// - `dateRange` (query,optional)
+/// - `dateStart` (query,optional)
+/// - `dateEnd` (query,optional)
+/// - `asn` (query,optional)
+/// - `location` (query,optional)
+/// - `continent` (query,optional)
+/// - `normalization` (query,optional)
+/// - `ipVersion` (query,optional)
+/// - `httpVersion` (query,optional)
+/// - `httpMethod` (query,optional)
+/// - `mitigationProduct` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_layer_7_attacks };
+/// use cloudflare::{ ApiClient, apis::radar_layer_7_attacks };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_attacks_layer7_timeseries(&api)
+/// let response = get_attacks_layer7_timeseries(&api)
+///     .with_agg_interval("aggInterval")
+///     .with_name("name")
+///     .with_date_range("dateRange")
+///     .with_date_start("dateStart")
+///     .with_date_end("dateEnd")
+///     .with_asn("asn")
+///     .with_location("location")
+///     .with_continent("continent")
+///     .with_normalization("normalization")
+///     .with_ip_version("ipVersion")
+///     .with_http_version("httpVersion")
+///     .with_http_method("httpMethod")
+///     .with_mitigation_product("mitigationProduct")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```
@@ -737,13 +991,48 @@ impl<'a> GetAttacksLayer7TimeseriesGetRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get layer 7 attacks by HTTP method time series
+///
+/// Retrieves the distribution of layer 7 attacks by HTTP method over time.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/attacks/layer7/timeseries_groups/http_method`
+///
+/// **Parameters**
+/// - `aggInterval` (query,optional)
+/// - `name` (query,optional)
+/// - `dateRange` (query,optional)
+/// - `dateStart` (query,optional)
+/// - `dateEnd` (query,optional)
+/// - `asn` (query,optional)
+/// - `location` (query,optional)
+/// - `continent` (query,optional)
+/// - `ipVersion` (query,optional)
+/// - `httpVersion` (query,optional)
+/// - `mitigationProduct` (query,optional)
+/// - `normalization` (query,optional)
+/// - `limitPerGroup` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_layer_7_attacks };
+/// use cloudflare::{ ApiClient, apis::radar_layer_7_attacks };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_attacks_layer7_timeseries_get(&api)
+/// let response = get_attacks_layer7_timeseries_get(&api)
+///     .with_agg_interval("aggInterval")
+///     .with_name("name")
+///     .with_date_range("dateRange")
+///     .with_date_start("dateStart")
+///     .with_date_end("dateEnd")
+///     .with_asn("asn")
+///     .with_location("location")
+///     .with_continent("continent")
+///     .with_ip_version("ipVersion")
+///     .with_http_version("httpVersion")
+///     .with_mitigation_product("mitigationProduct")
+///     .with_normalization("normalization")
+///     .with_limit_per_group("limitPerGroup")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```
@@ -824,13 +1113,46 @@ impl<'a> GetAttacksLayer7TimeseriesGet3Request<'a> {
         self.builder.send().await
     }
 }
-
 /// Get layer 7 attacks by HTTP version time series
+///
+/// Retrieves the distribution of layer 7 attacks by HTTP version over time.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/attacks/layer7/timeseries_groups/http_version`
+///
+/// **Parameters**
+/// - `aggInterval` (query,optional)
+/// - `name` (query,optional)
+/// - `dateRange` (query,optional)
+/// - `dateStart` (query,optional)
+/// - `dateEnd` (query,optional)
+/// - `asn` (query,optional)
+/// - `location` (query,optional)
+/// - `continent` (query,optional)
+/// - `ipVersion` (query,optional)
+/// - `httpMethod` (query,optional)
+/// - `mitigationProduct` (query,optional)
+/// - `normalization` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_layer_7_attacks };
+/// use cloudflare::{ ApiClient, apis::radar_layer_7_attacks };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_attacks_layer7_timeseries_get_3(&api)
+/// let response = get_attacks_layer7_timeseries_get_3(&api)
+///     .with_agg_interval("aggInterval")
+///     .with_name("name")
+///     .with_date_range("dateRange")
+///     .with_date_start("dateStart")
+///     .with_date_end("dateEnd")
+///     .with_asn("asn")
+///     .with_location("location")
+///     .with_continent("continent")
+///     .with_ip_version("ipVersion")
+///     .with_http_method("httpMethod")
+///     .with_mitigation_product("mitigationProduct")
+///     .with_normalization("normalization")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```
@@ -919,13 +1241,50 @@ impl<'a> GetAttacksLayer7TimeseriesGet4Request<'a> {
         self.builder.send().await
     }
 }
-
 /// Get layer 7 attacks by target industries time series
+///
+/// Retrieves the distribution of layer 7 attacks by targeted industry over time.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/attacks/layer7/timeseries_groups/industry`
+///
+/// **Parameters**
+/// - `aggInterval` (query,optional)
+/// - `name` (query,optional)
+/// - `dateRange` (query,optional)
+/// - `dateStart` (query,optional)
+/// - `dateEnd` (query,optional)
+/// - `asn` (query,optional)
+/// - `location` (query,optional)
+/// - `continent` (query,optional)
+/// - `ipVersion` (query,optional)
+/// - `httpVersion` (query,optional)
+/// - `httpMethod` (query,optional)
+/// - `mitigationProduct` (query,optional)
+/// - `normalization` (query,optional)
+/// - `limitPerGroup` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_layer_7_attacks };
+/// use cloudflare::{ ApiClient, apis::radar_layer_7_attacks };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_attacks_layer7_timeseries_get_4(&api)
+/// let response = get_attacks_layer7_timeseries_get_4(&api)
+///     .with_agg_interval("aggInterval")
+///     .with_name("name")
+///     .with_date_range("dateRange")
+///     .with_date_start("dateStart")
+///     .with_date_end("dateEnd")
+///     .with_asn("asn")
+///     .with_location("location")
+///     .with_continent("continent")
+///     .with_ip_version("ipVersion")
+///     .with_http_version("httpVersion")
+///     .with_http_method("httpMethod")
+///     .with_mitigation_product("mitigationProduct")
+///     .with_normalization("normalization")
+///     .with_limit_per_group("limitPerGroup")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```
@@ -1006,13 +1365,46 @@ impl<'a> GetAttacksLayer7TimeseriesGet5Request<'a> {
         self.builder.send().await
     }
 }
-
 /// Get layer 7 attacks by IP version time series
+///
+/// Retrieves the distribution of layer 7 attacks by IP version used over time.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/attacks/layer7/timeseries_groups/ip_version`
+///
+/// **Parameters**
+/// - `aggInterval` (query,optional)
+/// - `name` (query,optional)
+/// - `dateRange` (query,optional)
+/// - `dateStart` (query,optional)
+/// - `dateEnd` (query,optional)
+/// - `asn` (query,optional)
+/// - `location` (query,optional)
+/// - `continent` (query,optional)
+/// - `httpVersion` (query,optional)
+/// - `httpMethod` (query,optional)
+/// - `mitigationProduct` (query,optional)
+/// - `normalization` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_layer_7_attacks };
+/// use cloudflare::{ ApiClient, apis::radar_layer_7_attacks };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_attacks_layer7_timeseries_get_5(&api)
+/// let response = get_attacks_layer7_timeseries_get_5(&api)
+///     .with_agg_interval("aggInterval")
+///     .with_name("name")
+///     .with_date_range("dateRange")
+///     .with_date_start("dateStart")
+///     .with_date_end("dateEnd")
+///     .with_asn("asn")
+///     .with_location("location")
+///     .with_continent("continent")
+///     .with_http_version("httpVersion")
+///     .with_http_method("httpMethod")
+///     .with_mitigation_product("mitigationProduct")
+///     .with_normalization("normalization")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```
@@ -1101,13 +1493,50 @@ impl<'a> GetAttacksLayer7TimeseriesGet6Request<'a> {
         self.builder.send().await
     }
 }
-
 /// Get layer 7 attacks by managed rules time series
+///
+/// Retrieves the distribution of layer 7 attacks by managed rules over time.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/attacks/layer7/timeseries_groups/managed_rules`
+///
+/// **Parameters**
+/// - `aggInterval` (query,optional)
+/// - `name` (query,optional)
+/// - `dateRange` (query,optional)
+/// - `dateStart` (query,optional)
+/// - `dateEnd` (query,optional)
+/// - `asn` (query,optional)
+/// - `location` (query,optional)
+/// - `continent` (query,optional)
+/// - `ipVersion` (query,optional)
+/// - `httpVersion` (query,optional)
+/// - `httpMethod` (query,optional)
+/// - `mitigationProduct` (query,optional)
+/// - `normalization` (query,optional)
+/// - `limitPerGroup` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_layer_7_attacks };
+/// use cloudflare::{ ApiClient, apis::radar_layer_7_attacks };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_attacks_layer7_timeseries_get_6(&api)
+/// let response = get_attacks_layer7_timeseries_get_6(&api)
+///     .with_agg_interval("aggInterval")
+///     .with_name("name")
+///     .with_date_range("dateRange")
+///     .with_date_start("dateStart")
+///     .with_date_end("dateEnd")
+///     .with_asn("asn")
+///     .with_location("location")
+///     .with_continent("continent")
+///     .with_ip_version("ipVersion")
+///     .with_http_version("httpVersion")
+///     .with_http_method("httpMethod")
+///     .with_mitigation_product("mitigationProduct")
+///     .with_normalization("normalization")
+///     .with_limit_per_group("limitPerGroup")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```
@@ -1192,13 +1621,48 @@ impl<'a> GetAttacksLayer7TimeseriesGet7Request<'a> {
         self.builder.send().await
     }
 }
-
 /// Get layer 7 attacks by mitigation product time series
+///
+/// Retrieves the distribution of layer 7 attacks by mitigation product over time.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/attacks/layer7/timeseries_groups/mitigation_product`
+///
+/// **Parameters**
+/// - `aggInterval` (query,optional)
+/// - `name` (query,optional)
+/// - `dateRange` (query,optional)
+/// - `dateStart` (query,optional)
+/// - `dateEnd` (query,optional)
+/// - `asn` (query,optional)
+/// - `location` (query,optional)
+/// - `continent` (query,optional)
+/// - `ipVersion` (query,optional)
+/// - `httpVersion` (query,optional)
+/// - `httpMethod` (query,optional)
+/// - `normalization` (query,optional)
+/// - `limitPerGroup` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_layer_7_attacks };
+/// use cloudflare::{ ApiClient, apis::radar_layer_7_attacks };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_attacks_layer7_timeseries_get_7(&api)
+/// let response = get_attacks_layer7_timeseries_get_7(&api)
+///     .with_agg_interval("aggInterval")
+///     .with_name("name")
+///     .with_date_range("dateRange")
+///     .with_date_start("dateStart")
+///     .with_date_end("dateEnd")
+///     .with_asn("asn")
+///     .with_location("location")
+///     .with_continent("continent")
+///     .with_ip_version("ipVersion")
+///     .with_http_version("httpVersion")
+///     .with_http_method("httpMethod")
+///     .with_normalization("normalization")
+///     .with_limit_per_group("limitPerGroup")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```
@@ -1287,13 +1751,50 @@ impl<'a> GetAttacksLayer7TimeseriesGet8Request<'a> {
         self.builder.send().await
     }
 }
-
 /// Get layer 7 attacks by vertical time series
+///
+/// Retrieves the distribution of layer 7 attacks by targeted vertical over time.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/attacks/layer7/timeseries_groups/vertical`
+///
+/// **Parameters**
+/// - `aggInterval` (query,optional)
+/// - `name` (query,optional)
+/// - `dateRange` (query,optional)
+/// - `dateStart` (query,optional)
+/// - `dateEnd` (query,optional)
+/// - `asn` (query,optional)
+/// - `location` (query,optional)
+/// - `continent` (query,optional)
+/// - `ipVersion` (query,optional)
+/// - `httpVersion` (query,optional)
+/// - `httpMethod` (query,optional)
+/// - `mitigationProduct` (query,optional)
+/// - `normalization` (query,optional)
+/// - `limitPerGroup` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_layer_7_attacks };
+/// use cloudflare::{ ApiClient, apis::radar_layer_7_attacks };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_attacks_layer7_timeseries_get_8(&api)
+/// let response = get_attacks_layer7_timeseries_get_8(&api)
+///     .with_agg_interval("aggInterval")
+///     .with_name("name")
+///     .with_date_range("dateRange")
+///     .with_date_start("dateStart")
+///     .with_date_end("dateEnd")
+///     .with_asn("asn")
+///     .with_location("location")
+///     .with_continent("continent")
+///     .with_ip_version("ipVersion")
+///     .with_http_version("httpVersion")
+///     .with_http_method("httpMethod")
+///     .with_mitigation_product("mitigationProduct")
+///     .with_normalization("normalization")
+///     .with_limit_per_group("limitPerGroup")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```
@@ -1367,13 +1868,44 @@ impl<'a> GetAttacksLayer7TopRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get top origin ASes of layer 7 attacks
+///
+/// Retrieves the top origin autonomous systems of layer 7 attacks. Values are percentages of the total layer 7 attacks, with the origin autonomous systems determined by the client IP address.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/attacks/layer7/top/ases/origin`
+///
+/// **Parameters**
+/// - `limit` (query,optional)
+/// - `name` (query,optional)
+/// - `dateRange` (query,optional)
+/// - `dateStart` (query,optional)
+/// - `dateEnd` (query,optional)
+/// - `location` (query,optional)
+/// - `continent` (query,optional)
+/// - `ipVersion` (query,optional)
+/// - `httpVersion` (query,optional)
+/// - `httpMethod` (query,optional)
+/// - `mitigationProduct` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_layer_7_attacks };
+/// use cloudflare::{ ApiClient, apis::radar_layer_7_attacks };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_attacks_layer7_top(&api)
+/// let response = get_attacks_layer7_top(&api)
+///     .with_limit("limit")
+///     .with_name("name")
+///     .with_date_range("dateRange")
+///     .with_date_start("dateStart")
+///     .with_date_end("dateEnd")
+///     .with_location("location")
+///     .with_continent("continent")
+///     .with_ip_version("ipVersion")
+///     .with_http_version("httpVersion")
+///     .with_http_method("httpMethod")
+///     .with_mitigation_product("mitigationProduct")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```
@@ -1452,13 +1984,48 @@ impl<'a> GetAttacksLayer7TopGetRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get top layer 7 attack pairs (origin and target locations)
+///
+/// Retrieves the top attacks from origin to target location. Values are percentages of the total layer 7 attacks (with billing country). The attack magnitude can be defined by the number of mitigated requests or by the number of zones affected. You can optionally limit the number of attacks by origin/target location (useful if all the top attacks are from or to the same location).
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/attacks/layer7/top/attacks`
+///
+/// **Parameters**
+/// - `limit` (query,optional)
+/// - `name` (query,optional)
+/// - `dateRange` (query,optional)
+/// - `dateStart` (query,optional)
+/// - `dateEnd` (query,optional)
+/// - `asn` (query,optional)
+/// - `location` (query,optional)
+/// - `continent` (query,optional)
+/// - `mitigationProduct` (query,optional)
+/// - `limitDirection` (query,optional)
+/// - `limitPerLocation` (query,optional)
+/// - `magnitude` (query,optional)
+/// - `normalization` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_layer_7_attacks };
+/// use cloudflare::{ ApiClient, apis::radar_layer_7_attacks };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_attacks_layer7_top_get(&api)
+/// let response = get_attacks_layer7_top_get(&api)
+///     .with_limit("limit")
+///     .with_name("name")
+///     .with_date_range("dateRange")
+///     .with_date_start("dateStart")
+///     .with_date_end("dateEnd")
+///     .with_asn("asn")
+///     .with_location("location")
+///     .with_continent("continent")
+///     .with_mitigation_product("mitigationProduct")
+///     .with_limit_direction("limitDirection")
+///     .with_limit_per_location("limitPerLocation")
+///     .with_magnitude("magnitude")
+///     .with_normalization("normalization")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```
@@ -1533,13 +2100,46 @@ impl<'a> GetAttacksLayer7TopGet3Request<'a> {
         self.builder.send().await
     }
 }
-
 /// Get top industries targeted by layer 7 attacks
+///
+/// This endpoint is deprecated. To continue getting this data, switch to the summary by industry endpoint.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/attacks/layer7/top/industry`
+///
+/// **Parameters**
+/// - `limit` (query,optional)
+/// - `name` (query,optional)
+/// - `dateRange` (query,optional)
+/// - `dateStart` (query,optional)
+/// - `dateEnd` (query,optional)
+/// - `asn` (query,optional)
+/// - `location` (query,optional)
+/// - `continent` (query,optional)
+/// - `ipVersion` (query,optional)
+/// - `httpVersion` (query,optional)
+/// - `httpMethod` (query,optional)
+/// - `mitigationProduct` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_layer_7_attacks };
+/// use cloudflare::{ ApiClient, apis::radar_layer_7_attacks };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_attacks_layer7_top_get_3(&api)
+/// let response = get_attacks_layer7_top_get_3(&api)
+///     .with_limit("limit")
+///     .with_name("name")
+///     .with_date_range("dateRange")
+///     .with_date_start("dateStart")
+///     .with_date_end("dateEnd")
+///     .with_asn("asn")
+///     .with_location("location")
+///     .with_continent("continent")
+///     .with_ip_version("ipVersion")
+///     .with_http_version("httpVersion")
+///     .with_http_method("httpMethod")
+///     .with_mitigation_product("mitigationProduct")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```
@@ -1614,13 +2214,44 @@ impl<'a> GetAttacksLayer7TopGet4Request<'a> {
         self.builder.send().await
     }
 }
-
 /// Get top origin locations of layer 7 attacks
+///
+/// Retrieves the top origin locations of layer 7 attacks. Values are percentages of the total layer 7 attacks, with the origin location determined by the client IP address.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/attacks/layer7/top/locations/origin`
+///
+/// **Parameters**
+/// - `limit` (query,optional)
+/// - `name` (query,optional)
+/// - `dateRange` (query,optional)
+/// - `dateStart` (query,optional)
+/// - `dateEnd` (query,optional)
+/// - `asn` (query,optional)
+/// - `continent` (query,optional)
+/// - `ipVersion` (query,optional)
+/// - `httpVersion` (query,optional)
+/// - `httpMethod` (query,optional)
+/// - `mitigationProduct` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_layer_7_attacks };
+/// use cloudflare::{ ApiClient, apis::radar_layer_7_attacks };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_attacks_layer7_top_get_4(&api)
+/// let response = get_attacks_layer7_top_get_4(&api)
+///     .with_limit("limit")
+///     .with_name("name")
+///     .with_date_range("dateRange")
+///     .with_date_start("dateStart")
+///     .with_date_end("dateEnd")
+///     .with_asn("asn")
+///     .with_continent("continent")
+///     .with_ip_version("ipVersion")
+///     .with_http_version("httpVersion")
+///     .with_http_method("httpMethod")
+///     .with_mitigation_product("mitigationProduct")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```
@@ -1679,13 +2310,36 @@ impl<'a> GetAttacksLayer7TopGet5Request<'a> {
         self.builder.send().await
     }
 }
-
 /// Get top target locations of layer 7 attacks
+///
+/// Retrieves the top target locations of and by layer 7 attacks. Values are a percentage out of the total layer 7 attacks. The target location is determined by the attacked zone's billing country, when available.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/attacks/layer7/top/locations/target`
+///
+/// **Parameters**
+/// - `limit` (query,optional)
+/// - `name` (query,optional)
+/// - `dateRange` (query,optional)
+/// - `dateStart` (query,optional)
+/// - `dateEnd` (query,optional)
+/// - `continent` (query,optional)
+/// - `mitigationProduct` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_layer_7_attacks };
+/// use cloudflare::{ ApiClient, apis::radar_layer_7_attacks };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_attacks_layer7_top_get_5(&api)
+/// let response = get_attacks_layer7_top_get_5(&api)
+///     .with_limit("limit")
+///     .with_name("name")
+///     .with_date_range("dateRange")
+///     .with_date_start("dateStart")
+///     .with_date_end("dateEnd")
+///     .with_continent("continent")
+///     .with_mitigation_product("mitigationProduct")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```
@@ -1760,13 +2414,46 @@ impl<'a> GetAttacksLayer7TopGet6Request<'a> {
         self.builder.send().await
     }
 }
-
 /// Get top verticals targeted by layer 7 attacks
+///
+/// This endpoint is deprecated. To continue getting this data, switch to the summary by vertical endpoint.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/attacks/layer7/top/vertical`
+///
+/// **Parameters**
+/// - `limit` (query,optional)
+/// - `name` (query,optional)
+/// - `dateRange` (query,optional)
+/// - `dateStart` (query,optional)
+/// - `dateEnd` (query,optional)
+/// - `asn` (query,optional)
+/// - `location` (query,optional)
+/// - `continent` (query,optional)
+/// - `ipVersion` (query,optional)
+/// - `httpVersion` (query,optional)
+/// - `httpMethod` (query,optional)
+/// - `mitigationProduct` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_layer_7_attacks };
+/// use cloudflare::{ ApiClient, apis::radar_layer_7_attacks };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_attacks_layer7_top_get_6(&api)
+/// let response = get_attacks_layer7_top_get_6(&api)
+///     .with_limit("limit")
+///     .with_name("name")
+///     .with_date_range("dateRange")
+///     .with_date_start("dateStart")
+///     .with_date_end("dateEnd")
+///     .with_asn("asn")
+///     .with_location("location")
+///     .with_continent("continent")
+///     .with_ip_version("ipVersion")
+///     .with_http_version("httpVersion")
+///     .with_http_method("httpMethod")
+///     .with_mitigation_product("mitigationProduct")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```

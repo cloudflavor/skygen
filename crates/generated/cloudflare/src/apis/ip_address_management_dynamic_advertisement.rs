@@ -15,12 +15,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::addressing_advertised_response::AddressingAdvertisedResponse;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct GetAdvertisementStatusRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, AddressingAdvertisedResponse>,
 }
 
 impl<'a> GetAdvertisementStatusRequest<'a> {
@@ -43,19 +44,31 @@ impl<'a> GetAdvertisementStatusRequest<'a> {
         self.builder = self.builder.path_param("prefix_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<AddressingAdvertisedResponse> {
         self.builder.send().await
     }
 }
-
 /// Get Advertisement Status
+///
+/// View the current advertisement state for a prefix.
+///
+/// **Deprecated:** Prefer the BGP Prefixes endpoints, which additionally allow for advertising and withdrawing
+/// subnets of an IP prefix.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/addressing/prefixes/{prefix_id}/bgp/status`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `prefix_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::ip_address_management_dynamic_advertisement };
+/// use cloudflare::{ ApiClient, apis::ip_address_management_dynamic_advertisement };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_advertisement_status(&api)
-///     .with_account_id("value")
-///     .with_prefix_id("value")
+/// let response = get_advertisement_status(&api)
+///     .with_account_id("account_id")
+///     .with_prefix_id("prefix_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -65,7 +78,7 @@ pub fn get_advertisement_status(api: &ApiClient) -> GetAdvertisementStatusReques
 
 #[derive(Debug)]
 pub struct UpdatePrefixDynamicAdvertisementRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, AddressingAdvertisedResponse>,
 }
 
 impl<'a> UpdatePrefixDynamicAdvertisementRequest<'a> {
@@ -93,19 +106,33 @@ impl<'a> UpdatePrefixDynamicAdvertisementRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<AddressingAdvertisedResponse> {
         self.builder.send().await
     }
 }
-
 /// Update Prefix Dynamic Advertisement Status
+///
+/// Advertise or withdraw the BGP route for a prefix.
+///
+/// **Deprecated:** Prefer the BGP Prefixes endpoints, which additionally allow for advertising and withdrawing
+/// subnets of an IP prefix.
+///
+/// **HTTP Method:** `PATCH`
+/// **Path:** `/accounts/{account_id}/addressing/prefixes/{prefix_id}/bgp/status`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `prefix_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::ip_address_management_dynamic_advertisement };
+/// use cloudflare::{ ApiClient, apis::ip_address_management_dynamic_advertisement };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = update_prefix_dynamic_advertisement(&api)
-///     .with_account_id("value")
-///     .with_prefix_id("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = update_prefix_dynamic_advertisement(&api)
+///     .with_account_id("account_id")
+///     .with_prefix_id("prefix_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```

@@ -16,12 +16,16 @@
 // limitations under the License.
 
 use crate::models::api_shield_api_response_common::ApiShieldApiResponseCommon;
+use crate::models::api_shield_multiple_operation_response::ApiShieldMultipleOperationResponse;
+use crate::models::api_shield_multiple_operation_response_paginated::ApiShieldMultipleOperationResponsePaginated;
+use crate::models::api_shield_schema_response_with_thresholds::ApiShieldSchemaResponseWithThresholds;
+use crate::models::api_shield_single_operation_response::ApiShieldSingleOperationResponse;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct RetrieveInformationAboutAllRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, ApiShieldMultipleOperationResponsePaginated>,
 }
 
 impl<'a> RetrieveInformationAboutAllRequest<'a> {
@@ -40,18 +44,26 @@ impl<'a> RetrieveInformationAboutAllRequest<'a> {
         self.builder = self.builder.header_param("order", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<ApiShieldMultipleOperationResponsePaginated> {
         self.builder.send().await
     }
 }
-
 /// Retrieve information about all operations on a zone
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/api_gateway/operations`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `order` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::api_shield_endpoint_management };
+/// use cloudflare::{ ApiClient, apis::api_shield_endpoint_management };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = retrieve_information_about_all(&api)
-///     .with_zone_id("value")
+/// let response = retrieve_information_about_all(&api)
+///     .with_zone_id("zone_id")
+///     .with_order("order")
 ///     .send()
 ///     .await?;
 /// ```
@@ -61,7 +73,7 @@ pub fn retrieve_information_about_all(api: &ApiClient) -> RetrieveInformationAbo
 
 #[derive(Debug)]
 pub struct AddOperationsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, ApiShieldMultipleOperationResponse>,
 }
 
 impl<'a> AddOperationsRequest<'a> {
@@ -84,18 +96,28 @@ impl<'a> AddOperationsRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<ApiShieldMultipleOperationResponse> {
         self.builder.send().await
     }
 }
-
 /// Add operations to a zone
+///
+/// Add one or more operations to a zone. Endpoints can contain path variables. Host, method, endpoint will be normalized to a canoncial form when creating an operation and must be unique on the zone. Inserting an operation that matches an existing one will return the record of the already existing operation and update its last_updated date.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/zones/{zone_id}/api_gateway/operations`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::api_shield_endpoint_management };
+/// use cloudflare::{ ApiClient, apis::api_shield_endpoint_management };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = add_operations(&api)
-///     .with_zone_id("value")
+/// # let body: Vec<crate::models::api_shield_basic_operation::ApiShieldBasicOperation> = todo!();
+/// let response = add_operations(&api)
+///     .with_zone_id("zone_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -137,14 +159,22 @@ impl<'a> DeleteMultipleOperationsRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Delete multiple operations
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/zones/{zone_id}/api_gateway/operations`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::api_shield_endpoint_management };
+/// use cloudflare::{ ApiClient, apis::api_shield_endpoint_management };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete_multiple_operations(&api)
-///     .with_zone_id("value")
+/// # let body: Vec<crate::models::api_shield_object_with_operation_id::ApiShieldObjectWithOperationId> = todo!();
+/// let response = delete_multiple_operations(&api)
+///     .with_zone_id("zone_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -154,7 +184,7 @@ pub fn delete_multiple_operations(api: &ApiClient) -> DeleteMultipleOperationsRe
 
 #[derive(Debug)]
 pub struct AddOperationRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, ApiShieldSingleOperationResponse>,
 }
 
 impl<'a> AddOperationRequest<'a> {
@@ -180,18 +210,28 @@ impl<'a> AddOperationRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<ApiShieldSingleOperationResponse> {
         self.builder.send().await
     }
 }
-
 /// Add one operation to a zone
+///
+/// Add one operation to a zone. Endpoints can contain path variables. Host, method, endpoint will be normalized to a canoncial form when creating an operation and must be unique on the zone. Inserting an operation that matches an existing one will return the record of the already existing operation and update its last_updated date.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/zones/{zone_id}/api_gateway/operations/item`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::api_shield_endpoint_management };
+/// use cloudflare::{ ApiClient, apis::api_shield_endpoint_management };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = add_operation(&api)
-///     .with_zone_id("value")
+/// # let body: crate::models::api_shield_basic_operation::ApiShieldBasicOperation = todo!();
+/// let response = add_operation(&api)
+///     .with_zone_id("zone_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -201,7 +241,7 @@ pub fn add_operation(api: &ApiClient) -> AddOperationRequest<'_> {
 
 #[derive(Debug)]
 pub struct RetrieveInformationAboutOperationRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, ApiShieldSingleOperationResponse>,
 }
 
 impl<'a> RetrieveInformationAboutOperationRequest<'a> {
@@ -224,19 +264,26 @@ impl<'a> RetrieveInformationAboutOperationRequest<'a> {
         self.builder = self.builder.path_param("operation_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<ApiShieldSingleOperationResponse> {
         self.builder.send().await
     }
 }
-
 /// Retrieve information about an operation
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/api_gateway/operations/{operation_id}`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `operation_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::api_shield_endpoint_management };
+/// use cloudflare::{ ApiClient, apis::api_shield_endpoint_management };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = retrieve_information_about_operation(&api)
-///     .with_zone_id("value")
-///     .with_operation_id("value")
+/// let response = retrieve_information_about_operation(&api)
+///     .with_zone_id("zone_id")
+///     .with_operation_id("operation_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -275,15 +322,22 @@ impl<'a> DeleteOperationRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Delete an operation
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/zones/{zone_id}/api_gateway/operations/{operation_id}`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `operation_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::api_shield_endpoint_management };
+/// use cloudflare::{ ApiClient, apis::api_shield_endpoint_management };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete_operation(&api)
-///     .with_zone_id("value")
-///     .with_operation_id("value")
+/// let response = delete_operation(&api)
+///     .with_zone_id("zone_id")
+///     .with_operation_id("operation_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -293,7 +347,7 @@ pub fn delete_operation(api: &ApiClient) -> DeleteOperationRequest<'_> {
 
 #[derive(Debug)]
 pub struct RetrieveOperationsFeaturesAsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, ApiShieldSchemaResponseWithThresholds>,
 }
 
 impl<'a> RetrieveOperationsFeaturesAsRequest<'a> {
@@ -312,18 +366,26 @@ impl<'a> RetrieveOperationsFeaturesAsRequest<'a> {
         self.builder = self.builder.header_param("host", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<ApiShieldSchemaResponseWithThresholds> {
         self.builder.send().await
     }
 }
-
 /// Retrieve operations and features as OpenAPI schemas
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/api_gateway/schemas`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `host` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::api_shield_endpoint_management };
+/// use cloudflare::{ ApiClient, apis::api_shield_endpoint_management };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = retrieve_operations_features_as(&api)
-///     .with_zone_id("value")
+/// let response = retrieve_operations_features_as(&api)
+///     .with_zone_id("zone_id")
+///     .with_host("host")
 ///     .send()
 ///     .await?;
 /// ```

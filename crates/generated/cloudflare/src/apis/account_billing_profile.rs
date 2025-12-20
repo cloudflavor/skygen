@@ -15,12 +15,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::bill_subs_api_billing_response_single::BillSubsApiBillingResponseSingle;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct DeprecatedBillingProfileDetailsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, BillSubsApiBillingResponseSingle>,
 }
 
 impl<'a> DeprecatedBillingProfileDetailsRequest<'a> {
@@ -35,18 +36,26 @@ impl<'a> DeprecatedBillingProfileDetailsRequest<'a> {
         self.builder = self.builder.path_param("account_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<BillSubsApiBillingResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Billing Profile Details
+///
+/// Gets the current billing profile for the account.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/billing/profile`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::account_billing_profile };
+/// use cloudflare::{ ApiClient, apis::account_billing_profile };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = deprecated_billing_profile_details(&api)
-///     .with_account_id("value")
+/// let response = deprecated_billing_profile_details(&api)
+///     .with_account_id("account_id")
 ///     .send()
 ///     .await?;
 /// ```

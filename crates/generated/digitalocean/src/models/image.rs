@@ -20,17 +20,17 @@ use serde::{Deserialize, Serialize};
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct Image {
     pub created_at: Option<String>,
-    pub description: Option<serde_json::Value>,
-    pub distribution: Option<serde_json::Value>,
+    pub description: Option<crate::models::image_description::ImageDescription>,
+    pub distribution: Option<crate::models::distribution::Distribution>,
     pub error_message: Option<String>,
     pub id: Option<i64>,
     pub min_disk_size: Option<i64>,
-    pub name: Option<serde_json::Value>,
+    pub name: Option<crate::models::image_name::ImageName>,
     pub public: Option<bool>,
     pub r#type: Option<String>,
-    pub regions: Option<serde_json::Value>,
+    pub regions: Option<crate::models::regions_array::RegionsArray>,
     pub size_gigabytes: Option<f64>,
     pub slug: Option<String>,
     pub status: Option<String>,
-    pub tags: Option<serde_json::Value>,
+    pub tags: Option<crate::models::tags_array::TagsArray>,
 }

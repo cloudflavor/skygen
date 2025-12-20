@@ -19,11 +19,11 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct TunnelTunnelClient {
-    pub arch: Option<serde_json::Value>,
-    pub config_version: Option<serde_json::Value>,
-    pub conns: Option<serde_json::Value>,
-    pub features: Option<serde_json::Value>,
-    pub id: Option<serde_json::Value>,
-    pub run_at: Option<serde_json::Value>,
-    pub version: Option<serde_json::Value>,
+    pub arch: Option<crate::models::tunnel_arch::TunnelArch>,
+    pub config_version: Option<crate::models::tunnel_config_version::TunnelConfigVersion>,
+    pub conns: Option<crate::models::tunnel_connections::TunnelConnections>,
+    pub features: Option<crate::models::tunnel_features::TunnelFeatures>,
+    pub id: Option<crate::models::tunnel_connection_id::TunnelConnectionId>,
+    pub run_at: Option<crate::models::tunnel_run_at::TunnelRunAt>,
+    pub version: Option<crate::models::tunnel_version::TunnelVersion>,
 }

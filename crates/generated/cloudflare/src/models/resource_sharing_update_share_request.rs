@@ -19,5 +19,5 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct ResourceSharingUpdateShareRequest {
-    pub name: serde_json::Value,
+    pub name: crate::models::resource_sharing_share_name::ResourceSharingShareName,
 }

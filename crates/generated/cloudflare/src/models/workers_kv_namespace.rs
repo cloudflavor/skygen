@@ -20,7 +20,7 @@ use serde::{Deserialize, Serialize};
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct WorkersKvNamespace {
     pub beta: Option<bool>,
-    pub id: serde_json::Value,
+    pub id: crate::models::workers_kv_namespace_identifier::WorkersKvNamespaceIdentifier,
     pub supports_url_encoding: Option<bool>,
-    pub title: serde_json::Value,
+    pub title: crate::models::workers_kv_namespace_title::WorkersKvNamespaceTitle,
 }

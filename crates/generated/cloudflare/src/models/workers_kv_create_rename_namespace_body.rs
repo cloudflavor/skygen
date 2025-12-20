@@ -19,5 +19,5 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct WorkersKvCreateRenameNamespaceBody {
-    pub title: serde_json::Value,
+    pub title: crate::models::workers_kv_namespace_title::WorkersKvNamespaceTitle,
 }

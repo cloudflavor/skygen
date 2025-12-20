@@ -19,7 +19,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct CallsApiResponseCommon {
-    pub errors: serde_json::Value,
-    pub messages: serde_json::Value,
+    pub errors: crate::models::calls_messages::CallsMessages,
+    pub messages: crate::models::calls_messages::CallsMessages,
     pub success: bool,
 }

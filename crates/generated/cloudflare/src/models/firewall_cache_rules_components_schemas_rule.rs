@@ -20,7 +20,7 @@ use serde::{Deserialize, Serialize};
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct FirewallCacheRulesComponentsSchemasRule {
     pub action: Option<serde_json::Value>,
-    pub action_parameters: Option<serde_json::Value>,
+    pub action_parameters: Option<crate::models::firewall_cache_rules_components_schemas_action_parameters::FirewallCacheRulesComponentsSchemasActionParameters>,
     pub description: Option<serde_json::Value>,
     pub expression: Option<serde_json::Value>,
     pub id: Option<serde_json::Value>,

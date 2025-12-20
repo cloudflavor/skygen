@@ -19,10 +19,10 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct IamMembership {
-    pub account: Option<serde_json::Value>,
-    pub api_access_enabled: Option<serde_json::Value>,
-    pub id: Option<serde_json::Value>,
+    pub account: Option<crate::models::iam_schemas_account::IamSchemasAccount>,
+    pub api_access_enabled: Option<crate::models::iam_api_access_enabled::IamApiAccessEnabled>,
+    pub id: Option<crate::models::iam_membership_components_schemas_identifier::IamMembershipComponentsSchemasIdentifier>,
     pub permissions: Option<serde_json::Value>,
-    pub roles: Option<serde_json::Value>,
-    pub status: Option<serde_json::Value>,
+    pub roles: Option<crate::models::iam_role_names::IamRoleNames>,
+    pub status: Option<crate::models::iam_schemas_status::IamSchemasStatus>,
 }

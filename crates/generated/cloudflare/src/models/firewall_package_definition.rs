@@ -19,10 +19,10 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct FirewallPackageDefinition {
-    pub description: serde_json::Value,
-    pub detection_mode: serde_json::Value,
-    pub id: serde_json::Value,
-    pub name: serde_json::Value,
-    pub status: Option<serde_json::Value>,
-    pub zone_id: serde_json::Value,
+    pub description: crate::models::firewall_schemas_description::FirewallSchemasDescription,
+    pub detection_mode: crate::models::firewall_detection_mode::FirewallDetectionMode,
+    pub id: crate::models::firewall_identifier::FirewallIdentifier,
+    pub name: crate::models::firewall_name::FirewallName,
+    pub status: Option<crate::models::firewall_status::FirewallStatus>,
+    pub zone_id: crate::models::firewall_identifier::FirewallIdentifier,
 }

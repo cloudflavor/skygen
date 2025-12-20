@@ -19,8 +19,8 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct R2V4Response {
-    pub errors: serde_json::Value,
-    pub messages: serde_json::Value,
+    pub errors: crate::models::r2_errors::R2Errors,
+    pub messages: crate::models::r2_messages::R2Messages,
     pub result: std::collections::BTreeMap<String, serde_json::Value>,
     pub success: bool,
 }

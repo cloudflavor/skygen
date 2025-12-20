@@ -19,7 +19,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct LogcontrolApiResponseCommon {
-    pub errors: serde_json::Value,
-    pub messages: serde_json::Value,
+    pub errors: crate::models::logcontrol_messages::LogcontrolMessages,
+    pub messages: crate::models::logcontrol_messages::LogcontrolMessages,
     pub success: bool,
 }

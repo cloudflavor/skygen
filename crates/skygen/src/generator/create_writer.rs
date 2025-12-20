@@ -19,7 +19,7 @@ use crate::ir::{
 };
 use crate::transformer::{
     convert_param, extract_body, extract_response, fallback_operation_id,
-    infer_param_type_from_schema,
+    infer_param_type_from_schema, RefResolver,
 };
 use crate::TEMPLATES;
 use anyhow::{ensure, Context, Result};
@@ -35,8 +35,9 @@ pub async fn generate(schema: impl AsRef<Path>, output_dir: impl AsRef<Path>) ->
     match tokio::fs::read_to_string(schema).await {
         Ok(content) => {
             let openapi: OpenAPI = deserialize_data(content.as_str()).await?;
-            let reqs = walk_paths(openapi.paths).await?;
-            generate_lib(reqs, output_dir, openapi.info, openapi.components).await?;
+            let component_ref = openapi.components.as_ref();
+            let reqs = walk_paths(openapi.paths, component_ref).await?;
+            generate_lib(reqs, output_dir, openapi.info, component_ref).await?;
             Ok(())
         }
         Err(e) => Err(e.into()),
@@ -190,8 +191,12 @@ fn extract_path_params(path: &str) -> Vec<PathParam> {
     params
 }
 
-pub async fn walk_paths(paths: Paths) -> Result<BTreeMap<String, Vec<Operation>>> {
+pub async fn walk_paths(
+    paths: Paths,
+    components: Option<&Components>,
+) -> Result<BTreeMap<String, Vec<Operation>>> {
     let mut grouped: BTreeMap<String, Vec<Operation>> = BTreeMap::new();
+    let resolver = components.map(RefResolver::new);
 
     for (path, item) in paths.paths {
         if let Some(item) = item.into_item() {
@@ -243,12 +248,13 @@ pub async fn walk_paths(paths: Paths) -> Result<BTreeMap<String, Vec<Operation>>
                     let operation = Operation {
                         id,
                         summary: op.summary.clone(),
+                        description: op.description.clone(),
                         method,
                         path: path.clone(),
                         tags: op_tags,
                         params,
-                        request_body: extract_body(&op), // stub for now
-                        response: extract_response(&op), // stub for now
+                        request_body: extract_body(&op, resolver.as_ref()),
+                        response: extract_response(&op, resolver.as_ref()),
                     };
 
                     grouped.entry(tag).or_default().push(operation);
@@ -264,7 +270,7 @@ async fn generate_lib(
     reqs: BTreeMap<String, Vec<Operation>>,
     path: impl AsRef<Path>,
     api_info: OApiInfo,
-    components: Option<Components>,
+    components: Option<&Components>,
 ) -> Result<()> {
     let output_root = path.as_ref().to_path_buf();
     let src_dir = output_root.join("src");
@@ -308,7 +314,7 @@ async fn generate_lib(
             .unwrap_or_else(|| "health_check".to_string());
         (module_tokens, func)
     });
-    let crate_name_slug = title.to_snake_case();
+    let crate_name_slug = sanitize_crate_name(title.as_str());
     let sample_function_name = sample_metadata
         .as_ref()
         .map(|(_, func)| func.clone())
@@ -338,6 +344,7 @@ async fn generate_lib(
             let path_placeholders = extract_path_params(&normalized_path);
             let path_setters: HashSet<String> =
                 path_placeholders.iter().map(|p| p.setter.clone()).collect();
+            let description_lines = format_description_lines(op.description.as_deref());
 
             let params: Vec<FunctionParam> = op
                 .params
@@ -368,21 +375,37 @@ async fn generate_lib(
                 .filter(|param| !matches!(param.location, ParamLocation::Path))
                 .collect();
 
-            let return_type = param_type_to_rust(&op.response, Some(&model_result.module_set));
-            track_model_usage(&op.response, &mut model_usage);
+            let return_type = param_type_to_rust(
+                &op.response,
+                Some(&model_result.module_name_map),
+                Some(&model_result.module_set),
+            );
+            track_model_usage(
+                &op.response,
+                &mut model_usage,
+                &model_result.module_name_map,
+            );
             let request_body = op.request_body.as_ref().map(|body| RequestBodyConfig {
-                ty: param_type_to_rust(&body.ty, Some(&model_result.module_set)),
+                ty: param_type_to_rust(
+                    &body.ty,
+                    Some(&model_result.module_name_map),
+                    Some(&model_result.module_set),
+                ),
                 required: body.required,
             });
+            let method_name = sanitize_identifier(&clean_name);
+            let builder_struct = format!("{}Request", sanitize_struct_name(&method_name));
             let fn_name = Function {
-                name: clean_name.clone(),
-                builder_struct: format!("{}Request", clean_name.to_upper_camel_case()),
-                doc: op.summary.unwrap_or_default(),
+                name: method_name,
+                builder_struct,
+                summary: op.summary.clone(),
+                description_lines,
                 params,
                 path_params: path_placeholders,
                 return_type,
                 method: op.method.to_string(),
                 path: normalized_path,
+                path_display: op.path.clone(),
                 request_body,
             };
 
@@ -524,6 +547,14 @@ struct ModelField {
     name: String,
     ty: String,
     required: bool,
+    flatten: bool,
+}
+
+struct ModelTemplate {
+    module: String,
+    name: String,
+    fields: Vec<ModelField>,
+    alias: Option<String>,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Serialize)]
@@ -536,11 +567,12 @@ struct ModelUsage {
 struct ModelGenerationResult {
     modules: Vec<String>,
     module_set: HashSet<String>,
+    module_name_map: HashMap<String, String>,
 }
 
 async fn generate_models(
     models_dir: &Path,
-    components: Components,
+    components: &Components,
 ) -> Result<ModelGenerationResult> {
     let template_file = TEMPLATES
         .get_file("model.rs.tera")
@@ -552,97 +584,421 @@ async fn generate_models(
     tera.add_raw_template("model.rs", contents)
         .with_context(|| "failed to load model template")?;
 
-    let mut modules = Vec::new();
-    let schemas = components.schemas;
-    let mut available_modules: HashSet<String> = HashSet::new();
-    let mut generated_modules: HashSet<String> = HashSet::new();
+    let resolver = RefResolver::new(components);
+    let module_name_map = build_schema_module_name_map(components);
+    let struct_modules = collect_struct_modules(components, &resolver, &module_name_map);
+    let available_modules: HashSet<String> =
+        module_name_map.values().cloned().collect::<HashSet<_>>();
 
-    for (name, schema_or_ref) in schemas.iter() {
-        if matches!(
-            schema_or_ref,
-            ReferenceOr::Item(schema)
-                if matches!(schema.schema_kind, SchemaKind::Type(openapiv3::Type::Object(_)))
-        ) {
-            available_modules.insert(sanitize_module_name(name));
+    let mut templates = Vec::new();
+    for (raw_name, schema_or_ref) in components.schemas.iter() {
+        let module_name = module_name_map
+            .get(raw_name)
+            .cloned()
+            .unwrap_or_else(|| sanitize_module_name(raw_name));
+        let struct_name = raw_name.to_upper_camel_case();
+        if struct_modules.contains(&module_name) {
+            let mut visited = BTreeSet::new();
+            if let Some(mut fields) = collect_model_fields(
+                schema_or_ref,
+                &resolver,
+                &module_name_map,
+                &struct_modules,
+                &available_modules,
+                &mut visited,
+            ) {
+                fields.sort_by(|a, b| a.name.cmp(&b.name));
+                templates.push(ModelTemplate {
+                    module: module_name.clone(),
+                    name: struct_name,
+                    fields,
+                    alias: None,
+                });
+                continue;
+            }
         }
+
+        let alias = schema_alias_type(
+            schema_or_ref,
+            &resolver,
+            &module_name_map,
+            &available_modules,
+        );
+        templates.push(ModelTemplate {
+            module: module_name,
+            name: raw_name.to_upper_camel_case(),
+            fields: Vec::new(),
+            alias: Some(alias),
+        });
     }
 
-    for (name, schema_or_ref) in schemas {
-        let schema = match schema_or_ref {
-            ReferenceOr::Item(schema) => schema,
-            ReferenceOr::Reference { .. } => continue,
-        };
-
-        let object = match schema.schema_kind {
-            openapiv3::SchemaKind::Type(openapiv3::Type::Object(obj)) => obj,
-            _ => continue,
-        };
-
-        let required: BTreeSet<String> = object.required.into_iter().collect();
-
-        let mut fields = Vec::new();
-
-        for (prop_name, prop_schema) in object.properties {
-            let normalized = match prop_schema {
-                ReferenceOr::Reference { reference } => ReferenceOr::Reference { reference },
-                ReferenceOr::Item(schema) => ReferenceOr::Item(*schema),
-            };
-            let param_type = infer_param_type_from_schema(&normalized);
-            let rust_type = param_type_to_rust(&param_type, Some(&available_modules));
-            let original_name = prop_name.clone();
-            let field_name = sanitize_field_name(&prop_name);
-            let field = ModelField {
-                name: field_name,
-                ty: rust_type,
-                required: required.contains(&original_name),
-            };
-            fields.push(field);
-        }
-
-        fields.sort_by(|a, b| a.name.cmp(&b.name));
-
-        let module_name = sanitize_module_name(&name);
-        if !generated_modules.insert(module_name.clone()) {
-            continue;
-        }
-        let struct_name = name.to_upper_camel_case();
-
+    templates.sort_by(|a, b| a.module.cmp(&b.module));
+    let mut modules = Vec::new();
+    for template in templates {
         let mut context = tera::Context::new();
-        context.insert("name", &struct_name);
-        context.insert("fields", &fields);
+        context.insert("name", &template.name);
+        context.insert("fields", &template.fields);
+        context.insert("alias", &template.alias);
 
         let render = tera
             .render("model.rs", &context)
-            .with_context(|| format!("failed to render model {struct_name}"))?;
+            .with_context(|| format!("failed to render model {}", template.name))?;
 
-        tokio::fs::write(models_dir.join(format!("{module_name}.rs")), render)
+        tokio::fs::write(models_dir.join(format!("{}.rs", template.module)), render)
             .await
-            .with_context(|| format!("failed to write model file {module_name}"))?;
+            .with_context(|| format!("failed to write model file {}", template.module))?;
 
-        modules.push(module_name);
+        modules.push(template.module);
     }
 
     modules.sort();
+    modules.dedup();
+
     Ok(ModelGenerationResult {
         modules,
         module_set: available_modules,
+        module_name_map,
     })
 }
 
-fn param_type_to_rust(ty: &ParamType, available_models: Option<&HashSet<String>>) -> String {
+fn build_schema_module_name_map(components: &Components) -> HashMap<String, String> {
+    let mut counts: HashMap<String, usize> = HashMap::new();
+    let mut map = HashMap::new();
+
+    for name in components.schemas.keys() {
+        let base = sanitize_module_name(name);
+        let counter = counts.entry(base.clone()).or_insert(0);
+        let module_name = if *counter == 0 {
+            base.clone()
+        } else {
+            format!("{base}_{}", counter)
+        };
+        *counter += 1;
+        map.insert(name.clone(), module_name);
+    }
+
+    map
+}
+
+fn collect_struct_modules(
+    components: &Components,
+    resolver: &RefResolver<'_>,
+    module_name_map: &HashMap<String, String>,
+) -> HashSet<String> {
+    let mut struct_modules = HashSet::new();
+    for (name, schema_or_ref) in components.schemas.iter() {
+        let mut visited = BTreeSet::new();
+        if schema_supports_struct(schema_or_ref, resolver, &mut visited) {
+            if let Some(module) = module_name_map.get(name) {
+                struct_modules.insert(module.clone());
+            }
+        }
+    }
+    struct_modules
+}
+
+fn schema_supports_struct(
+    schema_or_ref: &ReferenceOr<openapiv3::Schema>,
+    resolver: &RefResolver<'_>,
+    visited: &mut BTreeSet<String>,
+) -> bool {
+    match schema_or_ref {
+        ReferenceOr::Reference { reference } => {
+            if let Some(name) = component_name_from_reference(reference) {
+                if !visited.insert(name.to_string()) {
+                    return false;
+                }
+                let result = resolver
+                    .resolve_schema(reference)
+                    .map(|schema| schema_supports_struct_item(schema, resolver, visited))
+                    .unwrap_or(false);
+                visited.remove(name);
+                result
+            } else {
+                false
+            }
+        }
+        ReferenceOr::Item(schema) => schema_supports_struct_item(schema, resolver, visited),
+    }
+}
+
+fn schema_supports_struct_item(
+    schema: &openapiv3::Schema,
+    resolver: &RefResolver<'_>,
+    visited: &mut BTreeSet<String>,
+) -> bool {
+    match &schema.schema_kind {
+        SchemaKind::Type(openapiv3::Type::Object(obj)) => !obj.properties.is_empty(),
+        SchemaKind::AllOf { all_of } => all_of
+            .iter()
+            .any(|inner| schema_supports_struct(inner, resolver, visited)),
+        _ => false,
+    }
+}
+
+fn collect_model_fields(
+    schema_or_ref: &ReferenceOr<openapiv3::Schema>,
+    resolver: &RefResolver<'_>,
+    module_name_map: &HashMap<String, String>,
+    struct_modules: &HashSet<String>,
+    available_modules: &HashSet<String>,
+    visited: &mut BTreeSet<String>,
+) -> Option<Vec<ModelField>> {
+    collect_fields_impl(
+        schema_or_ref,
+        resolver,
+        module_name_map,
+        struct_modules,
+        available_modules,
+        visited,
+    )
+}
+
+fn collect_fields_impl(
+    schema_or_ref: &ReferenceOr<openapiv3::Schema>,
+    resolver: &RefResolver<'_>,
+    module_name_map: &HashMap<String, String>,
+    struct_modules: &HashSet<String>,
+    available_modules: &HashSet<String>,
+    visited: &mut BTreeSet<String>,
+) -> Option<Vec<ModelField>> {
+    match schema_or_ref {
+        ReferenceOr::Reference { reference } => {
+            let name = component_name_from_reference(reference)?.to_string();
+            if !visited.insert(name.clone()) {
+                return None;
+            }
+            let schema = resolver.resolve_schema(reference)?;
+            let fields = collect_fields_from_schema(
+                schema,
+                resolver,
+                module_name_map,
+                struct_modules,
+                available_modules,
+                visited,
+            );
+            visited.remove(&name);
+            fields
+        }
+        ReferenceOr::Item(schema) => collect_fields_from_schema(
+            schema,
+            resolver,
+            module_name_map,
+            struct_modules,
+            available_modules,
+            visited,
+        ),
+    }
+}
+
+fn collect_fields_from_schema(
+    schema: &openapiv3::Schema,
+    resolver: &RefResolver<'_>,
+    module_name_map: &HashMap<String, String>,
+    struct_modules: &HashSet<String>,
+    available_modules: &HashSet<String>,
+    visited: &mut BTreeSet<String>,
+) -> Option<Vec<ModelField>> {
+    match &schema.schema_kind {
+        SchemaKind::Type(openapiv3::Type::Object(obj)) => {
+            let required: BTreeSet<String> = obj.required.iter().cloned().collect();
+            let mut fields = Vec::new();
+            for (prop_name, prop_schema) in obj.properties.iter() {
+                let normalized = clone_schema_reference(prop_schema);
+                let param_type = infer_param_type_from_schema(&normalized);
+                let rust_type =
+                    param_type_to_rust(&param_type, Some(module_name_map), Some(available_modules));
+                let field_name = sanitize_field_name(prop_name);
+                fields.push(ModelField {
+                    name: field_name,
+                    ty: rust_type,
+                    required: required.contains(prop_name),
+                    flatten: false,
+                });
+            }
+            Some(fields)
+        }
+        SchemaKind::AllOf { all_of } => {
+            let mut fields = Vec::new();
+            for part in all_of {
+                match part {
+                    ReferenceOr::Reference { reference } => {
+                        if let Some(name) = component_name_from_reference(reference) {
+                            let module = module_name_map
+                                .get(name)
+                                .cloned()
+                                .unwrap_or_else(|| sanitize_module_name(name));
+                            if struct_modules.contains(&module) {
+                                let ty = format!(
+                                    "crate::models::{module}::{}",
+                                    name.to_upper_camel_case()
+                                );
+                                let ident = sanitize_identifier(&name.to_snake_case());
+                                fields.push(ModelField {
+                                    name: ident,
+                                    ty,
+                                    required: true,
+                                    flatten: true,
+                                });
+                                continue;
+                            }
+                            let ty =
+                                format!("crate::models::{module}::{}", name.to_upper_camel_case());
+                            let ident = sanitize_identifier(&name.to_snake_case());
+                            fields.push(ModelField {
+                                name: ident,
+                                ty,
+                                required: true,
+                                flatten: false,
+                            });
+                        }
+                    }
+                    ReferenceOr::Item(inline_schema) => {
+                        if let Some(mut nested) = collect_fields_from_schema(
+                            inline_schema,
+                            resolver,
+                            module_name_map,
+                            struct_modules,
+                            available_modules,
+                            visited,
+                        ) {
+                            fields.append(&mut nested);
+                        }
+                    }
+                }
+            }
+            Some(fields)
+        }
+        _ => None,
+    }
+}
+
+fn schema_alias_type(
+    schema_or_ref: &ReferenceOr<openapiv3::Schema>,
+    resolver: &RefResolver<'_>,
+    module_name_map: &HashMap<String, String>,
+    available_modules: &HashSet<String>,
+) -> String {
+    match schema_or_ref {
+        ReferenceOr::Reference { reference } => {
+            if let Some(name) = component_name_from_reference(reference) {
+                let module = module_name_map
+                    .get(name)
+                    .cloned()
+                    .unwrap_or_else(|| sanitize_module_name(name));
+                let ty = name.to_upper_camel_case();
+                format!("crate::models::{module}::{ty}")
+            } else {
+                "serde_json::Value".into()
+            }
+        }
+        ReferenceOr::Item(schema) => {
+            schema_alias_type_from_schema(schema, resolver, module_name_map, available_modules)
+        }
+    }
+}
+
+fn schema_alias_type_from_schema(
+    schema: &openapiv3::Schema,
+    resolver: &RefResolver<'_>,
+    module_name_map: &HashMap<String, String>,
+    available_modules: &HashSet<String>,
+) -> String {
+    match &schema.schema_kind {
+        SchemaKind::Type(openapiv3::Type::String(_)) => "String".into(),
+        SchemaKind::Type(openapiv3::Type::Integer(_)) => "i64".into(),
+        SchemaKind::Type(openapiv3::Type::Number(_)) => "f64".into(),
+        SchemaKind::Type(openapiv3::Type::Boolean(_)) => "bool".into(),
+        SchemaKind::Type(openapiv3::Type::Array(array)) => {
+            if let Some(items) = &array.items {
+                let normalized = clone_schema_reference(items);
+                let inner = infer_param_type_from_schema(&normalized);
+                let ty = param_type_to_rust(&inner, Some(module_name_map), Some(available_modules));
+                format!("Vec<{ty}>")
+            } else {
+                "Vec<serde_json::Value>".into()
+            }
+        }
+        SchemaKind::Type(openapiv3::Type::Object(obj)) => {
+            if obj.properties.is_empty() {
+                if let Some(additional) = &obj.additional_properties {
+                    match additional {
+                        openapiv3::AdditionalProperties::Any(_) => {
+                            "std::collections::BTreeMap<String, serde_json::Value>".into()
+                        }
+                        openapiv3::AdditionalProperties::Schema(schema) => {
+                            let normalized = match schema.as_ref() {
+                                ReferenceOr::Reference { reference } => ReferenceOr::Reference {
+                                    reference: reference.clone(),
+                                },
+                                ReferenceOr::Item(item) => ReferenceOr::Item((*item).clone()),
+                            };
+                            let param = infer_param_type_from_schema(&normalized);
+                            let ty = param_type_to_rust(
+                                &param,
+                                Some(module_name_map),
+                                Some(available_modules),
+                            );
+                            format!("std::collections::BTreeMap<String, {ty}>")
+                        }
+                    }
+                } else {
+                    "std::collections::BTreeMap<String, serde_json::Value>".into()
+                }
+            } else {
+                "serde_json::Value".into()
+            }
+        }
+        SchemaKind::AllOf { all_of } => {
+            if let Some(first) = all_of.first() {
+                schema_alias_type(first, resolver, module_name_map, available_modules)
+            } else {
+                "serde_json::Value".into()
+            }
+        }
+        _ => "serde_json::Value".into(),
+    }
+}
+
+fn clone_schema_reference(
+    schema: &ReferenceOr<Box<openapiv3::Schema>>,
+) -> ReferenceOr<openapiv3::Schema> {
+    match schema {
+        ReferenceOr::Reference { reference } => ReferenceOr::Reference {
+            reference: reference.clone(),
+        },
+        ReferenceOr::Item(item) => ReferenceOr::Item((**item).clone()),
+    }
+}
+
+fn component_name_from_reference(reference: &str) -> Option<&str> {
+    reference.rsplit('/').next()
+}
+
+fn param_type_to_rust(
+    ty: &ParamType,
+    module_name_map: Option<&HashMap<String, String>>,
+    available_models: Option<&HashSet<String>>,
+) -> String {
     match ty {
         ParamType::String => "String".into(),
         ParamType::Integer => "i64".into(),
         ParamType::Boolean => "bool".into(),
         ParamType::Float => "f64".into(),
-        ParamType::Array(inner) => format!("Vec<{}>", param_type_to_rust(inner, available_models)),
+        ParamType::Array(inner) => format!(
+            "Vec<{}>",
+            param_type_to_rust(inner, module_name_map, available_models)
+        ),
         ParamType::Map(inner) => format!(
             "std::collections::BTreeMap<String, {}>",
-            param_type_to_rust(inner, available_models)
+            param_type_to_rust(inner, module_name_map, available_models)
         ),
         ParamType::Enum(_) => "String".into(),
         ParamType::Object(name) => {
-            let module = sanitize_module_name(name);
+            let module = module_name_map
+                .and_then(|map| map.get(name))
+                .cloned()
+                .unwrap_or_else(|| sanitize_module_name(name));
             if available_models
                 .map(|set| set.contains(&module))
                 .unwrap_or(true)
@@ -654,22 +1010,33 @@ fn param_type_to_rust(ty: &ParamType, available_models: Option<&HashSet<String>>
             }
         }
         ParamType::Optional(inner) => {
-            format!("Option<{}>", param_type_to_rust(inner, available_models))
+            format!(
+                "Option<{}>",
+                param_type_to_rust(inner, module_name_map, available_models)
+            )
         }
         ParamType::Unknown => "serde_json::Value".into(),
     }
 }
 
-fn track_model_usage(ty: &ParamType, usages: &mut BTreeSet<ModelUsage>) {
+fn track_model_usage(
+    ty: &ParamType,
+    usages: &mut BTreeSet<ModelUsage>,
+    module_name_map: &HashMap<String, String>,
+) {
     match ty {
         ParamType::Object(name) => {
+            let module = module_name_map
+                .get(name)
+                .cloned()
+                .unwrap_or_else(|| sanitize_module_name(name));
             usages.insert(ModelUsage {
-                module: sanitize_module_name(name),
+                module,
                 ty: name.to_upper_camel_case(),
             });
         }
         ParamType::Array(inner) | ParamType::Optional(inner) | ParamType::Map(inner) => {
-            track_model_usage(inner, usages);
+            track_model_usage(inner, usages, module_name_map);
         }
         _ => {}
     }
@@ -771,6 +1138,27 @@ fn sanitize_identifier(value: &str) -> String {
     ident
 }
 
+fn sanitize_struct_name(value: &str) -> String {
+    let trimmed = value.trim_start_matches("r#");
+    let mut ident = if trimmed.is_empty() {
+        "Endpoint".to_string()
+    } else {
+        trimmed.to_upper_camel_case()
+    };
+    if ident
+        .chars()
+        .next()
+        .map(|c| c.is_ascii_digit())
+        .unwrap_or(false)
+    {
+        ident = format!("Struct{ident}");
+    }
+    if is_rust_keyword(&ident.to_lowercase()) {
+        ident.push_str("Struct");
+    }
+    ident
+}
+
 fn is_rust_keyword(name: &str) -> bool {
     matches!(
         name,
@@ -840,6 +1228,44 @@ fn sanitize_method_suffix(value: &str) -> String {
     ident
 }
 
+fn format_description_lines(text: Option<&str>) -> Vec<String> {
+    match text {
+        Some(val) => val.lines().map(|line| hyperlinkize(line.trim())).collect(),
+        None => Vec::new(),
+    }
+}
+
+fn hyperlinkize(line: &str) -> String {
+    fn find_url_start(s: &str) -> Option<usize> {
+        match (s.find("http://"), s.find("https://")) {
+            (Some(http), Some(https)) => Some(if http < https { http } else { https }),
+            (Some(pos), None) | (None, Some(pos)) => Some(pos),
+            (None, None) => None,
+        }
+    }
+
+    let mut result = String::new();
+    let mut rest = line;
+    while let Some(start) = find_url_start(rest) {
+        let (prefix, tail) = rest.split_at(start);
+        result.push_str(prefix);
+        let end = tail
+            .find(|c: char| c.is_whitespace())
+            .unwrap_or_else(|| tail.len());
+        let (url, remainder) = tail.split_at(end);
+        if url.starts_with('<') && url.ends_with('>') {
+            result.push_str(url);
+        } else {
+            result.push('<');
+            result.push_str(url);
+            result.push('>');
+        }
+        rest = remainder;
+    }
+    result.push_str(rest);
+    result
+}
+
 fn sanitize_crate_version(raw: &str) -> String {
     let trimmed = raw.trim();
     let stripped = trimmed.trim_start_matches(|c| c == 'v' || c == 'V');
@@ -855,13 +1281,13 @@ fn sanitize_crate_version(raw: &str) -> String {
     }
 
     if Version::parse(candidate).is_ok() {
-        return candidate.to_string();
+        return append_alpha(candidate);
     }
 
     if let Some(padded) = pad_semver_components(candidate) {
         if Version::parse(&padded).is_ok() {
             tracing::warn!("normalized OpenAPI version '{}' to '{}'", raw, padded);
-            return padded;
+            return append_alpha(&padded);
         }
     }
 
@@ -869,7 +1295,7 @@ fn sanitize_crate_version(raw: &str) -> String {
         "unable to parse OpenAPI version '{}' - falling back to 0.1.0",
         raw
     );
-    "0.1.0".to_string()
+    append_alpha("0.1.0")
 }
 
 fn pad_semver_components(value: &str) -> Option<String> {
@@ -922,6 +1348,32 @@ fn pad_semver_components(value: &str) -> Option<String> {
     }
 
     Some(version)
+}
+
+fn append_alpha(version: &str) -> String {
+    if version.ends_with("-alpha") {
+        version.to_string()
+    } else {
+        format!("{}-alpha", version.trim_end_matches('-'))
+    }
+}
+
+fn sanitize_crate_name(raw: &str) -> String {
+    let mut slug = raw.to_lowercase().replace(' ', "_").replace('-', "_");
+    slug = slug.trim_matches('_').to_string();
+    if slug.is_empty() {
+        slug = "api".to_string();
+    }
+    for pattern in ["public_api", "api", "swagger"] {
+        if let Some(stripped) = slug.strip_suffix(pattern) {
+            slug = stripped.trim_end_matches('_').to_string();
+        }
+    }
+    slug = slug.trim_matches('_').to_string();
+    if slug.is_empty() {
+        slug = "api".to_string();
+    }
+    slug
 }
 
 async fn create_rust_project(title: String, version: String, path: impl AsRef<Path>) -> Result<()> {

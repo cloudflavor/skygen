@@ -19,6 +19,6 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct AccessAppSettingsRequest {
-    pub allow_iframe: Option<serde_json::Value>,
-    pub skip_interstitial: Option<serde_json::Value>,
+    pub allow_iframe: Option<crate::models::access_allow_iframe::AccessAllowIframe>,
+    pub skip_interstitial: Option<crate::models::access_skip_interstitial::AccessSkipInterstitial>,
 }

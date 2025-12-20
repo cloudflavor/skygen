@@ -24,6 +24,6 @@ pub struct R2SlurperJobProgressResponse {
     pub id: Option<String>,
     pub objects: Option<i64>,
     pub skipped_objects: Option<i64>,
-    pub status: Option<serde_json::Value>,
+    pub status: Option<crate::models::r2_slurper_job_status::R2SlurperJobStatus>,
     pub transferred_objects: Option<i64>,
 }

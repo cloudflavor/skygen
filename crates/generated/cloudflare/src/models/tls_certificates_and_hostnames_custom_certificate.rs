@@ -19,19 +19,18 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct TlsCertificatesAndHostnamesCustomCertificate {
-
-    pub bundle_method: serde_json::Value,
-    pub expires_on: serde_json::Value,
+    pub bundle_method: crate::models::tls_certificates_and_hostnames_bundle_method::TlsCertificatesAndHostnamesBundleMethod,
+    pub expires_on: crate::models::tls_certificates_and_hostnames_expires_on::TlsCertificatesAndHostnamesExpiresOn,
     pub geo_restrictions: Option<crate::models::tls_certificates_and_hostnames_geo_restrictions::TlsCertificatesAndHostnamesGeoRestrictions>,
-    pub hosts: serde_json::Value,
-    pub id: serde_json::Value,
-    pub issuer: serde_json::Value,
-    pub keyless_server: Option<serde_json::Value>,
-    pub modified_on: serde_json::Value,
-    pub policy: Option<serde_json::Value>,
-    pub priority: serde_json::Value,
-    pub signature: serde_json::Value,
-    pub status: serde_json::Value,
-    pub uploaded_on: serde_json::Value,
-    pub zone_id: serde_json::Value,
+    pub hosts: crate::models::tls_certificates_and_hostnames_hosts::TlsCertificatesAndHostnamesHosts,
+    pub id: crate::models::tls_certificates_and_hostnames_identifier::TlsCertificatesAndHostnamesIdentifier,
+    pub issuer: crate::models::tls_certificates_and_hostnames_issuer::TlsCertificatesAndHostnamesIssuer,
+    pub keyless_server: Option<crate::models::tls_certificates_and_hostnames_keyless_certificate::TlsCertificatesAndHostnamesKeylessCertificate>,
+    pub modified_on: crate::models::tls_certificates_and_hostnames_modified_on::TlsCertificatesAndHostnamesModifiedOn,
+    pub policy: Option<crate::models::tls_certificates_and_hostnames_policy::TlsCertificatesAndHostnamesPolicy>,
+    pub priority: crate::models::tls_certificates_and_hostnames_priority::TlsCertificatesAndHostnamesPriority,
+    pub signature: crate::models::tls_certificates_and_hostnames_signature::TlsCertificatesAndHostnamesSignature,
+    pub status: crate::models::tls_certificates_and_hostnames_status::TlsCertificatesAndHostnamesStatus,
+    pub uploaded_on: crate::models::tls_certificates_and_hostnames_uploaded_on::TlsCertificatesAndHostnamesUploadedOn,
+    pub zone_id: crate::models::tls_certificates_and_hostnames_identifier::TlsCertificatesAndHostnamesIdentifier,
 }

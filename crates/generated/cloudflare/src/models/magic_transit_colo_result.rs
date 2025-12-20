@@ -20,9 +20,10 @@ use serde::{Deserialize, Serialize};
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct MagicTransitColoResult {
     pub colo: Option<crate::models::magic_transit_colo::MagicTransitColo>,
-    pub error: Option<serde_json::Value>,
+    pub error: Option<crate::models::magic_transit_error::MagicTransitError>,
     pub hops: Option<Vec<crate::models::magic_transit_hop_result::MagicTransitHopResult>>,
     pub target_summary:
         Option<crate::models::magic_transit_target_summary::MagicTransitTargetSummary>,
-    pub traceroute_time_ms: Option<serde_json::Value>,
+    pub traceroute_time_ms:
+        Option<crate::models::magic_transit_traceroute_time_ms::MagicTransitTracerouteTimeMs>,
 }

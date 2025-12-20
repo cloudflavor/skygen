@@ -19,9 +19,9 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct TunnelArgoTunnel {
-    pub connections: Vec<serde_json::Value>,
-    pub created_at: serde_json::Value,
-    pub deleted_at: Option<serde_json::Value>,
-    pub id: serde_json::Value,
-    pub name: serde_json::Value,
+    pub connections: Vec<crate::models::tunnel_connection::TunnelConnection>,
+    pub created_at: crate::models::tunnel_created_at::TunnelCreatedAt,
+    pub deleted_at: Option<crate::models::tunnel_deleted_at::TunnelDeletedAt>,
+    pub id: crate::models::tunnel_tunnel_id::TunnelTunnelId,
+    pub name: crate::models::tunnel_tunnel_name::TunnelTunnelName,
 }

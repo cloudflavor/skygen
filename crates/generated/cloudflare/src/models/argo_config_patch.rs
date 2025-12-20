@@ -19,5 +19,5 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct ArgoConfigPatch {
-    pub value: serde_json::Value,
+    pub value: crate::models::argo_config_value::ArgoConfigValue,
 }

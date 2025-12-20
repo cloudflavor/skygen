@@ -19,7 +19,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct DnsFirewallApiResponseCommon {
-    pub errors: serde_json::Value,
-    pub messages: serde_json::Value,
+    pub errors: crate::models::dns_firewall_messages::DnsFirewallMessages,
+    pub messages: crate::models::dns_firewall_messages::DnsFirewallMessages,
     pub success: bool,
 }

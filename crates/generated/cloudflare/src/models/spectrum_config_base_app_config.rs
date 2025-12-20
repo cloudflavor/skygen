@@ -19,7 +19,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct SpectrumConfigBaseAppConfig {
-    pub created_on: serde_json::Value,
-    pub id: serde_json::Value,
-    pub modified_on: serde_json::Value,
+    pub created_on: crate::models::spectrum_config_created::SpectrumConfigCreated,
+    pub id: crate::models::spectrum_config_app_identifier::SpectrumConfigAppIdentifier,
+    pub modified_on: crate::models::spectrum_config_modified::SpectrumConfigModified,
 }

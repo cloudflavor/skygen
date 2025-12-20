@@ -19,5 +19,5 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct DlpUpdateAddinAccountMapping {
-    pub auth_requirements: serde_json::Value,
+    pub auth_requirements: crate::models::dlp_addin_auth::DlpAddinAuth,
 }

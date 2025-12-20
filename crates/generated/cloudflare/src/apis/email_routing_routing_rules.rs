@@ -15,12 +15,15 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::email_catch_all_rule_response_single::EmailCatchAllRuleResponseSingle;
+use crate::models::email_rule_response_single::EmailRuleResponseSingle;
+use crate::models::email_rules_response_collection::EmailRulesResponseCollection;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct ListRoutingRulesRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, EmailRulesResponseCollection>,
 }
 
 impl<'a> ListRoutingRulesRequest<'a> {
@@ -47,18 +50,32 @@ impl<'a> ListRoutingRulesRequest<'a> {
         self.builder = self.builder.header_param("enabled", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<EmailRulesResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// List routing rules
+///
+/// Lists existing routing rules.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/email/routing/rules`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `page` (query,optional)
+/// - `per_page` (query,optional)
+/// - `enabled` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::email_routing_routing_rules };
+/// use cloudflare::{ ApiClient, apis::email_routing_routing_rules };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_routing_rules(&api)
-///     .with_zone_id("value")
+/// let response = list_routing_rules(&api)
+///     .with_zone_id("zone_id")
+///     .with_page("page")
+///     .with_per_page("per_page")
+///     .with_enabled("enabled")
 ///     .send()
 ///     .await?;
 /// ```
@@ -68,7 +85,7 @@ pub fn list_routing_rules(api: &ApiClient) -> ListRoutingRulesRequest<'_> {
 
 #[derive(Debug)]
 pub struct CreateRoutingRuleRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, EmailRuleResponseSingle>,
 }
 
 impl<'a> CreateRoutingRuleRequest<'a> {
@@ -91,18 +108,28 @@ impl<'a> CreateRoutingRuleRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<EmailRuleResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Create routing rule
+///
+/// Rules consist of a set of criteria for matching emails (such as an email being sent to a specific custom email address) plus a set of actions to take on the email (like forwarding it to a specific destination address).
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/zones/{zone_id}/email/routing/rules`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::email_routing_routing_rules };
+/// use cloudflare::{ ApiClient, apis::email_routing_routing_rules };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = create_routing_rule(&api)
-///     .with_zone_id("value")
+/// # let body: crate::models::email_create_rule_properties::EmailCreateRuleProperties = todo!();
+/// let response = create_routing_rule(&api)
+///     .with_zone_id("zone_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -112,7 +139,7 @@ pub fn create_routing_rule(api: &ApiClient) -> CreateRoutingRuleRequest<'_> {
 
 #[derive(Debug)]
 pub struct GetCatchAllRuleRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, EmailCatchAllRuleResponseSingle>,
 }
 
 impl<'a> GetCatchAllRuleRequest<'a> {
@@ -130,18 +157,26 @@ impl<'a> GetCatchAllRuleRequest<'a> {
         self.builder = self.builder.path_param("zone_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<EmailCatchAllRuleResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Get catch-all rule
+///
+/// Get information on the default catch-all routing rule.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/email/routing/rules/catch_all`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::email_routing_routing_rules };
+/// use cloudflare::{ ApiClient, apis::email_routing_routing_rules };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_catch_all_rule(&api)
-///     .with_zone_id("value")
+/// let response = get_catch_all_rule(&api)
+///     .with_zone_id("zone_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -151,7 +186,7 @@ pub fn get_catch_all_rule(api: &ApiClient) -> GetCatchAllRuleRequest<'_> {
 
 #[derive(Debug)]
 pub struct UpdateCatchAllRuleRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, EmailCatchAllRuleResponseSingle>,
 }
 
 impl<'a> UpdateCatchAllRuleRequest<'a> {
@@ -177,18 +212,28 @@ impl<'a> UpdateCatchAllRuleRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<EmailCatchAllRuleResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Update catch-all rule
+///
+/// Enable or disable catch-all routing rule, or change action to forward to specific destination address.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/zones/{zone_id}/email/routing/rules/catch_all`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::email_routing_routing_rules };
+/// use cloudflare::{ ApiClient, apis::email_routing_routing_rules };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = update_catch_all_rule(&api)
-///     .with_zone_id("value")
+/// # let body: crate::models::email_update_catch_all_rule_properties::EmailUpdateCatchAllRuleProperties = todo!();
+/// let response = update_catch_all_rule(&api)
+///     .with_zone_id("zone_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -198,7 +243,7 @@ pub fn update_catch_all_rule(api: &ApiClient) -> UpdateCatchAllRuleRequest<'_> {
 
 #[derive(Debug)]
 pub struct GetRoutingRuleRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, EmailRuleResponseSingle>,
 }
 
 impl<'a> GetRoutingRuleRequest<'a> {
@@ -221,19 +266,28 @@ impl<'a> GetRoutingRuleRequest<'a> {
         self.builder = self.builder.path_param("rule_identifier", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<EmailRuleResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Get routing rule
+///
+/// Get information for a specific routing rule already created.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/email/routing/rules/{rule_identifier}`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `rule_identifier` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::email_routing_routing_rules };
+/// use cloudflare::{ ApiClient, apis::email_routing_routing_rules };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_routing_rule(&api)
-///     .with_zone_id("value")
-///     .with_rule_identifier("value")
+/// let response = get_routing_rule(&api)
+///     .with_zone_id("zone_id")
+///     .with_rule_identifier("rule_identifier")
 ///     .send()
 ///     .await?;
 /// ```
@@ -243,7 +297,7 @@ pub fn get_routing_rule(api: &ApiClient) -> GetRoutingRuleRequest<'_> {
 
 #[derive(Debug)]
 pub struct UpdateRoutingRuleRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, EmailRuleResponseSingle>,
 }
 
 impl<'a> UpdateRoutingRuleRequest<'a> {
@@ -274,19 +328,30 @@ impl<'a> UpdateRoutingRuleRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<EmailRuleResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Update routing rule
+///
+/// Update actions and matches, or enable/disable specific routing rules.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/zones/{zone_id}/email/routing/rules/{rule_identifier}`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `rule_identifier` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::email_routing_routing_rules };
+/// use cloudflare::{ ApiClient, apis::email_routing_routing_rules };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = update_routing_rule(&api)
-///     .with_zone_id("value")
-///     .with_rule_identifier("value")
+/// # let body: crate::models::email_update_rule_properties::EmailUpdateRuleProperties = todo!();
+/// let response = update_routing_rule(&api)
+///     .with_zone_id("zone_id")
+///     .with_rule_identifier("rule_identifier")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -296,7 +361,7 @@ pub fn update_routing_rule(api: &ApiClient) -> UpdateRoutingRuleRequest<'_> {
 
 #[derive(Debug)]
 pub struct DeleteRoutingRuleRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, EmailRuleResponseSingle>,
 }
 
 impl<'a> DeleteRoutingRuleRequest<'a> {
@@ -319,19 +384,28 @@ impl<'a> DeleteRoutingRuleRequest<'a> {
         self.builder = self.builder.path_param("rule_identifier", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<EmailRuleResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Delete routing rule
+///
+/// Delete a specific routing rule.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/zones/{zone_id}/email/routing/rules/{rule_identifier}`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `rule_identifier` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::email_routing_routing_rules };
+/// use cloudflare::{ ApiClient, apis::email_routing_routing_rules };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete_routing_rule(&api)
-///     .with_zone_id("value")
-///     .with_rule_identifier("value")
+/// let response = delete_routing_rule(&api)
+///     .with_zone_id("zone_id")
+///     .with_rule_identifier("rule_identifier")
 ///     .send()
 ///     .await?;
 /// ```

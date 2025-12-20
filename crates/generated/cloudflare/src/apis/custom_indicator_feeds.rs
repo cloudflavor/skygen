@@ -15,12 +15,19 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::custom_indicator_feeds_create_feed_response::CustomIndicatorFeedsCreateFeedResponse;
+use crate::models::custom_indicator_feeds_indicator_feed_metadata_response::CustomIndicatorFeedsIndicatorFeedMetadataResponse;
+use crate::models::custom_indicator_feeds_indicator_feed_response::CustomIndicatorFeedsIndicatorFeedResponse;
+use crate::models::custom_indicator_feeds_permission_list_item_response::CustomIndicatorFeedsPermissionListItemResponse;
+use crate::models::custom_indicator_feeds_permissions_response::CustomIndicatorFeedsPermissionsResponse;
+use crate::models::custom_indicator_feeds_update_feed_response::CustomIndicatorFeedsUpdateFeedResponse;
+use crate::models::custom_indicator_feeds_update_public_field_response::CustomIndicatorFeedsUpdatePublicFieldResponse;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct GetIndicatorFeedsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, CustomIndicatorFeedsIndicatorFeedResponse>,
 }
 
 impl<'a> GetIndicatorFeedsRequest<'a> {
@@ -38,18 +45,24 @@ impl<'a> GetIndicatorFeedsRequest<'a> {
         self.builder = self.builder.path_param("account_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<CustomIndicatorFeedsIndicatorFeedResponse> {
         self.builder.send().await
     }
 }
-
 /// Get indicator feeds owned by this account
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/intel/indicator-feeds`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::custom_indicator_feeds };
+/// use cloudflare::{ ApiClient, apis::custom_indicator_feeds };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_indicator_feeds(&api)
-///     .with_account_id("value")
+/// let response = get_indicator_feeds(&api)
+///     .with_account_id("account_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -59,7 +72,7 @@ pub fn get_indicator_feeds(api: &ApiClient) -> GetIndicatorFeedsRequest<'_> {
 
 #[derive(Debug)]
 pub struct CreateIndicatorFeedsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, CustomIndicatorFeedsCreateFeedResponse>,
 }
 
 impl<'a> CreateIndicatorFeedsRequest<'a> {
@@ -78,22 +91,33 @@ impl<'a> CreateIndicatorFeedsRequest<'a> {
         self.builder = self.builder.path_param("account_id", value);
         self
     }
-    pub fn with_body(mut self, body: serde_json::Value) -> Self {
+    pub fn with_body(
+        mut self,
+        body: crate::models::custom_indicator_feeds_create_feed::CustomIndicatorFeedsCreateFeed,
+    ) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<CustomIndicatorFeedsCreateFeedResponse> {
         self.builder.send().await
     }
 }
-
 /// Create new indicator feed
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/intel/indicator-feeds`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::custom_indicator_feeds };
+/// use cloudflare::{ ApiClient, apis::custom_indicator_feeds };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = create_indicator_feeds(&api)
-///     .with_account_id("value")
+/// # let body: crate::models::custom_indicator_feeds_create_feed::CustomIndicatorFeedsCreateFeed = todo!();
+/// let response = create_indicator_feeds(&api)
+///     .with_account_id("account_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -103,7 +127,7 @@ pub fn create_indicator_feeds(api: &ApiClient) -> CreateIndicatorFeedsRequest<'_
 
 #[derive(Debug)]
 pub struct AddPermissionRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, CustomIndicatorFeedsPermissionsResponse>,
 }
 
 impl<'a> AddPermissionRequest<'a> {
@@ -122,22 +146,33 @@ impl<'a> AddPermissionRequest<'a> {
         self.builder = self.builder.path_param("account_id", value);
         self
     }
-    pub fn with_body(mut self, body: serde_json::Value) -> Self {
+    pub fn with_body(
+        mut self,
+        body: crate::models::custom_indicator_feeds_permissions_request::CustomIndicatorFeedsPermissionsRequest,
+    ) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<CustomIndicatorFeedsPermissionsResponse> {
         self.builder.send().await
     }
 }
-
 /// Grant permission to indicator feed
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/accounts/{account_id}/intel/indicator-feeds/permissions/add`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::custom_indicator_feeds };
+/// use cloudflare::{ ApiClient, apis::custom_indicator_feeds };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = add_permission(&api)
-///     .with_account_id("value")
+/// # let body: crate::models::custom_indicator_feeds_permissions_request::CustomIndicatorFeedsPermissionsRequest = todo!();
+/// let response = add_permission(&api)
+///     .with_account_id("account_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -147,7 +182,7 @@ pub fn add_permission(api: &ApiClient) -> AddPermissionRequest<'_> {
 
 #[derive(Debug)]
 pub struct RemovePermissionRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, CustomIndicatorFeedsPermissionsResponse>,
 }
 
 impl<'a> RemovePermissionRequest<'a> {
@@ -166,22 +201,33 @@ impl<'a> RemovePermissionRequest<'a> {
         self.builder = self.builder.path_param("account_id", value);
         self
     }
-    pub fn with_body(mut self, body: serde_json::Value) -> Self {
+    pub fn with_body(
+        mut self,
+        body: crate::models::custom_indicator_feeds_permissions_request::CustomIndicatorFeedsPermissionsRequest,
+    ) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<CustomIndicatorFeedsPermissionsResponse> {
         self.builder.send().await
     }
 }
-
 /// Revoke permission to indicator feed
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/accounts/{account_id}/intel/indicator-feeds/permissions/remove`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::custom_indicator_feeds };
+/// use cloudflare::{ ApiClient, apis::custom_indicator_feeds };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = remove_permission(&api)
-///     .with_account_id("value")
+/// # let body: crate::models::custom_indicator_feeds_permissions_request::CustomIndicatorFeedsPermissionsRequest = todo!();
+/// let response = remove_permission(&api)
+///     .with_account_id("account_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -191,7 +237,7 @@ pub fn remove_permission(api: &ApiClient) -> RemovePermissionRequest<'_> {
 
 #[derive(Debug)]
 pub struct ViewPermissionsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, CustomIndicatorFeedsPermissionListItemResponse>,
 }
 
 impl<'a> ViewPermissionsRequest<'a> {
@@ -209,18 +255,24 @@ impl<'a> ViewPermissionsRequest<'a> {
         self.builder = self.builder.path_param("account_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<CustomIndicatorFeedsPermissionListItemResponse> {
         self.builder.send().await
     }
 }
-
 /// List indicator feed permissions
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/intel/indicator-feeds/permissions/view`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::custom_indicator_feeds };
+/// use cloudflare::{ ApiClient, apis::custom_indicator_feeds };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = view_permissions(&api)
-///     .with_account_id("value")
+/// let response = view_permissions(&api)
+///     .with_account_id("account_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -230,7 +282,7 @@ pub fn view_permissions(api: &ApiClient) -> ViewPermissionsRequest<'_> {
 
 #[derive(Debug)]
 pub struct GetIndicatorFeedMetadataRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, CustomIndicatorFeedsIndicatorFeedMetadataResponse>,
 }
 
 impl<'a> GetIndicatorFeedMetadataRequest<'a> {
@@ -253,19 +305,26 @@ impl<'a> GetIndicatorFeedMetadataRequest<'a> {
         self.builder = self.builder.path_param("feed_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<CustomIndicatorFeedsIndicatorFeedMetadataResponse> {
         self.builder.send().await
     }
 }
-
 /// Get indicator feed metadata
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/intel/indicator-feeds/{feed_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `feed_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::custom_indicator_feeds };
+/// use cloudflare::{ ApiClient, apis::custom_indicator_feeds };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_indicator_feed_metadata(&api)
-///     .with_account_id("value")
-///     .with_feed_id("value")
+/// let response = get_indicator_feed_metadata(&api)
+///     .with_account_id("account_id")
+///     .with_feed_id("feed_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -275,7 +334,7 @@ pub fn get_indicator_feed_metadata(api: &ApiClient) -> GetIndicatorFeedMetadataR
 
 #[derive(Debug)]
 pub struct UpdateIndicatorFeedMetadataRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, CustomIndicatorFeedsUpdatePublicFieldResponse>,
 }
 
 impl<'a> UpdateIndicatorFeedMetadataRequest<'a> {
@@ -299,23 +358,35 @@ impl<'a> UpdateIndicatorFeedMetadataRequest<'a> {
         self.builder = self.builder.path_param("feed_id", value);
         self
     }
-    pub fn with_body(mut self, body: serde_json::Value) -> Self {
+    pub fn with_body(
+        mut self,
+        body: crate::models::custom_indicator_feeds_update_public_field_request::CustomIndicatorFeedsUpdatePublicFieldRequest,
+    ) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<CustomIndicatorFeedsUpdatePublicFieldResponse> {
         self.builder.send().await
     }
 }
-
 /// Update indicator feed metadata
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/accounts/{account_id}/intel/indicator-feeds/{feed_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `feed_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::custom_indicator_feeds };
+/// use cloudflare::{ ApiClient, apis::custom_indicator_feeds };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = update_indicator_feed_metadata(&api)
-///     .with_account_id("value")
-///     .with_feed_id("value")
+/// # let body: crate::models::custom_indicator_feeds_update_public_field_request::CustomIndicatorFeedsUpdatePublicFieldRequest = todo!();
+/// let response = update_indicator_feed_metadata(&api)
+///     .with_account_id("account_id")
+///     .with_feed_id("feed_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -352,15 +423,22 @@ impl<'a> GetIndicatorFeedDataRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get indicator feed data
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/intel/indicator-feeds/{feed_id}/data`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `feed_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::custom_indicator_feeds };
+/// use cloudflare::{ ApiClient, apis::custom_indicator_feeds };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_indicator_feed_data(&api)
-///     .with_account_id("value")
-///     .with_feed_id("value")
+/// let response = get_indicator_feed_data(&api)
+///     .with_account_id("account_id")
+///     .with_feed_id("feed_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -370,7 +448,7 @@ pub fn get_indicator_feed_data(api: &ApiClient) -> GetIndicatorFeedDataRequest<'
 
 #[derive(Debug)]
 pub struct UpdateIndicatorFeedDataRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, CustomIndicatorFeedsUpdateFeedResponse>,
 }
 
 impl<'a> UpdateIndicatorFeedDataRequest<'a> {
@@ -393,19 +471,26 @@ impl<'a> UpdateIndicatorFeedDataRequest<'a> {
         self.builder = self.builder.path_param("feed_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<CustomIndicatorFeedsUpdateFeedResponse> {
         self.builder.send().await
     }
 }
-
 /// Update indicator feed data
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/accounts/{account_id}/intel/indicator-feeds/{feed_id}/snapshot`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `feed_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::custom_indicator_feeds };
+/// use cloudflare::{ ApiClient, apis::custom_indicator_feeds };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = update_indicator_feed_data(&api)
-///     .with_account_id("value")
-///     .with_feed_id("value")
+/// let response = update_indicator_feed_data(&api)
+///     .with_account_id("account_id")
+///     .with_feed_id("feed_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -415,7 +500,7 @@ pub fn update_indicator_feed_data(api: &ApiClient) -> UpdateIndicatorFeedDataReq
 
 #[derive(Debug)]
 pub struct DownloadIndicatorFeedDataRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, CustomIndicatorFeedsUpdateFeedResponse>,
 }
 
 impl<'a> DownloadIndicatorFeedDataRequest<'a> {
@@ -438,19 +523,26 @@ impl<'a> DownloadIndicatorFeedDataRequest<'a> {
         self.builder = self.builder.path_param("feed_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<CustomIndicatorFeedsUpdateFeedResponse> {
         self.builder.send().await
     }
 }
-
 /// Download indicator feed data
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/intel/indicator_feeds/{feed_id}/download`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `feed_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::custom_indicator_feeds };
+/// use cloudflare::{ ApiClient, apis::custom_indicator_feeds };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = download_indicator_feed_data(&api)
-///     .with_account_id("value")
-///     .with_feed_id("value")
+/// let response = download_indicator_feed_data(&api)
+///     .with_account_id("account_id")
+///     .with_feed_id("feed_id")
 ///     .send()
 ///     .await?;
 /// ```

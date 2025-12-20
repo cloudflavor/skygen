@@ -15,12 +15,15 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::api_shield_patch_discoveries_response::ApiShieldPatchDiscoveriesResponse;
+use crate::models::api_shield_patch_discovery_response::ApiShieldPatchDiscoveryResponse;
+use crate::models::api_shield_schema_response_discovery::ApiShieldSchemaResponseDiscovery;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct RetrieveDiscoveredOperationsAsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, ApiShieldSchemaResponseDiscovery>,
 }
 
 impl<'a> RetrieveDiscoveredOperationsAsRequest<'a> {
@@ -35,18 +38,26 @@ impl<'a> RetrieveDiscoveredOperationsAsRequest<'a> {
         self.builder = self.builder.path_param("zone_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<ApiShieldSchemaResponseDiscovery> {
         self.builder.send().await
     }
 }
-
 /// Retrieve discovered operations on a zone rendered as OpenAPI schemas
+///
+/// Retrieve the most up to date view of discovered operations, rendered as OpenAPI schemas
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/api_gateway/discovery`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::api_shield_api_discovery };
+/// use cloudflare::{ ApiClient, apis::api_shield_api_discovery };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = retrieve_discovered_operations_as(&api)
-///     .with_zone_id("value")
+/// let response = retrieve_discovered_operations_as(&api)
+///     .with_zone_id("zone_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -80,14 +91,22 @@ impl<'a> RetrieveDiscoveredOperationsRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Retrieve discovered operations on a zone
+///
+/// Retrieve the most up to date view of discovered operations
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/api_gateway/discovery/operations`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::api_shield_api_discovery };
+/// use cloudflare::{ ApiClient, apis::api_shield_api_discovery };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = retrieve_discovered_operations(&api)
-///     .with_zone_id("value")
+/// let response = retrieve_discovered_operations(&api)
+///     .with_zone_id("zone_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -97,7 +116,7 @@ pub fn retrieve_discovered_operations(api: &ApiClient) -> RetrieveDiscoveredOper
 
 #[derive(Debug)]
 pub struct PatchDiscoveredOperationsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, ApiShieldPatchDiscoveriesResponse>,
 }
 
 impl<'a> PatchDiscoveredOperationsRequest<'a> {
@@ -123,18 +142,28 @@ impl<'a> PatchDiscoveredOperationsRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<ApiShieldPatchDiscoveriesResponse> {
         self.builder.send().await
     }
 }
-
 /// Patch discovered operations
+///
+/// Update the `state` on one or more discovered operations
+///
+/// **HTTP Method:** `PATCH`
+/// **Path:** `/zones/{zone_id}/api_gateway/discovery/operations`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::api_shield_api_discovery };
+/// use cloudflare::{ ApiClient, apis::api_shield_api_discovery };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = patch_discovered_operations(&api)
-///     .with_zone_id("value")
+/// # let body: crate::models::api_shield_api_discovery_patch_multiple_request::ApiShieldApiDiscoveryPatchMultipleRequest = todo!();
+/// let response = patch_discovered_operations(&api)
+///     .with_zone_id("zone_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -144,7 +173,7 @@ pub fn patch_discovered_operations(api: &ApiClient) -> PatchDiscoveredOperations
 
 #[derive(Debug)]
 pub struct PatchDiscoveredOperationRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, ApiShieldPatchDiscoveryResponse>,
 }
 
 impl<'a> PatchDiscoveredOperationRequest<'a> {
@@ -175,19 +204,30 @@ impl<'a> PatchDiscoveredOperationRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<ApiShieldPatchDiscoveryResponse> {
         self.builder.send().await
     }
 }
-
 /// Patch discovered operation
+///
+/// Update the `state` on a discovered operation
+///
+/// **HTTP Method:** `PATCH`
+/// **Path:** `/zones/{zone_id}/api_gateway/discovery/operations/{operation_id}`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `operation_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::api_shield_api_discovery };
+/// use cloudflare::{ ApiClient, apis::api_shield_api_discovery };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = patch_discovered_operation(&api)
-///     .with_zone_id("value")
-///     .with_operation_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = patch_discovered_operation(&api)
+///     .with_zone_id("zone_id")
+///     .with_operation_id("operation_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```

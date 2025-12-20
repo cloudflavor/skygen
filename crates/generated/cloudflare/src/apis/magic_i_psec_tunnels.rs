@@ -15,12 +15,19 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::magic_psk_generation_response::MagicPskGenerationResponse;
+use crate::models::magic_schemas_create_ipsec_tunnel_response::MagicSchemasCreateIpsecTunnelResponse;
+use crate::models::magic_schemas_modified_tunnels_collection_response::MagicSchemasModifiedTunnelsCollectionResponse;
+use crate::models::magic_schemas_tunnel_deleted_response::MagicSchemasTunnelDeletedResponse;
+use crate::models::magic_schemas_tunnel_modified_response::MagicSchemasTunnelModifiedResponse;
+use crate::models::magic_schemas_tunnel_single_response::MagicSchemasTunnelSingleResponse;
+use crate::models::magic_schemas_tunnels_collection_response::MagicSchemasTunnelsCollectionResponse;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct IpsecTunnelsListIpsecRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, MagicSchemasTunnelsCollectionResponse>,
 }
 
 impl<'a> IpsecTunnelsListIpsecRequest<'a> {
@@ -42,18 +49,28 @@ impl<'a> IpsecTunnelsListIpsecRequest<'a> {
         self.builder = self.builder.header_param("x-magic-new-hc-target", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<MagicSchemasTunnelsCollectionResponse> {
         self.builder.send().await
     }
 }
-
 /// List IPsec tunnels
+///
+/// Lists IPsec tunnels associated with an account.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/magic/ipsec_tunnels`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `x-magic-new-hc-target` (header,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::magic_i_psec_tunnels };
+/// use cloudflare::{ ApiClient, apis::magic_i_psec_tunnels };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = ipsec_tunnels_list_ipsec(&api)
-///     .with_account_id("value")
+/// let response = ipsec_tunnels_list_ipsec(&api)
+///     .with_account_id("account_id")
+///     .with_x_magic_new_hc_target("x-magic-new-hc-target")
 ///     .send()
 ///     .await?;
 /// ```
@@ -63,7 +80,7 @@ pub fn ipsec_tunnels_list_ipsec(api: &ApiClient) -> IpsecTunnelsListIpsecRequest
 
 #[derive(Debug)]
 pub struct IpsecTunnelsCreateIpsecRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, MagicSchemasCreateIpsecTunnelResponse>,
 }
 
 impl<'a> IpsecTunnelsCreateIpsecRequest<'a> {
@@ -86,22 +103,37 @@ impl<'a> IpsecTunnelsCreateIpsecRequest<'a> {
         self.builder = self.builder.header_param("x-magic-new-hc-target", value);
         self
     }
-    pub fn with_body(mut self, body: serde_json::Value) -> Self {
+    pub fn with_body(
+        mut self,
+        body: crate::models::magic_ipsec_tunnel_add_request::MagicIpsecTunnelAddRequest,
+    ) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<MagicSchemasCreateIpsecTunnelResponse> {
         self.builder.send().await
     }
 }
-
 /// Create an IPsec tunnel
+///
+/// Creates a new IPsec tunnel associated with an account. Use `?validate_only=true` as an optional query parameter to only run validation without persisting changes.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/magic/ipsec_tunnels`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `x-magic-new-hc-target` (header,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::magic_i_psec_tunnels };
+/// use cloudflare::{ ApiClient, apis::magic_i_psec_tunnels };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = ipsec_tunnels_create_ipsec(&api)
-///     .with_account_id("value")
+/// # let body: crate::models::magic_ipsec_tunnel_add_request::MagicIpsecTunnelAddRequest = todo!();
+/// let response = ipsec_tunnels_create_ipsec(&api)
+///     .with_account_id("account_id")
+///     .with_x_magic_new_hc_target("x-magic-new-hc-target")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -111,7 +143,7 @@ pub fn ipsec_tunnels_create_ipsec(api: &ApiClient) -> IpsecTunnelsCreateIpsecReq
 
 #[derive(Debug)]
 pub struct IpsecTunnelsUpdateMultipleRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, MagicSchemasModifiedTunnelsCollectionResponse>,
 }
 
 impl<'a> IpsecTunnelsUpdateMultipleRequest<'a> {
@@ -138,18 +170,30 @@ impl<'a> IpsecTunnelsUpdateMultipleRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<MagicSchemasModifiedTunnelsCollectionResponse> {
         self.builder.send().await
     }
 }
-
 /// Update multiple IPsec tunnels
+///
+/// Update multiple IPsec tunnels associated with an account. Use `?validate_only=true` as an optional query parameter to only run validation without persisting changes.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/accounts/{account_id}/magic/ipsec_tunnels`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `x-magic-new-hc-target` (header,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::magic_i_psec_tunnels };
+/// use cloudflare::{ ApiClient, apis::magic_i_psec_tunnels };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = ipsec_tunnels_update_multiple(&api)
-///     .with_account_id("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = ipsec_tunnels_update_multiple(&api)
+///     .with_account_id("account_id")
+///     .with_x_magic_new_hc_target("x-magic-new-hc-target")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -159,7 +203,7 @@ pub fn ipsec_tunnels_update_multiple(api: &ApiClient) -> IpsecTunnelsUpdateMulti
 
 #[derive(Debug)]
 pub struct IpsecTunnelsListIpsecGetRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, MagicSchemasTunnelSingleResponse>,
 }
 
 impl<'a> IpsecTunnelsListIpsecGetRequest<'a> {
@@ -186,19 +230,30 @@ impl<'a> IpsecTunnelsListIpsecGetRequest<'a> {
         self.builder = self.builder.header_param("x-magic-new-hc-target", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<MagicSchemasTunnelSingleResponse> {
         self.builder.send().await
     }
 }
-
 /// List IPsec tunnel details
+///
+/// Lists details for a specific IPsec tunnel.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/magic/ipsec_tunnels/{ipsec_tunnel_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `ipsec_tunnel_id` (path, required)
+/// - `x-magic-new-hc-target` (header,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::magic_i_psec_tunnels };
+/// use cloudflare::{ ApiClient, apis::magic_i_psec_tunnels };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = ipsec_tunnels_list_ipsec_get(&api)
-///     .with_account_id("value")
-///     .with_ipsec_tunnel_id("value")
+/// let response = ipsec_tunnels_list_ipsec_get(&api)
+///     .with_account_id("account_id")
+///     .with_ipsec_tunnel_id("ipsec_tunnel_id")
+///     .with_x_magic_new_hc_target("x-magic-new-hc-target")
 ///     .send()
 ///     .await?;
 /// ```
@@ -208,7 +263,7 @@ pub fn ipsec_tunnels_list_ipsec_get(api: &ApiClient) -> IpsecTunnelsListIpsecGet
 
 #[derive(Debug)]
 pub struct IpsecTunnelsUpdateIpsecRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, MagicSchemasTunnelModifiedResponse>,
 }
 
 impl<'a> IpsecTunnelsUpdateIpsecRequest<'a> {
@@ -243,19 +298,32 @@ impl<'a> IpsecTunnelsUpdateIpsecRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<MagicSchemasTunnelModifiedResponse> {
         self.builder.send().await
     }
 }
-
 /// Update IPsec Tunnel
+///
+/// Updates a specific IPsec tunnel associated with an account. Use `?validate_only=true` as an optional query parameter to only run validation without persisting changes.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/accounts/{account_id}/magic/ipsec_tunnels/{ipsec_tunnel_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `ipsec_tunnel_id` (path, required)
+/// - `x-magic-new-hc-target` (header,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::magic_i_psec_tunnels };
+/// use cloudflare::{ ApiClient, apis::magic_i_psec_tunnels };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = ipsec_tunnels_update_ipsec(&api)
-///     .with_account_id("value")
-///     .with_ipsec_tunnel_id("value")
+/// # let body: crate::models::magic_ipsec_tunnel_add_single_request::MagicIpsecTunnelAddSingleRequest = todo!();
+/// let response = ipsec_tunnels_update_ipsec(&api)
+///     .with_account_id("account_id")
+///     .with_ipsec_tunnel_id("ipsec_tunnel_id")
+///     .with_x_magic_new_hc_target("x-magic-new-hc-target")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -265,7 +333,7 @@ pub fn ipsec_tunnels_update_ipsec(api: &ApiClient) -> IpsecTunnelsUpdateIpsecReq
 
 #[derive(Debug)]
 pub struct IpsecTunnelsDeleteIpsecRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, MagicSchemasTunnelDeletedResponse>,
 }
 
 impl<'a> IpsecTunnelsDeleteIpsecRequest<'a> {
@@ -292,19 +360,30 @@ impl<'a> IpsecTunnelsDeleteIpsecRequest<'a> {
         self.builder = self.builder.header_param("x-magic-new-hc-target", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<MagicSchemasTunnelDeletedResponse> {
         self.builder.send().await
     }
 }
-
 /// Delete IPsec Tunnel
+///
+/// Disables and removes a specific static IPsec Tunnel associated with an account. Use `?validate_only=true` as an optional query parameter to only run validation without persisting changes.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/accounts/{account_id}/magic/ipsec_tunnels/{ipsec_tunnel_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `ipsec_tunnel_id` (path, required)
+/// - `x-magic-new-hc-target` (header,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::magic_i_psec_tunnels };
+/// use cloudflare::{ ApiClient, apis::magic_i_psec_tunnels };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = ipsec_tunnels_delete_ipsec(&api)
-///     .with_account_id("value")
-///     .with_ipsec_tunnel_id("value")
+/// let response = ipsec_tunnels_delete_ipsec(&api)
+///     .with_account_id("account_id")
+///     .with_ipsec_tunnel_id("ipsec_tunnel_id")
+///     .with_x_magic_new_hc_target("x-magic-new-hc-target")
 ///     .send()
 ///     .await?;
 /// ```
@@ -314,7 +393,7 @@ pub fn ipsec_tunnels_delete_ipsec(api: &ApiClient) -> IpsecTunnelsDeleteIpsecReq
 
 #[derive(Debug)]
 pub struct IpsecTunnelsGeneratePreRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, MagicPskGenerationResponse>,
 }
 
 impl<'a> IpsecTunnelsGeneratePreRequest<'a> {
@@ -337,19 +416,28 @@ impl<'a> IpsecTunnelsGeneratePreRequest<'a> {
         self.builder = self.builder.path_param("ipsec_tunnel_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<MagicPskGenerationResponse> {
         self.builder.send().await
     }
 }
-
 /// Generate Pre Shared Key (PSK) for IPsec tunnels
+///
+/// Generates a Pre Shared Key for a specific IPsec tunnel used in the IKE session. Use `?validate_only=true` as an optional query parameter to only run validation without persisting changes. After a PSK is generated, the PSK is immediately persisted to Cloudflare's edge and cannot be retrieved later. Note the PSK in a safe place.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/magic/ipsec_tunnels/{ipsec_tunnel_id}/psk_generate`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `ipsec_tunnel_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::magic_i_psec_tunnels };
+/// use cloudflare::{ ApiClient, apis::magic_i_psec_tunnels };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = ipsec_tunnels_generate_pre(&api)
-///     .with_account_id("value")
-///     .with_ipsec_tunnel_id("value")
+/// let response = ipsec_tunnels_generate_pre(&api)
+///     .with_account_id("account_id")
+///     .with_ipsec_tunnel_id("ipsec_tunnel_id")
 ///     .send()
 ///     .await?;
 /// ```

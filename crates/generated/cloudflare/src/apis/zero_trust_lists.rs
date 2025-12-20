@@ -15,12 +15,17 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::zero_trust_gateway_empty_response::ZeroTrustGatewayEmptyResponse;
+use crate::models::zero_trust_gateway_list_item_response_collection::ZeroTrustGatewayListItemResponseCollection;
+use crate::models::zero_trust_gateway_list_single_response::ZeroTrustGatewayListSingleResponse;
+use crate::models::zero_trust_gateway_schemas_response_collection::ZeroTrustGatewaySchemasResponseCollection;
+use crate::models::zero_trust_gateway_single_response_with_list_items::ZeroTrustGatewaySingleResponseWithListItems;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct ListZeroTrustListsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, ZeroTrustGatewaySchemasResponseCollection>,
 }
 
 impl<'a> ListZeroTrustListsRequest<'a> {
@@ -39,18 +44,28 @@ impl<'a> ListZeroTrustListsRequest<'a> {
         self.builder = self.builder.header_param("type", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<ZeroTrustGatewaySchemasResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// List Zero Trust lists
+///
+/// Fetches all Zero Trust lists for an account.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/gateway/lists`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `type` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zero_trust_lists };
+/// use cloudflare::{ ApiClient, apis::zero_trust_lists };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_zero_trust_lists(&api)
-///     .with_account_id("value")
+/// let response = list_zero_trust_lists(&api)
+///     .with_account_id("account_id")
+///     .with_type_param("type")
 ///     .send()
 ///     .await?;
 /// ```
@@ -60,7 +75,7 @@ pub fn list_zero_trust_lists(api: &ApiClient) -> ListZeroTrustListsRequest<'_> {
 
 #[derive(Debug)]
 pub struct CreateZeroTrustListRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, ZeroTrustGatewaySingleResponseWithListItems>,
 }
 
 impl<'a> CreateZeroTrustListRequest<'a> {
@@ -80,18 +95,28 @@ impl<'a> CreateZeroTrustListRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<ZeroTrustGatewaySingleResponseWithListItems> {
         self.builder.send().await
     }
 }
-
 /// Create Zero Trust list
+///
+/// Creates a new Zero Trust list.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/gateway/lists`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zero_trust_lists };
+/// use cloudflare::{ ApiClient, apis::zero_trust_lists };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = create_zero_trust_list(&api)
-///     .with_account_id("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = create_zero_trust_list(&api)
+///     .with_account_id("account_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -101,7 +126,7 @@ pub fn create_zero_trust_list(api: &ApiClient) -> CreateZeroTrustListRequest<'_>
 
 #[derive(Debug)]
 pub struct ListDetailsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, ZeroTrustGatewayListSingleResponse>,
 }
 
 impl<'a> ListDetailsRequest<'a> {
@@ -124,19 +149,28 @@ impl<'a> ListDetailsRequest<'a> {
         self.builder = self.builder.path_param("list_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<ZeroTrustGatewayListSingleResponse> {
         self.builder.send().await
     }
 }
-
 /// Get Zero Trust list details
+///
+/// Fetches a single Zero Trust list.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/gateway/lists/{list_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `list_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zero_trust_lists };
+/// use cloudflare::{ ApiClient, apis::zero_trust_lists };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_details(&api)
-///     .with_account_id("value")
-///     .with_list_id("value")
+/// let response = list_details(&api)
+///     .with_account_id("account_id")
+///     .with_list_id("list_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -146,7 +180,7 @@ pub fn list_details(api: &ApiClient) -> ListDetailsRequest<'_> {
 
 #[derive(Debug)]
 pub struct UpdateZeroTrustListRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, ZeroTrustGatewayListSingleResponse>,
 }
 
 impl<'a> UpdateZeroTrustListRequest<'a> {
@@ -174,19 +208,30 @@ impl<'a> UpdateZeroTrustListRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<ZeroTrustGatewayListSingleResponse> {
         self.builder.send().await
     }
 }
-
 /// Update Zero Trust list
+///
+/// Updates a configured Zero Trust list. Skips updating list items if not included in the payload.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/accounts/{account_id}/gateway/lists/{list_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `list_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zero_trust_lists };
+/// use cloudflare::{ ApiClient, apis::zero_trust_lists };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = update_zero_trust_list(&api)
-///     .with_account_id("value")
-///     .with_list_id("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = update_zero_trust_list(&api)
+///     .with_account_id("account_id")
+///     .with_list_id("list_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -196,7 +241,7 @@ pub fn update_zero_trust_list(api: &ApiClient) -> UpdateZeroTrustListRequest<'_>
 
 #[derive(Debug)]
 pub struct DeleteZeroTrustListRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, ZeroTrustGatewayEmptyResponse>,
 }
 
 impl<'a> DeleteZeroTrustListRequest<'a> {
@@ -219,19 +264,28 @@ impl<'a> DeleteZeroTrustListRequest<'a> {
         self.builder = self.builder.path_param("list_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<ZeroTrustGatewayEmptyResponse> {
         self.builder.send().await
     }
 }
-
 /// Delete Zero Trust list
+///
+/// Deletes a Zero Trust list.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/accounts/{account_id}/gateway/lists/{list_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `list_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zero_trust_lists };
+/// use cloudflare::{ ApiClient, apis::zero_trust_lists };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete_zero_trust_list(&api)
-///     .with_account_id("value")
-///     .with_list_id("value")
+/// let response = delete_zero_trust_list(&api)
+///     .with_account_id("account_id")
+///     .with_list_id("list_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -241,7 +295,7 @@ pub fn delete_zero_trust_list(api: &ApiClient) -> DeleteZeroTrustListRequest<'_>
 
 #[derive(Debug)]
 pub struct PatchZeroTrustListRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, ZeroTrustGatewayListSingleResponse>,
 }
 
 impl<'a> PatchZeroTrustListRequest<'a> {
@@ -272,19 +326,30 @@ impl<'a> PatchZeroTrustListRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<ZeroTrustGatewayListSingleResponse> {
         self.builder.send().await
     }
 }
-
 /// Patch Zero Trust list
+///
+/// Appends or removes an item from a configured Zero Trust list.
+///
+/// **HTTP Method:** `PATCH`
+/// **Path:** `/accounts/{account_id}/gateway/lists/{list_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `list_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zero_trust_lists };
+/// use cloudflare::{ ApiClient, apis::zero_trust_lists };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = patch_zero_trust_list(&api)
-///     .with_account_id("value")
-///     .with_list_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = patch_zero_trust_list(&api)
+///     .with_account_id("account_id")
+///     .with_list_id("list_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -294,7 +359,7 @@ pub fn patch_zero_trust_list(api: &ApiClient) -> PatchZeroTrustListRequest<'_> {
 
 #[derive(Debug)]
 pub struct ListItemsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, ZeroTrustGatewayListItemResponseCollection>,
 }
 
 impl<'a> ListItemsRequest<'a> {
@@ -317,19 +382,28 @@ impl<'a> ListItemsRequest<'a> {
         self.builder = self.builder.path_param("list_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<ZeroTrustGatewayListItemResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// Get Zero Trust list items
+///
+/// Fetches all items in a single Zero Trust list.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/gateway/lists/{list_id}/items`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `list_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zero_trust_lists };
+/// use cloudflare::{ ApiClient, apis::zero_trust_lists };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_items(&api)
-///     .with_account_id("value")
-///     .with_list_id("value")
+/// let response = list_items(&api)
+///     .with_account_id("account_id")
+///     .with_list_id("list_id")
 ///     .send()
 ///     .await?;
 /// ```

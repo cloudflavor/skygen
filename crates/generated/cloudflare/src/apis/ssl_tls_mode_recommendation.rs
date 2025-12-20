@@ -39,14 +39,22 @@ impl<'a> GetRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// SSL/TLS Recommendation
+///
+/// Retrieve the SSL/TLS Recommender's recommendation for a zone.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/ssl/recommendation`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::ssl_tls_mode_recommendation };
+/// use cloudflare::{ ApiClient, apis::ssl_tls_mode_recommendation };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get(&api)
-///     .with_zone_id("value")
+/// let response = get(&api)
+///     .with_zone_id("zone_id")
 ///     .send()
 ///     .await?;
 /// ```

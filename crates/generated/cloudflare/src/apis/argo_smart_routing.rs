@@ -15,12 +15,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::argo_config_response_single::ArgoConfigResponseSingle;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct GetArgoSmartRoutingRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, ArgoConfigResponseSingle>,
 }
 
 impl<'a> GetArgoSmartRoutingRequest<'a> {
@@ -35,18 +36,24 @@ impl<'a> GetArgoSmartRoutingRequest<'a> {
         self.builder = self.builder.path_param("zone_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<ArgoConfigResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Get Argo Smart Routing setting
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/argo/smart_routing`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::argo_smart_routing };
+/// use cloudflare::{ ApiClient, apis::argo_smart_routing };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_argo_smart_routing(&api)
-///     .with_zone_id("value")
+/// let response = get_argo_smart_routing(&api)
+///     .with_zone_id("zone_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -56,7 +63,7 @@ pub fn get_argo_smart_routing(api: &ApiClient) -> GetArgoSmartRoutingRequest<'_>
 
 #[derive(Debug)]
 pub struct PatchArgoSmartRoutingRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, ArgoConfigResponseSingle>,
 }
 
 impl<'a> PatchArgoSmartRoutingRequest<'a> {
@@ -76,18 +83,28 @@ impl<'a> PatchArgoSmartRoutingRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<ArgoConfigResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Patch Argo Smart Routing setting
+///
+/// Updates enablement of Argo Smart Routing.
+///
+/// **HTTP Method:** `PATCH`
+/// **Path:** `/zones/{zone_id}/argo/smart_routing`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::argo_smart_routing };
+/// use cloudflare::{ ApiClient, apis::argo_smart_routing };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = patch_argo_smart_routing(&api)
-///     .with_zone_id("value")
+/// # let body: crate::models::argo_config_patch::ArgoConfigPatch = todo!();
+/// let response = patch_argo_smart_routing(&api)
+///     .with_zone_id("zone_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```

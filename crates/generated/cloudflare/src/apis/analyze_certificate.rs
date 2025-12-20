@@ -15,12 +15,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::tls_certificates_and_hostnames_certificate_analyze_response::TlsCertificatesAndHostnamesCertificateAnalyzeResponse;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct PostRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, TlsCertificatesAndHostnamesCertificateAnalyzeResponse>,
 }
 
 impl<'a> PostRequest<'a> {
@@ -42,18 +43,28 @@ impl<'a> PostRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<TlsCertificatesAndHostnamesCertificateAnalyzeResponse> {
         self.builder.send().await
     }
 }
-
 /// Analyze Certificate
+///
+/// Returns the set of hostnames, the signature algorithm, and the expiration date of the certificate.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/zones/{zone_id}/ssl/analyze`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::analyze_certificate };
+/// use cloudflare::{ ApiClient, apis::analyze_certificate };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = post(&api)
-///     .with_zone_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = post(&api)
+///     .with_zone_id("zone_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```

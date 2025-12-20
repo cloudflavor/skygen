@@ -15,7 +15,4 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-use serde::{Deserialize, Serialize};
-
-#[derive(Debug, Clone, Serialize, Deserialize)]
-pub struct LoadBalancingHeader {}
+pub type LoadBalancingHeader = std::collections::BTreeMap<String, Vec<String>>;

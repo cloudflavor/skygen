@@ -50,14 +50,28 @@ impl<'a> CloudflareD1ListDatabasesRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// List D1 Databases
+///
+/// Returns a list of D1 databases.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/d1/database`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `name` (query,optional)
+/// - `page` (query,optional)
+/// - `per_page` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::d1 };
+/// use cloudflare::{ ApiClient, apis::d1 };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = cloudflare_d1_list_databases(&api)
-///     .with_account_id("value")
+/// let response = cloudflare_d1_list_databases(&api)
+///     .with_account_id("account_id")
+///     .with_name("name")
+///     .with_page("page")
+///     .with_per_page("per_page")
 ///     .send()
 ///     .await?;
 /// ```
@@ -94,14 +108,24 @@ impl<'a> CloudflareD1CreateDatabaseRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Create D1 Database
+///
+/// Returns the created D1 database.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/d1/database`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::d1 };
+/// use cloudflare::{ ApiClient, apis::d1 };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = cloudflare_d1_create_database(&api)
-///     .with_account_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = cloudflare_d1_create_database(&api)
+///     .with_account_id("account_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -138,15 +162,24 @@ impl<'a> CloudflareD1GetDatabaseRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get D1 Database
+///
+/// Returns the specified D1 database.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/d1/database/{database_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `database_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::d1 };
+/// use cloudflare::{ ApiClient, apis::d1 };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = cloudflare_d1_get_database(&api)
-///     .with_account_id("value")
-///     .with_database_id("value")
+/// let response = cloudflare_d1_get_database(&api)
+///     .with_account_id("account_id")
+///     .with_database_id("database_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -191,15 +224,26 @@ impl<'a> CloudflareD1UpdateDatabaseRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Update D1 Database
+///
+/// Updates the specified D1 database.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/accounts/{account_id}/d1/database/{database_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `database_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::d1 };
+/// use cloudflare::{ ApiClient, apis::d1 };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = cloudflare_d1_update_database(&api)
-///     .with_account_id("value")
-///     .with_database_id("value")
+/// # let body: crate::models::d1_database_update_request_body::D1DatabaseUpdateRequestBody = todo!();
+/// let response = cloudflare_d1_update_database(&api)
+///     .with_account_id("account_id")
+///     .with_database_id("database_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -236,15 +280,24 @@ impl<'a> CloudflareD1DeleteDatabaseRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Delete D1 Database
+///
+/// Deletes the specified D1 database.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/accounts/{account_id}/d1/database/{database_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `database_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::d1 };
+/// use cloudflare::{ ApiClient, apis::d1 };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = cloudflare_d1_delete_database(&api)
-///     .with_account_id("value")
-///     .with_database_id("value")
+/// let response = cloudflare_d1_delete_database(&api)
+///     .with_account_id("account_id")
+///     .with_database_id("database_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -289,15 +342,26 @@ impl<'a> CloudflareD1UpdatePartialRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Update D1 Database partially
+///
+/// Updates partially the specified D1 database.
+///
+/// **HTTP Method:** `PATCH`
+/// **Path:** `/accounts/{account_id}/d1/database/{database_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `database_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::d1 };
+/// use cloudflare::{ ApiClient, apis::d1 };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = cloudflare_d1_update_partial(&api)
-///     .with_account_id("value")
-///     .with_database_id("value")
+/// # let body: crate::models::d1_database_update_partial_request_body::D1DatabaseUpdatePartialRequestBody = todo!();
+/// let response = cloudflare_d1_update_partial(&api)
+///     .with_account_id("account_id")
+///     .with_database_id("database_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -342,15 +406,28 @@ impl<'a> CloudflareD1ExportDatabaseRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Export D1 Database as SQL
+///
+/// Returns a URL where the SQL contents of your D1 can be downloaded. Note: this process may take
+/// some time for larger DBs, during which your D1 will be unavailable to serve queries. To avoid
+/// blocking your DB unnecessarily, an in-progress export must be continually polled or will automatically cancel.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/d1/database/{database_id}/export`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `database_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::d1 };
+/// use cloudflare::{ ApiClient, apis::d1 };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = cloudflare_d1_export_database(&api)
-///     .with_account_id("value")
-///     .with_database_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = cloudflare_d1_export_database(&api)
+///     .with_account_id("account_id")
+///     .with_database_id("database_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -392,15 +469,27 @@ impl<'a> CloudflareD1ImportDatabaseRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Import SQL into your D1 Database
+///
+/// Generates a temporary URL for uploading an SQL file to, then instructing the D1 to import it
+/// and polling it for status updates. Imports block the D1 for their duration.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/d1/database/{database_id}/import`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `database_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::d1 };
+/// use cloudflare::{ ApiClient, apis::d1 };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = cloudflare_d1_import_database(&api)
-///     .with_account_id("value")
-///     .with_database_id("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = cloudflare_d1_import_database(&api)
+///     .with_account_id("account_id")
+///     .with_database_id("database_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -445,15 +534,26 @@ impl<'a> CloudflareD1QueryDatabaseRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Query D1 Database
+///
+/// Returns the query result as an object.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/d1/database/{database_id}/query`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `database_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::d1 };
+/// use cloudflare::{ ApiClient, apis::d1 };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = cloudflare_d1_query_database(&api)
-///     .with_account_id("value")
-///     .with_database_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = cloudflare_d1_query_database(&api)
+///     .with_account_id("account_id")
+///     .with_database_id("database_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -498,15 +598,26 @@ impl<'a> CloudflareD1RawDatabaseRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Raw D1 Database query
+///
+/// Returns the query result rows as arrays rather than objects. This is a performance-optimized version of the /query endpoint.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/d1/database/{database_id}/raw`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `database_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::d1 };
+/// use cloudflare::{ ApiClient, apis::d1 };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = cloudflare_d1_raw_database(&api)
-///     .with_account_id("value")
-///     .with_database_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = cloudflare_d1_raw_database(&api)
+///     .with_account_id("account_id")
+///     .with_database_id("database_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```

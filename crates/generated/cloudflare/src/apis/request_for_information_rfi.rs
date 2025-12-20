@@ -51,14 +51,22 @@ impl<'a> CloudforceOneRequestListRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// List Requests
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/cloudforce-one/requests`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::request_for_information_rfi };
+/// use cloudflare::{ ApiClient, apis::request_for_information_rfi };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = cloudforce_one_request_list(&api)
-///     .with_account_id("value")
+/// # let body: crate::models::cloudforce_one_requests_request_list::CloudforceOneRequestsRequestList = todo!();
+/// let response = cloudforce_one_request_list(&api)
+///     .with_account_id("account_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -90,14 +98,20 @@ impl<'a> CloudforceOneRequestConstantsRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get Request Priority, Status, and TLP constants
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/cloudforce-one/requests/constants`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::request_for_information_rfi };
+/// use cloudflare::{ ApiClient, apis::request_for_information_rfi };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = cloudforce_one_request_constants(&api)
-///     .with_account_id("value")
+/// let response = cloudforce_one_request_constants(&api)
+///     .with_account_id("account_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -139,14 +153,24 @@ impl<'a> CloudforceOneRequestNewRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Create a New Request.
+///
+/// Creating a request adds the request into the Cloudforce One queue for analysis. In addition to the content, a short title, type, priority, and releasability should be provided. If one is not provided, a default will be assigned.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/cloudforce-one/requests/new`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::request_for_information_rfi };
+/// use cloudflare::{ ApiClient, apis::request_for_information_rfi };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = cloudforce_one_request_new(&api)
-///     .with_account_id("value")
+/// # let body: crate::models::cloudforce_one_requests_request_edit::CloudforceOneRequestsRequestEdit = todo!();
+/// let response = cloudforce_one_request_new(&api)
+///     .with_account_id("account_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -178,14 +202,20 @@ impl<'a> CloudforceOneRequestQuotaRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get Request Quota
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/cloudforce-one/requests/quota`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::request_for_information_rfi };
+/// use cloudflare::{ ApiClient, apis::request_for_information_rfi };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = cloudforce_one_request_quota(&api)
-///     .with_account_id("value")
+/// let response = cloudforce_one_request_quota(&api)
+///     .with_account_id("account_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -217,14 +247,20 @@ impl<'a> CloudforceOneRequestTypesRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get Request Types
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/cloudforce-one/requests/types`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::request_for_information_rfi };
+/// use cloudflare::{ ApiClient, apis::request_for_information_rfi };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = cloudforce_one_request_types(&api)
-///     .with_account_id("value")
+/// let response = cloudforce_one_request_types(&api)
+///     .with_account_id("account_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -261,15 +297,22 @@ impl<'a> CloudforceOneRequestGetRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get a Request
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/cloudforce-one/requests/{request_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `request_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::request_for_information_rfi };
+/// use cloudflare::{ ApiClient, apis::request_for_information_rfi };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = cloudforce_one_request_get(&api)
-///     .with_account_id("value")
-///     .with_request_id("value")
+/// let response = cloudforce_one_request_get(&api)
+///     .with_account_id("account_id")
+///     .with_request_id("request_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -314,15 +357,26 @@ impl<'a> CloudforceOneRequestUpdateRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Update a Request
+///
+/// Updating a request alters the request in the Cloudforce One queue. This API may be used to update any attributes of the request after the initial submission. Only fields that you choose to update need to be add to the request body.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/accounts/{account_id}/cloudforce-one/requests/{request_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `request_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::request_for_information_rfi };
+/// use cloudflare::{ ApiClient, apis::request_for_information_rfi };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = cloudforce_one_request_update(&api)
-///     .with_account_id("value")
-///     .with_request_id("value")
+/// # let body: crate::models::cloudforce_one_requests_request_edit::CloudforceOneRequestsRequestEdit = todo!();
+/// let response = cloudforce_one_request_update(&api)
+///     .with_account_id("account_id")
+///     .with_request_id("request_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -359,15 +413,22 @@ impl<'a> CloudforceOneRequestDeleteRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Delete a Request
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/accounts/{account_id}/cloudforce-one/requests/{request_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `request_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::request_for_information_rfi };
+/// use cloudflare::{ ApiClient, apis::request_for_information_rfi };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = cloudforce_one_request_delete(&api)
-///     .with_account_id("value")
-///     .with_request_id("value")
+/// let response = cloudforce_one_request_delete(&api)
+///     .with_account_id("account_id")
+///     .with_request_id("request_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -412,15 +473,24 @@ impl<'a> CloudforceOneRequestAssetRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// List Request Assets
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/cloudforce-one/requests/{request_id}/asset`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `request_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::request_for_information_rfi };
+/// use cloudflare::{ ApiClient, apis::request_for_information_rfi };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = cloudforce_one_request_asset(&api)
-///     .with_account_id("value")
-///     .with_request_id("value")
+/// # let body: crate::models::cloudforce_one_requests_request_asset_list::CloudforceOneRequestsRequestAssetList = todo!();
+/// let response = cloudforce_one_request_asset(&api)
+///     .with_account_id("account_id")
+///     .with_request_id("request_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -457,15 +527,22 @@ impl<'a> CloudforceOneRequestAssetPostRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Create a New Request Asset
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/cloudforce-one/requests/{request_id}/asset/new`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `request_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::request_for_information_rfi };
+/// use cloudflare::{ ApiClient, apis::request_for_information_rfi };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = cloudforce_one_request_asset_post(&api)
-///     .with_account_id("value")
-///     .with_request_id("value")
+/// let response = cloudforce_one_request_asset_post(&api)
+///     .with_account_id("account_id")
+///     .with_request_id("request_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -509,16 +586,24 @@ impl<'a> CloudforceOneRequestAssetGetRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get a Request Asset
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/cloudforce-one/requests/{request_id}/asset/{asset_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `request_id` (path, required)
+/// - `asset_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::request_for_information_rfi };
+/// use cloudflare::{ ApiClient, apis::request_for_information_rfi };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = cloudforce_one_request_asset_get(&api)
-///     .with_account_id("value")
-///     .with_request_id("value")
-///     .with_asset_id("value")
+/// let response = cloudforce_one_request_asset_get(&api)
+///     .with_account_id("account_id")
+///     .with_request_id("request_id")
+///     .with_asset_id("asset_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -570,16 +655,26 @@ impl<'a> CloudforceOneRequestAssetPutRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Update a Request Asset
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/accounts/{account_id}/cloudforce-one/requests/{request_id}/asset/{asset_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `request_id` (path, required)
+/// - `asset_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::request_for_information_rfi };
+/// use cloudflare::{ ApiClient, apis::request_for_information_rfi };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = cloudforce_one_request_asset_put(&api)
-///     .with_account_id("value")
-///     .with_request_id("value")
-///     .with_asset_id("value")
+/// # let body: crate::models::cloudforce_one_requests_request_asset_edit::CloudforceOneRequestsRequestAssetEdit = todo!();
+/// let response = cloudforce_one_request_asset_put(&api)
+///     .with_account_id("account_id")
+///     .with_request_id("request_id")
+///     .with_asset_id("asset_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -623,16 +718,24 @@ impl<'a> CloudforceOneRequestAssetDeleteRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Delete a Request Asset
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/accounts/{account_id}/cloudforce-one/requests/{request_id}/asset/{asset_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `request_id` (path, required)
+/// - `asset_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::request_for_information_rfi };
+/// use cloudflare::{ ApiClient, apis::request_for_information_rfi };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = cloudforce_one_request_asset_delete(&api)
-///     .with_account_id("value")
-///     .with_request_id("value")
-///     .with_asset_id("value")
+/// let response = cloudforce_one_request_asset_delete(&api)
+///     .with_account_id("account_id")
+///     .with_request_id("request_id")
+///     .with_asset_id("asset_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -679,15 +782,24 @@ impl<'a> CloudforceOneRequestMessageRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// List Request Messages
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/cloudforce-one/requests/{request_id}/message`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `request_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::request_for_information_rfi };
+/// use cloudflare::{ ApiClient, apis::request_for_information_rfi };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = cloudforce_one_request_message(&api)
-///     .with_account_id("value")
-///     .with_request_id("value")
+/// # let body: crate::models::cloudforce_one_requests_request_message_list::CloudforceOneRequestsRequestMessageList = todo!();
+/// let response = cloudforce_one_request_message(&api)
+///     .with_account_id("account_id")
+///     .with_request_id("request_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -732,15 +844,24 @@ impl<'a> CloudforceOneRequestMessagePostRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Create a New Request Message
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/cloudforce-one/requests/{request_id}/message/new`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `request_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::request_for_information_rfi };
+/// use cloudflare::{ ApiClient, apis::request_for_information_rfi };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = cloudforce_one_request_message_post(&api)
-///     .with_account_id("value")
-///     .with_request_id("value")
+/// # let body: crate::models::cloudforce_one_requests_request_message_edit::CloudforceOneRequestsRequestMessageEdit = todo!();
+/// let response = cloudforce_one_request_message_post(&api)
+///     .with_account_id("account_id")
+///     .with_request_id("request_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -792,16 +913,26 @@ impl<'a> CloudforceOneRequestMessagePutRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Update a Request Message
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/accounts/{account_id}/cloudforce-one/requests/{request_id}/message/{message_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `request_id` (path, required)
+/// - `message_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::request_for_information_rfi };
+/// use cloudflare::{ ApiClient, apis::request_for_information_rfi };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = cloudforce_one_request_message_put(&api)
-///     .with_account_id("value")
-///     .with_request_id("value")
-///     .with_message_id("value")
+/// # let body: crate::models::cloudforce_one_requests_request_message_edit::CloudforceOneRequestsRequestMessageEdit = todo!();
+/// let response = cloudforce_one_request_message_put(&api)
+///     .with_account_id("account_id")
+///     .with_request_id("request_id")
+///     .with_message_id("message_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -845,16 +976,24 @@ impl<'a> CloudforceOneRequestMessageDeleteRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Delete a Request Message
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/accounts/{account_id}/cloudforce-one/requests/{request_id}/message/{message_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `request_id` (path, required)
+/// - `message_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::request_for_information_rfi };
+/// use cloudflare::{ ApiClient, apis::request_for_information_rfi };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = cloudforce_one_request_message_delete(&api)
-///     .with_account_id("value")
-///     .with_request_id("value")
-///     .with_message_id("value")
+/// let response = cloudforce_one_request_message_delete(&api)
+///     .with_account_id("account_id")
+///     .with_request_id("request_id")
+///     .with_message_id("message_id")
 ///     .send()
 ///     .await?;
 /// ```

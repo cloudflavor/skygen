@@ -15,7 +15,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-use crate::models::one_clicks_create::OneClicksCreate;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
@@ -34,13 +33,23 @@ impl<'a> OneClicksListRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// List 1-Click Applications
+///
+/// To list all available 1-Click applications, send a GET request to `/v2/1-clicks`. The `type` may
+/// be provided as query paramater in order to restrict results to a certain type of 1-Click, for
+/// example: `/v2/1-clicks?type=droplet`. Current supported types are `kubernetes` and `droplet`.
+///
+/// The response will be a JSON object with a key called `1_clicks`. This will be set to an array of
+/// 1-Click application data, each of which will contain the the slug and type for the 1-Click.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/1-clicks`
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::model_1_click_applications };
+/// use digitalocean::{ ApiClient, apis::model_1_click_applications };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = one_clicks_list(&api)
+/// let response = one_clicks_list(&api)
 ///     .send()
 ///     .await?;
 /// ```
@@ -50,7 +59,7 @@ pub fn one_clicks_list(api: &ApiClient) -> OneClicksListRequest<'_> {
 
 #[derive(Debug)]
 pub struct OneClicksInstallKubernetesRequest<'a> {
-    builder: ApiRequestBuilder<'a, OneClicksCreate>,
+    builder: ApiRequestBuilder<'a, std::collections::BTreeMap<String, serde_json::Value>>,
 }
 
 impl<'a> OneClicksInstallKubernetesRequest<'a> {
@@ -60,21 +69,31 @@ impl<'a> OneClicksInstallKubernetesRequest<'a> {
 
         Self { builder }
     }
-    pub fn with_body(mut self, body: OneClicksCreate) -> Self {
+    pub fn with_body(mut self, body: crate::models::one_clicks_create::OneClicksCreate) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<OneClicksCreate> {
+    pub async fn send(self) -> ApiResult<std::collections::BTreeMap<String, serde_json::Value>> {
         self.builder.send().await
     }
 }
-
 /// Install Kubernetes 1-Click Applications
+///
+/// To install a Kubernetes 1-Click application on a cluster, send a POST request to
+/// `/v2/1-clicks/kubernetes`. The `addon_slugs` and `cluster_uuid` must be provided as body
+/// parameter in order to specify which 1-Click application(s) to install. To list all available
+/// 1-Click Kubernetes applications, send a request to `/v2/1-clicks?type=kubernetes`.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/v2/1-clicks/kubernetes`
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::model_1_click_applications };
+/// use digitalocean::{ ApiClient, apis::model_1_click_applications };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = one_clicks_install_kubernetes(&api)
+/// # let body: crate::models::one_clicks_create::OneClicksCreate = todo!();
+/// let response = one_clicks_install_kubernetes(&api)
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```

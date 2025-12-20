@@ -15,12 +15,15 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::magic_visibility_mnm_mnm_rule_advertisement_single_response::MagicVisibilityMnmMnmRuleAdvertisementSingleResponse;
+use crate::models::magic_visibility_mnm_mnm_rules_collection_response::MagicVisibilityMnmMnmRulesCollectionResponse;
+use crate::models::magic_visibility_mnm_mnm_rules_single_response::MagicVisibilityMnmMnmRulesSingleResponse;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct ListRulesRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, MagicVisibilityMnmMnmRulesCollectionResponse>,
 }
 
 impl<'a> ListRulesRequest<'a> {
@@ -34,18 +37,26 @@ impl<'a> ListRulesRequest<'a> {
         self.builder = self.builder.path_param("account_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<MagicVisibilityMnmMnmRulesCollectionResponse> {
         self.builder.send().await
     }
 }
-
 /// List rules
+///
+/// Lists network monitoring rules for account.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/mnm/rules`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::magic_network_monitoring_rules };
+/// use cloudflare::{ ApiClient, apis::magic_network_monitoring_rules };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_rules(&api)
-///     .with_account_id("value")
+/// let response = list_rules(&api)
+///     .with_account_id("account_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -55,7 +66,7 @@ pub fn list_rules(api: &ApiClient) -> ListRulesRequest<'_> {
 
 #[derive(Debug)]
 pub struct CreateRulesRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, MagicVisibilityMnmMnmRulesSingleResponse>,
 }
 
 impl<'a> CreateRulesRequest<'a> {
@@ -77,18 +88,28 @@ impl<'a> CreateRulesRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<MagicVisibilityMnmMnmRulesSingleResponse> {
         self.builder.send().await
     }
 }
-
 /// Create rules
+///
+/// Create network monitoring rules for account. Currently only supports creating a single rule per API request.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/mnm/rules`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::magic_network_monitoring_rules };
+/// use cloudflare::{ ApiClient, apis::magic_network_monitoring_rules };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = create_rules(&api)
-///     .with_account_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = create_rules(&api)
+///     .with_account_id("account_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -98,7 +119,7 @@ pub fn create_rules(api: &ApiClient) -> CreateRulesRequest<'_> {
 
 #[derive(Debug)]
 pub struct UpdateRulesRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, MagicVisibilityMnmMnmRulesSingleResponse>,
 }
 
 impl<'a> UpdateRulesRequest<'a> {
@@ -120,18 +141,28 @@ impl<'a> UpdateRulesRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<MagicVisibilityMnmMnmRulesSingleResponse> {
         self.builder.send().await
     }
 }
-
 /// Update rules
+///
+/// Update network monitoring rules for account.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/accounts/{account_id}/mnm/rules`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::magic_network_monitoring_rules };
+/// use cloudflare::{ ApiClient, apis::magic_network_monitoring_rules };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = update_rules(&api)
-///     .with_account_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = update_rules(&api)
+///     .with_account_id("account_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -141,7 +172,7 @@ pub fn update_rules(api: &ApiClient) -> UpdateRulesRequest<'_> {
 
 #[derive(Debug)]
 pub struct GetRuleRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, MagicVisibilityMnmMnmRulesSingleResponse>,
 }
 
 impl<'a> GetRuleRequest<'a> {
@@ -164,19 +195,28 @@ impl<'a> GetRuleRequest<'a> {
         self.builder = self.builder.path_param("rule_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<MagicVisibilityMnmMnmRulesSingleResponse> {
         self.builder.send().await
     }
 }
-
 /// Get rule
+///
+/// List a single network monitoring rule for account.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/mnm/rules/{rule_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `rule_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::magic_network_monitoring_rules };
+/// use cloudflare::{ ApiClient, apis::magic_network_monitoring_rules };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_rule(&api)
-///     .with_account_id("value")
-///     .with_rule_id("value")
+/// let response = get_rule(&api)
+///     .with_account_id("account_id")
+///     .with_rule_id("rule_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -186,7 +226,7 @@ pub fn get_rule(api: &ApiClient) -> GetRuleRequest<'_> {
 
 #[derive(Debug)]
 pub struct DeleteRuleRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, MagicVisibilityMnmMnmRulesSingleResponse>,
 }
 
 impl<'a> DeleteRuleRequest<'a> {
@@ -209,19 +249,28 @@ impl<'a> DeleteRuleRequest<'a> {
         self.builder = self.builder.path_param("rule_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<MagicVisibilityMnmMnmRulesSingleResponse> {
         self.builder.send().await
     }
 }
-
 /// Delete rule
+///
+/// Delete a network monitoring rule for account.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/accounts/{account_id}/mnm/rules/{rule_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `rule_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::magic_network_monitoring_rules };
+/// use cloudflare::{ ApiClient, apis::magic_network_monitoring_rules };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete_rule(&api)
-///     .with_account_id("value")
-///     .with_rule_id("value")
+/// let response = delete_rule(&api)
+///     .with_account_id("account_id")
+///     .with_rule_id("rule_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -231,7 +280,7 @@ pub fn delete_rule(api: &ApiClient) -> DeleteRuleRequest<'_> {
 
 #[derive(Debug)]
 pub struct UpdateRuleRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, MagicVisibilityMnmMnmRulesSingleResponse>,
 }
 
 impl<'a> UpdateRuleRequest<'a> {
@@ -262,19 +311,30 @@ impl<'a> UpdateRuleRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<MagicVisibilityMnmMnmRulesSingleResponse> {
         self.builder.send().await
     }
 }
-
 /// Update rule
+///
+/// Update a network monitoring rule for account.
+///
+/// **HTTP Method:** `PATCH`
+/// **Path:** `/accounts/{account_id}/mnm/rules/{rule_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `rule_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::magic_network_monitoring_rules };
+/// use cloudflare::{ ApiClient, apis::magic_network_monitoring_rules };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = update_rule(&api)
-///     .with_account_id("value")
-///     .with_rule_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = update_rule(&api)
+///     .with_account_id("account_id")
+///     .with_rule_id("rule_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -284,7 +344,7 @@ pub fn update_rule(api: &ApiClient) -> UpdateRuleRequest<'_> {
 
 #[derive(Debug)]
 pub struct UpdateAdvertisementRuleRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, MagicVisibilityMnmMnmRuleAdvertisementSingleResponse>,
 }
 
 impl<'a> UpdateAdvertisementRuleRequest<'a> {
@@ -307,19 +367,28 @@ impl<'a> UpdateAdvertisementRuleRequest<'a> {
         self.builder = self.builder.path_param("rule_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<MagicVisibilityMnmMnmRuleAdvertisementSingleResponse> {
         self.builder.send().await
     }
 }
-
 /// Update advertisement for rule
+///
+/// Update advertisement for rule.
+///
+/// **HTTP Method:** `PATCH`
+/// **Path:** `/accounts/{account_id}/mnm/rules/{rule_id}/advertisement`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `rule_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::magic_network_monitoring_rules };
+/// use cloudflare::{ ApiClient, apis::magic_network_monitoring_rules };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = update_advertisement_rule(&api)
-///     .with_account_id("value")
-///     .with_rule_id("value")
+/// let response = update_advertisement_rule(&api)
+///     .with_account_id("account_id")
+///     .with_rule_id("rule_id")
 ///     .send()
 ///     .await?;
 /// ```

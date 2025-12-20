@@ -19,8 +19,14 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct DnsRecordsDnsRequestBatchObject {
-    pub deletes: Option<Vec<serde_json::Value>>,
-    pub patches: Option<Vec<serde_json::Value>>,
-    pub posts: Option<Vec<serde_json::Value>>,
-    pub puts: Option<Vec<serde_json::Value>>,
+    pub deletes: Option<
+        Vec<crate::models::dns_records_dns_record_batch_delete::DnsRecordsDnsRecordBatchDelete>,
+    >,
+    pub patches: Option<
+        Vec<crate::models::dns_records_dns_record_batch_patch::DnsRecordsDnsRecordBatchPatch>,
+    >,
+    pub posts:
+        Option<Vec<crate::models::dns_records_dns_record_batch_post::DnsRecordsDnsRecordBatchPost>>,
+    pub puts:
+        Option<Vec<crate::models::dns_records_dns_record_batch_put::DnsRecordsDnsRecordBatchPut>>,
 }

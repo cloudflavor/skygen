@@ -69,13 +69,38 @@ impl<'a> GetTrafficAnomaliesRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get latest Internet traffic anomalies
+///
+/// Retrieves the latest Internet traffic anomalies, which are signals that might indicate an outage. These alerts are automatically detected by Radar and manually verified by our team.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/traffic_anomalies`
+///
+/// **Parameters**
+/// - `limit` (query,optional)
+/// - `offset` (query,optional)
+/// - `dateRange` (query,optional)
+/// - `dateStart` (query,optional)
+/// - `dateEnd` (query,optional)
+/// - `status` (query,optional)
+/// - `asn` (query,optional)
+/// - `location` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_traffic_anomalies };
+/// use cloudflare::{ ApiClient, apis::radar_traffic_anomalies };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_traffic_anomalies(&api)
+/// let response = get_traffic_anomalies(&api)
+///     .with_limit("limit")
+///     .with_offset("offset")
+///     .with_date_range("dateRange")
+///     .with_date_start("dateStart")
+///     .with_date_end("dateEnd")
+///     .with_status("status")
+///     .with_asn("asn")
+///     .with_location("location")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```
@@ -122,13 +147,32 @@ impl<'a> GetTrafficAnomaliesTopRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get top locations by total traffic anomalies
+///
+/// Retrieves the sum of Internet traffic anomalies, grouped by location. These anomalies are signals that might indicate an outage, automatically detected by Radar and manually verified by our team.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/traffic_anomalies/locations`
+///
+/// **Parameters**
+/// - `limit` (query,optional)
+/// - `dateRange` (query,optional)
+/// - `dateStart` (query,optional)
+/// - `dateEnd` (query,optional)
+/// - `status` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_traffic_anomalies };
+/// use cloudflare::{ ApiClient, apis::radar_traffic_anomalies };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_traffic_anomalies_top(&api)
+/// let response = get_traffic_anomalies_top(&api)
+///     .with_limit("limit")
+///     .with_date_range("dateRange")
+///     .with_date_start("dateStart")
+///     .with_date_end("dateEnd")
+///     .with_status("status")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```

@@ -53,14 +53,24 @@ impl<'a> PostRunCfBaaiRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Execute @cf/baai/bge-reranker-base model.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/ai/run/@cf/baai/bge-reranker-base`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `queueRequest` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::workers_ai_text_classification };
+/// use cloudflare::{ ApiClient, apis::workers_ai_text_classification };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = post_run_cf_baai(&api)
-///     .with_account_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = post_run_cf_baai(&api)
+///     .with_account_id("account_id")
+///     .with_queue_request("queueRequest")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -103,14 +113,24 @@ impl<'a> PostRunCfHuggingfaceRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Execute @cf/huggingface/distilbert-sst-2-int8 model.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/ai/run/@cf/huggingface/distilbert-sst-2-int8`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `queueRequest` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::workers_ai_text_classification };
+/// use cloudflare::{ ApiClient, apis::workers_ai_text_classification };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = post_run_cf_huggingface(&api)
-///     .with_account_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = post_run_cf_huggingface(&api)
+///     .with_account_id("account_id")
+///     .with_queue_request("queueRequest")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```

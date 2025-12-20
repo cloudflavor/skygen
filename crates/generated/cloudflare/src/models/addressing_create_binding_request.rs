@@ -19,6 +19,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct AddressingCreateBindingRequest {
-    pub cidr: Option<serde_json::Value>,
-    pub service_id: Option<serde_json::Value>,
+    pub cidr: Option<crate::models::addressing_cidr::AddressingCidr>,
+    pub service_id:
+        Option<crate::models::addressing_service_identifier::AddressingServiceIdentifier>,
 }

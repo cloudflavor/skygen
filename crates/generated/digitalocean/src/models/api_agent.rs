@@ -44,7 +44,7 @@ pub struct ApiAgent {
     pub project_id: Option<String>,
     pub provide_citations: Option<bool>,
     pub region: Option<String>,
-    pub retrieval_method: Option<serde_json::Value>,
+    pub retrieval_method: Option<crate::models::api_retrieval_method::ApiRetrievalMethod>,
     pub route_created_at: Option<String>,
     pub route_created_by: Option<String>,
     pub route_name: Option<String>,

@@ -19,7 +19,6 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct DigitalExperienceMonitoringHttpDetailsPercentilesResponse {
-
     pub dns_response_time_ms: Option<crate::models::digital_experience_monitoring_percentiles::DigitalExperienceMonitoringPercentiles>,
     pub resource_fetch_time_ms: Option<crate::models::digital_experience_monitoring_percentiles::DigitalExperienceMonitoringPercentiles>,
     pub server_response_time_ms: Option<crate::models::digital_experience_monitoring_percentiles::DigitalExperienceMonitoringPercentiles>,

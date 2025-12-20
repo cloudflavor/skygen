@@ -19,8 +19,9 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct WaitingroomCreateRule {
-    pub action: serde_json::Value,
-    pub description: Option<serde_json::Value>,
-    pub enabled: Option<serde_json::Value>,
-    pub expression: serde_json::Value,
+    pub action: crate::models::waitingroom_rule_action::WaitingroomRuleAction,
+    pub description:
+        Option<crate::models::waitingroom_rule_description::WaitingroomRuleDescription>,
+    pub enabled: Option<crate::models::waitingroom_rule_enabled::WaitingroomRuleEnabled>,
+    pub expression: crate::models::waitingroom_rule_expression::WaitingroomRuleExpression,
 }

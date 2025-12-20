@@ -19,6 +19,6 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct IntelResolvesToRef {
-    pub id: Option<serde_json::Value>,
+    pub id: Option<crate::models::intel_stix_identifier::IntelStixIdentifier>,
     pub value: Option<String>,
 }

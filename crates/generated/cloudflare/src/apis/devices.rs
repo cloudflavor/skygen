@@ -15,12 +15,23 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::teams_devices_api_response_single::TeamsDevicesApiResponseSingle;
+use crate::models::teams_devices_default_device_settings_response::TeamsDevicesDefaultDeviceSettingsResponse;
+use crate::models::teams_devices_device_response::TeamsDevicesDeviceResponse;
+use crate::models::teams_devices_device_settings_response::TeamsDevicesDeviceSettingsResponse;
+use crate::models::teams_devices_device_settings_response_collection::TeamsDevicesDeviceSettingsResponseCollection;
+use crate::models::teams_devices_devices_policy_certificates_single::TeamsDevicesDevicesPolicyCertificatesSingle;
+use crate::models::teams_devices_devices_response::TeamsDevicesDevicesResponse;
+use crate::models::teams_devices_fallback_domain_response_collection::TeamsDevicesFallbackDomainResponseCollection;
+use crate::models::teams_devices_override_codes_response::TeamsDevicesOverrideCodesResponse;
+use crate::models::teams_devices_split_tunnel_include_response_collection::TeamsDevicesSplitTunnelIncludeResponseCollection;
+use crate::models::teams_devices_split_tunnel_response_collection::TeamsDevicesSplitTunnelResponseCollection;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct ListDevicesRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, TeamsDevicesDevicesResponse>,
 }
 
 impl<'a> ListDevicesRequest<'a> {
@@ -34,18 +45,30 @@ impl<'a> ListDevicesRequest<'a> {
         self.builder = self.builder.path_param("account_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<TeamsDevicesDevicesResponse> {
         self.builder.send().await
     }
 }
-
 /// List devices (deprecated)
+///
+/// List WARP devices. Not supported when [multi-user mode](<https://developers.cloudflare.com/cloudflare-one/connections/connect-devices/warp/deployment/mdm-deployment/windows-multiuser/)> is enabled for the account.
+///
+/// **Deprecated**: please use one of the following endpoints instead:
+/// - GET /accounts/{account_id}/devices/physical-devices
+/// - GET /accounts/{account_id}/devices/registrations
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/devices`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::devices };
+/// use cloudflare::{ ApiClient, apis::devices };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_devices(&api)
-///     .with_account_id("value")
+/// let response = list_devices(&api)
+///     .with_account_id("account_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -55,7 +78,7 @@ pub fn list_devices(api: &ApiClient) -> ListDevicesRequest<'_> {
 
 #[derive(Debug)]
 pub struct ListDeviceSettingsPoliciesRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, TeamsDevicesDeviceSettingsResponseCollection>,
 }
 
 impl<'a> ListDeviceSettingsPoliciesRequest<'a> {
@@ -70,18 +93,26 @@ impl<'a> ListDeviceSettingsPoliciesRequest<'a> {
         self.builder = self.builder.path_param("account_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<TeamsDevicesDeviceSettingsResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// List device settings profiles
+///
+/// Fetches a list of the device settings profiles for an account.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/devices/policies`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::devices };
+/// use cloudflare::{ ApiClient, apis::devices };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_device_settings_policies(&api)
-///     .with_account_id("value")
+/// let response = list_device_settings_policies(&api)
+///     .with_account_id("account_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -91,7 +122,7 @@ pub fn list_device_settings_policies(api: &ApiClient) -> ListDeviceSettingsPolic
 
 #[derive(Debug)]
 pub struct GetDefaultDeviceSettingsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, TeamsDevicesDefaultDeviceSettingsResponse>,
 }
 
 impl<'a> GetDefaultDeviceSettingsRequest<'a> {
@@ -106,18 +137,26 @@ impl<'a> GetDefaultDeviceSettingsRequest<'a> {
         self.builder = self.builder.path_param("account_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<TeamsDevicesDefaultDeviceSettingsResponse> {
         self.builder.send().await
     }
 }
-
 /// Get the default device settings profile
+///
+/// Fetches the default device settings profile for an account.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/devices/policy`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::devices };
+/// use cloudflare::{ ApiClient, apis::devices };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_default_device_settings(&api)
-///     .with_account_id("value")
+/// let response = get_default_device_settings(&api)
+///     .with_account_id("account_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -127,7 +166,7 @@ pub fn get_default_device_settings(api: &ApiClient) -> GetDefaultDeviceSettingsR
 
 #[derive(Debug)]
 pub struct CreateDeviceSettingsPolicyRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, TeamsDevicesDeviceSettingsResponse>,
 }
 
 impl<'a> CreateDeviceSettingsPolicyRequest<'a> {
@@ -150,18 +189,28 @@ impl<'a> CreateDeviceSettingsPolicyRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<TeamsDevicesDeviceSettingsResponse> {
         self.builder.send().await
     }
 }
-
 /// Create a device settings profile
+///
+/// Creates a device settings profile to be applied to certain devices matching the criteria.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/devices/policy`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::devices };
+/// use cloudflare::{ ApiClient, apis::devices };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = create_device_settings_policy(&api)
-///     .with_account_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = create_device_settings_policy(&api)
+///     .with_account_id("account_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -171,7 +220,7 @@ pub fn create_device_settings_policy(api: &ApiClient) -> CreateDeviceSettingsPol
 
 #[derive(Debug)]
 pub struct UpdateDefaultDeviceSettingsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, TeamsDevicesDefaultDeviceSettingsResponse>,
 }
 
 impl<'a> UpdateDefaultDeviceSettingsRequest<'a> {
@@ -194,18 +243,28 @@ impl<'a> UpdateDefaultDeviceSettingsRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<TeamsDevicesDefaultDeviceSettingsResponse> {
         self.builder.send().await
     }
 }
-
 /// Update the default device settings profile
+///
+/// Updates the default device settings profile for an account.
+///
+/// **HTTP Method:** `PATCH`
+/// **Path:** `/accounts/{account_id}/devices/policy`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::devices };
+/// use cloudflare::{ ApiClient, apis::devices };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = update_default_device_settings(&api)
-///     .with_account_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = update_default_device_settings(&api)
+///     .with_account_id("account_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -215,7 +274,7 @@ pub fn update_default_device_settings(api: &ApiClient) -> UpdateDefaultDeviceSet
 
 #[derive(Debug)]
 pub struct GetSplitTunnelExcludeRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, TeamsDevicesSplitTunnelResponseCollection>,
 }
 
 impl<'a> GetSplitTunnelExcludeRequest<'a> {
@@ -233,18 +292,26 @@ impl<'a> GetSplitTunnelExcludeRequest<'a> {
         self.builder = self.builder.path_param("account_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<TeamsDevicesSplitTunnelResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// Get the Split Tunnel exclude list
+///
+/// Fetches the list of routes excluded from the WARP client's tunnel.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/devices/policy/exclude`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::devices };
+/// use cloudflare::{ ApiClient, apis::devices };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_split_tunnel_exclude(&api)
-///     .with_account_id("value")
+/// let response = get_split_tunnel_exclude(&api)
+///     .with_account_id("account_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -254,7 +321,7 @@ pub fn get_split_tunnel_exclude(api: &ApiClient) -> GetSplitTunnelExcludeRequest
 
 #[derive(Debug)]
 pub struct SetSplitTunnelExcludeRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, TeamsDevicesSplitTunnelResponseCollection>,
 }
 
 impl<'a> SetSplitTunnelExcludeRequest<'a> {
@@ -273,22 +340,35 @@ impl<'a> SetSplitTunnelExcludeRequest<'a> {
         self.builder = self.builder.path_param("account_id", value);
         self
     }
-    pub fn with_body(mut self, body: Vec<serde_json::Value>) -> Self {
+    pub fn with_body(
+        mut self,
+        body: Vec<crate::models::teams_devices_split_tunnel::TeamsDevicesSplitTunnel>,
+    ) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<TeamsDevicesSplitTunnelResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// Set the Split Tunnel exclude list
+///
+/// Sets the list of routes excluded from the WARP client's tunnel.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/accounts/{account_id}/devices/policy/exclude`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::devices };
+/// use cloudflare::{ ApiClient, apis::devices };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = set_split_tunnel_exclude(&api)
-///     .with_account_id("value")
+/// # let body: Vec<crate::models::teams_devices_split_tunnel::TeamsDevicesSplitTunnel> = todo!();
+/// let response = set_split_tunnel_exclude(&api)
+///     .with_account_id("account_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -298,7 +378,7 @@ pub fn set_split_tunnel_exclude(api: &ApiClient) -> SetSplitTunnelExcludeRequest
 
 #[derive(Debug)]
 pub struct GetLocalDomainFallbackRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, TeamsDevicesFallbackDomainResponseCollection>,
 }
 
 impl<'a> GetLocalDomainFallbackRequest<'a> {
@@ -316,18 +396,26 @@ impl<'a> GetLocalDomainFallbackRequest<'a> {
         self.builder = self.builder.path_param("account_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<TeamsDevicesFallbackDomainResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// Get your Local Domain Fallback list
+///
+/// Fetches a list of domains to bypass Gateway DNS resolution. These domains will use the specified local DNS resolver instead.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/devices/policy/fallback_domains`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::devices };
+/// use cloudflare::{ ApiClient, apis::devices };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_local_domain_fallback(&api)
-///     .with_account_id("value")
+/// let response = get_local_domain_fallback(&api)
+///     .with_account_id("account_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -337,7 +425,7 @@ pub fn get_local_domain_fallback(api: &ApiClient) -> GetLocalDomainFallbackReque
 
 #[derive(Debug)]
 pub struct SetLocalDomainFallbackRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, TeamsDevicesFallbackDomainResponseCollection>,
 }
 
 impl<'a> SetLocalDomainFallbackRequest<'a> {
@@ -363,18 +451,28 @@ impl<'a> SetLocalDomainFallbackRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<TeamsDevicesFallbackDomainResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// Set your Local Domain Fallback list
+///
+/// Sets the list of domains to bypass Gateway DNS resolution. These domains will use the specified local DNS resolver instead.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/accounts/{account_id}/devices/policy/fallback_domains`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::devices };
+/// use cloudflare::{ ApiClient, apis::devices };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = set_local_domain_fallback(&api)
-///     .with_account_id("value")
+/// # let body: Vec<crate::models::teams_devices_fallback_domain::TeamsDevicesFallbackDomain> = todo!();
+/// let response = set_local_domain_fallback(&api)
+///     .with_account_id("account_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -384,7 +482,7 @@ pub fn set_local_domain_fallback(api: &ApiClient) -> SetLocalDomainFallbackReque
 
 #[derive(Debug)]
 pub struct GetSplitTunnelIncludeRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, TeamsDevicesSplitTunnelIncludeResponseCollection>,
 }
 
 impl<'a> GetSplitTunnelIncludeRequest<'a> {
@@ -402,18 +500,26 @@ impl<'a> GetSplitTunnelIncludeRequest<'a> {
         self.builder = self.builder.path_param("account_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<TeamsDevicesSplitTunnelIncludeResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// Get the Split Tunnel include list
+///
+/// Fetches the list of routes included in the WARP client's tunnel.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/devices/policy/include`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::devices };
+/// use cloudflare::{ ApiClient, apis::devices };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_split_tunnel_include(&api)
-///     .with_account_id("value")
+/// let response = get_split_tunnel_include(&api)
+///     .with_account_id("account_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -423,7 +529,7 @@ pub fn get_split_tunnel_include(api: &ApiClient) -> GetSplitTunnelIncludeRequest
 
 #[derive(Debug)]
 pub struct SetSplitTunnelIncludeRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, TeamsDevicesSplitTunnelIncludeResponseCollection>,
 }
 
 impl<'a> SetSplitTunnelIncludeRequest<'a> {
@@ -442,22 +548,37 @@ impl<'a> SetSplitTunnelIncludeRequest<'a> {
         self.builder = self.builder.path_param("account_id", value);
         self
     }
-    pub fn with_body(mut self, body: Vec<serde_json::Value>) -> Self {
+    pub fn with_body(
+        mut self,
+        body: Vec<
+            crate::models::teams_devices_split_tunnel_include::TeamsDevicesSplitTunnelInclude,
+        >,
+    ) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<TeamsDevicesSplitTunnelIncludeResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// Set the Split Tunnel include list
+///
+/// Sets the list of routes included in the WARP client's tunnel.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/accounts/{account_id}/devices/policy/include`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::devices };
+/// use cloudflare::{ ApiClient, apis::devices };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = set_split_tunnel_include(&api)
-///     .with_account_id("value")
+/// # let body: Vec<crate::models::teams_devices_split_tunnel_include::TeamsDevicesSplitTunnelInclude> = todo!();
+/// let response = set_split_tunnel_include(&api)
+///     .with_account_id("account_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -467,7 +588,7 @@ pub fn set_split_tunnel_include(api: &ApiClient) -> SetSplitTunnelIncludeRequest
 
 #[derive(Debug)]
 pub struct GetDeviceSettingsPolicyRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, TeamsDevicesDeviceSettingsResponse>,
 }
 
 impl<'a> GetDeviceSettingsPolicyRequest<'a> {
@@ -490,19 +611,28 @@ impl<'a> GetDeviceSettingsPolicyRequest<'a> {
         self.builder = self.builder.path_param("policy_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<TeamsDevicesDeviceSettingsResponse> {
         self.builder.send().await
     }
 }
-
 /// Get device settings profile by ID
+///
+/// Fetches a device settings profile by ID.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/devices/policy/{policy_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `policy_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::devices };
+/// use cloudflare::{ ApiClient, apis::devices };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_device_settings_policy(&api)
-///     .with_account_id("value")
-///     .with_policy_id("value")
+/// let response = get_device_settings_policy(&api)
+///     .with_account_id("account_id")
+///     .with_policy_id("policy_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -512,7 +642,7 @@ pub fn get_device_settings_policy(api: &ApiClient) -> GetDeviceSettingsPolicyReq
 
 #[derive(Debug)]
 pub struct DeleteDeviceSettingsPolicyRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, TeamsDevicesDeviceSettingsResponseCollection>,
 }
 
 impl<'a> DeleteDeviceSettingsPolicyRequest<'a> {
@@ -535,19 +665,28 @@ impl<'a> DeleteDeviceSettingsPolicyRequest<'a> {
         self.builder = self.builder.path_param("policy_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<TeamsDevicesDeviceSettingsResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// Delete a device settings profile
+///
+/// Deletes a device settings profile and fetches a list of the remaining profiles for an account.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/accounts/{account_id}/devices/policy/{policy_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `policy_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::devices };
+/// use cloudflare::{ ApiClient, apis::devices };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete_device_settings_policy(&api)
-///     .with_account_id("value")
-///     .with_policy_id("value")
+/// let response = delete_device_settings_policy(&api)
+///     .with_account_id("account_id")
+///     .with_policy_id("policy_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -557,7 +696,7 @@ pub fn delete_device_settings_policy(api: &ApiClient) -> DeleteDeviceSettingsPol
 
 #[derive(Debug)]
 pub struct UpdateDeviceSettingsPolicyRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, TeamsDevicesDeviceSettingsResponse>,
 }
 
 impl<'a> UpdateDeviceSettingsPolicyRequest<'a> {
@@ -588,19 +727,30 @@ impl<'a> UpdateDeviceSettingsPolicyRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<TeamsDevicesDeviceSettingsResponse> {
         self.builder.send().await
     }
 }
-
 /// Update a device settings profile
+///
+/// Updates a configured device settings profile.
+///
+/// **HTTP Method:** `PATCH`
+/// **Path:** `/accounts/{account_id}/devices/policy/{policy_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `policy_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::devices };
+/// use cloudflare::{ ApiClient, apis::devices };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = update_device_settings_policy(&api)
-///     .with_account_id("value")
-///     .with_policy_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = update_device_settings_policy(&api)
+///     .with_account_id("account_id")
+///     .with_policy_id("policy_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -610,7 +760,7 @@ pub fn update_device_settings_policy(api: &ApiClient) -> UpdateDeviceSettingsPol
 
 #[derive(Debug)]
 pub struct GetSplitTunnelExcludeGetRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, TeamsDevicesSplitTunnelResponseCollection>,
 }
 
 impl<'a> GetSplitTunnelExcludeGetRequest<'a> {
@@ -633,19 +783,28 @@ impl<'a> GetSplitTunnelExcludeGetRequest<'a> {
         self.builder = self.builder.path_param("policy_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<TeamsDevicesSplitTunnelResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// Get the Split Tunnel exclude list for a device settings profile
+///
+/// Fetches the list of routes excluded from the WARP client's tunnel for a specific device settings profile.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/devices/policy/{policy_id}/exclude`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `policy_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::devices };
+/// use cloudflare::{ ApiClient, apis::devices };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_split_tunnel_exclude_get(&api)
-///     .with_account_id("value")
-///     .with_policy_id("value")
+/// let response = get_split_tunnel_exclude_get(&api)
+///     .with_account_id("account_id")
+///     .with_policy_id("policy_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -655,7 +814,7 @@ pub fn get_split_tunnel_exclude_get(api: &ApiClient) -> GetSplitTunnelExcludeGet
 
 #[derive(Debug)]
 pub struct SetSplitTunnelExcludePutRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, TeamsDevicesSplitTunnelResponseCollection>,
 }
 
 impl<'a> SetSplitTunnelExcludePutRequest<'a> {
@@ -679,23 +838,37 @@ impl<'a> SetSplitTunnelExcludePutRequest<'a> {
         self.builder = self.builder.path_param("policy_id", value);
         self
     }
-    pub fn with_body(mut self, body: Vec<serde_json::Value>) -> Self {
+    pub fn with_body(
+        mut self,
+        body: Vec<crate::models::teams_devices_split_tunnel::TeamsDevicesSplitTunnel>,
+    ) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<TeamsDevicesSplitTunnelResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// Set the Split Tunnel exclude list for a device settings profile
+///
+/// Sets the list of routes excluded from the WARP client's tunnel for a specific device settings profile.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/accounts/{account_id}/devices/policy/{policy_id}/exclude`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `policy_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::devices };
+/// use cloudflare::{ ApiClient, apis::devices };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = set_split_tunnel_exclude_put(&api)
-///     .with_account_id("value")
-///     .with_policy_id("value")
+/// # let body: Vec<crate::models::teams_devices_split_tunnel::TeamsDevicesSplitTunnel> = todo!();
+/// let response = set_split_tunnel_exclude_put(&api)
+///     .with_account_id("account_id")
+///     .with_policy_id("policy_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -705,7 +878,7 @@ pub fn set_split_tunnel_exclude_put(api: &ApiClient) -> SetSplitTunnelExcludePut
 
 #[derive(Debug)]
 pub struct GetLocalDomainFallbackGetRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, TeamsDevicesFallbackDomainResponseCollection>,
 }
 
 impl<'a> GetLocalDomainFallbackGetRequest<'a> {
@@ -728,19 +901,28 @@ impl<'a> GetLocalDomainFallbackGetRequest<'a> {
         self.builder = self.builder.path_param("policy_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<TeamsDevicesFallbackDomainResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// Get the Local Domain Fallback list for a device settings profile
+///
+/// Fetches the list of domains to bypass Gateway DNS resolution from a specified device settings profile. These domains will use the specified local DNS resolver instead.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/devices/policy/{policy_id}/fallback_domains`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `policy_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::devices };
+/// use cloudflare::{ ApiClient, apis::devices };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_local_domain_fallback_get(&api)
-///     .with_account_id("value")
-///     .with_policy_id("value")
+/// let response = get_local_domain_fallback_get(&api)
+///     .with_account_id("account_id")
+///     .with_policy_id("policy_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -750,7 +932,7 @@ pub fn get_local_domain_fallback_get(api: &ApiClient) -> GetLocalDomainFallbackG
 
 #[derive(Debug)]
 pub struct SetLocalDomainFallbackPutRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, TeamsDevicesFallbackDomainResponseCollection>,
 }
 
 impl<'a> SetLocalDomainFallbackPutRequest<'a> {
@@ -781,19 +963,30 @@ impl<'a> SetLocalDomainFallbackPutRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<TeamsDevicesFallbackDomainResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// Set the Local Domain Fallback list for a device settings profile
+///
+/// Sets the list of domains to bypass Gateway DNS resolution. These domains will use the specified local DNS resolver instead. This will only apply to the specified device settings profile.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/accounts/{account_id}/devices/policy/{policy_id}/fallback_domains`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `policy_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::devices };
+/// use cloudflare::{ ApiClient, apis::devices };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = set_local_domain_fallback_put(&api)
-///     .with_account_id("value")
-///     .with_policy_id("value")
+/// # let body: Vec<crate::models::teams_devices_fallback_domain::TeamsDevicesFallbackDomain> = todo!();
+/// let response = set_local_domain_fallback_put(&api)
+///     .with_account_id("account_id")
+///     .with_policy_id("policy_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -803,7 +996,7 @@ pub fn set_local_domain_fallback_put(api: &ApiClient) -> SetLocalDomainFallbackP
 
 #[derive(Debug)]
 pub struct GetSplitTunnelIncludeGetRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, TeamsDevicesSplitTunnelIncludeResponseCollection>,
 }
 
 impl<'a> GetSplitTunnelIncludeGetRequest<'a> {
@@ -826,19 +1019,28 @@ impl<'a> GetSplitTunnelIncludeGetRequest<'a> {
         self.builder = self.builder.path_param("policy_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<TeamsDevicesSplitTunnelIncludeResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// Get the Split Tunnel include list for a device settings profile
+///
+/// Fetches the list of routes included in the WARP client's tunnel for a specific device settings profile.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/devices/policy/{policy_id}/include`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `policy_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::devices };
+/// use cloudflare::{ ApiClient, apis::devices };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_split_tunnel_include_get(&api)
-///     .with_account_id("value")
-///     .with_policy_id("value")
+/// let response = get_split_tunnel_include_get(&api)
+///     .with_account_id("account_id")
+///     .with_policy_id("policy_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -848,7 +1050,7 @@ pub fn get_split_tunnel_include_get(api: &ApiClient) -> GetSplitTunnelIncludeGet
 
 #[derive(Debug)]
 pub struct SetSplitTunnelIncludePutRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, TeamsDevicesSplitTunnelIncludeResponseCollection>,
 }
 
 impl<'a> SetSplitTunnelIncludePutRequest<'a> {
@@ -872,23 +1074,39 @@ impl<'a> SetSplitTunnelIncludePutRequest<'a> {
         self.builder = self.builder.path_param("policy_id", value);
         self
     }
-    pub fn with_body(mut self, body: Vec<serde_json::Value>) -> Self {
+    pub fn with_body(
+        mut self,
+        body: Vec<
+            crate::models::teams_devices_split_tunnel_include::TeamsDevicesSplitTunnelInclude,
+        >,
+    ) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<TeamsDevicesSplitTunnelIncludeResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// Set the Split Tunnel include list for a device settings profile
+///
+/// Sets the list of routes included in the WARP client's tunnel for a specific device settings profile.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/accounts/{account_id}/devices/policy/{policy_id}/include`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `policy_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::devices };
+/// use cloudflare::{ ApiClient, apis::devices };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = set_split_tunnel_include_put(&api)
-///     .with_account_id("value")
-///     .with_policy_id("value")
+/// # let body: Vec<crate::models::teams_devices_split_tunnel_include::TeamsDevicesSplitTunnelInclude> = todo!();
+/// let response = set_split_tunnel_include_put(&api)
+///     .with_account_id("account_id")
+///     .with_policy_id("policy_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -898,7 +1116,7 @@ pub fn set_split_tunnel_include_put(api: &ApiClient) -> SetSplitTunnelIncludePut
 
 #[derive(Debug)]
 pub struct RevokeDevicesRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, TeamsDevicesApiResponseSingle>,
 }
 
 impl<'a> RevokeDevicesRequest<'a> {
@@ -914,22 +1132,37 @@ impl<'a> RevokeDevicesRequest<'a> {
         self.builder = self.builder.path_param("account_id", value);
         self
     }
-    pub fn with_body(mut self, body: serde_json::Value) -> Self {
+    pub fn with_body(
+        mut self,
+        body: crate::models::teams_devices_revoke_devices_request::TeamsDevicesRevokeDevicesRequest,
+    ) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<TeamsDevicesApiResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Revoke devices (deprecated)
+///
+/// Revokes a list of devices. Not supported when [multi-user mode](<https://developers.cloudflare.com/cloudflare-one/connections/connect-devices/warp/deployment/mdm-deployment/windows-multiuser/)> is enabled.
+///
+/// **Deprecated**: please use POST /accounts/{account_id}/devices/registrations/revoke instead.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/devices/revoke`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::devices };
+/// use cloudflare::{ ApiClient, apis::devices };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = revoke_devices(&api)
-///     .with_account_id("value")
+/// # let body: crate::models::teams_devices_revoke_devices_request::TeamsDevicesRevokeDevicesRequest = todo!();
+/// let response = revoke_devices(&api)
+///     .with_account_id("account_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -939,7 +1172,7 @@ pub fn revoke_devices(api: &ApiClient) -> RevokeDevicesRequest<'_> {
 
 #[derive(Debug)]
 pub struct UnrevokeDevicesRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, TeamsDevicesApiResponseSingle>,
 }
 
 impl<'a> UnrevokeDevicesRequest<'a> {
@@ -955,22 +1188,37 @@ impl<'a> UnrevokeDevicesRequest<'a> {
         self.builder = self.builder.path_param("account_id", value);
         self
     }
-    pub fn with_body(mut self, body: serde_json::Value) -> Self {
+    pub fn with_body(
+        mut self,
+        body: crate::models::teams_devices_unrevoke_devices_request::TeamsDevicesUnrevokeDevicesRequest,
+    ) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<TeamsDevicesApiResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Unrevoke devices (deprecated)
+///
+/// Unrevokes a list of devices. Not supported when [multi-user mode](<https://developers.cloudflare.com/cloudflare-one/connections/connect-devices/warp/deployment/mdm-deployment/windows-multiuser/)> is enabled.
+///
+/// **Deprecated**: please use POST /accounts/{account_id}/devices/registrations/unrevoke instead.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/devices/unrevoke`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::devices };
+/// use cloudflare::{ ApiClient, apis::devices };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = unrevoke_devices(&api)
-///     .with_account_id("value")
+/// # let body: crate::models::teams_devices_unrevoke_devices_request::TeamsDevicesUnrevokeDevicesRequest = todo!();
+/// let response = unrevoke_devices(&api)
+///     .with_account_id("account_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -980,7 +1228,7 @@ pub fn unrevoke_devices(api: &ApiClient) -> UnrevokeDevicesRequest<'_> {
 
 #[derive(Debug)]
 pub struct DeviceDetailsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, TeamsDevicesDeviceResponse>,
 }
 
 impl<'a> DeviceDetailsRequest<'a> {
@@ -1003,19 +1251,32 @@ impl<'a> DeviceDetailsRequest<'a> {
         self.builder = self.builder.path_param("device_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<TeamsDevicesDeviceResponse> {
         self.builder.send().await
     }
 }
-
 /// Get device (deprecated)
+///
+/// Fetches a single WARP device. Not supported when [multi-user mode](<https://developers.cloudflare.com/cloudflare-one/connections/connect-devices/warp/deployment/mdm-deployment/windows-multiuser/)> is enabled for the account.
+///
+/// **Deprecated**: please use one of the following endpoints instead:
+/// - GET /accounts/{account_id}/devices/physical-devices/{device_id}
+/// - GET /accounts/{account_id}/devices/registrations/{registration_id}
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/devices/{device_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `device_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::devices };
+/// use cloudflare::{ ApiClient, apis::devices };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = device_details(&api)
-///     .with_account_id("value")
-///     .with_device_id("value")
+/// let response = device_details(&api)
+///     .with_account_id("account_id")
+///     .with_device_id("device_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -1025,7 +1286,7 @@ pub fn device_details(api: &ApiClient) -> DeviceDetailsRequest<'_> {
 
 #[derive(Debug)]
 pub struct ListAdminOverrideCodeRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, TeamsDevicesOverrideCodesResponse>,
 }
 
 impl<'a> ListAdminOverrideCodeRequest<'a> {
@@ -1048,20 +1309,30 @@ impl<'a> ListAdminOverrideCodeRequest<'a> {
         self.builder = self.builder.path_param("device_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<TeamsDevicesOverrideCodesResponse> {
         self.builder.send().await
     }
 }
-
 /// Get override codes (deprecated)
 
+///
+/// Fetches a one-time use admin override code for a device. This relies on the **Admin Override** setting being enabled in your device configuration. Not supported when [multi-user mode](<https://developers.cloudflare.com/cloudflare-one/connections/connect-devices/warp/deployment/mdm-deployment/windows-multiuser/)> is enabled for the account.
+/// **Deprecated:** please use GET /accounts/{account_id}/devices/registrations/{registration_id}/override_codes instead.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/devices/{device_id}/override_codes`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `device_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::devices };
+/// use cloudflare::{ ApiClient, apis::devices };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_admin_override_code(&api)
-///     .with_account_id("value")
-///     .with_device_id("value")
+/// let response = list_admin_override_code(&api)
+///     .with_account_id("account_id")
+///     .with_device_id("device_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -1071,7 +1342,7 @@ pub fn list_admin_override_code(api: &ApiClient) -> ListAdminOverrideCodeRequest
 
 #[derive(Debug)]
 pub struct GetPolicyCertificatesRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, TeamsDevicesDevicesPolicyCertificatesSingle>,
 }
 
 impl<'a> GetPolicyCertificatesRequest<'a> {
@@ -1089,18 +1360,26 @@ impl<'a> GetPolicyCertificatesRequest<'a> {
         self.builder = self.builder.path_param("zone_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<TeamsDevicesDevicesPolicyCertificatesSingle> {
         self.builder.send().await
     }
 }
-
 /// Get device certificate provisioning status
+///
+/// Fetches device certificate provisioning.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/devices/policy/certificates`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::devices };
+/// use cloudflare::{ ApiClient, apis::devices };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_policy_certificates(&api)
-///     .with_zone_id("value")
+/// let response = get_policy_certificates(&api)
+///     .with_zone_id("zone_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -1110,7 +1389,7 @@ pub fn get_policy_certificates(api: &ApiClient) -> GetPolicyCertificatesRequest<
 
 #[derive(Debug)]
 pub struct UpdatePolicyCertificatesRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, TeamsDevicesDevicesPolicyCertificatesSingle>,
 }
 
 impl<'a> UpdatePolicyCertificatesRequest<'a> {
@@ -1136,18 +1415,28 @@ impl<'a> UpdatePolicyCertificatesRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<TeamsDevicesDevicesPolicyCertificatesSingle> {
         self.builder.send().await
     }
 }
-
 /// Update device certificate provisioning status
+///
+/// Enable Zero Trust Clients to provision a certificate, containing a x509 subject, and referenced by Access device posture policies when the client visits MTLS protected domains. This facilitates device posture without a WARP session.
+///
+/// **HTTP Method:** `PATCH`
+/// **Path:** `/zones/{zone_id}/devices/policy/certificates`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::devices };
+/// use cloudflare::{ ApiClient, apis::devices };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = update_policy_certificates(&api)
-///     .with_zone_id("value")
+/// # let body: crate::models::teams_devices_devices_policy_certificates::TeamsDevicesDevicesPolicyCertificates = todo!();
+/// let response = update_policy_certificates(&api)
+///     .with_zone_id("zone_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```

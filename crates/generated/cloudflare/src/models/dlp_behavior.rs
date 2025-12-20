@@ -22,5 +22,5 @@ pub struct DlpBehavior {
     pub description: String,
     pub enabled: bool,
     pub name: String,
-    pub risk_level: serde_json::Value,
+    pub risk_level: crate::models::dlp_risk_level::DlpRiskLevel,
 }

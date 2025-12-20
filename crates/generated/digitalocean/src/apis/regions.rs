@@ -33,13 +33,19 @@ impl<'a> ListRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// List All Data Center Regions
+///
+/// To list all of the regions that are available, send a GET request to `/v2/regions`.
+/// The response will be a JSON object with a key called `regions`. The value of this will be an array of `region` objects, each of which will contain the standard region attributes.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/regions`
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::regions };
+/// use digitalocean::{ ApiClient, apis::regions };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list(&api)
+/// let response = list(&api)
 ///     .send()
 ///     .await?;
 /// ```

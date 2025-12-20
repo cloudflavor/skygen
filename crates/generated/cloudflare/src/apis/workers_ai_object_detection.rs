@@ -46,14 +46,22 @@ impl<'a> PostRunCfFacebookRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Execute @cf/facebook/detr-resnet-50 model.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/ai/run/@cf/facebook/detr-resnet-50`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `queueRequest` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::workers_ai_object_detection };
+/// use cloudflare::{ ApiClient, apis::workers_ai_object_detection };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = post_run_cf_facebook(&api)
-///     .with_account_id("value")
+/// let response = post_run_cf_facebook(&api)
+///     .with_account_id("account_id")
+///     .with_queue_request("queueRequest")
 ///     .send()
 ///     .await?;
 /// ```
@@ -89,14 +97,22 @@ impl<'a> PostRunCfFacebookPostRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Execute @cf/facebook/omni-detr-resnet-50 model.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/ai/run/@cf/facebook/omni-detr-resnet-50`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `queueRequest` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::workers_ai_object_detection };
+/// use cloudflare::{ ApiClient, apis::workers_ai_object_detection };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = post_run_cf_facebook_post(&api)
-///     .with_account_id("value")
+/// let response = post_run_cf_facebook_post(&api)
+///     .with_account_id("account_id")
+///     .with_queue_request("queueRequest")
 ///     .send()
 ///     .await?;
 /// ```
@@ -132,14 +148,22 @@ impl<'a> PostRunCfFacebookPost3Request<'a> {
         self.builder.send().await
     }
 }
-
 /// Execute @cf/facebook/triton-detr-resnet-50 model.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/ai/run/@cf/facebook/triton-detr-resnet-50`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `queueRequest` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::workers_ai_object_detection };
+/// use cloudflare::{ ApiClient, apis::workers_ai_object_detection };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = post_run_cf_facebook_post_3(&api)
-///     .with_account_id("value")
+/// let response = post_run_cf_facebook_post_3(&api)
+///     .with_account_id("account_id")
+///     .with_queue_request("queueRequest")
 ///     .send()
 ///     .await?;
 /// ```

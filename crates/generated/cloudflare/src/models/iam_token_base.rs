@@ -20,13 +20,13 @@ use serde::{Deserialize, Serialize};
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct IamTokenBase {
     pub condition: Option<crate::models::iam_condition::IamCondition>,
-    pub expires_on: Option<serde_json::Value>,
-    pub id: Option<serde_json::Value>,
-    pub issued_on: Option<serde_json::Value>,
-    pub last_used_on: Option<serde_json::Value>,
-    pub modified_on: Option<serde_json::Value>,
-    pub name: Option<serde_json::Value>,
-    pub not_before: Option<serde_json::Value>,
-    pub policies: Option<serde_json::Value>,
-    pub status: Option<serde_json::Value>,
+    pub expires_on: Option<crate::models::iam_expires_on::IamExpiresOn>,
+    pub id: Option<crate::models::iam_token_identifier::IamTokenIdentifier>,
+    pub issued_on: Option<crate::models::iam_issued_on::IamIssuedOn>,
+    pub last_used_on: Option<crate::models::iam_last_used_on::IamLastUsedOn>,
+    pub modified_on: Option<crate::models::iam_modified_on::IamModifiedOn>,
+    pub name: Option<crate::models::iam_name::IamName>,
+    pub not_before: Option<crate::models::iam_not_before::IamNotBefore>,
+    pub policies: Option<crate::models::iam_token_policies::IamTokenPolicies>,
+    pub status: Option<crate::models::iam_status::IamStatus>,
 }

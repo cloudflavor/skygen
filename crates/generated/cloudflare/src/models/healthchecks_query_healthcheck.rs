@@ -19,17 +19,19 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct HealthchecksQueryHealthcheck {
-    pub address: serde_json::Value,
-    pub check_regions: Option<serde_json::Value>,
-    pub consecutive_fails: Option<serde_json::Value>,
-    pub consecutive_successes: Option<serde_json::Value>,
-    pub description: Option<serde_json::Value>,
+    pub address: crate::models::healthchecks_address::HealthchecksAddress,
+    pub check_regions: Option<crate::models::healthchecks_check_regions::HealthchecksCheckRegions>,
+    pub consecutive_fails:
+        Option<crate::models::healthchecks_consecutive_fails::HealthchecksConsecutiveFails>,
+    pub consecutive_successes:
+        Option<crate::models::healthchecks_consecutive_successes::HealthchecksConsecutiveSuccesses>,
+    pub description: Option<crate::models::healthchecks_description::HealthchecksDescription>,
     pub http_config: Option<crate::models::healthchecks_http_config::HealthchecksHttpConfig>,
-    pub interval: Option<serde_json::Value>,
-    pub name: serde_json::Value,
-    pub r#type: Option<serde_json::Value>,
-    pub retries: Option<serde_json::Value>,
-    pub suspended: Option<serde_json::Value>,
+    pub interval: Option<crate::models::healthchecks_interval::HealthchecksInterval>,
+    pub name: crate::models::healthchecks_name::HealthchecksName,
+    pub r#type: Option<crate::models::healthchecks_type::HealthchecksType>,
+    pub retries: Option<crate::models::healthchecks_retries::HealthchecksRetries>,
+    pub suspended: Option<crate::models::healthchecks_suspended::HealthchecksSuspended>,
     pub tcp_config: Option<crate::models::healthchecks_tcp_config::HealthchecksTcpConfig>,
-    pub timeout: Option<serde_json::Value>,
+    pub timeout: Option<crate::models::healthchecks_timeout::HealthchecksTimeout>,
 }

@@ -54,13 +54,30 @@ impl<'a> GetRobotsTxtTopRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get top domain categories by robots.txt files parsed
+///
+/// Retrieves the top domain categories by the number of robots.txt files parsed.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/robots_txt/top/domain_categories`
+///
+/// **Parameters**
+/// - `limit` (query,optional)
+/// - `name` (query,optional)
+/// - `userAgentCategory` (query,optional)
+/// - `date` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_robots_txt };
+/// use cloudflare::{ ApiClient, apis::radar_robots_txt };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_robots_txt_top(&api)
+/// let response = get_robots_txt_top(&api)
+///     .with_limit("limit")
+///     .with_name("name")
+///     .with_user_agent_category("userAgentCategory")
+///     .with_date("date")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```
@@ -115,13 +132,34 @@ impl<'a> GetRobotsTxtTopGetRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get top user agents on robots.txt files
+///
+/// Retrieves the top user agents on robots.txt files.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/robots_txt/top/user_agents/directive`
+///
+/// **Parameters**
+/// - `limit` (query,optional)
+/// - `name` (query,optional)
+/// - `userAgentCategory` (query,optional)
+/// - `date` (query,optional)
+/// - `domainCategory` (query,optional)
+/// - `directive` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_robots_txt };
+/// use cloudflare::{ ApiClient, apis::radar_robots_txt };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_robots_txt_top_get(&api)
+/// let response = get_robots_txt_top_get(&api)
+///     .with_limit("limit")
+///     .with_name("name")
+///     .with_user_agent_category("userAgentCategory")
+///     .with_date("date")
+///     .with_domain_category("domainCategory")
+///     .with_directive("directive")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```

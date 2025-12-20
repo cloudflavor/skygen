@@ -15,12 +15,19 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::mcn_create_onramp_response::McnCreateOnrampResponse;
+use crate::models::mcn_delete_onramp_response::McnDeleteOnrampResponse;
+use crate::models::mcn_get_magic_wan_address_space_response::McnGetMagicWanAddressSpaceResponse;
+use crate::models::mcn_get_onramp_response::McnGetOnrampResponse;
+use crate::models::mcn_list_onramps_response::McnListOnrampsResponse;
+use crate::models::mcn_update_magic_wan_address_space_response::McnUpdateMagicWanAddressSpaceResponse;
+use crate::models::mcn_update_onramp_response::McnUpdateOnrampResponse;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct OnrampsListRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, McnListOnrampsResponse>,
 }
 
 impl<'a> OnrampsListRequest<'a> {
@@ -54,18 +61,34 @@ impl<'a> OnrampsListRequest<'a> {
         self.builder = self.builder.header_param("vpcs", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<McnListOnrampsResponse> {
         self.builder.send().await
     }
 }
-
 /// List On-ramps
+///
+/// List On-ramps (Closed Beta).
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/magic/cloud/onramps`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `order_by` (query,optional)
+/// - `desc` (query,optional)
+/// - `status` (query,optional)
+/// - `vpcs` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::on_ramps };
+/// use cloudflare::{ ApiClient, apis::on_ramps };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = onramps_list(&api)
-///     .with_account_id("value")
+/// let response = onramps_list(&api)
+///     .with_account_id("account_id")
+///     .with_order_by("order_by")
+///     .with_desc("desc")
+///     .with_status("status")
+///     .with_vpcs("vpcs")
 ///     .send()
 ///     .await?;
 /// ```
@@ -75,7 +98,7 @@ pub fn onramps_list(api: &ApiClient) -> OnrampsListRequest<'_> {
 
 #[derive(Debug)]
 pub struct OnrampsCreateRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, McnCreateOnrampResponse>,
 }
 
 impl<'a> OnrampsCreateRequest<'a> {
@@ -105,18 +128,30 @@ impl<'a> OnrampsCreateRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<McnCreateOnrampResponse> {
         self.builder.send().await
     }
 }
-
 /// Create On-ramp
+///
+/// Create a new On-ramp (Closed Beta).
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/magic/cloud/onramps`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `forwarded` (header,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::on_ramps };
+/// use cloudflare::{ ApiClient, apis::on_ramps };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = onramps_create(&api)
-///     .with_account_id("value")
+/// # let body: crate::models::mcn_create_onramp_request::McnCreateOnrampRequest = todo!();
+/// let response = onramps_create(&api)
+///     .with_account_id("account_id")
+///     .with_forwarded("forwarded")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -126,7 +161,7 @@ pub fn onramps_create(api: &ApiClient) -> OnrampsCreateRequest<'_> {
 
 #[derive(Debug)]
 pub struct OnrampsMwanAddrSpaceRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, McnGetMagicWanAddressSpaceResponse>,
 }
 
 impl<'a> OnrampsMwanAddrSpaceRequest<'a> {
@@ -144,18 +179,26 @@ impl<'a> OnrampsMwanAddrSpaceRequest<'a> {
         self.builder = self.builder.path_param("account_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<McnGetMagicWanAddressSpaceResponse> {
         self.builder.send().await
     }
 }
-
 /// Read Magic WAN Address Space
+///
+/// Read the Magic WAN Address Space (Closed Beta).
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/magic/cloud/onramps/magic_wan_address_space`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::on_ramps };
+/// use cloudflare::{ ApiClient, apis::on_ramps };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = onramps_mwan_addr_space(&api)
-///     .with_account_id("value")
+/// let response = onramps_mwan_addr_space(&api)
+///     .with_account_id("account_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -165,7 +208,7 @@ pub fn onramps_mwan_addr_space(api: &ApiClient) -> OnrampsMwanAddrSpaceRequest<'
 
 #[derive(Debug)]
 pub struct OnrampsMwanAddrSpacePutRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, McnUpdateMagicWanAddressSpaceResponse>,
 }
 
 impl<'a> OnrampsMwanAddrSpacePutRequest<'a> {
@@ -191,18 +234,28 @@ impl<'a> OnrampsMwanAddrSpacePutRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<McnUpdateMagicWanAddressSpaceResponse> {
         self.builder.send().await
     }
 }
-
 /// Update Magic WAN Address Space
+///
+/// Update the Magic WAN Address Space (Closed Beta).
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/accounts/{account_id}/magic/cloud/onramps/magic_wan_address_space`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::on_ramps };
+/// use cloudflare::{ ApiClient, apis::on_ramps };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = onramps_mwan_addr_space_put(&api)
-///     .with_account_id("value")
+/// # let body: crate::models::mcn_update_magic_wan_address_space_request::McnUpdateMagicWanAddressSpaceRequest = todo!();
+/// let response = onramps_mwan_addr_space_put(&api)
+///     .with_account_id("account_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -212,7 +265,7 @@ pub fn onramps_mwan_addr_space_put(api: &ApiClient) -> OnrampsMwanAddrSpacePutRe
 
 #[derive(Debug)]
 pub struct OnrampsMwanAddrSpacePatchRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, McnUpdateMagicWanAddressSpaceResponse>,
 }
 
 impl<'a> OnrampsMwanAddrSpacePatchRequest<'a> {
@@ -238,18 +291,28 @@ impl<'a> OnrampsMwanAddrSpacePatchRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<McnUpdateMagicWanAddressSpaceResponse> {
         self.builder.send().await
     }
 }
-
 /// Patch Magic WAN Address Space
+///
+/// Update the Magic WAN Address Space (Closed Beta).
+///
+/// **HTTP Method:** `PATCH`
+/// **Path:** `/accounts/{account_id}/magic/cloud/onramps/magic_wan_address_space`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::on_ramps };
+/// use cloudflare::{ ApiClient, apis::on_ramps };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = onramps_mwan_addr_space_patch(&api)
-///     .with_account_id("value")
+/// # let body: crate::models::mcn_update_magic_wan_address_space_request::McnUpdateMagicWanAddressSpaceRequest = todo!();
+/// let response = onramps_mwan_addr_space_patch(&api)
+///     .with_account_id("account_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -259,7 +322,7 @@ pub fn onramps_mwan_addr_space_patch(api: &ApiClient) -> OnrampsMwanAddrSpacePat
 
 #[derive(Debug)]
 pub struct OnrampsReadRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, McnGetOnrampResponse>,
 }
 
 impl<'a> OnrampsReadRequest<'a> {
@@ -298,19 +361,36 @@ impl<'a> OnrampsReadRequest<'a> {
         self.builder = self.builder.header_param("planned_resources", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<McnGetOnrampResponse> {
         self.builder.send().await
     }
 }
-
 /// Read On-ramp
+///
+/// Read an On-ramp (Closed Beta).
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/magic/cloud/onramps/{onramp_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `onramp_id` (path, required)
+/// - `status` (query,optional)
+/// - `vpcs` (query,optional)
+/// - `post_apply_resources` (query,optional)
+/// - `planned_resources` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::on_ramps };
+/// use cloudflare::{ ApiClient, apis::on_ramps };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = onramps_read(&api)
-///     .with_account_id("value")
-///     .with_onramp_id("value")
+/// let response = onramps_read(&api)
+///     .with_account_id("account_id")
+///     .with_onramp_id("onramp_id")
+///     .with_status("status")
+///     .with_vpcs("vpcs")
+///     .with_post_apply_resources("post_apply_resources")
+///     .with_planned_resources("planned_resources")
 ///     .send()
 ///     .await?;
 /// ```
@@ -320,7 +400,7 @@ pub fn onramps_read(api: &ApiClient) -> OnrampsReadRequest<'_> {
 
 #[derive(Debug)]
 pub struct OnrampsUpdateRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, McnUpdateOnrampResponse>,
 }
 
 impl<'a> OnrampsUpdateRequest<'a> {
@@ -351,19 +431,30 @@ impl<'a> OnrampsUpdateRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<McnUpdateOnrampResponse> {
         self.builder.send().await
     }
 }
-
 /// Update On-ramp
+///
+/// Update an On-ramp (Closed Beta).
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/accounts/{account_id}/magic/cloud/onramps/{onramp_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `onramp_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::on_ramps };
+/// use cloudflare::{ ApiClient, apis::on_ramps };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = onramps_update(&api)
-///     .with_account_id("value")
-///     .with_onramp_id("value")
+/// # let body: crate::models::mcn_update_onramp_request::McnUpdateOnrampRequest = todo!();
+/// let response = onramps_update(&api)
+///     .with_account_id("account_id")
+///     .with_onramp_id("onramp_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -373,7 +464,7 @@ pub fn onramps_update(api: &ApiClient) -> OnrampsUpdateRequest<'_> {
 
 #[derive(Debug)]
 pub struct OnrampsDeleteRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, McnDeleteOnrampResponse>,
 }
 
 impl<'a> OnrampsDeleteRequest<'a> {
@@ -404,19 +495,32 @@ impl<'a> OnrampsDeleteRequest<'a> {
         self.builder = self.builder.header_param("force", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<McnDeleteOnrampResponse> {
         self.builder.send().await
     }
 }
-
 /// Delete On-ramp
+///
+/// Delete an On-ramp (Closed Beta).
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/accounts/{account_id}/magic/cloud/onramps/{onramp_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `onramp_id` (path, required)
+/// - `destroy` (query,optional)
+/// - `force` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::on_ramps };
+/// use cloudflare::{ ApiClient, apis::on_ramps };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = onramps_delete(&api)
-///     .with_account_id("value")
-///     .with_onramp_id("value")
+/// let response = onramps_delete(&api)
+///     .with_account_id("account_id")
+///     .with_onramp_id("onramp_id")
+///     .with_destroy("destroy")
+///     .with_force("force")
 ///     .send()
 ///     .await?;
 /// ```
@@ -426,7 +530,7 @@ pub fn onramps_delete(api: &ApiClient) -> OnrampsDeleteRequest<'_> {
 
 #[derive(Debug)]
 pub struct OnrampsPatchRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, McnUpdateOnrampResponse>,
 }
 
 impl<'a> OnrampsPatchRequest<'a> {
@@ -457,19 +561,30 @@ impl<'a> OnrampsPatchRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<McnUpdateOnrampResponse> {
         self.builder.send().await
     }
 }
-
 /// Patch On-ramp
+///
+/// Update an On-ramp (Closed Beta).
+///
+/// **HTTP Method:** `PATCH`
+/// **Path:** `/accounts/{account_id}/magic/cloud/onramps/{onramp_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `onramp_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::on_ramps };
+/// use cloudflare::{ ApiClient, apis::on_ramps };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = onramps_patch(&api)
-///     .with_account_id("value")
-///     .with_onramp_id("value")
+/// # let body: crate::models::mcn_update_onramp_request::McnUpdateOnrampRequest = todo!();
+/// let response = onramps_patch(&api)
+///     .with_account_id("account_id")
+///     .with_onramp_id("onramp_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -506,15 +621,24 @@ impl<'a> OnrampsApplyRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Apply On-ramp
+///
+/// Apply an On-ramp (Closed Beta).
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/magic/cloud/onramps/{onramp_id}/apply`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `onramp_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::on_ramps };
+/// use cloudflare::{ ApiClient, apis::on_ramps };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = onramps_apply(&api)
-///     .with_account_id("value")
-///     .with_onramp_id("value")
+/// let response = onramps_apply(&api)
+///     .with_account_id("account_id")
+///     .with_onramp_id("onramp_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -551,15 +675,24 @@ impl<'a> OnrampsExportRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Export as Terraform
+///
+/// Export an On-ramp to terraform ready file(s) (Closed Beta).
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/magic/cloud/onramps/{onramp_id}/export`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `onramp_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::on_ramps };
+/// use cloudflare::{ ApiClient, apis::on_ramps };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = onramps_export(&api)
-///     .with_account_id("value")
-///     .with_onramp_id("value")
+/// let response = onramps_export(&api)
+///     .with_account_id("account_id")
+///     .with_onramp_id("onramp_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -596,15 +729,24 @@ impl<'a> OnrampsPlanRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Plan On-ramp
+///
+/// Plan an On-ramp (Closed Beta).
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/magic/cloud/onramps/{onramp_id}/plan`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `onramp_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::on_ramps };
+/// use cloudflare::{ ApiClient, apis::on_ramps };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = onramps_plan(&api)
-///     .with_account_id("value")
-///     .with_onramp_id("value")
+/// let response = onramps_plan(&api)
+///     .with_account_id("account_id")
+///     .with_onramp_id("onramp_id")
 ///     .send()
 ///     .await?;
 /// ```

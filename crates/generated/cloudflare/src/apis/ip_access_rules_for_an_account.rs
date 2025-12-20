@@ -15,12 +15,15 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::firewall_api_response_single_id::FirewallApiResponseSingleId;
+use crate::models::firewall_response_collection::FirewallResponseCollection;
+use crate::models::firewall_response_single::FirewallResponseSingle;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct ListIpAccessRulesRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, FirewallResponseCollection>,
 }
 
 impl<'a> ListIpAccessRulesRequest<'a> {
@@ -74,18 +77,44 @@ impl<'a> ListIpAccessRulesRequest<'a> {
         self.builder = self.builder.header_param("direction", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<FirewallResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// List IP Access rules
+///
+/// Fetches IP Access rules of an account. These rules apply to all the zones in the account. You can filter the results using several optional parameters.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/firewall/access_rules/rules`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `mode` (query,optional)
+/// - `configuration.target` (query,optional)
+/// - `configuration.value` (query,optional)
+/// - `notes` (query,optional)
+/// - `match` (query,optional)
+/// - `page` (query,optional)
+/// - `per_page` (query,optional)
+/// - `order` (query,optional)
+/// - `direction` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::ip_access_rules_for_an_account };
+/// use cloudflare::{ ApiClient, apis::ip_access_rules_for_an_account };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_ip_access_rules(&api)
-///     .with_account_id("value")
+/// let response = list_ip_access_rules(&api)
+///     .with_account_id("account_id")
+///     .with_mode("mode")
+///     .with_configuration_target("configuration.target")
+///     .with_configuration_value("configuration.value")
+///     .with_notes("notes")
+///     .with_match_param("match")
+///     .with_page("page")
+///     .with_per_page("per_page")
+///     .with_order("order")
+///     .with_direction("direction")
 ///     .send()
 ///     .await?;
 /// ```
@@ -95,7 +124,7 @@ pub fn list_ip_access_rules(api: &ApiClient) -> ListIpAccessRulesRequest<'_> {
 
 #[derive(Debug)]
 pub struct CreateIpAccessRuleRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, FirewallResponseSingle>,
 }
 
 impl<'a> CreateIpAccessRuleRequest<'a> {
@@ -121,18 +150,30 @@ impl<'a> CreateIpAccessRuleRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<FirewallResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Create an IP Access rule
+///
+/// Creates a new IP Access rule for an account. The rule will apply to all zones in the account.
+///
+/// Note: To create an IP Access rule that applies to a single zone, refer to the [IP Access rules for a zone](#ip-access-rules-for-a-zone) endpoints.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/firewall/access_rules/rules`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::ip_access_rules_for_an_account };
+/// use cloudflare::{ ApiClient, apis::ip_access_rules_for_an_account };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = create_ip_access_rule(&api)
-///     .with_account_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = create_ip_access_rule(&api)
+///     .with_account_id("account_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -142,7 +183,7 @@ pub fn create_ip_access_rule(api: &ApiClient) -> CreateIpAccessRuleRequest<'_> {
 
 #[derive(Debug)]
 pub struct GetIpAccessRuleRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, FirewallResponseSingle>,
 }
 
 impl<'a> GetIpAccessRuleRequest<'a> {
@@ -165,19 +206,28 @@ impl<'a> GetIpAccessRuleRequest<'a> {
         self.builder = self.builder.path_param("rule_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<FirewallResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Get an IP Access rule
+///
+/// Fetches the details of an IP Access rule defined at the account level.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/firewall/access_rules/rules/{rule_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `rule_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::ip_access_rules_for_an_account };
+/// use cloudflare::{ ApiClient, apis::ip_access_rules_for_an_account };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_ip_access_rule(&api)
-///     .with_account_id("value")
-///     .with_rule_id("value")
+/// let response = get_ip_access_rule(&api)
+///     .with_account_id("account_id")
+///     .with_rule_id("rule_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -187,7 +237,7 @@ pub fn get_ip_access_rule(api: &ApiClient) -> GetIpAccessRuleRequest<'_> {
 
 #[derive(Debug)]
 pub struct DeleteIpAccessRuleRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, FirewallApiResponseSingleId>,
 }
 
 impl<'a> DeleteIpAccessRuleRequest<'a> {
@@ -210,19 +260,30 @@ impl<'a> DeleteIpAccessRuleRequest<'a> {
         self.builder = self.builder.path_param("rule_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<FirewallApiResponseSingleId> {
         self.builder.send().await
     }
 }
-
 /// Delete an IP Access rule
+///
+/// Deletes an existing IP Access rule defined at the account level.
+///
+/// Note: This operation will affect all zones in the account.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/accounts/{account_id}/firewall/access_rules/rules/{rule_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `rule_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::ip_access_rules_for_an_account };
+/// use cloudflare::{ ApiClient, apis::ip_access_rules_for_an_account };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete_ip_access_rule(&api)
-///     .with_account_id("value")
-///     .with_rule_id("value")
+/// let response = delete_ip_access_rule(&api)
+///     .with_account_id("account_id")
+///     .with_rule_id("rule_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -232,7 +293,7 @@ pub fn delete_ip_access_rule(api: &ApiClient) -> DeleteIpAccessRuleRequest<'_> {
 
 #[derive(Debug)]
 pub struct UpdateIpAccessRuleRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, FirewallResponseSingle>,
 }
 
 impl<'a> UpdateIpAccessRuleRequest<'a> {
@@ -256,23 +317,39 @@ impl<'a> UpdateIpAccessRuleRequest<'a> {
         self.builder = self.builder.path_param("rule_id", value);
         self
     }
-    pub fn with_body(mut self, body: serde_json::Value) -> Self {
+    pub fn with_body(
+        mut self,
+        body: crate::models::firewall_schemas_rule::FirewallSchemasRule,
+    ) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<FirewallResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Update an IP Access rule
+///
+/// Updates an IP Access rule defined at the account level.
+///
+/// Note: This operation will affect all zones in the account.
+///
+/// **HTTP Method:** `PATCH`
+/// **Path:** `/accounts/{account_id}/firewall/access_rules/rules/{rule_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `rule_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::ip_access_rules_for_an_account };
+/// use cloudflare::{ ApiClient, apis::ip_access_rules_for_an_account };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = update_ip_access_rule(&api)
-///     .with_account_id("value")
-///     .with_rule_id("value")
+/// # let body: crate::models::firewall_schemas_rule::FirewallSchemasRule = todo!();
+/// let response = update_ip_access_rule(&api)
+///     .with_account_id("account_id")
+///     .with_rule_id("rule_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```

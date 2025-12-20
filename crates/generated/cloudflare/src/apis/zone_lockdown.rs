@@ -15,12 +15,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::firewall_zonelockdown_response_collection::FirewallZonelockdownResponseCollection;
+use crate::models::firewall_zonelockdown_response_single::FirewallZonelockdownResponseSingle;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct ListLockdownRulesRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, FirewallZonelockdownResponseCollection>,
 }
 
 impl<'a> ListLockdownRulesRequest<'a> {
@@ -79,18 +81,48 @@ impl<'a> ListLockdownRulesRequest<'a> {
         self.builder = self.builder.header_param("ip_search", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<FirewallZonelockdownResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// List Zone Lockdown rules
+///
+/// Fetches Zone Lockdown rules. You can filter the results using several optional parameters.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/firewall/lockdowns`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `page` (query,optional)
+/// - `description` (query,optional)
+/// - `modified_on` (query,optional)
+/// - `ip` (query,optional)
+/// - `priority` (query,optional)
+/// - `uri_search` (query,optional)
+/// - `ip_range_search` (query,optional)
+/// - `per_page` (query,optional)
+/// - `created_on` (query,optional)
+/// - `description_search` (query,optional)
+/// - `ip_search` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zone_lockdown };
+/// use cloudflare::{ ApiClient, apis::zone_lockdown };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_lockdown_rules(&api)
-///     .with_zone_id("value")
+/// let response = list_lockdown_rules(&api)
+///     .with_zone_id("zone_id")
+///     .with_page("page")
+///     .with_description("description")
+///     .with_modified_on("modified_on")
+///     .with_ip("ip")
+///     .with_priority("priority")
+///     .with_uri_search("uri_search")
+///     .with_ip_range_search("ip_range_search")
+///     .with_per_page("per_page")
+///     .with_created_on("created_on")
+///     .with_description_search("description_search")
+///     .with_ip_search("ip_search")
 ///     .send()
 ///     .await?;
 /// ```
@@ -100,7 +132,7 @@ pub fn list_lockdown_rules(api: &ApiClient) -> ListLockdownRulesRequest<'_> {
 
 #[derive(Debug)]
 pub struct CreateLockdownRuleRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, FirewallZonelockdownResponseSingle>,
 }
 
 impl<'a> CreateLockdownRuleRequest<'a> {
@@ -123,18 +155,28 @@ impl<'a> CreateLockdownRuleRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<FirewallZonelockdownResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Create a Zone Lockdown rule
+///
+/// Creates a new Zone Lockdown rule.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/zones/{zone_id}/firewall/lockdowns`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zone_lockdown };
+/// use cloudflare::{ ApiClient, apis::zone_lockdown };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = create_lockdown_rule(&api)
-///     .with_zone_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = create_lockdown_rule(&api)
+///     .with_zone_id("zone_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -144,7 +186,7 @@ pub fn create_lockdown_rule(api: &ApiClient) -> CreateLockdownRuleRequest<'_> {
 
 #[derive(Debug)]
 pub struct GetLockdownRuleRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, FirewallZonelockdownResponseSingle>,
 }
 
 impl<'a> GetLockdownRuleRequest<'a> {
@@ -167,19 +209,28 @@ impl<'a> GetLockdownRuleRequest<'a> {
         self.builder = self.builder.path_param("lock_downs_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<FirewallZonelockdownResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Get a Zone Lockdown rule
+///
+/// Fetches the details of a Zone Lockdown rule.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/firewall/lockdowns/{lock_downs_id}`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `lock_downs_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zone_lockdown };
+/// use cloudflare::{ ApiClient, apis::zone_lockdown };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_lockdown_rule(&api)
-///     .with_zone_id("value")
-///     .with_lock_downs_id("value")
+/// let response = get_lockdown_rule(&api)
+///     .with_zone_id("zone_id")
+///     .with_lock_downs_id("lock_downs_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -189,7 +240,7 @@ pub fn get_lockdown_rule(api: &ApiClient) -> GetLockdownRuleRequest<'_> {
 
 #[derive(Debug)]
 pub struct UpdateLockdownRuleRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, FirewallZonelockdownResponseSingle>,
 }
 
 impl<'a> UpdateLockdownRuleRequest<'a> {
@@ -220,19 +271,30 @@ impl<'a> UpdateLockdownRuleRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<FirewallZonelockdownResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Update a Zone Lockdown rule
+///
+/// Updates an existing Zone Lockdown rule.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/zones/{zone_id}/firewall/lockdowns/{lock_downs_id}`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `lock_downs_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zone_lockdown };
+/// use cloudflare::{ ApiClient, apis::zone_lockdown };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = update_lockdown_rule(&api)
-///     .with_zone_id("value")
-///     .with_lock_downs_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = update_lockdown_rule(&api)
+///     .with_zone_id("zone_id")
+///     .with_lock_downs_id("lock_downs_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -269,15 +331,24 @@ impl<'a> DeleteLockdownRuleRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Delete a Zone Lockdown rule
+///
+/// Deletes an existing Zone Lockdown rule.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/zones/{zone_id}/firewall/lockdowns/{lock_downs_id}`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `lock_downs_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zone_lockdown };
+/// use cloudflare::{ ApiClient, apis::zone_lockdown };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete_lockdown_rule(&api)
-///     .with_zone_id("value")
-///     .with_lock_downs_id("value")
+/// let response = delete_lockdown_rule(&api)
+///     .with_zone_id("zone_id")
+///     .with_lock_downs_id("lock_downs_id")
 ///     .send()
 ///     .await?;
 /// ```

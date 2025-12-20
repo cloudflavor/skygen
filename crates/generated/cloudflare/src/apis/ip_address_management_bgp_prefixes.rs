@@ -15,12 +15,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::addressing_response_collection_bgp::AddressingResponseCollectionBgp;
+use crate::models::addressing_single_response_bgp::AddressingSingleResponseBgp;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct ListBgpPrefixesRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, AddressingResponseCollectionBgp>,
 }
 
 impl<'a> ListBgpPrefixesRequest<'a> {
@@ -43,19 +45,28 @@ impl<'a> ListBgpPrefixesRequest<'a> {
         self.builder = self.builder.path_param("prefix_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<AddressingResponseCollectionBgp> {
         self.builder.send().await
     }
 }
-
 /// List BGP Prefixes
+///
+/// List all BGP Prefixes within the specified IP Prefix. BGP Prefixes are used to control which specific subnets are advertised to the Internet. It is possible to advertise subnets more specific than an IP Prefix by creating more specific BGP Prefixes.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/addressing/prefixes/{prefix_id}/bgp/prefixes`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `prefix_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::ip_address_management_bgp_prefixes };
+/// use cloudflare::{ ApiClient, apis::ip_address_management_bgp_prefixes };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_bgp_prefixes(&api)
-///     .with_account_id("value")
-///     .with_prefix_id("value")
+/// let response = list_bgp_prefixes(&api)
+///     .with_account_id("account_id")
+///     .with_prefix_id("prefix_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -65,7 +76,7 @@ pub fn list_bgp_prefixes(api: &ApiClient) -> ListBgpPrefixesRequest<'_> {
 
 #[derive(Debug)]
 pub struct CreateBgpPrefixRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, AddressingSingleResponseBgp>,
 }
 
 impl<'a> CreateBgpPrefixRequest<'a> {
@@ -96,19 +107,30 @@ impl<'a> CreateBgpPrefixRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<AddressingSingleResponseBgp> {
         self.builder.send().await
     }
 }
-
 /// Create BGP Prefix
+///
+/// Create a BGP prefix, controlling the BGP advertisement status of a specific subnet. When created, BGP prefixes are initially withdrawn, and can be advertised with the Update BGP Prefix API.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/addressing/prefixes/{prefix_id}/bgp/prefixes`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `prefix_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::ip_address_management_bgp_prefixes };
+/// use cloudflare::{ ApiClient, apis::ip_address_management_bgp_prefixes };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = create_bgp_prefix(&api)
-///     .with_account_id("value")
-///     .with_prefix_id("value")
+/// # let body: crate::models::addressing_bgp_prefix_create::AddressingBgpPrefixCreate = todo!();
+/// let response = create_bgp_prefix(&api)
+///     .with_account_id("account_id")
+///     .with_prefix_id("prefix_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -118,7 +140,7 @@ pub fn create_bgp_prefix(api: &ApiClient) -> CreateBgpPrefixRequest<'_> {
 
 #[derive(Debug)]
 pub struct FetchBgpPrefixRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, AddressingSingleResponseBgp>,
 }
 
 impl<'a> FetchBgpPrefixRequest<'a> {
@@ -146,20 +168,30 @@ impl<'a> FetchBgpPrefixRequest<'a> {
         self.builder = self.builder.path_param("bgp_prefix_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<AddressingSingleResponseBgp> {
         self.builder.send().await
     }
 }
-
 /// Fetch BGP Prefix
+///
+/// Retrieve a single BGP Prefix according to its identifier
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/addressing/prefixes/{prefix_id}/bgp/prefixes/{bgp_prefix_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `prefix_id` (path, required)
+/// - `bgp_prefix_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::ip_address_management_bgp_prefixes };
+/// use cloudflare::{ ApiClient, apis::ip_address_management_bgp_prefixes };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = fetch_bgp_prefix(&api)
-///     .with_account_id("value")
-///     .with_prefix_id("value")
-///     .with_bgp_prefix_id("value")
+/// let response = fetch_bgp_prefix(&api)
+///     .with_account_id("account_id")
+///     .with_prefix_id("prefix_id")
+///     .with_bgp_prefix_id("bgp_prefix_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -169,7 +201,7 @@ pub fn fetch_bgp_prefix(api: &ApiClient) -> FetchBgpPrefixRequest<'_> {
 
 #[derive(Debug)]
 pub struct UpdateBgpPrefixRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, AddressingSingleResponseBgp>,
 }
 
 impl<'a> UpdateBgpPrefixRequest<'a> {
@@ -205,20 +237,32 @@ impl<'a> UpdateBgpPrefixRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<AddressingSingleResponseBgp> {
         self.builder.send().await
     }
 }
-
 /// Update BGP Prefix
+///
+/// Update the properties of a BGP Prefix, such as the on demand advertisement status (advertised or withdrawn).
+///
+/// **HTTP Method:** `PATCH`
+/// **Path:** `/accounts/{account_id}/addressing/prefixes/{prefix_id}/bgp/prefixes/{bgp_prefix_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `prefix_id` (path, required)
+/// - `bgp_prefix_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::ip_address_management_bgp_prefixes };
+/// use cloudflare::{ ApiClient, apis::ip_address_management_bgp_prefixes };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = update_bgp_prefix(&api)
-///     .with_account_id("value")
-///     .with_prefix_id("value")
-///     .with_bgp_prefix_id("value")
+/// # let body: crate::models::addressing_bgp_prefix_update_advertisement::AddressingBgpPrefixUpdateAdvertisement = todo!();
+/// let response = update_bgp_prefix(&api)
+///     .with_account_id("account_id")
+///     .with_prefix_id("prefix_id")
+///     .with_bgp_prefix_id("bgp_prefix_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```

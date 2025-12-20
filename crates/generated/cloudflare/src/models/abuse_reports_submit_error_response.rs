@@ -19,7 +19,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct AbuseReportsSubmitErrorResponse {
-    pub error_code: serde_json::Value,
+    pub error_code: crate::models::abuse_reports_error_code::AbuseReportsErrorCode,
     pub msg: String,
     pub request: std::collections::BTreeMap<String, serde_json::Value>,
     pub result: String,

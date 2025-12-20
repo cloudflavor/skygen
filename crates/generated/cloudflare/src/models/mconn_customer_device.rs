@@ -19,6 +19,6 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct MconnCustomerDevice {
-    pub id: serde_json::Value,
+    pub id: crate::models::mconn_uuid::MconnUuid,
     pub serial_number: Option<String>,
 }

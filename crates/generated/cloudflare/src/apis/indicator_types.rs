@@ -42,14 +42,20 @@ impl<'a> ListRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Lists all indicator types
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/cloudforce-one/events/indicatorTypes`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::indicator_types };
+/// use cloudflare::{ ApiClient, apis::indicator_types };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list(&api)
-///     .with_account_id("value")
+/// let response = list(&api)
+///     .with_account_id("account_id")
 ///     .send()
 ///     .await?;
 /// ```

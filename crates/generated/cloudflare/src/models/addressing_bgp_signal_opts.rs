@@ -19,6 +19,9 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct AddressingBgpSignalOpts {
-    pub enabled: Option<serde_json::Value>,
-    pub modified_at: Option<serde_json::Value>,
+    pub enabled:
+        Option<crate::models::addressing_bgp_signaling_enabled::AddressingBgpSignalingEnabled>,
+    pub modified_at: Option<
+        crate::models::addressing_bgp_signaling_modified_at::AddressingBgpSignalingModifiedAt,
+    >,
 }

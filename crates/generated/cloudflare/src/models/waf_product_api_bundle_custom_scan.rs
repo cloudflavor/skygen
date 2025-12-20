@@ -19,6 +19,6 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct WafProductApiBundleCustomScan {
-    pub id: Option<serde_json::Value>,
-    pub payload: Option<serde_json::Value>,
+    pub id: Option<crate::models::waf_product_api_bundle_custom_scan_id::WafProductApiBundleCustomScanId>,
+    pub payload: Option<crate::models::waf_product_api_bundle_custom_scan_payload::WafProductApiBundleCustomScanPayload>,
 }

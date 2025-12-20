@@ -20,8 +20,8 @@ use serde::{Deserialize, Serialize};
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct DnsCustomNameserversCustomNs {
     pub dns_records: Vec<serde_json::Value>,
-    pub ns_name: serde_json::Value,
-    pub ns_set: Option<serde_json::Value>,
+    pub ns_name: crate::models::dns_custom_nameservers_ns_name::DnsCustomNameserversNsName,
+    pub ns_set: Option<crate::models::dns_custom_nameservers_ns_set::DnsCustomNameserversNsSet>,
     pub status: String,
-    pub zone_tag: serde_json::Value,
+    pub zone_tag: crate::models::dns_custom_nameservers_schemas_identifier::DnsCustomNameserversSchemasIdentifier,
 }

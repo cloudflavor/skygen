@@ -20,7 +20,7 @@ use serde::{Deserialize, Serialize};
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct R2SlurperR2SourceSchema {
     pub bucket: Option<String>,
-    pub jurisdiction: Option<serde_json::Value>,
+    pub jurisdiction: Option<crate::models::r2_slurper_jurisdiction::R2SlurperJurisdiction>,
     pub secret: Option<crate::models::r2_slurper_s3_like_creds_schema::R2SlurperS3LikeCredsSchema>,
     pub vendor: Option<String>,
 }

@@ -73,13 +73,40 @@ impl<'a> GetDnsAs112TimeseriesRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get AS112 DNS queries by DNSSEC summary
+///
+/// Retrieves the distribution of DNS queries to AS112 by DNSSEC (DNS Security Extensions) support.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/as112/summary/dnssec`
+///
+/// **Parameters**
+/// - `name` (query,optional)
+/// - `dateRange` (query,optional)
+/// - `dateStart` (query,optional)
+/// - `dateEnd` (query,optional)
+/// - `location` (query,optional)
+/// - `continent` (query,optional)
+/// - `queryType` (query,optional)
+/// - `protocol` (query,optional)
+/// - `responseCode` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_as112 };
+/// use cloudflare::{ ApiClient, apis::radar_as112 };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_dns_as112_timeseries(&api)
+/// let response = get_dns_as112_timeseries(&api)
+///     .with_name("name")
+///     .with_date_range("dateRange")
+///     .with_date_start("dateStart")
+///     .with_date_end("dateEnd")
+///     .with_location("location")
+///     .with_continent("continent")
+///     .with_query_type("queryType")
+///     .with_protocol("protocol")
+///     .with_response_code("responseCode")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```
@@ -142,13 +169,40 @@ impl<'a> GetDnsAs112TimeseriesGetRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get AS112 DNS queries by EDNS summary
+///
+/// Retrieves the distribution of DNS queries to AS112 by EDNS (Extension Mechanisms for DNS) support.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/as112/summary/edns`
+///
+/// **Parameters**
+/// - `name` (query,optional)
+/// - `dateRange` (query,optional)
+/// - `dateStart` (query,optional)
+/// - `dateEnd` (query,optional)
+/// - `location` (query,optional)
+/// - `continent` (query,optional)
+/// - `queryType` (query,optional)
+/// - `protocol` (query,optional)
+/// - `responseCode` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_as112 };
+/// use cloudflare::{ ApiClient, apis::radar_as112 };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_dns_as112_timeseries_get(&api)
+/// let response = get_dns_as112_timeseries_get(&api)
+///     .with_name("name")
+///     .with_date_range("dateRange")
+///     .with_date_start("dateStart")
+///     .with_date_end("dateEnd")
+///     .with_location("location")
+///     .with_continent("continent")
+///     .with_query_type("queryType")
+///     .with_protocol("protocol")
+///     .with_response_code("responseCode")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```
@@ -211,13 +265,40 @@ impl<'a> GetDnsAs112TimeseriesGet3Request<'a> {
         self.builder.send().await
     }
 }
-
 /// Get AS112 DNS queries by IP version summary
+///
+/// Retrieves the distribution of DNS queries to AS112 by IP version.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/as112/summary/ip_version`
+///
+/// **Parameters**
+/// - `name` (query,optional)
+/// - `dateRange` (query,optional)
+/// - `dateStart` (query,optional)
+/// - `dateEnd` (query,optional)
+/// - `location` (query,optional)
+/// - `continent` (query,optional)
+/// - `queryType` (query,optional)
+/// - `protocol` (query,optional)
+/// - `responseCode` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_as112 };
+/// use cloudflare::{ ApiClient, apis::radar_as112 };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_dns_as112_timeseries_get_3(&api)
+/// let response = get_dns_as112_timeseries_get_3(&api)
+///     .with_name("name")
+///     .with_date_range("dateRange")
+///     .with_date_start("dateStart")
+///     .with_date_end("dateEnd")
+///     .with_location("location")
+///     .with_continent("continent")
+///     .with_query_type("queryType")
+///     .with_protocol("protocol")
+///     .with_response_code("responseCode")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```
@@ -276,13 +357,38 @@ impl<'a> GetDnsAs112TimeseriesGet4Request<'a> {
         self.builder.send().await
     }
 }
-
 /// Get AS112 DNS queries by DNS protocol summary
+///
+/// Retrieves the distribution of DNS queries to AS112 by protocol.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/as112/summary/protocol`
+///
+/// **Parameters**
+/// - `name` (query,optional)
+/// - `dateRange` (query,optional)
+/// - `dateStart` (query,optional)
+/// - `dateEnd` (query,optional)
+/// - `location` (query,optional)
+/// - `continent` (query,optional)
+/// - `queryType` (query,optional)
+/// - `responseCode` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_as112 };
+/// use cloudflare::{ ApiClient, apis::radar_as112 };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_dns_as112_timeseries_get_4(&api)
+/// let response = get_dns_as112_timeseries_get_4(&api)
+///     .with_name("name")
+///     .with_date_range("dateRange")
+///     .with_date_start("dateStart")
+///     .with_date_end("dateEnd")
+///     .with_location("location")
+///     .with_continent("continent")
+///     .with_query_type("queryType")
+///     .with_response_code("responseCode")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```
@@ -345,13 +451,40 @@ impl<'a> GetDnsAs112TimeseriesGet5Request<'a> {
         self.builder.send().await
     }
 }
-
 /// Get AS112 DNS queries by type summary
+///
+/// Retrieves the distribution of DNS queries to AS112 by type.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/as112/summary/query_type`
+///
+/// **Parameters**
+/// - `name` (query,optional)
+/// - `dateRange` (query,optional)
+/// - `dateStart` (query,optional)
+/// - `dateEnd` (query,optional)
+/// - `location` (query,optional)
+/// - `continent` (query,optional)
+/// - `protocol` (query,optional)
+/// - `responseCode` (query,optional)
+/// - `limitPerGroup` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_as112 };
+/// use cloudflare::{ ApiClient, apis::radar_as112 };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_dns_as112_timeseries_get_5(&api)
+/// let response = get_dns_as112_timeseries_get_5(&api)
+///     .with_name("name")
+///     .with_date_range("dateRange")
+///     .with_date_start("dateStart")
+///     .with_date_end("dateEnd")
+///     .with_location("location")
+///     .with_continent("continent")
+///     .with_protocol("protocol")
+///     .with_response_code("responseCode")
+///     .with_limit_per_group("limitPerGroup")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```
@@ -415,13 +548,40 @@ impl<'a> GetDnsAs112TimeseriesGet6Request<'a> {
         self.builder.send().await
     }
 }
-
 /// Get AS112 DNS queries by response code summary
+///
+/// Retrieves the distribution of AS112 DNS requests classified by response code.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/as112/summary/response_codes`
+///
+/// **Parameters**
+/// - `name` (query,optional)
+/// - `dateRange` (query,optional)
+/// - `dateStart` (query,optional)
+/// - `dateEnd` (query,optional)
+/// - `location` (query,optional)
+/// - `continent` (query,optional)
+/// - `queryType` (query,optional)
+/// - `protocol` (query,optional)
+/// - `limitPerGroup` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_as112 };
+/// use cloudflare::{ ApiClient, apis::radar_as112 };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_dns_as112_timeseries_get_6(&api)
+/// let response = get_dns_as112_timeseries_get_6(&api)
+///     .with_name("name")
+///     .with_date_range("dateRange")
+///     .with_date_start("dateStart")
+///     .with_date_end("dateEnd")
+///     .with_location("location")
+///     .with_continent("continent")
+///     .with_query_type("queryType")
+///     .with_protocol("protocol")
+///     .with_limit_per_group("limitPerGroup")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```
@@ -488,13 +648,42 @@ impl<'a> GetDnsAs112TimeseriesGet7Request<'a> {
         self.builder.send().await
     }
 }
-
 /// Get AS112 DNS queries time series
+///
+/// Retrieves the AS112 DNS queries over time.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/as112/timeseries`
+///
+/// **Parameters**
+/// - `aggInterval` (query,optional)
+/// - `name` (query,optional)
+/// - `dateRange` (query,optional)
+/// - `dateStart` (query,optional)
+/// - `dateEnd` (query,optional)
+/// - `location` (query,optional)
+/// - `continent` (query,optional)
+/// - `queryType` (query,optional)
+/// - `protocol` (query,optional)
+/// - `responseCode` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_as112 };
+/// use cloudflare::{ ApiClient, apis::radar_as112 };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_dns_as112_timeseries_get_7(&api)
+/// let response = get_dns_as112_timeseries_get_7(&api)
+///     .with_agg_interval("aggInterval")
+///     .with_name("name")
+///     .with_date_range("dateRange")
+///     .with_date_start("dateStart")
+///     .with_date_end("dateEnd")
+///     .with_location("location")
+///     .with_continent("continent")
+///     .with_query_type("queryType")
+///     .with_protocol("protocol")
+///     .with_response_code("responseCode")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```
@@ -562,13 +751,42 @@ impl<'a> GetDnsAs112TimeseriesGet8Request<'a> {
         self.builder.send().await
     }
 }
-
 /// Get AS112 DNS queries by DNSSEC support time series
+///
+/// Retrieves the distribution of AS112 DNS queries by DNSSEC (DNS Security Extensions) support over time.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/as112/timeseries_groups/dnssec`
+///
+/// **Parameters**
+/// - `aggInterval` (query,optional)
+/// - `name` (query,optional)
+/// - `dateRange` (query,optional)
+/// - `dateStart` (query,optional)
+/// - `dateEnd` (query,optional)
+/// - `location` (query,optional)
+/// - `continent` (query,optional)
+/// - `queryType` (query,optional)
+/// - `protocol` (query,optional)
+/// - `responseCode` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_as112 };
+/// use cloudflare::{ ApiClient, apis::radar_as112 };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_dns_as112_timeseries_get_8(&api)
+/// let response = get_dns_as112_timeseries_get_8(&api)
+///     .with_agg_interval("aggInterval")
+///     .with_name("name")
+///     .with_date_range("dateRange")
+///     .with_date_start("dateStart")
+///     .with_date_end("dateEnd")
+///     .with_location("location")
+///     .with_continent("continent")
+///     .with_query_type("queryType")
+///     .with_protocol("protocol")
+///     .with_response_code("responseCode")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```
@@ -636,13 +854,42 @@ impl<'a> GetDnsAs112TimeseriesGet9Request<'a> {
         self.builder.send().await
     }
 }
-
 /// Get AS112 DNS queries by EDNS support summary
+///
+/// Retrieves the distribution of AS112 DNS queries by EDNS (Extension Mechanisms for DNS) support over time.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/as112/timeseries_groups/edns`
+///
+/// **Parameters**
+/// - `aggInterval` (query,optional)
+/// - `name` (query,optional)
+/// - `dateRange` (query,optional)
+/// - `dateStart` (query,optional)
+/// - `dateEnd` (query,optional)
+/// - `location` (query,optional)
+/// - `continent` (query,optional)
+/// - `queryType` (query,optional)
+/// - `protocol` (query,optional)
+/// - `responseCode` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_as112 };
+/// use cloudflare::{ ApiClient, apis::radar_as112 };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_dns_as112_timeseries_get_9(&api)
+/// let response = get_dns_as112_timeseries_get_9(&api)
+///     .with_agg_interval("aggInterval")
+///     .with_name("name")
+///     .with_date_range("dateRange")
+///     .with_date_start("dateStart")
+///     .with_date_end("dateEnd")
+///     .with_location("location")
+///     .with_continent("continent")
+///     .with_query_type("queryType")
+///     .with_protocol("protocol")
+///     .with_response_code("responseCode")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```
@@ -710,13 +957,42 @@ impl<'a> GetDnsAs112TimeseriesGet10Request<'a> {
         self.builder.send().await
     }
 }
-
 /// Get AS112 DNS queries by IP version time series
+///
+/// Retrieves the distribution of AS112 DNS queries by IP version over time.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/as112/timeseries_groups/ip_version`
+///
+/// **Parameters**
+/// - `aggInterval` (query,optional)
+/// - `name` (query,optional)
+/// - `dateRange` (query,optional)
+/// - `dateStart` (query,optional)
+/// - `dateEnd` (query,optional)
+/// - `location` (query,optional)
+/// - `continent` (query,optional)
+/// - `queryType` (query,optional)
+/// - `protocol` (query,optional)
+/// - `responseCode` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_as112 };
+/// use cloudflare::{ ApiClient, apis::radar_as112 };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_dns_as112_timeseries_get_10(&api)
+/// let response = get_dns_as112_timeseries_get_10(&api)
+///     .with_agg_interval("aggInterval")
+///     .with_name("name")
+///     .with_date_range("dateRange")
+///     .with_date_start("dateStart")
+///     .with_date_end("dateEnd")
+///     .with_location("location")
+///     .with_continent("continent")
+///     .with_query_type("queryType")
+///     .with_protocol("protocol")
+///     .with_response_code("responseCode")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```
@@ -780,13 +1056,40 @@ impl<'a> GetDnsAs112TimeseriesGet11Request<'a> {
         self.builder.send().await
     }
 }
-
 /// Get AS112 DNS queries by DNS protocol time series
+///
+/// Retrieves the distribution of AS112 DNS requests classified by protocol over time.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/as112/timeseries_groups/protocol`
+///
+/// **Parameters**
+/// - `aggInterval` (query,optional)
+/// - `name` (query,optional)
+/// - `dateRange` (query,optional)
+/// - `dateStart` (query,optional)
+/// - `dateEnd` (query,optional)
+/// - `location` (query,optional)
+/// - `continent` (query,optional)
+/// - `queryType` (query,optional)
+/// - `responseCode` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_as112 };
+/// use cloudflare::{ ApiClient, apis::radar_as112 };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_dns_as112_timeseries_get_11(&api)
+/// let response = get_dns_as112_timeseries_get_11(&api)
+///     .with_agg_interval("aggInterval")
+///     .with_name("name")
+///     .with_date_range("dateRange")
+///     .with_date_start("dateStart")
+///     .with_date_end("dateEnd")
+///     .with_location("location")
+///     .with_continent("continent")
+///     .with_query_type("queryType")
+///     .with_response_code("responseCode")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```
@@ -854,13 +1157,42 @@ impl<'a> GetDnsAs112TimeseriesGet12Request<'a> {
         self.builder.send().await
     }
 }
-
 /// Get AS112 DNS queries by type time series
+///
+/// Retrieves the distribution of AS112 DNS queries by type over time.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/as112/timeseries_groups/query_type`
+///
+/// **Parameters**
+/// - `aggInterval` (query,optional)
+/// - `name` (query,optional)
+/// - `dateRange` (query,optional)
+/// - `dateStart` (query,optional)
+/// - `dateEnd` (query,optional)
+/// - `location` (query,optional)
+/// - `continent` (query,optional)
+/// - `protocol` (query,optional)
+/// - `responseCode` (query,optional)
+/// - `limitPerGroup` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_as112 };
+/// use cloudflare::{ ApiClient, apis::radar_as112 };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_dns_as112_timeseries_get_12(&api)
+/// let response = get_dns_as112_timeseries_get_12(&api)
+///     .with_agg_interval("aggInterval")
+///     .with_name("name")
+///     .with_date_range("dateRange")
+///     .with_date_start("dateStart")
+///     .with_date_end("dateEnd")
+///     .with_location("location")
+///     .with_continent("continent")
+///     .with_protocol("protocol")
+///     .with_response_code("responseCode")
+///     .with_limit_per_group("limitPerGroup")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```
@@ -931,13 +1263,42 @@ impl<'a> GetDnsAs112TimeseriesGet13Request<'a> {
         self.builder.send().await
     }
 }
-
 /// Get AS112 DNS queries by response code time series
+///
+/// Retrieves the distribution of AS112 DNS requests classified by response code over time.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/as112/timeseries_groups/response_codes`
+///
+/// **Parameters**
+/// - `aggInterval` (query,optional)
+/// - `name` (query,optional)
+/// - `dateRange` (query,optional)
+/// - `dateStart` (query,optional)
+/// - `dateEnd` (query,optional)
+/// - `location` (query,optional)
+/// - `continent` (query,optional)
+/// - `queryType` (query,optional)
+/// - `protocol` (query,optional)
+/// - `limitPerGroup` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_as112 };
+/// use cloudflare::{ ApiClient, apis::radar_as112 };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_dns_as112_timeseries_get_13(&api)
+/// let response = get_dns_as112_timeseries_get_13(&api)
+///     .with_agg_interval("aggInterval")
+///     .with_name("name")
+///     .with_date_range("dateRange")
+///     .with_date_start("dateStart")
+///     .with_date_end("dateEnd")
+///     .with_location("location")
+///     .with_continent("continent")
+///     .with_query_type("queryType")
+///     .with_protocol("protocol")
+///     .with_limit_per_group("limitPerGroup")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```
@@ -992,13 +1353,36 @@ impl<'a> GetDnsAs112TopRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get top locations by AS112 DNS queries
+///
+/// Retrieves the top locations by AS112 DNS queries.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/as112/top/locations`
+///
+/// **Parameters**
+/// - `limit` (query,optional)
+/// - `name` (query,optional)
+/// - `dateRange` (query,optional)
+/// - `dateStart` (query,optional)
+/// - `dateEnd` (query,optional)
+/// - `location` (query,optional)
+/// - `continent` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_as112 };
+/// use cloudflare::{ ApiClient, apis::radar_as112 };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_dns_as112_top(&api)
+/// let response = get_dns_as112_top(&api)
+///     .with_limit("limit")
+///     .with_name("name")
+///     .with_date_range("dateRange")
+///     .with_date_start("dateStart")
+///     .with_date_end("dateEnd")
+///     .with_location("location")
+///     .with_continent("continent")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```
@@ -1062,14 +1446,38 @@ impl<'a> GetDnsAs112TopGetRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get top locations by AS112 DNS queries with DNSSEC support
+///
+/// Retrieves the top locations of DNS queries to AS112 with DNSSEC (DNS Security Extensions) support.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/as112/top/locations/dnssec/{dnssec}`
+///
+/// **Parameters**
+/// - `dnssec` (path, required)
+/// - `limit` (query,optional)
+/// - `name` (query,optional)
+/// - `dateRange` (query,optional)
+/// - `dateStart` (query,optional)
+/// - `dateEnd` (query,optional)
+/// - `location` (query,optional)
+/// - `continent` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_as112 };
+/// use cloudflare::{ ApiClient, apis::radar_as112 };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_dns_as112_top_get(&api)
-///     .with_dnssec("value")
+/// let response = get_dns_as112_top_get(&api)
+///     .with_dnssec("dnssec")
+///     .with_limit("limit")
+///     .with_name("name")
+///     .with_date_range("dateRange")
+///     .with_date_start("dateStart")
+///     .with_date_end("dateEnd")
+///     .with_location("location")
+///     .with_continent("continent")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```
@@ -1130,14 +1538,38 @@ impl<'a> GetDnsAs112TopGet3Request<'a> {
         self.builder.send().await
     }
 }
-
 /// Get top locations by AS112 DNS queries with EDNS support
+///
+/// Retrieves the top locations of DNS queries to AS112 with EDNS (Extension Mechanisms for DNS) support.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/as112/top/locations/edns/{edns}`
+///
+/// **Parameters**
+/// - `edns` (path, required)
+/// - `limit` (query,optional)
+/// - `name` (query,optional)
+/// - `dateRange` (query,optional)
+/// - `dateStart` (query,optional)
+/// - `dateEnd` (query,optional)
+/// - `location` (query,optional)
+/// - `continent` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_as112 };
+/// use cloudflare::{ ApiClient, apis::radar_as112 };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_dns_as112_top_get_3(&api)
-///     .with_edns("value")
+/// let response = get_dns_as112_top_get_3(&api)
+///     .with_edns("edns")
+///     .with_limit("limit")
+///     .with_name("name")
+///     .with_date_range("dateRange")
+///     .with_date_start("dateStart")
+///     .with_date_end("dateEnd")
+///     .with_location("location")
+///     .with_continent("continent")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```
@@ -1201,14 +1633,38 @@ impl<'a> GetDnsAs112TopGet4Request<'a> {
         self.builder.send().await
     }
 }
-
 /// Get top locations by AS112 DNS queries for an IP version
+///
+/// Retrieves the top locations of DNS queries to AS112 for an IP version.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/as112/top/locations/ip_version/{ip_version}`
+///
+/// **Parameters**
+/// - `ip_version` (path, required)
+/// - `limit` (query,optional)
+/// - `name` (query,optional)
+/// - `dateRange` (query,optional)
+/// - `dateStart` (query,optional)
+/// - `dateEnd` (query,optional)
+/// - `location` (query,optional)
+/// - `continent` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_as112 };
+/// use cloudflare::{ ApiClient, apis::radar_as112 };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_dns_as112_top_get_4(&api)
-///     .with_ip_version("value")
+/// let response = get_dns_as112_top_get_4(&api)
+///     .with_ip_version("ip_version")
+///     .with_limit("limit")
+///     .with_name("name")
+///     .with_date_range("dateRange")
+///     .with_date_start("dateStart")
+///     .with_date_end("dateEnd")
+///     .with_location("location")
+///     .with_continent("continent")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```

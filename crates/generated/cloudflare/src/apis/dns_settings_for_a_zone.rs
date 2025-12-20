@@ -15,12 +15,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::dns_settings_schemas_dns_response_single::DnsSettingsSchemasDnsResponseSingle;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct ListDnsSettingsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, DnsSettingsSchemasDnsResponseSingle>,
 }
 
 impl<'a> ListDnsSettingsRequest<'a> {
@@ -34,18 +35,26 @@ impl<'a> ListDnsSettingsRequest<'a> {
         self.builder = self.builder.path_param("zone_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<DnsSettingsSchemasDnsResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Show DNS Settings
+///
+/// Show DNS settings for a zone
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/dns_settings`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::dns_settings_for_a_zone };
+/// use cloudflare::{ ApiClient, apis::dns_settings_for_a_zone };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_dns_settings(&api)
-///     .with_zone_id("value")
+/// let response = list_dns_settings(&api)
+///     .with_zone_id("zone_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -55,7 +64,7 @@ pub fn list_dns_settings(api: &ApiClient) -> ListDnsSettingsRequest<'_> {
 
 #[derive(Debug)]
 pub struct UpdateDnsSettingsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, DnsSettingsSchemasDnsResponseSingle>,
 }
 
 impl<'a> UpdateDnsSettingsRequest<'a> {
@@ -70,22 +79,35 @@ impl<'a> UpdateDnsSettingsRequest<'a> {
         self.builder = self.builder.path_param("zone_id", value);
         self
     }
-    pub fn with_body(mut self, body: serde_json::Value) -> Self {
+    pub fn with_body(
+        mut self,
+        body: crate::models::dns_settings_dns_settings_zone::DnsSettingsDnsSettingsZone,
+    ) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<DnsSettingsSchemasDnsResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Update DNS Settings
+///
+/// Update DNS settings for a zone
+///
+/// **HTTP Method:** `PATCH`
+/// **Path:** `/zones/{zone_id}/dns_settings`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::dns_settings_for_a_zone };
+/// use cloudflare::{ ApiClient, apis::dns_settings_for_a_zone };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = update_dns_settings(&api)
-///     .with_zone_id("value")
+/// # let body: crate::models::dns_settings_dns_settings_zone::DnsSettingsDnsSettingsZone = todo!();
+/// let response = update_dns_settings(&api)
+///     .with_zone_id("zone_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```

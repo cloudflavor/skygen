@@ -15,12 +15,16 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::stream_live_input_response_collection::StreamLiveInputResponseCollection;
+use crate::models::stream_live_input_response_single::StreamLiveInputResponseSingle;
+use crate::models::stream_output_response_collection::StreamOutputResponseCollection;
+use crate::models::stream_output_response_single::StreamOutputResponseSingle;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct ListLiveInputsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, StreamLiveInputResponseCollection>,
 }
 
 impl<'a> ListLiveInputsRequest<'a> {
@@ -39,18 +43,28 @@ impl<'a> ListLiveInputsRequest<'a> {
         self.builder = self.builder.header_param("include_counts", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<StreamLiveInputResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// List live inputs
+///
+/// Lists the live inputs created for an account. To get the credentials needed to stream to a specific live input, request a single live input.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/stream/live_inputs`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `include_counts` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::stream_live_inputs };
+/// use cloudflare::{ ApiClient, apis::stream_live_inputs };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_live_inputs(&api)
-///     .with_account_id("value")
+/// let response = list_live_inputs(&api)
+///     .with_account_id("account_id")
+///     .with_include_counts("include_counts")
 ///     .send()
 ///     .await?;
 /// ```
@@ -60,7 +74,7 @@ pub fn list_live_inputs(api: &ApiClient) -> ListLiveInputsRequest<'_> {
 
 #[derive(Debug)]
 pub struct CreateLiveInputRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, StreamLiveInputResponseSingle>,
 }
 
 impl<'a> CreateLiveInputRequest<'a> {
@@ -79,22 +93,35 @@ impl<'a> CreateLiveInputRequest<'a> {
         self.builder = self.builder.path_param("account_id", value);
         self
     }
-    pub fn with_body(mut self, body: serde_json::Value) -> Self {
+    pub fn with_body(
+        mut self,
+        body: crate::models::stream_create_input_request::StreamCreateInputRequest,
+    ) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<StreamLiveInputResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Create a live input
+///
+/// Creates a live input, and returns credentials that you or your users can use to stream live video to Cloudflare Stream.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/stream/live_inputs`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::stream_live_inputs };
+/// use cloudflare::{ ApiClient, apis::stream_live_inputs };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = create_live_input(&api)
-///     .with_account_id("value")
+/// # let body: crate::models::stream_create_input_request::StreamCreateInputRequest = todo!();
+/// let response = create_live_input(&api)
+///     .with_account_id("account_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -104,7 +131,7 @@ pub fn create_live_input(api: &ApiClient) -> CreateLiveInputRequest<'_> {
 
 #[derive(Debug)]
 pub struct RetrieveLiveInputRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, StreamLiveInputResponseSingle>,
 }
 
 impl<'a> RetrieveLiveInputRequest<'a> {
@@ -127,19 +154,28 @@ impl<'a> RetrieveLiveInputRequest<'a> {
         self.builder = self.builder.path_param("live_input_identifier", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<StreamLiveInputResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Retrieve a live input
+///
+/// Retrieves details of an existing live input.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/stream/live_inputs/{live_input_identifier}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `live_input_identifier` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::stream_live_inputs };
+/// use cloudflare::{ ApiClient, apis::stream_live_inputs };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = retrieve_live_input(&api)
-///     .with_account_id("value")
-///     .with_live_input_identifier("value")
+/// let response = retrieve_live_input(&api)
+///     .with_account_id("account_id")
+///     .with_live_input_identifier("live_input_identifier")
 ///     .send()
 ///     .await?;
 /// ```
@@ -149,7 +185,7 @@ pub fn retrieve_live_input(api: &ApiClient) -> RetrieveLiveInputRequest<'_> {
 
 #[derive(Debug)]
 pub struct UpdateLiveInputRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, StreamLiveInputResponseSingle>,
 }
 
 impl<'a> UpdateLiveInputRequest<'a> {
@@ -173,23 +209,37 @@ impl<'a> UpdateLiveInputRequest<'a> {
         self.builder = self.builder.path_param("live_input_identifier", value);
         self
     }
-    pub fn with_body(mut self, body: serde_json::Value) -> Self {
+    pub fn with_body(
+        mut self,
+        body: crate::models::stream_update_input_request::StreamUpdateInputRequest,
+    ) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<StreamLiveInputResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Update a live input
+///
+/// Updates a specified live input.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/accounts/{account_id}/stream/live_inputs/{live_input_identifier}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `live_input_identifier` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::stream_live_inputs };
+/// use cloudflare::{ ApiClient, apis::stream_live_inputs };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = update_live_input(&api)
-///     .with_account_id("value")
-///     .with_live_input_identifier("value")
+/// # let body: crate::models::stream_update_input_request::StreamUpdateInputRequest = todo!();
+/// let response = update_live_input(&api)
+///     .with_account_id("account_id")
+///     .with_live_input_identifier("live_input_identifier")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -226,15 +276,24 @@ impl<'a> DeleteLiveInputRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Delete a live input
+///
+/// Prevents a live input from being streamed to and makes the live input inaccessible to any future API calls.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/accounts/{account_id}/stream/live_inputs/{live_input_identifier}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `live_input_identifier` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::stream_live_inputs };
+/// use cloudflare::{ ApiClient, apis::stream_live_inputs };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete_live_input(&api)
-///     .with_account_id("value")
-///     .with_live_input_identifier("value")
+/// let response = delete_live_input(&api)
+///     .with_account_id("account_id")
+///     .with_live_input_identifier("live_input_identifier")
 ///     .send()
 ///     .await?;
 /// ```
@@ -244,7 +303,7 @@ pub fn delete_live_input(api: &ApiClient) -> DeleteLiveInputRequest<'_> {
 
 #[derive(Debug)]
 pub struct ListAllOutputsAssociatedRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, StreamOutputResponseCollection>,
 }
 
 impl<'a> ListAllOutputsAssociatedRequest<'a> {
@@ -267,19 +326,28 @@ impl<'a> ListAllOutputsAssociatedRequest<'a> {
         self.builder = self.builder.path_param("live_input_identifier", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<StreamOutputResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// List all outputs associated with a specified live input
+///
+/// Retrieves all outputs associated with a specified live input.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/stream/live_inputs/{live_input_identifier}/outputs`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `live_input_identifier` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::stream_live_inputs };
+/// use cloudflare::{ ApiClient, apis::stream_live_inputs };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_all_outputs_associated(&api)
-///     .with_account_id("value")
-///     .with_live_input_identifier("value")
+/// let response = list_all_outputs_associated(&api)
+///     .with_account_id("account_id")
+///     .with_live_input_identifier("live_input_identifier")
 ///     .send()
 ///     .await?;
 /// ```
@@ -289,7 +357,7 @@ pub fn list_all_outputs_associated(api: &ApiClient) -> ListAllOutputsAssociatedR
 
 #[derive(Debug)]
 pub struct CreateNewOutputConnectedRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, StreamOutputResponseSingle>,
 }
 
 impl<'a> CreateNewOutputConnectedRequest<'a> {
@@ -313,23 +381,37 @@ impl<'a> CreateNewOutputConnectedRequest<'a> {
         self.builder = self.builder.path_param("live_input_identifier", value);
         self
     }
-    pub fn with_body(mut self, body: serde_json::Value) -> Self {
+    pub fn with_body(
+        mut self,
+        body: crate::models::stream_create_output_request::StreamCreateOutputRequest,
+    ) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<StreamOutputResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Create a new output, connected to a live input
+///
+/// Creates a new output that can be used to simulcast or restream live video to other RTMP or SRT destinations. Outputs are always linked to a specific live input — one live input can have many outputs.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/stream/live_inputs/{live_input_identifier}/outputs`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `live_input_identifier` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::stream_live_inputs };
+/// use cloudflare::{ ApiClient, apis::stream_live_inputs };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = create_new_output_connected(&api)
-///     .with_account_id("value")
-///     .with_live_input_identifier("value")
+/// # let body: crate::models::stream_create_output_request::StreamCreateOutputRequest = todo!();
+/// let response = create_new_output_connected(&api)
+///     .with_account_id("account_id")
+///     .with_live_input_identifier("live_input_identifier")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -339,7 +421,7 @@ pub fn create_new_output_connected(api: &ApiClient) -> CreateNewOutputConnectedR
 
 #[derive(Debug)]
 pub struct UpdateOutputRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, StreamOutputResponseSingle>,
 }
 
 impl<'a> UpdateOutputRequest<'a> {
@@ -364,24 +446,39 @@ impl<'a> UpdateOutputRequest<'a> {
         self.builder = self.builder.path_param("output_identifier", value);
         self
     }
-    pub fn with_body(mut self, body: serde_json::Value) -> Self {
+    pub fn with_body(
+        mut self,
+        body: crate::models::stream_update_output_request::StreamUpdateOutputRequest,
+    ) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<StreamOutputResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Update an output
+///
+/// Updates the state of an output.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/accounts/{account_id}/stream/live_inputs/{live_input_identifier}/outputs/{output_identifier}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `live_input_identifier` (path, required)
+/// - `output_identifier` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::stream_live_inputs };
+/// use cloudflare::{ ApiClient, apis::stream_live_inputs };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = update_output(&api)
-///     .with_account_id("value")
-///     .with_live_input_identifier("value")
-///     .with_output_identifier("value")
+/// # let body: crate::models::stream_update_output_request::StreamUpdateOutputRequest = todo!();
+/// let response = update_output(&api)
+///     .with_account_id("account_id")
+///     .with_live_input_identifier("live_input_identifier")
+///     .with_output_identifier("output_identifier")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -419,16 +516,26 @@ impl<'a> DeleteOutputRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Delete an output
+///
+/// Deletes an output and removes it from the associated live input.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/accounts/{account_id}/stream/live_inputs/{live_input_identifier}/outputs/{output_identifier}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `live_input_identifier` (path, required)
+/// - `output_identifier` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::stream_live_inputs };
+/// use cloudflare::{ ApiClient, apis::stream_live_inputs };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete_output(&api)
-///     .with_account_id("value")
-///     .with_live_input_identifier("value")
-///     .with_output_identifier("value")
+/// let response = delete_output(&api)
+///     .with_account_id("account_id")
+///     .with_live_input_identifier("live_input_identifier")
+///     .with_output_identifier("output_identifier")
 ///     .send()
 ///     .await?;
 /// ```

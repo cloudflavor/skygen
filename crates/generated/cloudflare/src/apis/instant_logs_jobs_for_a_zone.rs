@@ -15,12 +15,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::logpush_instant_logs_job_response_collection::LogpushInstantLogsJobResponseCollection;
+use crate::models::logpush_instant_logs_job_response_single::LogpushInstantLogsJobResponseSingle;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct ZonesLogpushEdgeJobsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, LogpushInstantLogsJobResponseCollection>,
 }
 
 impl<'a> ZonesLogpushEdgeJobsRequest<'a> {
@@ -34,18 +36,26 @@ impl<'a> ZonesLogpushEdgeJobsRequest<'a> {
         self.builder = self.builder.path_param("zone_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<LogpushInstantLogsJobResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// List Instant Logs jobs
+///
+/// Lists Instant Logs jobs for a zone.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/logpush/edge`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::instant_logs_jobs_for_a_zone };
+/// use cloudflare::{ ApiClient, apis::instant_logs_jobs_for_a_zone };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = zones_logpush_edge_jobs(&api)
-///     .with_zone_id("value")
+/// let response = zones_logpush_edge_jobs(&api)
+///     .with_zone_id("zone_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -55,7 +65,7 @@ pub fn zones_logpush_edge_jobs(api: &ApiClient) -> ZonesLogpushEdgeJobsRequest<'
 
 #[derive(Debug)]
 pub struct ZonesLogpushEdgeJobsPostRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, LogpushInstantLogsJobResponseSingle>,
 }
 
 impl<'a> ZonesLogpushEdgeJobsPostRequest<'a> {
@@ -74,18 +84,28 @@ impl<'a> ZonesLogpushEdgeJobsPostRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<LogpushInstantLogsJobResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Create Instant Logs job
+///
+/// Creates a new Instant Logs job for a zone.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/zones/{zone_id}/logpush/edge`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::instant_logs_jobs_for_a_zone };
+/// use cloudflare::{ ApiClient, apis::instant_logs_jobs_for_a_zone };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = zones_logpush_edge_jobs_post(&api)
-///     .with_zone_id("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = zones_logpush_edge_jobs_post(&api)
+///     .with_zone_id("zone_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```

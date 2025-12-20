@@ -19,6 +19,6 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct MagicVisibilityPcapsPcapsOwnershipValidateRequest {
-    pub destination_conf: serde_json::Value,
-    pub ownership_challenge: serde_json::Value,
+    pub destination_conf: crate::models::magic_visibility_pcaps_pcaps_destination_conf::MagicVisibilityPcapsPcapsDestinationConf,
+    pub ownership_challenge: crate::models::magic_visibility_pcaps_pcaps_ownership_challenge::MagicVisibilityPcapsPcapsOwnershipChallenge,
 }

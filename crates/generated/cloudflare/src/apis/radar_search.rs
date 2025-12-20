@@ -57,13 +57,32 @@ impl<'a> GetSearchGlobalRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Search for locations, ASes, and reports
+///
+/// Searches for locations, autonomous systems, and reports.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/search/global`
+///
+/// **Parameters**
+/// - `limit` (query,optional)
+/// - `limitPerGroup` (query,optional)
+/// - `query` (query,required)
+/// - `include` (query,optional)
+/// - `exclude` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_search };
+/// use cloudflare::{ ApiClient, apis::radar_search };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_search_global(&api)
+/// let response = get_search_global(&api)
+///     .with_limit("limit")
+///     .with_limit_per_group("limitPerGroup")
+///     .with_query("query")
+///     .with_include("include")
+///     .with_exclude("exclude")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```

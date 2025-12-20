@@ -19,6 +19,6 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct TeamsDevicesDiskEncryptionInputRequest {
-    pub check_disks: Option<serde_json::Value>,
-    pub require_all: Option<serde_json::Value>,
+    pub check_disks: Option<crate::models::teams_devices_check_disks::TeamsDevicesCheckDisks>,
+    pub require_all: Option<crate::models::teams_devices_require_all::TeamsDevicesRequireAll>,
 }

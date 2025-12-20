@@ -20,6 +20,6 @@ use serde::{Deserialize, Serialize};
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct WorkersBindingKindVectorize {
     pub index_name: String,
-    pub name: serde_json::Value,
+    pub name: crate::models::workers_binding_name::WorkersBindingName,
     pub r#type: String,
 }

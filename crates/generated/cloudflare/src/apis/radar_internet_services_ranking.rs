@@ -53,13 +53,28 @@ impl<'a> GetRankingInternetServicesRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// List Internet services categories
+///
+/// Retrieves the list of Internet services categories.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/ranking/internet_services/categories`
+///
+/// **Parameters**
+/// - `limit` (query,optional)
+/// - `name` (query,optional)
+/// - `date` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_internet_services_ranking };
+/// use cloudflare::{ ApiClient, apis::radar_internet_services_ranking };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_ranking_internet_services(&api)
+/// let response = get_ranking_internet_services(&api)
+///     .with_limit("limit")
+///     .with_name("name")
+///     .with_date("date")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```
@@ -114,13 +129,34 @@ impl<'a> GetRankingInternetServicesGetRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get Internet services rank time series
+///
+/// Retrieves Internet Services rank update changes over time.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/ranking/internet_services/timeseries_groups`
+///
+/// **Parameters**
+/// - `serviceCategory` (query,optional)
+/// - `limit` (query,optional)
+/// - `name` (query,optional)
+/// - `dateRange` (query,optional)
+/// - `dateStart` (query,optional)
+/// - `dateEnd` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_internet_services_ranking };
+/// use cloudflare::{ ApiClient, apis::radar_internet_services_ranking };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_ranking_internet_services_get(&api)
+/// let response = get_ranking_internet_services_get(&api)
+///     .with_service_category("serviceCategory")
+///     .with_limit("limit")
+///     .with_name("name")
+///     .with_date_range("dateRange")
+///     .with_date_start("dateStart")
+///     .with_date_end("dateEnd")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```
@@ -166,13 +202,30 @@ impl<'a> GetRankingTopInternetRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get top Internet services
+///
+/// Retrieves top Internet services based on their rank.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/ranking/internet_services/top`
+///
+/// **Parameters**
+/// - `serviceCategory` (query,optional)
+/// - `limit` (query,optional)
+/// - `name` (query,optional)
+/// - `date` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_internet_services_ranking };
+/// use cloudflare::{ ApiClient, apis::radar_internet_services_ranking };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_ranking_top_internet(&api)
+/// let response = get_ranking_top_internet(&api)
+///     .with_service_category("serviceCategory")
+///     .with_limit("limit")
+///     .with_name("name")
+///     .with_date("date")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```

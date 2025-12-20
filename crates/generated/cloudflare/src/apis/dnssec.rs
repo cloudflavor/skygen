@@ -15,12 +15,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::dnssec_delete_dnssec_response_single::DnssecDeleteDnssecResponseSingle;
+use crate::models::dnssec_dnssec_response_single::DnssecDnssecResponseSingle;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct DetailsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, DnssecDnssecResponseSingle>,
 }
 
 impl<'a> DetailsRequest<'a> {
@@ -34,18 +36,26 @@ impl<'a> DetailsRequest<'a> {
         self.builder = self.builder.path_param("zone_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<DnssecDnssecResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// DNSSEC Details
+///
+/// Details about DNSSEC status and configuration.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/dnssec`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::dnssec };
+/// use cloudflare::{ ApiClient, apis::dnssec };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = details(&api)
-///     .with_zone_id("value")
+/// let response = details(&api)
+///     .with_zone_id("zone_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -55,7 +65,7 @@ pub fn details(api: &ApiClient) -> DetailsRequest<'_> {
 
 #[derive(Debug)]
 pub struct DeleteDnssecRecordsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, DnssecDeleteDnssecResponseSingle>,
 }
 
 impl<'a> DeleteDnssecRecordsRequest<'a> {
@@ -69,18 +79,26 @@ impl<'a> DeleteDnssecRecordsRequest<'a> {
         self.builder = self.builder.path_param("zone_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<DnssecDeleteDnssecResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Delete DNSSEC records
+///
+/// Delete DNSSEC.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/zones/{zone_id}/dnssec`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::dnssec };
+/// use cloudflare::{ ApiClient, apis::dnssec };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete_dnssec_records(&api)
-///     .with_zone_id("value")
+/// let response = delete_dnssec_records(&api)
+///     .with_zone_id("zone_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -90,7 +108,7 @@ pub fn delete_dnssec_records(api: &ApiClient) -> DeleteDnssecRecordsRequest<'_> 
 
 #[derive(Debug)]
 pub struct EditDnssecStatusRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, DnssecDnssecResponseSingle>,
 }
 
 impl<'a> EditDnssecStatusRequest<'a> {
@@ -109,18 +127,28 @@ impl<'a> EditDnssecStatusRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<DnssecDnssecResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Edit DNSSEC Status
+///
+/// Enable or disable DNSSEC.
+///
+/// **HTTP Method:** `PATCH`
+/// **Path:** `/zones/{zone_id}/dnssec`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::dnssec };
+/// use cloudflare::{ ApiClient, apis::dnssec };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = edit_dnssec_status(&api)
-///     .with_zone_id("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = edit_dnssec_status(&api)
+///     .with_zone_id("zone_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```

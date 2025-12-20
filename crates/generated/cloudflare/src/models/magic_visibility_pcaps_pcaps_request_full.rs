@@ -19,14 +19,12 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct MagicVisibilityPcapsPcapsRequestFull {
-    pub byte_limit: Option<serde_json::Value>,
-    pub colo_name: serde_json::Value,
-    pub destination_conf: serde_json::Value,
-    pub filter_v1: Option<
-        crate::models::magic_visibility_pcaps_pcaps_filter_v1::MagicVisibilityPcapsPcapsFilterV1,
-    >,
-    pub packet_limit: Option<serde_json::Value>,
-    pub r#type: serde_json::Value,
-    pub system: serde_json::Value,
-    pub time_limit: serde_json::Value,
+    pub byte_limit: Option<crate::models::magic_visibility_pcaps_pcaps_byte_limit::MagicVisibilityPcapsPcapsByteLimit>,
+    pub colo_name: crate::models::magic_visibility_pcaps_pcaps_colo_name::MagicVisibilityPcapsPcapsColoName,
+    pub destination_conf: crate::models::magic_visibility_pcaps_pcaps_destination_conf::MagicVisibilityPcapsPcapsDestinationConf,
+    pub filter_v1: Option<crate::models::magic_visibility_pcaps_pcaps_filter_v1::MagicVisibilityPcapsPcapsFilterV1>,
+    pub packet_limit: Option<crate::models::magic_visibility_pcaps_pcaps_packet_limit::MagicVisibilityPcapsPcapsPacketLimit>,
+    pub r#type: crate::models::magic_visibility_pcaps_pcaps_type::MagicVisibilityPcapsPcapsType,
+    pub system: crate::models::magic_visibility_pcaps_pcaps_system::MagicVisibilityPcapsPcapsSystem,
+    pub time_limit: crate::models::magic_visibility_pcaps_pcaps_time_limit_full::MagicVisibilityPcapsPcapsTimeLimitFull,
 }

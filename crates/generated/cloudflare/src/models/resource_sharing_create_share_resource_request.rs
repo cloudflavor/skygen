@@ -20,7 +20,8 @@ use serde::{Deserialize, Serialize};
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct ResourceSharingCreateShareResourceRequest {
     pub meta: crate::models::resource_sharing_resource_meta::ResourceSharingResourceMeta,
-    pub resource_account_id: serde_json::Value,
-    pub resource_id: serde_json::Value,
-    pub resource_type: serde_json::Value,
+    pub resource_account_id: crate::models::resource_sharing_account_id::ResourceSharingAccountId,
+    pub resource_id:
+        crate::models::resource_sharing_resource_resource_id::ResourceSharingResourceResourceId,
+    pub resource_type: crate::models::resource_sharing_resource_type::ResourceSharingResourceType,
 }

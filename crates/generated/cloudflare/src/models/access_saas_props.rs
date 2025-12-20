@@ -19,13 +19,13 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct AccessSaasProps {
-    pub allowed_idps: Option<serde_json::Value>,
-    pub app_launcher_visible: Option<serde_json::Value>,
-    pub auto_redirect_to_identity: Option<serde_json::Value>,
-    pub custom_pages: Option<serde_json::Value>,
-    pub logo_url: Option<serde_json::Value>,
-    pub name: Option<serde_json::Value>,
+    pub allowed_idps: Option<crate::models::access_allowed_idps::AccessAllowedIdps>,
+    pub app_launcher_visible: Option<crate::models::access_app_launcher_visible::AccessAppLauncherVisible>,
+    pub auto_redirect_to_identity: Option<crate::models::access_schemas_auto_redirect_to_identity::AccessSchemasAutoRedirectToIdentity>,
+    pub custom_pages: Option<crate::models::access_schemas_custom_pages::AccessSchemasCustomPages>,
+    pub logo_url: Option<crate::models::access_logo_url::AccessLogoUrl>,
+    pub name: Option<crate::models::access_apps_components_schemas_name::AccessAppsComponentsSchemasName>,
     pub r#type: Option<serde_json::Value>,
     pub saas_app: Option<serde_json::Value>,
-    pub tags: Option<serde_json::Value>,
+    pub tags: Option<crate::models::access_tags::AccessTags>,
 }

@@ -19,5 +19,5 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct VectorizeUpdateIndexRequest {
-    pub description: serde_json::Value,
+    pub description: crate::models::vectorize_index_description::VectorizeIndexDescription,
 }

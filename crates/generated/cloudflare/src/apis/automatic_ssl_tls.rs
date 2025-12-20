@@ -15,12 +15,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::cache_automatic_upgrader_response::CacheAutomaticUpgraderResponse;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct DetectorAutomaticModeGetRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, CacheAutomaticUpgraderResponse>,
 }
 
 impl<'a> DetectorAutomaticModeGetRequest<'a> {
@@ -38,18 +39,26 @@ impl<'a> DetectorAutomaticModeGetRequest<'a> {
         self.builder = self.builder.path_param("zone_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<CacheAutomaticUpgraderResponse> {
         self.builder.send().await
     }
 }
-
 /// Get Automatic SSL/TLS enrollment status for the given zone
+///
+/// If the system is enabled, the response will include next_scheduled_scan, representing the next time this zone will be scanned and the zone's ssl/tls encryption mode is potentially upgraded by the system. If the system is disabled, next_scheduled_scan will not be present in the response body.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/settings/ssl_automatic_mode`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::automatic_ssl_tls };
+/// use cloudflare::{ ApiClient, apis::automatic_ssl_tls };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = detector_automatic_mode_get(&api)
-///     .with_zone_id("value")
+/// let response = detector_automatic_mode_get(&api)
+///     .with_zone_id("zone_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -59,7 +68,7 @@ pub fn detector_automatic_mode_get(api: &ApiClient) -> DetectorAutomaticModeGetR
 
 #[derive(Debug)]
 pub struct DetectorAutomaticModePatchRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, CacheAutomaticUpgraderResponse>,
 }
 
 impl<'a> DetectorAutomaticModePatchRequest<'a> {
@@ -85,18 +94,28 @@ impl<'a> DetectorAutomaticModePatchRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<CacheAutomaticUpgraderResponse> {
         self.builder.send().await
     }
 }
-
 /// Patch Automatic SSL/TLS Enrollment status for given zone
+///
+/// The automatic system is enabled when this endpoint is hit with value in the request body is set to "auto", and disabled when the request body value is set to "custom".
+///
+/// **HTTP Method:** `PATCH`
+/// **Path:** `/zones/{zone_id}/settings/ssl_automatic_mode`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::automatic_ssl_tls };
+/// use cloudflare::{ ApiClient, apis::automatic_ssl_tls };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = detector_automatic_mode_patch(&api)
-///     .with_zone_id("value")
+/// # let body: crate::models::cache_schemas_patch::CacheSchemasPatch = todo!();
+/// let response = detector_automatic_mode_patch(&api)
+///     .with_zone_id("zone_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```

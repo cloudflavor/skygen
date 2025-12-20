@@ -15,6 +15,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::bill_subs_api_plan_response_collection::BillSubsApiPlanResponseCollection;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
@@ -38,14 +39,22 @@ impl<'a> ListAvailablePlansRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// List Available Plans
+///
+/// Lists available plans the zone can subscribe to.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/available_plans`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zone_rate_plan };
+/// use cloudflare::{ ApiClient, apis::zone_rate_plan };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_available_plans(&api)
-///     .with_zone_id("value")
+/// let response = list_available_plans(&api)
+///     .with_zone_id("zone_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -82,15 +91,24 @@ impl<'a> AvailablePlanDetailsRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Available Plan Details
+///
+/// Details of the available plan that the zone can subscribe to.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/available_plans/{plan_identifier}`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `plan_identifier` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zone_rate_plan };
+/// use cloudflare::{ ApiClient, apis::zone_rate_plan };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = available_plan_details(&api)
-///     .with_zone_id("value")
-///     .with_plan_identifier("value")
+/// let response = available_plan_details(&api)
+///     .with_zone_id("zone_id")
+///     .with_plan_identifier("plan_identifier")
 ///     .send()
 ///     .await?;
 /// ```
@@ -100,7 +118,7 @@ pub fn available_plan_details(api: &ApiClient) -> AvailablePlanDetailsRequest<'_
 
 #[derive(Debug)]
 pub struct ListAvailableRatePlansRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, BillSubsApiPlanResponseCollection>,
 }
 
 impl<'a> ListAvailableRatePlansRequest<'a> {
@@ -115,18 +133,26 @@ impl<'a> ListAvailableRatePlansRequest<'a> {
         self.builder = self.builder.path_param("zone_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<BillSubsApiPlanResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// List Available Rate Plans
+///
+/// Lists all rate plans the zone can subscribe to.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/available_rate_plans`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zone_rate_plan };
+/// use cloudflare::{ ApiClient, apis::zone_rate_plan };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_available_rate_plans(&api)
-///     .with_zone_id("value")
+/// let response = list_available_rate_plans(&api)
+///     .with_zone_id("zone_id")
 ///     .send()
 ///     .await?;
 /// ```

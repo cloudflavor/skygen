@@ -15,6 +15,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::error::Error;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
@@ -33,13 +34,18 @@ impl<'a> ListRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// List All Projects
+///
+/// To list all your projects, send a GET request to `/v2/projects`.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/projects`
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::projects };
+/// use digitalocean::{ ApiClient, apis::projects };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list(&api)
+/// let response = list(&api)
 ///     .send()
 ///     .await?;
 /// ```
@@ -66,13 +72,20 @@ impl<'a> CreateRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Create a Project
+///
+/// To create a project, send a POST request to `/v2/projects`.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/v2/projects`
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::projects };
+/// use digitalocean::{ ApiClient, apis::projects };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = create(&api)
+/// # let body: serde_json::Value = todo!();
+/// let response = create(&api)
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -95,13 +108,18 @@ impl<'a> GetDefaultRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Retrieve the Default Project
+///
+/// To get your default project, send a GET request to `/v2/projects/default`.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/projects/default`
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::projects };
+/// use digitalocean::{ ApiClient, apis::projects };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_default(&api)
+/// let response = get_default(&api)
 ///     .send()
 ///     .await?;
 /// ```
@@ -129,13 +147,20 @@ impl<'a> UpdateDefaultRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Update the Default Project
+///
+/// To update you default project, send a PUT request to `/v2/projects/default`. All of the following attributes must be sent.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/v2/projects/default`
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::projects };
+/// use digitalocean::{ ApiClient, apis::projects };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = update_default(&api)
+/// # let body: serde_json::Value = todo!();
+/// let response = update_default(&api)
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -155,7 +180,7 @@ impl<'a> PatchDefaultRequest<'a> {
 
         Self { builder }
     }
-    pub fn with_body(mut self, body: serde_json::Value) -> Self {
+    pub fn with_body(mut self, body: crate::models::project::Project) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
@@ -163,13 +188,20 @@ impl<'a> PatchDefaultRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Patch the Default Project
+///
+/// To update only specific attributes of your default project, send a PATCH request to `/v2/projects/default`. At least one of the following attributes needs to be sent.
+///
+/// **HTTP Method:** `PATCH`
+/// **Path:** `/v2/projects/default`
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::projects };
+/// use digitalocean::{ ApiClient, apis::projects };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = patch_default(&api)
+/// # let body: crate::models::project::Project = todo!();
+/// let response = patch_default(&api)
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -197,14 +229,22 @@ impl<'a> GetRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Retrieve an Existing Project
+///
+/// To get a project, send a GET request to `/v2/projects/$PROJECT_ID`.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/projects/{project_id}`
+///
+/// **Parameters**
+/// - `project_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::projects };
+/// use digitalocean::{ ApiClient, apis::projects };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get(&api)
-///     .with_project_id("value")
+/// let response = get(&api)
+///     .with_project_id("project_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -237,14 +277,24 @@ impl<'a> UpdateRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Update a Project
+///
+/// To update a project, send a PUT request to `/v2/projects/$PROJECT_ID`. All of the following attributes must be sent.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/v2/projects/{project_id}`
+///
+/// **Parameters**
+/// - `project_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::projects };
+/// use digitalocean::{ ApiClient, apis::projects };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = update(&api)
-///     .with_project_id("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = update(&api)
+///     .with_project_id("project_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -254,7 +304,7 @@ pub fn update(api: &ApiClient) -> UpdateRequest<'_> {
 
 #[derive(Debug)]
 pub struct DeleteRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, Error>,
 }
 
 impl<'a> DeleteRequest<'a> {
@@ -268,18 +318,31 @@ impl<'a> DeleteRequest<'a> {
         self.builder = self.builder.path_param("project_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<Error> {
         self.builder.send().await
     }
 }
-
 /// Delete an Existing Project
+///
+/// To delete a project, send a DELETE request to `/v2/projects/$PROJECT_ID`. To
+/// be deleted, a project must not have any resources assigned to it. Any existing
+/// resources must first be reassigned or destroyed, or you will receive a 412 error.
+///
+/// A successful request will receive a 204 status code with no body in response.
+/// This indicates that the request was processed successfully.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/v2/projects/{project_id}`
+///
+/// **Parameters**
+/// - `project_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::projects };
+/// use digitalocean::{ ApiClient, apis::projects };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete(&api)
-///     .with_project_id("value")
+/// let response = delete(&api)
+///     .with_project_id("project_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -304,7 +367,7 @@ impl<'a> PatchRequest<'a> {
         self.builder = self.builder.path_param("project_id", value);
         self
     }
-    pub fn with_body(mut self, body: serde_json::Value) -> Self {
+    pub fn with_body(mut self, body: crate::models::project::Project) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
@@ -312,14 +375,24 @@ impl<'a> PatchRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Patch a Project
+///
+/// To update only specific attributes of a project, send a PATCH request to `/v2/projects/$PROJECT_ID`. At least one of the following attributes needs to be sent.
+///
+/// **HTTP Method:** `PATCH`
+/// **Path:** `/v2/projects/{project_id}`
+///
+/// **Parameters**
+/// - `project_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::projects };
+/// use digitalocean::{ ApiClient, apis::projects };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = patch(&api)
-///     .with_project_id("value")
+/// # let body: crate::models::project::Project = todo!();
+/// let response = patch(&api)
+///     .with_project_id("project_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```

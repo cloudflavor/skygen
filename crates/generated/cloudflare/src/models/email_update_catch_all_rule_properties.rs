@@ -19,8 +19,8 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct EmailUpdateCatchAllRuleProperties {
-    pub actions: serde_json::Value,
-    pub enabled: Option<serde_json::Value>,
-    pub matchers: serde_json::Value,
-    pub name: Option<serde_json::Value>,
+    pub actions: crate::models::email_rule_catchall_actions::EmailRuleCatchallActions,
+    pub enabled: Option<crate::models::email_rule_enabled::EmailRuleEnabled>,
+    pub matchers: crate::models::email_rule_catchall_matchers::EmailRuleCatchallMatchers,
+    pub name: Option<crate::models::email_rule_name::EmailRuleName>,
 }

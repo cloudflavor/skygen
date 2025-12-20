@@ -19,15 +19,14 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct TlsCertificatesAndHostnamesBase {
-
     pub created_on: String,
-    pub enabled: serde_json::Value,
-    pub host: serde_json::Value,
-    pub id: serde_json::Value,
+    pub enabled: crate::models::tls_certificates_and_hostnames_enabled::TlsCertificatesAndHostnamesEnabled,
+    pub host: crate::models::tls_certificates_and_hostnames_host::TlsCertificatesAndHostnamesHost,
+    pub id: crate::models::tls_certificates_and_hostnames_schemas_identifier::TlsCertificatesAndHostnamesSchemasIdentifier,
     pub modified_on: String,
-    pub name: serde_json::Value,
+    pub name: crate::models::tls_certificates_and_hostnames_name::TlsCertificatesAndHostnamesName,
     pub permissions: Vec<String>,
-    pub port: serde_json::Value,
-    pub status: serde_json::Value,
+    pub port: crate::models::tls_certificates_and_hostnames_port::TlsCertificatesAndHostnamesPort,
+    pub status: crate::models::tls_certificates_and_hostnames_schemas_status::TlsCertificatesAndHostnamesSchemasStatus,
     pub tunnel: Option<crate::models::tls_certificates_and_hostnames_keyless_tunnel::TlsCertificatesAndHostnamesKeylessTunnel>,
 }

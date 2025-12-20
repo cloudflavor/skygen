@@ -15,12 +15,19 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::lists_bulk_operation_response_collection::ListsBulkOperationResponseCollection;
+use crate::models::lists_item_response_collection::ListsItemResponseCollection;
+use crate::models::lists_items_list_response_collection::ListsItemsListResponseCollection;
+use crate::models::lists_list_delete_response_collection::ListsListDeleteResponseCollection;
+use crate::models::lists_list_response_collection::ListsListResponseCollection;
+use crate::models::lists_lists_async_response::ListsListsAsyncResponse;
+use crate::models::lists_lists_response_collection::ListsListsResponseCollection;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct GetListsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, ListsListsResponseCollection>,
 }
 
 impl<'a> GetListsRequest<'a> {
@@ -34,18 +41,26 @@ impl<'a> GetListsRequest<'a> {
         self.builder = self.builder.path_param("account_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<ListsListsResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// Get lists
+///
+/// Fetches all lists in the account.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/rules/lists`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::lists };
+/// use cloudflare::{ ApiClient, apis::lists };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_lists(&api)
-///     .with_account_id("value")
+/// let response = get_lists(&api)
+///     .with_account_id("account_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -55,7 +70,7 @@ pub fn get_lists(api: &ApiClient) -> GetListsRequest<'_> {
 
 #[derive(Debug)]
 pub struct CreateListRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, ListsListResponseCollection>,
 }
 
 impl<'a> CreateListRequest<'a> {
@@ -78,18 +93,28 @@ impl<'a> CreateListRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<ListsListResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// Create a list
+///
+/// Creates a new list of the specified type.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/rules/lists`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::lists };
+/// use cloudflare::{ ApiClient, apis::lists };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = create_list(&api)
-///     .with_account_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = create_list(&api)
+///     .with_account_id("account_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -99,7 +124,7 @@ pub fn create_list(api: &ApiClient) -> CreateListRequest<'_> {
 
 #[derive(Debug)]
 pub struct GetBulkOperationStatusRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, ListsBulkOperationResponseCollection>,
 }
 
 impl<'a> GetBulkOperationStatusRequest<'a> {
@@ -122,19 +147,30 @@ impl<'a> GetBulkOperationStatusRequest<'a> {
         self.builder = self.builder.path_param("operation_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<ListsBulkOperationResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// Get bulk operation status
+///
+/// Gets the current status of an asynchronous operation on a list.
+///
+/// The `status` property can have one of the following values: `pending`, `running`, `completed`, or `failed`. If the status is `failed`, the `error` property will contain a message describing the error.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/rules/lists/bulk_operations/{operation_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `operation_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::lists };
+/// use cloudflare::{ ApiClient, apis::lists };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_bulk_operation_status(&api)
-///     .with_account_id("value")
-///     .with_operation_id("value")
+/// let response = get_bulk_operation_status(&api)
+///     .with_account_id("account_id")
+///     .with_operation_id("operation_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -144,7 +180,7 @@ pub fn get_bulk_operation_status(api: &ApiClient) -> GetBulkOperationStatusReque
 
 #[derive(Debug)]
 pub struct GetListRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, ListsListResponseCollection>,
 }
 
 impl<'a> GetListRequest<'a> {
@@ -167,19 +203,28 @@ impl<'a> GetListRequest<'a> {
         self.builder = self.builder.path_param("list_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<ListsListResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// Get a list
+///
+/// Fetches the details of a list.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/rules/lists/{list_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `list_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::lists };
+/// use cloudflare::{ ApiClient, apis::lists };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_list(&api)
-///     .with_account_id("value")
-///     .with_list_id("value")
+/// let response = get_list(&api)
+///     .with_account_id("account_id")
+///     .with_list_id("list_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -189,7 +234,7 @@ pub fn get_list(api: &ApiClient) -> GetListRequest<'_> {
 
 #[derive(Debug)]
 pub struct UpdateListRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, ListsListResponseCollection>,
 }
 
 impl<'a> UpdateListRequest<'a> {
@@ -220,19 +265,30 @@ impl<'a> UpdateListRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<ListsListResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// Update a list
+///
+/// Updates the description of a list.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/accounts/{account_id}/rules/lists/{list_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `list_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::lists };
+/// use cloudflare::{ ApiClient, apis::lists };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = update_list(&api)
-///     .with_account_id("value")
-///     .with_list_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = update_list(&api)
+///     .with_account_id("account_id")
+///     .with_list_id("list_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -242,7 +298,7 @@ pub fn update_list(api: &ApiClient) -> UpdateListRequest<'_> {
 
 #[derive(Debug)]
 pub struct DeleteListRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, ListsListDeleteResponseCollection>,
 }
 
 impl<'a> DeleteListRequest<'a> {
@@ -265,19 +321,28 @@ impl<'a> DeleteListRequest<'a> {
         self.builder = self.builder.path_param("list_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<ListsListDeleteResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// Delete a list
+///
+/// Deletes a specific list and all its items.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/accounts/{account_id}/rules/lists/{list_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `list_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::lists };
+/// use cloudflare::{ ApiClient, apis::lists };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete_list(&api)
-///     .with_account_id("value")
-///     .with_list_id("value")
+/// let response = delete_list(&api)
+///     .with_account_id("account_id")
+///     .with_list_id("list_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -287,7 +352,7 @@ pub fn delete_list(api: &ApiClient) -> DeleteListRequest<'_> {
 
 #[derive(Debug)]
 pub struct GetListItemsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, ListsItemsListResponseCollection>,
 }
 
 impl<'a> GetListItemsRequest<'a> {
@@ -322,19 +387,34 @@ impl<'a> GetListItemsRequest<'a> {
         self.builder = self.builder.header_param("search", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<ListsItemsListResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// Get list items
+///
+/// Fetches all the items in the list.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/rules/lists/{list_id}/items`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `list_id` (path, required)
+/// - `cursor` (query,optional)
+/// - `per_page` (query,optional)
+/// - `search` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::lists };
+/// use cloudflare::{ ApiClient, apis::lists };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_list_items(&api)
-///     .with_account_id("value")
-///     .with_list_id("value")
+/// let response = get_list_items(&api)
+///     .with_account_id("account_id")
+///     .with_list_id("list_id")
+///     .with_cursor("cursor")
+///     .with_per_page("per_page")
+///     .with_search("search")
 ///     .send()
 ///     .await?;
 /// ```
@@ -344,7 +424,7 @@ pub fn get_list_items(api: &ApiClient) -> GetListItemsRequest<'_> {
 
 #[derive(Debug)]
 pub struct CreateListItemsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, ListsListsAsyncResponse>,
 }
 
 impl<'a> CreateListItemsRequest<'a> {
@@ -368,23 +448,39 @@ impl<'a> CreateListItemsRequest<'a> {
         self.builder = self.builder.path_param("list_id", value);
         self
     }
-    pub fn with_body(mut self, body: serde_json::Value) -> Self {
+    pub fn with_body(
+        mut self,
+        body: crate::models::lists_items_update_request_collection::ListsItemsUpdateRequestCollection,
+    ) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<ListsListsAsyncResponse> {
         self.builder.send().await
     }
 }
-
 /// Create list items
+///
+/// Appends new items to the list.
+///
+/// This operation is asynchronous. To get current the operation status, invoke the [Get bulk operation status](/operations/lists-get-bulk-operation-status) endpoint with the returned `operation_id`.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/rules/lists/{list_id}/items`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `list_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::lists };
+/// use cloudflare::{ ApiClient, apis::lists };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = create_list_items(&api)
-///     .with_account_id("value")
-///     .with_list_id("value")
+/// # let body: crate::models::lists_items_update_request_collection::ListsItemsUpdateRequestCollection = todo!();
+/// let response = create_list_items(&api)
+///     .with_account_id("account_id")
+///     .with_list_id("list_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -394,7 +490,7 @@ pub fn create_list_items(api: &ApiClient) -> CreateListItemsRequest<'_> {
 
 #[derive(Debug)]
 pub struct UpdateAllListItemsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, ListsListsAsyncResponse>,
 }
 
 impl<'a> UpdateAllListItemsRequest<'a> {
@@ -418,23 +514,39 @@ impl<'a> UpdateAllListItemsRequest<'a> {
         self.builder = self.builder.path_param("list_id", value);
         self
     }
-    pub fn with_body(mut self, body: serde_json::Value) -> Self {
+    pub fn with_body(
+        mut self,
+        body: crate::models::lists_items_update_request_collection::ListsItemsUpdateRequestCollection,
+    ) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<ListsListsAsyncResponse> {
         self.builder.send().await
     }
 }
-
 /// Update all list items
+///
+/// Removes all existing items from the list and adds the provided items to the list.
+///
+/// This operation is asynchronous. To get current the operation status, invoke the [Get bulk operation status](/operations/lists-get-bulk-operation-status) endpoint with the returned `operation_id`.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/accounts/{account_id}/rules/lists/{list_id}/items`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `list_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::lists };
+/// use cloudflare::{ ApiClient, apis::lists };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = update_all_list_items(&api)
-///     .with_account_id("value")
-///     .with_list_id("value")
+/// # let body: crate::models::lists_items_update_request_collection::ListsItemsUpdateRequestCollection = todo!();
+/// let response = update_all_list_items(&api)
+///     .with_account_id("account_id")
+///     .with_list_id("list_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -444,7 +556,7 @@ pub fn update_all_list_items(api: &ApiClient) -> UpdateAllListItemsRequest<'_> {
 
 #[derive(Debug)]
 pub struct DeleteListItemsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, ListsListsAsyncResponse>,
 }
 
 impl<'a> DeleteListItemsRequest<'a> {
@@ -475,19 +587,32 @@ impl<'a> DeleteListItemsRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<ListsListsAsyncResponse> {
         self.builder.send().await
     }
 }
-
 /// Delete list items
+///
+/// Removes one or more items from a list.
+///
+/// This operation is asynchronous. To get current the operation status, invoke the [Get bulk operation status](/operations/lists-get-bulk-operation-status) endpoint with the returned `operation_id`.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/accounts/{account_id}/rules/lists/{list_id}/items`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `list_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::lists };
+/// use cloudflare::{ ApiClient, apis::lists };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete_list_items(&api)
-///     .with_account_id("value")
-///     .with_list_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = delete_list_items(&api)
+///     .with_account_id("account_id")
+///     .with_list_id("list_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -497,7 +622,7 @@ pub fn delete_list_items(api: &ApiClient) -> DeleteListItemsRequest<'_> {
 
 #[derive(Debug)]
 pub struct GetListItemRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, ListsItemResponseCollection>,
 }
 
 impl<'a> GetListItemRequest<'a> {
@@ -525,20 +650,30 @@ impl<'a> GetListItemRequest<'a> {
         self.builder = self.builder.path_param("item_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<ListsItemResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// Get a list item
+///
+/// Fetches a list item in the list.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/rules/lists/{list_id}/items/{item_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `list_id` (path, required)
+/// - `item_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::lists };
+/// use cloudflare::{ ApiClient, apis::lists };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_list_item(&api)
-///     .with_account_id("value")
-///     .with_list_id("value")
-///     .with_item_id("value")
+/// let response = get_list_item(&api)
+///     .with_account_id("account_id")
+///     .with_list_id("list_id")
+///     .with_item_id("item_id")
 ///     .send()
 ///     .await?;
 /// ```

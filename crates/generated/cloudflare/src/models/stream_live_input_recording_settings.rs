@@ -19,9 +19,9 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct StreamLiveInputRecordingSettings {
-    pub allowed_origins: Option<serde_json::Value>,
-    pub hide_live_viewer_count: Option<serde_json::Value>,
-    pub mode: Option<serde_json::Value>,
-    pub require_signed_ur_ls: Option<serde_json::Value>,
-    pub timeout_seconds: Option<serde_json::Value>,
+    pub allowed_origins: Option<crate::models::stream_live_input_recording_allowed_origins::StreamLiveInputRecordingAllowedOrigins>,
+    pub hide_live_viewer_count: Option<crate::models::stream_live_input_recording_hide_live_viewer_count::StreamLiveInputRecordingHideLiveViewerCount>,
+    pub mode: Option<crate::models::stream_live_input_recording_mode::StreamLiveInputRecordingMode>,
+    pub require_signed_ur_ls: Option<crate::models::stream_live_input_recording_require_signed_ur_ls::StreamLiveInputRecordingRequireSignedUrLs>,
+    pub timeout_seconds: Option<crate::models::stream_live_input_recording_timeout_seconds::StreamLiveInputRecordingTimeoutSeconds>,
 }

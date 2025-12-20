@@ -19,11 +19,12 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct MagicSite {
-    pub connector_id: Option<serde_json::Value>,
+    pub connector_id: Option<crate::models::magic_connector_id::MagicConnectorId>,
     pub description: Option<String>,
     pub ha_mode: Option<bool>,
-    pub id: Option<serde_json::Value>,
+    pub id: Option<crate::models::magic_identifier::MagicIdentifier>,
     pub location: Option<crate::models::magic_site_location::MagicSiteLocation>,
-    pub name: Option<serde_json::Value>,
-    pub secondary_connector_id: Option<serde_json::Value>,
+    pub name: Option<crate::models::magic_site_name::MagicSiteName>,
+    pub secondary_connector_id:
+        Option<crate::models::magic_secondary_connector_id::MagicSecondaryConnectorId>,
 }

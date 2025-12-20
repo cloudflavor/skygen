@@ -15,15 +15,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-use crate::models::reserved_ipv6::ReservedIpv6;
-use crate::models::reserved_ipv6_create::ReservedIpv6Create;
-use crate::models::reserved_ipv6_list::ReservedIpv6List;
+use crate::models::error::Error;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct ListRequest<'a> {
-    builder: ApiRequestBuilder<'a, ReservedIpv6List>,
+    builder: ApiRequestBuilder<'a, serde_json::Value>,
 }
 
 impl<'a> ListRequest<'a> {
@@ -32,17 +30,22 @@ impl<'a> ListRequest<'a> {
 
         Self { builder }
     }
-    pub async fn send(self) -> ApiResult<ReservedIpv6List> {
+    pub async fn send(self) -> ApiResult<serde_json::Value> {
         self.builder.send().await
     }
 }
-
 /// [Public Preview] List All Reserved IPv6s
+///
+/// To list all of the reserved IPv6s available on your account, send a GET request to `/v2/reserved_ipv6`.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/reserved_ipv6`
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::public_preview_reserved_i_pv6 };
+/// use digitalocean::{ ApiClient, apis::public_preview_reserved_i_pv6 };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list(&api)
+/// let response = list(&api)
 ///     .send()
 ///     .await?;
 /// ```
@@ -52,7 +55,7 @@ pub fn list(api: &ApiClient) -> ListRequest<'_> {
 
 #[derive(Debug)]
 pub struct CreateRequest<'a> {
-    builder: ApiRequestBuilder<'a, ReservedIpv6Create>,
+    builder: ApiRequestBuilder<'a, serde_json::Value>,
 }
 
 impl<'a> CreateRequest<'a> {
@@ -61,21 +64,33 @@ impl<'a> CreateRequest<'a> {
 
         Self { builder }
     }
-    pub fn with_body(mut self, body: ReservedIpv6Create) -> Self {
+    pub fn with_body(
+        mut self,
+        body: crate::models::reserved_ipv6_create::ReservedIpv6Create,
+    ) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<ReservedIpv6Create> {
+    pub async fn send(self) -> ApiResult<serde_json::Value> {
         self.builder.send().await
     }
 }
-
 /// [Public Preview] Create a New Reserved IPv6
+///
+/// On creation, a reserved IPv6 must be reserved to a region.
+/// * To create a new reserved IPv6 reserved to a region, send a POST request to
+/// `/v2/reserved_ipv6` with the `region_slug` attribute.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/v2/reserved_ipv6`
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::public_preview_reserved_i_pv6 };
+/// use digitalocean::{ ApiClient, apis::public_preview_reserved_i_pv6 };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = create(&api)
+/// # let body: crate::models::reserved_ipv6_create::ReservedIpv6Create = todo!();
+/// let response = create(&api)
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -85,7 +100,7 @@ pub fn create(api: &ApiClient) -> CreateRequest<'_> {
 
 #[derive(Debug)]
 pub struct GetRequest<'a> {
-    builder: ApiRequestBuilder<'a, ReservedIpv6>,
+    builder: ApiRequestBuilder<'a, std::collections::BTreeMap<String, serde_json::Value>>,
 }
 
 impl<'a> GetRequest<'a> {
@@ -99,18 +114,26 @@ impl<'a> GetRequest<'a> {
         self.builder = self.builder.path_param("reserved_ipv6", value);
         self
     }
-    pub async fn send(self) -> ApiResult<ReservedIpv6> {
+    pub async fn send(self) -> ApiResult<std::collections::BTreeMap<String, serde_json::Value>> {
         self.builder.send().await
     }
 }
-
 /// [Public Preview] Retrieve an Existing Reserved IPv6
+///
+/// To show information about a reserved IPv6, send a GET request to `/v2/reserved_ipv6/$RESERVED_IPV6`.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/reserved_ipv6/{reserved_ipv6}`
+///
+/// **Parameters**
+/// - `reserved_ipv6` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::public_preview_reserved_i_pv6 };
+/// use digitalocean::{ ApiClient, apis::public_preview_reserved_i_pv6 };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get(&api)
-///     .with_reserved_ipv6("value")
+/// let response = get(&api)
+///     .with_reserved_ipv6("reserved_ipv6")
 ///     .send()
 ///     .await?;
 /// ```
@@ -120,7 +143,7 @@ pub fn get(api: &ApiClient) -> GetRequest<'_> {
 
 #[derive(Debug)]
 pub struct DeleteRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, Error>,
 }
 
 impl<'a> DeleteRequest<'a> {
@@ -135,18 +158,30 @@ impl<'a> DeleteRequest<'a> {
         self.builder = self.builder.path_param("reserved_ipv6", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<Error> {
         self.builder.send().await
     }
 }
-
 /// [Public Preview] Delete a Reserved IPv6
+///
+/// To delete a reserved IP and remove it from your account, send a DELETE request
+/// to `/v2/reserved_ipv6/$RESERVED_IPV6`.
+///
+/// A successful request will receive a 204 status code with no body in response.
+/// This indicates that the request was processed successfully.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/v2/reserved_ipv6/{reserved_ipv6}`
+///
+/// **Parameters**
+/// - `reserved_ipv6` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::public_preview_reserved_i_pv6 };
+/// use digitalocean::{ ApiClient, apis::public_preview_reserved_i_pv6 };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete(&api)
-///     .with_reserved_ipv6("value")
+/// let response = delete(&api)
+///     .with_reserved_ipv6("reserved_ipv6")
 ///     .send()
 ///     .await?;
 /// ```

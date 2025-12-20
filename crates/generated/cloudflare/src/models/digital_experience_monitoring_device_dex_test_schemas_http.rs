@@ -19,13 +19,12 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct DigitalExperienceMonitoringDeviceDexTestSchemasHttp {
-
     pub data: crate::models::digital_experience_monitoring_device_dex_test_schemas_data::DigitalExperienceMonitoringDeviceDexTestSchemasData,
-    pub description: Option<serde_json::Value>,
-    pub enabled: serde_json::Value,
-    pub interval: serde_json::Value,
-    pub name: serde_json::Value,
-    pub target_policies: Option<serde_json::Value>,
+    pub description: Option<crate::models::digital_experience_monitoring_device_dex_test_schemas_description::DigitalExperienceMonitoringDeviceDexTestSchemasDescription>,
+    pub enabled: crate::models::digital_experience_monitoring_device_dex_test_schemas_enabled::DigitalExperienceMonitoringDeviceDexTestSchemasEnabled,
+    pub interval: crate::models::digital_experience_monitoring_device_dex_test_schemas_interval::DigitalExperienceMonitoringDeviceDexTestSchemasInterval,
+    pub name: crate::models::digital_experience_monitoring_device_dex_test_schemas_name::DigitalExperienceMonitoringDeviceDexTestSchemasName,
+    pub target_policies: Option<crate::models::digital_experience_monitoring_device_dex_test_target_policies::DigitalExperienceMonitoringDeviceDexTestTargetPolicies>,
     pub targeted: Option<bool>,
-    pub test_id: Option<serde_json::Value>,
+    pub test_id: Option<crate::models::digital_experience_monitoring_schemas_test_id::DigitalExperienceMonitoringSchemasTestId>,
 }

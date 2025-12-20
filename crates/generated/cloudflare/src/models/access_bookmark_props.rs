@@ -19,10 +19,12 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct AccessBookmarkProps {
-    pub app_launcher_visible: Option<serde_json::Value>,
+    pub app_launcher_visible:
+        Option<crate::models::access_app_launcher_visible::AccessAppLauncherVisible>,
     pub domain: Option<String>,
-    pub logo_url: Option<serde_json::Value>,
-    pub name: Option<serde_json::Value>,
+    pub logo_url: Option<crate::models::access_logo_url::AccessLogoUrl>,
+    pub name:
+        Option<crate::models::access_apps_components_schemas_name::AccessAppsComponentsSchemasName>,
     pub r#type: Option<serde_json::Value>,
-    pub tags: Option<serde_json::Value>,
+    pub tags: Option<crate::models::access_tags::AccessTags>,
 }

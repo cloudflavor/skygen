@@ -57,13 +57,32 @@ impl<'a> GetAiInferenceSummaryRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get Workers AI models summary
+///
+/// Retrieves the distribution of unique accounts by model.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/ai/inference/summary/model`
+///
+/// **Parameters**
+/// - `name` (query,optional)
+/// - `dateRange` (query,optional)
+/// - `dateStart` (query,optional)
+/// - `dateEnd` (query,optional)
+/// - `limitPerGroup` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_ai_inference };
+/// use cloudflare::{ ApiClient, apis::radar_ai_inference };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_ai_inference_summary(&api)
+/// let response = get_ai_inference_summary(&api)
+///     .with_name("name")
+///     .with_date_range("dateRange")
+///     .with_date_start("dateStart")
+///     .with_date_end("dateEnd")
+///     .with_limit_per_group("limitPerGroup")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```
@@ -110,13 +129,32 @@ impl<'a> GetAiInferenceSummaryGetRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get Workers AI tasks summary
+///
+/// Retrieves the distribution of unique accounts by task.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/ai/inference/summary/task`
+///
+/// **Parameters**
+/// - `name` (query,optional)
+/// - `dateRange` (query,optional)
+/// - `dateStart` (query,optional)
+/// - `dateEnd` (query,optional)
+/// - `limitPerGroup` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_ai_inference };
+/// use cloudflare::{ ApiClient, apis::radar_ai_inference };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_ai_inference_summary_get(&api)
+/// let response = get_ai_inference_summary_get(&api)
+///     .with_name("name")
+///     .with_date_range("dateRange")
+///     .with_date_start("dateStart")
+///     .with_date_end("dateEnd")
+///     .with_limit_per_group("limitPerGroup")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```
@@ -171,13 +209,34 @@ impl<'a> GetAiInferenceTimeseriesRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get Workers AI models time series
+///
+/// Retrieves the distribution of unique accounts by model over time.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/ai/inference/timeseries_groups/model`
+///
+/// **Parameters**
+/// - `aggInterval` (query,optional)
+/// - `name` (query,optional)
+/// - `dateRange` (query,optional)
+/// - `dateStart` (query,optional)
+/// - `dateEnd` (query,optional)
+/// - `limitPerGroup` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_ai_inference };
+/// use cloudflare::{ ApiClient, apis::radar_ai_inference };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_ai_inference_timeseries(&api)
+/// let response = get_ai_inference_timeseries(&api)
+///     .with_agg_interval("aggInterval")
+///     .with_name("name")
+///     .with_date_range("dateRange")
+///     .with_date_start("dateStart")
+///     .with_date_end("dateEnd")
+///     .with_limit_per_group("limitPerGroup")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```
@@ -232,13 +291,34 @@ impl<'a> GetAiInferenceTimeseriesGetRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get Workers AI tasks time series
+///
+/// Retrieves the distribution of unique accounts by task over time.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/ai/inference/timeseries_groups/task`
+///
+/// **Parameters**
+/// - `aggInterval` (query,optional)
+/// - `name` (query,optional)
+/// - `dateRange` (query,optional)
+/// - `dateStart` (query,optional)
+/// - `dateEnd` (query,optional)
+/// - `limitPerGroup` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_ai_inference };
+/// use cloudflare::{ ApiClient, apis::radar_ai_inference };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_ai_inference_timeseries_get(&api)
+/// let response = get_ai_inference_timeseries_get(&api)
+///     .with_agg_interval("aggInterval")
+///     .with_name("name")
+///     .with_date_range("dateRange")
+///     .with_date_start("dateStart")
+///     .with_date_end("dateEnd")
+///     .with_limit_per_group("limitPerGroup")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```

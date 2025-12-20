@@ -19,6 +19,6 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct ImagesImageKeys {
-    pub name: Option<serde_json::Value>,
-    pub value: Option<serde_json::Value>,
+    pub name: Option<crate::models::images_image_key_name::ImagesImageKeyName>,
+    pub value: Option<crate::models::images_image_key_value::ImagesImageKeyValue>,
 }

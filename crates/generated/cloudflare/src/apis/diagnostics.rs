@@ -15,12 +15,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::magic_transit_traceroute_response_collection::MagicTransitTracerouteResponseCollection;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct TracerouteRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, MagicTransitTracerouteResponseCollection>,
 }
 
 impl<'a> TracerouteRequest<'a> {
@@ -43,18 +44,28 @@ impl<'a> TracerouteRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<MagicTransitTracerouteResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// Traceroute
+///
+/// Run traceroutes from Cloudflare colos.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/diagnostics/traceroute`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::diagnostics };
+/// use cloudflare::{ ApiClient, apis::diagnostics };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = traceroute(&api)
-///     .with_account_id("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = traceroute(&api)
+///     .with_account_id("account_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```

@@ -42,14 +42,20 @@ impl<'a> DlpRiskScoreBehaviorsRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get all behaviors and associated configuration
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/zt_risk_scoring/behaviors`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zero_trust_risk_scoring };
+/// use cloudflare::{ ApiClient, apis::zero_trust_risk_scoring };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = dlp_risk_score_behaviors(&api)
-///     .with_account_id("value")
+/// let response = dlp_risk_score_behaviors(&api)
+///     .with_account_id("account_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -89,14 +95,22 @@ impl<'a> DlpRiskScoreBehaviorsPutRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Update configuration for risk behaviors
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/accounts/{account_id}/zt_risk_scoring/behaviors`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zero_trust_risk_scoring };
+/// use cloudflare::{ ApiClient, apis::zero_trust_risk_scoring };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = dlp_risk_score_behaviors_put(&api)
-///     .with_account_id("value")
+/// # let body: crate::models::dlp_update_behaviors::DlpUpdateBehaviors = todo!();
+/// let response = dlp_risk_score_behaviors_put(&api)
+///     .with_account_id("account_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -128,14 +142,20 @@ impl<'a> DlpRiskScoreSummaryRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get risk score info for all users in the account
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/zt_risk_scoring/summary`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zero_trust_risk_scoring };
+/// use cloudflare::{ ApiClient, apis::zero_trust_risk_scoring };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = dlp_risk_score_summary(&api)
-///     .with_account_id("value")
+/// let response = dlp_risk_score_summary(&api)
+///     .with_account_id("account_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -172,15 +192,22 @@ impl<'a> DlpRiskScoreSummaryGetRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get risk event/score information for a specific user
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/zt_risk_scoring/{user_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `user_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zero_trust_risk_scoring };
+/// use cloudflare::{ ApiClient, apis::zero_trust_risk_scoring };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = dlp_risk_score_summary_get(&api)
-///     .with_account_id("value")
-///     .with_user_id("value")
+/// let response = dlp_risk_score_summary_get(&api)
+///     .with_account_id("account_id")
+///     .with_user_id("user_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -217,15 +244,22 @@ impl<'a> DlpRiskScoreResetRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Clear the risk score for a particular user
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/zt_risk_scoring/{user_id}/reset`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `user_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zero_trust_risk_scoring };
+/// use cloudflare::{ ApiClient, apis::zero_trust_risk_scoring };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = dlp_risk_score_reset(&api)
-///     .with_account_id("value")
-///     .with_user_id("value")
+/// let response = dlp_risk_score_reset(&api)
+///     .with_account_id("account_id")
+///     .with_user_id("user_id")
 ///     .send()
 ///     .await?;
 /// ```

@@ -23,7 +23,8 @@ pub struct DlpRiskScoreIntegration {
     pub active: bool,
     pub created_at: String,
     pub id: String,
-    pub integration_type: serde_json::Value,
+    pub integration_type:
+        crate::models::dlp_risk_score_integration_type::DlpRiskScoreIntegrationType,
     pub reference_id: String,
     pub tenant_url: String,
     pub well_known_url: String,

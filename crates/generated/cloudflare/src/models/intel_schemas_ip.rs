@@ -20,6 +20,6 @@ use serde::{Deserialize, Serialize};
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct IntelSchemasIp {
     pub belongs_to_ref: Option<std::collections::BTreeMap<String, serde_json::Value>>,
-    pub ip: Option<serde_json::Value>,
+    pub ip: Option<crate::models::intel_ip::IntelIp>,
     pub risk_types: Option<Vec<std::collections::BTreeMap<String, serde_json::Value>>>,
 }

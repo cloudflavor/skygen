@@ -65,13 +65,36 @@ impl<'a> GetTcpResetsTimeoutsRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get TCP resets and timeouts summary
+///
+/// Retrieves the distribution of connection stage by TCP connections terminated within the first 10 packets by a reset or timeout.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/tcp_resets_timeouts/summary`
+///
+/// **Parameters**
+/// - `name` (query,optional)
+/// - `dateRange` (query,optional)
+/// - `dateStart` (query,optional)
+/// - `dateEnd` (query,optional)
+/// - `asn` (query,optional)
+/// - `location` (query,optional)
+/// - `continent` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_tcp_resets_and_timeouts };
+/// use cloudflare::{ ApiClient, apis::radar_tcp_resets_and_timeouts };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_tcp_resets_timeouts(&api)
+/// let response = get_tcp_resets_timeouts(&api)
+///     .with_name("name")
+///     .with_date_range("dateRange")
+///     .with_date_start("dateStart")
+///     .with_date_end("dateEnd")
+///     .with_asn("asn")
+///     .with_location("location")
+///     .with_continent("continent")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```
@@ -134,13 +157,38 @@ impl<'a> GetTcpResetsTimeoutsGetRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get TCP resets and timeouts time series
+///
+/// Retrieves the distribution of connection stage by TCP connections terminated within the first 10 packets by a reset or timeout over time.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/tcp_resets_timeouts/timeseries_groups`
+///
+/// **Parameters**
+/// - `aggInterval` (query,optional)
+/// - `name` (query,optional)
+/// - `dateRange` (query,optional)
+/// - `dateStart` (query,optional)
+/// - `dateEnd` (query,optional)
+/// - `asn` (query,optional)
+/// - `location` (query,optional)
+/// - `continent` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_tcp_resets_and_timeouts };
+/// use cloudflare::{ ApiClient, apis::radar_tcp_resets_and_timeouts };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_tcp_resets_timeouts_get(&api)
+/// let response = get_tcp_resets_timeouts_get(&api)
+///     .with_agg_interval("aggInterval")
+///     .with_name("name")
+///     .with_date_range("dateRange")
+///     .with_date_start("dateStart")
+///     .with_date_end("dateEnd")
+///     .with_asn("asn")
+///     .with_location("location")
+///     .with_continent("continent")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```

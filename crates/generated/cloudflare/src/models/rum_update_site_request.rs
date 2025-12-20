@@ -19,9 +19,9 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct RumUpdateSiteRequest {
-    pub auto_install: Option<serde_json::Value>,
-    pub enabled: Option<serde_json::Value>,
-    pub host: Option<serde_json::Value>,
-    pub lite: Option<serde_json::Value>,
-    pub zone_tag: Option<serde_json::Value>,
+    pub auto_install: Option<crate::models::rum_auto_install::RumAutoInstall>,
+    pub enabled: Option<crate::models::rum_enabled::RumEnabled>,
+    pub host: Option<crate::models::rum_host::RumHost>,
+    pub lite: Option<crate::models::rum_lite::RumLite>,
+    pub zone_tag: Option<crate::models::rum_zone_tag::RumZoneTag>,
 }

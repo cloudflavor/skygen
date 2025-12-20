@@ -16,12 +16,13 @@
 // limitations under the License.
 
 use crate::models::api_shield_api_response_common::ApiShieldApiResponseCommon;
+use crate::models::api_shield_configuration_single_response::ApiShieldConfigurationSingleResponse;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct RetrieveInformationAboutSpecificRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, ApiShieldConfigurationSingleResponse>,
 }
 
 impl<'a> RetrieveInformationAboutSpecificRequest<'a> {
@@ -43,18 +44,26 @@ impl<'a> RetrieveInformationAboutSpecificRequest<'a> {
         self.builder = self.builder.header_param("properties", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<ApiShieldConfigurationSingleResponse> {
         self.builder.send().await
     }
 }
-
 /// Retrieve information about specific configuration properties
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/api_gateway/configuration`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `properties` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::api_shield_settings };
+/// use cloudflare::{ ApiClient, apis::api_shield_settings };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = retrieve_information_about_specific(&api)
-///     .with_zone_id("value")
+/// let response = retrieve_information_about_specific(&api)
+///     .with_zone_id("zone_id")
+///     .with_properties("properties")
 ///     .send()
 ///     .await?;
 /// ```
@@ -96,14 +105,22 @@ impl<'a> SetConfigurationPropertiesRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Set configuration properties
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/zones/{zone_id}/api_gateway/configuration`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::api_shield_settings };
+/// use cloudflare::{ ApiClient, apis::api_shield_settings };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = set_configuration_properties(&api)
-///     .with_zone_id("value")
+/// # let body: crate::models::api_shield_configuration::ApiShieldConfiguration = todo!();
+/// let response = set_configuration_properties(&api)
+///     .with_zone_id("zone_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```

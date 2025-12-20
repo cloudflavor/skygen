@@ -15,6 +15,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::workers_kv_api_response_common_no_result::WorkersKvApiResponseCommonNoResult;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
@@ -58,14 +59,30 @@ impl<'a> ListNamespacesRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// List Namespaces
+///
+/// Returns the namespaces owned by an account.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/storage/kv/namespaces`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `page` (query,optional)
+/// - `per_page` (query,optional)
+/// - `order` (query,optional)
+/// - `direction` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::workers_kv_namespace };
+/// use cloudflare::{ ApiClient, apis::workers_kv_namespace };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_namespaces(&api)
-///     .with_account_id("value")
+/// let response = list_namespaces(&api)
+///     .with_account_id("account_id")
+///     .with_page("page")
+///     .with_per_page("per_page")
+///     .with_order("order")
+///     .with_direction("direction")
 ///     .send()
 ///     .await?;
 /// ```
@@ -105,14 +122,24 @@ impl<'a> CreateNamespaceRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Create a Namespace
+///
+/// Creates a namespace under the given title. A `400` is returned if the account already owns a namespace with this title. A namespace must be explicitly deleted to be replaced.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/storage/kv/namespaces`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::workers_kv_namespace };
+/// use cloudflare::{ ApiClient, apis::workers_kv_namespace };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = create_namespace(&api)
-///     .with_account_id("value")
+/// # let body: crate::models::workers_kv_create_rename_namespace_body::WorkersKvCreateRenameNamespaceBody = todo!();
+/// let response = create_namespace(&api)
+///     .with_account_id("account_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -149,15 +176,24 @@ impl<'a> GetNamespaceRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get a Namespace
+///
+/// Get the namespace corresponding to the given ID.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/storage/kv/namespaces/{namespace_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `namespace_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::workers_kv_namespace };
+/// use cloudflare::{ ApiClient, apis::workers_kv_namespace };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_namespace(&api)
-///     .with_account_id("value")
-///     .with_namespace_id("value")
+/// let response = get_namespace(&api)
+///     .with_account_id("account_id")
+///     .with_namespace_id("namespace_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -202,15 +238,26 @@ impl<'a> RenameNamespaceRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Rename a Namespace
+///
+/// Modifies a namespace's title.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/accounts/{account_id}/storage/kv/namespaces/{namespace_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `namespace_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::workers_kv_namespace };
+/// use cloudflare::{ ApiClient, apis::workers_kv_namespace };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = rename_namespace(&api)
-///     .with_account_id("value")
-///     .with_namespace_id("value")
+/// # let body: crate::models::workers_kv_create_rename_namespace_body::WorkersKvCreateRenameNamespaceBody = todo!();
+/// let response = rename_namespace(&api)
+///     .with_account_id("account_id")
+///     .with_namespace_id("namespace_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -220,7 +267,7 @@ pub fn rename_namespace(api: &ApiClient) -> RenameNamespaceRequest<'_> {
 
 #[derive(Debug)]
 pub struct RemoveNamespaceRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, WorkersKvApiResponseCommonNoResult>,
 }
 
 impl<'a> RemoveNamespaceRequest<'a> {
@@ -243,19 +290,28 @@ impl<'a> RemoveNamespaceRequest<'a> {
         self.builder = self.builder.path_param("namespace_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<WorkersKvApiResponseCommonNoResult> {
         self.builder.send().await
     }
 }
-
 /// Remove a Namespace
+///
+/// Deletes the namespace corresponding to the given ID.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/accounts/{account_id}/storage/kv/namespaces/{namespace_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `namespace_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::workers_kv_namespace };
+/// use cloudflare::{ ApiClient, apis::workers_kv_namespace };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = remove_namespace(&api)
-///     .with_account_id("value")
-///     .with_namespace_id("value")
+/// let response = remove_namespace(&api)
+///     .with_account_id("account_id")
+///     .with_namespace_id("namespace_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -289,7 +345,10 @@ impl<'a> WriteMultipleKeyValueRequest<'a> {
         self.builder = self.builder.path_param("namespace_id", value);
         self
     }
-    pub fn with_body(mut self, body: serde_json::Value) -> Self {
+    pub fn with_body(
+        mut self,
+        body: crate::models::workers_kv_bulk_write::WorkersKvBulkWrite,
+    ) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
@@ -297,15 +356,26 @@ impl<'a> WriteMultipleKeyValueRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Write multiple key-value pairs
+///
+/// Write multiple keys and values at once. Body should be an array of up to 10,000 key-value pairs to be stored, along with optional expiration information. Existing values and expirations will be overwritten. If neither `expiration` nor `expiration_ttl` is specified, the key-value pair will never expire. If both are set, `expiration_ttl` is used and `expiration` is ignored. The entire request size must be 100 megabytes or less.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/accounts/{account_id}/storage/kv/namespaces/{namespace_id}/bulk`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `namespace_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::workers_kv_namespace };
+/// use cloudflare::{ ApiClient, apis::workers_kv_namespace };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = write_multiple_key_value(&api)
-///     .with_account_id("value")
-///     .with_namespace_id("value")
+/// # let body: crate::models::workers_kv_bulk_write::WorkersKvBulkWrite = todo!();
+/// let response = write_multiple_key_value(&api)
+///     .with_account_id("account_id")
+///     .with_namespace_id("namespace_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -339,7 +409,10 @@ impl<'a> DeleteMultipleKeyValueRequest<'a> {
         self.builder = self.builder.path_param("namespace_id", value);
         self
     }
-    pub fn with_body(mut self, body: serde_json::Value) -> Self {
+    pub fn with_body(
+        mut self,
+        body: crate::models::workers_kv_bulk_delete::WorkersKvBulkDelete,
+    ) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
@@ -347,15 +420,26 @@ impl<'a> DeleteMultipleKeyValueRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Delete multiple key-value pairs
+///
+/// Remove multiple KV pairs from the namespace. Body should be an array of up to 10,000 keys to be removed.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/accounts/{account_id}/storage/kv/namespaces/{namespace_id}/bulk`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `namespace_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::workers_kv_namespace };
+/// use cloudflare::{ ApiClient, apis::workers_kv_namespace };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete_multiple_key_value(&api)
-///     .with_account_id("value")
-///     .with_namespace_id("value")
+/// # let body: crate::models::workers_kv_bulk_delete::WorkersKvBulkDelete = todo!();
+/// let response = delete_multiple_key_value(&api)
+///     .with_account_id("account_id")
+///     .with_namespace_id("namespace_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -389,7 +473,10 @@ impl<'a> DeleteMultipleKeyValuePostRequest<'a> {
         self.builder = self.builder.path_param("namespace_id", value);
         self
     }
-    pub fn with_body(mut self, body: serde_json::Value) -> Self {
+    pub fn with_body(
+        mut self,
+        body: crate::models::workers_kv_bulk_delete::WorkersKvBulkDelete,
+    ) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
@@ -397,15 +484,26 @@ impl<'a> DeleteMultipleKeyValuePostRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Delete multiple key-value pairs
+///
+/// Remove multiple KV pairs from the namespace. Body should be an array of up to 10,000 keys to be removed.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/storage/kv/namespaces/{namespace_id}/bulk/delete`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `namespace_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::workers_kv_namespace };
+/// use cloudflare::{ ApiClient, apis::workers_kv_namespace };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete_multiple_key_value_post(&api)
-///     .with_account_id("value")
-///     .with_namespace_id("value")
+/// # let body: crate::models::workers_kv_bulk_delete::WorkersKvBulkDelete = todo!();
+/// let response = delete_multiple_key_value_post(&api)
+///     .with_account_id("account_id")
+///     .with_namespace_id("namespace_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -450,15 +548,26 @@ impl<'a> GetMultipleKeyValueRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get multiple key-value pairs
+///
+/// Get multiple KV pairs from the namespace. Body should contain keys to retrieve at most 100. Keys must contain text-based values. If value is json, it can be requested to return in JSON, instead of string. Metadata can be return if withMetadata is true.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/storage/kv/namespaces/{namespace_id}/bulk/get`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `namespace_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::workers_kv_namespace };
+/// use cloudflare::{ ApiClient, apis::workers_kv_namespace };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_multiple_key_value(&api)
-///     .with_account_id("value")
-///     .with_namespace_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = get_multiple_key_value(&api)
+///     .with_account_id("account_id")
+///     .with_namespace_id("namespace_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -507,15 +616,30 @@ impl<'a> ListNamespaceSKeysRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// List a Namespace's Keys
+///
+/// Lists a namespace's keys.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/storage/kv/namespaces/{namespace_id}/keys`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `namespace_id` (path, required)
+/// - `limit` (query,optional)
+/// - `prefix` (query,optional)
+/// - `cursor` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::workers_kv_namespace };
+/// use cloudflare::{ ApiClient, apis::workers_kv_namespace };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_namespace_s_keys(&api)
-///     .with_account_id("value")
-///     .with_namespace_id("value")
+/// let response = list_namespace_s_keys(&api)
+///     .with_account_id("account_id")
+///     .with_namespace_id("namespace_id")
+///     .with_limit("limit")
+///     .with_prefix("prefix")
+///     .with_cursor("cursor")
 ///     .send()
 ///     .await?;
 /// ```
@@ -557,16 +681,26 @@ impl<'a> ReadMetadataKeyRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Read the metadata for a key
+///
+/// Returns the metadata associated with the given key in the given namespace. Use URL-encoding to use special characters (for example, `:`, `!`, `%`) in the key name.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/storage/kv/namespaces/{namespace_id}/metadata/{key_name}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `namespace_id` (path, required)
+/// - `key_name` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::workers_kv_namespace };
+/// use cloudflare::{ ApiClient, apis::workers_kv_namespace };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = read_metadata_key(&api)
-///     .with_account_id("value")
-///     .with_namespace_id("value")
-///     .with_key_name("value")
+/// let response = read_metadata_key(&api)
+///     .with_account_id("account_id")
+///     .with_namespace_id("namespace_id")
+///     .with_key_name("key_name")
 ///     .send()
 ///     .await?;
 /// ```
@@ -608,16 +742,26 @@ impl<'a> ReadKeyValuePairRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Read key-value pair
+///
+/// Returns the value associated with the given key in the given namespace. Use URL-encoding to use special characters (for example, `:`, `!`, `%`) in the key name. If the KV-pair is set to expire at some point, the expiration time as measured in seconds since the UNIX epoch will be returned in the `expiration` response header.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/storage/kv/namespaces/{namespace_id}/values/{key_name}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `namespace_id` (path, required)
+/// - `key_name` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::workers_kv_namespace };
+/// use cloudflare::{ ApiClient, apis::workers_kv_namespace };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = read_key_value_pair(&api)
-///     .with_account_id("value")
-///     .with_namespace_id("value")
-///     .with_key_name("value")
+/// let response = read_key_value_pair(&api)
+///     .with_account_id("account_id")
+///     .with_namespace_id("namespace_id")
+///     .with_key_name("key_name")
 ///     .send()
 ///     .await?;
 /// ```
@@ -627,7 +771,7 @@ pub fn read_key_value_pair(api: &ApiClient) -> ReadKeyValuePairRequest<'_> {
 
 #[derive(Debug)]
 pub struct WriteKeyValuePairRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, WorkersKvApiResponseCommonNoResult>,
 }
 
 impl<'a> WriteKeyValuePairRequest<'a> {
@@ -663,20 +807,34 @@ impl<'a> WriteKeyValuePairRequest<'a> {
         self.builder = self.builder.header_param("expiration_ttl", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<WorkersKvApiResponseCommonNoResult> {
         self.builder.send().await
     }
 }
-
 /// Write key-value pair with optional metadata
+///
+/// Write a value identified by a key. Use URL-encoding to use special characters (for example, `:`, `!`, `%`) in the key name. Body should be the value to be stored. If JSON metadata to be associated with the key/value pair is needed, use `multipart/form-data` content type for your PUT request (see dropdown below in `REQUEST BODY SCHEMA`). Existing values, expirations, and metadata will be overwritten. If neither `expiration` nor `expiration_ttl` is specified, the key-value pair will never expire. If both are set, `expiration_ttl` is used and `expiration` is ignored.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/accounts/{account_id}/storage/kv/namespaces/{namespace_id}/values/{key_name}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `namespace_id` (path, required)
+/// - `key_name` (path, required)
+/// - `expiration` (query,optional)
+/// - `expiration_ttl` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::workers_kv_namespace };
+/// use cloudflare::{ ApiClient, apis::workers_kv_namespace };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = write_key_value_pair(&api)
-///     .with_account_id("value")
-///     .with_namespace_id("value")
-///     .with_key_name("value")
+/// let response = write_key_value_pair(&api)
+///     .with_account_id("account_id")
+///     .with_namespace_id("namespace_id")
+///     .with_key_name("key_name")
+///     .with_expiration("expiration")
+///     .with_expiration_ttl("expiration_ttl")
 ///     .send()
 ///     .await?;
 /// ```
@@ -686,7 +844,7 @@ pub fn write_key_value_pair(api: &ApiClient) -> WriteKeyValuePairRequest<'_> {
 
 #[derive(Debug)]
 pub struct DeleteKeyValuePairRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, WorkersKvApiResponseCommonNoResult>,
 }
 
 impl<'a> DeleteKeyValuePairRequest<'a> {
@@ -714,20 +872,30 @@ impl<'a> DeleteKeyValuePairRequest<'a> {
         self.builder = self.builder.path_param("key_name", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<WorkersKvApiResponseCommonNoResult> {
         self.builder.send().await
     }
 }
-
 /// Delete key-value pair
+///
+/// Remove a KV pair from the namespace. Use URL-encoding to use special characters (for example, `:`, `!`, `%`) in the key name.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/accounts/{account_id}/storage/kv/namespaces/{namespace_id}/values/{key_name}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `namespace_id` (path, required)
+/// - `key_name` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::workers_kv_namespace };
+/// use cloudflare::{ ApiClient, apis::workers_kv_namespace };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete_key_value_pair(&api)
-///     .with_account_id("value")
-///     .with_namespace_id("value")
-///     .with_key_name("value")
+/// let response = delete_key_value_pair(&api)
+///     .with_account_id("account_id")
+///     .with_namespace_id("namespace_id")
+///     .with_key_name("key_name")
 ///     .send()
 ///     .await?;
 /// ```

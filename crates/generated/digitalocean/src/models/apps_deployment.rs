@@ -25,7 +25,7 @@ pub struct AppsDeployment {
     pub functions: Option<Vec<crate::models::apps_deployment_functions::AppsDeploymentFunctions>>,
     pub id: Option<String>,
     pub jobs: Option<Vec<crate::models::apps_deployment_job::AppsDeploymentJob>>,
-    pub phase: Option<serde_json::Value>,
+    pub phase: Option<crate::models::apps_deployment_phase::AppsDeploymentPhase>,
     pub phase_last_updated_at: Option<String>,
     pub progress: Option<crate::models::apps_deployment_progress::AppsDeploymentProgress>,
     pub services: Option<Vec<crate::models::apps_deployment_service::AppsDeploymentService>>,

@@ -19,7 +19,6 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct WorkersObservabilityQueryResults {
-
     pub calculations: Option<Vec<std::collections::BTreeMap<String, serde_json::Value>>>,
     pub compare: Option<Vec<std::collections::BTreeMap<String, serde_json::Value>>>,
     pub events: Option<std::collections::BTreeMap<String, serde_json::Value>>,

@@ -15,12 +15,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::iam_collection_role_response::IamCollectionRoleResponse;
+use crate::models::iam_single_role_response::IamSingleRoleResponse;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct ListRolesRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, IamCollectionRoleResponse>,
 }
 
 impl<'a> ListRolesRequest<'a> {
@@ -42,18 +44,30 @@ impl<'a> ListRolesRequest<'a> {
         self.builder = self.builder.header_param("per_page", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<IamCollectionRoleResponse> {
         self.builder.send().await
     }
 }
-
 /// List Roles
+///
+/// Get all available roles for an account.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/roles`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `page` (query,optional)
+/// - `per_page` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::account_roles };
+/// use cloudflare::{ ApiClient, apis::account_roles };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_roles(&api)
-///     .with_account_id("value")
+/// let response = list_roles(&api)
+///     .with_account_id("account_id")
+///     .with_page("page")
+///     .with_per_page("per_page")
 ///     .send()
 ///     .await?;
 /// ```
@@ -63,7 +77,7 @@ pub fn list_roles(api: &ApiClient) -> ListRolesRequest<'_> {
 
 #[derive(Debug)]
 pub struct RoleDetailsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, IamSingleRoleResponse>,
 }
 
 impl<'a> RoleDetailsRequest<'a> {
@@ -83,19 +97,28 @@ impl<'a> RoleDetailsRequest<'a> {
         self.builder = self.builder.path_param("role_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<IamSingleRoleResponse> {
         self.builder.send().await
     }
 }
-
 /// Role Details
+///
+/// Get information about a specific role for an account.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/roles/{role_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `role_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::account_roles };
+/// use cloudflare::{ ApiClient, apis::account_roles };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = role_details(&api)
-///     .with_account_id("value")
-///     .with_role_id("value")
+/// let response = role_details(&api)
+///     .with_account_id("account_id")
+///     .with_role_id("role_id")
 ///     .send()
 ///     .await?;
 /// ```

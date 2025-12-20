@@ -19,12 +19,12 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct D1DatabaseDetailsResponse {
-    pub created_at: Option<serde_json::Value>,
-    pub file_size: Option<serde_json::Value>,
-    pub name: Option<serde_json::Value>,
-    pub num_tables: Option<serde_json::Value>,
+    pub created_at: Option<crate::models::d1_created_at::D1CreatedAt>,
+    pub file_size: Option<crate::models::d1_file_size::D1FileSize>,
+    pub name: Option<crate::models::d1_database_name::D1DatabaseName>,
+    pub num_tables: Option<crate::models::d1_table_count::D1TableCount>,
     pub read_replication:
         Option<crate::models::d1_read_replication_details::D1ReadReplicationDetails>,
-    pub uuid: Option<serde_json::Value>,
-    pub version: Option<serde_json::Value>,
+    pub uuid: Option<crate::models::d1_database_identifier::D1DatabaseIdentifier>,
+    pub version: Option<crate::models::d1_database_version::D1DatabaseVersion>,
 }

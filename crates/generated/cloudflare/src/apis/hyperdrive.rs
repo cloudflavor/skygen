@@ -39,14 +39,22 @@ impl<'a> ListHyperdriveRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// List Hyperdrives
+///
+/// Returns a list of Hyperdrives.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/hyperdrive/configs`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::hyperdrive };
+/// use cloudflare::{ ApiClient, apis::hyperdrive };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_hyperdrive(&api)
-///     .with_account_id("value")
+/// let response = list_hyperdrive(&api)
+///     .with_account_id("account_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -86,14 +94,24 @@ impl<'a> CreateHyperdriveRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Create Hyperdrive
+///
+/// Creates and returns a new Hyperdrive configuration.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/hyperdrive/configs`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::hyperdrive };
+/// use cloudflare::{ ApiClient, apis::hyperdrive };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = create_hyperdrive(&api)
-///     .with_account_id("value")
+/// # let body: crate::models::hyperdrive_hyperdrive_config::HyperdriveHyperdriveConfig = todo!();
+/// let response = create_hyperdrive(&api)
+///     .with_account_id("account_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -130,15 +148,24 @@ impl<'a> GetRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get Hyperdrive
+///
+/// Returns the specified Hyperdrive configuration.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/hyperdrive/configs/{hyperdrive_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `hyperdrive_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::hyperdrive };
+/// use cloudflare::{ ApiClient, apis::hyperdrive };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get(&api)
-///     .with_account_id("value")
-///     .with_hyperdrive_id("value")
+/// let response = get(&api)
+///     .with_account_id("account_id")
+///     .with_hyperdrive_id("hyperdrive_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -183,15 +210,26 @@ impl<'a> UpdateHyperdriveRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Update Hyperdrive
+///
+/// Updates and returns the specified Hyperdrive configuration.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/accounts/{account_id}/hyperdrive/configs/{hyperdrive_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `hyperdrive_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::hyperdrive };
+/// use cloudflare::{ ApiClient, apis::hyperdrive };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = update_hyperdrive(&api)
-///     .with_account_id("value")
-///     .with_hyperdrive_id("value")
+/// # let body: crate::models::hyperdrive_hyperdrive_config::HyperdriveHyperdriveConfig = todo!();
+/// let response = update_hyperdrive(&api)
+///     .with_account_id("account_id")
+///     .with_hyperdrive_id("hyperdrive_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -228,15 +266,24 @@ impl<'a> DeleteRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Delete Hyperdrive
+///
+/// Deletes the specified Hyperdrive.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/accounts/{account_id}/hyperdrive/configs/{hyperdrive_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `hyperdrive_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::hyperdrive };
+/// use cloudflare::{ ApiClient, apis::hyperdrive };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete(&api)
-///     .with_account_id("value")
-///     .with_hyperdrive_id("value")
+/// let response = delete(&api)
+///     .with_account_id("account_id")
+///     .with_hyperdrive_id("hyperdrive_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -281,15 +328,26 @@ impl<'a> PatchRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Patch Hyperdrive
+///
+/// Patches and returns the specified Hyperdrive configuration. Custom caching settings are not kept if caching is disabled.
+///
+/// **HTTP Method:** `PATCH`
+/// **Path:** `/accounts/{account_id}/hyperdrive/configs/{hyperdrive_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `hyperdrive_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::hyperdrive };
+/// use cloudflare::{ ApiClient, apis::hyperdrive };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = patch(&api)
-///     .with_account_id("value")
-///     .with_hyperdrive_id("value")
+/// # let body: crate::models::hyperdrive_hyperdrive_config_patch::HyperdriveHyperdriveConfigPatch = todo!();
+/// let response = patch(&api)
+///     .with_account_id("account_id")
+///     .with_hyperdrive_id("hyperdrive_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```

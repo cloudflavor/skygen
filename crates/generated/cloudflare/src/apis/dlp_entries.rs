@@ -38,14 +38,22 @@ impl<'a> ListAllEntriesRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// List all entries
+///
+/// Lists all DLP entries in an account.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/dlp/entries`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::dlp_entries };
+/// use cloudflare::{ ApiClient, apis::dlp_entries };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_all_entries(&api)
-///     .with_account_id("value")
+/// let response = list_all_entries(&api)
+///     .with_account_id("account_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -79,14 +87,24 @@ impl<'a> CreateEntryRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Create custom entry
+///
+/// Creates a DLP custom entry.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/dlp/entries`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::dlp_entries };
+/// use cloudflare::{ ApiClient, apis::dlp_entries };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = create_entry(&api)
-///     .with_account_id("value")
+/// # let body: crate::models::dlp_new_entry::DlpNewEntry = todo!();
+/// let response = create_entry(&api)
+///     .with_account_id("account_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -123,15 +141,24 @@ impl<'a> GetDlpEntryRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get DLP Entry
+///
+/// Fetches a DLP entry by ID.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/dlp/entries/{entry_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `entry_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::dlp_entries };
+/// use cloudflare::{ ApiClient, apis::dlp_entries };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_dlp_entry(&api)
-///     .with_account_id("value")
-///     .with_entry_id("value")
+/// let response = get_dlp_entry(&api)
+///     .with_account_id("account_id")
+///     .with_entry_id("entry_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -165,7 +192,7 @@ impl<'a> UpdateEntryRequest<'a> {
         self.builder = self.builder.path_param("entry_id", value);
         self
     }
-    pub fn with_body(mut self, body: serde_json::Value) -> Self {
+    pub fn with_body(mut self, body: crate::models::dlp_entry_update::DlpEntryUpdate) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
@@ -173,15 +200,26 @@ impl<'a> UpdateEntryRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Update entry
+///
+/// Updates a DLP entry.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/accounts/{account_id}/dlp/entries/{entry_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `entry_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::dlp_entries };
+/// use cloudflare::{ ApiClient, apis::dlp_entries };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = update_entry(&api)
-///     .with_account_id("value")
-///     .with_entry_id("value")
+/// # let body: crate::models::dlp_entry_update::DlpEntryUpdate = todo!();
+/// let response = update_entry(&api)
+///     .with_account_id("account_id")
+///     .with_entry_id("entry_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -218,15 +256,24 @@ impl<'a> DeleteEntryRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Delete custom entry
+///
+/// Deletes a DLP custom entry.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/accounts/{account_id}/dlp/entries/{entry_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `entry_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::dlp_entries };
+/// use cloudflare::{ ApiClient, apis::dlp_entries };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete_entry(&api)
-///     .with_account_id("value")
-///     .with_entry_id("value")
+/// let response = delete_entry(&api)
+///     .with_account_id("account_id")
+///     .with_entry_id("entry_id")
 ///     .send()
 ///     .await?;
 /// ```

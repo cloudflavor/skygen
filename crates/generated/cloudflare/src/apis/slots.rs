@@ -64,14 +64,32 @@ impl<'a> ListSlotsRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Retrieve a list of all slots matching the specified parameters
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/cni/slots`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `address_contains` (query,optional)
+/// - `site` (query,optional)
+/// - `speed` (query,optional)
+/// - `occupied` (query,optional)
+/// - `cursor` (query,optional)
+/// - `limit` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::slots };
+/// use cloudflare::{ ApiClient, apis::slots };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_slots(&api)
-///     .with_account_id("value")
+/// let response = list_slots(&api)
+///     .with_account_id("account_id")
+///     .with_address_contains("address_contains")
+///     .with_site("site")
+///     .with_speed("speed")
+///     .with_occupied("occupied")
+///     .with_cursor("cursor")
+///     .with_limit("limit")
 ///     .send()
 ///     .await?;
 /// ```
@@ -105,15 +123,22 @@ impl<'a> SlotRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get information about the specified slot
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/cni/slots/{slot}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `slot` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::slots };
+/// use cloudflare::{ ApiClient, apis::slots };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = slot(&api)
-///     .with_account_id("value")
-///     .with_slot("value")
+/// let response = slot(&api)
+///     .with_account_id("account_id")
+///     .with_slot("slot")
 ///     .send()
 ///     .await?;
 /// ```

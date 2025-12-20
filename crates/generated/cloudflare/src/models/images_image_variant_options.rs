@@ -19,8 +19,9 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct ImagesImageVariantOptions {
-    pub fit: serde_json::Value,
-    pub height: serde_json::Value,
-    pub metadata: serde_json::Value,
-    pub width: serde_json::Value,
+    pub fit: crate::models::images_image_variant_fit::ImagesImageVariantFit,
+    pub height: crate::models::images_image_variant_height::ImagesImageVariantHeight,
+    pub metadata:
+        crate::models::images_image_variant_schemas_metadata::ImagesImageVariantSchemasMetadata,
+    pub width: crate::models::images_image_variant_width::ImagesImageVariantWidth,
 }

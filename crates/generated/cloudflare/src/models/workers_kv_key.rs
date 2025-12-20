@@ -21,5 +21,5 @@ use serde::{Deserialize, Serialize};
 pub struct WorkersKvKey {
     pub expiration: Option<f64>,
     pub metadata: Option<crate::models::workers_kv_list_metadata::WorkersKvListMetadata>,
-    pub name: serde_json::Value,
+    pub name: crate::models::workers_kv_key_name::WorkersKvKeyName,
 }

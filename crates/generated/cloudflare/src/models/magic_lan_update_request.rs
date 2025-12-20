@@ -21,9 +21,9 @@ use serde::{Deserialize, Serialize};
 pub struct MagicLanUpdateRequest {
     pub name: Option<String>,
     pub nat: Option<crate::models::magic_nat::MagicNat>,
-    pub physport: Option<serde_json::Value>,
+    pub physport: Option<crate::models::magic_port::MagicPort>,
     pub routed_subnets: Option<Vec<crate::models::magic_routed_subnet::MagicRoutedSubnet>>,
     pub static_addressing:
         Option<crate::models::magic_lan_static_addressing::MagicLanStaticAddressing>,
-    pub vlan_tag: Option<serde_json::Value>,
+    pub vlan_tag: Option<crate::models::magic_vlan_tag::MagicVlanTag>,
 }

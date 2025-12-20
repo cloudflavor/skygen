@@ -19,7 +19,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct NscCni {
-    pub account: serde_json::Value,
+    pub account: crate::models::nsc_account_tag::NscAccountTag,
     pub bgp: Option<crate::models::nsc_bgp_control::NscBgpControl>,
     pub cust_ip: String,
     pub id: String,

@@ -15,12 +15,18 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::workers_api_response_null_result::WorkersApiResponseNullResult;
+use crate::models::workers_create_assets_upload_session_response::WorkersCreateAssetsUploadSessionResponse;
+use crate::models::workers_namespace_list_response::WorkersNamespaceListResponse;
+use crate::models::workers_namespace_script_response_single::WorkersNamespaceScriptResponseSingle;
+use crate::models::workers_namespace_single_response::WorkersNamespaceSingleResponse;
+use crate::models::workers_script_response_single::WorkersScriptResponseSingle;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct NamespaceWorkerListRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, WorkersNamespaceListResponse>,
 }
 
 impl<'a> NamespaceWorkerListRequest<'a> {
@@ -38,18 +44,26 @@ impl<'a> NamespaceWorkerListRequest<'a> {
         self.builder = self.builder.path_param("account_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<WorkersNamespaceListResponse> {
         self.builder.send().await
     }
 }
-
 /// List dispatch namespaces
+///
+/// Fetch a list of Workers for Platforms namespaces.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/workers/dispatch/namespaces`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::workers_for_platforms };
+/// use cloudflare::{ ApiClient, apis::workers_for_platforms };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = namespace_worker_list(&api)
-///     .with_account_id("value")
+/// let response = namespace_worker_list(&api)
+///     .with_account_id("account_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -59,7 +73,7 @@ pub fn namespace_worker_list(api: &ApiClient) -> NamespaceWorkerListRequest<'_> 
 
 #[derive(Debug)]
 pub struct NamespaceWorkerCreateRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, WorkersNamespaceSingleResponse>,
 }
 
 impl<'a> NamespaceWorkerCreateRequest<'a> {
@@ -85,18 +99,28 @@ impl<'a> NamespaceWorkerCreateRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<WorkersNamespaceSingleResponse> {
         self.builder.send().await
     }
 }
-
 /// Create dispatch namespace
+///
+/// Create a new Workers for Platforms namespace.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/workers/dispatch/namespaces`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::workers_for_platforms };
+/// use cloudflare::{ ApiClient, apis::workers_for_platforms };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = namespace_worker_create(&api)
-///     .with_account_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = namespace_worker_create(&api)
+///     .with_account_id("account_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -106,7 +130,7 @@ pub fn namespace_worker_create(api: &ApiClient) -> NamespaceWorkerCreateRequest<
 
 #[derive(Debug)]
 pub struct NamespaceWorkerGetNamespaceRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, WorkersNamespaceSingleResponse>,
 }
 
 impl<'a> NamespaceWorkerGetNamespaceRequest<'a> {
@@ -129,19 +153,28 @@ impl<'a> NamespaceWorkerGetNamespaceRequest<'a> {
         self.builder = self.builder.path_param("dispatch_namespace", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<WorkersNamespaceSingleResponse> {
         self.builder.send().await
     }
 }
-
 /// Get dispatch namespace
+///
+/// Get a Workers for Platforms namespace.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/workers/dispatch/namespaces/{dispatch_namespace}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `dispatch_namespace` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::workers_for_platforms };
+/// use cloudflare::{ ApiClient, apis::workers_for_platforms };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = namespace_worker_get_namespace(&api)
-///     .with_account_id("value")
-///     .with_dispatch_namespace("value")
+/// let response = namespace_worker_get_namespace(&api)
+///     .with_account_id("account_id")
+///     .with_dispatch_namespace("dispatch_namespace")
 ///     .send()
 ///     .await?;
 /// ```
@@ -151,7 +184,7 @@ pub fn namespace_worker_get_namespace(api: &ApiClient) -> NamespaceWorkerGetName
 
 #[derive(Debug)]
 pub struct NamespaceWorkerDeleteNamespaceRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, WorkersApiResponseNullResult>,
 }
 
 impl<'a> NamespaceWorkerDeleteNamespaceRequest<'a> {
@@ -174,19 +207,28 @@ impl<'a> NamespaceWorkerDeleteNamespaceRequest<'a> {
         self.builder = self.builder.path_param("dispatch_namespace", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<WorkersApiResponseNullResult> {
         self.builder.send().await
     }
 }
-
 /// Delete dispatch namespace
+///
+/// Delete a Workers for Platforms namespace.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/accounts/{account_id}/workers/dispatch/namespaces/{dispatch_namespace}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `dispatch_namespace` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::workers_for_platforms };
+/// use cloudflare::{ ApiClient, apis::workers_for_platforms };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = namespace_worker_delete_namespace(&api)
-///     .with_account_id("value")
-///     .with_dispatch_namespace("value")
+/// let response = namespace_worker_delete_namespace(&api)
+///     .with_account_id("account_id")
+///     .with_dispatch_namespace("dispatch_namespace")
 ///     .send()
 ///     .await?;
 /// ```
@@ -198,7 +240,7 @@ pub fn namespace_worker_delete_namespace(
 
 #[derive(Debug)]
 pub struct NamespaceWorkerScriptWorkerRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, WorkersNamespaceScriptResponseSingle>,
 }
 
 impl<'a> NamespaceWorkerScriptWorkerRequest<'a> {
@@ -222,20 +264,30 @@ impl<'a> NamespaceWorkerScriptWorkerRequest<'a> {
         self.builder = self.builder.path_param("script_name", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<WorkersNamespaceScriptResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Worker Details
+///
+/// Fetch information about a script uploaded to a Workers for Platforms namespace.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/workers/dispatch/namespaces/{dispatch_namespace}/scripts/{script_name}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `dispatch_namespace` (path, required)
+/// - `script_name` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::workers_for_platforms };
+/// use cloudflare::{ ApiClient, apis::workers_for_platforms };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = namespace_worker_script_worker(&api)
-///     .with_account_id("value")
-///     .with_dispatch_namespace("value")
-///     .with_script_name("value")
+/// let response = namespace_worker_script_worker(&api)
+///     .with_account_id("account_id")
+///     .with_dispatch_namespace("dispatch_namespace")
+///     .with_script_name("script_name")
 ///     .send()
 ///     .await?;
 /// ```
@@ -253,8 +305,7 @@ impl<'a> NamespaceWorkerScriptUploadRequest<'a> {
         let builder = ApiRequestBuilder::new(api, Method::PUT, "accounts/{account_id}/workers/dispatch/namespaces/{dispatch_namespace}/scripts/{script_name}")
             .require_path("account_id")
             .require_path("dispatch_namespace")
-            .require_path("script_name")
-            .require_body();
+            .require_path("script_name");
 
         Self { builder }
     }
@@ -270,24 +321,30 @@ impl<'a> NamespaceWorkerScriptUploadRequest<'a> {
         self.builder = self.builder.path_param("script_name", value);
         self
     }
-    pub fn with_body(mut self, body: serde_json::Value) -> Self {
-        self.builder = self.builder.json_body(body).expect("body serialization");
-        self
-    }
     pub async fn send(self) -> ApiResult<serde_json::Value> {
         self.builder.send().await
     }
 }
-
 /// Upload Worker Module
+///
+/// Upload a worker module to a Workers for Platforms namespace. You can find more about the multipart metadata on our docs: <https://developers.cloudflare.com/workers/configuration/multipart-upload-metadata/.>
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/accounts/{account_id}/workers/dispatch/namespaces/{dispatch_namespace}/scripts/{script_name}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `dispatch_namespace` (path, required)
+/// - `script_name` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::workers_for_platforms };
+/// use cloudflare::{ ApiClient, apis::workers_for_platforms };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = namespace_worker_script_upload(&api)
-///     .with_account_id("value")
-///     .with_dispatch_namespace("value")
-///     .with_script_name("value")
+/// let response = namespace_worker_script_upload(&api)
+///     .with_account_id("account_id")
+///     .with_dispatch_namespace("dispatch_namespace")
+///     .with_script_name("script_name")
 ///     .send()
 ///     .await?;
 /// ```
@@ -297,7 +354,7 @@ pub fn namespace_worker_script_upload(api: &ApiClient) -> NamespaceWorkerScriptU
 
 #[derive(Debug)]
 pub struct NamespaceWorkerScriptDeleteRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, WorkersApiResponseNullResult>,
 }
 
 impl<'a> NamespaceWorkerScriptDeleteRequest<'a> {
@@ -325,20 +382,32 @@ impl<'a> NamespaceWorkerScriptDeleteRequest<'a> {
         self.builder = self.builder.header_param("force", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<WorkersApiResponseNullResult> {
         self.builder.send().await
     }
 }
-
 /// Delete Worker
+///
+/// Delete a worker from a Workers for Platforms namespace. This call has no response body on a successful delete.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/accounts/{account_id}/workers/dispatch/namespaces/{dispatch_namespace}/scripts/{script_name}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `dispatch_namespace` (path, required)
+/// - `script_name` (path, required)
+/// - `force` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::workers_for_platforms };
+/// use cloudflare::{ ApiClient, apis::workers_for_platforms };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = namespace_worker_script_delete(&api)
-///     .with_account_id("value")
-///     .with_dispatch_namespace("value")
-///     .with_script_name("value")
+/// let response = namespace_worker_script_delete(&api)
+///     .with_account_id("account_id")
+///     .with_dispatch_namespace("dispatch_namespace")
+///     .with_script_name("script_name")
+///     .with_force("force")
 ///     .send()
 ///     .await?;
 /// ```
@@ -348,7 +417,7 @@ pub fn namespace_worker_script_delete(api: &ApiClient) -> NamespaceWorkerScriptD
 
 #[derive(Debug)]
 pub struct NamespaceWorkerScriptUpdateRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, WorkersCreateAssetsUploadSessionResponse>,
 }
 
 impl<'a> NamespaceWorkerScriptUpdateRequest<'a> {
@@ -380,20 +449,32 @@ impl<'a> NamespaceWorkerScriptUpdateRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<WorkersCreateAssetsUploadSessionResponse> {
         self.builder.send().await
     }
 }
-
 /// Create Assets Upload Session
+///
+/// Start uploading a collection of assets for use in a Worker version. To learn more about the direct uploads of assets, see <https://developers.cloudflare.com/workers/static-assets/direct-upload/.>
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/workers/dispatch/namespaces/{dispatch_namespace}/scripts/{script_name}/assets-upload-session`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `dispatch_namespace` (path, required)
+/// - `script_name` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::workers_for_platforms };
+/// use cloudflare::{ ApiClient, apis::workers_for_platforms };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = namespace_worker_script_update(&api)
-///     .with_account_id("value")
-///     .with_dispatch_namespace("value")
-///     .with_script_name("value")
+/// # let body: crate::models::workers_create_assets_upload_session_object::WorkersCreateAssetsUploadSessionObject = todo!();
+/// let response = namespace_worker_script_update(&api)
+///     .with_account_id("account_id")
+///     .with_dispatch_namespace("dispatch_namespace")
+///     .with_script_name("script_name")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -431,16 +512,26 @@ impl<'a> NamespaceWorkerGetScriptRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get Script Bindings
+///
+/// Fetch script bindings from a script uploaded to a Workers for Platforms namespace.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/workers/dispatch/namespaces/{dispatch_namespace}/scripts/{script_name}/bindings`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `dispatch_namespace` (path, required)
+/// - `script_name` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::workers_for_platforms };
+/// use cloudflare::{ ApiClient, apis::workers_for_platforms };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = namespace_worker_get_script(&api)
-///     .with_account_id("value")
-///     .with_dispatch_namespace("value")
-///     .with_script_name("value")
+/// let response = namespace_worker_get_script(&api)
+///     .with_account_id("account_id")
+///     .with_dispatch_namespace("dispatch_namespace")
+///     .with_script_name("script_name")
 ///     .send()
 ///     .await?;
 /// ```
@@ -478,16 +569,26 @@ impl<'a> NamespaceWorkerGetScriptGetRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get Script Content
+///
+/// Fetch script content from a script uploaded to a Workers for Platforms namespace.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/workers/dispatch/namespaces/{dispatch_namespace}/scripts/{script_name}/content`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `dispatch_namespace` (path, required)
+/// - `script_name` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::workers_for_platforms };
+/// use cloudflare::{ ApiClient, apis::workers_for_platforms };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = namespace_worker_get_script_get(&api)
-///     .with_account_id("value")
-///     .with_dispatch_namespace("value")
-///     .with_script_name("value")
+/// let response = namespace_worker_get_script_get(&api)
+///     .with_account_id("account_id")
+///     .with_dispatch_namespace("dispatch_namespace")
+///     .with_script_name("script_name")
 ///     .send()
 ///     .await?;
 /// ```
@@ -497,7 +598,7 @@ pub fn namespace_worker_get_script_get(api: &ApiClient) -> NamespaceWorkerGetScr
 
 #[derive(Debug)]
 pub struct NamespaceWorkerPutScriptRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, WorkersScriptResponseSingle>,
 }
 
 impl<'a> NamespaceWorkerPutScriptRequest<'a> {
@@ -531,20 +632,34 @@ impl<'a> NamespaceWorkerPutScriptRequest<'a> {
             .header_param("CF-WORKER-MAIN-MODULE-PART", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<WorkersScriptResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Put Script Content
+///
+/// Put script content for a script uploaded to a Workers for Platforms namespace.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/accounts/{account_id}/workers/dispatch/namespaces/{dispatch_namespace}/scripts/{script_name}/content`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `dispatch_namespace` (path, required)
+/// - `script_name` (path, required)
+/// - `CF-WORKER-BODY-PART` (header,optional)
+/// - `CF-WORKER-MAIN-MODULE-PART` (header,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::workers_for_platforms };
+/// use cloudflare::{ ApiClient, apis::workers_for_platforms };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = namespace_worker_put_script(&api)
-///     .with_account_id("value")
-///     .with_dispatch_namespace("value")
-///     .with_script_name("value")
+/// let response = namespace_worker_put_script(&api)
+///     .with_account_id("account_id")
+///     .with_dispatch_namespace("dispatch_namespace")
+///     .with_script_name("script_name")
+///     .with_cf_worker_body_part("CF-WORKER-BODY-PART")
+///     .with_cf_worker_main_module_part("CF-WORKER-MAIN-MODULE-PART")
 ///     .send()
 ///     .await?;
 /// ```
@@ -582,16 +697,26 @@ impl<'a> NamespaceWorkerListScriptRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// List Script Secrets
+///
+/// List secrets bound to a script uploaded to a Workers for Platforms namespace.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/workers/dispatch/namespaces/{dispatch_namespace}/scripts/{script_name}/secrets`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `dispatch_namespace` (path, required)
+/// - `script_name` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::workers_for_platforms };
+/// use cloudflare::{ ApiClient, apis::workers_for_platforms };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = namespace_worker_list_script(&api)
-///     .with_account_id("value")
-///     .with_dispatch_namespace("value")
-///     .with_script_name("value")
+/// let response = namespace_worker_list_script(&api)
+///     .with_account_id("account_id")
+///     .with_dispatch_namespace("dispatch_namespace")
+///     .with_script_name("script_name")
 ///     .send()
 ///     .await?;
 /// ```
@@ -626,7 +751,7 @@ impl<'a> NamespaceWorkerPutScriptPutRequest<'a> {
         self.builder = self.builder.path_param("script_name", value);
         self
     }
-    pub fn with_body(mut self, body: serde_json::Value) -> Self {
+    pub fn with_body(mut self, body: crate::models::workers_secret::WorkersSecret) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
@@ -634,16 +759,28 @@ impl<'a> NamespaceWorkerPutScriptPutRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Add script secret
+///
+/// Add a secret to a script uploaded to a Workers for Platforms namespace.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/accounts/{account_id}/workers/dispatch/namespaces/{dispatch_namespace}/scripts/{script_name}/secrets`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `dispatch_namespace` (path, required)
+/// - `script_name` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::workers_for_platforms };
+/// use cloudflare::{ ApiClient, apis::workers_for_platforms };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = namespace_worker_put_script_put(&api)
-///     .with_account_id("value")
-///     .with_dispatch_namespace("value")
-///     .with_script_name("value")
+/// # let body: crate::models::workers_secret::WorkersSecret = todo!();
+/// let response = namespace_worker_put_script_put(&api)
+///     .with_account_id("account_id")
+///     .with_dispatch_namespace("dispatch_namespace")
+///     .with_script_name("script_name")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -686,17 +823,28 @@ impl<'a> NamespaceWorkerGetScriptGet3Request<'a> {
         self.builder.send().await
     }
 }
-
 /// Get secret binding
+///
+/// Get a given secret binding (value omitted) on a script uploaded to a Workers for Platforms namespace.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/workers/dispatch/namespaces/{dispatch_namespace}/scripts/{script_name}/secrets/{secret_name}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `dispatch_namespace` (path, required)
+/// - `script_name` (path, required)
+/// - `secret_name` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::workers_for_platforms };
+/// use cloudflare::{ ApiClient, apis::workers_for_platforms };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = namespace_worker_get_script_get_3(&api)
-///     .with_account_id("value")
-///     .with_dispatch_namespace("value")
-///     .with_script_name("value")
-///     .with_secret_name("value")
+/// let response = namespace_worker_get_script_get_3(&api)
+///     .with_account_id("account_id")
+///     .with_dispatch_namespace("dispatch_namespace")
+///     .with_script_name("script_name")
+///     .with_secret_name("secret_name")
 ///     .send()
 ///     .await?;
 /// ```
@@ -708,7 +856,7 @@ pub fn namespace_worker_get_script_get_3(
 
 #[derive(Debug)]
 pub struct NamespaceWorkerDeleteScriptRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, WorkersApiResponseNullResult>,
 }
 
 impl<'a> NamespaceWorkerDeleteScriptRequest<'a> {
@@ -737,21 +885,32 @@ impl<'a> NamespaceWorkerDeleteScriptRequest<'a> {
         self.builder = self.builder.path_param("secret_name", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<WorkersApiResponseNullResult> {
         self.builder.send().await
     }
 }
-
 /// Delete script secret
+///
+/// Remove a secret from a script uploaded to a Workers for Platforms namespace.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/accounts/{account_id}/workers/dispatch/namespaces/{dispatch_namespace}/scripts/{script_name}/secrets/{secret_name}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `dispatch_namespace` (path, required)
+/// - `script_name` (path, required)
+/// - `secret_name` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::workers_for_platforms };
+/// use cloudflare::{ ApiClient, apis::workers_for_platforms };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = namespace_worker_delete_script(&api)
-///     .with_account_id("value")
-///     .with_dispatch_namespace("value")
-///     .with_script_name("value")
-///     .with_secret_name("value")
+/// let response = namespace_worker_delete_script(&api)
+///     .with_account_id("account_id")
+///     .with_dispatch_namespace("dispatch_namespace")
+///     .with_script_name("script_name")
+///     .with_secret_name("secret_name")
 ///     .send()
 ///     .await?;
 /// ```
@@ -789,16 +948,26 @@ impl<'a> NamespaceWorkerGetScriptGet4Request<'a> {
         self.builder.send().await
     }
 }
-
 /// Get Script Settings
+///
+/// Get script settings from a script uploaded to a Workers for Platforms namespace.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/workers/dispatch/namespaces/{dispatch_namespace}/scripts/{script_name}/settings`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `dispatch_namespace` (path, required)
+/// - `script_name` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::workers_for_platforms };
+/// use cloudflare::{ ApiClient, apis::workers_for_platforms };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = namespace_worker_get_script_get_4(&api)
-///     .with_account_id("value")
-///     .with_dispatch_namespace("value")
-///     .with_script_name("value")
+/// let response = namespace_worker_get_script_get_4(&api)
+///     .with_account_id("account_id")
+///     .with_dispatch_namespace("dispatch_namespace")
+///     .with_script_name("script_name")
 ///     .send()
 ///     .await?;
 /// ```
@@ -838,16 +1007,26 @@ impl<'a> NamespaceWorkerPatchScriptRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Patch Script Settings
+///
+/// Patch script metadata, such as bindings.
+///
+/// **HTTP Method:** `PATCH`
+/// **Path:** `/accounts/{account_id}/workers/dispatch/namespaces/{dispatch_namespace}/scripts/{script_name}/settings`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `dispatch_namespace` (path, required)
+/// - `script_name` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::workers_for_platforms };
+/// use cloudflare::{ ApiClient, apis::workers_for_platforms };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = namespace_worker_patch_script(&api)
-///     .with_account_id("value")
-///     .with_dispatch_namespace("value")
-///     .with_script_name("value")
+/// let response = namespace_worker_patch_script(&api)
+///     .with_account_id("account_id")
+///     .with_dispatch_namespace("dispatch_namespace")
+///     .with_script_name("script_name")
 ///     .send()
 ///     .await?;
 /// ```
@@ -885,16 +1064,26 @@ impl<'a> NamespaceWorkerGetScriptGet5Request<'a> {
         self.builder.send().await
     }
 }
-
 /// Get Script Tags
+///
+/// Fetch tags from a script uploaded to a Workers for Platforms namespace.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/workers/dispatch/namespaces/{dispatch_namespace}/scripts/{script_name}/tags`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `dispatch_namespace` (path, required)
+/// - `script_name` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::workers_for_platforms };
+/// use cloudflare::{ ApiClient, apis::workers_for_platforms };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = namespace_worker_get_script_get_5(&api)
-///     .with_account_id("value")
-///     .with_dispatch_namespace("value")
-///     .with_script_name("value")
+/// let response = namespace_worker_get_script_get_5(&api)
+///     .with_account_id("account_id")
+///     .with_dispatch_namespace("dispatch_namespace")
+///     .with_script_name("script_name")
 ///     .send()
 ///     .await?;
 /// ```
@@ -931,7 +1120,7 @@ impl<'a> NamespaceWorkerPutScriptPut3Request<'a> {
         self.builder = self.builder.path_param("script_name", value);
         self
     }
-    pub fn with_body(mut self, body: serde_json::Value) -> Self {
+    pub fn with_body(mut self, body: crate::models::workers_tags::WorkersTags) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
@@ -939,16 +1128,28 @@ impl<'a> NamespaceWorkerPutScriptPut3Request<'a> {
         self.builder.send().await
     }
 }
-
 /// Put Script Tags
+///
+/// Put script tags for a script uploaded to a Workers for Platforms namespace.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/accounts/{account_id}/workers/dispatch/namespaces/{dispatch_namespace}/scripts/{script_name}/tags`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `dispatch_namespace` (path, required)
+/// - `script_name` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::workers_for_platforms };
+/// use cloudflare::{ ApiClient, apis::workers_for_platforms };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = namespace_worker_put_script_put_3(&api)
-///     .with_account_id("value")
-///     .with_dispatch_namespace("value")
-///     .with_script_name("value")
+/// # let body: crate::models::workers_tags::WorkersTags = todo!();
+/// let response = namespace_worker_put_script_put_3(&api)
+///     .with_account_id("account_id")
+///     .with_dispatch_namespace("dispatch_namespace")
+///     .with_script_name("script_name")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -960,7 +1161,7 @@ pub fn namespace_worker_put_script_put_3(
 
 #[derive(Debug)]
 pub struct NamespaceWorkerPutScriptPut4Request<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, WorkersApiResponseNullResult>,
 }
 
 impl<'a> NamespaceWorkerPutScriptPut4Request<'a> {
@@ -989,21 +1190,32 @@ impl<'a> NamespaceWorkerPutScriptPut4Request<'a> {
         self.builder = self.builder.path_param("tag", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<WorkersApiResponseNullResult> {
         self.builder.send().await
     }
 }
-
 /// Put Script Tag
+///
+/// Put a single tag on a script uploaded to a Workers for Platforms namespace.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/accounts/{account_id}/workers/dispatch/namespaces/{dispatch_namespace}/scripts/{script_name}/tags/{tag}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `dispatch_namespace` (path, required)
+/// - `script_name` (path, required)
+/// - `tag` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::workers_for_platforms };
+/// use cloudflare::{ ApiClient, apis::workers_for_platforms };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = namespace_worker_put_script_put_4(&api)
-///     .with_account_id("value")
-///     .with_dispatch_namespace("value")
-///     .with_script_name("value")
-///     .with_tag("value")
+/// let response = namespace_worker_put_script_put_4(&api)
+///     .with_account_id("account_id")
+///     .with_dispatch_namespace("dispatch_namespace")
+///     .with_script_name("script_name")
+///     .with_tag("tag")
 ///     .send()
 ///     .await?;
 /// ```
@@ -1015,7 +1227,7 @@ pub fn namespace_worker_put_script_put_4(
 
 #[derive(Debug)]
 pub struct NamespaceWorkerDeleteScriptDeleteRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, WorkersApiResponseNullResult>,
 }
 
 impl<'a> NamespaceWorkerDeleteScriptDeleteRequest<'a> {
@@ -1044,21 +1256,32 @@ impl<'a> NamespaceWorkerDeleteScriptDeleteRequest<'a> {
         self.builder = self.builder.path_param("tag", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<WorkersApiResponseNullResult> {
         self.builder.send().await
     }
 }
-
 /// Delete Script Tag
+///
+/// Delete script tag for a script uploaded to a Workers for Platforms namespace.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/accounts/{account_id}/workers/dispatch/namespaces/{dispatch_namespace}/scripts/{script_name}/tags/{tag}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `dispatch_namespace` (path, required)
+/// - `script_name` (path, required)
+/// - `tag` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::workers_for_platforms };
+/// use cloudflare::{ ApiClient, apis::workers_for_platforms };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = namespace_worker_delete_script_delete(&api)
-///     .with_account_id("value")
-///     .with_dispatch_namespace("value")
-///     .with_script_name("value")
-///     .with_tag("value")
+/// let response = namespace_worker_delete_script_delete(&api)
+///     .with_account_id("account_id")
+///     .with_dispatch_namespace("dispatch_namespace")
+///     .with_script_name("script_name")
+///     .with_tag("tag")
 ///     .send()
 ///     .await?;
 /// ```

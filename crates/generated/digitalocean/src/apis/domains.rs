@@ -15,6 +15,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::error::Error;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
@@ -33,13 +34,18 @@ impl<'a> ListRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// List All Domains
+///
+/// To retrieve a list of all of the domains in your account, send a GET request to `/v2/domains`.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/domains`
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::domains };
+/// use digitalocean::{ ApiClient, apis::domains };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list(&api)
+/// let response = list(&api)
 ///     .send()
 ///     .await?;
 /// ```
@@ -66,13 +72,23 @@ impl<'a> CreateRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Create a New Domain
+///
+/// To create a new domain, send a POST request to `/v2/domains`. Set the "name"
+/// attribute to the domain name you are adding. Optionally, you may set the
+/// "ip_address" attribute, and an A record will be automatically created pointing
+/// to the apex domain.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/v2/domains`
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::domains };
+/// use digitalocean::{ ApiClient, apis::domains };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = create(&api)
+/// # let body: crate::models::domain::Domain = todo!();
+/// let response = create(&api)
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -100,14 +116,22 @@ impl<'a> GetRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Retrieve an Existing Domain
+///
+/// To get details about a specific domain, send a GET request to `/v2/domains/$DOMAIN_NAME`.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/domains/{domain_name}`
+///
+/// **Parameters**
+/// - `domain_name` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::domains };
+/// use digitalocean::{ ApiClient, apis::domains };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get(&api)
-///     .with_domain_name("value")
+/// let response = get(&api)
+///     .with_domain_name("domain_name")
 ///     .send()
 ///     .await?;
 /// ```
@@ -117,7 +141,7 @@ pub fn get(api: &ApiClient) -> GetRequest<'_> {
 
 #[derive(Debug)]
 pub struct DeleteRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, Error>,
 }
 
 impl<'a> DeleteRequest<'a> {
@@ -131,18 +155,26 @@ impl<'a> DeleteRequest<'a> {
         self.builder = self.builder.path_param("domain_name", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<Error> {
         self.builder.send().await
     }
 }
-
 /// Delete a Domain
+///
+/// To delete a domain, send a DELETE request to `/v2/domains/$DOMAIN_NAME`.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/v2/domains/{domain_name}`
+///
+/// **Parameters**
+/// - `domain_name` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::domains };
+/// use digitalocean::{ ApiClient, apis::domains };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete(&api)
-///     .with_domain_name("value")
+/// let response = delete(&api)
+///     .with_domain_name("domain_name")
 ///     .send()
 ///     .await?;
 /// ```

@@ -15,12 +15,15 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::teams_devices_schemas_id_response::TeamsDevicesSchemasIdResponse;
+use crate::models::teams_devices_schemas_response_collection::TeamsDevicesSchemasResponseCollection;
+use crate::models::teams_devices_schemas_single_response::TeamsDevicesSchemasSingleResponse;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct ListDevicePostureIntegrationsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, TeamsDevicesSchemasResponseCollection>,
 }
 
 impl<'a> ListDevicePostureIntegrationsRequest<'a> {
@@ -38,18 +41,26 @@ impl<'a> ListDevicePostureIntegrationsRequest<'a> {
         self.builder = self.builder.path_param("account_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<TeamsDevicesSchemasResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// List your device posture integrations
+///
+/// Fetches the list of device posture integrations for an account.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/devices/posture/integration`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::device_posture_integrations };
+/// use cloudflare::{ ApiClient, apis::device_posture_integrations };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_device_posture_integrations(&api)
-///     .with_account_id("value")
+/// let response = list_device_posture_integrations(&api)
+///     .with_account_id("account_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -61,7 +72,7 @@ pub fn list_device_posture_integrations(
 
 #[derive(Debug)]
 pub struct CreateDevicePostureIntegrationRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, TeamsDevicesSchemasSingleResponse>,
 }
 
 impl<'a> CreateDevicePostureIntegrationRequest<'a> {
@@ -87,18 +98,28 @@ impl<'a> CreateDevicePostureIntegrationRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<TeamsDevicesSchemasSingleResponse> {
         self.builder.send().await
     }
 }
-
 /// Create a device posture integration
+///
+/// Create a new device posture integration.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/devices/posture/integration`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::device_posture_integrations };
+/// use cloudflare::{ ApiClient, apis::device_posture_integrations };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = create_device_posture_integration(&api)
-///     .with_account_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = create_device_posture_integration(&api)
+///     .with_account_id("account_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -110,7 +131,7 @@ pub fn create_device_posture_integration(
 
 #[derive(Debug)]
 pub struct IntegrationDetailsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, TeamsDevicesSchemasSingleResponse>,
 }
 
 impl<'a> IntegrationDetailsRequest<'a> {
@@ -133,19 +154,28 @@ impl<'a> IntegrationDetailsRequest<'a> {
         self.builder = self.builder.path_param("integration_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<TeamsDevicesSchemasSingleResponse> {
         self.builder.send().await
     }
 }
-
 /// Get device posture integration details
+///
+/// Fetches details for a single device posture integration.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/devices/posture/integration/{integration_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `integration_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::device_posture_integrations };
+/// use cloudflare::{ ApiClient, apis::device_posture_integrations };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = integration_details(&api)
-///     .with_account_id("value")
-///     .with_integration_id("value")
+/// let response = integration_details(&api)
+///     .with_account_id("account_id")
+///     .with_integration_id("integration_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -155,7 +185,7 @@ pub fn integration_details(api: &ApiClient) -> IntegrationDetailsRequest<'_> {
 
 #[derive(Debug)]
 pub struct DeleteDevicePostureIntegrationRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, TeamsDevicesSchemasIdResponse>,
 }
 
 impl<'a> DeleteDevicePostureIntegrationRequest<'a> {
@@ -178,19 +208,28 @@ impl<'a> DeleteDevicePostureIntegrationRequest<'a> {
         self.builder = self.builder.path_param("integration_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<TeamsDevicesSchemasIdResponse> {
         self.builder.send().await
     }
 }
-
 /// Delete a device posture integration
+///
+/// Delete a configured device posture integration.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/accounts/{account_id}/devices/posture/integration/{integration_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `integration_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::device_posture_integrations };
+/// use cloudflare::{ ApiClient, apis::device_posture_integrations };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete_device_posture_integration(&api)
-///     .with_account_id("value")
-///     .with_integration_id("value")
+/// let response = delete_device_posture_integration(&api)
+///     .with_account_id("account_id")
+///     .with_integration_id("integration_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -202,7 +241,7 @@ pub fn delete_device_posture_integration(
 
 #[derive(Debug)]
 pub struct UpdateDevicePostureIntegrationRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, TeamsDevicesSchemasSingleResponse>,
 }
 
 impl<'a> UpdateDevicePostureIntegrationRequest<'a> {
@@ -233,19 +272,30 @@ impl<'a> UpdateDevicePostureIntegrationRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<TeamsDevicesSchemasSingleResponse> {
         self.builder.send().await
     }
 }
-
 /// Update a device posture integration
+///
+/// Updates a configured device posture integration.
+///
+/// **HTTP Method:** `PATCH`
+/// **Path:** `/accounts/{account_id}/devices/posture/integration/{integration_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `integration_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::device_posture_integrations };
+/// use cloudflare::{ ApiClient, apis::device_posture_integrations };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = update_device_posture_integration(&api)
-///     .with_account_id("value")
-///     .with_integration_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = update_device_posture_integration(&api)
+///     .with_account_id("account_id")
+///     .with_integration_id("integration_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```

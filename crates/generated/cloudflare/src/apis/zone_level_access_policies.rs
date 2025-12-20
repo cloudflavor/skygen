@@ -15,12 +15,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::access_policies_components_schemas_response_collection::AccessPoliciesComponentsSchemasResponseCollection;
+use crate::models::access_policies_components_schemas_single_response::AccessPoliciesComponentsSchemasSingleResponse;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct ListAccessPoliciesRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, AccessPoliciesComponentsSchemasResponseCollection>,
 }
 
 impl<'a> ListAccessPoliciesRequest<'a> {
@@ -43,19 +45,28 @@ impl<'a> ListAccessPoliciesRequest<'a> {
         self.builder = self.builder.path_param("app_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<AccessPoliciesComponentsSchemasResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// List Access policies
+///
+/// Lists Access policies configured for an application.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/access/apps/{app_id}/policies`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `app_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zone_level_access_policies };
+/// use cloudflare::{ ApiClient, apis::zone_level_access_policies };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_access_policies(&api)
-///     .with_zone_id("value")
-///     .with_app_id("value")
+/// let response = list_access_policies(&api)
+///     .with_zone_id("zone_id")
+///     .with_app_id("app_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -65,7 +76,7 @@ pub fn list_access_policies(api: &ApiClient) -> ListAccessPoliciesRequest<'_> {
 
 #[derive(Debug)]
 pub struct CreateAccessPolicyRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, AccessPoliciesComponentsSchemasSingleResponse>,
 }
 
 impl<'a> CreateAccessPolicyRequest<'a> {
@@ -93,19 +104,30 @@ impl<'a> CreateAccessPolicyRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<AccessPoliciesComponentsSchemasSingleResponse> {
         self.builder.send().await
     }
 }
-
 /// Create an Access policy
+///
+/// Create a new Access policy for an application.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/zones/{zone_id}/access/apps/{app_id}/policies`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `app_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zone_level_access_policies };
+/// use cloudflare::{ ApiClient, apis::zone_level_access_policies };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = create_access_policy(&api)
-///     .with_zone_id("value")
-///     .with_app_id("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = create_access_policy(&api)
+///     .with_zone_id("zone_id")
+///     .with_app_id("app_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -115,7 +137,7 @@ pub fn create_access_policy(api: &ApiClient) -> CreateAccessPolicyRequest<'_> {
 
 #[derive(Debug)]
 pub struct GetAccessPolicyRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, AccessPoliciesComponentsSchemasSingleResponse>,
 }
 
 impl<'a> GetAccessPolicyRequest<'a> {
@@ -143,20 +165,30 @@ impl<'a> GetAccessPolicyRequest<'a> {
         self.builder = self.builder.path_param("policy_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<AccessPoliciesComponentsSchemasSingleResponse> {
         self.builder.send().await
     }
 }
-
 /// Get an Access policy
+///
+/// Fetches a single Access policy.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/access/apps/{app_id}/policies/{policy_id}`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `app_id` (path, required)
+/// - `policy_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zone_level_access_policies };
+/// use cloudflare::{ ApiClient, apis::zone_level_access_policies };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_access_policy(&api)
-///     .with_zone_id("value")
-///     .with_app_id("value")
-///     .with_policy_id("value")
+/// let response = get_access_policy(&api)
+///     .with_zone_id("zone_id")
+///     .with_app_id("app_id")
+///     .with_policy_id("policy_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -166,7 +198,7 @@ pub fn get_access_policy(api: &ApiClient) -> GetAccessPolicyRequest<'_> {
 
 #[derive(Debug)]
 pub struct UpdateAccessPolicyRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, AccessPoliciesComponentsSchemasSingleResponse>,
 }
 
 impl<'a> UpdateAccessPolicyRequest<'a> {
@@ -199,20 +231,32 @@ impl<'a> UpdateAccessPolicyRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<AccessPoliciesComponentsSchemasSingleResponse> {
         self.builder.send().await
     }
 }
-
 /// Update an Access policy
+///
+/// Update a configured Access policy.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/zones/{zone_id}/access/apps/{app_id}/policies/{policy_id}`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `app_id` (path, required)
+/// - `policy_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zone_level_access_policies };
+/// use cloudflare::{ ApiClient, apis::zone_level_access_policies };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = update_access_policy(&api)
-///     .with_zone_id("value")
-///     .with_app_id("value")
-///     .with_policy_id("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = update_access_policy(&api)
+///     .with_zone_id("zone_id")
+///     .with_app_id("app_id")
+///     .with_policy_id("policy_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -254,16 +298,26 @@ impl<'a> DeleteAccessPolicyRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Delete an Access policy
+///
+/// Delete an Access policy.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/zones/{zone_id}/access/apps/{app_id}/policies/{policy_id}`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `app_id` (path, required)
+/// - `policy_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zone_level_access_policies };
+/// use cloudflare::{ ApiClient, apis::zone_level_access_policies };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete_access_policy(&api)
-///     .with_zone_id("value")
-///     .with_app_id("value")
-///     .with_policy_id("value")
+/// let response = delete_access_policy(&api)
+///     .with_zone_id("zone_id")
+///     .with_app_id("app_id")
+///     .with_policy_id("policy_id")
 ///     .send()
 ///     .await?;
 /// ```

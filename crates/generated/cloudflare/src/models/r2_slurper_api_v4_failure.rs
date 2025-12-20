@@ -19,7 +19,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct R2SlurperApiV4Failure {
-    pub errors: Option<serde_json::Value>,
-    pub messages: Option<serde_json::Value>,
+    pub errors: Option<crate::models::r2_slurper_api_v4_error::R2SlurperApiV4Error>,
+    pub messages: Option<crate::models::r2_slurper_api_v4_message::R2SlurperApiV4Message>,
     pub success: Option<bool>,
 }

@@ -19,7 +19,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct RumRumSite {
-    pub editable: Option<serde_json::Value>,
-    pub id: Option<serde_json::Value>,
-    pub value: Option<serde_json::Value>,
+    pub editable: Option<crate::models::rum_editable::RumEditable>,
+    pub id: Option<crate::models::rum_id::RumId>,
+    pub value: Option<crate::models::rum_value::RumValue>,
 }

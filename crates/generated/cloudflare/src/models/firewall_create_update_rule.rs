@@ -19,12 +19,11 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct FirewallCreateUpdateRule {
-    pub action: serde_json::Value,
-    pub action_parameters:
-        Option<crate::models::firewall_schemas_action_parameters::FirewallSchemasActionParameters>,
-    pub description: Option<serde_json::Value>,
-    pub enabled: Option<serde_json::Value>,
-    pub expression: serde_json::Value,
+    pub action: crate::models::firewall_components_schemas_action::FirewallComponentsSchemasAction,
+    pub action_parameters: Option<crate::models::firewall_schemas_action_parameters::FirewallSchemasActionParameters>,
+    pub description: Option<crate::models::firewall_rules_components_schemas_description::FirewallRulesComponentsSchemasDescription>,
+    pub enabled: Option<crate::models::firewall_enabled::FirewallEnabled>,
+    pub expression: crate::models::firewall_schemas_expression::FirewallSchemasExpression,
     pub logging: Option<crate::models::firewall_logging::FirewallLogging>,
-    pub r#ref: Option<serde_json::Value>,
+    pub r#ref: Option<crate::models::firewall_components_schemas_ref::FirewallComponentsSchemasRef>,
 }

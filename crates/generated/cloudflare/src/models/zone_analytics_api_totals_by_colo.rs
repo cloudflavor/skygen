@@ -24,7 +24,7 @@ pub struct ZoneAnalyticsApiTotalsByColo {
     >,
     pub requests:
         Option<crate::models::zone_analytics_api_requests_by_colo::ZoneAnalyticsApiRequestsByColo>,
-    pub since: Option<serde_json::Value>,
+    pub since: Option<crate::models::zone_analytics_api_since::ZoneAnalyticsApiSince>,
     pub threats: Option<crate::models::zone_analytics_api_threats::ZoneAnalyticsApiThreats>,
-    pub until: Option<serde_json::Value>,
+    pub until: Option<crate::models::zone_analytics_api_until::ZoneAnalyticsApiUntil>,
 }

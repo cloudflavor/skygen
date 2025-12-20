@@ -19,6 +19,6 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct AaaPagerduty {
-    pub id: Option<serde_json::Value>,
-    pub name: Option<serde_json::Value>,
+    pub id: Option<crate::models::aaa_uuid::AaaUuid>,
+    pub name: Option<crate::models::aaa_name::AaaName>,
 }

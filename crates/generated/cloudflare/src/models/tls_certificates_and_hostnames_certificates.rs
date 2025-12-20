@@ -19,11 +19,11 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct TlsCertificatesAndHostnamesCertificates {
-    pub certificate: Option<serde_json::Value>,
-    pub csr: serde_json::Value,
-    pub expires_on: Option<serde_json::Value>,
-    pub hostnames: serde_json::Value,
-    pub id: Option<serde_json::Value>,
-    pub request_type: serde_json::Value,
-    pub requested_validity: serde_json::Value,
+    pub certificate: Option<crate::models::tls_certificates_and_hostnames_components_schemas_certificate::TlsCertificatesAndHostnamesComponentsSchemasCertificate>,
+    pub csr: crate::models::tls_certificates_and_hostnames_csr::TlsCertificatesAndHostnamesCsr,
+    pub expires_on: Option<crate::models::tls_certificates_and_hostnames_schemas_expires_on::TlsCertificatesAndHostnamesSchemasExpiresOn>,
+    pub hostnames: crate::models::tls_certificates_and_hostnames_hostnames::TlsCertificatesAndHostnamesHostnames,
+    pub id: Option<crate::models::tls_certificates_and_hostnames_identifier::TlsCertificatesAndHostnamesIdentifier>,
+    pub request_type: crate::models::tls_certificates_and_hostnames_request_type::TlsCertificatesAndHostnamesRequestType,
+    pub requested_validity: crate::models::tls_certificates_and_hostnames_requested_validity::TlsCertificatesAndHostnamesRequestedValidity,
 }

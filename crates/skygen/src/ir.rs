@@ -20,6 +20,7 @@ use serde::Serialize;
 pub struct Operation {
     pub id: String,
     pub summary: Option<String>,
+    pub description: Option<String>,
     pub method: HttpMethod,
     pub path: String,
     pub tags: Vec<String>,
@@ -91,12 +92,14 @@ pub enum ParamType {
 pub struct Function {
     pub name: String,
     pub builder_struct: String,
-    pub doc: String,
+    pub summary: Option<String>,
+    pub description_lines: Vec<String>,
     pub params: Vec<FunctionParam>,
     pub path_params: Vec<PathParam>,
     pub return_type: String,
     pub method: String,
     pub path: String,
+    pub path_display: String,
     pub request_body: Option<RequestBodyConfig>,
 }
 

@@ -74,13 +74,40 @@ impl<'a> GetAttacksLayer3SummaryRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get layer 3 attacks by bitrate summary
+///
+/// Retrieves the distribution of layer 3 attacks by bitrate.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/attacks/layer3/summary/bitrate`
+///
+/// **Parameters**
+/// - `name` (query,optional)
+/// - `dateRange` (query,optional)
+/// - `dateStart` (query,optional)
+/// - `dateEnd` (query,optional)
+/// - `location` (query,optional)
+/// - `continent` (query,optional)
+/// - `ipVersion` (query,optional)
+/// - `protocol` (query,optional)
+/// - `direction` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_layer_3_attacks };
+/// use cloudflare::{ ApiClient, apis::radar_layer_3_attacks };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_attacks_layer3_summary(&api)
+/// let response = get_attacks_layer3_summary(&api)
+///     .with_name("name")
+///     .with_date_range("dateRange")
+///     .with_date_start("dateStart")
+///     .with_date_end("dateEnd")
+///     .with_location("location")
+///     .with_continent("continent")
+///     .with_ip_version("ipVersion")
+///     .with_protocol("protocol")
+///     .with_direction("direction")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```
@@ -144,13 +171,40 @@ impl<'a> GetAttacksLayer3SummaryGetRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get layer 3 attacks by duration summary
+///
+/// Retrieves the distribution of layer 3 attacks by duration.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/attacks/layer3/summary/duration`
+///
+/// **Parameters**
+/// - `name` (query,optional)
+/// - `dateRange` (query,optional)
+/// - `dateStart` (query,optional)
+/// - `dateEnd` (query,optional)
+/// - `location` (query,optional)
+/// - `continent` (query,optional)
+/// - `ipVersion` (query,optional)
+/// - `protocol` (query,optional)
+/// - `direction` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_layer_3_attacks };
+/// use cloudflare::{ ApiClient, apis::radar_layer_3_attacks };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_attacks_layer3_summary_get(&api)
+/// let response = get_attacks_layer3_summary_get(&api)
+///     .with_name("name")
+///     .with_date_range("dateRange")
+///     .with_date_start("dateStart")
+///     .with_date_end("dateEnd")
+///     .with_location("location")
+///     .with_continent("continent")
+///     .with_ip_version("ipVersion")
+///     .with_protocol("protocol")
+///     .with_direction("direction")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```
@@ -218,13 +272,42 @@ impl<'a> GetAttacksLayer3SummaryGet3Request<'a> {
         self.builder.send().await
     }
 }
-
 /// Get layer 3 attacks by targeted industry summary
+///
+/// Retrieves the distribution of layer 3 attacks by targeted industry.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/attacks/layer3/summary/industry`
+///
+/// **Parameters**
+/// - `name` (query,optional)
+/// - `dateRange` (query,optional)
+/// - `dateStart` (query,optional)
+/// - `dateEnd` (query,optional)
+/// - `location` (query,optional)
+/// - `continent` (query,optional)
+/// - `ipVersion` (query,optional)
+/// - `protocol` (query,optional)
+/// - `direction` (query,optional)
+/// - `limitPerGroup` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_layer_3_attacks };
+/// use cloudflare::{ ApiClient, apis::radar_layer_3_attacks };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_attacks_layer3_summary_get_3(&api)
+/// let response = get_attacks_layer3_summary_get_3(&api)
+///     .with_name("name")
+///     .with_date_range("dateRange")
+///     .with_date_start("dateStart")
+///     .with_date_end("dateEnd")
+///     .with_location("location")
+///     .with_continent("continent")
+///     .with_ip_version("ipVersion")
+///     .with_protocol("protocol")
+///     .with_direction("direction")
+///     .with_limit_per_group("limitPerGroup")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```
@@ -284,13 +367,38 @@ impl<'a> GetAttacksLayer3SummaryGet4Request<'a> {
         self.builder.send().await
     }
 }
-
 /// Get layer 3 attacks by IP version summary
+///
+/// Retrieves the distribution of layer 3 attacks by IP version.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/attacks/layer3/summary/ip_version`
+///
+/// **Parameters**
+/// - `name` (query,optional)
+/// - `dateRange` (query,optional)
+/// - `dateStart` (query,optional)
+/// - `dateEnd` (query,optional)
+/// - `location` (query,optional)
+/// - `continent` (query,optional)
+/// - `protocol` (query,optional)
+/// - `direction` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_layer_3_attacks };
+/// use cloudflare::{ ApiClient, apis::radar_layer_3_attacks };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_attacks_layer3_summary_get_4(&api)
+/// let response = get_attacks_layer3_summary_get_4(&api)
+///     .with_name("name")
+///     .with_date_range("dateRange")
+///     .with_date_start("dateStart")
+///     .with_date_end("dateEnd")
+///     .with_location("location")
+///     .with_continent("continent")
+///     .with_protocol("protocol")
+///     .with_direction("direction")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```
@@ -350,13 +458,38 @@ impl<'a> GetAttacksLayer3SummaryGet5Request<'a> {
         self.builder.send().await
     }
 }
-
 /// Get layer 3 attacks by protocol summary
+///
+/// Retrieves the distribution of layer 3 attacks by protocol.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/attacks/layer3/summary/protocol`
+///
+/// **Parameters**
+/// - `name` (query,optional)
+/// - `dateRange` (query,optional)
+/// - `dateStart` (query,optional)
+/// - `dateEnd` (query,optional)
+/// - `location` (query,optional)
+/// - `continent` (query,optional)
+/// - `ipVersion` (query,optional)
+/// - `direction` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_layer_3_attacks };
+/// use cloudflare::{ ApiClient, apis::radar_layer_3_attacks };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_attacks_layer3_summary_get_5(&api)
+/// let response = get_attacks_layer3_summary_get_5(&api)
+///     .with_name("name")
+///     .with_date_range("dateRange")
+///     .with_date_start("dateStart")
+///     .with_date_end("dateEnd")
+///     .with_location("location")
+///     .with_continent("continent")
+///     .with_ip_version("ipVersion")
+///     .with_direction("direction")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```
@@ -424,13 +557,42 @@ impl<'a> GetAttacksLayer3SummaryGet6Request<'a> {
         self.builder.send().await
     }
 }
-
 /// Get layer 3 attacks by vector summary
+///
+/// Retrieves the distribution of layer 3 attacks by vector.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/attacks/layer3/summary/vector`
+///
+/// **Parameters**
+/// - `name` (query,optional)
+/// - `dateRange` (query,optional)
+/// - `dateStart` (query,optional)
+/// - `dateEnd` (query,optional)
+/// - `location` (query,optional)
+/// - `continent` (query,optional)
+/// - `ipVersion` (query,optional)
+/// - `protocol` (query,optional)
+/// - `direction` (query,optional)
+/// - `limitPerGroup` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_layer_3_attacks };
+/// use cloudflare::{ ApiClient, apis::radar_layer_3_attacks };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_attacks_layer3_summary_get_6(&api)
+/// let response = get_attacks_layer3_summary_get_6(&api)
+///     .with_name("name")
+///     .with_date_range("dateRange")
+///     .with_date_start("dateStart")
+///     .with_date_end("dateEnd")
+///     .with_location("location")
+///     .with_continent("continent")
+///     .with_ip_version("ipVersion")
+///     .with_protocol("protocol")
+///     .with_direction("direction")
+///     .with_limit_per_group("limitPerGroup")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```
@@ -498,13 +660,42 @@ impl<'a> GetAttacksLayer3SummaryGet7Request<'a> {
         self.builder.send().await
     }
 }
-
 /// Get layer 3 attacks by targeted vertical summary
+///
+/// Retrieves the distribution of layer 3 attacks by targeted vertical.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/attacks/layer3/summary/vertical`
+///
+/// **Parameters**
+/// - `name` (query,optional)
+/// - `dateRange` (query,optional)
+/// - `dateStart` (query,optional)
+/// - `dateEnd` (query,optional)
+/// - `location` (query,optional)
+/// - `continent` (query,optional)
+/// - `ipVersion` (query,optional)
+/// - `protocol` (query,optional)
+/// - `direction` (query,optional)
+/// - `limitPerGroup` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_layer_3_attacks };
+/// use cloudflare::{ ApiClient, apis::radar_layer_3_attacks };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_attacks_layer3_summary_get_7(&api)
+/// let response = get_attacks_layer3_summary_get_7(&api)
+///     .with_name("name")
+///     .with_date_range("dateRange")
+///     .with_date_start("dateStart")
+///     .with_date_end("dateEnd")
+///     .with_location("location")
+///     .with_continent("continent")
+///     .with_ip_version("ipVersion")
+///     .with_protocol("protocol")
+///     .with_direction("direction")
+///     .with_limit_per_group("limitPerGroup")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```
@@ -583,13 +774,48 @@ impl<'a> GetAttacksLayer3TimeseriesRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get layer 3 attacks by bytes time series
+///
+/// Retrieves layer 3 attacks over time.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/attacks/layer3/timeseries`
+///
+/// **Parameters**
+/// - `aggInterval` (query,optional)
+/// - `name` (query,optional)
+/// - `dateRange` (query,optional)
+/// - `dateStart` (query,optional)
+/// - `dateEnd` (query,optional)
+/// - `asn` (query,optional)
+/// - `location` (query,optional)
+/// - `continent` (query,optional)
+/// - `ipVersion` (query,optional)
+/// - `protocol` (query,optional)
+/// - `normalization` (query,optional)
+/// - `metric` (query,optional)
+/// - `direction` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_layer_3_attacks };
+/// use cloudflare::{ ApiClient, apis::radar_layer_3_attacks };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_attacks_layer3_timeseries(&api)
+/// let response = get_attacks_layer3_timeseries(&api)
+///     .with_agg_interval("aggInterval")
+///     .with_name("name")
+///     .with_date_range("dateRange")
+///     .with_date_start("dateStart")
+///     .with_date_end("dateEnd")
+///     .with_asn("asn")
+///     .with_location("location")
+///     .with_continent("continent")
+///     .with_ip_version("ipVersion")
+///     .with_protocol("protocol")
+///     .with_normalization("normalization")
+///     .with_metric("metric")
+///     .with_direction("direction")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```
@@ -664,13 +890,44 @@ impl<'a> GetAttacksLayer3TimeseriesGetRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get layer 3 attacks by bitrate time series
+///
+/// Retrieves the distribution of layer 3 attacks by bitrate over time.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/attacks/layer3/timeseries_groups/bitrate`
+///
+/// **Parameters**
+/// - `aggInterval` (query,optional)
+/// - `name` (query,optional)
+/// - `dateRange` (query,optional)
+/// - `dateStart` (query,optional)
+/// - `dateEnd` (query,optional)
+/// - `location` (query,optional)
+/// - `continent` (query,optional)
+/// - `ipVersion` (query,optional)
+/// - `protocol` (query,optional)
+/// - `normalization` (query,optional)
+/// - `direction` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_layer_3_attacks };
+/// use cloudflare::{ ApiClient, apis::radar_layer_3_attacks };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_attacks_layer3_timeseries_get(&api)
+/// let response = get_attacks_layer3_timeseries_get(&api)
+///     .with_agg_interval("aggInterval")
+///     .with_name("name")
+///     .with_date_range("dateRange")
+///     .with_date_start("dateStart")
+///     .with_date_end("dateEnd")
+///     .with_location("location")
+///     .with_continent("continent")
+///     .with_ip_version("ipVersion")
+///     .with_protocol("protocol")
+///     .with_normalization("normalization")
+///     .with_direction("direction")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```
@@ -747,13 +1004,44 @@ impl<'a> GetAttacksLayer3TimeseriesGet3Request<'a> {
         self.builder.send().await
     }
 }
-
 /// Get layer 3 attacks by duration time series
+///
+/// Retrieves the distribution of layer 3 attacks by duration over time.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/attacks/layer3/timeseries_groups/duration`
+///
+/// **Parameters**
+/// - `aggInterval` (query,optional)
+/// - `name` (query,optional)
+/// - `dateRange` (query,optional)
+/// - `dateStart` (query,optional)
+/// - `dateEnd` (query,optional)
+/// - `location` (query,optional)
+/// - `continent` (query,optional)
+/// - `ipVersion` (query,optional)
+/// - `protocol` (query,optional)
+/// - `normalization` (query,optional)
+/// - `direction` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_layer_3_attacks };
+/// use cloudflare::{ ApiClient, apis::radar_layer_3_attacks };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_attacks_layer3_timeseries_get_3(&api)
+/// let response = get_attacks_layer3_timeseries_get_3(&api)
+///     .with_agg_interval("aggInterval")
+///     .with_name("name")
+///     .with_date_range("dateRange")
+///     .with_date_start("dateStart")
+///     .with_date_end("dateEnd")
+///     .with_location("location")
+///     .with_continent("continent")
+///     .with_ip_version("ipVersion")
+///     .with_protocol("protocol")
+///     .with_normalization("normalization")
+///     .with_direction("direction")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```
@@ -834,13 +1122,46 @@ impl<'a> GetAttacksLayer3TimeseriesGet4Request<'a> {
         self.builder.send().await
     }
 }
-
 /// Get layer 3 attacks by target industries time series
+///
+/// Retrieves the distribution of layer 3 attacks by targeted industry over time.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/attacks/layer3/timeseries_groups/industry`
+///
+/// **Parameters**
+/// - `aggInterval` (query,optional)
+/// - `name` (query,optional)
+/// - `dateRange` (query,optional)
+/// - `dateStart` (query,optional)
+/// - `dateEnd` (query,optional)
+/// - `location` (query,optional)
+/// - `continent` (query,optional)
+/// - `ipVersion` (query,optional)
+/// - `protocol` (query,optional)
+/// - `normalization` (query,optional)
+/// - `direction` (query,optional)
+/// - `limitPerGroup` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_layer_3_attacks };
+/// use cloudflare::{ ApiClient, apis::radar_layer_3_attacks };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_attacks_layer3_timeseries_get_4(&api)
+/// let response = get_attacks_layer3_timeseries_get_4(&api)
+///     .with_agg_interval("aggInterval")
+///     .with_name("name")
+///     .with_date_range("dateRange")
+///     .with_date_start("dateStart")
+///     .with_date_end("dateEnd")
+///     .with_location("location")
+///     .with_continent("continent")
+///     .with_ip_version("ipVersion")
+///     .with_protocol("protocol")
+///     .with_normalization("normalization")
+///     .with_direction("direction")
+///     .with_limit_per_group("limitPerGroup")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```
@@ -913,13 +1234,42 @@ impl<'a> GetAttacksLayer3TimeseriesGet5Request<'a> {
         self.builder.send().await
     }
 }
-
 /// Get layer 3 attacks by IP version time series
+///
+/// Retrieves the distribution of layer 3 attacks by IP version over time.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/attacks/layer3/timeseries_groups/ip_version`
+///
+/// **Parameters**
+/// - `aggInterval` (query,optional)
+/// - `name` (query,optional)
+/// - `dateRange` (query,optional)
+/// - `dateStart` (query,optional)
+/// - `dateEnd` (query,optional)
+/// - `location` (query,optional)
+/// - `continent` (query,optional)
+/// - `protocol` (query,optional)
+/// - `normalization` (query,optional)
+/// - `direction` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_layer_3_attacks };
+/// use cloudflare::{ ApiClient, apis::radar_layer_3_attacks };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_attacks_layer3_timeseries_get_5(&api)
+/// let response = get_attacks_layer3_timeseries_get_5(&api)
+///     .with_agg_interval("aggInterval")
+///     .with_name("name")
+///     .with_date_range("dateRange")
+///     .with_date_start("dateStart")
+///     .with_date_end("dateEnd")
+///     .with_location("location")
+///     .with_continent("continent")
+///     .with_protocol("protocol")
+///     .with_normalization("normalization")
+///     .with_direction("direction")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```
@@ -992,13 +1342,42 @@ impl<'a> GetAttacksLayer3TimeseriesGet6Request<'a> {
         self.builder.send().await
     }
 }
-
 /// Get layer 3 attacks by protocol time series
+///
+/// Retrieves the distribution of layer 3 attacks by protocol over time.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/attacks/layer3/timeseries_groups/protocol`
+///
+/// **Parameters**
+/// - `aggInterval` (query,optional)
+/// - `name` (query,optional)
+/// - `dateRange` (query,optional)
+/// - `dateStart` (query,optional)
+/// - `dateEnd` (query,optional)
+/// - `location` (query,optional)
+/// - `continent` (query,optional)
+/// - `ipVersion` (query,optional)
+/// - `normalization` (query,optional)
+/// - `direction` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_layer_3_attacks };
+/// use cloudflare::{ ApiClient, apis::radar_layer_3_attacks };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_attacks_layer3_timeseries_get_6(&api)
+/// let response = get_attacks_layer3_timeseries_get_6(&api)
+///     .with_agg_interval("aggInterval")
+///     .with_name("name")
+///     .with_date_range("dateRange")
+///     .with_date_start("dateStart")
+///     .with_date_end("dateEnd")
+///     .with_location("location")
+///     .with_continent("continent")
+///     .with_ip_version("ipVersion")
+///     .with_normalization("normalization")
+///     .with_direction("direction")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```
@@ -1079,13 +1458,46 @@ impl<'a> GetAttacksLayer3TimeseriesGet7Request<'a> {
         self.builder.send().await
     }
 }
-
 /// Get layer 3 attacks by vector time series
+///
+/// Retrieves the distribution of layer 3 attacks by vector over time.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/attacks/layer3/timeseries_groups/vector`
+///
+/// **Parameters**
+/// - `aggInterval` (query,optional)
+/// - `name` (query,optional)
+/// - `dateRange` (query,optional)
+/// - `dateStart` (query,optional)
+/// - `dateEnd` (query,optional)
+/// - `location` (query,optional)
+/// - `continent` (query,optional)
+/// - `ipVersion` (query,optional)
+/// - `protocol` (query,optional)
+/// - `normalization` (query,optional)
+/// - `direction` (query,optional)
+/// - `limitPerGroup` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_layer_3_attacks };
+/// use cloudflare::{ ApiClient, apis::radar_layer_3_attacks };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_attacks_layer3_timeseries_get_7(&api)
+/// let response = get_attacks_layer3_timeseries_get_7(&api)
+///     .with_agg_interval("aggInterval")
+///     .with_name("name")
+///     .with_date_range("dateRange")
+///     .with_date_start("dateStart")
+///     .with_date_end("dateEnd")
+///     .with_location("location")
+///     .with_continent("continent")
+///     .with_ip_version("ipVersion")
+///     .with_protocol("protocol")
+///     .with_normalization("normalization")
+///     .with_direction("direction")
+///     .with_limit_per_group("limitPerGroup")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```
@@ -1166,13 +1578,46 @@ impl<'a> GetAttacksLayer3TimeseriesGet8Request<'a> {
         self.builder.send().await
     }
 }
-
 /// Get layer 3 attacks by vertical time series
+///
+/// Retrieves the distribution of layer 3 attacks by targeted vertical over time.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/attacks/layer3/timeseries_groups/vertical`
+///
+/// **Parameters**
+/// - `aggInterval` (query,optional)
+/// - `name` (query,optional)
+/// - `dateRange` (query,optional)
+/// - `dateStart` (query,optional)
+/// - `dateEnd` (query,optional)
+/// - `location` (query,optional)
+/// - `continent` (query,optional)
+/// - `ipVersion` (query,optional)
+/// - `protocol` (query,optional)
+/// - `normalization` (query,optional)
+/// - `direction` (query,optional)
+/// - `limitPerGroup` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_layer_3_attacks };
+/// use cloudflare::{ ApiClient, apis::radar_layer_3_attacks };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_attacks_layer3_timeseries_get_8(&api)
+/// let response = get_attacks_layer3_timeseries_get_8(&api)
+///     .with_agg_interval("aggInterval")
+///     .with_name("name")
+///     .with_date_range("dateRange")
+///     .with_date_start("dateStart")
+///     .with_date_end("dateEnd")
+///     .with_location("location")
+///     .with_continent("continent")
+///     .with_ip_version("ipVersion")
+///     .with_protocol("protocol")
+///     .with_normalization("normalization")
+///     .with_direction("direction")
+///     .with_limit_per_group("limitPerGroup")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```
@@ -1253,13 +1698,48 @@ impl<'a> GetAttacksLayer3TopRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get top layer 3 attack pairs (origin and target locations)
+///
+/// Retrieves the top layer 3 attacks from origin to target location. Values are a percentage out of the total layer 3 attacks (with billing country). You can optionally limit the number of attacks by origin/target location (useful if all the top attacks are from or to the same location).
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/attacks/layer3/top/attacks`
+///
+/// **Parameters**
+/// - `limit` (query,optional)
+/// - `name` (query,optional)
+/// - `dateRange` (query,optional)
+/// - `dateStart` (query,optional)
+/// - `dateEnd` (query,optional)
+/// - `location` (query,optional)
+/// - `continent` (query,optional)
+/// - `ipVersion` (query,optional)
+/// - `protocol` (query,optional)
+/// - `limitDirection` (query,optional)
+/// - `limitPerLocation` (query,optional)
+/// - `magnitude` (query,optional)
+/// - `normalization` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_layer_3_attacks };
+/// use cloudflare::{ ApiClient, apis::radar_layer_3_attacks };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_attacks_layer3_top(&api)
+/// let response = get_attacks_layer3_top(&api)
+///     .with_limit("limit")
+///     .with_name("name")
+///     .with_date_range("dateRange")
+///     .with_date_start("dateStart")
+///     .with_date_end("dateEnd")
+///     .with_location("location")
+///     .with_continent("continent")
+///     .with_ip_version("ipVersion")
+///     .with_protocol("protocol")
+///     .with_limit_direction("limitDirection")
+///     .with_limit_per_location("limitPerLocation")
+///     .with_magnitude("magnitude")
+///     .with_normalization("normalization")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```
@@ -1322,13 +1802,40 @@ impl<'a> GetAttacksLayer3TopGetRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get top industries targeted by layer 3 attacks
+///
+/// This endpoint is deprecated. To continue getting this data, switch to the summary by industry endpoint.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/attacks/layer3/top/industry`
+///
+/// **Parameters**
+/// - `limit` (query,optional)
+/// - `name` (query,optional)
+/// - `dateRange` (query,optional)
+/// - `dateStart` (query,optional)
+/// - `dateEnd` (query,optional)
+/// - `location` (query,optional)
+/// - `continent` (query,optional)
+/// - `ipVersion` (query,optional)
+/// - `protocol` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_layer_3_attacks };
+/// use cloudflare::{ ApiClient, apis::radar_layer_3_attacks };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_attacks_layer3_top_get(&api)
+/// let response = get_attacks_layer3_top_get(&api)
+///     .with_limit("limit")
+///     .with_name("name")
+///     .with_date_range("dateRange")
+///     .with_date_start("dateStart")
+///     .with_date_end("dateEnd")
+///     .with_location("location")
+///     .with_continent("continent")
+///     .with_ip_version("ipVersion")
+///     .with_protocol("protocol")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```
@@ -1395,13 +1902,40 @@ impl<'a> GetAttacksLayer3TopGet3Request<'a> {
         self.builder.send().await
     }
 }
-
 /// Get top origin locations of layer 3 attacks
+///
+/// Retrieves the origin locations of layer 3 attacks.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/attacks/layer3/top/locations/origin`
+///
+/// **Parameters**
+/// - `limit` (query,optional)
+/// - `name` (query,optional)
+/// - `dateRange` (query,optional)
+/// - `dateStart` (query,optional)
+/// - `dateEnd` (query,optional)
+/// - `location` (query,optional)
+/// - `continent` (query,optional)
+/// - `ipVersion` (query,optional)
+/// - `protocol` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_layer_3_attacks };
+/// use cloudflare::{ ApiClient, apis::radar_layer_3_attacks };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_attacks_layer3_top_get_3(&api)
+/// let response = get_attacks_layer3_top_get_3(&api)
+///     .with_limit("limit")
+///     .with_name("name")
+///     .with_date_range("dateRange")
+///     .with_date_start("dateStart")
+///     .with_date_end("dateEnd")
+///     .with_location("location")
+///     .with_continent("continent")
+///     .with_ip_version("ipVersion")
+///     .with_protocol("protocol")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```
@@ -1468,13 +2002,40 @@ impl<'a> GetAttacksLayer3TopGet4Request<'a> {
         self.builder.send().await
     }
 }
-
 /// Get top target locations of layer 3 attacks
+///
+/// Retrieves the target locations of layer 3 attacks.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/attacks/layer3/top/locations/target`
+///
+/// **Parameters**
+/// - `limit` (query,optional)
+/// - `name` (query,optional)
+/// - `dateRange` (query,optional)
+/// - `dateStart` (query,optional)
+/// - `dateEnd` (query,optional)
+/// - `location` (query,optional)
+/// - `continent` (query,optional)
+/// - `ipVersion` (query,optional)
+/// - `protocol` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_layer_3_attacks };
+/// use cloudflare::{ ApiClient, apis::radar_layer_3_attacks };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_attacks_layer3_top_get_4(&api)
+/// let response = get_attacks_layer3_top_get_4(&api)
+///     .with_limit("limit")
+///     .with_name("name")
+///     .with_date_range("dateRange")
+///     .with_date_start("dateStart")
+///     .with_date_end("dateEnd")
+///     .with_location("location")
+///     .with_continent("continent")
+///     .with_ip_version("ipVersion")
+///     .with_protocol("protocol")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```
@@ -1537,13 +2098,40 @@ impl<'a> GetAttacksLayer3TopGet5Request<'a> {
         self.builder.send().await
     }
 }
-
 /// Get top verticals targeted by layer 3 attacks
+///
+/// This endpoint is deprecated. To continue getting this data, switch to the summary by vertical endpoint.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/attacks/layer3/top/vertical`
+///
+/// **Parameters**
+/// - `limit` (query,optional)
+/// - `name` (query,optional)
+/// - `dateRange` (query,optional)
+/// - `dateStart` (query,optional)
+/// - `dateEnd` (query,optional)
+/// - `location` (query,optional)
+/// - `continent` (query,optional)
+/// - `ipVersion` (query,optional)
+/// - `protocol` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_layer_3_attacks };
+/// use cloudflare::{ ApiClient, apis::radar_layer_3_attacks };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_attacks_layer3_top_get_5(&api)
+/// let response = get_attacks_layer3_top_get_5(&api)
+///     .with_limit("limit")
+///     .with_name("name")
+///     .with_date_range("dateRange")
+///     .with_date_start("dateStart")
+///     .with_date_end("dateEnd")
+///     .with_location("location")
+///     .with_continent("continent")
+///     .with_ip_version("ipVersion")
+///     .with_protocol("protocol")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```

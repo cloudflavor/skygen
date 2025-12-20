@@ -15,13 +15,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::iam_collection_permission_groups_response::IamCollectionPermissionGroupsResponse;
 use crate::models::iam_permission_group::IamPermissionGroup;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct GroupListRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, IamCollectionPermissionGroupsResponse>,
 }
 
 impl<'a> GroupListRequest<'a> {
@@ -59,18 +60,36 @@ impl<'a> GroupListRequest<'a> {
         self.builder = self.builder.header_param("per_page", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<IamCollectionPermissionGroupsResponse> {
         self.builder.send().await
     }
 }
-
 /// List Account Permission Groups
+///
+/// List all the permissions groups for an account.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/iam/permission_groups`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `id` (query,optional)
+/// - `name` (query,optional)
+/// - `label` (query,optional)
+/// - `page` (query,optional)
+/// - `per_page` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::account_permission_groups };
+/// use cloudflare::{ ApiClient, apis::account_permission_groups };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = group_list(&api)
-///     .with_account_id("value")
+/// let response = group_list(&api)
+///     .with_account_id("account_id")
+///     .with_id("id")
+///     .with_name("name")
+///     .with_label("label")
+///     .with_page("page")
+///     .with_per_page("per_page")
 ///     .send()
 ///     .await?;
 /// ```
@@ -107,15 +126,24 @@ impl<'a> GroupDetailsRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Permission Group Details
+///
+/// Get information about a specific permission group in an account.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/iam/permission_groups/{permission_group_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `permission_group_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::account_permission_groups };
+/// use cloudflare::{ ApiClient, apis::account_permission_groups };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = group_details(&api)
-///     .with_account_id("value")
-///     .with_permission_group_id("value")
+/// let response = group_details(&api)
+///     .with_account_id("account_id")
+///     .with_permission_group_id("permission_group_id")
 ///     .send()
 ///     .await?;
 /// ```

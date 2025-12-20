@@ -19,8 +19,9 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct AddressingAddressMapsMembership {
-    pub can_delete: Option<serde_json::Value>,
-    pub created_at: Option<serde_json::Value>,
-    pub identifier: Option<serde_json::Value>,
-    pub kind: Option<serde_json::Value>,
+    pub can_delete:
+        Option<crate::models::addressing_schemas_can_delete::AddressingSchemasCanDelete>,
+    pub created_at: Option<crate::models::addressing_timestamp::AddressingTimestamp>,
+    pub identifier: Option<crate::models::addressing_identifier::AddressingIdentifier>,
+    pub kind: Option<crate::models::addressing_kind::AddressingKind>,
 }

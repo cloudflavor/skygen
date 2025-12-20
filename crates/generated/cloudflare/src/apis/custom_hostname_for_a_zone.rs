@@ -15,12 +15,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::tls_certificates_and_hostnames_custom_hostname_response_collection::TlsCertificatesAndHostnamesCustomHostnameResponseCollection;
+use crate::models::tls_certificates_and_hostnames_custom_hostname_response_single::TlsCertificatesAndHostnamesCustomHostnameResponseSingle;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct ListCustomHostnamesRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, TlsCertificatesAndHostnamesCustomHostnameResponseCollection>,
 }
 
 impl<'a> ListCustomHostnamesRequest<'a> {
@@ -62,18 +64,42 @@ impl<'a> ListCustomHostnamesRequest<'a> {
         self.builder = self.builder.header_param("ssl", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(
+        self,
+    ) -> ApiResult<TlsCertificatesAndHostnamesCustomHostnameResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// List Custom Hostnames
+///
+/// List, search, sort, and filter all of your custom hostnames.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/custom_hostnames`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `hostname` (query,optional)
+/// - `id` (query,optional)
+/// - `page` (query,optional)
+/// - `per_page` (query,optional)
+/// - `order` (query,optional)
+/// - `direction` (query,optional)
+/// - `ssl` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::custom_hostname_for_a_zone };
+/// use cloudflare::{ ApiClient, apis::custom_hostname_for_a_zone };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_custom_hostnames(&api)
-///     .with_zone_id("value")
+/// let response = list_custom_hostnames(&api)
+///     .with_zone_id("zone_id")
+///     .with_hostname("hostname")
+///     .with_id("id")
+///     .with_page("page")
+///     .with_per_page("per_page")
+///     .with_order("order")
+///     .with_direction("direction")
+///     .with_ssl("ssl")
 ///     .send()
 ///     .await?;
 /// ```
@@ -83,7 +109,7 @@ pub fn list_custom_hostnames(api: &ApiClient) -> ListCustomHostnamesRequest<'_> 
 
 #[derive(Debug)]
 pub struct CreateCustomHostnameRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, TlsCertificatesAndHostnamesCustomHostnameResponseSingle>,
 }
 
 impl<'a> CreateCustomHostnameRequest<'a> {
@@ -105,18 +131,28 @@ impl<'a> CreateCustomHostnameRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<TlsCertificatesAndHostnamesCustomHostnameResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Create Custom Hostname
+///
+/// Add a new custom hostname and request that an SSL certificate be issued for it. One of three validation methods—http, txt, email—should be used, with 'http' recommended if the CNAME is already in place (or will be soon). Specifying 'email' will send an email to the WHOIS contacts on file for the base domain plus hostmaster, postmaster, webmaster, admin, administrator. If http is used and the domain is not already pointing to the Managed CNAME host, the PATCH method must be used once it is (to complete validation).  Enable bundling of certificates using the custom_cert_bundle field. The bundling process requires the following condition One certificate in the bundle must use an RSA, and the other must use an ECDSA.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/zones/{zone_id}/custom_hostnames`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::custom_hostname_for_a_zone };
+/// use cloudflare::{ ApiClient, apis::custom_hostname_for_a_zone };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = create_custom_hostname(&api)
-///     .with_zone_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = create_custom_hostname(&api)
+///     .with_zone_id("zone_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -126,7 +162,7 @@ pub fn create_custom_hostname(api: &ApiClient) -> CreateCustomHostnameRequest<'_
 
 #[derive(Debug)]
 pub struct DetailsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, TlsCertificatesAndHostnamesCustomHostnameResponseSingle>,
 }
 
 impl<'a> DetailsRequest<'a> {
@@ -149,19 +185,26 @@ impl<'a> DetailsRequest<'a> {
         self.builder = self.builder.path_param("custom_hostname_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<TlsCertificatesAndHostnamesCustomHostnameResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Custom Hostname Details
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/custom_hostnames/{custom_hostname_id}`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `custom_hostname_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::custom_hostname_for_a_zone };
+/// use cloudflare::{ ApiClient, apis::custom_hostname_for_a_zone };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = details(&api)
-///     .with_zone_id("value")
-///     .with_custom_hostname_id("value")
+/// let response = details(&api)
+///     .with_zone_id("zone_id")
+///     .with_custom_hostname_id("custom_hostname_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -198,15 +241,22 @@ impl<'a> DeleteCustomHostnameAnyRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Delete Custom Hostname (and any issued SSL certificates)
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/zones/{zone_id}/custom_hostnames/{custom_hostname_id}`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `custom_hostname_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::custom_hostname_for_a_zone };
+/// use cloudflare::{ ApiClient, apis::custom_hostname_for_a_zone };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete_custom_hostname_any(&api)
-///     .with_zone_id("value")
-///     .with_custom_hostname_id("value")
+/// let response = delete_custom_hostname_any(&api)
+///     .with_zone_id("zone_id")
+///     .with_custom_hostname_id("custom_hostname_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -216,7 +266,7 @@ pub fn delete_custom_hostname_any(api: &ApiClient) -> DeleteCustomHostnameAnyReq
 
 #[derive(Debug)]
 pub struct EditCustomHostnameRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, TlsCertificatesAndHostnamesCustomHostnameResponseSingle>,
 }
 
 impl<'a> EditCustomHostnameRequest<'a> {
@@ -247,19 +297,30 @@ impl<'a> EditCustomHostnameRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<TlsCertificatesAndHostnamesCustomHostnameResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Edit Custom Hostname
+///
+/// Modify SSL configuration for a custom hostname. When sent with SSL config that matches existing config, used to indicate that hostname should pass domain control validation (DCV). Can also be used to change validation type, e.g., from 'http' to 'email'. Bundle an existing certificate with another certificate by using the "custom_cert_bundle" field. The bundling process supports combining certificates as long as the following condition is met. One certificate must use the RSA algorithm, and the other must use the ECDSA algorithm.
+///
+/// **HTTP Method:** `PATCH`
+/// **Path:** `/zones/{zone_id}/custom_hostnames/{custom_hostname_id}`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `custom_hostname_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::custom_hostname_for_a_zone };
+/// use cloudflare::{ ApiClient, apis::custom_hostname_for_a_zone };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = edit_custom_hostname(&api)
-///     .with_zone_id("value")
-///     .with_custom_hostname_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = edit_custom_hostname(&api)
+///     .with_zone_id("zone_id")
+///     .with_custom_hostname_id("custom_hostname_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -310,17 +371,30 @@ impl<'a> EditCustomCertificateCustomRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Replace Custom Certificate and Custom Key In Custom Hostname
+///
+/// Replace a single custom certificate within a certificate pack that contains two bundled certificates. The replacement must adhere to the following constraints. You can only replace an RSA certificate with another RSA certificate or an ECDSA certificate with another ECDSA certificate.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/zones/{zone_id}/custom_hostnames/{custom_hostname_id}/certificate_pack/{certificate_pack_id}/certificates/{certificate_id}`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `custom_hostname_id` (path, required)
+/// - `certificate_pack_id` (path, required)
+/// - `certificate_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::custom_hostname_for_a_zone };
+/// use cloudflare::{ ApiClient, apis::custom_hostname_for_a_zone };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = edit_custom_certificate_custom(&api)
-///     .with_zone_id("value")
-///     .with_custom_hostname_id("value")
-///     .with_certificate_pack_id("value")
-///     .with_certificate_id("value")
+/// # let body: crate::models::tls_certificates_and_hostnames_custom_cert_and_key::TlsCertificatesAndHostnamesCustomCertAndKey = todo!();
+/// let response = edit_custom_certificate_custom(&api)
+///     .with_zone_id("zone_id")
+///     .with_custom_hostname_id("custom_hostname_id")
+///     .with_certificate_pack_id("certificate_pack_id")
+///     .with_certificate_id("certificate_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -363,17 +437,28 @@ impl<'a> DeleteSingleCertificateKeyRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Delete Single Certificate And Key For Custom Hostname
+///
+/// Delete a single custom certificate from a certificate pack that contains two bundled certificates. Deletion is subject to the following constraints. You cannot delete a certificate if it is the only remaining certificate in the pack. At least one certificate must remain in the pack.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/zones/{zone_id}/custom_hostnames/{custom_hostname_id}/certificate_pack/{certificate_pack_id}/certificates/{certificate_id}`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `custom_hostname_id` (path, required)
+/// - `certificate_pack_id` (path, required)
+/// - `certificate_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::custom_hostname_for_a_zone };
+/// use cloudflare::{ ApiClient, apis::custom_hostname_for_a_zone };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete_single_certificate_key(&api)
-///     .with_zone_id("value")
-///     .with_custom_hostname_id("value")
-///     .with_certificate_pack_id("value")
-///     .with_certificate_id("value")
+/// let response = delete_single_certificate_key(&api)
+///     .with_zone_id("zone_id")
+///     .with_custom_hostname_id("custom_hostname_id")
+///     .with_certificate_pack_id("certificate_pack_id")
+///     .with_certificate_id("certificate_id")
 ///     .send()
 ///     .await?;
 /// ```

@@ -15,7 +15,9 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::nsc_interconnect::NscInterconnect;
 use crate::models::nsc_interconnect_list::NscInterconnectList;
+use crate::models::nsc_status_info::NscStatusInfo;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
@@ -56,14 +58,28 @@ impl<'a> ListInterconnectsRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// List existing interconnects
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/cni/interconnects`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `site` (query,optional)
+/// - `type` (query,optional)
+/// - `cursor` (query,optional)
+/// - `limit` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::interconnects };
+/// use cloudflare::{ ApiClient, apis::interconnects };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_interconnects(&api)
-///     .with_account_id("value")
+/// let response = list_interconnects(&api)
+///     .with_account_id("account_id")
+///     .with_site("site")
+///     .with_type_param("type")
+///     .with_cursor("cursor")
+///     .with_limit("limit")
 ///     .send()
 ///     .await?;
 /// ```
@@ -73,7 +89,7 @@ pub fn list_interconnects(api: &ApiClient) -> ListInterconnectsRequest<'_> {
 
 #[derive(Debug)]
 pub struct CreateInterconnectRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, NscInterconnect>,
 }
 
 impl<'a> CreateInterconnectRequest<'a> {
@@ -89,22 +105,33 @@ impl<'a> CreateInterconnectRequest<'a> {
         self.builder = self.builder.path_param("account_id", value);
         self
     }
-    pub fn with_body(mut self, body: serde_json::Value) -> Self {
+    pub fn with_body(
+        mut self,
+        body: crate::models::nsc_interconnect_create::NscInterconnectCreate,
+    ) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<NscInterconnect> {
         self.builder.send().await
     }
 }
-
 /// Create a new interconnect
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/cni/interconnects`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::interconnects };
+/// use cloudflare::{ ApiClient, apis::interconnects };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = create_interconnect(&api)
-///     .with_account_id("value")
+/// # let body: crate::models::nsc_interconnect_create::NscInterconnectCreate = todo!();
+/// let response = create_interconnect(&api)
+///     .with_account_id("account_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -114,7 +141,7 @@ pub fn create_interconnect(api: &ApiClient) -> CreateInterconnectRequest<'_> {
 
 #[derive(Debug)]
 pub struct InterconnectRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, NscInterconnect>,
 }
 
 impl<'a> InterconnectRequest<'a> {
@@ -137,19 +164,26 @@ impl<'a> InterconnectRequest<'a> {
         self.builder = self.builder.path_param("icon", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<NscInterconnect> {
         self.builder.send().await
     }
 }
-
 /// Get information about an interconnect object
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/cni/interconnects/{icon}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `icon` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::interconnects };
+/// use cloudflare::{ ApiClient, apis::interconnects };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = interconnect(&api)
-///     .with_account_id("value")
-///     .with_icon("value")
+/// let response = interconnect(&api)
+///     .with_account_id("account_id")
+///     .with_icon("icon")
 ///     .send()
 ///     .await?;
 /// ```
@@ -186,15 +220,22 @@ impl<'a> InterconnectDeleteRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Delete an interconnect object
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/accounts/{account_id}/cni/interconnects/{icon}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `icon` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::interconnects };
+/// use cloudflare::{ ApiClient, apis::interconnects };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = interconnect_delete(&api)
-///     .with_account_id("value")
-///     .with_icon("value")
+/// let response = interconnect_delete(&api)
+///     .with_account_id("account_id")
+///     .with_icon("icon")
 ///     .send()
 ///     .await?;
 /// ```
@@ -231,15 +272,22 @@ impl<'a> InterconnectLoaRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Generate the Letter of Authorization (LOA) for a given interconnect
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/cni/interconnects/{icon}/loa`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `icon` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::interconnects };
+/// use cloudflare::{ ApiClient, apis::interconnects };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = interconnect_loa(&api)
-///     .with_account_id("value")
-///     .with_icon("value")
+/// let response = interconnect_loa(&api)
+///     .with_account_id("account_id")
+///     .with_icon("icon")
 ///     .send()
 ///     .await?;
 /// ```
@@ -249,7 +297,7 @@ pub fn interconnect_loa(api: &ApiClient) -> InterconnectLoaRequest<'_> {
 
 #[derive(Debug)]
 pub struct InterconnectStatusRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, NscStatusInfo>,
 }
 
 impl<'a> InterconnectStatusRequest<'a> {
@@ -272,19 +320,26 @@ impl<'a> InterconnectStatusRequest<'a> {
         self.builder = self.builder.path_param("icon", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<NscStatusInfo> {
         self.builder.send().await
     }
 }
-
 /// Get the current status of an interconnect object
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/cni/interconnects/{icon}/status`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `icon` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::interconnects };
+/// use cloudflare::{ ApiClient, apis::interconnects };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = interconnect_status(&api)
-///     .with_account_id("value")
-///     .with_icon("value")
+/// let response = interconnect_status(&api)
+///     .with_account_id("account_id")
+///     .with_icon("icon")
 ///     .send()
 ///     .await?;
 /// ```

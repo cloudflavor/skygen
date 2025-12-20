@@ -39,14 +39,22 @@ impl<'a> ListAvailablePageRulesRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// List available Page Rules settings
+///
+/// Returns a list of settings (and their details) that Page Rules can apply to matching requests.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/pagerules/settings`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::available_page_rules_settings };
+/// use cloudflare::{ ApiClient, apis::available_page_rules_settings };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_available_page_rules(&api)
-///     .with_zone_id("value")
+/// let response = list_available_page_rules(&api)
+///     .with_zone_id("zone_id")
 ///     .send()
 ///     .await?;
 /// ```

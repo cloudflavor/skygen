@@ -19,13 +19,12 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct TeamsDevicesDeviceDexTestSchemasHttp {
-
     pub data: crate::models::teams_devices_device_dex_test_schemas_data::TeamsDevicesDeviceDexTestSchemasData,
-    pub description: Option<serde_json::Value>,
-    pub enabled: serde_json::Value,
-    pub interval: serde_json::Value,
-    pub name: serde_json::Value,
-    pub target_policies: Option<serde_json::Value>,
+    pub description: Option<crate::models::teams_devices_device_dex_test_schemas_description::TeamsDevicesDeviceDexTestSchemasDescription>,
+    pub enabled: crate::models::teams_devices_device_dex_test_schemas_enabled::TeamsDevicesDeviceDexTestSchemasEnabled,
+    pub interval: crate::models::teams_devices_device_dex_test_schemas_interval::TeamsDevicesDeviceDexTestSchemasInterval,
+    pub name: crate::models::teams_devices_device_dex_test_schemas_name::TeamsDevicesDeviceDexTestSchemasName,
+    pub target_policies: Option<crate::models::teams_devices_device_dex_test_target_policies::TeamsDevicesDeviceDexTestTargetPolicies>,
     pub targeted: Option<bool>,
-    pub test_id: Option<serde_json::Value>,
+    pub test_id: Option<crate::models::teams_devices_schemas_test_id::TeamsDevicesSchemasTestId>,
 }

@@ -42,14 +42,20 @@ impl<'a> DlpZtRiskScoreRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// List all risk score integrations for the account.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/zt_risk_scoring/integrations`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zero_trust_risk_scoring_integrations };
+/// use cloudflare::{ ApiClient, apis::zero_trust_risk_scoring_integrations };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = dlp_zt_risk_score(&api)
-///     .with_account_id("value")
+/// let response = dlp_zt_risk_score(&api)
+///     .with_account_id("account_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -89,14 +95,22 @@ impl<'a> DlpZtRiskScorePostRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Create new risk score integration.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/zt_risk_scoring/integrations`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zero_trust_risk_scoring_integrations };
+/// use cloudflare::{ ApiClient, apis::zero_trust_risk_scoring_integrations };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = dlp_zt_risk_score_post(&api)
-///     .with_account_id("value")
+/// # let body: crate::models::dlp_create_integration_body::DlpCreateIntegrationBody = todo!();
+/// let response = dlp_zt_risk_score_post(&api)
+///     .with_account_id("account_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -133,15 +147,22 @@ impl<'a> DlpZtRiskScoreGetRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get risk score integration by reference id.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/zt_risk_scoring/integrations/reference_id/{reference_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `reference_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zero_trust_risk_scoring_integrations };
+/// use cloudflare::{ ApiClient, apis::zero_trust_risk_scoring_integrations };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = dlp_zt_risk_score_get(&api)
-///     .with_account_id("value")
-///     .with_reference_id("value")
+/// let response = dlp_zt_risk_score_get(&api)
+///     .with_account_id("account_id")
+///     .with_reference_id("reference_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -178,15 +199,22 @@ impl<'a> DlpZtRiskScoreGet3Request<'a> {
         self.builder.send().await
     }
 }
-
 /// Get risk score integration by id.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/zt_risk_scoring/integrations/{integration_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `integration_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zero_trust_risk_scoring_integrations };
+/// use cloudflare::{ ApiClient, apis::zero_trust_risk_scoring_integrations };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = dlp_zt_risk_score_get_3(&api)
-///     .with_account_id("value")
-///     .with_integration_id("value")
+/// let response = dlp_zt_risk_score_get_3(&api)
+///     .with_account_id("account_id")
+///     .with_integration_id("integration_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -231,15 +259,26 @@ impl<'a> DlpZtRiskScorePutRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Update a risk score integration.
+///
+/// Overwrite the reference_id, tenant_url, and active values with the ones provided.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/accounts/{account_id}/zt_risk_scoring/integrations/{integration_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `integration_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zero_trust_risk_scoring_integrations };
+/// use cloudflare::{ ApiClient, apis::zero_trust_risk_scoring_integrations };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = dlp_zt_risk_score_put(&api)
-///     .with_account_id("value")
-///     .with_integration_id("value")
+/// # let body: crate::models::dlp_update_integration_body::DlpUpdateIntegrationBody = todo!();
+/// let response = dlp_zt_risk_score_put(&api)
+///     .with_account_id("account_id")
+///     .with_integration_id("integration_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -276,15 +315,22 @@ impl<'a> DlpZtRiskScoreDeleteRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Delete a risk score integration.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/accounts/{account_id}/zt_risk_scoring/integrations/{integration_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `integration_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zero_trust_risk_scoring_integrations };
+/// use cloudflare::{ ApiClient, apis::zero_trust_risk_scoring_integrations };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = dlp_zt_risk_score_delete(&api)
-///     .with_account_id("value")
-///     .with_integration_id("value")
+/// let response = dlp_zt_risk_score_delete(&api)
+///     .with_account_id("account_id")
+///     .with_integration_id("integration_id")
 ///     .send()
 ///     .await?;
 /// ```

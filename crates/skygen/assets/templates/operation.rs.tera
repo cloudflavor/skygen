@@ -94,15 +94,48 @@ impl<'a> {{ function.builder_struct }}<'a> {
     }
 }
 
-/// {{ function.doc }}
+{%- if function.summary %}
+/// {{ function.summary }}
+{%- endif %}
+{%- if function.description_lines | length > 0 %}
+{%- if function.summary %}
+///
+{%- endif %}
+{%- for line in function.description_lines %}
+/// {{ line }}
+{%- endfor %}
+{%- endif %}
+///
+/// **HTTP Method:** `{{ function.method }}`
+/// **Path:** `{{ function.path_display }}`
+{%- if function.path_params | length > 0 or function.params | length > 0 %}
+///
+/// **Parameters**
+{%- for param in function.path_params %}
+/// - `{{ param.wire_name }}` (path, required)
+{%- endfor %}
+{%- for param in function.params %}
+/// - `{{ param.wire_name }}` ({{ param.location | lower }}, {%- if param.required %}required{%- else %}optional{%- endif %})
+{%- endfor %}
+{%- endif %}
+///
 /// # Example
 /// ```no_run
 /// use {{ crate_name }}::{ ApiClient, apis::{{ module_name }} };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = {{ function.name }}(&api)
+{%- if function.request_body %}
+/// # let body: {{ function.request_body.ty }} = todo!();
+{%- endif %}
+/// let response = {{ function.name }}(&api)
 {%- for param in function.path_params %}
-///     .with_{{ param.setter }}("value")
+///     .with_{{ param.setter }}("{{ param.wire_name }}")
 {%- endfor %}
+{%- for param in function.params %}
+///     .with_{{ param.setter }}("{{ param.wire_name }}")
+{%- endfor %}
+{%- if function.request_body %}
+///     .with_body(body)
+{%- endif %}
 ///     .send()
 ///     .await?;
 /// ```

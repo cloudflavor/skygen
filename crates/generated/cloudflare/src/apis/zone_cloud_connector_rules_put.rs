@@ -46,14 +46,22 @@ impl<'a> ConenctorRulesPutRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Put Rules
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/zones/{zone_id}/cloud_connector/rules`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zone_cloud_connector_rules_put };
+/// use cloudflare::{ ApiClient, apis::zone_cloud_connector_rules_put };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = conenctor_rules_put(&api)
-///     .with_zone_id("value")
+/// # let body: Vec<crate::models::cloud_connector_rule::CloudConnectorRule> = todo!();
+/// let response = conenctor_rules_put(&api)
+///     .with_zone_id("zone_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```

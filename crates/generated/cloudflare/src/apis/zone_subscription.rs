@@ -15,12 +15,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::bill_subs_api_zone_subscription_response_single::BillSubsApiZoneSubscriptionResponseSingle;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct DetailsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, BillSubsApiZoneSubscriptionResponseSingle>,
 }
 
 impl<'a> DetailsRequest<'a> {
@@ -34,18 +35,26 @@ impl<'a> DetailsRequest<'a> {
         self.builder = self.builder.path_param("identifier", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<BillSubsApiZoneSubscriptionResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Zone Subscription Details
+///
+/// Lists zone subscription details.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{identifier}/subscription`
+///
+/// **Parameters**
+/// - `identifier` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zone_subscription };
+/// use cloudflare::{ ApiClient, apis::zone_subscription };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = details(&api)
-///     .with_identifier("value")
+/// let response = details(&api)
+///     .with_identifier("identifier")
 ///     .send()
 ///     .await?;
 /// ```
@@ -55,7 +64,7 @@ pub fn details(api: &ApiClient) -> DetailsRequest<'_> {
 
 #[derive(Debug)]
 pub struct CreateSubscriptionRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, BillSubsApiZoneSubscriptionResponseSingle>,
 }
 
 impl<'a> CreateSubscriptionRequest<'a> {
@@ -77,18 +86,28 @@ impl<'a> CreateSubscriptionRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<BillSubsApiZoneSubscriptionResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Create Zone Subscription
+///
+/// Create a zone subscription, either plan or add-ons.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/zones/{identifier}/subscription`
+///
+/// **Parameters**
+/// - `identifier` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zone_subscription };
+/// use cloudflare::{ ApiClient, apis::zone_subscription };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = create_subscription(&api)
-///     .with_identifier("value")
+/// # let body: crate::models::bill_subs_api_subscription_v2::BillSubsApiSubscriptionV2 = todo!();
+/// let response = create_subscription(&api)
+///     .with_identifier("identifier")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -98,7 +117,7 @@ pub fn create_subscription(api: &ApiClient) -> CreateSubscriptionRequest<'_> {
 
 #[derive(Debug)]
 pub struct UpdateSubscriptionRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, BillSubsApiZoneSubscriptionResponseSingle>,
 }
 
 impl<'a> UpdateSubscriptionRequest<'a> {
@@ -120,18 +139,28 @@ impl<'a> UpdateSubscriptionRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<BillSubsApiZoneSubscriptionResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Update Zone Subscription
+///
+/// Updates zone subscriptions, either plan or add-ons.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/zones/{identifier}/subscription`
+///
+/// **Parameters**
+/// - `identifier` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zone_subscription };
+/// use cloudflare::{ ApiClient, apis::zone_subscription };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = update_subscription(&api)
-///     .with_identifier("value")
+/// # let body: crate::models::bill_subs_api_subscription_v2::BillSubsApiSubscriptionV2 = todo!();
+/// let response = update_subscription(&api)
+///     .with_identifier("identifier")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```

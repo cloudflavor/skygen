@@ -19,9 +19,9 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct MqHttpConsumer {
-    pub consumer_id: Option<serde_json::Value>,
+    pub consumer_id: Option<crate::models::mq_identifier::MqIdentifier>,
     pub created_on: Option<String>,
-    pub queue_id: Option<serde_json::Value>,
+    pub queue_id: Option<crate::models::mq_identifier::MqIdentifier>,
     pub r#type: Option<String>,
     pub settings: Option<std::collections::BTreeMap<String, serde_json::Value>>,
 }

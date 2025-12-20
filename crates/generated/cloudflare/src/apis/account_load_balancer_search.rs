@@ -58,14 +58,30 @@ impl<'a> ResourcesRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Search Resources
+///
+/// Search for Load Balancing resources.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/load_balancers/search`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `query` (query,optional)
+/// - `references` (query,optional)
+/// - `page` (query,optional)
+/// - `per_page` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::account_load_balancer_search };
+/// use cloudflare::{ ApiClient, apis::account_load_balancer_search };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = resources(&api)
-///     .with_account_id("value")
+/// let response = resources(&api)
+///     .with_account_id("account_id")
+///     .with_query("query")
+///     .with_references("references")
+///     .with_page("page")
+///     .with_per_page("per_page")
 ///     .send()
 ///     .await?;
 /// ```

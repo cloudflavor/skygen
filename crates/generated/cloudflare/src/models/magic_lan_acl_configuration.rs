@@ -21,7 +21,7 @@ use serde::{Deserialize, Serialize};
 pub struct MagicLanAclConfiguration {
     pub lan_id: String,
     pub lan_name: Option<String>,
-    pub port_ranges: Option<Vec<serde_json::Value>>,
-    pub ports: Option<Vec<serde_json::Value>>,
-    pub subnets: Option<Vec<serde_json::Value>>,
+    pub port_ranges: Option<Vec<crate::models::magic_acl_port_range::MagicAclPortRange>>,
+    pub ports: Option<Vec<crate::models::magic_port::MagicPort>>,
+    pub subnets: Option<Vec<crate::models::magic_acl_subnet::MagicAclSubnet>>,
 }

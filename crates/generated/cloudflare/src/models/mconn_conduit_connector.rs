@@ -19,5 +19,5 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct MconnConduitConnector {
-    pub account_id: serde_json::Value,
+    pub account_id: crate::models::mconn_account_id::MconnAccountId,
 }

@@ -19,7 +19,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct AccessSeat {
-    pub access_seat: serde_json::Value,
-    pub gateway_seat: serde_json::Value,
-    pub seat_uid: serde_json::Value,
+    pub access_seat: crate::models::access_access_seat::AccessAccessSeat,
+    pub gateway_seat: crate::models::access_gateway_seat::AccessGatewaySeat,
+    pub seat_uid: crate::models::access_seat_uid::AccessSeatUid,
 }

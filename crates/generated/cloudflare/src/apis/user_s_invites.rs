@@ -15,12 +15,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::iam_schemas_collection_invite_response::IamSchemasCollectionInviteResponse;
+use crate::models::iam_single_invite_response::IamSingleInviteResponse;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct ListInvitationsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, IamSchemasCollectionInviteResponse>,
 }
 
 impl<'a> ListInvitationsRequest<'a> {
@@ -29,17 +31,22 @@ impl<'a> ListInvitationsRequest<'a> {
 
         Self { builder }
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<IamSchemasCollectionInviteResponse> {
         self.builder.send().await
     }
 }
-
 /// List Invitations
+///
+/// Lists all invitations associated with my user.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/user/invites`
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::user_s_invites };
+/// use cloudflare::{ ApiClient, apis::user_s_invites };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_invitations(&api)
+/// let response = list_invitations(&api)
 ///     .send()
 ///     .await?;
 /// ```
@@ -49,7 +56,7 @@ pub fn list_invitations(api: &ApiClient) -> ListInvitationsRequest<'_> {
 
 #[derive(Debug)]
 pub struct InvitationDetailsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, IamSingleInviteResponse>,
 }
 
 impl<'a> InvitationDetailsRequest<'a> {
@@ -63,18 +70,26 @@ impl<'a> InvitationDetailsRequest<'a> {
         self.builder = self.builder.path_param("invite_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<IamSingleInviteResponse> {
         self.builder.send().await
     }
 }
-
 /// Invitation Details
+///
+/// Gets the details of an invitation.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/user/invites/{invite_id}`
+///
+/// **Parameters**
+/// - `invite_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::user_s_invites };
+/// use cloudflare::{ ApiClient, apis::user_s_invites };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = invitation_details(&api)
-///     .with_invite_id("value")
+/// let response = invitation_details(&api)
+///     .with_invite_id("invite_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -84,7 +99,7 @@ pub fn invitation_details(api: &ApiClient) -> InvitationDetailsRequest<'_> {
 
 #[derive(Debug)]
 pub struct RespondInvitationRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, IamSingleInviteResponse>,
 }
 
 impl<'a> RespondInvitationRequest<'a> {
@@ -106,18 +121,28 @@ impl<'a> RespondInvitationRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<IamSingleInviteResponse> {
         self.builder.send().await
     }
 }
-
 /// Respond to Invitation
+///
+/// Responds to an invitation.
+///
+/// **HTTP Method:** `PATCH`
+/// **Path:** `/user/invites/{invite_id}`
+///
+/// **Parameters**
+/// - `invite_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::user_s_invites };
+/// use cloudflare::{ ApiClient, apis::user_s_invites };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = respond_invitation(&api)
-///     .with_invite_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = respond_invitation(&api)
+///     .with_invite_id("invite_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```

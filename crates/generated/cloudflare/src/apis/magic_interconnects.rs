@@ -15,12 +15,16 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::magic_components_schemas_modified_tunnels_collection_response::MagicComponentsSchemasModifiedTunnelsCollectionResponse;
+use crate::models::magic_components_schemas_tunnel_modified_response::MagicComponentsSchemasTunnelModifiedResponse;
+use crate::models::magic_components_schemas_tunnel_single_response::MagicComponentsSchemasTunnelSingleResponse;
+use crate::models::magic_components_schemas_tunnels_collection_response::MagicComponentsSchemasTunnelsCollectionResponse;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct ListInterconnectsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, MagicComponentsSchemasTunnelsCollectionResponse>,
 }
 
 impl<'a> ListInterconnectsRequest<'a> {
@@ -42,18 +46,28 @@ impl<'a> ListInterconnectsRequest<'a> {
         self.builder = self.builder.header_param("x-magic-new-hc-target", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<MagicComponentsSchemasTunnelsCollectionResponse> {
         self.builder.send().await
     }
 }
-
 /// List interconnects
+///
+/// Lists interconnects associated with an account.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/magic/cf_interconnects`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `x-magic-new-hc-target` (header,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::magic_interconnects };
+/// use cloudflare::{ ApiClient, apis::magic_interconnects };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_interconnects(&api)
-///     .with_account_id("value")
+/// let response = list_interconnects(&api)
+///     .with_account_id("account_id")
+///     .with_x_magic_new_hc_target("x-magic-new-hc-target")
 ///     .send()
 ///     .await?;
 /// ```
@@ -63,7 +77,7 @@ pub fn list_interconnects(api: &ApiClient) -> ListInterconnectsRequest<'_> {
 
 #[derive(Debug)]
 pub struct UpdateMultipleInterconnectsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, MagicComponentsSchemasModifiedTunnelsCollectionResponse>,
 }
 
 impl<'a> UpdateMultipleInterconnectsRequest<'a> {
@@ -90,18 +104,30 @@ impl<'a> UpdateMultipleInterconnectsRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<MagicComponentsSchemasModifiedTunnelsCollectionResponse> {
         self.builder.send().await
     }
 }
-
 /// Update multiple interconnects
+///
+/// Updates multiple interconnects associated with an account. Use `?validate_only=true` as an optional query parameter to only run validation without persisting changes.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/accounts/{account_id}/magic/cf_interconnects`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `x-magic-new-hc-target` (header,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::magic_interconnects };
+/// use cloudflare::{ ApiClient, apis::magic_interconnects };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = update_multiple_interconnects(&api)
-///     .with_account_id("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = update_multiple_interconnects(&api)
+///     .with_account_id("account_id")
+///     .with_x_magic_new_hc_target("x-magic-new-hc-target")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -111,7 +137,7 @@ pub fn update_multiple_interconnects(api: &ApiClient) -> UpdateMultipleInterconn
 
 #[derive(Debug)]
 pub struct ListInterconnectDetailsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, MagicComponentsSchemasTunnelSingleResponse>,
 }
 
 impl<'a> ListInterconnectDetailsRequest<'a> {
@@ -138,19 +164,30 @@ impl<'a> ListInterconnectDetailsRequest<'a> {
         self.builder = self.builder.header_param("x-magic-new-hc-target", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<MagicComponentsSchemasTunnelSingleResponse> {
         self.builder.send().await
     }
 }
-
 /// List interconnect Details
+///
+/// Lists details for a specific interconnect.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/magic/cf_interconnects/{cf_interconnect_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `cf_interconnect_id` (path, required)
+/// - `x-magic-new-hc-target` (header,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::magic_interconnects };
+/// use cloudflare::{ ApiClient, apis::magic_interconnects };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_interconnect_details(&api)
-///     .with_account_id("value")
-///     .with_cf_interconnect_id("value")
+/// let response = list_interconnect_details(&api)
+///     .with_account_id("account_id")
+///     .with_cf_interconnect_id("cf_interconnect_id")
+///     .with_x_magic_new_hc_target("x-magic-new-hc-target")
 ///     .send()
 ///     .await?;
 /// ```
@@ -160,7 +197,7 @@ pub fn list_interconnect_details(api: &ApiClient) -> ListInterconnectDetailsRequ
 
 #[derive(Debug)]
 pub struct UpdateInterconnectRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, MagicComponentsSchemasTunnelModifiedResponse>,
 }
 
 impl<'a> UpdateInterconnectRequest<'a> {
@@ -195,19 +232,32 @@ impl<'a> UpdateInterconnectRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<MagicComponentsSchemasTunnelModifiedResponse> {
         self.builder.send().await
     }
 }
-
 /// Update interconnect
+///
+/// Updates a specific interconnect associated with an account. Use `?validate_only=true` as an optional query parameter to only run validation without persisting changes.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/accounts/{account_id}/magic/cf_interconnects/{cf_interconnect_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `cf_interconnect_id` (path, required)
+/// - `x-magic-new-hc-target` (header,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::magic_interconnects };
+/// use cloudflare::{ ApiClient, apis::magic_interconnects };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = update_interconnect(&api)
-///     .with_account_id("value")
-///     .with_cf_interconnect_id("value")
+/// # let body: crate::models::magic_interconnect_tunnel_update_request::MagicInterconnectTunnelUpdateRequest = todo!();
+/// let response = update_interconnect(&api)
+///     .with_account_id("account_id")
+///     .with_cf_interconnect_id("cf_interconnect_id")
+///     .with_x_magic_new_hc_target("x-magic-new-hc-target")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```

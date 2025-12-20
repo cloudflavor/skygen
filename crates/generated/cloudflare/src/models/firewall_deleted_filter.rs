@@ -19,6 +19,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct FirewallDeletedFilter {
-    pub deleted: serde_json::Value,
-    pub id: serde_json::Value,
+    pub deleted: crate::models::firewall_deleted::FirewallDeleted,
+    pub id:
+        crate::models::firewall_filters_components_schemas_id::FirewallFiltersComponentsSchemasId,
 }

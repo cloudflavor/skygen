@@ -19,11 +19,11 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct RumSite {
-    pub auto_install: Option<serde_json::Value>,
-    pub created: Option<serde_json::Value>,
-    pub rules: Option<serde_json::Value>,
+    pub auto_install: Option<crate::models::rum_auto_install::RumAutoInstall>,
+    pub created: Option<crate::models::rum_timestamp::RumTimestamp>,
+    pub rules: Option<crate::models::rum_rules::RumRules>,
     pub ruleset: Option<crate::models::rum_ruleset::RumRuleset>,
-    pub site_tag: Option<serde_json::Value>,
-    pub site_token: Option<serde_json::Value>,
-    pub snippet: Option<serde_json::Value>,
+    pub site_tag: Option<crate::models::rum_site_tag::RumSiteTag>,
+    pub site_token: Option<crate::models::rum_site_token::RumSiteToken>,
+    pub snippet: Option<crate::models::rum_snippet::RumSnippet>,
 }

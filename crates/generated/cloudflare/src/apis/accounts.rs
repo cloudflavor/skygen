@@ -15,12 +15,15 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::iam_api_response_single_id::IamApiResponseSingleId;
+use crate::models::iam_response_collection_accounts::IamResponseCollectionAccounts;
+use crate::models::iam_response_single_account::IamResponseSingleAccount;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct ListRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, IamResponseCollectionAccounts>,
 }
 
 impl<'a> ListRequest<'a> {
@@ -45,17 +48,32 @@ impl<'a> ListRequest<'a> {
         self.builder = self.builder.header_param("direction", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<IamResponseCollectionAccounts> {
         self.builder.send().await
     }
 }
-
 /// List Accounts
+///
+/// List all accounts you have ownership or verified access to.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts`
+///
+/// **Parameters**
+/// - `name` (query,optional)
+/// - `page` (query,optional)
+/// - `per_page` (query,optional)
+/// - `direction` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::accounts };
+/// use cloudflare::{ ApiClient, apis::accounts };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list(&api)
+/// let response = list(&api)
+///     .with_name("name")
+///     .with_page("page")
+///     .with_per_page("per_page")
+///     .with_direction("direction")
 ///     .send()
 ///     .await?;
 /// ```
@@ -65,7 +83,7 @@ pub fn list(api: &ApiClient) -> ListRequest<'_> {
 
 #[derive(Debug)]
 pub struct AccountCreationRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, IamResponseSingleAccount>,
 }
 
 impl<'a> AccountCreationRequest<'a> {
@@ -78,17 +96,24 @@ impl<'a> AccountCreationRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<IamResponseSingleAccount> {
         self.builder.send().await
     }
 }
-
 /// Create an account
+///
+/// Create an account (only available for tenant admins at this time)
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts`
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::accounts };
+/// use cloudflare::{ ApiClient, apis::accounts };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = account_creation(&api)
+/// # let body: crate::models::iam_create_account::IamCreateAccount = todo!();
+/// let response = account_creation(&api)
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -98,7 +123,7 @@ pub fn account_creation(api: &ApiClient) -> AccountCreationRequest<'_> {
 
 #[derive(Debug)]
 pub struct DetailsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, IamResponseSingleAccount>,
 }
 
 impl<'a> DetailsRequest<'a> {
@@ -112,18 +137,26 @@ impl<'a> DetailsRequest<'a> {
         self.builder = self.builder.path_param("account_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<IamResponseSingleAccount> {
         self.builder.send().await
     }
 }
-
 /// Account Details
+///
+/// Get information about a specific account that you are a member of.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::accounts };
+/// use cloudflare::{ ApiClient, apis::accounts };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = details(&api)
-///     .with_account_id("value")
+/// let response = details(&api)
+///     .with_account_id("account_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -133,7 +166,7 @@ pub fn details(api: &ApiClient) -> DetailsRequest<'_> {
 
 #[derive(Debug)]
 pub struct UpdateRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, IamResponseSingleAccount>,
 }
 
 impl<'a> UpdateRequest<'a> {
@@ -148,22 +181,35 @@ impl<'a> UpdateRequest<'a> {
         self.builder = self.builder.path_param("account_id", value);
         self
     }
-    pub fn with_body(mut self, body: serde_json::Value) -> Self {
+    pub fn with_body(
+        mut self,
+        body: crate::models::iam_components_schemas_account::IamComponentsSchemasAccount,
+    ) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<IamResponseSingleAccount> {
         self.builder.send().await
     }
 }
-
 /// Update Account
+///
+/// Update an existing account.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/accounts/{account_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::accounts };
+/// use cloudflare::{ ApiClient, apis::accounts };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = update(&api)
-///     .with_account_id("value")
+/// # let body: crate::models::iam_components_schemas_account::IamComponentsSchemasAccount = todo!();
+/// let response = update(&api)
+///     .with_account_id("account_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -173,7 +219,7 @@ pub fn update(api: &ApiClient) -> UpdateRequest<'_> {
 
 #[derive(Debug)]
 pub struct AccountDeletionRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, IamApiResponseSingleId>,
 }
 
 impl<'a> AccountDeletionRequest<'a> {
@@ -187,18 +233,26 @@ impl<'a> AccountDeletionRequest<'a> {
         self.builder = self.builder.path_param("account_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<IamApiResponseSingleId> {
         self.builder.send().await
     }
 }
-
 /// Delete a specific account
+///
+/// Delete a specific account (only available for tenant admins at this time). This is a permanent operation that will delete any zones or other resources under the account
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/accounts/{account_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::accounts };
+/// use cloudflare::{ ApiClient, apis::accounts };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = account_deletion(&api)
-///     .with_account_id("value")
+/// let response = account_deletion(&api)
+///     .with_account_id("account_id")
 ///     .send()
 ///     .await?;
 /// ```

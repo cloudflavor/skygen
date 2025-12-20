@@ -19,12 +19,16 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct DnsSettingsDnsSettings {
-    pub flatten_all_cnames: Option<serde_json::Value>,
-    pub foundation_dns: Option<serde_json::Value>,
+    pub flatten_all_cnames:
+        Option<crate::models::dns_settings_flatten_all_cnames::DnsSettingsFlattenAllCnames>,
+    pub foundation_dns:
+        Option<crate::models::dns_settings_foundation_dns::DnsSettingsFoundationDns>,
     pub internal_dns: Option<crate::models::dns_settings_internal_dns::DnsSettingsInternalDns>,
-    pub multi_provider: Option<serde_json::Value>,
-    pub ns_ttl: Option<serde_json::Value>,
-    pub secondary_overrides: Option<serde_json::Value>,
+    pub multi_provider:
+        Option<crate::models::dns_settings_multi_provider::DnsSettingsMultiProvider>,
+    pub ns_ttl: Option<crate::models::dns_settings_ns_ttl::DnsSettingsNsTtl>,
+    pub secondary_overrides:
+        Option<crate::models::dns_settings_secondary_overrides::DnsSettingsSecondaryOverrides>,
     pub soa: Option<crate::models::dns_settings_soa::DnsSettingsSoa>,
-    pub zone_mode: Option<serde_json::Value>,
+    pub zone_mode: Option<crate::models::dns_settings_zone_mode::DnsSettingsZoneMode>,
 }

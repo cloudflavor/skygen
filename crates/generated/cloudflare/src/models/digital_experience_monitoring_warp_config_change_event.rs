@@ -19,13 +19,12 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct DigitalExperienceMonitoringWarpConfigChangeEvent {
-
-    pub device_id: Option<serde_json::Value>,
-    pub device_registration: Option<serde_json::Value>,
+    pub device_id: Option<crate::models::digital_experience_monitoring_uuid::DigitalExperienceMonitoringUuid>,
+    pub device_registration: Option<crate::models::digital_experience_monitoring_uuid::DigitalExperienceMonitoringUuid>,
     pub from: Option<crate::models::digital_experience_monitoring_warp_config_details::DigitalExperienceMonitoringWarpConfigDetails>,
     pub hostname: Option<String>,
     pub serial_number: Option<String>,
-    pub timestamp: Option<serde_json::Value>,
+    pub timestamp: Option<crate::models::digital_experience_monitoring_timestamp::DigitalExperienceMonitoringTimestamp>,
     pub to: Option<crate::models::digital_experience_monitoring_warp_config_details::DigitalExperienceMonitoringWarpConfigDetails>,
     pub user_email: Option<String>,
 }

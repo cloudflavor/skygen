@@ -15,6 +15,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::error::Error;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
@@ -33,13 +34,18 @@ impl<'a> KeyListRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// List Spaces Access Keys
+///
+/// To list Spaces Access Key, send a GET request to `/v2/spaces/keys`. Sort parameter must be used with Sort Direction.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/spaces/keys`
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::spaces_keys };
+/// use digitalocean::{ ApiClient, apis::spaces_keys };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = key_list(&api)
+/// let response = key_list(&api)
 ///     .send()
 ///     .await?;
 /// ```
@@ -66,13 +72,22 @@ impl<'a> KeyCreateRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Create a New Spaces Access Key
+///
+/// To create a new Spaces Access Key, send a POST request to `/v2/spaces/keys`.
+/// At the moment, you cannot mix a fullaccess permission with scoped permissions.
+/// A fullaccess permission will be prioritized if fullaccess and scoped permissions are both added.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/v2/spaces/keys`
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::spaces_keys };
+/// use digitalocean::{ ApiClient, apis::spaces_keys };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = key_create(&api)
+/// # let body: crate::models::key::Key = todo!();
+/// let response = key_create(&api)
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -100,14 +115,24 @@ impl<'a> KeyGetRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get a Spaces Access Key
+///
+/// To get a Spaces Access Key, send a GET request to `/v2/spaces/keys/$ACCESS_KEY`.
+///
+/// A successful request will return the Access Key.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/spaces/keys/{access_key}`
+///
+/// **Parameters**
+/// - `access_key` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::spaces_keys };
+/// use digitalocean::{ ApiClient, apis::spaces_keys };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = key_get(&api)
-///     .with_access_key("value")
+/// let response = key_get(&api)
+///     .with_access_key("access_key")
 ///     .send()
 ///     .await?;
 /// ```
@@ -140,14 +165,25 @@ impl<'a> KeyUpdateRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Update Spaces Access Keys
+///
+/// To update Spaces Access Key, send a PUT or PATCH request to `/v2/spaces/keys/$ACCESS_KEY`. At the moment, you cannot convert a
+/// fullaccess key to a scoped key or vice versa. You can only update the name of the key.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/v2/spaces/keys/{access_key}`
+///
+/// **Parameters**
+/// - `access_key` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::spaces_keys };
+/// use digitalocean::{ ApiClient, apis::spaces_keys };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = key_update(&api)
-///     .with_access_key("value")
+/// # let body: crate::models::key::Key = todo!();
+/// let response = key_update(&api)
+///     .with_access_key("access_key")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -157,7 +193,7 @@ pub fn key_update(api: &ApiClient) -> KeyUpdateRequest<'_> {
 
 #[derive(Debug)]
 pub struct KeyDeleteRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, Error>,
 }
 
 impl<'a> KeyDeleteRequest<'a> {
@@ -171,18 +207,28 @@ impl<'a> KeyDeleteRequest<'a> {
         self.builder = self.builder.path_param("access_key", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<Error> {
         self.builder.send().await
     }
 }
-
 /// Delete a Spaces Access Key
+///
+/// To delete a Spaces Access Key, send a DELETE request to `/v2/spaces/keys/$ACCESS_KEY`.
+///
+/// A successful request will return a `204 No Content` status code.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/v2/spaces/keys/{access_key}`
+///
+/// **Parameters**
+/// - `access_key` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::spaces_keys };
+/// use digitalocean::{ ApiClient, apis::spaces_keys };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = key_delete(&api)
-///     .with_access_key("value")
+/// let response = key_delete(&api)
+///     .with_access_key("access_key")
 ///     .send()
 ///     .await?;
 /// ```
@@ -215,14 +261,25 @@ impl<'a> KeyPatchRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Update Spaces Access Keys
+///
+/// To update Spaces Access Key, send a PUT or PATCH request to `/v2/spaces/keys/$ACCESS_KEY`. At the moment, you cannot convert a
+/// fullaccess key to a scoped key or vice versa. You can only update the name of the key.
+///
+/// **HTTP Method:** `PATCH`
+/// **Path:** `/v2/spaces/keys/{access_key}`
+///
+/// **Parameters**
+/// - `access_key` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::spaces_keys };
+/// use digitalocean::{ ApiClient, apis::spaces_keys };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = key_patch(&api)
-///     .with_access_key("value")
+/// # let body: crate::models::key::Key = todo!();
+/// let response = key_patch(&api)
+///     .with_access_key("access_key")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```

@@ -15,7 +15,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-use crate::models::action::Action;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
@@ -34,13 +33,18 @@ impl<'a> ListRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// List All Actions
+///
+/// This will be the entire list of actions taken on your account, so it will be quite large. As with any large collection returned by the API, the results will be paginated with only 20 on each page by default.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/actions`
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::actions };
+/// use digitalocean::{ ApiClient, apis::actions };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list(&api)
+/// let response = list(&api)
 ///     .send()
 ///     .await?;
 /// ```
@@ -50,7 +54,7 @@ pub fn list(api: &ApiClient) -> ListRequest<'_> {
 
 #[derive(Debug)]
 pub struct GetRequest<'a> {
-    builder: ApiRequestBuilder<'a, Action>,
+    builder: ApiRequestBuilder<'a, serde_json::Value>,
 }
 
 impl<'a> GetRequest<'a> {
@@ -64,18 +68,26 @@ impl<'a> GetRequest<'a> {
         self.builder = self.builder.path_param("action_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<Action> {
+    pub async fn send(self) -> ApiResult<serde_json::Value> {
         self.builder.send().await
     }
 }
-
 /// Retrieve an Existing Action
+///
+/// To retrieve a specific action object, send a GET request to `/v2/actions/$ACTION_ID`.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/actions/{action_id}`
+///
+/// **Parameters**
+/// - `action_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::actions };
+/// use digitalocean::{ ApiClient, apis::actions };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get(&api)
-///     .with_action_id("value")
+/// let response = get(&api)
+///     .with_action_id("action_id")
 ///     .send()
 ///     .await?;
 /// ```

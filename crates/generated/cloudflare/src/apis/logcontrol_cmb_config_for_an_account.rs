@@ -15,12 +15,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::logcontrol_cmb_config_response_single::LogcontrolCmbConfigResponseSingle;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct AccountsLogsControlCmbRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, LogcontrolCmbConfigResponseSingle>,
 }
 
 impl<'a> AccountsLogsControlCmbRequest<'a> {
@@ -38,18 +39,26 @@ impl<'a> AccountsLogsControlCmbRequest<'a> {
         self.builder = self.builder.path_param("account_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<LogcontrolCmbConfigResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Get CMB config
+///
+/// Gets CMB config.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/logs/control/cmb/config`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::logcontrol_cmb_config_for_an_account };
+/// use cloudflare::{ ApiClient, apis::logcontrol_cmb_config_for_an_account };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = accounts_logs_control_cmb(&api)
-///     .with_account_id("value")
+/// let response = accounts_logs_control_cmb(&api)
+///     .with_account_id("account_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -59,7 +68,7 @@ pub fn accounts_logs_control_cmb(api: &ApiClient) -> AccountsLogsControlCmbReque
 
 #[derive(Debug)]
 pub struct AccountsLogsControlCmbPostRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, LogcontrolCmbConfigResponseSingle>,
 }
 
 impl<'a> AccountsLogsControlCmbPostRequest<'a> {
@@ -85,18 +94,28 @@ impl<'a> AccountsLogsControlCmbPostRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<LogcontrolCmbConfigResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Update CMB config
+///
+/// Updates CMB config.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/logs/control/cmb/config`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::logcontrol_cmb_config_for_an_account };
+/// use cloudflare::{ ApiClient, apis::logcontrol_cmb_config_for_an_account };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = accounts_logs_control_cmb_post(&api)
-///     .with_account_id("value")
+/// # let body: crate::models::logcontrol_cmb_config::LogcontrolCmbConfig = todo!();
+/// let response = accounts_logs_control_cmb_post(&api)
+///     .with_account_id("account_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -128,14 +147,22 @@ impl<'a> AccountsLogsControlCmbDeleteRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Delete CMB config
+///
+/// Deletes CMB config.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/accounts/{account_id}/logs/control/cmb/config`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::logcontrol_cmb_config_for_an_account };
+/// use cloudflare::{ ApiClient, apis::logcontrol_cmb_config_for_an_account };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = accounts_logs_control_cmb_delete(&api)
-///     .with_account_id("value")
+/// let response = accounts_logs_control_cmb_delete(&api)
+///     .with_account_id("account_id")
 ///     .send()
 ///     .await?;
 /// ```

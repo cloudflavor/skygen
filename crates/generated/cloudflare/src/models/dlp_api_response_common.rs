@@ -19,7 +19,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct DlpApiResponseCommon {
-    pub errors: serde_json::Value,
-    pub messages: serde_json::Value,
+    pub errors: crate::models::dlp_messages::DlpMessages,
+    pub messages: crate::models::dlp_messages::DlpMessages,
     pub success: bool,
 }

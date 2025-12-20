@@ -15,12 +15,19 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::mcn_catalog_syncs_prebuilt_policies_response::McnCatalogSyncsPrebuiltPoliciesResponse;
+use crate::models::mcn_create_catalog_sync_response::McnCreateCatalogSyncResponse;
+use crate::models::mcn_delete_catalog_sync_response::McnDeleteCatalogSyncResponse;
+use crate::models::mcn_read_account_catalog_sync_response::McnReadAccountCatalogSyncResponse;
+use crate::models::mcn_read_account_catalog_syncs_response::McnReadAccountCatalogSyncsResponse;
+use crate::models::mcn_refresh_catalog_sync_response::McnRefreshCatalogSyncResponse;
+use crate::models::mcn_update_catalog_sync_response::McnUpdateCatalogSyncResponse;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct SyncsListRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, McnReadAccountCatalogSyncsResponse>,
 }
 
 impl<'a> SyncsListRequest<'a> {
@@ -38,18 +45,26 @@ impl<'a> SyncsListRequest<'a> {
         self.builder = self.builder.path_param("account_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<McnReadAccountCatalogSyncsResponse> {
         self.builder.send().await
     }
 }
-
 /// List Catalog Syncs
+///
+/// List Catalog Syncs (Closed Beta).
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/magic/cloud/catalog-syncs`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::catalog_sync };
+/// use cloudflare::{ ApiClient, apis::catalog_sync };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = syncs_list(&api)
-///     .with_account_id("value")
+/// let response = syncs_list(&api)
+///     .with_account_id("account_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -59,7 +74,7 @@ pub fn syncs_list(api: &ApiClient) -> SyncsListRequest<'_> {
 
 #[derive(Debug)]
 pub struct SyncsCreateRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, McnCreateCatalogSyncResponse>,
 }
 
 impl<'a> SyncsCreateRequest<'a> {
@@ -89,18 +104,30 @@ impl<'a> SyncsCreateRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<McnCreateCatalogSyncResponse> {
         self.builder.send().await
     }
 }
-
 /// Create Catalog Sync
+///
+/// Create a new Catalog Sync (Closed Beta).
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/magic/cloud/catalog-syncs`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `forwarded` (header,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::catalog_sync };
+/// use cloudflare::{ ApiClient, apis::catalog_sync };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = syncs_create(&api)
-///     .with_account_id("value")
+/// # let body: crate::models::mcn_create_catalog_sync_request::McnCreateCatalogSyncRequest = todo!();
+/// let response = syncs_create(&api)
+///     .with_account_id("account_id")
+///     .with_forwarded("forwarded")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -110,7 +137,7 @@ pub fn syncs_create(api: &ApiClient) -> SyncsCreateRequest<'_> {
 
 #[derive(Debug)]
 pub struct SyncsPrebuiltPoliciesListRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, McnCatalogSyncsPrebuiltPoliciesResponse>,
 }
 
 impl<'a> SyncsPrebuiltPoliciesListRequest<'a> {
@@ -132,18 +159,28 @@ impl<'a> SyncsPrebuiltPoliciesListRequest<'a> {
         self.builder = self.builder.header_param("destination_type", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<McnCatalogSyncsPrebuiltPoliciesResponse> {
         self.builder.send().await
     }
 }
-
 /// List Prebuilt Policies
+///
+/// List prebuilt catalog sync policies (Closed Beta).
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/magic/cloud/catalog-syncs/prebuilt-policies`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `destination_type` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::catalog_sync };
+/// use cloudflare::{ ApiClient, apis::catalog_sync };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = syncs_prebuilt_policies_list(&api)
-///     .with_account_id("value")
+/// let response = syncs_prebuilt_policies_list(&api)
+///     .with_account_id("account_id")
+///     .with_destination_type("destination_type")
 ///     .send()
 ///     .await?;
 /// ```
@@ -153,7 +190,7 @@ pub fn syncs_prebuilt_policies_list(api: &ApiClient) -> SyncsPrebuiltPoliciesLis
 
 #[derive(Debug)]
 pub struct SyncsReadRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, McnReadAccountCatalogSyncResponse>,
 }
 
 impl<'a> SyncsReadRequest<'a> {
@@ -176,19 +213,28 @@ impl<'a> SyncsReadRequest<'a> {
         self.builder = self.builder.path_param("sync_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<McnReadAccountCatalogSyncResponse> {
         self.builder.send().await
     }
 }
-
 /// Read Catalog Sync
+///
+/// Read a Catalog Sync (Closed Beta).
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/magic/cloud/catalog-syncs/{sync_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `sync_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::catalog_sync };
+/// use cloudflare::{ ApiClient, apis::catalog_sync };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = syncs_read(&api)
-///     .with_account_id("value")
-///     .with_sync_id("value")
+/// let response = syncs_read(&api)
+///     .with_account_id("account_id")
+///     .with_sync_id("sync_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -198,7 +244,7 @@ pub fn syncs_read(api: &ApiClient) -> SyncsReadRequest<'_> {
 
 #[derive(Debug)]
 pub struct SyncsUpdateRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, McnUpdateCatalogSyncResponse>,
 }
 
 impl<'a> SyncsUpdateRequest<'a> {
@@ -229,19 +275,30 @@ impl<'a> SyncsUpdateRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<McnUpdateCatalogSyncResponse> {
         self.builder.send().await
     }
 }
-
 /// Update Catalog Sync
+///
+/// Update a Catalog Sync (Closed Beta).
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/accounts/{account_id}/magic/cloud/catalog-syncs/{sync_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `sync_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::catalog_sync };
+/// use cloudflare::{ ApiClient, apis::catalog_sync };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = syncs_update(&api)
-///     .with_account_id("value")
-///     .with_sync_id("value")
+/// # let body: crate::models::mcn_update_catalog_sync_request::McnUpdateCatalogSyncRequest = todo!();
+/// let response = syncs_update(&api)
+///     .with_account_id("account_id")
+///     .with_sync_id("sync_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -251,7 +308,7 @@ pub fn syncs_update(api: &ApiClient) -> SyncsUpdateRequest<'_> {
 
 #[derive(Debug)]
 pub struct SyncsDeleteRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, McnDeleteCatalogSyncResponse>,
 }
 
 impl<'a> SyncsDeleteRequest<'a> {
@@ -278,19 +335,30 @@ impl<'a> SyncsDeleteRequest<'a> {
         self.builder = self.builder.header_param("delete_destination", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<McnDeleteCatalogSyncResponse> {
         self.builder.send().await
     }
 }
-
 /// Delete Catalog Sync
+///
+/// Delete a Catalog Sync (Closed Beta).
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/accounts/{account_id}/magic/cloud/catalog-syncs/{sync_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `sync_id` (path, required)
+/// - `delete_destination` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::catalog_sync };
+/// use cloudflare::{ ApiClient, apis::catalog_sync };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = syncs_delete(&api)
-///     .with_account_id("value")
-///     .with_sync_id("value")
+/// let response = syncs_delete(&api)
+///     .with_account_id("account_id")
+///     .with_sync_id("sync_id")
+///     .with_delete_destination("delete_destination")
 ///     .send()
 ///     .await?;
 /// ```
@@ -300,7 +368,7 @@ pub fn syncs_delete(api: &ApiClient) -> SyncsDeleteRequest<'_> {
 
 #[derive(Debug)]
 pub struct SyncsPatchRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, McnUpdateCatalogSyncResponse>,
 }
 
 impl<'a> SyncsPatchRequest<'a> {
@@ -331,19 +399,30 @@ impl<'a> SyncsPatchRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<McnUpdateCatalogSyncResponse> {
         self.builder.send().await
     }
 }
-
 /// Patch Catalog Sync
+///
+/// Update a Catalog Sync (Closed Beta).
+///
+/// **HTTP Method:** `PATCH`
+/// **Path:** `/accounts/{account_id}/magic/cloud/catalog-syncs/{sync_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `sync_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::catalog_sync };
+/// use cloudflare::{ ApiClient, apis::catalog_sync };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = syncs_patch(&api)
-///     .with_account_id("value")
-///     .with_sync_id("value")
+/// # let body: crate::models::mcn_update_catalog_sync_request::McnUpdateCatalogSyncRequest = todo!();
+/// let response = syncs_patch(&api)
+///     .with_account_id("account_id")
+///     .with_sync_id("sync_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -353,7 +432,7 @@ pub fn syncs_patch(api: &ApiClient) -> SyncsPatchRequest<'_> {
 
 #[derive(Debug)]
 pub struct SyncsRefreshRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, McnRefreshCatalogSyncResponse>,
 }
 
 impl<'a> SyncsRefreshRequest<'a> {
@@ -376,19 +455,28 @@ impl<'a> SyncsRefreshRequest<'a> {
         self.builder = self.builder.path_param("sync_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<McnRefreshCatalogSyncResponse> {
         self.builder.send().await
     }
 }
-
 /// Run Catalog Sync
+///
+/// Refresh a Catalog Sync's destination by running the sync policy against latest resource catalog (Closed Beta).
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/magic/cloud/catalog-syncs/{sync_id}/refresh`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `sync_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::catalog_sync };
+/// use cloudflare::{ ApiClient, apis::catalog_sync };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = syncs_refresh(&api)
-///     .with_account_id("value")
-///     .with_sync_id("value")
+/// let response = syncs_refresh(&api)
+///     .with_account_id("account_id")
+///     .with_sync_id("sync_id")
 ///     .send()
 ///     .await?;
 /// ```

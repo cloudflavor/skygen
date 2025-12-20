@@ -16,12 +16,15 @@
 // limitations under the License.
 
 use crate::models::waf_product_api_bundle_api_response_common::WafProductApiBundleApiResponseCommon;
+use crate::models::waf_product_api_bundle_response_custom_detection::WafProductApiBundleResponseCustomDetection;
+use crate::models::waf_product_api_bundle_response_custom_detection_collection::WafProductApiBundleResponseCustomDetectionCollection;
+use crate::models::waf_product_api_bundle_response_status::WafProductApiBundleResponseStatus;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct WafProductApiLeakedRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, WafProductApiBundleResponseStatus>,
 }
 
 impl<'a> WafProductApiLeakedRequest<'a> {
@@ -36,18 +39,26 @@ impl<'a> WafProductApiLeakedRequest<'a> {
         self.builder = self.builder.path_param("zone_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<WafProductApiBundleResponseStatus> {
         self.builder.send().await
     }
 }
-
 /// Get Leaked Credential Checks Status
+///
+/// Retrieves the current status of Leaked Credential Checks.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/leaked-credential-checks`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::leaked_credential_checks };
+/// use cloudflare::{ ApiClient, apis::leaked_credential_checks };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = waf_product_api_leaked(&api)
-///     .with_zone_id("value")
+/// let response = waf_product_api_leaked(&api)
+///     .with_zone_id("zone_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -57,7 +68,7 @@ pub fn waf_product_api_leaked(api: &ApiClient) -> WafProductApiLeakedRequest<'_>
 
 #[derive(Debug)]
 pub struct WafProductApiLeakedPostRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, WafProductApiBundleResponseStatus>,
 }
 
 impl<'a> WafProductApiLeakedPostRequest<'a> {
@@ -83,18 +94,28 @@ impl<'a> WafProductApiLeakedPostRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<WafProductApiBundleResponseStatus> {
         self.builder.send().await
     }
 }
-
 /// Set Leaked Credential Checks Status
+///
+/// Updates the current status of Leaked Credential Checks.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/zones/{zone_id}/leaked-credential-checks`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::leaked_credential_checks };
+/// use cloudflare::{ ApiClient, apis::leaked_credential_checks };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = waf_product_api_leaked_post(&api)
-///     .with_zone_id("value")
+/// # let body: crate::models::waf_product_api_bundle_status::WafProductApiBundleStatus = todo!();
+/// let response = waf_product_api_leaked_post(&api)
+///     .with_zone_id("zone_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -104,7 +125,7 @@ pub fn waf_product_api_leaked_post(api: &ApiClient) -> WafProductApiLeakedPostRe
 
 #[derive(Debug)]
 pub struct WafProductApiLeakedGetRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, WafProductApiBundleResponseCustomDetectionCollection>,
 }
 
 impl<'a> WafProductApiLeakedGetRequest<'a> {
@@ -122,18 +143,26 @@ impl<'a> WafProductApiLeakedGetRequest<'a> {
         self.builder = self.builder.path_param("zone_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<WafProductApiBundleResponseCustomDetectionCollection> {
         self.builder.send().await
     }
 }
-
 /// List Leaked Credential Checks Custom Detections
+///
+/// List user-defined detection patterns for Leaked Credential Checks.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/leaked-credential-checks/detections`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::leaked_credential_checks };
+/// use cloudflare::{ ApiClient, apis::leaked_credential_checks };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = waf_product_api_leaked_get(&api)
-///     .with_zone_id("value")
+/// let response = waf_product_api_leaked_get(&api)
+///     .with_zone_id("zone_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -143,7 +172,7 @@ pub fn waf_product_api_leaked_get(api: &ApiClient) -> WafProductApiLeakedGetRequ
 
 #[derive(Debug)]
 pub struct WafProductApiLeakedPost3Request<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, WafProductApiBundleResponseCustomDetection>,
 }
 
 impl<'a> WafProductApiLeakedPost3Request<'a> {
@@ -169,18 +198,28 @@ impl<'a> WafProductApiLeakedPost3Request<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<WafProductApiBundleResponseCustomDetection> {
         self.builder.send().await
     }
 }
-
 /// Create Leaked Credential Checks Custom Detection
+///
+/// Create user-defined detection pattern for Leaked Credential Checks.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/zones/{zone_id}/leaked-credential-checks/detections`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::leaked_credential_checks };
+/// use cloudflare::{ ApiClient, apis::leaked_credential_checks };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = waf_product_api_leaked_post_3(&api)
-///     .with_zone_id("value")
+/// # let body: crate::models::waf_product_api_bundle_custom_detection::WafProductApiBundleCustomDetection = todo!();
+/// let response = waf_product_api_leaked_post_3(&api)
+///     .with_zone_id("zone_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -190,7 +229,7 @@ pub fn waf_product_api_leaked_post_3(api: &ApiClient) -> WafProductApiLeakedPost
 
 #[derive(Debug)]
 pub struct WafProductApiLeakedPutRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, WafProductApiBundleResponseCustomDetection>,
 }
 
 impl<'a> WafProductApiLeakedPutRequest<'a> {
@@ -221,19 +260,30 @@ impl<'a> WafProductApiLeakedPutRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<WafProductApiBundleResponseCustomDetection> {
         self.builder.send().await
     }
 }
-
 /// Update Leaked Credential Checks Custom Detection
+///
+/// Update user-defined detection pattern for Leaked Credential Checks.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/zones/{zone_id}/leaked-credential-checks/detections/{detection_id}`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `detection_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::leaked_credential_checks };
+/// use cloudflare::{ ApiClient, apis::leaked_credential_checks };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = waf_product_api_leaked_put(&api)
-///     .with_zone_id("value")
-///     .with_detection_id("value")
+/// # let body: crate::models::waf_product_api_bundle_custom_detection::WafProductApiBundleCustomDetection = todo!();
+/// let response = waf_product_api_leaked_put(&api)
+///     .with_zone_id("zone_id")
+///     .with_detection_id("detection_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -270,15 +320,24 @@ impl<'a> WafProductApiLeakedDeleteRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Delete Leaked Credential Checks Custom Detection
+///
+/// Remove user-defined detection pattern for Leaked Credential Checks.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/zones/{zone_id}/leaked-credential-checks/detections/{detection_id}`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `detection_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::leaked_credential_checks };
+/// use cloudflare::{ ApiClient, apis::leaked_credential_checks };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = waf_product_api_leaked_delete(&api)
-///     .with_zone_id("value")
-///     .with_detection_id("value")
+/// let response = waf_product_api_leaked_delete(&api)
+///     .with_zone_id("zone_id")
+///     .with_detection_id("detection_id")
 ///     .send()
 ///     .await?;
 /// ```

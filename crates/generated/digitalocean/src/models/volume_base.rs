@@ -25,5 +25,5 @@ pub struct VolumeBase {
     pub id: Option<String>,
     pub name: Option<String>,
     pub size_gigabytes: Option<i64>,
-    pub tags: Option<serde_json::Value>,
+    pub tags: Option<crate::models::tags_array::TagsArray>,
 }

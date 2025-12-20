@@ -19,6 +19,6 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct RumModifyRulesRequest {
-    pub delete_rules: Option<Vec<serde_json::Value>>,
+    pub delete_rules: Option<Vec<crate::models::rum_rule_identifier::RumRuleIdentifier>>,
     pub rules: Option<Vec<std::collections::BTreeMap<String, serde_json::Value>>>,
 }

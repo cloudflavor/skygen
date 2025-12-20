@@ -23,7 +23,7 @@ pub struct WorkersBindingKindSecretKey {
     pub format: String,
     pub key_base64: Option<String>,
     pub key_jwk: Option<std::collections::BTreeMap<String, serde_json::Value>>,
-    pub name: serde_json::Value,
+    pub name: crate::models::workers_binding_name::WorkersBindingName,
     pub r#type: String,
     pub usages: Vec<String>,
 }

@@ -19,5 +19,5 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct IamUpdateMemberWithPolicies {
-    pub policies: Vec<serde_json::Value>,
+    pub policies: Vec<crate::models::iam_create_member_policy::IamCreateMemberPolicy>,
 }

@@ -19,7 +19,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct LoadBalancingApiResponseCommon {
-    pub errors: serde_json::Value,
-    pub messages: serde_json::Value,
+    pub errors: crate::models::load_balancing_messages::LoadBalancingMessages,
+    pub messages: crate::models::load_balancing_messages::LoadBalancingMessages,
     pub success: bool,
 }

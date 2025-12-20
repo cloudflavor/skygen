@@ -19,7 +19,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct MagicWanStaticAddressing {
-    pub address: serde_json::Value,
-    pub gateway_address: serde_json::Value,
-    pub secondary_address: Option<serde_json::Value>,
+    pub address: crate::models::magic_cidr::MagicCidr,
+    pub gateway_address: crate::models::magic_ip_address::MagicIpAddress,
+    pub secondary_address: Option<crate::models::magic_cidr::MagicCidr>,
 }

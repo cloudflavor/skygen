@@ -19,7 +19,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct ZonesSchemasApiResponseCommon {
-    pub errors: serde_json::Value,
-    pub messages: serde_json::Value,
+    pub errors: crate::models::zones_schemas_messages::ZonesSchemasMessages,
+    pub messages: crate::models::zones_schemas_messages::ZonesSchemasMessages,
     pub success: bool,
 }

@@ -19,5 +19,5 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct D1ReadReplicationDetails {
-    pub mode: serde_json::Value,
+    pub mode: crate::models::d1_read_replication_mode::D1ReadReplicationMode,
 }

@@ -25,7 +25,7 @@ pub struct AccessSchemasOidcSaasApp {
     pub auth_type: Option<String>,
     pub client_id: Option<String>,
     pub client_secret: Option<String>,
-    pub created_at: Option<serde_json::Value>,
+    pub created_at: Option<crate::models::access_timestamp::AccessTimestamp>,
     pub custom_claims: Option<Vec<std::collections::BTreeMap<String, serde_json::Value>>>,
     pub grant_types: Option<Vec<String>>,
     pub group_filter_regex: Option<String>,
@@ -34,5 +34,5 @@ pub struct AccessSchemasOidcSaasApp {
     pub redirect_uris: Option<Vec<String>>,
     pub refresh_token_options: Option<std::collections::BTreeMap<String, serde_json::Value>>,
     pub scopes: Option<Vec<String>>,
-    pub updated_at: Option<serde_json::Value>,
+    pub updated_at: Option<crate::models::access_timestamp::AccessTimestamp>,
 }

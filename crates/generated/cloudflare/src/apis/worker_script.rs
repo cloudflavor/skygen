@@ -15,12 +15,20 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::workers_api_response_null_result::WorkersApiResponseNullResult;
+use crate::models::workers_completed_upload_assets_response::WorkersCompletedUploadAssetsResponse;
+use crate::models::workers_create_assets_upload_session_response::WorkersCreateAssetsUploadSessionResponse;
+use crate::models::workers_script_and_version_settings_response::WorkersScriptAndVersionSettingsResponse;
+use crate::models::workers_script_response_collection::WorkersScriptResponseCollection;
+use crate::models::workers_script_response_single::WorkersScriptResponseSingle;
+use crate::models::workers_script_settings_response::WorkersScriptSettingsResponse;
+use crate::models::workers_usage_model_response::WorkersUsageModelResponse;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct AssetsUploadRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, WorkersCompletedUploadAssetsResponse>,
 }
 
 impl<'a> AssetsUploadRequest<'a> {
@@ -42,18 +50,28 @@ impl<'a> AssetsUploadRequest<'a> {
         self.builder = self.builder.header_param("base64", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<WorkersCompletedUploadAssetsResponse> {
         self.builder.send().await
     }
 }
-
 /// Upload Assets
+///
+/// Upload assets ahead of creating a Worker version.  To learn more about the direct uploads of assets, see <https://developers.cloudflare.com/workers/static-assets/direct-upload/.>
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/workers/assets/upload`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `base64` (query,required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::worker_script };
+/// use cloudflare::{ ApiClient, apis::worker_script };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = assets_upload(&api)
-///     .with_account_id("value")
+/// let response = assets_upload(&api)
+///     .with_account_id("account_id")
+///     .with_base64("base64")
 ///     .send()
 ///     .await?;
 /// ```
@@ -63,7 +81,7 @@ pub fn assets_upload(api: &ApiClient) -> AssetsUploadRequest<'_> {
 
 #[derive(Debug)]
 pub struct ListWorkersRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, WorkersScriptResponseCollection>,
 }
 
 impl<'a> ListWorkersRequest<'a> {
@@ -78,18 +96,26 @@ impl<'a> ListWorkersRequest<'a> {
         self.builder = self.builder.path_param("account_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<WorkersScriptResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// List Workers
+///
+/// Fetch a list of uploaded workers.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/workers/scripts`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::worker_script };
+/// use cloudflare::{ ApiClient, apis::worker_script };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_workers(&api)
-///     .with_account_id("value")
+/// let response = list_workers(&api)
+///     .with_account_id("account_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -126,15 +152,24 @@ impl<'a> DownloadWorkerRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Download Worker
+///
+/// Fetch raw script content for your worker. Note this is the original script content, not JSON encoded.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/workers/scripts/{script_name}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `script_name` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::worker_script };
+/// use cloudflare::{ ApiClient, apis::worker_script };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = download_worker(&api)
-///     .with_account_id("value")
-///     .with_script_name("value")
+/// let response = download_worker(&api)
+///     .with_account_id("account_id")
+///     .with_script_name("script_name")
 ///     .send()
 ///     .await?;
 /// ```
@@ -155,8 +190,7 @@ impl<'a> UploadWorkerModuleRequest<'a> {
             "accounts/{account_id}/workers/scripts/{script_name}",
         )
         .require_path("account_id")
-        .require_path("script_name")
-        .require_body();
+        .require_path("script_name");
 
         Self { builder }
     }
@@ -168,23 +202,28 @@ impl<'a> UploadWorkerModuleRequest<'a> {
         self.builder = self.builder.path_param("script_name", value);
         self
     }
-    pub fn with_body(mut self, body: serde_json::Value) -> Self {
-        self.builder = self.builder.json_body(body).expect("body serialization");
-        self
-    }
     pub async fn send(self) -> ApiResult<serde_json::Value> {
         self.builder.send().await
     }
 }
-
 /// Upload Worker Module
+///
+/// Upload a worker module. You can find more about the multipart metadata on our docs: <https://developers.cloudflare.com/workers/configuration/multipart-upload-metadata/.>
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/accounts/{account_id}/workers/scripts/{script_name}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `script_name` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::worker_script };
+/// use cloudflare::{ ApiClient, apis::worker_script };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = upload_worker_module(&api)
-///     .with_account_id("value")
-///     .with_script_name("value")
+/// let response = upload_worker_module(&api)
+///     .with_account_id("account_id")
+///     .with_script_name("script_name")
 ///     .send()
 ///     .await?;
 /// ```
@@ -194,7 +233,7 @@ pub fn upload_worker_module(api: &ApiClient) -> UploadWorkerModuleRequest<'_> {
 
 #[derive(Debug)]
 pub struct DeleteWorkerRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, WorkersApiResponseNullResult>,
 }
 
 impl<'a> DeleteWorkerRequest<'a> {
@@ -221,19 +260,30 @@ impl<'a> DeleteWorkerRequest<'a> {
         self.builder = self.builder.header_param("force", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<WorkersApiResponseNullResult> {
         self.builder.send().await
     }
 }
-
 /// Delete Worker
+///
+/// Delete your worker. This call has no response body on a successful delete.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/accounts/{account_id}/workers/scripts/{script_name}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `script_name` (path, required)
+/// - `force` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::worker_script };
+/// use cloudflare::{ ApiClient, apis::worker_script };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete_worker(&api)
-///     .with_account_id("value")
-///     .with_script_name("value")
+/// let response = delete_worker(&api)
+///     .with_account_id("account_id")
+///     .with_script_name("script_name")
+///     .with_force("force")
 ///     .send()
 ///     .await?;
 /// ```
@@ -243,7 +293,7 @@ pub fn delete_worker(api: &ApiClient) -> DeleteWorkerRequest<'_> {
 
 #[derive(Debug)]
 pub struct UpdateCreateAssetsUploadRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, WorkersCreateAssetsUploadSessionResponse>,
 }
 
 impl<'a> UpdateCreateAssetsUploadRequest<'a> {
@@ -274,19 +324,30 @@ impl<'a> UpdateCreateAssetsUploadRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<WorkersCreateAssetsUploadSessionResponse> {
         self.builder.send().await
     }
 }
-
 /// Create Assets Upload Session
+///
+/// Start uploading a collection of assets for use in a Worker version. To learn more about the direct uploads of assets, see <https://developers.cloudflare.com/workers/static-assets/direct-upload/.>
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/workers/scripts/{script_name}/assets-upload-session`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `script_name` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::worker_script };
+/// use cloudflare::{ ApiClient, apis::worker_script };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = update_create_assets_upload(&api)
-///     .with_account_id("value")
-///     .with_script_name("value")
+/// # let body: crate::models::workers_create_assets_upload_session_object::WorkersCreateAssetsUploadSessionObject = todo!();
+/// let response = update_create_assets_upload(&api)
+///     .with_account_id("account_id")
+///     .with_script_name("script_name")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -296,7 +357,7 @@ pub fn update_create_assets_upload(api: &ApiClient) -> UpdateCreateAssetsUploadR
 
 #[derive(Debug)]
 pub struct PutContentRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, WorkersScriptResponseSingle>,
 }
 
 impl<'a> PutContentRequest<'a> {
@@ -329,19 +390,32 @@ impl<'a> PutContentRequest<'a> {
             .header_param("CF-WORKER-MAIN-MODULE-PART", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<WorkersScriptResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Put script content
+///
+/// Put script content without touching config or metadata.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/accounts/{account_id}/workers/scripts/{script_name}/content`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `script_name` (path, required)
+/// - `CF-WORKER-BODY-PART` (header,optional)
+/// - `CF-WORKER-MAIN-MODULE-PART` (header,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::worker_script };
+/// use cloudflare::{ ApiClient, apis::worker_script };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = put_content(&api)
-///     .with_account_id("value")
-///     .with_script_name("value")
+/// let response = put_content(&api)
+///     .with_account_id("account_id")
+///     .with_script_name("script_name")
+///     .with_cf_worker_body_part("CF-WORKER-BODY-PART")
+///     .with_cf_worker_main_module_part("CF-WORKER-MAIN-MODULE-PART")
 ///     .send()
 ///     .await?;
 /// ```
@@ -378,15 +452,24 @@ impl<'a> GetContentRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get script content
+///
+/// Fetch script content only.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/workers/scripts/{script_name}/content/v2`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `script_name` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::worker_script };
+/// use cloudflare::{ ApiClient, apis::worker_script };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_content(&api)
-///     .with_account_id("value")
-///     .with_script_name("value")
+/// let response = get_content(&api)
+///     .with_account_id("account_id")
+///     .with_script_name("script_name")
 ///     .send()
 ///     .await?;
 /// ```
@@ -396,7 +479,7 @@ pub fn get_content(api: &ApiClient) -> GetContentRequest<'_> {
 
 #[derive(Debug)]
 pub struct SettingsGetSettingsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, WorkersScriptSettingsResponse>,
 }
 
 impl<'a> SettingsGetSettingsRequest<'a> {
@@ -419,19 +502,28 @@ impl<'a> SettingsGetSettingsRequest<'a> {
         self.builder = self.builder.path_param("script_name", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<WorkersScriptSettingsResponse> {
         self.builder.send().await
     }
 }
-
 /// Get Script Settings
+///
+/// Get script-level settings when using [Worker Versions](<https://developers.cloudflare.com/api/operations/worker-versions-list-versions).> Includes Logpush and Tail Consumers.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/workers/scripts/{script_name}/script-settings`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `script_name` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::worker_script };
+/// use cloudflare::{ ApiClient, apis::worker_script };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = settings_get_settings(&api)
-///     .with_account_id("value")
-///     .with_script_name("value")
+/// let response = settings_get_settings(&api)
+///     .with_account_id("account_id")
+///     .with_script_name("script_name")
 ///     .send()
 ///     .await?;
 /// ```
@@ -441,7 +533,7 @@ pub fn settings_get_settings(api: &ApiClient) -> SettingsGetSettingsRequest<'_> 
 
 #[derive(Debug)]
 pub struct SettingsPatchSettingsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, WorkersScriptSettingsResponse>,
 }
 
 impl<'a> SettingsPatchSettingsRequest<'a> {
@@ -472,19 +564,30 @@ impl<'a> SettingsPatchSettingsRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<WorkersScriptSettingsResponse> {
         self.builder.send().await
     }
 }
-
 /// Patch Script Settings
+///
+/// Patch script-level settings when using [Worker Versions](<https://developers.cloudflare.com/api/operations/worker-versions-list-versions).> Including but not limited to Logpush and Tail Consumers.
+///
+/// **HTTP Method:** `PATCH`
+/// **Path:** `/accounts/{account_id}/workers/scripts/{script_name}/script-settings`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `script_name` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::worker_script };
+/// use cloudflare::{ ApiClient, apis::worker_script };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = settings_patch_settings(&api)
-///     .with_account_id("value")
-///     .with_script_name("value")
+/// # let body: crate::models::workers_script_settings_item::WorkersScriptSettingsItem = todo!();
+/// let response = settings_patch_settings(&api)
+///     .with_account_id("account_id")
+///     .with_script_name("script_name")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -521,15 +624,24 @@ impl<'a> ListScriptSecretsRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// List script secrets
+///
+/// List secrets bound to a script.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/workers/scripts/{script_name}/secrets`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `script_name` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::worker_script };
+/// use cloudflare::{ ApiClient, apis::worker_script };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_script_secrets(&api)
-///     .with_account_id("value")
-///     .with_script_name("value")
+/// let response = list_script_secrets(&api)
+///     .with_account_id("account_id")
+///     .with_script_name("script_name")
 ///     .send()
 ///     .await?;
 /// ```
@@ -563,7 +675,7 @@ impl<'a> PutScriptSecretRequest<'a> {
         self.builder = self.builder.path_param("script_name", value);
         self
     }
-    pub fn with_body(mut self, body: serde_json::Value) -> Self {
+    pub fn with_body(mut self, body: crate::models::workers_secret::WorkersSecret) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
@@ -571,15 +683,26 @@ impl<'a> PutScriptSecretRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Add script secret
+///
+/// Add a secret to a script.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/accounts/{account_id}/workers/scripts/{script_name}/secrets`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `script_name` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::worker_script };
+/// use cloudflare::{ ApiClient, apis::worker_script };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = put_script_secret(&api)
-///     .with_account_id("value")
-///     .with_script_name("value")
+/// # let body: crate::models::workers_secret::WorkersSecret = todo!();
+/// let response = put_script_secret(&api)
+///     .with_account_id("account_id")
+///     .with_script_name("script_name")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -621,16 +744,26 @@ impl<'a> GetScriptSecretRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get secret binding
+///
+/// Get a given secret binding (value omitted) on a script.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/workers/scripts/{script_name}/secrets/{secret_name}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `script_name` (path, required)
+/// - `secret_name` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::worker_script };
+/// use cloudflare::{ ApiClient, apis::worker_script };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_script_secret(&api)
-///     .with_account_id("value")
-///     .with_script_name("value")
-///     .with_secret_name("value")
+/// let response = get_script_secret(&api)
+///     .with_account_id("account_id")
+///     .with_script_name("script_name")
+///     .with_secret_name("secret_name")
 ///     .send()
 ///     .await?;
 /// ```
@@ -640,7 +773,7 @@ pub fn get_script_secret(api: &ApiClient) -> GetScriptSecretRequest<'_> {
 
 #[derive(Debug)]
 pub struct DeleteScriptSecretRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, WorkersApiResponseNullResult>,
 }
 
 impl<'a> DeleteScriptSecretRequest<'a> {
@@ -668,20 +801,30 @@ impl<'a> DeleteScriptSecretRequest<'a> {
         self.builder = self.builder.path_param("secret_name", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<WorkersApiResponseNullResult> {
         self.builder.send().await
     }
 }
-
 /// Delete script secret
+///
+/// Remove a secret from a script.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/accounts/{account_id}/workers/scripts/{script_name}/secrets/{secret_name}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `script_name` (path, required)
+/// - `secret_name` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::worker_script };
+/// use cloudflare::{ ApiClient, apis::worker_script };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete_script_secret(&api)
-///     .with_account_id("value")
-///     .with_script_name("value")
-///     .with_secret_name("value")
+/// let response = delete_script_secret(&api)
+///     .with_account_id("account_id")
+///     .with_script_name("script_name")
+///     .with_secret_name("secret_name")
 ///     .send()
 ///     .await?;
 /// ```
@@ -691,7 +834,7 @@ pub fn delete_script_secret(api: &ApiClient) -> DeleteScriptSecretRequest<'_> {
 
 #[derive(Debug)]
 pub struct GetSettingsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, WorkersScriptAndVersionSettingsResponse>,
 }
 
 impl<'a> GetSettingsRequest<'a> {
@@ -714,19 +857,28 @@ impl<'a> GetSettingsRequest<'a> {
         self.builder = self.builder.path_param("script_name", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<WorkersScriptAndVersionSettingsResponse> {
         self.builder.send().await
     }
 }
-
 /// Get Settings
+///
+/// Get metadata and config, such as bindings or usage model.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/workers/scripts/{script_name}/settings`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `script_name` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::worker_script };
+/// use cloudflare::{ ApiClient, apis::worker_script };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_settings(&api)
-///     .with_account_id("value")
-///     .with_script_name("value")
+/// let response = get_settings(&api)
+///     .with_account_id("account_id")
+///     .with_script_name("script_name")
 ///     .send()
 ///     .await?;
 /// ```
@@ -736,7 +888,7 @@ pub fn get_settings(api: &ApiClient) -> GetSettingsRequest<'_> {
 
 #[derive(Debug)]
 pub struct PatchSettingsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, WorkersScriptAndVersionSettingsResponse>,
 }
 
 impl<'a> PatchSettingsRequest<'a> {
@@ -759,19 +911,28 @@ impl<'a> PatchSettingsRequest<'a> {
         self.builder = self.builder.path_param("script_name", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<WorkersScriptAndVersionSettingsResponse> {
         self.builder.send().await
     }
 }
-
 /// Patch Settings
+///
+/// Patch metadata or config, such as bindings or usage model.
+///
+/// **HTTP Method:** `PATCH`
+/// **Path:** `/accounts/{account_id}/workers/scripts/{script_name}/settings`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `script_name` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::worker_script };
+/// use cloudflare::{ ApiClient, apis::worker_script };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = patch_settings(&api)
-///     .with_account_id("value")
-///     .with_script_name("value")
+/// let response = patch_settings(&api)
+///     .with_account_id("account_id")
+///     .with_script_name("script_name")
 ///     .send()
 ///     .await?;
 /// ```
@@ -808,15 +969,24 @@ impl<'a> GetSubdomainRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get Worker subdomain
+///
+/// Get if the Worker is available on the workers.dev subdomain.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/workers/scripts/{script_name}/subdomain`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `script_name` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::worker_script };
+/// use cloudflare::{ ApiClient, apis::worker_script };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_subdomain(&api)
-///     .with_account_id("value")
-///     .with_script_name("value")
+/// let response = get_subdomain(&api)
+///     .with_account_id("account_id")
+///     .with_script_name("script_name")
 ///     .send()
 ///     .await?;
 /// ```
@@ -861,15 +1031,26 @@ impl<'a> PostSubdomainRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Post Worker subdomain
+///
+/// Enable or disable the Worker on the workers.dev subdomain.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/workers/scripts/{script_name}/subdomain`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `script_name` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::worker_script };
+/// use cloudflare::{ ApiClient, apis::worker_script };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = post_subdomain(&api)
-///     .with_account_id("value")
-///     .with_script_name("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = post_subdomain(&api)
+///     .with_account_id("account_id")
+///     .with_script_name("script_name")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -906,15 +1087,24 @@ impl<'a> DeleteSubdomainRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Delete Worker subdomain
+///
+/// Disable all workers.dev subdomains for a Worker.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/accounts/{account_id}/workers/scripts/{script_name}/subdomain`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `script_name` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::worker_script };
+/// use cloudflare::{ ApiClient, apis::worker_script };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete_subdomain(&api)
-///     .with_account_id("value")
-///     .with_script_name("value")
+/// let response = delete_subdomain(&api)
+///     .with_account_id("account_id")
+///     .with_script_name("script_name")
 ///     .send()
 ///     .await?;
 /// ```
@@ -924,7 +1114,7 @@ pub fn delete_subdomain(api: &ApiClient) -> DeleteSubdomainRequest<'_> {
 
 #[derive(Debug)]
 pub struct FetchUsageModelRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, WorkersUsageModelResponse>,
 }
 
 impl<'a> FetchUsageModelRequest<'a> {
@@ -947,19 +1137,28 @@ impl<'a> FetchUsageModelRequest<'a> {
         self.builder = self.builder.path_param("script_name", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<WorkersUsageModelResponse> {
         self.builder.send().await
     }
 }
-
 /// Fetch Usage Model
+///
+/// Fetches the Usage Model for a given Worker.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/workers/scripts/{script_name}/usage-model`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `script_name` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::worker_script };
+/// use cloudflare::{ ApiClient, apis::worker_script };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = fetch_usage_model(&api)
-///     .with_account_id("value")
-///     .with_script_name("value")
+/// let response = fetch_usage_model(&api)
+///     .with_account_id("account_id")
+///     .with_script_name("script_name")
 ///     .send()
 ///     .await?;
 /// ```
@@ -969,7 +1168,7 @@ pub fn fetch_usage_model(api: &ApiClient) -> FetchUsageModelRequest<'_> {
 
 #[derive(Debug)]
 pub struct UpdateUsageModelRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, WorkersUsageModelResponse>,
 }
 
 impl<'a> UpdateUsageModelRequest<'a> {
@@ -1000,19 +1199,30 @@ impl<'a> UpdateUsageModelRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<WorkersUsageModelResponse> {
         self.builder.send().await
     }
 }
-
 /// Update Usage Model
+///
+/// Updates the Usage Model for a given Worker. Requires a Workers Paid subscription.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/accounts/{account_id}/workers/scripts/{script_name}/usage-model`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `script_name` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::worker_script };
+/// use cloudflare::{ ApiClient, apis::worker_script };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = update_usage_model(&api)
-///     .with_account_id("value")
-///     .with_script_name("value")
+/// # let body: crate::models::workers_usage_model_object::WorkersUsageModelObject = todo!();
+/// let response = update_usage_model(&api)
+///     .with_account_id("account_id")
+///     .with_script_name("script_name")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```

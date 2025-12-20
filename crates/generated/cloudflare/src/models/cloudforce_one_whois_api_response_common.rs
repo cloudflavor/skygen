@@ -19,7 +19,9 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct CloudforceOneWhoisApiResponseCommon {
-    pub errors: serde_json::Value,
-    pub messages: serde_json::Value,
+    pub errors:
+        crate::models::cloudforce_one_whois_schemas_messages::CloudforceOneWhoisSchemasMessages,
+    pub messages:
+        crate::models::cloudforce_one_whois_schemas_messages::CloudforceOneWhoisSchemasMessages,
     pub success: bool,
 }

@@ -38,14 +38,20 @@ impl<'a> GetRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// All Snippets
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/snippets`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zone_snippets };
+/// use cloudflare::{ ApiClient, apis::zone_snippets };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get(&api)
-///     .with_zone_id("value")
+/// let response = get(&api)
+///     .with_zone_id("zone_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -74,14 +80,20 @@ impl<'a> SnippetRulesRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Rules
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/snippets/snippet_rules`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zone_snippets };
+/// use cloudflare::{ ApiClient, apis::zone_snippets };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = snippet_rules(&api)
-///     .with_zone_id("value")
+/// let response = snippet_rules(&api)
+///     .with_zone_id("zone_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -117,14 +129,22 @@ impl<'a> SnippetRulesPutRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Put Rules
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/zones/{zone_id}/snippets/snippet_rules`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zone_snippets };
+/// use cloudflare::{ ApiClient, apis::zone_snippets };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = snippet_rules_put(&api)
-///     .with_zone_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = snippet_rules_put(&api)
+///     .with_zone_id("zone_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -156,14 +176,20 @@ impl<'a> SnippetRulesDeleteRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Delete All Rules
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/zones/{zone_id}/snippets/snippet_rules`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zone_snippets };
+/// use cloudflare::{ ApiClient, apis::zone_snippets };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = snippet_rules_delete(&api)
-///     .with_zone_id("value")
+/// let response = snippet_rules_delete(&api)
+///     .with_zone_id("zone_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -197,15 +223,22 @@ impl<'a> SnippetRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Snippet
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/snippets/{snippet_name}`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `snippet_name` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zone_snippets };
+/// use cloudflare::{ ApiClient, apis::zone_snippets };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = snippet(&api)
-///     .with_zone_id("value")
-///     .with_snippet_name("value")
+/// let response = snippet(&api)
+///     .with_zone_id("zone_id")
+///     .with_snippet_name("snippet_name")
 ///     .send()
 ///     .await?;
 /// ```
@@ -239,15 +272,22 @@ impl<'a> SnippetPutRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Put Snippet
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/zones/{zone_id}/snippets/{snippet_name}`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `snippet_name` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zone_snippets };
+/// use cloudflare::{ ApiClient, apis::zone_snippets };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = snippet_put(&api)
-///     .with_zone_id("value")
-///     .with_snippet_name("value")
+/// let response = snippet_put(&api)
+///     .with_zone_id("zone_id")
+///     .with_snippet_name("snippet_name")
 ///     .send()
 ///     .await?;
 /// ```
@@ -284,15 +324,22 @@ impl<'a> SnippetDeleteRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Delete Snippet
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/zones/{zone_id}/snippets/{snippet_name}`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `snippet_name` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zone_snippets };
+/// use cloudflare::{ ApiClient, apis::zone_snippets };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = snippet_delete(&api)
-///     .with_zone_id("value")
-///     .with_snippet_name("value")
+/// let response = snippet_delete(&api)
+///     .with_zone_id("zone_id")
+///     .with_snippet_name("snippet_name")
 ///     .send()
 ///     .await?;
 /// ```
@@ -329,15 +376,22 @@ impl<'a> SnippetContentRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Snippet Content
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/snippets/{snippet_name}/content`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `snippet_name` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zone_snippets };
+/// use cloudflare::{ ApiClient, apis::zone_snippets };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = snippet_content(&api)
-///     .with_zone_id("value")
-///     .with_snippet_name("value")
+/// let response = snippet_content(&api)
+///     .with_zone_id("zone_id")
+///     .with_snippet_name("snippet_name")
 ///     .send()
 ///     .await?;
 /// ```

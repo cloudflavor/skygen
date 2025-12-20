@@ -20,5 +20,5 @@ use serde::{Deserialize, Serialize};
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct VolumeActionPostBase {
     pub r#type: String,
-    pub region: Option<serde_json::Value>,
+    pub region: Option<crate::models::region_slug::RegionSlug>,
 }

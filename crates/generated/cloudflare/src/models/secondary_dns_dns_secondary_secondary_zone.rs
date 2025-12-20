@@ -19,8 +19,9 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct SecondaryDnsDnsSecondarySecondaryZone {
-    pub auto_refresh_seconds: serde_json::Value,
-    pub id: serde_json::Value,
-    pub name: serde_json::Value,
-    pub peers: serde_json::Value,
+    pub auto_refresh_seconds:
+        crate::models::secondary_dns_auto_refresh_seconds::SecondaryDnsAutoRefreshSeconds,
+    pub id: crate::models::secondary_dns_identifier::SecondaryDnsIdentifier,
+    pub name: crate::models::secondary_dns_name::SecondaryDnsName,
+    pub peers: crate::models::secondary_dns_peers::SecondaryDnsPeers,
 }

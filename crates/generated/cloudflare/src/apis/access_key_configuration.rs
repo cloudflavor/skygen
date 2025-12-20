@@ -15,12 +15,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::access_keys_components_schemas_single_response::AccessKeysComponentsSchemasSingleResponse;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct GetAccessKeyConfigurationRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, AccessKeysComponentsSchemasSingleResponse>,
 }
 
 impl<'a> GetAccessKeyConfigurationRequest<'a> {
@@ -34,18 +35,26 @@ impl<'a> GetAccessKeyConfigurationRequest<'a> {
         self.builder = self.builder.path_param("account_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<AccessKeysComponentsSchemasSingleResponse> {
         self.builder.send().await
     }
 }
-
 /// Get the Access key configuration
+///
+/// Gets the Access key rotation settings for an account.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/access/keys`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::access_key_configuration };
+/// use cloudflare::{ ApiClient, apis::access_key_configuration };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_access_key_configuration(&api)
-///     .with_account_id("value")
+/// let response = get_access_key_configuration(&api)
+///     .with_account_id("account_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -55,7 +64,7 @@ pub fn get_access_key_configuration(api: &ApiClient) -> GetAccessKeyConfiguratio
 
 #[derive(Debug)]
 pub struct UpdateAccessKeyConfigurationRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, AccessKeysComponentsSchemasSingleResponse>,
 }
 
 impl<'a> UpdateAccessKeyConfigurationRequest<'a> {
@@ -74,18 +83,28 @@ impl<'a> UpdateAccessKeyConfigurationRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<AccessKeysComponentsSchemasSingleResponse> {
         self.builder.send().await
     }
 }
-
 /// Update the Access key configuration
+///
+/// Updates the Access key rotation settings for an account.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/accounts/{account_id}/access/keys`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::access_key_configuration };
+/// use cloudflare::{ ApiClient, apis::access_key_configuration };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = update_access_key_configuration(&api)
-///     .with_account_id("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = update_access_key_configuration(&api)
+///     .with_account_id("account_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -95,7 +114,7 @@ pub fn update_access_key_configuration(api: &ApiClient) -> UpdateAccessKeyConfig
 
 #[derive(Debug)]
 pub struct RotateAccessKeysRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, AccessKeysComponentsSchemasSingleResponse>,
 }
 
 impl<'a> RotateAccessKeysRequest<'a> {
@@ -113,18 +132,26 @@ impl<'a> RotateAccessKeysRequest<'a> {
         self.builder = self.builder.path_param("account_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<AccessKeysComponentsSchemasSingleResponse> {
         self.builder.send().await
     }
 }
-
 /// Rotate Access keys
+///
+/// Perfoms a key rotation for an account.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/access/keys/rotate`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::access_key_configuration };
+/// use cloudflare::{ ApiClient, apis::access_key_configuration };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = rotate_access_keys(&api)
-///     .with_account_id("value")
+/// let response = rotate_access_keys(&api)
+///     .with_account_id("account_id")
 ///     .send()
 ///     .await?;
 /// ```

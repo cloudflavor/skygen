@@ -15,12 +15,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::tunnel_configuration_response::TunnelConfigurationResponse;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct GetConfigurationRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, TunnelConfigurationResponse>,
 }
 
 impl<'a> GetConfigurationRequest<'a> {
@@ -43,19 +44,28 @@ impl<'a> GetConfigurationRequest<'a> {
         self.builder = self.builder.path_param("tunnel_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<TunnelConfigurationResponse> {
         self.builder.send().await
     }
 }
-
 /// Get configuration
+///
+/// Gets the configuration for a remotely-managed tunnel
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/cfd_tunnel/{tunnel_id}/configurations`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `tunnel_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::cloudflare_tunnel_configuration };
+/// use cloudflare::{ ApiClient, apis::cloudflare_tunnel_configuration };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_configuration(&api)
-///     .with_account_id("value")
-///     .with_tunnel_id("value")
+/// let response = get_configuration(&api)
+///     .with_account_id("account_id")
+///     .with_tunnel_id("tunnel_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -65,7 +75,7 @@ pub fn get_configuration(api: &ApiClient) -> GetConfigurationRequest<'_> {
 
 #[derive(Debug)]
 pub struct PutConfigurationRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, TunnelConfigurationResponse>,
 }
 
 impl<'a> PutConfigurationRequest<'a> {
@@ -96,19 +106,30 @@ impl<'a> PutConfigurationRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<TunnelConfigurationResponse> {
         self.builder.send().await
     }
 }
-
 /// Put configuration
+///
+/// Adds or updates the configuration for a remotely-managed tunnel.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/accounts/{account_id}/cfd_tunnel/{tunnel_id}/configurations`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `tunnel_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::cloudflare_tunnel_configuration };
+/// use cloudflare::{ ApiClient, apis::cloudflare_tunnel_configuration };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = put_configuration(&api)
-///     .with_account_id("value")
-///     .with_tunnel_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = put_configuration(&api)
+///     .with_account_id("account_id")
+///     .with_tunnel_id("tunnel_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```

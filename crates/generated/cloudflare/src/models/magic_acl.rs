@@ -20,11 +20,11 @@ use serde::{Deserialize, Serialize};
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct MagicAcl {
     pub description: Option<String>,
-    pub forward_locally: Option<serde_json::Value>,
-    pub id: Option<serde_json::Value>,
+    pub forward_locally: Option<crate::models::magic_forward_locally::MagicForwardLocally>,
+    pub id: Option<crate::models::magic_identifier::MagicIdentifier>,
     pub lan_1: Option<crate::models::magic_lan_acl_configuration::MagicLanAclConfiguration>,
     pub lan_2: Option<crate::models::magic_lan_acl_configuration::MagicLanAclConfiguration>,
     pub name: Option<String>,
     pub protocols: Option<Vec<String>>,
-    pub unidirectional: Option<serde_json::Value>,
+    pub unidirectional: Option<crate::models::magic_unidirectional::MagicUnidirectional>,
 }

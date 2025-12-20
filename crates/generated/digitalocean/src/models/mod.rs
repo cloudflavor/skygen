@@ -21,6 +21,8 @@ pub mod action;
 
 pub mod action_link;
 
+pub mod alert;
+
 pub mod alert_base;
 
 pub mod alert_policy;
@@ -57,6 +59,8 @@ pub mod api_agent_template;
 
 pub mod api_agent_template_guardrail;
 
+pub mod api_agent_template_type;
+
 pub mod api_agent_version;
 
 pub mod api_agreement;
@@ -69,11 +73,15 @@ pub mod api_aws_data_source;
 
 pub mod api_aws_data_source_display;
 
+pub mod api_batch_job_phase;
+
 pub mod api_cancel_knowledge_base_indexing_job_input_public;
 
 pub mod api_cancel_knowledge_base_indexing_job_output;
 
 pub mod api_chatbot;
+
+pub mod api_crawling_option;
 
 pub mod api_create_agent_api_key_input_public;
 
@@ -119,7 +127,15 @@ pub mod api_delete_open_aiapi_key_output;
 
 pub mod api_deployment;
 
+pub mod api_deployment_status;
+
+pub mod api_deployment_visibility;
+
 pub mod api_evaluation_metric;
+
+pub mod api_evaluation_metric_type;
+
+pub mod api_evaluation_metric_value_type;
 
 pub mod api_evaluation_test_case;
 
@@ -137,7 +153,11 @@ pub mod api_get_knowledge_base_output;
 
 pub mod api_get_open_aiapi_key_output;
 
+pub mod api_guardrail_type;
+
 pub mod api_indexed_data_source;
+
+pub mod api_indexed_data_source_status;
 
 pub mod api_indexing_job;
 
@@ -193,7 +213,11 @@ pub mod api_model;
 
 pub mod api_model_api_key_info;
 
+pub mod api_model_provider;
+
 pub mod api_model_public;
+
+pub mod api_model_usecase;
 
 pub mod api_model_version;
 
@@ -204,6 +228,8 @@ pub mod api_pages;
 pub mod api_regenerate_agent_api_key_output;
 
 pub mod api_regenerate_model_api_key_output;
+
+pub mod api_retrieval_method;
 
 pub mod api_rollback_to_agent_version_input_public;
 
@@ -267,15 +293,27 @@ pub mod app;
 
 pub mod app_alert;
 
+pub mod app_alert_email;
+
+pub mod app_alert_phase;
+
 pub mod app_alert_progress;
 
 pub mod app_alert_progress_step;
 
 pub mod app_alert_progress_step_reason;
 
+pub mod app_alert_progress_step_status;
+
 pub mod app_alert_slack_webhook;
 
 pub mod app_alert_spec;
+
+pub mod app_alert_spec_operator;
+
+pub mod app_alert_spec_rule;
+
+pub mod app_alert_spec_window;
 
 pub mod app_component_base;
 
@@ -287,7 +325,11 @@ pub mod app_database_spec;
 
 pub mod app_domain_spec;
 
+pub mod app_domain_validation;
+
 pub mod app_egress_spec;
+
+pub mod app_egress_type_spec;
 
 pub mod app_functions_component_health;
 
@@ -316,6 +358,8 @@ pub mod app_ingress_spec_rule_string_match_prefix;
 pub mod app_instance;
 
 pub mod app_instances;
+
+pub mod app_job_spec;
 
 pub mod app_job_spec_termination;
 
@@ -349,13 +393,19 @@ pub mod app_rollback_validation_condition;
 
 pub mod app_route_spec;
 
+pub mod app_service_spec;
+
 pub mod app_service_spec_health_check;
 
 pub mod app_service_spec_termination;
 
 pub mod app_spec;
 
+pub mod app_static_site_spec;
+
 pub mod app_variable_definition;
+
+pub mod app_worker_spec;
 
 pub mod app_worker_spec_termination;
 
@@ -373,6 +423,8 @@ pub mod apps_create_deployment_request;
 
 pub mod apps_dedicated_egress_ip;
 
+pub mod apps_dedicated_egress_ip_status;
+
 pub mod apps_delete_app_response;
 
 pub mod apps_deployment;
@@ -381,11 +433,15 @@ pub mod apps_deployment_functions;
 
 pub mod apps_deployment_job;
 
+pub mod apps_deployment_phase;
+
 pub mod apps_deployment_progress;
 
 pub mod apps_deployment_progress_step;
 
 pub mod apps_deployment_progress_step_reason;
+
+pub mod apps_deployment_progress_step_status;
 
 pub mod apps_deployment_response;
 
@@ -395,7 +451,11 @@ pub mod apps_deployment_static_site;
 
 pub mod apps_deployment_worker;
 
+pub mod apps_deployments_response;
+
 pub mod apps_domain;
+
+pub mod apps_domain_phase;
 
 pub mod apps_domain_progress;
 
@@ -422,6 +482,8 @@ pub mod apps_list_instance_sizes_response;
 pub mod apps_list_regions_response;
 
 pub mod apps_region;
+
+pub mod apps_response;
 
 pub mod apps_restart_request;
 
@@ -451,6 +513,8 @@ pub mod autoscale_pool_static_config;
 
 pub mod backup;
 
+pub mod backward_links;
+
 pub mod balance;
 
 pub mod billing_address;
@@ -464,6 +528,12 @@ pub mod cdn_endpoint;
 pub mod certificate;
 
 pub mod certificate_create_base;
+
+pub mod certificate_request_custom;
+
+pub mod certificate_request_lets_encrypt;
+
+pub mod check;
 
 pub mod check_base;
 
@@ -525,6 +595,8 @@ pub mod database_service_endpoint;
 
 pub mod database_user;
 
+pub mod database_version_availabilities;
+
 pub mod database_version_availability;
 
 pub mod database_version_options;
@@ -532,6 +604,8 @@ pub mod database_version_options;
 pub mod databases_basic_auth_credentials;
 
 pub mod datadog_logsink;
+
+pub mod dbaas_cluster_status;
 
 pub mod destination;
 
@@ -545,11 +619,31 @@ pub mod destroyed_associated_resource;
 
 pub mod disk_info;
 
+pub mod distribution;
+
 pub mod docker_credentials;
 
 pub mod domain;
 
 pub mod domain_record;
+
+pub mod domain_record_a;
+
+pub mod domain_record_aaaa;
+
+pub mod domain_record_caa;
+
+pub mod domain_record_cname;
+
+pub mod domain_record_mx;
+
+pub mod domain_record_ns;
+
+pub mod domain_record_soa;
+
+pub mod domain_record_srv;
+
+pub mod domain_record_txt;
 
 pub mod domains;
 
@@ -557,13 +651,35 @@ pub mod droplet;
 
 pub mod droplet_action;
 
+pub mod droplet_action_change_backup_policy;
+
+pub mod droplet_action_change_kernel;
+
+pub mod droplet_action_enable_backups;
+
+pub mod droplet_action_rebuild;
+
+pub mod droplet_action_rename;
+
+pub mod droplet_action_resize;
+
+pub mod droplet_action_restore;
+
+pub mod droplet_action_snapshot;
+
 pub mod droplet_backup_policy;
 
 pub mod droplet_backup_policy_record;
 
 pub mod droplet_create;
 
+pub mod droplet_multi_create;
+
 pub mod droplet_next_backup_window;
+
+pub mod droplet_single_create;
+
+pub mod droplet_snapshot;
 
 pub mod elasticsearch_logsink;
 
@@ -572,6 +688,12 @@ pub mod error;
 pub mod error_with_root_causes;
 
 pub mod events_logs;
+
+pub mod eviction_policy_model;
+
+pub mod existing_tags_array;
+
+pub mod firewall;
 
 pub mod firewall_rule;
 
@@ -584,6 +706,14 @@ pub mod firewall_rules;
 pub mod floating_i_ps_action;
 
 pub mod floating_ip;
+
+pub mod floating_ip_action_assign;
+
+pub mod floating_ip_action_unassign;
+
+pub mod floating_ip_create;
+
+pub mod forward_links;
 
 pub mod forwarding_rule;
 
@@ -605,7 +735,17 @@ pub mod image;
 
 pub mod image_action_base;
 
+pub mod image_action_transfer;
+
+pub mod image_description;
+
+pub mod image_name;
+
+pub mod image_new_custom;
+
 pub mod image_update;
+
+pub mod instance_size_cpu_type;
 
 pub mod invoice_item;
 
@@ -615,9 +755,13 @@ pub mod invoice_summary;
 
 pub mod kafka_advanced_config;
 
+pub mod kafka_topic;
+
 pub mod kafka_topic_base;
 
 pub mod kafka_topic_config;
+
+pub mod kafka_topic_create;
 
 pub mod kafka_topic_partition;
 
@@ -629,11 +773,17 @@ pub mod kernel;
 
 pub mod key;
 
+pub mod key_create_response;
+
+pub mod kubernetes_node_pool;
+
 pub mod kubernetes_node_pool_base;
 
 pub mod kubernetes_node_pool_size;
 
 pub mod kubernetes_node_pool_taint;
+
+pub mod kubernetes_node_pool_update;
 
 pub mod kubernetes_options;
 
@@ -655,13 +805,21 @@ pub mod link_to_prev_page;
 
 pub mod list_alert_policy;
 
+pub mod load_balancer;
+
 pub mod load_balancer_base;
+
+pub mod load_balancer_create;
 
 pub mod logsink_base;
 
 pub mod logsink_base_verbose;
 
+pub mod logsink_create;
+
 pub mod logsink_update;
+
+pub mod logsink_verbose;
 
 pub mod maintenance_policy;
 
@@ -682,6 +840,8 @@ pub mod metrics_data;
 pub mod metrics_result;
 
 pub mod mongo_advanced_config;
+
+pub mod multiregistry;
 
 pub mod multiregistry_create;
 
@@ -717,6 +877,8 @@ pub mod opensearch_config_request;
 
 pub mod opensearch_connection;
 
+pub mod opensearch_index;
+
 pub mod opensearch_index_base;
 
 pub mod opensearch_logsink;
@@ -735,6 +897,8 @@ pub mod partner_attachment_remote_route_writable;
 
 pub mod partner_attachment_service_key;
 
+pub mod partner_attachment_updatable;
+
 pub mod partner_attachment_writable;
 
 pub mod pgbouncer_advanced_config;
@@ -747,6 +911,8 @@ pub mod product_charge_item;
 
 pub mod product_usage_charges;
 
+pub mod project;
+
 pub mod project_assignment;
 
 pub mod project_base;
@@ -757,9 +923,15 @@ pub mod redis_advanced_config;
 
 pub mod region;
 
+pub mod region_slug;
+
 pub mod region_state;
 
 pub mod regional_state;
+
+pub mod regions_array;
+
+pub mod registry;
 
 pub mod registry_base;
 
@@ -779,11 +951,21 @@ pub mod repository_v2;
 
 pub mod reserved_ip;
 
+pub mod reserved_ip_action_assign;
+
 pub mod reserved_ip_action_type;
+
+pub mod reserved_ip_action_unassign;
+
+pub mod reserved_ip_create;
 
 pub mod reserved_ipv6;
 
+pub mod reserved_ipv6_action_assign;
+
 pub mod reserved_ipv6_action_type;
+
+pub mod reserved_ipv6_action_unassign;
 
 pub mod reserved_ipv6_create;
 
@@ -809,11 +991,19 @@ pub mod size;
 
 pub mod slack_details;
 
+pub mod snapshots;
+
 pub mod snapshots_base;
 
 pub mod source_database;
 
 pub mod sql_mode;
+
+pub mod ssh_key_fingerprint;
+
+pub mod ssh_key_id;
+
+pub mod ssh_key_name;
 
 pub mod ssh_keys;
 
@@ -833,6 +1023,8 @@ pub mod supported_droplet_backup_policy;
 
 pub mod tags;
 
+pub mod tags_array;
+
 pub mod tags_metadata;
 
 pub mod tags_resource;
@@ -847,6 +1039,8 @@ pub mod update_registry;
 
 pub mod update_trigger;
 
+pub mod urn;
+
 pub mod user;
 
 pub mod user_settings;
@@ -855,13 +1049,37 @@ pub mod validate_registry;
 
 pub mod valkey_advanced_config;
 
+pub mod version;
+
 pub mod version_2;
+
+pub mod volume_action;
+
+pub mod volume_action_droplet_id;
+
+pub mod volume_action_post_attach;
 
 pub mod volume_action_post_base;
 
+pub mod volume_action_post_detach;
+
+pub mod volume_action_post_resize;
+
 pub mod volume_base;
 
+pub mod volume_full;
+
+pub mod volume_snapshot_id;
+
+pub mod volume_write_file_system_label;
+
 pub mod volume_write_file_system_type;
+
+pub mod volumes_ext4;
+
+pub mod volumes_xfs;
+
+pub mod vpc;
 
 pub mod vpc_base;
 
@@ -870,6 +1088,8 @@ pub mod vpc_create;
 pub mod vpc_default;
 
 pub mod vpc_member;
+
+pub mod vpc_peering;
 
 pub mod vpc_peering_base;
 

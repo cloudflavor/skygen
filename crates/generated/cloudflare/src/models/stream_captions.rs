@@ -19,8 +19,8 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct StreamCaptions {
-    pub generated: Option<serde_json::Value>,
-    pub label: Option<serde_json::Value>,
-    pub language: Option<serde_json::Value>,
-    pub status: Option<serde_json::Value>,
+    pub generated: Option<crate::models::stream_generated_caption::StreamGeneratedCaption>,
+    pub label: Option<crate::models::stream_label::StreamLabel>,
+    pub language: Option<crate::models::stream_language::StreamLanguage>,
+    pub status: Option<crate::models::stream_caption_status::StreamCaptionStatus>,
 }

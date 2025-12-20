@@ -19,8 +19,9 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct WorkersNamespaceScriptResponse {
-    pub created_on: Option<serde_json::Value>,
-    pub dispatch_namespace: Option<serde_json::Value>,
-    pub modified_on: Option<serde_json::Value>,
-    pub script: Option<serde_json::Value>,
+    pub created_on: Option<crate::models::workers_created_on::WorkersCreatedOn>,
+    pub dispatch_namespace:
+        Option<crate::models::workers_dispatch_namespace_name::WorkersDispatchNamespaceName>,
+    pub modified_on: Option<crate::models::workers_modified_on::WorkersModifiedOn>,
+    pub script: Option<crate::models::workers_script_response::WorkersScriptResponse>,
 }

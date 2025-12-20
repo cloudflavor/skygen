@@ -15,12 +15,15 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::secondary_dns_components_schemas_id_response::SecondaryDnsComponentsSchemasIdResponse;
+use crate::models::secondary_dns_components_schemas_response_collection::SecondaryDnsComponentsSchemasResponseCollection;
+use crate::models::secondary_dns_components_schemas_single_response::SecondaryDnsComponentsSchemasSingleResponse;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct ListAcLsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, SecondaryDnsComponentsSchemasResponseCollection>,
 }
 
 impl<'a> ListAcLsRequest<'a> {
@@ -35,18 +38,26 @@ impl<'a> ListAcLsRequest<'a> {
         self.builder = self.builder.path_param("account_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<SecondaryDnsComponentsSchemasResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// List ACLs
+///
+/// List ACLs.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/secondary_dns/acls`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::secondary_dns_acl };
+/// use cloudflare::{ ApiClient, apis::secondary_dns_acl };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_ac_ls(&api)
-///     .with_account_id("value")
+/// let response = list_ac_ls(&api)
+///     .with_account_id("account_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -56,7 +67,7 @@ pub fn list_ac_ls(api: &ApiClient) -> ListAcLsRequest<'_> {
 
 #[derive(Debug)]
 pub struct CreateAclRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, SecondaryDnsComponentsSchemasSingleResponse>,
 }
 
 impl<'a> CreateAclRequest<'a> {
@@ -82,18 +93,28 @@ impl<'a> CreateAclRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<SecondaryDnsComponentsSchemasSingleResponse> {
         self.builder.send().await
     }
 }
-
 /// Create ACL
+///
+/// Create ACL.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/secondary_dns/acls`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::secondary_dns_acl };
+/// use cloudflare::{ ApiClient, apis::secondary_dns_acl };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = create_acl(&api)
-///     .with_account_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = create_acl(&api)
+///     .with_account_id("account_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -103,7 +124,7 @@ pub fn create_acl(api: &ApiClient) -> CreateAclRequest<'_> {
 
 #[derive(Debug)]
 pub struct DetailsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, SecondaryDnsComponentsSchemasSingleResponse>,
 }
 
 impl<'a> DetailsRequest<'a> {
@@ -126,19 +147,28 @@ impl<'a> DetailsRequest<'a> {
         self.builder = self.builder.path_param("acl_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<SecondaryDnsComponentsSchemasSingleResponse> {
         self.builder.send().await
     }
 }
-
 /// ACL Details
+///
+/// Get ACL.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/secondary_dns/acls/{acl_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `acl_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::secondary_dns_acl };
+/// use cloudflare::{ ApiClient, apis::secondary_dns_acl };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = details(&api)
-///     .with_account_id("value")
-///     .with_acl_id("value")
+/// let response = details(&api)
+///     .with_account_id("account_id")
+///     .with_acl_id("acl_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -148,7 +178,7 @@ pub fn details(api: &ApiClient) -> DetailsRequest<'_> {
 
 #[derive(Debug)]
 pub struct UpdateAclRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, SecondaryDnsComponentsSchemasSingleResponse>,
 }
 
 impl<'a> UpdateAclRequest<'a> {
@@ -176,19 +206,30 @@ impl<'a> UpdateAclRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<SecondaryDnsComponentsSchemasSingleResponse> {
         self.builder.send().await
     }
 }
-
 /// Update ACL
+///
+/// Modify ACL.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/accounts/{account_id}/secondary_dns/acls/{acl_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `acl_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::secondary_dns_acl };
+/// use cloudflare::{ ApiClient, apis::secondary_dns_acl };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = update_acl(&api)
-///     .with_account_id("value")
-///     .with_acl_id("value")
+/// # let body: crate::models::secondary_dns_acl::SecondaryDnsAcl = todo!();
+/// let response = update_acl(&api)
+///     .with_account_id("account_id")
+///     .with_acl_id("acl_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -198,7 +239,7 @@ pub fn update_acl(api: &ApiClient) -> UpdateAclRequest<'_> {
 
 #[derive(Debug)]
 pub struct DeleteAclRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, SecondaryDnsComponentsSchemasIdResponse>,
 }
 
 impl<'a> DeleteAclRequest<'a> {
@@ -221,19 +262,28 @@ impl<'a> DeleteAclRequest<'a> {
         self.builder = self.builder.path_param("acl_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<SecondaryDnsComponentsSchemasIdResponse> {
         self.builder.send().await
     }
 }
-
 /// Delete ACL
+///
+/// Delete ACL.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/accounts/{account_id}/secondary_dns/acls/{acl_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `acl_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::secondary_dns_acl };
+/// use cloudflare::{ ApiClient, apis::secondary_dns_acl };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete_acl(&api)
-///     .with_account_id("value")
-///     .with_acl_id("value")
+/// let response = delete_acl(&api)
+///     .with_account_id("account_id")
+///     .with_acl_id("acl_id")
 ///     .send()
 ///     .await?;
 /// ```

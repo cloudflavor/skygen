@@ -19,7 +19,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct AaaAuditLogsV2ResponseCollection {
-    pub errors: Option<serde_json::Value>,
+    pub errors: Option<crate::models::aaa_schemas_messages::AaaSchemasMessages>,
     pub result: Option<Vec<crate::models::aaa_audit_logs_v2::AaaAuditLogsV2>>,
     pub result_info: Option<crate::models::aaa_result_info::AaaResultInfo>,
     pub success: Option<bool>,

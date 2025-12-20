@@ -19,9 +19,9 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct MagicLanStaticAddressing {
-    pub address: serde_json::Value,
+    pub address: crate::models::magic_cidr::MagicCidr,
     pub dhcp_relay: Option<crate::models::magic_lan_dhcp_relay::MagicLanDhcpRelay>,
     pub dhcp_server: Option<crate::models::magic_lan_dhcp_server::MagicLanDhcpServer>,
-    pub secondary_address: Option<serde_json::Value>,
-    pub virtual_address: Option<serde_json::Value>,
+    pub secondary_address: Option<crate::models::magic_cidr::MagicCidr>,
+    pub virtual_address: Option<crate::models::magic_cidr::MagicCidr>,
 }

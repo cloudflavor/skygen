@@ -15,12 +15,15 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::access_custom_pages_components_schemas_response_collection::AccessCustomPagesComponentsSchemasResponseCollection;
+use crate::models::access_custom_pages_components_schemas_single_response::AccessCustomPagesComponentsSchemasSingleResponse;
+use crate::models::access_single_response_without_html::AccessSingleResponseWithoutHtml;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct ListCustomPagesRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, AccessCustomPagesComponentsSchemasResponseCollection>,
 }
 
 impl<'a> ListCustomPagesRequest<'a> {
@@ -38,18 +41,26 @@ impl<'a> ListCustomPagesRequest<'a> {
         self.builder = self.builder.path_param("account_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<AccessCustomPagesComponentsSchemasResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// List custom pages
+///
+/// List custom pages
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/access/custom_pages`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::access_custom_pages };
+/// use cloudflare::{ ApiClient, apis::access_custom_pages };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_custom_pages(&api)
-///     .with_account_id("value")
+/// let response = list_custom_pages(&api)
+///     .with_account_id("account_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -59,7 +70,7 @@ pub fn list_custom_pages(api: &ApiClient) -> ListCustomPagesRequest<'_> {
 
 #[derive(Debug)]
 pub struct CreateCustomPageRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, AccessSingleResponseWithoutHtml>,
 }
 
 impl<'a> CreateCustomPageRequest<'a> {
@@ -81,18 +92,28 @@ impl<'a> CreateCustomPageRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<AccessSingleResponseWithoutHtml> {
         self.builder.send().await
     }
 }
-
 /// Create a custom page
+///
+/// Create a custom page
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/access/custom_pages`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::access_custom_pages };
+/// use cloudflare::{ ApiClient, apis::access_custom_pages };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = create_custom_page(&api)
-///     .with_account_id("value")
+/// # let body: crate::models::access_custom_page::AccessCustomPage = todo!();
+/// let response = create_custom_page(&api)
+///     .with_account_id("account_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -102,7 +123,7 @@ pub fn create_custom_page(api: &ApiClient) -> CreateCustomPageRequest<'_> {
 
 #[derive(Debug)]
 pub struct GetCustomPageRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, AccessCustomPagesComponentsSchemasSingleResponse>,
 }
 
 impl<'a> GetCustomPageRequest<'a> {
@@ -125,19 +146,28 @@ impl<'a> GetCustomPageRequest<'a> {
         self.builder = self.builder.path_param("custom_page_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<AccessCustomPagesComponentsSchemasSingleResponse> {
         self.builder.send().await
     }
 }
-
 /// Get a custom page
+///
+/// Fetches a custom page and also returns its HTML.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/access/custom_pages/{custom_page_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `custom_page_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::access_custom_pages };
+/// use cloudflare::{ ApiClient, apis::access_custom_pages };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_custom_page(&api)
-///     .with_account_id("value")
-///     .with_custom_page_id("value")
+/// let response = get_custom_page(&api)
+///     .with_account_id("account_id")
+///     .with_custom_page_id("custom_page_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -147,7 +177,7 @@ pub fn get_custom_page(api: &ApiClient) -> GetCustomPageRequest<'_> {
 
 #[derive(Debug)]
 pub struct UpdateCustomPageRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, AccessSingleResponseWithoutHtml>,
 }
 
 impl<'a> UpdateCustomPageRequest<'a> {
@@ -174,19 +204,30 @@ impl<'a> UpdateCustomPageRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<AccessSingleResponseWithoutHtml> {
         self.builder.send().await
     }
 }
-
 /// Update a custom page
+///
+/// Update a custom page
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/accounts/{account_id}/access/custom_pages/{custom_page_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `custom_page_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::access_custom_pages };
+/// use cloudflare::{ ApiClient, apis::access_custom_pages };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = update_custom_page(&api)
-///     .with_account_id("value")
-///     .with_custom_page_id("value")
+/// # let body: crate::models::access_custom_page::AccessCustomPage = todo!();
+/// let response = update_custom_page(&api)
+///     .with_account_id("account_id")
+///     .with_custom_page_id("custom_page_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -223,15 +264,24 @@ impl<'a> DeleteCustomPageRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Delete a custom page
+///
+/// Delete a custom page
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/accounts/{account_id}/access/custom_pages/{custom_page_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `custom_page_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::access_custom_pages };
+/// use cloudflare::{ ApiClient, apis::access_custom_pages };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete_custom_page(&api)
-///     .with_account_id("value")
-///     .with_custom_page_id("value")
+/// let response = delete_custom_page(&api)
+///     .with_account_id("account_id")
+///     .with_custom_page_id("custom_page_id")
 ///     .send()
 ///     .await?;
 /// ```

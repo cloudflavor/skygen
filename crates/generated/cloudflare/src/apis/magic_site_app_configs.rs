@@ -15,12 +15,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::magic_app_config_single_response::MagicAppConfigSingleResponse;
+use crate::models::magic_app_configs_collection_response::MagicAppConfigsCollectionResponse;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct ListAppConfigsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, MagicAppConfigsCollectionResponse>,
 }
 
 impl<'a> ListAppConfigsRequest<'a> {
@@ -43,19 +45,28 @@ impl<'a> ListAppConfigsRequest<'a> {
         self.builder = self.builder.path_param("site_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<MagicAppConfigsCollectionResponse> {
         self.builder.send().await
     }
 }
-
 /// List App Configs
+///
+/// Lists App Configs associated with a site.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/magic/sites/{site_id}/app_configs`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `site_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::magic_site_app_configs };
+/// use cloudflare::{ ApiClient, apis::magic_site_app_configs };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_app_configs(&api)
-///     .with_account_id("value")
-///     .with_site_id("value")
+/// let response = list_app_configs(&api)
+///     .with_account_id("account_id")
+///     .with_site_id("site_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -65,7 +76,7 @@ pub fn list_app_configs(api: &ApiClient) -> ListAppConfigsRequest<'_> {
 
 #[derive(Debug)]
 pub struct AddAppConfigRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, MagicAppConfigSingleResponse>,
 }
 
 impl<'a> AddAppConfigRequest<'a> {
@@ -89,23 +100,37 @@ impl<'a> AddAppConfigRequest<'a> {
         self.builder = self.builder.path_param("site_id", value);
         self
     }
-    pub fn with_body(mut self, body: serde_json::Value) -> Self {
+    pub fn with_body(
+        mut self,
+        body: crate::models::magic_app_config_add_single_request::MagicAppConfigAddSingleRequest,
+    ) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<MagicAppConfigSingleResponse> {
         self.builder.send().await
     }
 }
-
 /// Create a new App Config
+///
+/// Creates a new App Config for a site
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/magic/sites/{site_id}/app_configs`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `site_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::magic_site_app_configs };
+/// use cloudflare::{ ApiClient, apis::magic_site_app_configs };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = add_app_config(&api)
-///     .with_account_id("value")
-///     .with_site_id("value")
+/// # let body: crate::models::magic_app_config_add_single_request::MagicAppConfigAddSingleRequest = todo!();
+/// let response = add_app_config(&api)
+///     .with_account_id("account_id")
+///     .with_site_id("site_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -115,7 +140,7 @@ pub fn add_app_config(api: &ApiClient) -> AddAppConfigRequest<'_> {
 
 #[derive(Debug)]
 pub struct UpdateAppConfigRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, MagicAppConfigSingleResponse>,
 }
 
 impl<'a> UpdateAppConfigRequest<'a> {
@@ -151,20 +176,32 @@ impl<'a> UpdateAppConfigRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<MagicAppConfigSingleResponse> {
         self.builder.send().await
     }
 }
-
 /// Update an App Config
+///
+/// Updates an App Config for a site
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/accounts/{account_id}/magic/sites/{site_id}/app_configs/{app_config_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `site_id` (path, required)
+/// - `app_config_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::magic_site_app_configs };
+/// use cloudflare::{ ApiClient, apis::magic_site_app_configs };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = update_app_config(&api)
-///     .with_account_id("value")
-///     .with_site_id("value")
-///     .with_app_config_id("value")
+/// # let body: crate::models::magic_app_config_update_request::MagicAppConfigUpdateRequest = todo!();
+/// let response = update_app_config(&api)
+///     .with_account_id("account_id")
+///     .with_site_id("site_id")
+///     .with_app_config_id("app_config_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -174,7 +211,7 @@ pub fn update_app_config(api: &ApiClient) -> UpdateAppConfigRequest<'_> {
 
 #[derive(Debug)]
 pub struct DeleteAppConfigRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, MagicAppConfigSingleResponse>,
 }
 
 impl<'a> DeleteAppConfigRequest<'a> {
@@ -202,20 +239,30 @@ impl<'a> DeleteAppConfigRequest<'a> {
         self.builder = self.builder.path_param("app_config_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<MagicAppConfigSingleResponse> {
         self.builder.send().await
     }
 }
-
 /// Delete App Config
+///
+/// Deletes specific App Config associated with a site.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/accounts/{account_id}/magic/sites/{site_id}/app_configs/{app_config_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `site_id` (path, required)
+/// - `app_config_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::magic_site_app_configs };
+/// use cloudflare::{ ApiClient, apis::magic_site_app_configs };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete_app_config(&api)
-///     .with_account_id("value")
-///     .with_site_id("value")
-///     .with_app_config_id("value")
+/// let response = delete_app_config(&api)
+///     .with_account_id("account_id")
+///     .with_site_id("site_id")
+///     .with_app_config_id("app_config_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -225,7 +272,7 @@ pub fn delete_app_config(api: &ApiClient) -> DeleteAppConfigRequest<'_> {
 
 #[derive(Debug)]
 pub struct PatchAppConfigRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, MagicAppConfigSingleResponse>,
 }
 
 impl<'a> PatchAppConfigRequest<'a> {
@@ -261,20 +308,32 @@ impl<'a> PatchAppConfigRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<MagicAppConfigSingleResponse> {
         self.builder.send().await
     }
 }
-
 /// Update an App Config
+///
+/// Updates an App Config for a site
+///
+/// **HTTP Method:** `PATCH`
+/// **Path:** `/accounts/{account_id}/magic/sites/{site_id}/app_configs/{app_config_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `site_id` (path, required)
+/// - `app_config_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::magic_site_app_configs };
+/// use cloudflare::{ ApiClient, apis::magic_site_app_configs };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = patch_app_config(&api)
-///     .with_account_id("value")
-///     .with_site_id("value")
-///     .with_app_config_id("value")
+/// # let body: crate::models::magic_app_config_update_request::MagicAppConfigUpdateRequest = todo!();
+/// let response = patch_app_config(&api)
+///     .with_account_id("account_id")
+///     .with_site_id("site_id")
+///     .with_app_config_id("app_config_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```

@@ -29,7 +29,7 @@ pub struct ApiUpdateAgentInputPublic {
     pub open_ai_key_uuid: Option<String>,
     pub project_id: Option<String>,
     pub provide_citations: Option<bool>,
-    pub retrieval_method: Option<serde_json::Value>,
+    pub retrieval_method: Option<crate::models::api_retrieval_method::ApiRetrievalMethod>,
     pub tags: Option<Vec<String>>,
     pub temperature: Option<f64>,
     pub top_p: Option<f64>,

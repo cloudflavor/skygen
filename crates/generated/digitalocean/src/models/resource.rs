@@ -22,5 +22,5 @@ pub struct Resource {
     pub assigned_at: Option<String>,
     pub links: Option<std::collections::BTreeMap<String, serde_json::Value>>,
     pub status: Option<String>,
-    pub urn: Option<serde_json::Value>,
+    pub urn: Option<crate::models::urn::Urn>,
 }

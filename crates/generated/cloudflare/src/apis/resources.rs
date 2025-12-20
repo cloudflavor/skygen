@@ -15,12 +15,15 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::mcn_read_account_resource_response::McnReadAccountResourceResponse;
+use crate::models::mcn_read_account_resources_response::McnReadAccountResourcesResponse;
+use crate::models::mcn_resources_catalog_policy_preview_response::McnResourcesCatalogPolicyPreviewResponse;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct CatalogListRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, McnReadAccountResourcesResponse>,
 }
 
 impl<'a> CatalogListRequest<'a> {
@@ -90,18 +93,52 @@ impl<'a> CatalogListRequest<'a> {
         self.builder = self.builder.header_param("v2", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<McnReadAccountResourcesResponse> {
         self.builder.send().await
     }
 }
-
 /// List Resources
+///
+/// List resources in the Resource Catalog (Closed Beta).
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/magic/cloud/resources`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `provider_id` (query,optional)
+/// - `resource_type` (query,optional)
+/// - `resource_id` (query,optional)
+/// - `region` (query,optional)
+/// - `resource_group` (query,optional)
+/// - `managed` (query,optional)
+/// - `search` (query,optional)
+/// - `order_by` (query,optional)
+/// - `desc` (query,optional)
+/// - `per_page` (query,optional)
+/// - `page` (query,optional)
+/// - `cloudflare` (query,optional)
+/// - `v2` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::resources };
+/// use cloudflare::{ ApiClient, apis::resources };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = catalog_list(&api)
-///     .with_account_id("value")
+/// let response = catalog_list(&api)
+///     .with_account_id("account_id")
+///     .with_provider_id("provider_id")
+///     .with_resource_type("resource_type")
+///     .with_resource_id("resource_id")
+///     .with_region("region")
+///     .with_resource_group("resource_group")
+///     .with_managed("managed")
+///     .with_search("search")
+///     .with_order_by("order_by")
+///     .with_desc("desc")
+///     .with_per_page("per_page")
+///     .with_page("page")
+///     .with_cloudflare("cloudflare")
+///     .with_v2("v2")
 ///     .send()
 ///     .await?;
 /// ```
@@ -169,14 +206,40 @@ impl<'a> CatalogExportRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Export Resources
+///
+/// Export resources in the Resource Catalog as a JSON file (Closed Beta).
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/magic/cloud/resources/export`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `provider_id` (query,optional)
+/// - `resource_type` (query,optional)
+/// - `resource_id` (query,optional)
+/// - `region` (query,optional)
+/// - `resource_group` (query,optional)
+/// - `search` (query,optional)
+/// - `order_by` (query,optional)
+/// - `desc` (query,optional)
+/// - `v2` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::resources };
+/// use cloudflare::{ ApiClient, apis::resources };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = catalog_export(&api)
-///     .with_account_id("value")
+/// let response = catalog_export(&api)
+///     .with_account_id("account_id")
+///     .with_provider_id("provider_id")
+///     .with_resource_type("resource_type")
+///     .with_resource_id("resource_id")
+///     .with_region("region")
+///     .with_resource_group("resource_group")
+///     .with_search("search")
+///     .with_order_by("order_by")
+///     .with_desc("desc")
+///     .with_v2("v2")
 ///     .send()
 ///     .await?;
 /// ```
@@ -186,7 +249,7 @@ pub fn catalog_export(api: &ApiClient) -> CatalogExportRequest<'_> {
 
 #[derive(Debug)]
 pub struct CatalogPolicyPreviewRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, McnResourcesCatalogPolicyPreviewResponse>,
 }
 
 impl<'a> CatalogPolicyPreviewRequest<'a> {
@@ -212,18 +275,28 @@ impl<'a> CatalogPolicyPreviewRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<McnResourcesCatalogPolicyPreviewResponse> {
         self.builder.send().await
     }
 }
-
 /// Preview Rego Query
+///
+/// Preview Rego query result against the latest resource catalog (Closed Beta).
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/magic/cloud/resources/policy-preview`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::resources };
+/// use cloudflare::{ ApiClient, apis::resources };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = catalog_policy_preview(&api)
-///     .with_account_id("value")
+/// # let body: crate::models::mcn_resources_catalog_policy_preview_request::McnResourcesCatalogPolicyPreviewRequest = todo!();
+/// let response = catalog_policy_preview(&api)
+///     .with_account_id("account_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -233,7 +306,7 @@ pub fn catalog_policy_preview(api: &ApiClient) -> CatalogPolicyPreviewRequest<'_
 
 #[derive(Debug)]
 pub struct CatalogReadRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, McnReadAccountResourceResponse>,
 }
 
 impl<'a> CatalogReadRequest<'a> {
@@ -260,19 +333,30 @@ impl<'a> CatalogReadRequest<'a> {
         self.builder = self.builder.header_param("v2", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<McnReadAccountResourceResponse> {
         self.builder.send().await
     }
 }
-
 /// Read Resource
+///
+/// Read an resource from the Resource Catalog (Closed Beta).
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/magic/cloud/resources/{resource_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `resource_id` (path, required)
+/// - `v2` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::resources };
+/// use cloudflare::{ ApiClient, apis::resources };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = catalog_read(&api)
-///     .with_account_id("value")
-///     .with_resource_id("value")
+/// let response = catalog_read(&api)
+///     .with_account_id("account_id")
+///     .with_resource_id("resource_id")
+///     .with_v2("v2")
 ///     .send()
 ///     .await?;
 /// ```

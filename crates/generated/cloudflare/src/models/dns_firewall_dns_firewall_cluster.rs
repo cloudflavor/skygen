@@ -21,13 +21,17 @@ use serde::{Deserialize, Serialize};
 pub struct DnsFirewallDnsFirewallCluster {
     pub attack_mitigation:
         Option<crate::models::dns_firewall_attack_mitigation::DnsFirewallAttackMitigation>,
-    pub deprecate_any_requests: Option<serde_json::Value>,
-    pub ecs_fallback: Option<serde_json::Value>,
-    pub maximum_cache_ttl: Option<serde_json::Value>,
-    pub minimum_cache_ttl: Option<serde_json::Value>,
-    pub name: Option<serde_json::Value>,
-    pub negative_cache_ttl: Option<serde_json::Value>,
-    pub ratelimit: Option<serde_json::Value>,
-    pub retries: Option<serde_json::Value>,
-    pub upstream_ips: Option<serde_json::Value>,
+    pub deprecate_any_requests:
+        Option<crate::models::dns_firewall_deprecate_any_requests::DnsFirewallDeprecateAnyRequests>,
+    pub ecs_fallback: Option<crate::models::dns_firewall_ecs_fallback::DnsFirewallEcsFallback>,
+    pub maximum_cache_ttl:
+        Option<crate::models::dns_firewall_maximum_cache_ttl::DnsFirewallMaximumCacheTtl>,
+    pub minimum_cache_ttl:
+        Option<crate::models::dns_firewall_minimum_cache_ttl::DnsFirewallMinimumCacheTtl>,
+    pub name: Option<crate::models::dns_firewall_name::DnsFirewallName>,
+    pub negative_cache_ttl:
+        Option<crate::models::dns_firewall_negative_cache_ttl::DnsFirewallNegativeCacheTtl>,
+    pub ratelimit: Option<crate::models::dns_firewall_ratelimit::DnsFirewallRatelimit>,
+    pub retries: Option<crate::models::dns_firewall_retries::DnsFirewallRetries>,
+    pub upstream_ips: Option<crate::models::dns_firewall_upstream_ips::DnsFirewallUpstreamIps>,
 }

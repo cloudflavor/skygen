@@ -22,5 +22,5 @@ pub struct McnUpdateCatalogSyncRequest {
     pub description: Option<String>,
     pub name: Option<String>,
     pub policy: Option<String>,
-    pub update_mode: Option<serde_json::Value>,
+    pub update_mode: Option<crate::models::mcn_catalog_sync_update_mode::McnCatalogSyncUpdateMode>,
 }

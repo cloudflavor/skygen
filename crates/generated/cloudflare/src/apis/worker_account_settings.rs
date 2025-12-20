@@ -42,14 +42,22 @@ impl<'a> FetchWorkerSettingsRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Fetch Worker Account Settings
+///
+/// Fetches Worker account settings for an account.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/workers/account-settings`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::worker_account_settings };
+/// use cloudflare::{ ApiClient, apis::worker_account_settings };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = fetch_worker_settings(&api)
-///     .with_account_id("value")
+/// let response = fetch_worker_settings(&api)
+///     .with_account_id("account_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -89,14 +97,24 @@ impl<'a> CreateWorkerSettingsRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Create Worker Account Settings
+///
+/// Creates Worker account settings for an account.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/accounts/{account_id}/workers/account-settings`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::worker_account_settings };
+/// use cloudflare::{ ApiClient, apis::worker_account_settings };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = create_worker_settings(&api)
-///     .with_account_id("value")
+/// # let body: crate::models::workers_account_settings::WorkersAccountSettings = todo!();
+/// let response = create_worker_settings(&api)
+///     .with_account_id("account_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```

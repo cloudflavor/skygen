@@ -19,7 +19,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct WafManagedRulesApiResponseCommon {
-    pub errors: serde_json::Value,
-    pub messages: serde_json::Value,
+    pub errors: crate::models::waf_managed_rules_messages::WafManagedRulesMessages,
+    pub messages: crate::models::waf_managed_rules_messages::WafManagedRulesMessages,
     pub success: bool,
 }

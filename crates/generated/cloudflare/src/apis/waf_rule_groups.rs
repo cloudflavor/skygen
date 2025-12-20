@@ -15,12 +15,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::waf_managed_rules_rule_group_response_collection::WafManagedRulesRuleGroupResponseCollection;
+use crate::models::waf_managed_rules_rule_group_response_single::WafManagedRulesRuleGroupResponseSingle;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct ListWafRuleGroupsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, WafManagedRulesRuleGroupResponseCollection>,
 }
 
 impl<'a> ListWafRuleGroupsRequest<'a> {
@@ -75,19 +77,46 @@ impl<'a> ListWafRuleGroupsRequest<'a> {
         self.builder = self.builder.header_param("rules_count", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<WafManagedRulesRuleGroupResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// List WAF rule groups
+///
+/// Fetches the WAF rule groups in a WAF package.
+///
+/// **Note:** Applies only to the [previous version of WAF managed rules](<https://developers.cloudflare.com/support/firewall/managed-rules-web-application-firewall-waf/understanding-waf-managed-rules-web-application-firewall/).>
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/firewall/waf/packages/{package_id}/groups`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `package_id` (path, required)
+/// - `mode` (query,optional)
+/// - `page` (query,optional)
+/// - `per_page` (query,optional)
+/// - `order` (query,optional)
+/// - `direction` (query,optional)
+/// - `match` (query,optional)
+/// - `name` (query,optional)
+/// - `rules_count` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::waf_rule_groups };
+/// use cloudflare::{ ApiClient, apis::waf_rule_groups };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_waf_rule_groups(&api)
-///     .with_zone_id("value")
-///     .with_package_id("value")
+/// let response = list_waf_rule_groups(&api)
+///     .with_zone_id("zone_id")
+///     .with_package_id("package_id")
+///     .with_mode("mode")
+///     .with_page("page")
+///     .with_per_page("per_page")
+///     .with_order("order")
+///     .with_direction("direction")
+///     .with_match_param("match")
+///     .with_name("name")
+///     .with_rules_count("rules_count")
 ///     .send()
 ///     .await?;
 /// ```
@@ -97,7 +126,7 @@ pub fn list_waf_rule_groups(api: &ApiClient) -> ListWafRuleGroupsRequest<'_> {
 
 #[derive(Debug)]
 pub struct GetWafRuleGroupRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, WafManagedRulesRuleGroupResponseSingle>,
 }
 
 impl<'a> GetWafRuleGroupRequest<'a> {
@@ -125,20 +154,32 @@ impl<'a> GetWafRuleGroupRequest<'a> {
         self.builder = self.builder.path_param("group_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<WafManagedRulesRuleGroupResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Get a WAF rule group
+///
+/// Fetches the details of a WAF rule group.
+///
+/// **Note:** Applies only to the [previous version of WAF managed rules](<https://developers.cloudflare.com/support/firewall/managed-rules-web-application-firewall-waf/understanding-waf-managed-rules-web-application-firewall/).>
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/firewall/waf/packages/{package_id}/groups/{group_id}`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `package_id` (path, required)
+/// - `group_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::waf_rule_groups };
+/// use cloudflare::{ ApiClient, apis::waf_rule_groups };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_waf_rule_group(&api)
-///     .with_zone_id("value")
-///     .with_package_id("value")
-///     .with_group_id("value")
+/// let response = get_waf_rule_group(&api)
+///     .with_zone_id("zone_id")
+///     .with_package_id("package_id")
+///     .with_group_id("group_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -148,7 +189,7 @@ pub fn get_waf_rule_group(api: &ApiClient) -> GetWafRuleGroupRequest<'_> {
 
 #[derive(Debug)]
 pub struct UpdateWafRuleGroupRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, WafManagedRulesRuleGroupResponseSingle>,
 }
 
 impl<'a> UpdateWafRuleGroupRequest<'a> {
@@ -184,20 +225,34 @@ impl<'a> UpdateWafRuleGroupRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<WafManagedRulesRuleGroupResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Update a WAF rule group
+///
+/// Updates a WAF rule group. You can update the state (`mode` parameter) of a rule group.
+///
+/// **Note:** Applies only to the [previous version of WAF managed rules](<https://developers.cloudflare.com/support/firewall/managed-rules-web-application-firewall-waf/understanding-waf-managed-rules-web-application-firewall/).>
+///
+/// **HTTP Method:** `PATCH`
+/// **Path:** `/zones/{zone_id}/firewall/waf/packages/{package_id}/groups/{group_id}`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `package_id` (path, required)
+/// - `group_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::waf_rule_groups };
+/// use cloudflare::{ ApiClient, apis::waf_rule_groups };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = update_waf_rule_group(&api)
-///     .with_zone_id("value")
-///     .with_package_id("value")
-///     .with_group_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = update_waf_rule_group(&api)
+///     .with_zone_id("zone_id")
+///     .with_package_id("package_id")
+///     .with_group_id("group_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```

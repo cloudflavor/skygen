@@ -19,13 +19,14 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct AaaHistory {
-    pub alert_body: Option<serde_json::Value>,
-    pub alert_type: Option<serde_json::Value>,
-    pub description: Option<serde_json::Value>,
-    pub id: Option<serde_json::Value>,
-    pub mechanism: Option<serde_json::Value>,
-    pub mechanism_type: Option<serde_json::Value>,
-    pub name: Option<serde_json::Value>,
-    pub policy_id: Option<serde_json::Value>,
-    pub sent: Option<serde_json::Value>,
+    pub alert_body: Option<crate::models::aaa_alert_body::AaaAlertBody>,
+    pub alert_type: Option<crate::models::aaa_schemas_alert_type::AaaSchemasAlertType>,
+    pub description:
+        Option<crate::models::aaa_components_schemas_description::AaaComponentsSchemasDescription>,
+    pub id: Option<crate::models::aaa_uuid::AaaUuid>,
+    pub mechanism: Option<crate::models::aaa_mechanism::AaaMechanism>,
+    pub mechanism_type: Option<crate::models::aaa_mechanism_type::AaaMechanismType>,
+    pub name: Option<crate::models::aaa_schemas_name::AaaSchemasName>,
+    pub policy_id: Option<crate::models::aaa_policy_id::AaaPolicyId>,
+    pub sent: Option<crate::models::aaa_sent::AaaSent>,
 }

@@ -19,10 +19,10 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct McnResourcePreview {
-    pub cloud_type: serde_json::Value,
+    pub cloud_type: crate::models::mcn_cloud_type::McnCloudType,
     pub detail: String,
-    pub id: serde_json::Value,
+    pub id: crate::models::mcn_resource_id::McnResourceId,
     pub name: String,
-    pub resource_type: serde_json::Value,
+    pub resource_type: crate::models::mcn_resource_type::McnResourceType,
     pub title: String,
 }

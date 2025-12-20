@@ -15,12 +15,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::access_tags_components_schemas_response_collection::AccessTagsComponentsSchemasResponseCollection;
+use crate::models::access_tags_components_schemas_single_response::AccessTagsComponentsSchemasSingleResponse;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct ListTagsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, AccessTagsComponentsSchemasResponseCollection>,
 }
 
 impl<'a> ListTagsRequest<'a> {
@@ -34,18 +36,26 @@ impl<'a> ListTagsRequest<'a> {
         self.builder = self.builder.path_param("account_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<AccessTagsComponentsSchemasResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// List tags
+///
+/// List tags
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/access/tags`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::access_tags };
+/// use cloudflare::{ ApiClient, apis::access_tags };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_tags(&api)
-///     .with_account_id("value")
+/// let response = list_tags(&api)
+///     .with_account_id("account_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -55,7 +65,7 @@ pub fn list_tags(api: &ApiClient) -> ListTagsRequest<'_> {
 
 #[derive(Debug)]
 pub struct CreateTagRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, AccessTagsComponentsSchemasSingleResponse>,
 }
 
 impl<'a> CreateTagRequest<'a> {
@@ -74,18 +84,28 @@ impl<'a> CreateTagRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<AccessTagsComponentsSchemasSingleResponse> {
         self.builder.send().await
     }
 }
-
 /// Create a tag
+///
+/// Create a tag
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/access/tags`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::access_tags };
+/// use cloudflare::{ ApiClient, apis::access_tags };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = create_tag(&api)
-///     .with_account_id("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = create_tag(&api)
+///     .with_account_id("account_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -95,7 +115,7 @@ pub fn create_tag(api: &ApiClient) -> CreateTagRequest<'_> {
 
 #[derive(Debug)]
 pub struct GetTagRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, AccessTagsComponentsSchemasSingleResponse>,
 }
 
 impl<'a> GetTagRequest<'a> {
@@ -118,19 +138,28 @@ impl<'a> GetTagRequest<'a> {
         self.builder = self.builder.path_param("tag_name", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<AccessTagsComponentsSchemasSingleResponse> {
         self.builder.send().await
     }
 }
-
 /// Get a tag
+///
+/// Get a tag
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/access/tags/{tag_name}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `tag_name` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::access_tags };
+/// use cloudflare::{ ApiClient, apis::access_tags };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_tag(&api)
-///     .with_account_id("value")
-///     .with_tag_name("value")
+/// let response = get_tag(&api)
+///     .with_account_id("account_id")
+///     .with_tag_name("tag_name")
 ///     .send()
 ///     .await?;
 /// ```
@@ -140,7 +169,7 @@ pub fn get_tag(api: &ApiClient) -> GetTagRequest<'_> {
 
 #[derive(Debug)]
 pub struct UpdateTagRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, AccessTagsComponentsSchemasSingleResponse>,
 }
 
 impl<'a> UpdateTagRequest<'a> {
@@ -170,19 +199,30 @@ impl<'a> UpdateTagRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<AccessTagsComponentsSchemasSingleResponse> {
         self.builder.send().await
     }
 }
-
 /// Update a tag
+///
+/// Update a tag
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/accounts/{account_id}/access/tags/{tag_name}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `tag_name` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::access_tags };
+/// use cloudflare::{ ApiClient, apis::access_tags };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = update_tag(&api)
-///     .with_account_id("value")
-///     .with_tag_name("value")
+/// # let body: crate::models::access_tag_without_app_count::AccessTagWithoutAppCount = todo!();
+/// let response = update_tag(&api)
+///     .with_account_id("account_id")
+///     .with_tag_name("tag_name")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -219,15 +259,24 @@ impl<'a> DeleteTagRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Delete a tag
+///
+/// Delete a tag
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/accounts/{account_id}/access/tags/{tag_name}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `tag_name` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::access_tags };
+/// use cloudflare::{ ApiClient, apis::access_tags };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete_tag(&api)
-///     .with_account_id("value")
-///     .with_tag_name("value")
+/// let response = delete_tag(&api)
+///     .with_account_id("account_id")
+///     .with_tag_name("tag_name")
 ///     .send()
 ///     .await?;
 /// ```

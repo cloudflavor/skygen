@@ -19,8 +19,8 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct MagicAppConfigUpdateRequest {
-    pub account_app_id: Option<serde_json::Value>,
-    pub breakout: Option<serde_json::Value>,
-    pub managed_app_id: Option<serde_json::Value>,
-    pub priority: Option<serde_json::Value>,
+    pub account_app_id: Option<crate::models::magic_account_app_id::MagicAccountAppId>,
+    pub breakout: Option<crate::models::magic_app_breakout::MagicAppBreakout>,
+    pub managed_app_id: Option<crate::models::magic_managed_app_id::MagicManagedAppId>,
+    pub priority: Option<crate::models::magic_app_priority::MagicAppPriority>,
 }

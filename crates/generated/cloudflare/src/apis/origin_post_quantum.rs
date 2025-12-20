@@ -42,14 +42,22 @@ impl<'a> ZoneCacheSettingsGetRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get Origin Post-Quantum Encryption setting
+///
+/// Instructs Cloudflare to use Post-Quantum (PQ) key agreement algorithms when connecting to your origin. Preferred instructs Cloudflare to opportunistically send a Post-Quantum keyshare in the first message to the origin (for fastest connections when the origin supports and prefers PQ), supported means that PQ algorithms are advertised but only used when requested by the origin, and off means that PQ algorithms are not advertised
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/cache/origin_post_quantum_encryption`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::origin_post_quantum };
+/// use cloudflare::{ ApiClient, apis::origin_post_quantum };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = zone_cache_settings_get(&api)
-///     .with_zone_id("value")
+/// let response = zone_cache_settings_get(&api)
+///     .with_zone_id("zone_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -89,14 +97,24 @@ impl<'a> ZoneCacheSettingsChangeRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Change Origin Post-Quantum Encryption setting
+///
+/// Instructs Cloudflare to use Post-Quantum (PQ) key agreement algorithms when connecting to your origin. Preferred instructs Cloudflare to opportunistically send a Post-Quantum keyshare in the first message to the origin (for fastest connections when the origin supports and prefers PQ), supported means that PQ algorithms are advertised but only used when requested by the origin, and off means that PQ algorithms are not advertised
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/zones/{zone_id}/cache/origin_post_quantum_encryption`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::origin_post_quantum };
+/// use cloudflare::{ ApiClient, apis::origin_post_quantum };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = zone_cache_settings_change(&api)
-///     .with_zone_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = zone_cache_settings_change(&api)
+///     .with_zone_id("zone_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```

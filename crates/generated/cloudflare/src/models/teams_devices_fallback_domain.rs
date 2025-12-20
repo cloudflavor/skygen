@@ -20,6 +20,6 @@ use serde::{Deserialize, Serialize};
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct TeamsDevicesFallbackDomain {
     pub description: Option<String>,
-    pub dns_server: Option<Vec<serde_json::Value>>,
+    pub dns_server: Option<Vec<crate::models::teams_devices_ip::TeamsDevicesIp>>,
     pub suffix: String,
 }

@@ -21,7 +21,8 @@ use serde::{Deserialize, Serialize};
 pub struct ApiEvaluationMetric {
     pub description: Option<String>,
     pub metric_name: Option<String>,
-    pub metric_type: Option<serde_json::Value>,
+    pub metric_type: Option<crate::models::api_evaluation_metric_type::ApiEvaluationMetricType>,
     pub metric_uuid: Option<String>,
-    pub metric_value_type: Option<serde_json::Value>,
+    pub metric_value_type:
+        Option<crate::models::api_evaluation_metric_value_type::ApiEvaluationMetricValueType>,
 }

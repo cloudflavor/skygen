@@ -15,6 +15,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::error::Error;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
@@ -33,13 +34,18 @@ impl<'a> ListRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// List All Tags
+///
+/// To list all of your tags, you can send a GET request to `/v2/tags`.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/tags`
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::tags };
+/// use digitalocean::{ ApiClient, apis::tags };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list(&api)
+/// let response = list(&api)
 ///     .send()
 ///     .await?;
 /// ```
@@ -66,13 +72,20 @@ impl<'a> CreateRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Create a New Tag
+///
+/// To create a tag you can send a POST request to `/v2/tags` with a `name` attribute.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/v2/tags`
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::tags };
+/// use digitalocean::{ ApiClient, apis::tags };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = create(&api)
+/// # let body: crate::models::tags::Tags = todo!();
+/// let response = create(&api)
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -82,7 +95,7 @@ pub fn create(api: &ApiClient) -> CreateRequest<'_> {
 
 #[derive(Debug)]
 pub struct GetRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, std::collections::BTreeMap<String, serde_json::Value>>,
 }
 
 impl<'a> GetRequest<'a> {
@@ -96,18 +109,26 @@ impl<'a> GetRequest<'a> {
         self.builder = self.builder.path_param("tag_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<std::collections::BTreeMap<String, serde_json::Value>> {
         self.builder.send().await
     }
 }
-
 /// Retrieve a Tag
+///
+/// To retrieve an individual tag, you can send a `GET` request to `/v2/tags/$TAG_NAME`.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/tags/{tag_id}`
+///
+/// **Parameters**
+/// - `tag_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::tags };
+/// use digitalocean::{ ApiClient, apis::tags };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get(&api)
-///     .with_tag_id("value")
+/// let response = get(&api)
+///     .with_tag_id("tag_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -117,7 +138,7 @@ pub fn get(api: &ApiClient) -> GetRequest<'_> {
 
 #[derive(Debug)]
 pub struct DeleteRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, Error>,
 }
 
 impl<'a> DeleteRequest<'a> {
@@ -131,18 +152,26 @@ impl<'a> DeleteRequest<'a> {
         self.builder = self.builder.path_param("tag_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<Error> {
         self.builder.send().await
     }
 }
-
 /// Delete a Tag
+///
+/// A tag can be deleted by sending a `DELETE` request to `/v2/tags/$TAG_NAME`. Deleting a tag also untags all the resources that have previously been tagged by the Tag
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/v2/tags/{tag_id}`
+///
+/// **Parameters**
+/// - `tag_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::tags };
+/// use digitalocean::{ ApiClient, apis::tags };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete(&api)
-///     .with_tag_id("value")
+/// let response = delete(&api)
+///     .with_tag_id("tag_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -152,7 +181,7 @@ pub fn delete(api: &ApiClient) -> DeleteRequest<'_> {
 
 #[derive(Debug)]
 pub struct AssignResourcesRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, Error>,
 }
 
 impl<'a> AssignResourcesRequest<'a> {
@@ -171,18 +200,29 @@ impl<'a> AssignResourcesRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<Error> {
         self.builder.send().await
     }
 }
-
 /// Tag a Resource
+///
+/// Resources can be tagged by sending a POST request to `/v2/tags/$TAG_NAME/resources` with an array of json objects containing `resource_id` and `resource_type` attributes.
+/// Currently only tagging of Droplets, Databases, Images, Volumes, and Volume Snapshots is supported. `resource_type` is expected to be the string `droplet`, `database`, `image`, `volume` or `volume_snapshot`. `resource_id` is expected to be the ID of the resource as a string.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/v2/tags/{tag_id}/resources`
+///
+/// **Parameters**
+/// - `tag_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::tags };
+/// use digitalocean::{ ApiClient, apis::tags };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = assign_resources(&api)
-///     .with_tag_id("value")
+/// # let body: crate::models::tags_resource::TagsResource = todo!();
+/// let response = assign_resources(&api)
+///     .with_tag_id("tag_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -192,7 +232,7 @@ pub fn assign_resources(api: &ApiClient) -> AssignResourcesRequest<'_> {
 
 #[derive(Debug)]
 pub struct UnassignResourcesRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, Error>,
 }
 
 impl<'a> UnassignResourcesRequest<'a> {
@@ -211,18 +251,29 @@ impl<'a> UnassignResourcesRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<Error> {
         self.builder.send().await
     }
 }
-
 /// Untag a Resource
+///
+/// Resources can be untagged by sending a DELETE request to `/v2/tags/$TAG_NAME/resources` with an array of json objects containing `resource_id` and `resource_type` attributes.
+/// Currently only untagging of Droplets, Databases, Images, Volumes, and Volume Snapshots is supported. `resource_type` is expected to be the string `droplet`, `database`, `image`, `volume` or `volume_snapshot`. `resource_id` is expected to be the ID of the resource as a string.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/v2/tags/{tag_id}/resources`
+///
+/// **Parameters**
+/// - `tag_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::tags };
+/// use digitalocean::{ ApiClient, apis::tags };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = unassign_resources(&api)
-///     .with_tag_id("value")
+/// # let body: crate::models::tags_resource::TagsResource = todo!();
+/// let response = unassign_resources(&api)
+///     .with_tag_id("tag_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```

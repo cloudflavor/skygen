@@ -19,8 +19,8 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct IamPolicyWithPermissionGroupsAndResources {
-    pub effect: serde_json::Value,
-    pub id: serde_json::Value,
-    pub permission_groups: serde_json::Value,
+    pub effect: crate::models::iam_effect::IamEffect,
+    pub id: crate::models::iam_identifier::IamIdentifier,
+    pub permission_groups: crate::models::iam_permission_groups::IamPermissionGroups,
     pub resources: crate::models::iam_resources::IamResources,
 }

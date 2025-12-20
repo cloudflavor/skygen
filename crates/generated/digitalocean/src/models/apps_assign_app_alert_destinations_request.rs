@@ -19,6 +19,6 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct AppsAssignAppAlertDestinationsRequest {
-    pub emails: Option<Vec<serde_json::Value>>,
+    pub emails: Option<Vec<crate::models::app_alert_email::AppAlertEmail>>,
     pub slack_webhooks: Option<Vec<crate::models::app_alert_slack_webhook::AppAlertSlackWebhook>>,
 }

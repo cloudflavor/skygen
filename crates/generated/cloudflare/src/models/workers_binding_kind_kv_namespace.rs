@@ -19,7 +19,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct WorkersBindingKindKvNamespace {
-    pub name: serde_json::Value,
-    pub namespace_id: serde_json::Value,
+    pub name: crate::models::workers_binding_name::WorkersBindingName,
+    pub namespace_id: crate::models::workers_namespace_identifier::WorkersNamespaceIdentifier,
     pub r#type: String,
 }

@@ -19,7 +19,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct PageShieldApiResponseCommon {
-    pub errors: Option<serde_json::Value>,
-    pub messages: Option<serde_json::Value>,
+    pub errors: Option<crate::models::page_shield_messages::PageShieldMessages>,
+    pub messages: Option<crate::models::page_shield_messages::PageShieldMessages>,
     pub success: bool,
 }

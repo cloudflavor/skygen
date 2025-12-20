@@ -25,7 +25,7 @@ pub struct MconnAdminDevice {
     pub crypt_key_rotation_started_at: Option<String>,
     pub crypt_key_rotation_status_code: Option<f64>,
     pub ek_cert: Option<String>,
-    pub id: serde_json::Value,
+    pub id: crate::models::mconn_uuid::MconnUuid,
     pub imaged_at: Option<String>,
     pub last_crypt_key: Option<String>,
     pub last_updated: String,

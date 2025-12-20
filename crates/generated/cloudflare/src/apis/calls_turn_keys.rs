@@ -15,13 +15,15 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::calls_turn_key_collection::CallsTurnKeyCollection;
+use crate::models::calls_turn_key_response_single::CallsTurnKeyResponseSingle;
 use crate::models::calls_turn_key_with_key::CallsTurnKeyWithKey;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct KeyListRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, CallsTurnKeyCollection>,
 }
 
 impl<'a> KeyListRequest<'a> {
@@ -36,18 +38,26 @@ impl<'a> KeyListRequest<'a> {
         self.builder = self.builder.path_param("account_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<CallsTurnKeyCollection> {
         self.builder.send().await
     }
 }
-
 /// List TURN Keys
+///
+/// Lists all TURN keys in the Cloudflare account
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/calls/turn_keys`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::calls_turn_keys };
+/// use cloudflare::{ ApiClient, apis::calls_turn_keys };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = key_list(&api)
-///     .with_account_id("value")
+/// let response = key_list(&api)
+///     .with_account_id("account_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -84,14 +94,24 @@ impl<'a> KeyCreateRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Create a new TURN key
+///
+/// Creates a new Cloudflare Calls TURN key.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/calls/turn_keys`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::calls_turn_keys };
+/// use cloudflare::{ ApiClient, apis::calls_turn_keys };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = key_create(&api)
-///     .with_account_id("value")
+/// # let body: crate::models::calls_turn_key_editable_fields::CallsTurnKeyEditableFields = todo!();
+/// let response = key_create(&api)
+///     .with_account_id("account_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -101,7 +121,7 @@ pub fn key_create(api: &ApiClient) -> KeyCreateRequest<'_> {
 
 #[derive(Debug)]
 pub struct RetrieveTurnKeyDetailsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, CallsTurnKeyResponseSingle>,
 }
 
 impl<'a> RetrieveTurnKeyDetailsRequest<'a> {
@@ -124,19 +144,28 @@ impl<'a> RetrieveTurnKeyDetailsRequest<'a> {
         self.builder = self.builder.path_param("key_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<CallsTurnKeyResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Retrieve TURN key details
+///
+/// Fetches details for a single TURN key.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/calls/turn_keys/{key_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `key_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::calls_turn_keys };
+/// use cloudflare::{ ApiClient, apis::calls_turn_keys };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = retrieve_turn_key_details(&api)
-///     .with_account_id("value")
-///     .with_key_id("value")
+/// let response = retrieve_turn_key_details(&api)
+///     .with_account_id("account_id")
+///     .with_key_id("key_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -146,7 +175,7 @@ pub fn retrieve_turn_key_details(api: &ApiClient) -> RetrieveTurnKeyDetailsReque
 
 #[derive(Debug)]
 pub struct UpdateTurnKeyRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, CallsTurnKeyResponseSingle>,
 }
 
 impl<'a> UpdateTurnKeyRequest<'a> {
@@ -177,19 +206,30 @@ impl<'a> UpdateTurnKeyRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<CallsTurnKeyResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Edit TURN key details
+///
+/// Edit details for a single TURN key.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/accounts/{account_id}/calls/turn_keys/{key_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `key_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::calls_turn_keys };
+/// use cloudflare::{ ApiClient, apis::calls_turn_keys };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = update_turn_key(&api)
-///     .with_account_id("value")
-///     .with_key_id("value")
+/// # let body: crate::models::calls_turn_key_editable_fields::CallsTurnKeyEditableFields = todo!();
+/// let response = update_turn_key(&api)
+///     .with_account_id("account_id")
+///     .with_key_id("key_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -199,7 +239,7 @@ pub fn update_turn_key(api: &ApiClient) -> UpdateTurnKeyRequest<'_> {
 
 #[derive(Debug)]
 pub struct DeleteTurnKeyRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, CallsTurnKeyResponseSingle>,
 }
 
 impl<'a> DeleteTurnKeyRequest<'a> {
@@ -222,19 +262,28 @@ impl<'a> DeleteTurnKeyRequest<'a> {
         self.builder = self.builder.path_param("key_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<CallsTurnKeyResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Delete TURN key
+///
+/// Deletes a TURN key from Cloudflare Calls
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/accounts/{account_id}/calls/turn_keys/{key_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `key_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::calls_turn_keys };
+/// use cloudflare::{ ApiClient, apis::calls_turn_keys };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete_turn_key(&api)
-///     .with_account_id("value")
-///     .with_key_id("value")
+/// let response = delete_turn_key(&api)
+///     .with_account_id("account_id")
+///     .with_key_id("key_id")
 ///     .send()
 ///     .await?;
 /// ```

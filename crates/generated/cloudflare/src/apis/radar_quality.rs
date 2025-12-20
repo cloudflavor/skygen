@@ -69,13 +69,38 @@ impl<'a> GetQualityIndexSummaryRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get Internet Quality Index (IQI) summary
+///
+/// Retrieves a summary (percentiles) of bandwidth, latency, or DNS response time from the Radar Internet Quality Index (IQI).
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/quality/iqi/summary`
+///
+/// **Parameters**
+/// - `name` (query,optional)
+/// - `dateRange` (query,optional)
+/// - `dateStart` (query,optional)
+/// - `dateEnd` (query,optional)
+/// - `asn` (query,optional)
+/// - `location` (query,optional)
+/// - `continent` (query,optional)
+/// - `metric` (query,required)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_quality };
+/// use cloudflare::{ ApiClient, apis::radar_quality };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_quality_index_summary(&api)
+/// let response = get_quality_index_summary(&api)
+///     .with_name("name")
+///     .with_date_range("dateRange")
+///     .with_date_start("dateStart")
+///     .with_date_end("dateEnd")
+///     .with_asn("asn")
+///     .with_location("location")
+///     .with_continent("continent")
+///     .with_metric("metric")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```
@@ -143,13 +168,42 @@ impl<'a> GetQualityIndexTimeseriesRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get Internet Quality Index (IQI) time series
+///
+/// Retrieves a time series (percentiles) of bandwidth, latency, or DNS response time from the Radar Internet Quality Index (IQI).
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/quality/iqi/timeseries_groups`
+///
+/// **Parameters**
+/// - `aggInterval` (query,optional)
+/// - `name` (query,optional)
+/// - `dateRange` (query,optional)
+/// - `dateStart` (query,optional)
+/// - `dateEnd` (query,optional)
+/// - `asn` (query,optional)
+/// - `location` (query,optional)
+/// - `continent` (query,optional)
+/// - `interpolation` (query,optional)
+/// - `metric` (query,required)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_quality };
+/// use cloudflare::{ ApiClient, apis::radar_quality };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_quality_index_timeseries(&api)
+/// let response = get_quality_index_timeseries(&api)
+///     .with_agg_interval("aggInterval")
+///     .with_name("name")
+///     .with_date_range("dateRange")
+///     .with_date_start("dateStart")
+///     .with_date_end("dateEnd")
+///     .with_asn("asn")
+///     .with_location("location")
+///     .with_continent("continent")
+///     .with_interpolation("interpolation")
+///     .with_metric("metric")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```
@@ -204,13 +258,36 @@ impl<'a> GetQualitySpeedHistogramRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get speed tests histogram
+///
+/// Retrieves a histogram from the previous 90 days of Cloudflare Speed Test data, split into fixed bandwidth (Mbps), latency (ms), or jitter (ms) buckets.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/quality/speed/histogram`
+///
+/// **Parameters**
+/// - `name` (query,optional)
+/// - `dateEnd` (query,optional)
+/// - `asn` (query,optional)
+/// - `location` (query,optional)
+/// - `continent` (query,optional)
+/// - `bucketSize` (query,optional)
+/// - `metricGroup` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_quality };
+/// use cloudflare::{ ApiClient, apis::radar_quality };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_quality_speed_histogram(&api)
+/// let response = get_quality_speed_histogram(&api)
+///     .with_name("name")
+///     .with_date_end("dateEnd")
+///     .with_asn("asn")
+///     .with_location("location")
+///     .with_continent("continent")
+///     .with_bucket_size("bucketSize")
+///     .with_metric_group("metricGroup")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```
@@ -257,13 +334,32 @@ impl<'a> GetQualitySpeedSummaryRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get speed tests summary
+///
+/// Retrieves a summary of bandwidth, latency, jitter, and packet loss, from the previous 90 days of Cloudflare Speed Test data.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/quality/speed/summary`
+///
+/// **Parameters**
+/// - `name` (query,optional)
+/// - `dateEnd` (query,optional)
+/// - `asn` (query,optional)
+/// - `location` (query,optional)
+/// - `continent` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_quality };
+/// use cloudflare::{ ApiClient, apis::radar_quality };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_quality_speed_summary(&api)
+/// let response = get_quality_speed_summary(&api)
+///     .with_name("name")
+///     .with_date_end("dateEnd")
+///     .with_asn("asn")
+///     .with_location("location")
+///     .with_continent("continent")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```
@@ -322,13 +418,38 @@ impl<'a> GetQualitySpeedTopRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get top ASes by speed test results
+///
+/// Retrieves the top autonomous systems by bandwidth, latency, jitter, or packet loss, from the previous 90 days of Cloudflare Speed Test data.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/quality/speed/top/ases`
+///
+/// **Parameters**
+/// - `limit` (query,optional)
+/// - `name` (query,optional)
+/// - `dateEnd` (query,optional)
+/// - `asn` (query,optional)
+/// - `location` (query,optional)
+/// - `continent` (query,optional)
+/// - `orderBy` (query,optional)
+/// - `reverse` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_quality };
+/// use cloudflare::{ ApiClient, apis::radar_quality };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_quality_speed_top(&api)
+/// let response = get_quality_speed_top(&api)
+///     .with_limit("limit")
+///     .with_name("name")
+///     .with_date_end("dateEnd")
+///     .with_asn("asn")
+///     .with_location("location")
+///     .with_continent("continent")
+///     .with_order_by("orderBy")
+///     .with_reverse("reverse")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```
@@ -387,13 +508,38 @@ impl<'a> GetQualitySpeedTopGetRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get top locations by speed test results
+///
+/// Retrieves the top locations by bandwidth, latency, jitter, or packet loss, from the previous 90 days of Cloudflare Speed Test data.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/quality/speed/top/locations`
+///
+/// **Parameters**
+/// - `limit` (query,optional)
+/// - `name` (query,optional)
+/// - `dateEnd` (query,optional)
+/// - `asn` (query,optional)
+/// - `location` (query,optional)
+/// - `continent` (query,optional)
+/// - `orderBy` (query,optional)
+/// - `reverse` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_quality };
+/// use cloudflare::{ ApiClient, apis::radar_quality };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_quality_speed_top_get(&api)
+/// let response = get_quality_speed_top_get(&api)
+///     .with_limit("limit")
+///     .with_name("name")
+///     .with_date_end("dateEnd")
+///     .with_asn("asn")
+///     .with_location("location")
+///     .with_continent("continent")
+///     .with_order_by("orderBy")
+///     .with_reverse("reverse")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```

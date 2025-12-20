@@ -14,8 +14,9 @@
 
 use crate::ir::{ParamLocation, ParamType, Parameter, RequestBody};
 use openapiv3::{
-    Operation as OApiOperation, Parameter as OApiParam, ReferenceOr, Response as OApiResponse,
-    Schema as OApiSchema, SchemaKind, Type as OApiType,
+    Operation as OApiOperation, Parameter as OApiParam, ReferenceOr,
+    RequestBody as OApiRequestBody, Response as OApiResponse, Schema as OApiSchema, SchemaKind,
+    Type as OApiType,
 };
 use serde_json::{Number, Value as JsonVal};
 use serde_yaml::Value as YamlVal;
@@ -73,37 +74,43 @@ pub fn convert_param(param: openapiv3::Parameter) -> Option<Parameter> {
     })
 }
 
-pub fn extract_body(op: &openapiv3::Operation) -> Option<RequestBody> {
+pub fn extract_body(
+    op: &openapiv3::Operation,
+    resolver: Option<&RefResolver<'_>>,
+) -> Option<RequestBody> {
     let body_ref = op.request_body.as_ref()?;
 
     match body_ref {
         ReferenceOr::Reference { reference } => {
-            let name = reference.split('/').last().unwrap_or("Unknown");
+            if let Some(resolver) = resolver {
+                if let Some(body) = resolver.resolve_request_body(reference) {
+                    return build_request_body(body);
+                }
+            }
             Some(RequestBody {
-                ty: ParamType::Object(name.to_string()),
+                ty: ParamType::Object(reference_name(reference).to_string()),
                 required: true,
             })
         }
 
-        ReferenceOr::Item(body) => {
-            let required = body.required;
-            if let Some(content) = body.content.get("application/json") {
-                if let Some(schema) = &content.schema {
-                    Some(RequestBody {
-                        ty: infer_param_type_from_schema(schema),
-                        required,
-                    })
-                } else {
-                    None
-                }
-            } else {
-                None
-            }
-        }
+        ReferenceOr::Item(body) => build_request_body(body),
     }
 }
 
-pub fn extract_response(op: &OApiOperation) -> ParamType {
+fn build_request_body(body: &OApiRequestBody) -> Option<RequestBody> {
+    let required = body.required;
+    if let Some(content) = body.content.get("application/json") {
+        if let Some(schema) = &content.schema {
+            return Some(RequestBody {
+                ty: infer_param_type_from_schema(schema),
+                required,
+            });
+        }
+    }
+    None
+}
+
+pub fn extract_response(op: &OApiOperation, resolver: Option<&RefResolver<'_>>) -> ParamType {
     let responses = &op.responses;
 
     // Ordered preference of response codes
@@ -114,43 +121,51 @@ pub fn extract_response(op: &OApiOperation) -> ParamType {
 
     for code in candidates {
         if let Some(response) = responses.responses.get(&code) {
-            return extract_response_type_from_entry(response);
+            return extract_response_type_from_entry(response, resolver);
         }
     }
     if let Some(response) = &responses.default {
-        return extract_response_type_from_entry(response);
+        return extract_response_type_from_entry(response, resolver);
     }
 
     // No known good response found
     ParamType::Unknown
 }
 
-fn extract_response_type_from_entry(entry: &ReferenceOr<OApiResponse>) -> ParamType {
+fn extract_response_type_from_entry(
+    entry: &ReferenceOr<OApiResponse>,
+    resolver: Option<&RefResolver<'_>>,
+) -> ParamType {
     match entry {
         ReferenceOr::Reference { reference } => {
-            let name = reference.split('/').last().unwrap_or("Unknown");
-            ParamType::Object(name.to_string())
+            if let Some(resolver) = resolver {
+                if let Some(resp) = resolver.resolve_response(reference) {
+                    return extract_response_from_media(resp);
+                }
+            }
+            ParamType::Object(reference_name(reference).to_string())
         }
 
-        ReferenceOr::Item(response) => {
-            if let Some(media) = response.content.get("application/json") {
-                if let Some(schema) = &media.schema {
-                    infer_param_type_from_schema(schema)
-                } else {
-                    ParamType::Unknown
-                }
-            } else {
-                ParamType::Unknown
-            }
+        ReferenceOr::Item(response) => extract_response_from_media(response),
+    }
+}
+
+fn extract_response_from_media(response: &OApiResponse) -> ParamType {
+    if let Some(media) = response.content.get("application/json") {
+        if let Some(schema) = &media.schema {
+            infer_param_type_from_schema(schema)
+        } else {
+            ParamType::Unknown
         }
+    } else {
+        ParamType::Unknown
     }
 }
 
 pub fn infer_param_type_from_schema(schema_or_ref: &ReferenceOr<OApiSchema>) -> ParamType {
     match schema_or_ref {
         ReferenceOr::Reference { reference } => {
-            let name = reference.split('/').last().unwrap_or("Unknown");
-            ParamType::Object(name.to_string())
+            ParamType::Object(reference_name(reference).to_string())
         }
         ReferenceOr::Item(schema) => match &schema.schema_kind {
             SchemaKind::Type(OApiType::String(_)) => ParamType::String,
@@ -180,6 +195,10 @@ pub fn infer_param_type_from_schema(schema_or_ref: &ReferenceOr<OApiSchema>) -> 
             _ => ParamType::Unknown,
         },
     }
+}
+
+fn reference_name(reference: &str) -> &str {
+    reference.rsplit('/').next().unwrap_or(reference)
 }
 
 pub fn fix_json_large_numbers(mut val: JsonVal) -> JsonVal {
@@ -389,6 +408,10 @@ pub struct RefResolver<'a> {
 }
 
 impl<'a> RefResolver<'a> {
+    pub fn new(components: &'a openapiv3::Components) -> Self {
+        Self { components }
+    }
+
     pub fn resolve_schema(&self, reference: &str) -> Option<&OApiSchema> {
         let key = reference.strip_prefix("#/components/schemas/")?;
         match self.components.schemas.get(key)? {
@@ -401,6 +424,14 @@ impl<'a> RefResolver<'a> {
         let key = reference.strip_prefix("#/components/responses/")?;
         match self.components.responses.get(key)? {
             ReferenceOr::Item(resp) => Some(resp),
+            _ => None,
+        }
+    }
+
+    pub fn resolve_request_body(&self, reference: &str) -> Option<&OApiRequestBody> {
+        let key = reference.strip_prefix("#/components/requestBodies/")?;
+        match self.components.request_bodies.get(key)? {
+            ReferenceOr::Item(body) => Some(body),
             _ => None,
         }
     }

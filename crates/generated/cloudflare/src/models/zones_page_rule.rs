@@ -19,11 +19,11 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct ZonesPageRule {
-    pub actions: serde_json::Value,
-    pub created_on: serde_json::Value,
-    pub id: serde_json::Value,
-    pub modified_on: serde_json::Value,
-    pub priority: serde_json::Value,
-    pub status: serde_json::Value,
-    pub targets: serde_json::Value,
+    pub actions: crate::models::zones_actions::ZonesActions,
+    pub created_on: crate::models::zones_created_on::ZonesCreatedOn,
+    pub id: crate::models::zones_schemas_identifier::ZonesSchemasIdentifier,
+    pub modified_on: crate::models::zones_modified_on::ZonesModifiedOn,
+    pub priority: crate::models::zones_priority::ZonesPriority,
+    pub status: crate::models::zones_status::ZonesStatus,
+    pub targets: crate::models::zones_targets::ZonesTargets,
 }

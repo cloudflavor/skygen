@@ -19,5 +19,5 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct IamScopeObject {
-    pub key: serde_json::Value,
+    pub key: crate::models::iam_scope_object_key::IamScopeObjectKey,
 }

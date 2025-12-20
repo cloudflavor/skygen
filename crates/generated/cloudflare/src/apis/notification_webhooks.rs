@@ -15,12 +15,16 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::aaa_api_response_collection::AaaApiResponseCollection;
+use crate::models::aaa_id_response::AaaIdResponse;
+use crate::models::aaa_schemas_single_response::AaaSchemasSingleResponse;
+use crate::models::aaa_webhooks_components_schemas_response_collection::AaaWebhooksComponentsSchemasResponseCollection;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct ListWebhooksRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, AaaWebhooksComponentsSchemasResponseCollection>,
 }
 
 impl<'a> ListWebhooksRequest<'a> {
@@ -38,18 +42,26 @@ impl<'a> ListWebhooksRequest<'a> {
         self.builder = self.builder.path_param("account_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<AaaWebhooksComponentsSchemasResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// List webhooks
+///
+/// Gets a list of all configured webhook destinations.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/alerting/v3/destinations/webhooks`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::notification_webhooks };
+/// use cloudflare::{ ApiClient, apis::notification_webhooks };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_webhooks(&api)
-///     .with_account_id("value")
+/// let response = list_webhooks(&api)
+///     .with_account_id("account_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -59,7 +71,7 @@ pub fn list_webhooks(api: &ApiClient) -> ListWebhooksRequest<'_> {
 
 #[derive(Debug)]
 pub struct CreateWebhookRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, AaaIdResponse>,
 }
 
 impl<'a> CreateWebhookRequest<'a> {
@@ -82,18 +94,28 @@ impl<'a> CreateWebhookRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<AaaIdResponse> {
         self.builder.send().await
     }
 }
-
 /// Create a webhook
+///
+/// Creates a new webhook destination.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/alerting/v3/destinations/webhooks`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::notification_webhooks };
+/// use cloudflare::{ ApiClient, apis::notification_webhooks };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = create_webhook(&api)
-///     .with_account_id("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = create_webhook(&api)
+///     .with_account_id("account_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -103,7 +125,7 @@ pub fn create_webhook(api: &ApiClient) -> CreateWebhookRequest<'_> {
 
 #[derive(Debug)]
 pub struct GetWebhookRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, AaaSchemasSingleResponse>,
 }
 
 impl<'a> GetWebhookRequest<'a> {
@@ -126,19 +148,28 @@ impl<'a> GetWebhookRequest<'a> {
         self.builder = self.builder.path_param("webhook_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<AaaSchemasSingleResponse> {
         self.builder.send().await
     }
 }
-
 /// Get a webhook
+///
+/// Get details for a single webhooks destination.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/alerting/v3/destinations/webhooks/{webhook_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `webhook_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::notification_webhooks };
+/// use cloudflare::{ ApiClient, apis::notification_webhooks };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_webhook(&api)
-///     .with_account_id("value")
-///     .with_webhook_id("value")
+/// let response = get_webhook(&api)
+///     .with_account_id("account_id")
+///     .with_webhook_id("webhook_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -148,7 +179,7 @@ pub fn get_webhook(api: &ApiClient) -> GetWebhookRequest<'_> {
 
 #[derive(Debug)]
 pub struct UpdateWebhookRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, AaaIdResponse>,
 }
 
 impl<'a> UpdateWebhookRequest<'a> {
@@ -176,19 +207,30 @@ impl<'a> UpdateWebhookRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<AaaIdResponse> {
         self.builder.send().await
     }
 }
-
 /// Update a webhook
+///
+/// Update a webhook destination.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/accounts/{account_id}/alerting/v3/destinations/webhooks/{webhook_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `webhook_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::notification_webhooks };
+/// use cloudflare::{ ApiClient, apis::notification_webhooks };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = update_webhook(&api)
-///     .with_account_id("value")
-///     .with_webhook_id("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = update_webhook(&api)
+///     .with_account_id("account_id")
+///     .with_webhook_id("webhook_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -198,7 +240,7 @@ pub fn update_webhook(api: &ApiClient) -> UpdateWebhookRequest<'_> {
 
 #[derive(Debug)]
 pub struct DeleteWebhookRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, AaaApiResponseCollection>,
 }
 
 impl<'a> DeleteWebhookRequest<'a> {
@@ -221,19 +263,28 @@ impl<'a> DeleteWebhookRequest<'a> {
         self.builder = self.builder.path_param("webhook_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<AaaApiResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// Delete a webhook
+///
+/// Delete a configured webhook destination.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/accounts/{account_id}/alerting/v3/destinations/webhooks/{webhook_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `webhook_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::notification_webhooks };
+/// use cloudflare::{ ApiClient, apis::notification_webhooks };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete_webhook(&api)
-///     .with_account_id("value")
-///     .with_webhook_id("value")
+/// let response = delete_webhook(&api)
+///     .with_account_id("account_id")
+///     .with_webhook_id("webhook_id")
 ///     .send()
 ///     .await?;
 /// ```

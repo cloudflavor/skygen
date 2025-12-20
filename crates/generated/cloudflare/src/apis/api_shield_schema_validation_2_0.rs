@@ -15,6 +15,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::api_shield_api_response_single::ApiShieldApiResponseSingle;
 use crate::models::api_shield_operation_schema_validation_settings::ApiShieldOperationSchemaValidationSettings;
 use crate::models::api_shield_zone_schema_validation_settings::ApiShieldZoneSchemaValidationSettings;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
@@ -52,14 +53,24 @@ impl<'a> UpdateMultipleOperationLevelRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Update multiple operation-level schema validation settings
+///
+/// Updates multiple operation-level schema validation settings on the zone
+///
+/// **HTTP Method:** `PATCH`
+/// **Path:** `/zones/{zone_id}/api_gateway/operations/schema_validation`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::api_shield_schema_validation_2_0 };
+/// use cloudflare::{ ApiClient, apis::api_shield_schema_validation_2_0 };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = update_multiple_operation_level(&api)
-///     .with_zone_id("value")
+/// # let body: crate::models::api_shield_operation_schema_validation_settings_multiple_request::ApiShieldOperationSchemaValidationSettingsMultipleRequest = todo!();
+/// let response = update_multiple_operation_level(&api)
+///     .with_zone_id("zone_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -96,15 +107,24 @@ impl<'a> RetrieveOperationLevelSettingsRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Retrieve operation-level schema validation settings
+///
+/// Retrieves operation-level schema validation settings on the zone
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/api_gateway/operations/{operation_id}/schema_validation`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `operation_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::api_shield_schema_validation_2_0 };
+/// use cloudflare::{ ApiClient, apis::api_shield_schema_validation_2_0 };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = retrieve_operation_level_settings(&api)
-///     .with_zone_id("value")
-///     .with_operation_id("value")
+/// let response = retrieve_operation_level_settings(&api)
+///     .with_zone_id("zone_id")
+///     .with_operation_id("operation_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -151,15 +171,26 @@ impl<'a> UpdateOperationLevelSettingsRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Update operation-level schema validation settings
+///
+/// Updates operation-level schema validation settings on the zone
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/zones/{zone_id}/api_gateway/operations/{operation_id}/schema_validation`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `operation_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::api_shield_schema_validation_2_0 };
+/// use cloudflare::{ ApiClient, apis::api_shield_schema_validation_2_0 };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = update_operation_level_settings(&api)
-///     .with_zone_id("value")
-///     .with_operation_id("value")
+/// # let body: crate::models::api_shield_operation_schema_validation_settings_modify_request::ApiShieldOperationSchemaValidationSettingsModifyRequest = todo!();
+/// let response = update_operation_level_settings(&api)
+///     .with_zone_id("zone_id")
+///     .with_operation_id("operation_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -191,14 +222,22 @@ impl<'a> RetrieveLevelSettingsRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Retrieve zone level schema validation settings
+///
+/// Retrieves zone level schema validation settings currently set on the zone
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/api_gateway/settings/schema_validation`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::api_shield_schema_validation_2_0 };
+/// use cloudflare::{ ApiClient, apis::api_shield_schema_validation_2_0 };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = retrieve_level_settings(&api)
-///     .with_zone_id("value")
+/// let response = retrieve_level_settings(&api)
+///     .with_zone_id("zone_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -238,14 +277,24 @@ impl<'a> UpdateLevelSettingsRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Update zone level schema validation settings
+///
+/// Updates zone level schema validation settings on the zone
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/zones/{zone_id}/api_gateway/settings/schema_validation`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::api_shield_schema_validation_2_0 };
+/// use cloudflare::{ ApiClient, apis::api_shield_schema_validation_2_0 };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = update_level_settings(&api)
-///     .with_zone_id("value")
+/// # let body: crate::models::api_shield_zone_schema_validation_settings_put::ApiShieldZoneSchemaValidationSettingsPut = todo!();
+/// let response = update_level_settings(&api)
+///     .with_zone_id("zone_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -285,14 +334,24 @@ impl<'a> PatchLevelSettingsRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Update zone level schema validation settings
+///
+/// Updates zone level schema validation settings on the zone
+///
+/// **HTTP Method:** `PATCH`
+/// **Path:** `/zones/{zone_id}/api_gateway/settings/schema_validation`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::api_shield_schema_validation_2_0 };
+/// use cloudflare::{ ApiClient, apis::api_shield_schema_validation_2_0 };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = patch_level_settings(&api)
-///     .with_zone_id("value")
+/// # let body: crate::models::api_shield_zone_schema_validation_settings_patch::ApiShieldZoneSchemaValidationSettingsPatch = todo!();
+/// let response = patch_level_settings(&api)
+///     .with_zone_id("zone_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -325,14 +384,22 @@ impl<'a> RetrieveInformationAboutAllRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Retrieve information about all schemas on a zone
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/api_gateway/user_schemas`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `validation_enabled` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::api_shield_schema_validation_2_0 };
+/// use cloudflare::{ ApiClient, apis::api_shield_schema_validation_2_0 };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = retrieve_information_about_all(&api)
-///     .with_zone_id("value")
+/// let response = retrieve_information_about_all(&api)
+///     .with_zone_id("zone_id")
+///     .with_validation_enabled("validation_enabled")
 ///     .send()
 ///     .await?;
 /// ```
@@ -364,14 +431,20 @@ impl<'a> PostSchemaRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Upload a schema to a zone
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/zones/{zone_id}/api_gateway/user_schemas`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::api_shield_schema_validation_2_0 };
+/// use cloudflare::{ ApiClient, apis::api_shield_schema_validation_2_0 };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = post_schema(&api)
-///     .with_zone_id("value")
+/// let response = post_schema(&api)
+///     .with_zone_id("zone_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -403,14 +476,20 @@ impl<'a> RetrieveSchemaHostsRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Retrieve schema hosts in a zone
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/api_gateway/user_schemas/hosts`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::api_shield_schema_validation_2_0 };
+/// use cloudflare::{ ApiClient, apis::api_shield_schema_validation_2_0 };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = retrieve_schema_hosts(&api)
-///     .with_zone_id("value")
+/// let response = retrieve_schema_hosts(&api)
+///     .with_zone_id("zone_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -447,15 +526,22 @@ impl<'a> RetrieveInformationAboutSpecificRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Retrieve information about a specific schema on a zone
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/api_gateway/user_schemas/{schema_id}`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `schema_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::api_shield_schema_validation_2_0 };
+/// use cloudflare::{ ApiClient, apis::api_shield_schema_validation_2_0 };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = retrieve_information_about_specific(&api)
-///     .with_zone_id("value")
-///     .with_schema_id("value")
+/// let response = retrieve_information_about_specific(&api)
+///     .with_zone_id("zone_id")
+///     .with_schema_id("schema_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -467,7 +553,7 @@ pub fn retrieve_information_about_specific(
 
 #[derive(Debug)]
 pub struct DeleteSchemaRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, ApiShieldApiResponseSingle>,
 }
 
 impl<'a> DeleteSchemaRequest<'a> {
@@ -490,19 +576,26 @@ impl<'a> DeleteSchemaRequest<'a> {
         self.builder = self.builder.path_param("schema_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<ApiShieldApiResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Delete a schema
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/zones/{zone_id}/api_gateway/user_schemas/{schema_id}`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `schema_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::api_shield_schema_validation_2_0 };
+/// use cloudflare::{ ApiClient, apis::api_shield_schema_validation_2_0 };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete_schema(&api)
-///     .with_zone_id("value")
-///     .with_schema_id("value")
+/// let response = delete_schema(&api)
+///     .with_zone_id("zone_id")
+///     .with_schema_id("schema_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -547,15 +640,24 @@ impl<'a> EnableValidationSchemaRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Enable validation for a schema
+///
+/// **HTTP Method:** `PATCH`
+/// **Path:** `/zones/{zone_id}/api_gateway/user_schemas/{schema_id}`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `schema_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::api_shield_schema_validation_2_0 };
+/// use cloudflare::{ ApiClient, apis::api_shield_schema_validation_2_0 };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = enable_validation_schema(&api)
-///     .with_zone_id("value")
-///     .with_schema_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = enable_validation_schema(&api)
+///     .with_zone_id("zone_id")
+///     .with_schema_id("schema_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -596,15 +698,26 @@ impl<'a> ExtractOperationsSchemaRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Retrieve all operations from a schema.
+///
+/// Retrieves all operations from the schema. Operations that already exist in API Shield Endpoint Management will be returned as full operations.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/api_gateway/user_schemas/{schema_id}/operations`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `schema_id` (path, required)
+/// - `operation_status` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::api_shield_schema_validation_2_0 };
+/// use cloudflare::{ ApiClient, apis::api_shield_schema_validation_2_0 };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = extract_operations_schema(&api)
-///     .with_zone_id("value")
-///     .with_schema_id("value")
+/// let response = extract_operations_schema(&api)
+///     .with_zone_id("zone_id")
+///     .with_schema_id("schema_id")
+///     .with_operation_status("operation_status")
 ///     .send()
 ///     .await?;
 /// ```

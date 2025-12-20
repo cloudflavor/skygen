@@ -19,11 +19,11 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct AccessBookmarks {
-    pub app_launcher_visible: Option<serde_json::Value>,
-    pub created_at: Option<serde_json::Value>,
-    pub domain: Option<serde_json::Value>,
+    pub app_launcher_visible: Option<crate::models::access_schemas_app_launcher_visible::AccessSchemasAppLauncherVisible>,
+    pub created_at: Option<crate::models::access_timestamp::AccessTimestamp>,
+    pub domain: Option<crate::models::access_schemas_domain::AccessSchemasDomain>,
     pub id: Option<String>,
-    pub logo_url: Option<serde_json::Value>,
-    pub name: Option<serde_json::Value>,
-    pub updated_at: Option<serde_json::Value>,
+    pub logo_url: Option<crate::models::access_schemas_logo_url::AccessSchemasLogoUrl>,
+    pub name: Option<crate::models::access_bookmarks_components_schemas_name::AccessBookmarksComponentsSchemasName>,
+    pub updated_at: Option<crate::models::access_timestamp::AccessTimestamp>,
 }

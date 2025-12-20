@@ -20,5 +20,5 @@ use serde::{Deserialize, Serialize};
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct MqQueueBatch {
     pub delay_seconds: Option<f64>,
-    pub messages: Option<Vec<serde_json::Value>>,
+    pub messages: Option<Vec<crate::models::mq_queue_message::MqQueueMessage>>,
 }

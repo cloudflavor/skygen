@@ -19,7 +19,8 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct Web3ContentListEntryCreateRequest {
-    pub content: serde_json::Value,
-    pub description: Option<serde_json::Value>,
-    pub r#type: serde_json::Value,
+    pub content: crate::models::web3_content_list_entry_content::Web3ContentListEntryContent,
+    pub description:
+        Option<crate::models::web3_content_list_entry_description::Web3ContentListEntryDescription>,
+    pub r#type: crate::models::web3_content_list_entry_type::Web3ContentListEntryType,
 }

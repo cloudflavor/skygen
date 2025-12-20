@@ -15,12 +15,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::access_groups_components_schemas_response_collection::AccessGroupsComponentsSchemasResponseCollection;
+use crate::models::access_groups_components_schemas_single_response_2::AccessGroupsComponentsSchemasSingleResponse2;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct ListAccessGroupsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, AccessGroupsComponentsSchemasResponseCollection>,
 }
 
 impl<'a> ListAccessGroupsRequest<'a> {
@@ -34,18 +36,26 @@ impl<'a> ListAccessGroupsRequest<'a> {
         self.builder = self.builder.path_param("zone_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<AccessGroupsComponentsSchemasResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// List Access groups
+///
+/// Lists all Access groups.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/access/groups`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zone_level_access_groups };
+/// use cloudflare::{ ApiClient, apis::zone_level_access_groups };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_access_groups(&api)
-///     .with_zone_id("value")
+/// let response = list_access_groups(&api)
+///     .with_zone_id("zone_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -55,7 +65,7 @@ pub fn list_access_groups(api: &ApiClient) -> ListAccessGroupsRequest<'_> {
 
 #[derive(Debug)]
 pub struct CreateAccessGroupRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, AccessGroupsComponentsSchemasSingleResponse2>,
 }
 
 impl<'a> CreateAccessGroupRequest<'a> {
@@ -74,18 +84,28 @@ impl<'a> CreateAccessGroupRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<AccessGroupsComponentsSchemasSingleResponse2> {
         self.builder.send().await
     }
 }
-
 /// Create an Access group
+///
+/// Creates a new Access group.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/zones/{zone_id}/access/groups`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zone_level_access_groups };
+/// use cloudflare::{ ApiClient, apis::zone_level_access_groups };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = create_access_group(&api)
-///     .with_zone_id("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = create_access_group(&api)
+///     .with_zone_id("zone_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -95,7 +115,7 @@ pub fn create_access_group(api: &ApiClient) -> CreateAccessGroupRequest<'_> {
 
 #[derive(Debug)]
 pub struct GetAccessGroupRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, AccessGroupsComponentsSchemasSingleResponse2>,
 }
 
 impl<'a> GetAccessGroupRequest<'a> {
@@ -115,19 +135,28 @@ impl<'a> GetAccessGroupRequest<'a> {
         self.builder = self.builder.path_param("group_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<AccessGroupsComponentsSchemasSingleResponse2> {
         self.builder.send().await
     }
 }
-
 /// Get an Access group
+///
+/// Fetches a single Access group.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/access/groups/{group_id}`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `group_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zone_level_access_groups };
+/// use cloudflare::{ ApiClient, apis::zone_level_access_groups };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_access_group(&api)
-///     .with_zone_id("value")
-///     .with_group_id("value")
+/// let response = get_access_group(&api)
+///     .with_zone_id("zone_id")
+///     .with_group_id("group_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -137,7 +166,7 @@ pub fn get_access_group(api: &ApiClient) -> GetAccessGroupRequest<'_> {
 
 #[derive(Debug)]
 pub struct UpdateAccessGroupRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, AccessGroupsComponentsSchemasSingleResponse2>,
 }
 
 impl<'a> UpdateAccessGroupRequest<'a> {
@@ -162,19 +191,30 @@ impl<'a> UpdateAccessGroupRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<AccessGroupsComponentsSchemasSingleResponse2> {
         self.builder.send().await
     }
 }
-
 /// Update an Access group
+///
+/// Updates a configured Access group.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/zones/{zone_id}/access/groups/{group_id}`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `group_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zone_level_access_groups };
+/// use cloudflare::{ ApiClient, apis::zone_level_access_groups };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = update_access_group(&api)
-///     .with_zone_id("value")
-///     .with_group_id("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = update_access_group(&api)
+///     .with_zone_id("zone_id")
+///     .with_group_id("group_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -211,15 +251,24 @@ impl<'a> DeleteAccessGroupRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Delete an Access group
+///
+/// Deletes an Access group.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/zones/{zone_id}/access/groups/{group_id}`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `group_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zone_level_access_groups };
+/// use cloudflare::{ ApiClient, apis::zone_level_access_groups };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete_access_group(&api)
-///     .with_zone_id("value")
-///     .with_group_id("value")
+/// let response = delete_access_group(&api)
+///     .with_zone_id("zone_id")
+///     .with_group_id("group_id")
 ///     .send()
 ///     .await?;
 /// ```

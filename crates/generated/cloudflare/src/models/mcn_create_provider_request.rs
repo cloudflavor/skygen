@@ -19,7 +19,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct McnCreateProviderRequest {
-    pub cloud_type: serde_json::Value,
+    pub cloud_type: crate::models::mcn_cloud_type::McnCloudType,
     pub description: Option<String>,
     pub friendly_name: String,
 }

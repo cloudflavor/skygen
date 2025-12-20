@@ -15,12 +15,15 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::zero_trust_gateway_empty_response::ZeroTrustGatewayEmptyResponse;
+use crate::models::zero_trust_gateway_proxy_endpoints_components_schemas_response_collection::ZeroTrustGatewayProxyEndpointsComponentsSchemasResponseCollection;
+use crate::models::zero_trust_gateway_proxy_endpoints_components_schemas_single_response::ZeroTrustGatewayProxyEndpointsComponentsSchemasSingleResponse;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct ListProxyEndpointsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, ZeroTrustGatewayProxyEndpointsComponentsSchemasSingleResponse>,
 }
 
 impl<'a> ListProxyEndpointsRequest<'a> {
@@ -38,18 +41,28 @@ impl<'a> ListProxyEndpointsRequest<'a> {
         self.builder = self.builder.path_param("account_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(
+        self,
+    ) -> ApiResult<ZeroTrustGatewayProxyEndpointsComponentsSchemasSingleResponse> {
         self.builder.send().await
     }
 }
-
 /// List proxy endpoints
+///
+/// Fetches all Zero Trust Gateway proxy endpoints for an account.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/gateway/proxy_endpoints`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zero_trust_gateway_proxy_endpoints };
+/// use cloudflare::{ ApiClient, apis::zero_trust_gateway_proxy_endpoints };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_proxy_endpoints(&api)
-///     .with_account_id("value")
+/// let response = list_proxy_endpoints(&api)
+///     .with_account_id("account_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -59,7 +72,7 @@ pub fn list_proxy_endpoints(api: &ApiClient) -> ListProxyEndpointsRequest<'_> {
 
 #[derive(Debug)]
 pub struct CreateProxyEndpointRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, ZeroTrustGatewayProxyEndpointsComponentsSchemasSingleResponse>,
 }
 
 impl<'a> CreateProxyEndpointRequest<'a> {
@@ -85,18 +98,30 @@ impl<'a> CreateProxyEndpointRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(
+        self,
+    ) -> ApiResult<ZeroTrustGatewayProxyEndpointsComponentsSchemasSingleResponse> {
         self.builder.send().await
     }
 }
-
 /// Create a proxy endpoint
+///
+/// Creates a new Zero Trust Gateway proxy endpoint.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/gateway/proxy_endpoints`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zero_trust_gateway_proxy_endpoints };
+/// use cloudflare::{ ApiClient, apis::zero_trust_gateway_proxy_endpoints };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = create_proxy_endpoint(&api)
-///     .with_account_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = create_proxy_endpoint(&api)
+///     .with_account_id("account_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -106,7 +131,8 @@ pub fn create_proxy_endpoint(api: &ApiClient) -> CreateProxyEndpointRequest<'_> 
 
 #[derive(Debug)]
 pub struct EndpointDetailsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder:
+        ApiRequestBuilder<'a, ZeroTrustGatewayProxyEndpointsComponentsSchemasResponseCollection>,
 }
 
 impl<'a> EndpointDetailsRequest<'a> {
@@ -129,19 +155,30 @@ impl<'a> EndpointDetailsRequest<'a> {
         self.builder = self.builder.path_param("proxy_endpoint_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(
+        self,
+    ) -> ApiResult<ZeroTrustGatewayProxyEndpointsComponentsSchemasResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// Get a proxy endpoint
+///
+/// Fetches a single Zero Trust Gateway proxy endpoint.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/gateway/proxy_endpoints/{proxy_endpoint_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `proxy_endpoint_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zero_trust_gateway_proxy_endpoints };
+/// use cloudflare::{ ApiClient, apis::zero_trust_gateway_proxy_endpoints };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = endpoint_details(&api)
-///     .with_account_id("value")
-///     .with_proxy_endpoint_id("value")
+/// let response = endpoint_details(&api)
+///     .with_account_id("account_id")
+///     .with_proxy_endpoint_id("proxy_endpoint_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -151,7 +188,7 @@ pub fn endpoint_details(api: &ApiClient) -> EndpointDetailsRequest<'_> {
 
 #[derive(Debug)]
 pub struct DeleteProxyEndpointRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, ZeroTrustGatewayEmptyResponse>,
 }
 
 impl<'a> DeleteProxyEndpointRequest<'a> {
@@ -174,19 +211,28 @@ impl<'a> DeleteProxyEndpointRequest<'a> {
         self.builder = self.builder.path_param("proxy_endpoint_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<ZeroTrustGatewayEmptyResponse> {
         self.builder.send().await
     }
 }
-
 /// Delete a proxy endpoint
+///
+/// Deletes a configured Zero Trust Gateway proxy endpoint.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/accounts/{account_id}/gateway/proxy_endpoints/{proxy_endpoint_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `proxy_endpoint_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zero_trust_gateway_proxy_endpoints };
+/// use cloudflare::{ ApiClient, apis::zero_trust_gateway_proxy_endpoints };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete_proxy_endpoint(&api)
-///     .with_account_id("value")
-///     .with_proxy_endpoint_id("value")
+/// let response = delete_proxy_endpoint(&api)
+///     .with_account_id("account_id")
+///     .with_proxy_endpoint_id("proxy_endpoint_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -196,7 +242,7 @@ pub fn delete_proxy_endpoint(api: &ApiClient) -> DeleteProxyEndpointRequest<'_> 
 
 #[derive(Debug)]
 pub struct UpdateProxyEndpointRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, ZeroTrustGatewayProxyEndpointsComponentsSchemasSingleResponse>,
 }
 
 impl<'a> UpdateProxyEndpointRequest<'a> {
@@ -227,19 +273,32 @@ impl<'a> UpdateProxyEndpointRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(
+        self,
+    ) -> ApiResult<ZeroTrustGatewayProxyEndpointsComponentsSchemasSingleResponse> {
         self.builder.send().await
     }
 }
-
 /// Update a proxy endpoint
+///
+/// Updates a configured Zero Trust Gateway proxy endpoint.
+///
+/// **HTTP Method:** `PATCH`
+/// **Path:** `/accounts/{account_id}/gateway/proxy_endpoints/{proxy_endpoint_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `proxy_endpoint_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zero_trust_gateway_proxy_endpoints };
+/// use cloudflare::{ ApiClient, apis::zero_trust_gateway_proxy_endpoints };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = update_proxy_endpoint(&api)
-///     .with_account_id("value")
-///     .with_proxy_endpoint_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = update_proxy_endpoint(&api)
+///     .with_account_id("account_id")
+///     .with_proxy_endpoint_id("proxy_endpoint_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```

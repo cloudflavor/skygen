@@ -19,9 +19,8 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct ZeroTrustGatewayAntiVirusSettings {
-
-    pub enabled_download_phase: Option<serde_json::Value>,
-    pub enabled_upload_phase: Option<serde_json::Value>,
-    pub fail_closed: Option<serde_json::Value>,
+    pub enabled_download_phase: Option<crate::models::zero_trust_gateway_enabled_download_phase::ZeroTrustGatewayEnabledDownloadPhase>,
+    pub enabled_upload_phase: Option<crate::models::zero_trust_gateway_enabled_upload_phase::ZeroTrustGatewayEnabledUploadPhase>,
+    pub fail_closed: Option<crate::models::zero_trust_gateway_fail_closed::ZeroTrustGatewayFailClosed>,
     pub notification_settings: Option<crate::models::zero_trust_gateway_notification_settings::ZeroTrustGatewayNotificationSettings>,
 }

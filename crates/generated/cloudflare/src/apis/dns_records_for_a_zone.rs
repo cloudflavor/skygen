@@ -15,12 +15,16 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::dns_records_dns_response_batch::DnsRecordsDnsResponseBatch;
+use crate::models::dns_records_dns_response_collection::DnsRecordsDnsResponseCollection;
+use crate::models::dns_records_dns_response_import_scan::DnsRecordsDnsResponseImportScan;
+use crate::models::dns_records_dns_response_single::DnsRecordsDnsResponseSingle;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct ListDnsRecordsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, DnsRecordsDnsResponseCollection>,
 }
 
 impl<'a> ListDnsRecordsRequest<'a> {
@@ -166,18 +170,92 @@ impl<'a> ListDnsRecordsRequest<'a> {
         self.builder = self.builder.header_param("direction", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<DnsRecordsDnsResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// List DNS Records
+///
+/// List, search, sort, and filter a zones' DNS records.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/dns_records`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `name` (query,optional)
+/// - `name.exact` (query,optional)
+/// - `name.contains` (query,optional)
+/// - `name.startswith` (query,optional)
+/// - `name.endswith` (query,optional)
+/// - `type` (query,optional)
+/// - `content` (query,optional)
+/// - `content.exact` (query,optional)
+/// - `content.contains` (query,optional)
+/// - `content.startswith` (query,optional)
+/// - `content.endswith` (query,optional)
+/// - `proxied` (query,optional)
+/// - `match` (query,optional)
+/// - `comment` (query,optional)
+/// - `comment.present` (query,optional)
+/// - `comment.absent` (query,optional)
+/// - `comment.exact` (query,optional)
+/// - `comment.contains` (query,optional)
+/// - `comment.startswith` (query,optional)
+/// - `comment.endswith` (query,optional)
+/// - `tag` (query,optional)
+/// - `tag.present` (query,optional)
+/// - `tag.absent` (query,optional)
+/// - `tag.exact` (query,optional)
+/// - `tag.contains` (query,optional)
+/// - `tag.startswith` (query,optional)
+/// - `tag.endswith` (query,optional)
+/// - `search` (query,optional)
+/// - `tag_match` (query,optional)
+/// - `page` (query,optional)
+/// - `per_page` (query,optional)
+/// - `order` (query,optional)
+/// - `direction` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::dns_records_for_a_zone };
+/// use cloudflare::{ ApiClient, apis::dns_records_for_a_zone };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_dns_records(&api)
-///     .with_zone_id("value")
+/// let response = list_dns_records(&api)
+///     .with_zone_id("zone_id")
+///     .with_name("name")
+///     .with_name_exact("name.exact")
+///     .with_name_contains("name.contains")
+///     .with_name_startswith("name.startswith")
+///     .with_name_endswith("name.endswith")
+///     .with_type_param("type")
+///     .with_content("content")
+///     .with_content_exact("content.exact")
+///     .with_content_contains("content.contains")
+///     .with_content_startswith("content.startswith")
+///     .with_content_endswith("content.endswith")
+///     .with_proxied("proxied")
+///     .with_match_param("match")
+///     .with_comment("comment")
+///     .with_comment_present("comment.present")
+///     .with_comment_absent("comment.absent")
+///     .with_comment_exact("comment.exact")
+///     .with_comment_contains("comment.contains")
+///     .with_comment_startswith("comment.startswith")
+///     .with_comment_endswith("comment.endswith")
+///     .with_tag("tag")
+///     .with_tag_present("tag.present")
+///     .with_tag_absent("tag.absent")
+///     .with_tag_exact("tag.exact")
+///     .with_tag_contains("tag.contains")
+///     .with_tag_startswith("tag.startswith")
+///     .with_tag_endswith("tag.endswith")
+///     .with_search("search")
+///     .with_tag_match("tag_match")
+///     .with_page("page")
+///     .with_per_page("per_page")
+///     .with_order("order")
+///     .with_direction("direction")
 ///     .send()
 ///     .await?;
 /// ```
@@ -187,7 +265,7 @@ pub fn list_dns_records(api: &ApiClient) -> ListDnsRecordsRequest<'_> {
 
 #[derive(Debug)]
 pub struct CreateDnsRecordRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, DnsRecordsDnsResponseSingle>,
 }
 
 impl<'a> CreateDnsRecordRequest<'a> {
@@ -202,22 +280,41 @@ impl<'a> CreateDnsRecordRequest<'a> {
         self.builder = self.builder.path_param("zone_id", value);
         self
     }
-    pub fn with_body(mut self, body: serde_json::Value) -> Self {
+    pub fn with_body(
+        mut self,
+        body: crate::models::dns_records_dns_record_post::DnsRecordsDnsRecordPost,
+    ) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<DnsRecordsDnsResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Create DNS Record
+///
+/// Create a new DNS record for a zone.
+///
+/// Notes:
+/// - A/AAAA records cannot exist on the same name as CNAME records.
+/// - NS records cannot exist on the same name as any other record type.
+/// - Domain names are always represented in Punycode, even if Unicode
+/// characters were used when creating the record.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/zones/{zone_id}/dns_records`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::dns_records_for_a_zone };
+/// use cloudflare::{ ApiClient, apis::dns_records_for_a_zone };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = create_dns_record(&api)
-///     .with_zone_id("value")
+/// # let body: crate::models::dns_records_dns_record_post::DnsRecordsDnsRecordPost = todo!();
+/// let response = create_dns_record(&api)
+///     .with_zone_id("zone_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -227,7 +324,7 @@ pub fn create_dns_record(api: &ApiClient) -> CreateDnsRecordRequest<'_> {
 
 #[derive(Debug)]
 pub struct BatchDnsRecordsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, DnsRecordsDnsResponseBatch>,
 }
 
 impl<'a> BatchDnsRecordsRequest<'a> {
@@ -250,18 +347,37 @@ impl<'a> BatchDnsRecordsRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<DnsRecordsDnsResponseBatch> {
         self.builder.send().await
     }
 }
-
 /// Batch DNS Records
+///
+/// Send a Batch of DNS Record API calls to be executed together.
+///
+/// Notes:
+/// - Although Cloudflare will execute the batched operations in a single database transaction, Cloudflare's distributed KV store must treat each record change as a single key-value pair. This means that the propagation of changes is not atomic. See [the documentation](<https://developers.cloudflare.com/dns/manage-dns-records/how-to/batch-record-changes/> "Batch DNS records") for more information.
+/// - The operations you specify within the /batch request body are always executed in the following order:
+///
+/// - Deletes
+/// - Patches
+/// - Puts
+/// - Posts
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/zones/{zone_id}/dns_records/batch`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::dns_records_for_a_zone };
+/// use cloudflare::{ ApiClient, apis::dns_records_for_a_zone };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = batch_dns_records(&api)
-///     .with_zone_id("value")
+/// # let body: crate::models::dns_records_dns_request_batch_object::DnsRecordsDnsRequestBatchObject = todo!();
+/// let response = batch_dns_records(&api)
+///     .with_zone_id("zone_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -290,14 +406,24 @@ impl<'a> ExportDnsRecordsRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Export DNS Records
+///
+/// You can export your [BIND config](<https://en.wikipedia.org/wiki/Zone_file> "Zone file") through this endpoint.
+///
+/// See [the documentation](<https://developers.cloudflare.com/dns/manage-dns-records/how-to/import-and-export/> "Import and export records") for more information.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/dns_records/export`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::dns_records_for_a_zone };
+/// use cloudflare::{ ApiClient, apis::dns_records_for_a_zone };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = export_dns_records(&api)
-///     .with_zone_id("value")
+/// let response = export_dns_records(&api)
+///     .with_zone_id("zone_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -307,7 +433,7 @@ pub fn export_dns_records(api: &ApiClient) -> ExportDnsRecordsRequest<'_> {
 
 #[derive(Debug)]
 pub struct ImportDnsRecordsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, DnsRecordsDnsResponseImportScan>,
 }
 
 impl<'a> ImportDnsRecordsRequest<'a> {
@@ -322,18 +448,28 @@ impl<'a> ImportDnsRecordsRequest<'a> {
         self.builder = self.builder.path_param("zone_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<DnsRecordsDnsResponseImportScan> {
         self.builder.send().await
     }
 }
-
 /// Import DNS Records
+///
+/// You can upload your [BIND config](<https://en.wikipedia.org/wiki/Zone_file> "Zone file") through this endpoint. It assumes that cURL is called from a location with bind_config.txt (valid BIND config) present.
+///
+/// See [the documentation](<https://developers.cloudflare.com/dns/manage-dns-records/how-to/import-and-export/> "Import and export records") for more information.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/zones/{zone_id}/dns_records/import`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::dns_records_for_a_zone };
+/// use cloudflare::{ ApiClient, apis::dns_records_for_a_zone };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = import_dns_records(&api)
-///     .with_zone_id("value")
+/// let response = import_dns_records(&api)
+///     .with_zone_id("zone_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -343,7 +479,7 @@ pub fn import_dns_records(api: &ApiClient) -> ImportDnsRecordsRequest<'_> {
 
 #[derive(Debug)]
 pub struct ScanDnsRecordsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, DnsRecordsDnsResponseImportScan>,
 }
 
 impl<'a> ScanDnsRecordsRequest<'a> {
@@ -357,18 +493,26 @@ impl<'a> ScanDnsRecordsRequest<'a> {
         self.builder = self.builder.path_param("zone_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<DnsRecordsDnsResponseImportScan> {
         self.builder.send().await
     }
 }
-
 /// Scan DNS Records
+///
+/// Scan for common DNS records on your domain and automatically add them to your zone. Useful if you haven't updated your nameservers yet.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/zones/{zone_id}/dns_records/scan`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::dns_records_for_a_zone };
+/// use cloudflare::{ ApiClient, apis::dns_records_for_a_zone };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = scan_dns_records(&api)
-///     .with_zone_id("value")
+/// let response = scan_dns_records(&api)
+///     .with_zone_id("zone_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -378,7 +522,7 @@ pub fn scan_dns_records(api: &ApiClient) -> ScanDnsRecordsRequest<'_> {
 
 #[derive(Debug)]
 pub struct RecordDetailsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, DnsRecordsDnsResponseSingle>,
 }
 
 impl<'a> RecordDetailsRequest<'a> {
@@ -401,19 +545,26 @@ impl<'a> RecordDetailsRequest<'a> {
         self.builder = self.builder.path_param("dns_record_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<DnsRecordsDnsResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// DNS Record Details
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/dns_records/{dns_record_id}`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `dns_record_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::dns_records_for_a_zone };
+/// use cloudflare::{ ApiClient, apis::dns_records_for_a_zone };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = record_details(&api)
-///     .with_zone_id("value")
-///     .with_dns_record_id("value")
+/// let response = record_details(&api)
+///     .with_zone_id("zone_id")
+///     .with_dns_record_id("dns_record_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -423,7 +574,7 @@ pub fn record_details(api: &ApiClient) -> RecordDetailsRequest<'_> {
 
 #[derive(Debug)]
 pub struct UpdateDnsRecordRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, DnsRecordsDnsResponseSingle>,
 }
 
 impl<'a> UpdateDnsRecordRequest<'a> {
@@ -447,23 +598,43 @@ impl<'a> UpdateDnsRecordRequest<'a> {
         self.builder = self.builder.path_param("dns_record_id", value);
         self
     }
-    pub fn with_body(mut self, body: serde_json::Value) -> Self {
+    pub fn with_body(
+        mut self,
+        body: crate::models::dns_records_dns_record_post::DnsRecordsDnsRecordPost,
+    ) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<DnsRecordsDnsResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Overwrite DNS Record
+///
+/// Overwrite an existing DNS record.
+///
+/// Notes:
+/// - A/AAAA records cannot exist on the same name as CNAME records.
+/// - NS records cannot exist on the same name as any other record type.
+/// - Domain names are always represented in Punycode, even if Unicode
+/// characters were used when creating the record.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/zones/{zone_id}/dns_records/{dns_record_id}`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `dns_record_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::dns_records_for_a_zone };
+/// use cloudflare::{ ApiClient, apis::dns_records_for_a_zone };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = update_dns_record(&api)
-///     .with_zone_id("value")
-///     .with_dns_record_id("value")
+/// # let body: crate::models::dns_records_dns_record_post::DnsRecordsDnsRecordPost = todo!();
+/// let response = update_dns_record(&api)
+///     .with_zone_id("zone_id")
+///     .with_dns_record_id("dns_record_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -500,15 +671,22 @@ impl<'a> DeleteDnsRecordRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Delete DNS Record
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/zones/{zone_id}/dns_records/{dns_record_id}`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `dns_record_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::dns_records_for_a_zone };
+/// use cloudflare::{ ApiClient, apis::dns_records_for_a_zone };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete_dns_record(&api)
-///     .with_zone_id("value")
-///     .with_dns_record_id("value")
+/// let response = delete_dns_record(&api)
+///     .with_zone_id("zone_id")
+///     .with_dns_record_id("dns_record_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -518,7 +696,7 @@ pub fn delete_dns_record(api: &ApiClient) -> DeleteDnsRecordRequest<'_> {
 
 #[derive(Debug)]
 pub struct PatchDnsRecordRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, DnsRecordsDnsResponseSingle>,
 }
 
 impl<'a> PatchDnsRecordRequest<'a> {
@@ -542,23 +720,43 @@ impl<'a> PatchDnsRecordRequest<'a> {
         self.builder = self.builder.path_param("dns_record_id", value);
         self
     }
-    pub fn with_body(mut self, body: serde_json::Value) -> Self {
+    pub fn with_body(
+        mut self,
+        body: crate::models::dns_records_dns_record_patch::DnsRecordsDnsRecordPatch,
+    ) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<DnsRecordsDnsResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Update DNS Record
+///
+/// Update an existing DNS record.
+///
+/// Notes:
+/// - A/AAAA records cannot exist on the same name as CNAME records.
+/// - NS records cannot exist on the same name as any other record type.
+/// - Domain names are always represented in Punycode, even if Unicode
+/// characters were used when creating the record.
+///
+/// **HTTP Method:** `PATCH`
+/// **Path:** `/zones/{zone_id}/dns_records/{dns_record_id}`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `dns_record_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::dns_records_for_a_zone };
+/// use cloudflare::{ ApiClient, apis::dns_records_for_a_zone };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = patch_dns_record(&api)
-///     .with_zone_id("value")
-///     .with_dns_record_id("value")
+/// # let body: crate::models::dns_records_dns_record_patch::DnsRecordsDnsRecordPatch = todo!();
+/// let response = patch_dns_record(&api)
+///     .with_zone_id("zone_id")
+///     .with_dns_record_id("dns_record_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```

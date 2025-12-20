@@ -19,8 +19,8 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct TeamsDevicesDeviceManagedNetworks {
-    pub config: Option<serde_json::Value>,
-    pub name: Option<serde_json::Value>,
-    pub network_id: Option<serde_json::Value>,
-    pub r#type: Option<serde_json::Value>,
+    pub config: Option<crate::models::teams_devices_schemas_config_response::TeamsDevicesSchemasConfigResponse>,
+    pub name: Option<crate::models::teams_devices_device_managed_networks_components_schemas_name::TeamsDevicesDeviceManagedNetworksComponentsSchemasName>,
+    pub network_id: Option<crate::models::teams_devices_uuid::TeamsDevicesUuid>,
+    pub r#type: Option<crate::models::teams_devices_components_schemas_type::TeamsDevicesComponentsSchemasType>,
 }

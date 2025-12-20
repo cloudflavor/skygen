@@ -20,6 +20,6 @@ use serde::{Deserialize, Serialize};
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct DlpDatasetUpload {
     pub num_cells: i64,
-    pub status: serde_json::Value,
+    pub status: crate::models::dlp_dataset_upload_status::DlpDatasetUploadStatus,
     pub version: i64,
 }

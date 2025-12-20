@@ -19,8 +19,10 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct AccessPolicyUsers {
-    pub email: Option<serde_json::Value>,
-    pub id: Option<serde_json::Value>,
-    pub name: Option<serde_json::Value>,
-    pub status: Option<serde_json::Value>,
+    pub email: Option<crate::models::access_schemas_email::AccessSchemasEmail>,
+    pub id: Option<crate::models::access_uuid::AccessUuid>,
+    pub name: Option<
+        crate::models::access_users_components_schemas_name::AccessUsersComponentsSchemasName,
+    >,
+    pub status: Option<crate::models::access_user_result::AccessUserResult>,
 }

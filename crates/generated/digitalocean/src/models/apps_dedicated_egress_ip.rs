@@ -21,5 +21,5 @@ use serde::{Deserialize, Serialize};
 pub struct AppsDedicatedEgressIp {
     pub id: Option<String>,
     pub ip: Option<String>,
-    pub status: Option<serde_json::Value>,
+    pub status: Option<crate::models::apps_dedicated_egress_ip_status::AppsDedicatedEgressIpStatus>,
 }

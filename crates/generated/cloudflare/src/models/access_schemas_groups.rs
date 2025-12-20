@@ -19,12 +19,14 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct AccessSchemasGroups {
-    pub created_at: Option<serde_json::Value>,
-    pub exclude: Option<serde_json::Value>,
-    pub id: Option<serde_json::Value>,
-    pub include: Option<serde_json::Value>,
-    pub is_default: Option<serde_json::Value>,
-    pub name: Option<serde_json::Value>,
-    pub require: Option<serde_json::Value>,
-    pub updated_at: Option<serde_json::Value>,
+    pub created_at: Option<crate::models::access_timestamp::AccessTimestamp>,
+    pub exclude: Option<crate::models::access_exclude::AccessExclude>,
+    pub id: Option<crate::models::access_uuid::AccessUuid>,
+    pub include: Option<crate::models::access_include::AccessInclude>,
+    pub is_default: Option<crate::models::access_require::AccessRequire>,
+    pub name: Option<
+        crate::models::access_groups_components_schemas_name::AccessGroupsComponentsSchemasName,
+    >,
+    pub require: Option<crate::models::access_require::AccessRequire>,
+    pub updated_at: Option<crate::models::access_timestamp::AccessTimestamp>,
 }

@@ -19,5 +19,5 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct EmailCreateDestinationAddressProperties {
-    pub email: serde_json::Value,
+    pub email: crate::models::email_email::EmailEmail,
 }

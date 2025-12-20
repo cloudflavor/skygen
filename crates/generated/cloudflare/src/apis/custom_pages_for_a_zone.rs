@@ -15,12 +15,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::custom_pages_custom_pages_response_collection::CustomPagesCustomPagesResponseCollection;
+use crate::models::custom_pages_custom_pages_response_single::CustomPagesCustomPagesResponseSingle;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct ListCustomPagesRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, CustomPagesCustomPagesResponseCollection>,
 }
 
 impl<'a> ListCustomPagesRequest<'a> {
@@ -35,18 +37,26 @@ impl<'a> ListCustomPagesRequest<'a> {
         self.builder = self.builder.path_param("zone_identifier", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<CustomPagesCustomPagesResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// List custom pages
+///
+/// Fetches all the custom pages at the zone level.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_identifier}/custom_pages`
+///
+/// **Parameters**
+/// - `zone_identifier` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::custom_pages_for_a_zone };
+/// use cloudflare::{ ApiClient, apis::custom_pages_for_a_zone };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_custom_pages(&api)
-///     .with_zone_identifier("value")
+/// let response = list_custom_pages(&api)
+///     .with_zone_identifier("zone_identifier")
 ///     .send()
 ///     .await?;
 /// ```
@@ -56,7 +66,7 @@ pub fn list_custom_pages(api: &ApiClient) -> ListCustomPagesRequest<'_> {
 
 #[derive(Debug)]
 pub struct GetCustomPageRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, CustomPagesCustomPagesResponseSingle>,
 }
 
 impl<'a> GetCustomPageRequest<'a> {
@@ -79,19 +89,28 @@ impl<'a> GetCustomPageRequest<'a> {
         self.builder = self.builder.path_param("identifier", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<CustomPagesCustomPagesResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Get a custom page
+///
+/// Fetches the details of a custom page.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_identifier}/custom_pages/{identifier}`
+///
+/// **Parameters**
+/// - `zone_identifier` (path, required)
+/// - `identifier` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::custom_pages_for_a_zone };
+/// use cloudflare::{ ApiClient, apis::custom_pages_for_a_zone };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_custom_page(&api)
-///     .with_zone_identifier("value")
-///     .with_identifier("value")
+/// let response = get_custom_page(&api)
+///     .with_zone_identifier("zone_identifier")
+///     .with_identifier("identifier")
 ///     .send()
 ///     .await?;
 /// ```
@@ -101,7 +120,7 @@ pub fn get_custom_page(api: &ApiClient) -> GetCustomPageRequest<'_> {
 
 #[derive(Debug)]
 pub struct UpdateCustomPageRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, CustomPagesCustomPagesResponseSingle>,
 }
 
 impl<'a> UpdateCustomPageRequest<'a> {
@@ -129,19 +148,30 @@ impl<'a> UpdateCustomPageRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<CustomPagesCustomPagesResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Update a custom page
+///
+/// Updates the configuration of an existing custom page.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/zones/{zone_identifier}/custom_pages/{identifier}`
+///
+/// **Parameters**
+/// - `zone_identifier` (path, required)
+/// - `identifier` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::custom_pages_for_a_zone };
+/// use cloudflare::{ ApiClient, apis::custom_pages_for_a_zone };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = update_custom_page(&api)
-///     .with_zone_identifier("value")
-///     .with_identifier("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = update_custom_page(&api)
+///     .with_zone_identifier("zone_identifier")
+///     .with_identifier("identifier")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```

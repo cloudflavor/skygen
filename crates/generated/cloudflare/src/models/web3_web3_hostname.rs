@@ -19,12 +19,12 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct Web3Web3Hostname {
-    pub created_on: Option<serde_json::Value>,
-    pub description: Option<serde_json::Value>,
-    pub dnslink: Option<serde_json::Value>,
-    pub id: Option<serde_json::Value>,
-    pub modified_on: Option<serde_json::Value>,
-    pub name: Option<serde_json::Value>,
-    pub status: Option<serde_json::Value>,
-    pub target: Option<serde_json::Value>,
+    pub created_on: Option<crate::models::web3_timestamp::Web3Timestamp>,
+    pub description: Option<crate::models::web3_description::Web3Description>,
+    pub dnslink: Option<crate::models::web3_dnslink::Web3Dnslink>,
+    pub id: Option<crate::models::web3_identifier::Web3Identifier>,
+    pub modified_on: Option<crate::models::web3_timestamp::Web3Timestamp>,
+    pub name: Option<crate::models::web3_name::Web3Name>,
+    pub status: Option<crate::models::web3_status::Web3Status>,
+    pub target: Option<crate::models::web3_target::Web3Target>,
 }

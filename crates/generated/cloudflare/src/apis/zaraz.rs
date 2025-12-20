@@ -15,12 +15,17 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::zaraz_zaraz_config_history_response::ZarazZarazConfigHistoryResponse;
+use crate::models::zaraz_zaraz_config_response::ZarazZarazConfigResponse;
+use crate::models::zaraz_zaraz_config_return::ZarazZarazConfigReturn;
+use crate::models::zaraz_zaraz_history_response::ZarazZarazHistoryResponse;
+use crate::models::zaraz_zaraz_workflow_response::ZarazZarazWorkflowResponse;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct ZonesZarazConfigRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, ZarazZarazConfigResponse>,
 }
 
 impl<'a> ZonesZarazConfigRequest<'a> {
@@ -35,18 +40,26 @@ impl<'a> ZonesZarazConfigRequest<'a> {
         self.builder = self.builder.path_param("zone_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<ZarazZarazConfigResponse> {
         self.builder.send().await
     }
 }
-
 /// Get Zaraz configuration
+///
+/// Gets latest Zaraz configuration for a zone. It can be preview or published configuration, whichever was the last updated. Secret variables values will not be included.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/settings/zaraz/config`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zaraz };
+/// use cloudflare::{ ApiClient, apis::zaraz };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = zones_zaraz_config(&api)
-///     .with_zone_id("value")
+/// let response = zones_zaraz_config(&api)
+///     .with_zone_id("zone_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -56,7 +69,7 @@ pub fn zones_zaraz_config(api: &ApiClient) -> ZonesZarazConfigRequest<'_> {
 
 #[derive(Debug)]
 pub struct ZonesZarazConfigPutRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, ZarazZarazConfigResponse>,
 }
 
 impl<'a> ZonesZarazConfigPutRequest<'a> {
@@ -72,22 +85,35 @@ impl<'a> ZonesZarazConfigPutRequest<'a> {
         self.builder = self.builder.path_param("zone_id", value);
         self
     }
-    pub fn with_body(mut self, body: serde_json::Value) -> Self {
+    pub fn with_body(
+        mut self,
+        body: crate::models::zaraz_zaraz_config_body::ZarazZarazConfigBody,
+    ) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<ZarazZarazConfigResponse> {
         self.builder.send().await
     }
 }
-
 /// Update Zaraz configuration
+///
+/// Updates Zaraz configuration for a zone.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/zones/{zone_id}/settings/zaraz/config`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zaraz };
+/// use cloudflare::{ ApiClient, apis::zaraz };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = zones_zaraz_config_put(&api)
-///     .with_zone_id("value")
+/// # let body: crate::models::zaraz_zaraz_config_body::ZarazZarazConfigBody = todo!();
+/// let response = zones_zaraz_config_put(&api)
+///     .with_zone_id("zone_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -97,7 +123,7 @@ pub fn zones_zaraz_config_put(api: &ApiClient) -> ZonesZarazConfigPutRequest<'_>
 
 #[derive(Debug)]
 pub struct ZonesZarazDefaultRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, ZarazZarazConfigResponse>,
 }
 
 impl<'a> ZonesZarazDefaultRequest<'a> {
@@ -112,18 +138,26 @@ impl<'a> ZonesZarazDefaultRequest<'a> {
         self.builder = self.builder.path_param("zone_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<ZarazZarazConfigResponse> {
         self.builder.send().await
     }
 }
-
 /// Get default Zaraz configuration
+///
+/// Gets default Zaraz configuration for a zone.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/settings/zaraz/default`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zaraz };
+/// use cloudflare::{ ApiClient, apis::zaraz };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = zones_zaraz_default(&api)
-///     .with_zone_id("value")
+/// let response = zones_zaraz_default(&api)
+///     .with_zone_id("zone_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -133,7 +167,7 @@ pub fn zones_zaraz_default(api: &ApiClient) -> ZonesZarazDefaultRequest<'_> {
 
 #[derive(Debug)]
 pub struct ZonesZarazExportRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, ZarazZarazConfigReturn>,
 }
 
 impl<'a> ZonesZarazExportRequest<'a> {
@@ -148,18 +182,26 @@ impl<'a> ZonesZarazExportRequest<'a> {
         self.builder = self.builder.path_param("zone_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<ZarazZarazConfigReturn> {
         self.builder.send().await
     }
 }
-
 /// Export Zaraz configuration
+///
+/// Exports full current published Zaraz configuration for a zone, secret variables included.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/settings/zaraz/export`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zaraz };
+/// use cloudflare::{ ApiClient, apis::zaraz };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = zones_zaraz_export(&api)
-///     .with_zone_id("value")
+/// let response = zones_zaraz_export(&api)
+///     .with_zone_id("zone_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -169,7 +211,7 @@ pub fn zones_zaraz_export(api: &ApiClient) -> ZonesZarazExportRequest<'_> {
 
 #[derive(Debug)]
 pub struct ZonesZarazHistoryRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, ZarazZarazHistoryResponse>,
 }
 
 impl<'a> ZonesZarazHistoryRequest<'a> {
@@ -200,18 +242,34 @@ impl<'a> ZonesZarazHistoryRequest<'a> {
         self.builder = self.builder.header_param("sortOrder", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<ZarazZarazHistoryResponse> {
         self.builder.send().await
     }
 }
-
 /// List Zaraz historical configuration records
+///
+/// Lists a history of published Zaraz configuration records for a zone.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/settings/zaraz/history`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `offset` (query,optional)
+/// - `limit` (query,optional)
+/// - `sortField` (query,optional)
+/// - `sortOrder` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zaraz };
+/// use cloudflare::{ ApiClient, apis::zaraz };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = zones_zaraz_history(&api)
-///     .with_zone_id("value")
+/// let response = zones_zaraz_history(&api)
+///     .with_zone_id("zone_id")
+///     .with_offset("offset")
+///     .with_limit("limit")
+///     .with_sort_field("sortField")
+///     .with_sort_order("sortOrder")
 ///     .send()
 ///     .await?;
 /// ```
@@ -221,7 +279,7 @@ pub fn zones_zaraz_history(api: &ApiClient) -> ZonesZarazHistoryRequest<'_> {
 
 #[derive(Debug)]
 pub struct ZonesZarazHistoryPutRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, ZarazZarazConfigResponse>,
 }
 
 impl<'a> ZonesZarazHistoryPutRequest<'a> {
@@ -241,18 +299,28 @@ impl<'a> ZonesZarazHistoryPutRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<ZarazZarazConfigResponse> {
         self.builder.send().await
     }
 }
-
 /// Restore Zaraz historical configuration by ID
+///
+/// Restores a historical published Zaraz configuration by ID for a zone.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/zones/{zone_id}/settings/zaraz/history`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zaraz };
+/// use cloudflare::{ ApiClient, apis::zaraz };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = zones_zaraz_history_put(&api)
-///     .with_zone_id("value")
+/// # let body: i64 = todo!();
+/// let response = zones_zaraz_history_put(&api)
+///     .with_zone_id("zone_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -262,7 +330,7 @@ pub fn zones_zaraz_history_put(api: &ApiClient) -> ZonesZarazHistoryPutRequest<'
 
 #[derive(Debug)]
 pub struct ZonesZarazConfigHistoryRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, ZarazZarazConfigHistoryResponse>,
 }
 
 impl<'a> ZonesZarazConfigHistoryRequest<'a> {
@@ -284,18 +352,28 @@ impl<'a> ZonesZarazConfigHistoryRequest<'a> {
         self.builder = self.builder.header_param("ids", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<ZarazZarazConfigHistoryResponse> {
         self.builder.send().await
     }
 }
-
 /// Get Zaraz historical configurations by ID(s)
+///
+/// Gets a history of published Zaraz configurations by ID(s) for a zone.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/settings/zaraz/history/configs`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `ids` (query,required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zaraz };
+/// use cloudflare::{ ApiClient, apis::zaraz };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = zones_zaraz_config_history(&api)
-///     .with_zone_id("value")
+/// let response = zones_zaraz_config_history(&api)
+///     .with_zone_id("zone_id")
+///     .with_ids("ids")
 ///     .send()
 ///     .await?;
 /// ```
@@ -328,14 +406,24 @@ impl<'a> ZonesZarazPublishRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Publish Zaraz preview configuration
+///
+/// Publish current Zaraz preview configuration for a zone.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/zones/{zone_id}/settings/zaraz/publish`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zaraz };
+/// use cloudflare::{ ApiClient, apis::zaraz };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = zones_zaraz_publish(&api)
-///     .with_zone_id("value")
+/// # let body: String = todo!();
+/// let response = zones_zaraz_publish(&api)
+///     .with_zone_id("zone_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -345,7 +433,7 @@ pub fn zones_zaraz_publish(api: &ApiClient) -> ZonesZarazPublishRequest<'_> {
 
 #[derive(Debug)]
 pub struct ZonesZarazWorkflowRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, ZarazZarazWorkflowResponse>,
 }
 
 impl<'a> ZonesZarazWorkflowRequest<'a> {
@@ -360,18 +448,26 @@ impl<'a> ZonesZarazWorkflowRequest<'a> {
         self.builder = self.builder.path_param("zone_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<ZarazZarazWorkflowResponse> {
         self.builder.send().await
     }
 }
-
 /// Get Zaraz workflow
+///
+/// Gets Zaraz workflow for a zone.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/settings/zaraz/workflow`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zaraz };
+/// use cloudflare::{ ApiClient, apis::zaraz };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = zones_zaraz_workflow(&api)
-///     .with_zone_id("value")
+/// let response = zones_zaraz_workflow(&api)
+///     .with_zone_id("zone_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -381,7 +477,7 @@ pub fn zones_zaraz_workflow(api: &ApiClient) -> ZonesZarazWorkflowRequest<'_> {
 
 #[derive(Debug)]
 pub struct ZonesZarazWorkflowPutRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, ZarazZarazWorkflowResponse>,
 }
 
 impl<'a> ZonesZarazWorkflowPutRequest<'a> {
@@ -397,22 +493,35 @@ impl<'a> ZonesZarazWorkflowPutRequest<'a> {
         self.builder = self.builder.path_param("zone_id", value);
         self
     }
-    pub fn with_body(mut self, body: serde_json::Value) -> Self {
+    pub fn with_body(
+        mut self,
+        body: crate::models::zaraz_zaraz_workflow::ZarazZarazWorkflow,
+    ) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<ZarazZarazWorkflowResponse> {
         self.builder.send().await
     }
 }
-
 /// Update Zaraz workflow
+///
+/// Updates Zaraz workflow for a zone.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/zones/{zone_id}/settings/zaraz/workflow`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zaraz };
+/// use cloudflare::{ ApiClient, apis::zaraz };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = zones_zaraz_workflow_put(&api)
-///     .with_zone_id("value")
+/// # let body: crate::models::zaraz_zaraz_workflow::ZarazZarazWorkflow = todo!();
+/// let response = zones_zaraz_workflow_put(&api)
+///     .with_zone_id("zone_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```

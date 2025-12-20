@@ -19,5 +19,5 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct AppEgressSpec {
-    pub r#type: Option<serde_json::Value>,
+    pub r#type: Option<crate::models::app_egress_type_spec::AppEgressTypeSpec>,
 }

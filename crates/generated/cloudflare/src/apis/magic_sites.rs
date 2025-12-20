@@ -15,12 +15,16 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::magic_site_deleted_response::MagicSiteDeletedResponse;
+use crate::models::magic_site_modified_response::MagicSiteModifiedResponse;
+use crate::models::magic_site_single_response::MagicSiteSingleResponse;
+use crate::models::magic_sites_collection_response::MagicSitesCollectionResponse;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct ListSitesRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, MagicSitesCollectionResponse>,
 }
 
 impl<'a> ListSitesRequest<'a> {
@@ -38,18 +42,28 @@ impl<'a> ListSitesRequest<'a> {
         self.builder = self.builder.header_param("connectorid", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<MagicSitesCollectionResponse> {
         self.builder.send().await
     }
 }
-
 /// List Sites
+///
+/// Lists Sites associated with an account. Use connectorid query param to return sites where connectorid matches either site.ConnectorID or site.SecondaryConnectorID.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/magic/sites`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `connectorid` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::magic_sites };
+/// use cloudflare::{ ApiClient, apis::magic_sites };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_sites(&api)
-///     .with_account_id("value")
+/// let response = list_sites(&api)
+///     .with_account_id("account_id")
+///     .with_connectorid("connectorid")
 ///     .send()
 ///     .await?;
 /// ```
@@ -59,7 +73,7 @@ pub fn list_sites(api: &ApiClient) -> ListSitesRequest<'_> {
 
 #[derive(Debug)]
 pub struct CreateSiteRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, MagicSiteSingleResponse>,
 }
 
 impl<'a> CreateSiteRequest<'a> {
@@ -82,18 +96,28 @@ impl<'a> CreateSiteRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<MagicSiteSingleResponse> {
         self.builder.send().await
     }
 }
-
 /// Create a new Site
+///
+/// Creates a new Site
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/magic/sites`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::magic_sites };
+/// use cloudflare::{ ApiClient, apis::magic_sites };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = create_site(&api)
-///     .with_account_id("value")
+/// # let body: crate::models::magic_sites_add_single_request::MagicSitesAddSingleRequest = todo!();
+/// let response = create_site(&api)
+///     .with_account_id("account_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -103,7 +127,7 @@ pub fn create_site(api: &ApiClient) -> CreateSiteRequest<'_> {
 
 #[derive(Debug)]
 pub struct SiteDetailsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, MagicSiteSingleResponse>,
 }
 
 impl<'a> SiteDetailsRequest<'a> {
@@ -130,19 +154,30 @@ impl<'a> SiteDetailsRequest<'a> {
         self.builder = self.builder.header_param("x-magic-new-hc-target", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<MagicSiteSingleResponse> {
         self.builder.send().await
     }
 }
-
 /// Site Details
+///
+/// Get a specific Site.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/magic/sites/{site_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `site_id` (path, required)
+/// - `x-magic-new-hc-target` (header,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::magic_sites };
+/// use cloudflare::{ ApiClient, apis::magic_sites };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = site_details(&api)
-///     .with_account_id("value")
-///     .with_site_id("value")
+/// let response = site_details(&api)
+///     .with_account_id("account_id")
+///     .with_site_id("site_id")
+///     .with_x_magic_new_hc_target("x-magic-new-hc-target")
 ///     .send()
 ///     .await?;
 /// ```
@@ -152,7 +187,7 @@ pub fn site_details(api: &ApiClient) -> SiteDetailsRequest<'_> {
 
 #[derive(Debug)]
 pub struct UpdateSiteRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, MagicSiteModifiedResponse>,
 }
 
 impl<'a> UpdateSiteRequest<'a> {
@@ -183,19 +218,30 @@ impl<'a> UpdateSiteRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<MagicSiteModifiedResponse> {
         self.builder.send().await
     }
 }
-
 /// Update Site
+///
+/// Update a specific Site.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/accounts/{account_id}/magic/sites/{site_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `site_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::magic_sites };
+/// use cloudflare::{ ApiClient, apis::magic_sites };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = update_site(&api)
-///     .with_account_id("value")
-///     .with_site_id("value")
+/// # let body: crate::models::magic_site_update_request::MagicSiteUpdateRequest = todo!();
+/// let response = update_site(&api)
+///     .with_account_id("account_id")
+///     .with_site_id("site_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -205,7 +251,7 @@ pub fn update_site(api: &ApiClient) -> UpdateSiteRequest<'_> {
 
 #[derive(Debug)]
 pub struct DeleteSiteRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, MagicSiteDeletedResponse>,
 }
 
 impl<'a> DeleteSiteRequest<'a> {
@@ -228,19 +274,28 @@ impl<'a> DeleteSiteRequest<'a> {
         self.builder = self.builder.path_param("site_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<MagicSiteDeletedResponse> {
         self.builder.send().await
     }
 }
-
 /// Delete Site
+///
+/// Remove a specific Site.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/accounts/{account_id}/magic/sites/{site_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `site_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::magic_sites };
+/// use cloudflare::{ ApiClient, apis::magic_sites };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete_site(&api)
-///     .with_account_id("value")
-///     .with_site_id("value")
+/// let response = delete_site(&api)
+///     .with_account_id("account_id")
+///     .with_site_id("site_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -250,7 +305,7 @@ pub fn delete_site(api: &ApiClient) -> DeleteSiteRequest<'_> {
 
 #[derive(Debug)]
 pub struct PatchSiteRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, MagicSiteModifiedResponse>,
 }
 
 impl<'a> PatchSiteRequest<'a> {
@@ -281,19 +336,30 @@ impl<'a> PatchSiteRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<MagicSiteModifiedResponse> {
         self.builder.send().await
     }
 }
-
 /// Patch Site
+///
+/// Patch a specific Site.
+///
+/// **HTTP Method:** `PATCH`
+/// **Path:** `/accounts/{account_id}/magic/sites/{site_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `site_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::magic_sites };
+/// use cloudflare::{ ApiClient, apis::magic_sites };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = patch_site(&api)
-///     .with_account_id("value")
-///     .with_site_id("value")
+/// # let body: crate::models::magic_site_update_request::MagicSiteUpdateRequest = todo!();
+/// let response = patch_site(&api)
+///     .with_account_id("account_id")
+///     .with_site_id("site_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```

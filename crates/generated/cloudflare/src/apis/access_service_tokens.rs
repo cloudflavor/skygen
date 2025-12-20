@@ -15,12 +15,15 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::access_components_schemas_response_collection::AccessComponentsSchemasResponseCollection;
+use crate::models::access_create_response::AccessCreateResponse;
+use crate::models::access_schemas_single_response::AccessSchemasSingleResponse;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct ListServiceTokensRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, AccessComponentsSchemasResponseCollection>,
 }
 
 impl<'a> ListServiceTokensRequest<'a> {
@@ -46,18 +49,30 @@ impl<'a> ListServiceTokensRequest<'a> {
         self.builder = self.builder.header_param("search", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<AccessComponentsSchemasResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// List service tokens
+///
+/// Lists all service tokens.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/access/service_tokens`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `name` (query,optional)
+/// - `search` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::access_service_tokens };
+/// use cloudflare::{ ApiClient, apis::access_service_tokens };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_service_tokens(&api)
-///     .with_account_id("value")
+/// let response = list_service_tokens(&api)
+///     .with_account_id("account_id")
+///     .with_name("name")
+///     .with_search("search")
 ///     .send()
 ///     .await?;
 /// ```
@@ -67,7 +82,7 @@ pub fn list_service_tokens(api: &ApiClient) -> ListServiceTokensRequest<'_> {
 
 #[derive(Debug)]
 pub struct CreateServiceTokenRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, AccessCreateResponse>,
 }
 
 impl<'a> CreateServiceTokenRequest<'a> {
@@ -90,18 +105,28 @@ impl<'a> CreateServiceTokenRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<AccessCreateResponse> {
         self.builder.send().await
     }
 }
-
 /// Create a service token
+///
+/// Generates a new service token. **Note:** This is the only time you can get the Client Secret. If you lose the Client Secret, you will have to rotate the Client Secret or create a new service token.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/access/service_tokens`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::access_service_tokens };
+/// use cloudflare::{ ApiClient, apis::access_service_tokens };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = create_service_token(&api)
-///     .with_account_id("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = create_service_token(&api)
+///     .with_account_id("account_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -111,7 +136,7 @@ pub fn create_service_token(api: &ApiClient) -> CreateServiceTokenRequest<'_> {
 
 #[derive(Debug)]
 pub struct GetServiceTokenRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, AccessSchemasSingleResponse>,
 }
 
 impl<'a> GetServiceTokenRequest<'a> {
@@ -134,19 +159,28 @@ impl<'a> GetServiceTokenRequest<'a> {
         self.builder = self.builder.path_param("service_token_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<AccessSchemasSingleResponse> {
         self.builder.send().await
     }
 }
-
 /// Get a service token
+///
+/// Fetches a single service token.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/access/service_tokens/{service_token_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `service_token_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::access_service_tokens };
+/// use cloudflare::{ ApiClient, apis::access_service_tokens };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_service_token(&api)
-///     .with_account_id("value")
-///     .with_service_token_id("value")
+/// let response = get_service_token(&api)
+///     .with_account_id("account_id")
+///     .with_service_token_id("service_token_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -156,7 +190,7 @@ pub fn get_service_token(api: &ApiClient) -> GetServiceTokenRequest<'_> {
 
 #[derive(Debug)]
 pub struct UpdateServiceTokenRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, AccessSchemasSingleResponse>,
 }
 
 impl<'a> UpdateServiceTokenRequest<'a> {
@@ -184,19 +218,30 @@ impl<'a> UpdateServiceTokenRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<AccessSchemasSingleResponse> {
         self.builder.send().await
     }
 }
-
 /// Update a service token
+///
+/// Updates a configured service token.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/accounts/{account_id}/access/service_tokens/{service_token_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `service_token_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::access_service_tokens };
+/// use cloudflare::{ ApiClient, apis::access_service_tokens };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = update_service_token(&api)
-///     .with_account_id("value")
-///     .with_service_token_id("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = update_service_token(&api)
+///     .with_account_id("account_id")
+///     .with_service_token_id("service_token_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -206,7 +251,7 @@ pub fn update_service_token(api: &ApiClient) -> UpdateServiceTokenRequest<'_> {
 
 #[derive(Debug)]
 pub struct DeleteServiceTokenRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, AccessSchemasSingleResponse>,
 }
 
 impl<'a> DeleteServiceTokenRequest<'a> {
@@ -229,19 +274,28 @@ impl<'a> DeleteServiceTokenRequest<'a> {
         self.builder = self.builder.path_param("service_token_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<AccessSchemasSingleResponse> {
         self.builder.send().await
     }
 }
-
 /// Delete a service token
+///
+/// Deletes a service token.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/accounts/{account_id}/access/service_tokens/{service_token_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `service_token_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::access_service_tokens };
+/// use cloudflare::{ ApiClient, apis::access_service_tokens };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete_service_token(&api)
-///     .with_account_id("value")
-///     .with_service_token_id("value")
+/// let response = delete_service_token(&api)
+///     .with_account_id("account_id")
+///     .with_service_token_id("service_token_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -251,7 +305,7 @@ pub fn delete_service_token(api: &ApiClient) -> DeleteServiceTokenRequest<'_> {
 
 #[derive(Debug)]
 pub struct RefreshServiceTokenRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, AccessSchemasSingleResponse>,
 }
 
 impl<'a> RefreshServiceTokenRequest<'a> {
@@ -274,19 +328,28 @@ impl<'a> RefreshServiceTokenRequest<'a> {
         self.builder = self.builder.path_param("service_token_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<AccessSchemasSingleResponse> {
         self.builder.send().await
     }
 }
-
 /// Refresh a service token
+///
+/// Refreshes the expiration of a service token.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/access/service_tokens/{service_token_id}/refresh`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `service_token_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::access_service_tokens };
+/// use cloudflare::{ ApiClient, apis::access_service_tokens };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = refresh_service_token(&api)
-///     .with_account_id("value")
-///     .with_service_token_id("value")
+/// let response = refresh_service_token(&api)
+///     .with_account_id("account_id")
+///     .with_service_token_id("service_token_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -296,7 +359,7 @@ pub fn refresh_service_token(api: &ApiClient) -> RefreshServiceTokenRequest<'_> 
 
 #[derive(Debug)]
 pub struct RotateServiceTokenRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, AccessCreateResponse>,
 }
 
 impl<'a> RotateServiceTokenRequest<'a> {
@@ -319,19 +382,28 @@ impl<'a> RotateServiceTokenRequest<'a> {
         self.builder = self.builder.path_param("service_token_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<AccessCreateResponse> {
         self.builder.send().await
     }
 }
-
 /// Rotate a service token
+///
+/// Generates a new Client Secret for a service token and revokes the old one.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/access/service_tokens/{service_token_id}/rotate`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `service_token_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::access_service_tokens };
+/// use cloudflare::{ ApiClient, apis::access_service_tokens };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = rotate_service_token(&api)
-///     .with_account_id("value")
-///     .with_service_token_id("value")
+/// let response = rotate_service_token(&api)
+///     .with_account_id("account_id")
+///     .with_service_token_id("service_token_id")
 ///     .send()
 ///     .await?;
 /// ```

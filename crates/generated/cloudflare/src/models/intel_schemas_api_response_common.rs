@@ -19,7 +19,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct IntelSchemasApiResponseCommon {
-    pub errors: serde_json::Value,
-    pub messages: serde_json::Value,
+    pub errors: crate::models::intel_schemas_messages::IntelSchemasMessages,
+    pub messages: crate::models::intel_schemas_messages::IntelSchemasMessages,
     pub success: bool,
 }

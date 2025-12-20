@@ -15,12 +15,19 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::iam_api_response_single_id::IamApiResponseSingleId;
+use crate::models::iam_collection_tokens_response::IamCollectionTokensResponse;
+use crate::models::iam_permissions_group_response_collection::IamPermissionsGroupResponseCollection;
+use crate::models::iam_response_single_segment::IamResponseSingleSegment;
+use crate::models::iam_response_single_value::IamResponseSingleValue;
+use crate::models::iam_single_token_create_response::IamSingleTokenCreateResponse;
+use crate::models::iam_single_token_response::IamSingleTokenResponse;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct ListTokensRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, IamCollectionTokensResponse>,
 }
 
 impl<'a> ListTokensRequest<'a> {
@@ -41,17 +48,30 @@ impl<'a> ListTokensRequest<'a> {
         self.builder = self.builder.header_param("direction", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<IamCollectionTokensResponse> {
         self.builder.send().await
     }
 }
-
 /// List Tokens
+///
+/// List all access tokens you created.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/user/tokens`
+///
+/// **Parameters**
+/// - `page` (query,optional)
+/// - `per_page` (query,optional)
+/// - `direction` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::user_api_tokens };
+/// use cloudflare::{ ApiClient, apis::user_api_tokens };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_tokens(&api)
+/// let response = list_tokens(&api)
+///     .with_page("page")
+///     .with_per_page("per_page")
+///     .with_direction("direction")
 ///     .send()
 ///     .await?;
 /// ```
@@ -61,7 +81,7 @@ pub fn list_tokens(api: &ApiClient) -> ListTokensRequest<'_> {
 
 #[derive(Debug)]
 pub struct CreateTokenRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, IamSingleTokenCreateResponse>,
 }
 
 impl<'a> CreateTokenRequest<'a> {
@@ -74,17 +94,24 @@ impl<'a> CreateTokenRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<IamSingleTokenCreateResponse> {
         self.builder.send().await
     }
 }
-
 /// Create Token
+///
+/// Create a new access token.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/user/tokens`
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::user_api_tokens };
+/// use cloudflare::{ ApiClient, apis::user_api_tokens };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = create_token(&api)
+/// # let body: crate::models::iam_create_payload::IamCreatePayload = todo!();
+/// let response = create_token(&api)
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -94,7 +121,7 @@ pub fn create_token(api: &ApiClient) -> CreateTokenRequest<'_> {
 
 #[derive(Debug)]
 pub struct PermissionGroupsListPermissionRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, IamPermissionsGroupResponseCollection>,
 }
 
 impl<'a> PermissionGroupsListPermissionRequest<'a> {
@@ -103,17 +130,22 @@ impl<'a> PermissionGroupsListPermissionRequest<'a> {
 
         Self { builder }
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<IamPermissionsGroupResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// List Token Permission Groups
+///
+/// Find all available permission groups for API Tokens
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/user/tokens/permission_groups`
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::user_api_tokens };
+/// use cloudflare::{ ApiClient, apis::user_api_tokens };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = permission_groups_list_permission(&api)
+/// let response = permission_groups_list_permission(&api)
 ///     .send()
 ///     .await?;
 /// ```
@@ -125,7 +157,7 @@ pub fn permission_groups_list_permission(
 
 #[derive(Debug)]
 pub struct VerifyTokenRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, IamResponseSingleSegment>,
 }
 
 impl<'a> VerifyTokenRequest<'a> {
@@ -134,17 +166,22 @@ impl<'a> VerifyTokenRequest<'a> {
 
         Self { builder }
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<IamResponseSingleSegment> {
         self.builder.send().await
     }
 }
-
 /// Verify Token
+///
+/// Test whether a token works.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/user/tokens/verify`
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::user_api_tokens };
+/// use cloudflare::{ ApiClient, apis::user_api_tokens };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = verify_token(&api)
+/// let response = verify_token(&api)
 ///     .send()
 ///     .await?;
 /// ```
@@ -154,7 +191,7 @@ pub fn verify_token(api: &ApiClient) -> VerifyTokenRequest<'_> {
 
 #[derive(Debug)]
 pub struct TokenDetailsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, IamSingleTokenResponse>,
 }
 
 impl<'a> TokenDetailsRequest<'a> {
@@ -168,18 +205,26 @@ impl<'a> TokenDetailsRequest<'a> {
         self.builder = self.builder.path_param("token_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<IamSingleTokenResponse> {
         self.builder.send().await
     }
 }
-
 /// Token Details
+///
+/// Get information about a specific token.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/user/tokens/{token_id}`
+///
+/// **Parameters**
+/// - `token_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::user_api_tokens };
+/// use cloudflare::{ ApiClient, apis::user_api_tokens };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = token_details(&api)
-///     .with_token_id("value")
+/// let response = token_details(&api)
+///     .with_token_id("token_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -189,7 +234,7 @@ pub fn token_details(api: &ApiClient) -> TokenDetailsRequest<'_> {
 
 #[derive(Debug)]
 pub struct UpdateTokenRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, IamSingleTokenResponse>,
 }
 
 impl<'a> UpdateTokenRequest<'a> {
@@ -204,22 +249,32 @@ impl<'a> UpdateTokenRequest<'a> {
         self.builder = self.builder.path_param("token_id", value);
         self
     }
-    pub fn with_body(mut self, body: serde_json::Value) -> Self {
+    pub fn with_body(mut self, body: crate::models::iam_token_body::IamTokenBody) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<IamSingleTokenResponse> {
         self.builder.send().await
     }
 }
-
 /// Update Token
+///
+/// Update an existing token.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/user/tokens/{token_id}`
+///
+/// **Parameters**
+/// - `token_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::user_api_tokens };
+/// use cloudflare::{ ApiClient, apis::user_api_tokens };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = update_token(&api)
-///     .with_token_id("value")
+/// # let body: crate::models::iam_token_body::IamTokenBody = todo!();
+/// let response = update_token(&api)
+///     .with_token_id("token_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -229,7 +284,7 @@ pub fn update_token(api: &ApiClient) -> UpdateTokenRequest<'_> {
 
 #[derive(Debug)]
 pub struct DeleteTokenRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, IamApiResponseSingleId>,
 }
 
 impl<'a> DeleteTokenRequest<'a> {
@@ -243,18 +298,26 @@ impl<'a> DeleteTokenRequest<'a> {
         self.builder = self.builder.path_param("token_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<IamApiResponseSingleId> {
         self.builder.send().await
     }
 }
-
 /// Delete Token
+///
+/// Destroy a token.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/user/tokens/{token_id}`
+///
+/// **Parameters**
+/// - `token_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::user_api_tokens };
+/// use cloudflare::{ ApiClient, apis::user_api_tokens };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete_token(&api)
-///     .with_token_id("value")
+/// let response = delete_token(&api)
+///     .with_token_id("token_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -264,7 +327,7 @@ pub fn delete_token(api: &ApiClient) -> DeleteTokenRequest<'_> {
 
 #[derive(Debug)]
 pub struct RollTokenRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, IamResponseSingleValue>,
 }
 
 impl<'a> RollTokenRequest<'a> {
@@ -286,18 +349,28 @@ impl<'a> RollTokenRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<IamResponseSingleValue> {
         self.builder.send().await
     }
 }
-
 /// Roll Token
+///
+/// Roll the token secret.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/user/tokens/{token_id}/value`
+///
+/// **Parameters**
+/// - `token_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::user_api_tokens };
+/// use cloudflare::{ ApiClient, apis::user_api_tokens };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = roll_token(&api)
-///     .with_token_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = roll_token(&api)
+///     .with_token_id("token_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```

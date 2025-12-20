@@ -19,12 +19,13 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct MagicGreTunnelAddSingleRequest {
-    pub cloudflare_gre_endpoint: serde_json::Value,
-    pub customer_gre_endpoint: serde_json::Value,
-    pub description: Option<serde_json::Value>,
-    pub health_check: Option<serde_json::Value>,
-    pub interface_address: serde_json::Value,
-    pub mtu: Option<serde_json::Value>,
-    pub name: serde_json::Value,
-    pub ttl: Option<serde_json::Value>,
+    pub cloudflare_gre_endpoint:
+        crate::models::magic_cloudflare_gre_endpoint::MagicCloudflareGreEndpoint,
+    pub customer_gre_endpoint: crate::models::magic_customer_gre_endpoint::MagicCustomerGreEndpoint,
+    pub description: Option<crate::models::magic_schemas_description::MagicSchemasDescription>,
+    pub health_check: Option<crate::models::magic_tunnel_health_check::MagicTunnelHealthCheck>,
+    pub interface_address: crate::models::magic_interface_address::MagicInterfaceAddress,
+    pub mtu: Option<crate::models::magic_mtu::MagicMtu>,
+    pub name: crate::models::magic_gre_tunnel_name::MagicGreTunnelName,
+    pub ttl: Option<crate::models::magic_ttl::MagicTtl>,
 }

@@ -15,12 +15,19 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::rum_rule_id_response_single::RumRuleIdResponseSingle;
+use crate::models::rum_rule_response_single::RumRuleResponseSingle;
+use crate::models::rum_rules_response_collection::RumRulesResponseCollection;
+use crate::models::rum_rum_site_response_single::RumRumSiteResponseSingle;
+use crate::models::rum_site_response_single::RumSiteResponseSingle;
+use crate::models::rum_site_tag_response_single::RumSiteTagResponseSingle;
+use crate::models::rum_sites_response_collection::RumSitesResponseCollection;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct CreateSiteRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, RumSiteResponseSingle>,
 }
 
 impl<'a> CreateSiteRequest<'a> {
@@ -43,18 +50,28 @@ impl<'a> CreateSiteRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<RumSiteResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Create a Web Analytics site
+///
+/// Creates a new Web Analytics site.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/rum/site_info`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::web_analytics };
+/// use cloudflare::{ ApiClient, apis::web_analytics };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = create_site(&api)
-///     .with_account_id("value")
+/// # let body: crate::models::rum_create_site_request::RumCreateSiteRequest = todo!();
+/// let response = create_site(&api)
+///     .with_account_id("account_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -64,7 +81,7 @@ pub fn create_site(api: &ApiClient) -> CreateSiteRequest<'_> {
 
 #[derive(Debug)]
 pub struct ListSitesRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, RumSitesResponseCollection>,
 }
 
 impl<'a> ListSitesRequest<'a> {
@@ -91,18 +108,32 @@ impl<'a> ListSitesRequest<'a> {
         self.builder = self.builder.header_param("order_by", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<RumSitesResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// List Web Analytics sites
+///
+/// Lists all Web Analytics sites of an account.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/rum/site_info/list`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `per_page` (query,optional)
+/// - `page` (query,optional)
+/// - `order_by` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::web_analytics };
+/// use cloudflare::{ ApiClient, apis::web_analytics };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_sites(&api)
-///     .with_account_id("value")
+/// let response = list_sites(&api)
+///     .with_account_id("account_id")
+///     .with_per_page("per_page")
+///     .with_page("page")
+///     .with_order_by("order_by")
 ///     .send()
 ///     .await?;
 /// ```
@@ -112,7 +143,7 @@ pub fn list_sites(api: &ApiClient) -> ListSitesRequest<'_> {
 
 #[derive(Debug)]
 pub struct GetSiteRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, RumSiteResponseSingle>,
 }
 
 impl<'a> GetSiteRequest<'a> {
@@ -135,19 +166,28 @@ impl<'a> GetSiteRequest<'a> {
         self.builder = self.builder.path_param("site_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<RumSiteResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Get a Web Analytics site
+///
+/// Retrieves a Web Analytics site.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/rum/site_info/{site_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `site_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::web_analytics };
+/// use cloudflare::{ ApiClient, apis::web_analytics };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_site(&api)
-///     .with_account_id("value")
-///     .with_site_id("value")
+/// let response = get_site(&api)
+///     .with_account_id("account_id")
+///     .with_site_id("site_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -157,7 +197,7 @@ pub fn get_site(api: &ApiClient) -> GetSiteRequest<'_> {
 
 #[derive(Debug)]
 pub struct UpdateSiteRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, RumSiteResponseSingle>,
 }
 
 impl<'a> UpdateSiteRequest<'a> {
@@ -188,19 +228,30 @@ impl<'a> UpdateSiteRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<RumSiteResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Update a Web Analytics site
+///
+/// Updates an existing Web Analytics site.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/accounts/{account_id}/rum/site_info/{site_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `site_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::web_analytics };
+/// use cloudflare::{ ApiClient, apis::web_analytics };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = update_site(&api)
-///     .with_account_id("value")
-///     .with_site_id("value")
+/// # let body: crate::models::rum_update_site_request::RumUpdateSiteRequest = todo!();
+/// let response = update_site(&api)
+///     .with_account_id("account_id")
+///     .with_site_id("site_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -210,7 +261,7 @@ pub fn update_site(api: &ApiClient) -> UpdateSiteRequest<'_> {
 
 #[derive(Debug)]
 pub struct DeleteSiteRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, RumSiteTagResponseSingle>,
 }
 
 impl<'a> DeleteSiteRequest<'a> {
@@ -233,19 +284,28 @@ impl<'a> DeleteSiteRequest<'a> {
         self.builder = self.builder.path_param("site_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<RumSiteTagResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Delete a Web Analytics site
+///
+/// Deletes an existing Web Analytics site.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/accounts/{account_id}/rum/site_info/{site_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `site_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::web_analytics };
+/// use cloudflare::{ ApiClient, apis::web_analytics };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete_site(&api)
-///     .with_account_id("value")
-///     .with_site_id("value")
+/// let response = delete_site(&api)
+///     .with_account_id("account_id")
+///     .with_site_id("site_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -255,7 +315,7 @@ pub fn delete_site(api: &ApiClient) -> DeleteSiteRequest<'_> {
 
 #[derive(Debug)]
 pub struct CreateRuleRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, RumRuleResponseSingle>,
 }
 
 impl<'a> CreateRuleRequest<'a> {
@@ -286,19 +346,30 @@ impl<'a> CreateRuleRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<RumRuleResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Create a Web Analytics rule
+///
+/// Creates a new rule in a Web Analytics ruleset.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/rum/v2/{ruleset_id}/rule`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `ruleset_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::web_analytics };
+/// use cloudflare::{ ApiClient, apis::web_analytics };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = create_rule(&api)
-///     .with_account_id("value")
-///     .with_ruleset_id("value")
+/// # let body: crate::models::rum_create_rule_request::RumCreateRuleRequest = todo!();
+/// let response = create_rule(&api)
+///     .with_account_id("account_id")
+///     .with_ruleset_id("ruleset_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -308,7 +379,7 @@ pub fn create_rule(api: &ApiClient) -> CreateRuleRequest<'_> {
 
 #[derive(Debug)]
 pub struct UpdateRuleRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, RumRuleResponseSingle>,
 }
 
 impl<'a> UpdateRuleRequest<'a> {
@@ -344,20 +415,32 @@ impl<'a> UpdateRuleRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<RumRuleResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Update a Web Analytics rule
+///
+/// Updates a rule in a Web Analytics ruleset.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/accounts/{account_id}/rum/v2/{ruleset_id}/rule/{rule_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `ruleset_id` (path, required)
+/// - `rule_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::web_analytics };
+/// use cloudflare::{ ApiClient, apis::web_analytics };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = update_rule(&api)
-///     .with_account_id("value")
-///     .with_ruleset_id("value")
-///     .with_rule_id("value")
+/// # let body: crate::models::rum_create_rule_request::RumCreateRuleRequest = todo!();
+/// let response = update_rule(&api)
+///     .with_account_id("account_id")
+///     .with_ruleset_id("ruleset_id")
+///     .with_rule_id("rule_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -367,7 +450,7 @@ pub fn update_rule(api: &ApiClient) -> UpdateRuleRequest<'_> {
 
 #[derive(Debug)]
 pub struct DeleteRuleRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, RumRuleIdResponseSingle>,
 }
 
 impl<'a> DeleteRuleRequest<'a> {
@@ -395,20 +478,30 @@ impl<'a> DeleteRuleRequest<'a> {
         self.builder = self.builder.path_param("rule_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<RumRuleIdResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Delete a Web Analytics rule
+///
+/// Deletes an existing rule from a Web Analytics ruleset.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/accounts/{account_id}/rum/v2/{ruleset_id}/rule/{rule_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `ruleset_id` (path, required)
+/// - `rule_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::web_analytics };
+/// use cloudflare::{ ApiClient, apis::web_analytics };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete_rule(&api)
-///     .with_account_id("value")
-///     .with_ruleset_id("value")
-///     .with_rule_id("value")
+/// let response = delete_rule(&api)
+///     .with_account_id("account_id")
+///     .with_ruleset_id("ruleset_id")
+///     .with_rule_id("rule_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -418,7 +511,7 @@ pub fn delete_rule(api: &ApiClient) -> DeleteRuleRequest<'_> {
 
 #[derive(Debug)]
 pub struct ListRulesRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, RumRulesResponseCollection>,
 }
 
 impl<'a> ListRulesRequest<'a> {
@@ -441,19 +534,28 @@ impl<'a> ListRulesRequest<'a> {
         self.builder = self.builder.path_param("ruleset_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<RumRulesResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// List rules in Web Analytics ruleset
+///
+/// Lists all the rules in a Web Analytics ruleset.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/rum/v2/{ruleset_id}/rules`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `ruleset_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::web_analytics };
+/// use cloudflare::{ ApiClient, apis::web_analytics };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_rules(&api)
-///     .with_account_id("value")
-///     .with_ruleset_id("value")
+/// let response = list_rules(&api)
+///     .with_account_id("account_id")
+///     .with_ruleset_id("ruleset_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -463,7 +565,7 @@ pub fn list_rules(api: &ApiClient) -> ListRulesRequest<'_> {
 
 #[derive(Debug)]
 pub struct ModifyRulesRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, RumRulesResponseCollection>,
 }
 
 impl<'a> ModifyRulesRequest<'a> {
@@ -494,19 +596,30 @@ impl<'a> ModifyRulesRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<RumRulesResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// Update Web Analytics rules
+///
+/// Modifies one or more rules in a Web Analytics ruleset with a single request.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/rum/v2/{ruleset_id}/rules`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `ruleset_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::web_analytics };
+/// use cloudflare::{ ApiClient, apis::web_analytics };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = modify_rules(&api)
-///     .with_account_id("value")
-///     .with_ruleset_id("value")
+/// # let body: crate::models::rum_modify_rules_request::RumModifyRulesRequest = todo!();
+/// let response = modify_rules(&api)
+///     .with_account_id("account_id")
+///     .with_ruleset_id("ruleset_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -516,7 +629,7 @@ pub fn modify_rules(api: &ApiClient) -> ModifyRulesRequest<'_> {
 
 #[derive(Debug)]
 pub struct GetRumStatusRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, RumRumSiteResponseSingle>,
 }
 
 impl<'a> GetRumStatusRequest<'a> {
@@ -530,18 +643,26 @@ impl<'a> GetRumStatusRequest<'a> {
         self.builder = self.builder.path_param("zone_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<RumRumSiteResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Get RUM status for a zone
+///
+/// Retrieves RUM status for a zone.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/settings/rum`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::web_analytics };
+/// use cloudflare::{ ApiClient, apis::web_analytics };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_rum_status(&api)
-///     .with_zone_id("value")
+/// let response = get_rum_status(&api)
+///     .with_zone_id("zone_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -551,7 +672,7 @@ pub fn get_rum_status(api: &ApiClient) -> GetRumStatusRequest<'_> {
 
 #[derive(Debug)]
 pub struct ToggleRumRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, RumRumSiteResponseSingle>,
 }
 
 impl<'a> ToggleRumRequest<'a> {
@@ -573,18 +694,28 @@ impl<'a> ToggleRumRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<RumRumSiteResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Toggle RUM on/off for a zone
+///
+/// Toggles RUM on/off for an existing zone
+///
+/// **HTTP Method:** `PATCH`
+/// **Path:** `/zones/{zone_id}/settings/rum`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::web_analytics };
+/// use cloudflare::{ ApiClient, apis::web_analytics };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = toggle_rum(&api)
-///     .with_zone_id("value")
+/// # let body: crate::models::rum_toggle_rum_request::RumToggleRumRequest = todo!();
+/// let response = toggle_rum(&api)
+///     .with_zone_id("zone_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```

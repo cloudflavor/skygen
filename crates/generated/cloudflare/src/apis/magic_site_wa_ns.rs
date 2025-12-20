@@ -15,12 +15,16 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::magic_wan_deleted_response::MagicWanDeletedResponse;
+use crate::models::magic_wan_modified_response::MagicWanModifiedResponse;
+use crate::models::magic_wan_single_response::MagicWanSingleResponse;
+use crate::models::magic_wans_collection_response::MagicWansCollectionResponse;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct WansListWansRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, MagicWansCollectionResponse>,
 }
 
 impl<'a> WansListWansRequest<'a> {
@@ -43,19 +47,28 @@ impl<'a> WansListWansRequest<'a> {
         self.builder = self.builder.path_param("site_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<MagicWansCollectionResponse> {
         self.builder.send().await
     }
 }
-
 /// List Site WANs
+///
+/// Lists Site WANs associated with an account.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/magic/sites/{site_id}/wans`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `site_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::magic_site_wa_ns };
+/// use cloudflare::{ ApiClient, apis::magic_site_wa_ns };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = wans_list_wans(&api)
-///     .with_account_id("value")
-///     .with_site_id("value")
+/// let response = wans_list_wans(&api)
+///     .with_account_id("account_id")
+///     .with_site_id("site_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -65,7 +78,7 @@ pub fn wans_list_wans(api: &ApiClient) -> WansListWansRequest<'_> {
 
 #[derive(Debug)]
 pub struct WansCreateWanRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, MagicWansCollectionResponse>,
 }
 
 impl<'a> WansCreateWanRequest<'a> {
@@ -96,19 +109,30 @@ impl<'a> WansCreateWanRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<MagicWansCollectionResponse> {
         self.builder.send().await
     }
 }
-
 /// Create a new Site WAN
+///
+/// Creates a new Site WAN.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/magic/sites/{site_id}/wans`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `site_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::magic_site_wa_ns };
+/// use cloudflare::{ ApiClient, apis::magic_site_wa_ns };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = wans_create_wan(&api)
-///     .with_account_id("value")
-///     .with_site_id("value")
+/// # let body: crate::models::magic_wans_add_single_request::MagicWansAddSingleRequest = todo!();
+/// let response = wans_create_wan(&api)
+///     .with_account_id("account_id")
+///     .with_site_id("site_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -118,7 +142,7 @@ pub fn wans_create_wan(api: &ApiClient) -> WansCreateWanRequest<'_> {
 
 #[derive(Debug)]
 pub struct WansWanDetailsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, MagicWanSingleResponse>,
 }
 
 impl<'a> WansWanDetailsRequest<'a> {
@@ -146,20 +170,30 @@ impl<'a> WansWanDetailsRequest<'a> {
         self.builder = self.builder.path_param("wan_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<MagicWanSingleResponse> {
         self.builder.send().await
     }
 }
-
 /// Site WAN Details
+///
+/// Get a specific Site WAN.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/magic/sites/{site_id}/wans/{wan_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `site_id` (path, required)
+/// - `wan_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::magic_site_wa_ns };
+/// use cloudflare::{ ApiClient, apis::magic_site_wa_ns };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = wans_wan_details(&api)
-///     .with_account_id("value")
-///     .with_site_id("value")
-///     .with_wan_id("value")
+/// let response = wans_wan_details(&api)
+///     .with_account_id("account_id")
+///     .with_site_id("site_id")
+///     .with_wan_id("wan_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -169,7 +203,7 @@ pub fn wans_wan_details(api: &ApiClient) -> WansWanDetailsRequest<'_> {
 
 #[derive(Debug)]
 pub struct WansUpdateWanRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, MagicWanModifiedResponse>,
 }
 
 impl<'a> WansUpdateWanRequest<'a> {
@@ -205,20 +239,32 @@ impl<'a> WansUpdateWanRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<MagicWanModifiedResponse> {
         self.builder.send().await
     }
 }
-
 /// Update Site WAN
+///
+/// Update a specific Site WAN.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/accounts/{account_id}/magic/sites/{site_id}/wans/{wan_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `site_id` (path, required)
+/// - `wan_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::magic_site_wa_ns };
+/// use cloudflare::{ ApiClient, apis::magic_site_wa_ns };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = wans_update_wan(&api)
-///     .with_account_id("value")
-///     .with_site_id("value")
-///     .with_wan_id("value")
+/// # let body: crate::models::magic_wan_update_request::MagicWanUpdateRequest = todo!();
+/// let response = wans_update_wan(&api)
+///     .with_account_id("account_id")
+///     .with_site_id("site_id")
+///     .with_wan_id("wan_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -228,7 +274,7 @@ pub fn wans_update_wan(api: &ApiClient) -> WansUpdateWanRequest<'_> {
 
 #[derive(Debug)]
 pub struct WansDeleteWanRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, MagicWanDeletedResponse>,
 }
 
 impl<'a> WansDeleteWanRequest<'a> {
@@ -256,20 +302,30 @@ impl<'a> WansDeleteWanRequest<'a> {
         self.builder = self.builder.path_param("wan_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<MagicWanDeletedResponse> {
         self.builder.send().await
     }
 }
-
 /// Delete Site WAN
+///
+/// Remove a specific Site WAN.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/accounts/{account_id}/magic/sites/{site_id}/wans/{wan_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `site_id` (path, required)
+/// - `wan_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::magic_site_wa_ns };
+/// use cloudflare::{ ApiClient, apis::magic_site_wa_ns };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = wans_delete_wan(&api)
-///     .with_account_id("value")
-///     .with_site_id("value")
-///     .with_wan_id("value")
+/// let response = wans_delete_wan(&api)
+///     .with_account_id("account_id")
+///     .with_site_id("site_id")
+///     .with_wan_id("wan_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -279,7 +335,7 @@ pub fn wans_delete_wan(api: &ApiClient) -> WansDeleteWanRequest<'_> {
 
 #[derive(Debug)]
 pub struct WansPatchWanRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, MagicWanModifiedResponse>,
 }
 
 impl<'a> WansPatchWanRequest<'a> {
@@ -315,20 +371,32 @@ impl<'a> WansPatchWanRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<MagicWanModifiedResponse> {
         self.builder.send().await
     }
 }
-
 /// Patch Site WAN
+///
+/// Patch a specific Site WAN.
+///
+/// **HTTP Method:** `PATCH`
+/// **Path:** `/accounts/{account_id}/magic/sites/{site_id}/wans/{wan_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `site_id` (path, required)
+/// - `wan_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::magic_site_wa_ns };
+/// use cloudflare::{ ApiClient, apis::magic_site_wa_ns };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = wans_patch_wan(&api)
-///     .with_account_id("value")
-///     .with_site_id("value")
-///     .with_wan_id("value")
+/// # let body: crate::models::magic_wan_update_request::MagicWanUpdateRequest = todo!();
+/// let response = wans_patch_wan(&api)
+///     .with_account_id("account_id")
+///     .with_site_id("site_id")
+///     .with_wan_id("wan_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```

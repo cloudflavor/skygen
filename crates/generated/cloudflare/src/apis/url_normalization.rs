@@ -15,13 +15,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-use crate::models::rulesets_url_normalization::RulesetsUrlNormalization;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct GetRequest<'a> {
-    builder: ApiRequestBuilder<'a, RulesetsUrlNormalization>,
+    builder: ApiRequestBuilder<'a, serde_json::Value>,
 }
 
 impl<'a> GetRequest<'a> {
@@ -35,18 +34,26 @@ impl<'a> GetRequest<'a> {
         self.builder = self.builder.path_param("zone_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<RulesetsUrlNormalization> {
+    pub async fn send(self) -> ApiResult<serde_json::Value> {
         self.builder.send().await
     }
 }
-
 /// Get URL Normalization settings
+///
+/// Fetches the current URL Normalization settings.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/url_normalization`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::url_normalization };
+/// use cloudflare::{ ApiClient, apis::url_normalization };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get(&api)
-///     .with_zone_id("value")
+/// let response = get(&api)
+///     .with_zone_id("zone_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -56,7 +63,7 @@ pub fn get(api: &ApiClient) -> GetRequest<'_> {
 
 #[derive(Debug)]
 pub struct UpdateUrlNormalizationRequest<'a> {
-    builder: ApiRequestBuilder<'a, RulesetsUrlNormalization>,
+    builder: ApiRequestBuilder<'a, serde_json::Value>,
 }
 
 impl<'a> UpdateUrlNormalizationRequest<'a> {
@@ -71,22 +78,35 @@ impl<'a> UpdateUrlNormalizationRequest<'a> {
         self.builder = self.builder.path_param("zone_id", value);
         self
     }
-    pub fn with_body(mut self, body: RulesetsUrlNormalization) -> Self {
+    pub fn with_body(
+        mut self,
+        body: crate::models::rulesets_url_normalization::RulesetsUrlNormalization,
+    ) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<RulesetsUrlNormalization> {
+    pub async fn send(self) -> ApiResult<serde_json::Value> {
         self.builder.send().await
     }
 }
-
 /// Update URL Normalization settings
+///
+/// Updates the URL Normalization settings.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/zones/{zone_id}/url_normalization`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::url_normalization };
+/// use cloudflare::{ ApiClient, apis::url_normalization };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = update_url_normalization(&api)
-///     .with_zone_id("value")
+/// # let body: crate::models::rulesets_url_normalization::RulesetsUrlNormalization = todo!();
+/// let response = update_url_normalization(&api)
+///     .with_zone_id("zone_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -115,14 +135,22 @@ impl<'a> DeleteRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Delete URL Normalization settings
+///
+/// Deletes the URL Normalization settings.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/zones/{zone_id}/url_normalization`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::url_normalization };
+/// use cloudflare::{ ApiClient, apis::url_normalization };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete(&api)
-///     .with_zone_id("value")
+/// let response = delete(&api)
+///     .with_zone_id("zone_id")
 ///     .send()
 ///     .await?;
 /// ```

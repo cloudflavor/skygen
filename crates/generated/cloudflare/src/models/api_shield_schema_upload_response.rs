@@ -19,7 +19,6 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct ApiShieldSchemaUploadResponse {
-
     pub schema: crate::models::api_shield_public_schema::ApiShieldPublicSchema,
     pub upload_details: Option<crate::models::api_shield_schema_upload_details_warnings_only::ApiShieldSchemaUploadDetailsWarningsOnly>,
 }

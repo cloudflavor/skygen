@@ -48,15 +48,24 @@ impl<'a> AccountsWorkersScriptsScriptRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// List Tails
+///
+/// Get list of tails currently deployed on a Worker.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/workers/scripts/{script_name}/tails`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `script_name` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::worker_tail_logs };
+/// use cloudflare::{ ApiClient, apis::worker_tail_logs };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = accounts_workers_scripts_script(&api)
-///     .with_account_id("value")
-///     .with_script_name("value")
+/// let response = accounts_workers_scripts_script(&api)
+///     .with_account_id("account_id")
+///     .with_script_name("script_name")
 ///     .send()
 ///     .await?;
 /// ```
@@ -93,15 +102,24 @@ impl<'a> StartTailRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Start Tail
+///
+/// Starts a tail that receives logs and exception from a Worker.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/workers/scripts/{script_name}/tails`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `script_name` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::worker_tail_logs };
+/// use cloudflare::{ ApiClient, apis::worker_tail_logs };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = start_tail(&api)
-///     .with_account_id("value")
-///     .with_script_name("value")
+/// let response = start_tail(&api)
+///     .with_account_id("account_id")
+///     .with_script_name("script_name")
 ///     .send()
 ///     .await?;
 /// ```
@@ -143,16 +161,26 @@ impl<'a> DeleteTailRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Delete Tail
+///
+/// Deletes a tail from a Worker.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/accounts/{account_id}/workers/scripts/{script_name}/tails/{id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `script_name` (path, required)
+/// - `id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::worker_tail_logs };
+/// use cloudflare::{ ApiClient, apis::worker_tail_logs };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete_tail(&api)
-///     .with_account_id("value")
-///     .with_script_name("value")
-///     .with_id("value")
+/// let response = delete_tail(&api)
+///     .with_account_id("account_id")
+///     .with_script_name("script_name")
+///     .with_id("id")
 ///     .send()
 ///     .await?;
 /// ```

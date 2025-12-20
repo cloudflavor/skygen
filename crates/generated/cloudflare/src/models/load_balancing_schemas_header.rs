@@ -19,5 +19,5 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct LoadBalancingSchemasHeader {
-    pub host: Option<serde_json::Value>,
+    pub host: Option<crate::models::load_balancing_host::LoadBalancingHost>,
 }

@@ -15,12 +15,18 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::load_balancing_id_response::LoadBalancingIdResponse;
+use crate::models::load_balancing_monitor_references_response::LoadBalancingMonitorReferencesResponse;
+use crate::models::load_balancing_monitor_response_collection::LoadBalancingMonitorResponseCollection;
+use crate::models::load_balancing_monitor_response_single::LoadBalancingMonitorResponseSingle;
+use crate::models::load_balancing_preview_response::LoadBalancingPreviewResponse;
+use crate::models::load_balancing_preview_result_response::LoadBalancingPreviewResultResponse;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct ListMonitorsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, LoadBalancingMonitorResponseCollection>,
 }
 
 impl<'a> ListMonitorsRequest<'a> {
@@ -38,18 +44,26 @@ impl<'a> ListMonitorsRequest<'a> {
         self.builder = self.builder.path_param("account_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<LoadBalancingMonitorResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// List Monitors
+///
+/// List configured monitors for an account.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/load_balancers/monitors`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::account_load_balancer_monitors };
+/// use cloudflare::{ ApiClient, apis::account_load_balancer_monitors };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_monitors(&api)
-///     .with_account_id("value")
+/// let response = list_monitors(&api)
+///     .with_account_id("account_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -59,7 +73,7 @@ pub fn list_monitors(api: &ApiClient) -> ListMonitorsRequest<'_> {
 
 #[derive(Debug)]
 pub struct CreateMonitorRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, LoadBalancingMonitorResponseSingle>,
 }
 
 impl<'a> CreateMonitorRequest<'a> {
@@ -82,18 +96,28 @@ impl<'a> CreateMonitorRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<LoadBalancingMonitorResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Create Monitor
+///
+/// Create a configured monitor.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/load_balancers/monitors`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::account_load_balancer_monitors };
+/// use cloudflare::{ ApiClient, apis::account_load_balancer_monitors };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = create_monitor(&api)
-///     .with_account_id("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = create_monitor(&api)
+///     .with_account_id("account_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -103,7 +127,7 @@ pub fn create_monitor(api: &ApiClient) -> CreateMonitorRequest<'_> {
 
 #[derive(Debug)]
 pub struct MonitorDetailsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, LoadBalancingMonitorResponseSingle>,
 }
 
 impl<'a> MonitorDetailsRequest<'a> {
@@ -126,19 +150,28 @@ impl<'a> MonitorDetailsRequest<'a> {
         self.builder = self.builder.path_param("monitor_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<LoadBalancingMonitorResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Monitor Details
+///
+/// List a single configured monitor for an account.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/load_balancers/monitors/{monitor_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `monitor_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::account_load_balancer_monitors };
+/// use cloudflare::{ ApiClient, apis::account_load_balancer_monitors };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = monitor_details(&api)
-///     .with_account_id("value")
-///     .with_monitor_id("value")
+/// let response = monitor_details(&api)
+///     .with_account_id("account_id")
+///     .with_monitor_id("monitor_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -148,7 +181,7 @@ pub fn monitor_details(api: &ApiClient) -> MonitorDetailsRequest<'_> {
 
 #[derive(Debug)]
 pub struct UpdateMonitorRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, LoadBalancingMonitorResponseSingle>,
 }
 
 impl<'a> UpdateMonitorRequest<'a> {
@@ -176,19 +209,30 @@ impl<'a> UpdateMonitorRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<LoadBalancingMonitorResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Update Monitor
+///
+/// Modify a configured monitor.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/accounts/{account_id}/load_balancers/monitors/{monitor_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `monitor_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::account_load_balancer_monitors };
+/// use cloudflare::{ ApiClient, apis::account_load_balancer_monitors };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = update_monitor(&api)
-///     .with_account_id("value")
-///     .with_monitor_id("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = update_monitor(&api)
+///     .with_account_id("account_id")
+///     .with_monitor_id("monitor_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -198,7 +242,7 @@ pub fn update_monitor(api: &ApiClient) -> UpdateMonitorRequest<'_> {
 
 #[derive(Debug)]
 pub struct DeleteMonitorRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, LoadBalancingIdResponse>,
 }
 
 impl<'a> DeleteMonitorRequest<'a> {
@@ -221,19 +265,28 @@ impl<'a> DeleteMonitorRequest<'a> {
         self.builder = self.builder.path_param("monitor_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<LoadBalancingIdResponse> {
         self.builder.send().await
     }
 }
-
 /// Delete Monitor
+///
+/// Delete a configured monitor.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/accounts/{account_id}/load_balancers/monitors/{monitor_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `monitor_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::account_load_balancer_monitors };
+/// use cloudflare::{ ApiClient, apis::account_load_balancer_monitors };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete_monitor(&api)
-///     .with_account_id("value")
-///     .with_monitor_id("value")
+/// let response = delete_monitor(&api)
+///     .with_account_id("account_id")
+///     .with_monitor_id("monitor_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -243,7 +296,7 @@ pub fn delete_monitor(api: &ApiClient) -> DeleteMonitorRequest<'_> {
 
 #[derive(Debug)]
 pub struct PatchMonitorRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, LoadBalancingMonitorResponseSingle>,
 }
 
 impl<'a> PatchMonitorRequest<'a> {
@@ -271,19 +324,30 @@ impl<'a> PatchMonitorRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<LoadBalancingMonitorResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Patch Monitor
+///
+/// Apply changes to an existing monitor, overwriting the supplied properties.
+///
+/// **HTTP Method:** `PATCH`
+/// **Path:** `/accounts/{account_id}/load_balancers/monitors/{monitor_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `monitor_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::account_load_balancer_monitors };
+/// use cloudflare::{ ApiClient, apis::account_load_balancer_monitors };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = patch_monitor(&api)
-///     .with_account_id("value")
-///     .with_monitor_id("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = patch_monitor(&api)
+///     .with_account_id("account_id")
+///     .with_monitor_id("monitor_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -293,7 +357,7 @@ pub fn patch_monitor(api: &ApiClient) -> PatchMonitorRequest<'_> {
 
 #[derive(Debug)]
 pub struct PreviewMonitorRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, LoadBalancingPreviewResponse>,
 }
 
 impl<'a> PreviewMonitorRequest<'a> {
@@ -321,19 +385,30 @@ impl<'a> PreviewMonitorRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<LoadBalancingPreviewResponse> {
         self.builder.send().await
     }
 }
-
 /// Preview Monitor
+///
+/// Preview pools using the specified monitor with provided monitor details. The returned preview_id can be used in the preview endpoint to retrieve the results.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/load_balancers/monitors/{monitor_id}/preview`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `monitor_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::account_load_balancer_monitors };
+/// use cloudflare::{ ApiClient, apis::account_load_balancer_monitors };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = preview_monitor(&api)
-///     .with_account_id("value")
-///     .with_monitor_id("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = preview_monitor(&api)
+///     .with_account_id("account_id")
+///     .with_monitor_id("monitor_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -343,7 +418,7 @@ pub fn preview_monitor(api: &ApiClient) -> PreviewMonitorRequest<'_> {
 
 #[derive(Debug)]
 pub struct ListMonitorReferencesRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, LoadBalancingMonitorReferencesResponse>,
 }
 
 impl<'a> ListMonitorReferencesRequest<'a> {
@@ -366,19 +441,28 @@ impl<'a> ListMonitorReferencesRequest<'a> {
         self.builder = self.builder.path_param("monitor_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<LoadBalancingMonitorReferencesResponse> {
         self.builder.send().await
     }
 }
-
 /// List Monitor References
+///
+/// Get the list of resources that reference the provided monitor.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/load_balancers/monitors/{monitor_id}/references`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `monitor_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::account_load_balancer_monitors };
+/// use cloudflare::{ ApiClient, apis::account_load_balancer_monitors };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_monitor_references(&api)
-///     .with_account_id("value")
-///     .with_monitor_id("value")
+/// let response = list_monitor_references(&api)
+///     .with_account_id("account_id")
+///     .with_monitor_id("monitor_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -388,7 +472,7 @@ pub fn list_monitor_references(api: &ApiClient) -> ListMonitorReferencesRequest<
 
 #[derive(Debug)]
 pub struct PreviewResultRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, LoadBalancingPreviewResultResponse>,
 }
 
 impl<'a> PreviewResultRequest<'a> {
@@ -411,19 +495,28 @@ impl<'a> PreviewResultRequest<'a> {
         self.builder = self.builder.path_param("preview_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<LoadBalancingPreviewResultResponse> {
         self.builder.send().await
     }
 }
-
 /// Preview Result
+///
+/// Get the result of a previous preview operation using the provided preview_id.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/load_balancers/preview/{preview_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `preview_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::account_load_balancer_monitors };
+/// use cloudflare::{ ApiClient, apis::account_load_balancer_monitors };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = preview_result(&api)
-///     .with_account_id("value")
-///     .with_preview_id("value")
+/// let response = preview_result(&api)
+///     .with_account_id("account_id")
+///     .with_preview_id("preview_id")
 ///     .send()
 ///     .await?;
 /// ```

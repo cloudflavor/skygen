@@ -15,12 +15,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::access_reusable_policies_components_schemas_response_collection::AccessReusablePoliciesComponentsSchemasResponseCollection;
+use crate::models::access_reusable_policies_components_schemas_single_response::AccessReusablePoliciesComponentsSchemasSingleResponse;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct ListAccessReusablePoliciesRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, AccessReusablePoliciesComponentsSchemasResponseCollection>,
 }
 
 impl<'a> ListAccessReusablePoliciesRequest<'a> {
@@ -35,18 +37,28 @@ impl<'a> ListAccessReusablePoliciesRequest<'a> {
         self.builder = self.builder.path_param("account_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(
+        self,
+    ) -> ApiResult<AccessReusablePoliciesComponentsSchemasResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// List Access reusable policies
+///
+/// Lists Access reusable policies.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/access/policies`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::access_reusable_policies };
+/// use cloudflare::{ ApiClient, apis::access_reusable_policies };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_access_reusable_policies(&api)
-///     .with_account_id("value")
+/// let response = list_access_reusable_policies(&api)
+///     .with_account_id("account_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -56,7 +68,7 @@ pub fn list_access_reusable_policies(api: &ApiClient) -> ListAccessReusablePolic
 
 #[derive(Debug)]
 pub struct CreateAccessReusablePolicyRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, AccessReusablePoliciesComponentsSchemasSingleResponse>,
 }
 
 impl<'a> CreateAccessReusablePolicyRequest<'a> {
@@ -72,22 +84,32 @@ impl<'a> CreateAccessReusablePolicyRequest<'a> {
         self.builder = self.builder.path_param("account_id", value);
         self
     }
-    pub fn with_body(mut self, body: serde_json::Value) -> Self {
+    pub fn with_body(mut self, body: crate::models::access_policy_req::AccessPolicyReq) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<AccessReusablePoliciesComponentsSchemasSingleResponse> {
         self.builder.send().await
     }
 }
-
 /// Create an Access reusable policy
+///
+/// Creates a new Access reusable policy.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/access/policies`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::access_reusable_policies };
+/// use cloudflare::{ ApiClient, apis::access_reusable_policies };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = create_access_reusable_policy(&api)
-///     .with_account_id("value")
+/// # let body: crate::models::access_policy_req::AccessPolicyReq = todo!();
+/// let response = create_access_reusable_policy(&api)
+///     .with_account_id("account_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -97,7 +119,7 @@ pub fn create_access_reusable_policy(api: &ApiClient) -> CreateAccessReusablePol
 
 #[derive(Debug)]
 pub struct GetAccessReusablePolicyRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, AccessReusablePoliciesComponentsSchemasSingleResponse>,
 }
 
 impl<'a> GetAccessReusablePolicyRequest<'a> {
@@ -120,19 +142,28 @@ impl<'a> GetAccessReusablePolicyRequest<'a> {
         self.builder = self.builder.path_param("policy_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<AccessReusablePoliciesComponentsSchemasSingleResponse> {
         self.builder.send().await
     }
 }
-
 /// Get an Access reusable policy
+///
+/// Fetches a single Access reusable policy.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/access/policies/{policy_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `policy_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::access_reusable_policies };
+/// use cloudflare::{ ApiClient, apis::access_reusable_policies };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_access_reusable_policy(&api)
-///     .with_account_id("value")
-///     .with_policy_id("value")
+/// let response = get_access_reusable_policy(&api)
+///     .with_account_id("account_id")
+///     .with_policy_id("policy_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -142,7 +173,7 @@ pub fn get_access_reusable_policy(api: &ApiClient) -> GetAccessReusablePolicyReq
 
 #[derive(Debug)]
 pub struct UpdateAccessReusablePolicyRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, AccessReusablePoliciesComponentsSchemasSingleResponse>,
 }
 
 impl<'a> UpdateAccessReusablePolicyRequest<'a> {
@@ -166,23 +197,34 @@ impl<'a> UpdateAccessReusablePolicyRequest<'a> {
         self.builder = self.builder.path_param("policy_id", value);
         self
     }
-    pub fn with_body(mut self, body: serde_json::Value) -> Self {
+    pub fn with_body(mut self, body: crate::models::access_policy_req::AccessPolicyReq) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<AccessReusablePoliciesComponentsSchemasSingleResponse> {
         self.builder.send().await
     }
 }
-
 /// Update an Access reusable policy
+///
+/// Updates a Access reusable policy.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/accounts/{account_id}/access/policies/{policy_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `policy_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::access_reusable_policies };
+/// use cloudflare::{ ApiClient, apis::access_reusable_policies };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = update_access_reusable_policy(&api)
-///     .with_account_id("value")
-///     .with_policy_id("value")
+/// # let body: crate::models::access_policy_req::AccessPolicyReq = todo!();
+/// let response = update_access_reusable_policy(&api)
+///     .with_account_id("account_id")
+///     .with_policy_id("policy_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -219,15 +261,24 @@ impl<'a> DeleteAccessReusablePolicyRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Delete an Access reusable policy
+///
+/// Deletes an Access reusable policy.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/accounts/{account_id}/access/policies/{policy_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `policy_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::access_reusable_policies };
+/// use cloudflare::{ ApiClient, apis::access_reusable_policies };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete_access_reusable_policy(&api)
-///     .with_account_id("value")
-///     .with_policy_id("value")
+/// let response = delete_access_reusable_policy(&api)
+///     .with_account_id("account_id")
+///     .with_policy_id("policy_id")
 ///     .send()
 ///     .await?;
 /// ```

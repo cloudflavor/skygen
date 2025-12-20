@@ -16,12 +16,16 @@
 // limitations under the License.
 
 use crate::models::magic_visibility_pcaps_api_response_common_failure::MagicVisibilityPcapsApiResponseCommonFailure;
+use crate::models::magic_visibility_pcaps_pcaps_collection_response::MagicVisibilityPcapsPcapsCollectionResponse;
+use crate::models::magic_visibility_pcaps_pcaps_ownership_collection::MagicVisibilityPcapsPcapsOwnershipCollection;
+use crate::models::magic_visibility_pcaps_pcaps_ownership_single_response::MagicVisibilityPcapsPcapsOwnershipSingleResponse;
+use crate::models::magic_visibility_pcaps_pcaps_single_response::MagicVisibilityPcapsPcapsSingleResponse;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct ListPacketCaptureRequestsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, MagicVisibilityPcapsPcapsCollectionResponse>,
 }
 
 impl<'a> ListPacketCaptureRequestsRequest<'a> {
@@ -35,18 +39,26 @@ impl<'a> ListPacketCaptureRequestsRequest<'a> {
         self.builder = self.builder.path_param("account_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<MagicVisibilityPcapsPcapsCollectionResponse> {
         self.builder.send().await
     }
 }
-
 /// List packet capture requests
+///
+/// Lists all packet capture requests for an account.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/pcaps`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::magic_pcap_collection };
+/// use cloudflare::{ ApiClient, apis::magic_pcap_collection };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_packet_capture_requests(&api)
-///     .with_account_id("value")
+/// let response = list_packet_capture_requests(&api)
+///     .with_account_id("account_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -56,7 +68,7 @@ pub fn list_packet_capture_requests(api: &ApiClient) -> ListPacketCaptureRequest
 
 #[derive(Debug)]
 pub struct CreatePcapRequestRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, MagicVisibilityPcapsPcapsSingleResponse>,
 }
 
 impl<'a> CreatePcapRequestRequest<'a> {
@@ -71,22 +83,35 @@ impl<'a> CreatePcapRequestRequest<'a> {
         self.builder = self.builder.path_param("account_id", value);
         self
     }
-    pub fn with_body(mut self, body: serde_json::Value) -> Self {
+    pub fn with_body(
+        mut self,
+        body: crate::models::magic_visibility_pcaps_pcaps_request_pcap::MagicVisibilityPcapsPcapsRequestPcap,
+    ) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<MagicVisibilityPcapsPcapsSingleResponse> {
         self.builder.send().await
     }
 }
-
 /// Create PCAP request
+///
+/// Create new PCAP request for account.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/pcaps`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::magic_pcap_collection };
+/// use cloudflare::{ ApiClient, apis::magic_pcap_collection };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = create_pcap_request(&api)
-///     .with_account_id("value")
+/// # let body: crate::models::magic_visibility_pcaps_pcaps_request_pcap::MagicVisibilityPcapsPcapsRequestPcap = todo!();
+/// let response = create_pcap_request(&api)
+///     .with_account_id("account_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -96,7 +121,7 @@ pub fn create_pcap_request(api: &ApiClient) -> CreatePcapRequestRequest<'_> {
 
 #[derive(Debug)]
 pub struct ListPcaPsBucketRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, MagicVisibilityPcapsPcapsOwnershipCollection>,
 }
 
 impl<'a> ListPcaPsBucketRequest<'a> {
@@ -111,18 +136,26 @@ impl<'a> ListPcaPsBucketRequest<'a> {
         self.builder = self.builder.path_param("account_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<MagicVisibilityPcapsPcapsOwnershipCollection> {
         self.builder.send().await
     }
 }
-
 /// List PCAPs Bucket Ownership
+///
+/// List all buckets configured for use with PCAPs API.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/pcaps/ownership`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::magic_pcap_collection };
+/// use cloudflare::{ ApiClient, apis::magic_pcap_collection };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_pca_ps_bucket(&api)
-///     .with_account_id("value")
+/// let response = list_pca_ps_bucket(&api)
+///     .with_account_id("account_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -132,7 +165,7 @@ pub fn list_pca_ps_bucket(api: &ApiClient) -> ListPcaPsBucketRequest<'_> {
 
 #[derive(Debug)]
 pub struct AddBucketsFullPacketRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, MagicVisibilityPcapsPcapsOwnershipSingleResponse>,
 }
 
 impl<'a> AddBucketsFullPacketRequest<'a> {
@@ -155,18 +188,28 @@ impl<'a> AddBucketsFullPacketRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<MagicVisibilityPcapsPcapsOwnershipSingleResponse> {
         self.builder.send().await
     }
 }
-
 /// Add buckets for full packet captures
+///
+/// Adds an AWS or GCP bucket to use with full packet captures.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/pcaps/ownership`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::magic_pcap_collection };
+/// use cloudflare::{ ApiClient, apis::magic_pcap_collection };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = add_buckets_full_packet(&api)
-///     .with_account_id("value")
+/// # let body: crate::models::magic_visibility_pcaps_pcaps_ownership_request::MagicVisibilityPcapsPcapsOwnershipRequest = todo!();
+/// let response = add_buckets_full_packet(&api)
+///     .with_account_id("account_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -176,7 +219,7 @@ pub fn add_buckets_full_packet(api: &ApiClient) -> AddBucketsFullPacketRequest<'
 
 #[derive(Debug)]
 pub struct ValidateBucketsFullPacketRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, MagicVisibilityPcapsPcapsOwnershipSingleResponse>,
 }
 
 impl<'a> ValidateBucketsFullPacketRequest<'a> {
@@ -202,18 +245,28 @@ impl<'a> ValidateBucketsFullPacketRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<MagicVisibilityPcapsPcapsOwnershipSingleResponse> {
         self.builder.send().await
     }
 }
-
 /// Validate buckets for full packet captures
+///
+/// Validates buckets added to the packet captures API.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/pcaps/ownership/validate`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::magic_pcap_collection };
+/// use cloudflare::{ ApiClient, apis::magic_pcap_collection };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = validate_buckets_full_packet(&api)
-///     .with_account_id("value")
+/// # let body: crate::models::magic_visibility_pcaps_pcaps_ownership_validate_request::MagicVisibilityPcapsPcapsOwnershipValidateRequest = todo!();
+/// let response = validate_buckets_full_packet(&api)
+///     .with_account_id("account_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -250,15 +303,24 @@ impl<'a> DeleteBucketsFullPacketRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Delete buckets for full packet captures
+///
+/// Deletes buckets added to the packet captures API.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/accounts/{account_id}/pcaps/ownership/{ownership_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `ownership_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::magic_pcap_collection };
+/// use cloudflare::{ ApiClient, apis::magic_pcap_collection };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete_buckets_full_packet(&api)
-///     .with_account_id("value")
-///     .with_ownership_id("value")
+/// let response = delete_buckets_full_packet(&api)
+///     .with_account_id("account_id")
+///     .with_ownership_id("ownership_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -268,7 +330,7 @@ pub fn delete_buckets_full_packet(api: &ApiClient) -> DeleteBucketsFullPacketReq
 
 #[derive(Debug)]
 pub struct GetPcapRequestRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, MagicVisibilityPcapsPcapsSingleResponse>,
 }
 
 impl<'a> GetPcapRequestRequest<'a> {
@@ -288,19 +350,28 @@ impl<'a> GetPcapRequestRequest<'a> {
         self.builder = self.builder.path_param("pcap_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<MagicVisibilityPcapsPcapsSingleResponse> {
         self.builder.send().await
     }
 }
-
 /// Get PCAP request
+///
+/// Get information for a PCAP request by id.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/pcaps/{pcap_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `pcap_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::magic_pcap_collection };
+/// use cloudflare::{ ApiClient, apis::magic_pcap_collection };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_pcap_request(&api)
-///     .with_account_id("value")
-///     .with_pcap_id("value")
+/// let response = get_pcap_request(&api)
+///     .with_account_id("account_id")
+///     .with_pcap_id("pcap_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -337,15 +408,24 @@ impl<'a> DownloadSimplePcapRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Download Simple PCAP
+///
+/// Download PCAP information into a file. Response is a binary PCAP file.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/pcaps/{pcap_id}/download`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `pcap_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::magic_pcap_collection };
+/// use cloudflare::{ ApiClient, apis::magic_pcap_collection };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = download_simple_pcap(&api)
-///     .with_account_id("value")
-///     .with_pcap_id("value")
+/// let response = download_simple_pcap(&api)
+///     .with_account_id("account_id")
+///     .with_pcap_id("pcap_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -382,15 +462,24 @@ impl<'a> StopFullPcapRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Stop full PCAP
+///
+/// Stop full PCAP
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/accounts/{account_id}/pcaps/{pcap_id}/stop`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `pcap_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::magic_pcap_collection };
+/// use cloudflare::{ ApiClient, apis::magic_pcap_collection };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = stop_full_pcap(&api)
-///     .with_account_id("value")
-///     .with_pcap_id("value")
+/// let response = stop_full_pcap(&api)
+///     .with_account_id("account_id")
+///     .with_pcap_id("pcap_id")
 ///     .send()
 ///     .await?;
 /// ```

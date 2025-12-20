@@ -15,15 +15,24 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+{% if alias %}
+pub type {{ name }} = {{ alias }};
+{% else %}
 use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct {{ name }} {
-{% if fields | length == 0 %}
+{%- if fields | length == 0 %}
 }
-{% else %}
+{%- else %}
 {%- for field in fields %}
+    {%- if field.flatten %}
+    #[serde(flatten)]
+    pub {{ field.name }}: {{ field.ty }},
+    {%- else %}
     pub {{ field.name }}: {% if field.required %}{{ field.ty }}{% else %}Option<{{ field.ty }}>{% endif %},
+    {%- endif %}
 {%- endfor %}
 }
+{%- endif %}
 {% endif %}

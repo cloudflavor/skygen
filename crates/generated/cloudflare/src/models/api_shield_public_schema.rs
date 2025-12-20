@@ -19,10 +19,11 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct ApiShieldPublicSchema {
-    pub created_at: serde_json::Value,
-    pub kind: serde_json::Value,
+    pub created_at: crate::models::api_shield_schemas_timestamp::ApiShieldSchemasTimestamp,
+    pub kind: crate::models::api_shield_kind::ApiShieldKind,
     pub name: String,
-    pub schema_id: serde_json::Value,
+    pub schema_id: crate::models::api_shield_schemas_uuid::ApiShieldSchemasUuid,
     pub source: Option<String>,
-    pub validation_enabled: Option<serde_json::Value>,
+    pub validation_enabled:
+        Option<crate::models::api_shield_validation_enabled::ApiShieldValidationEnabled>,
 }

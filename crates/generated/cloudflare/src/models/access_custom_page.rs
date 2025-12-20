@@ -19,11 +19,11 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct AccessCustomPage {
-    pub app_count: Option<serde_json::Value>,
-    pub created_at: Option<serde_json::Value>,
+    pub app_count: Option<crate::models::access_schemas_app_count::AccessSchemasAppCount>,
+    pub created_at: Option<crate::models::access_timestamp::AccessTimestamp>,
     pub custom_html: String,
-    pub name: serde_json::Value,
-    pub r#type: serde_json::Value,
-    pub uid: Option<serde_json::Value>,
-    pub updated_at: Option<serde_json::Value>,
+    pub name: crate::models::access_custom_pages_components_schemas_name::AccessCustomPagesComponentsSchemasName,
+    pub r#type: crate::models::access_schemas_type::AccessSchemasType,
+    pub uid: Option<crate::models::access_uuid::AccessUuid>,
+    pub updated_at: Option<crate::models::access_timestamp::AccessTimestamp>,
 }

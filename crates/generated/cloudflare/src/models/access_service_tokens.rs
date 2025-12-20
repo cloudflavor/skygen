@@ -19,12 +19,12 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct AccessServiceTokens {
-    pub client_id: Option<serde_json::Value>,
-    pub created_at: Option<serde_json::Value>,
-    pub duration: Option<serde_json::Value>,
-    pub expires_at: Option<serde_json::Value>,
+    pub client_id: Option<crate::models::access_client_id::AccessClientId>,
+    pub created_at: Option<crate::models::access_timestamp::AccessTimestamp>,
+    pub duration: Option<crate::models::access_duration::AccessDuration>,
+    pub expires_at: Option<crate::models::access_timestamp::AccessTimestamp>,
     pub id: Option<serde_json::Value>,
-    pub last_seen_at: Option<serde_json::Value>,
-    pub name: Option<serde_json::Value>,
-    pub updated_at: Option<serde_json::Value>,
+    pub last_seen_at: Option<crate::models::access_timestamp::AccessTimestamp>,
+    pub name: Option<crate::models::access_schemas_name::AccessSchemasName>,
+    pub updated_at: Option<crate::models::access_timestamp::AccessTimestamp>,
 }

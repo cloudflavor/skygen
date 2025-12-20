@@ -15,12 +15,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::access_empty_response::AccessEmptyResponse;
+use crate::models::access_organizations_components_schemas_single_response::AccessOrganizationsComponentsSchemasSingleResponse;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct GetYourZeroTrustRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, AccessOrganizationsComponentsSchemasSingleResponse>,
 }
 
 impl<'a> GetYourZeroTrustRequest<'a> {
@@ -35,18 +37,26 @@ impl<'a> GetYourZeroTrustRequest<'a> {
         self.builder = self.builder.path_param("zone_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<AccessOrganizationsComponentsSchemasSingleResponse> {
         self.builder.send().await
     }
 }
-
 /// Get your Zero Trust organization
+///
+/// Returns the configuration for your Zero Trust organization.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/access/organizations`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zone_level_zero_trust_organization };
+/// use cloudflare::{ ApiClient, apis::zone_level_zero_trust_organization };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_your_zero_trust(&api)
-///     .with_zone_id("value")
+/// let response = get_your_zero_trust(&api)
+///     .with_zone_id("zone_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -56,7 +66,7 @@ pub fn get_your_zero_trust(api: &ApiClient) -> GetYourZeroTrustRequest<'_> {
 
 #[derive(Debug)]
 pub struct CreateYourZeroTrustRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, AccessOrganizationsComponentsSchemasSingleResponse>,
 }
 
 impl<'a> CreateYourZeroTrustRequest<'a> {
@@ -76,18 +86,28 @@ impl<'a> CreateYourZeroTrustRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<AccessOrganizationsComponentsSchemasSingleResponse> {
         self.builder.send().await
     }
 }
-
 /// Create your Zero Trust organization
+///
+/// Sets up a Zero Trust organization for your account.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/zones/{zone_id}/access/organizations`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zone_level_zero_trust_organization };
+/// use cloudflare::{ ApiClient, apis::zone_level_zero_trust_organization };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = create_your_zero_trust(&api)
-///     .with_zone_id("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = create_your_zero_trust(&api)
+///     .with_zone_id("zone_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -97,7 +117,7 @@ pub fn create_your_zero_trust(api: &ApiClient) -> CreateYourZeroTrustRequest<'_>
 
 #[derive(Debug)]
 pub struct UpdateYourZeroTrustRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, AccessOrganizationsComponentsSchemasSingleResponse>,
 }
 
 impl<'a> UpdateYourZeroTrustRequest<'a> {
@@ -117,18 +137,28 @@ impl<'a> UpdateYourZeroTrustRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<AccessOrganizationsComponentsSchemasSingleResponse> {
         self.builder.send().await
     }
 }
-
 /// Update your Zero Trust organization
+///
+/// Updates the configuration for your Zero Trust organization.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/zones/{zone_id}/access/organizations`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zone_level_zero_trust_organization };
+/// use cloudflare::{ ApiClient, apis::zone_level_zero_trust_organization };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = update_your_zero_trust(&api)
-///     .with_zone_id("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = update_your_zero_trust(&api)
+///     .with_zone_id("zone_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -138,7 +168,7 @@ pub fn update_your_zero_trust(api: &ApiClient) -> UpdateYourZeroTrustRequest<'_>
 
 #[derive(Debug)]
 pub struct RevokeAllAccessTokensRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, AccessEmptyResponse>,
 }
 
 impl<'a> RevokeAllAccessTokensRequest<'a> {
@@ -161,18 +191,28 @@ impl<'a> RevokeAllAccessTokensRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<AccessEmptyResponse> {
         self.builder.send().await
     }
 }
-
 /// Revoke all Access tokens for a user
+///
+/// Revokes a user's access across all applications.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/zones/{zone_id}/access/organizations/revoke_user`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zone_level_zero_trust_organization };
+/// use cloudflare::{ ApiClient, apis::zone_level_zero_trust_organization };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = revoke_all_access_tokens(&api)
-///     .with_zone_id("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = revoke_all_access_tokens(&api)
+///     .with_zone_id("zone_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```

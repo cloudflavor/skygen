@@ -19,7 +19,8 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct ObservatorySchedule {
-    pub frequency: Option<serde_json::Value>,
-    pub region: Option<serde_json::Value>,
-    pub url: Option<serde_json::Value>,
+    pub frequency:
+        Option<crate::models::observatory_schedule_frequency::ObservatoryScheduleFrequency>,
+    pub region: Option<crate::models::observatory_region::ObservatoryRegion>,
+    pub url: Option<crate::models::observatory_url::ObservatoryUrl>,
 }

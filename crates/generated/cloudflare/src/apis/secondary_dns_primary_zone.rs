@@ -15,12 +15,17 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::secondary_dns_disable_transfer_response::SecondaryDnsDisableTransferResponse;
+use crate::models::secondary_dns_enable_transfer_response::SecondaryDnsEnableTransferResponse;
+use crate::models::secondary_dns_id_response::SecondaryDnsIdResponse;
+use crate::models::secondary_dns_schemas_force_response::SecondaryDnsSchemasForceResponse;
+use crate::models::secondary_dns_single_response_outgoing::SecondaryDnsSingleResponseOutgoing;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct ConfigurationDetailsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, SecondaryDnsSingleResponseOutgoing>,
 }
 
 impl<'a> ConfigurationDetailsRequest<'a> {
@@ -35,18 +40,26 @@ impl<'a> ConfigurationDetailsRequest<'a> {
         self.builder = self.builder.path_param("zone_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<SecondaryDnsSingleResponseOutgoing> {
         self.builder.send().await
     }
 }
-
 /// Primary Zone Configuration Details
+///
+/// Get primary zone configuration for outgoing zone transfers.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/secondary_dns/outgoing`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::secondary_dns_primary_zone };
+/// use cloudflare::{ ApiClient, apis::secondary_dns_primary_zone };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = configuration_details(&api)
-///     .with_zone_id("value")
+/// let response = configuration_details(&api)
+///     .with_zone_id("zone_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -56,7 +69,7 @@ pub fn configuration_details(api: &ApiClient) -> ConfigurationDetailsRequest<'_>
 
 #[derive(Debug)]
 pub struct CreatePrimaryConfigurationRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, SecondaryDnsSingleResponseOutgoing>,
 }
 
 impl<'a> CreatePrimaryConfigurationRequest<'a> {
@@ -72,22 +85,35 @@ impl<'a> CreatePrimaryConfigurationRequest<'a> {
         self.builder = self.builder.path_param("zone_id", value);
         self
     }
-    pub fn with_body(mut self, body: serde_json::Value) -> Self {
+    pub fn with_body(
+        mut self,
+        body: crate::models::secondary_dns_single_request_outgoing::SecondaryDnsSingleRequestOutgoing,
+    ) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<SecondaryDnsSingleResponseOutgoing> {
         self.builder.send().await
     }
 }
-
 /// Create Primary Zone Configuration
+///
+/// Create primary zone configuration for outgoing zone transfers.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/zones/{zone_id}/secondary_dns/outgoing`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::secondary_dns_primary_zone };
+/// use cloudflare::{ ApiClient, apis::secondary_dns_primary_zone };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = create_primary_configuration(&api)
-///     .with_zone_id("value")
+/// # let body: crate::models::secondary_dns_single_request_outgoing::SecondaryDnsSingleRequestOutgoing = todo!();
+/// let response = create_primary_configuration(&api)
+///     .with_zone_id("zone_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -97,7 +123,7 @@ pub fn create_primary_configuration(api: &ApiClient) -> CreatePrimaryConfigurati
 
 #[derive(Debug)]
 pub struct UpdatePrimaryConfigurationRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, SecondaryDnsSingleResponseOutgoing>,
 }
 
 impl<'a> UpdatePrimaryConfigurationRequest<'a> {
@@ -113,22 +139,35 @@ impl<'a> UpdatePrimaryConfigurationRequest<'a> {
         self.builder = self.builder.path_param("zone_id", value);
         self
     }
-    pub fn with_body(mut self, body: serde_json::Value) -> Self {
+    pub fn with_body(
+        mut self,
+        body: crate::models::secondary_dns_single_request_outgoing::SecondaryDnsSingleRequestOutgoing,
+    ) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<SecondaryDnsSingleResponseOutgoing> {
         self.builder.send().await
     }
 }
-
 /// Update Primary Zone Configuration
+///
+/// Update primary zone configuration for outgoing zone transfers.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/zones/{zone_id}/secondary_dns/outgoing`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::secondary_dns_primary_zone };
+/// use cloudflare::{ ApiClient, apis::secondary_dns_primary_zone };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = update_primary_configuration(&api)
-///     .with_zone_id("value")
+/// # let body: crate::models::secondary_dns_single_request_outgoing::SecondaryDnsSingleRequestOutgoing = todo!();
+/// let response = update_primary_configuration(&api)
+///     .with_zone_id("zone_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -138,7 +177,7 @@ pub fn update_primary_configuration(api: &ApiClient) -> UpdatePrimaryConfigurati
 
 #[derive(Debug)]
 pub struct DeletePrimaryConfigurationRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, SecondaryDnsIdResponse>,
 }
 
 impl<'a> DeletePrimaryConfigurationRequest<'a> {
@@ -156,18 +195,26 @@ impl<'a> DeletePrimaryConfigurationRequest<'a> {
         self.builder = self.builder.path_param("zone_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<SecondaryDnsIdResponse> {
         self.builder.send().await
     }
 }
-
 /// Delete Primary Zone Configuration
+///
+/// Delete primary zone configuration for outgoing zone transfers.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/zones/{zone_id}/secondary_dns/outgoing`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::secondary_dns_primary_zone };
+/// use cloudflare::{ ApiClient, apis::secondary_dns_primary_zone };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete_primary_configuration(&api)
-///     .with_zone_id("value")
+/// let response = delete_primary_configuration(&api)
+///     .with_zone_id("zone_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -177,7 +224,7 @@ pub fn delete_primary_configuration(api: &ApiClient) -> DeletePrimaryConfigurati
 
 #[derive(Debug)]
 pub struct DisableOutgoingTransfersRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, SecondaryDnsDisableTransferResponse>,
 }
 
 impl<'a> DisableOutgoingTransfersRequest<'a> {
@@ -195,18 +242,26 @@ impl<'a> DisableOutgoingTransfersRequest<'a> {
         self.builder = self.builder.path_param("zone_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<SecondaryDnsDisableTransferResponse> {
         self.builder.send().await
     }
 }
-
 /// Disable Outgoing Zone Transfers
+///
+/// Disable outgoing zone transfers for primary zone and clears IXFR backlog of primary zone.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/zones/{zone_id}/secondary_dns/outgoing/disable`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::secondary_dns_primary_zone };
+/// use cloudflare::{ ApiClient, apis::secondary_dns_primary_zone };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = disable_outgoing_transfers(&api)
-///     .with_zone_id("value")
+/// let response = disable_outgoing_transfers(&api)
+///     .with_zone_id("zone_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -216,7 +271,7 @@ pub fn disable_outgoing_transfers(api: &ApiClient) -> DisableOutgoingTransfersRe
 
 #[derive(Debug)]
 pub struct EnableOutgoingTransfersRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, SecondaryDnsEnableTransferResponse>,
 }
 
 impl<'a> EnableOutgoingTransfersRequest<'a> {
@@ -234,18 +289,26 @@ impl<'a> EnableOutgoingTransfersRequest<'a> {
         self.builder = self.builder.path_param("zone_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<SecondaryDnsEnableTransferResponse> {
         self.builder.send().await
     }
 }
-
 /// Enable Outgoing Zone Transfers
+///
+/// Enable outgoing zone transfers for primary zone.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/zones/{zone_id}/secondary_dns/outgoing/enable`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::secondary_dns_primary_zone };
+/// use cloudflare::{ ApiClient, apis::secondary_dns_primary_zone };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = enable_outgoing_transfers(&api)
-///     .with_zone_id("value")
+/// let response = enable_outgoing_transfers(&api)
+///     .with_zone_id("zone_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -255,7 +318,7 @@ pub fn enable_outgoing_transfers(api: &ApiClient) -> EnableOutgoingTransfersRequ
 
 #[derive(Debug)]
 pub struct ForceDnsNotifyRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, SecondaryDnsSchemasForceResponse>,
 }
 
 impl<'a> ForceDnsNotifyRequest<'a> {
@@ -273,18 +336,26 @@ impl<'a> ForceDnsNotifyRequest<'a> {
         self.builder = self.builder.path_param("zone_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<SecondaryDnsSchemasForceResponse> {
         self.builder.send().await
     }
 }
-
 /// Force DNS NOTIFY
+///
+/// Notifies the secondary nameserver(s) and clears IXFR backlog of primary zone.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/zones/{zone_id}/secondary_dns/outgoing/force_notify`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::secondary_dns_primary_zone };
+/// use cloudflare::{ ApiClient, apis::secondary_dns_primary_zone };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = force_dns_notify(&api)
-///     .with_zone_id("value")
+/// let response = force_dns_notify(&api)
+///     .with_zone_id("zone_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -294,7 +365,7 @@ pub fn force_dns_notify(api: &ApiClient) -> ForceDnsNotifyRequest<'_> {
 
 #[derive(Debug)]
 pub struct GetOutgoingTransferStatusRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, SecondaryDnsEnableTransferResponse>,
 }
 
 impl<'a> GetOutgoingTransferStatusRequest<'a> {
@@ -312,18 +383,26 @@ impl<'a> GetOutgoingTransferStatusRequest<'a> {
         self.builder = self.builder.path_param("zone_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<SecondaryDnsEnableTransferResponse> {
         self.builder.send().await
     }
 }
-
 /// Get Outgoing Zone Transfer Status
+///
+/// Get primary zone transfer status.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/secondary_dns/outgoing/status`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::secondary_dns_primary_zone };
+/// use cloudflare::{ ApiClient, apis::secondary_dns_primary_zone };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_outgoing_transfer_status(&api)
-///     .with_zone_id("value")
+/// let response = get_outgoing_transfer_status(&api)
+///     .with_zone_id("zone_id")
 ///     .send()
 ///     .await?;
 /// ```

@@ -15,12 +15,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::zero_trust_gateway_response_collection::ZeroTrustGatewayResponseCollection;
+use crate::models::zero_trust_gateway_single_response::ZeroTrustGatewaySingleResponse;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct ListZeroTrustCertificatesRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, ZeroTrustGatewayResponseCollection>,
 }
 
 impl<'a> ListZeroTrustCertificatesRequest<'a> {
@@ -38,18 +40,26 @@ impl<'a> ListZeroTrustCertificatesRequest<'a> {
         self.builder = self.builder.path_param("account_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<ZeroTrustGatewayResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// List Zero Trust certificates
+///
+/// Fetches all Zero Trust certificates for an account.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/gateway/certificates`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zero_trust_certificates };
+/// use cloudflare::{ ApiClient, apis::zero_trust_certificates };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_zero_trust_certificates(&api)
-///     .with_account_id("value")
+/// let response = list_zero_trust_certificates(&api)
+///     .with_account_id("account_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -59,7 +69,7 @@ pub fn list_zero_trust_certificates(api: &ApiClient) -> ListZeroTrustCertificate
 
 #[derive(Debug)]
 pub struct CreateZeroTrustCertificateRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, ZeroTrustGatewaySingleResponse>,
 }
 
 impl<'a> CreateZeroTrustCertificateRequest<'a> {
@@ -84,18 +94,28 @@ impl<'a> CreateZeroTrustCertificateRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<ZeroTrustGatewaySingleResponse> {
         self.builder.send().await
     }
 }
-
 /// Create Zero Trust certificate
+///
+/// Creates a new Zero Trust certificate.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/gateway/certificates`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zero_trust_certificates };
+/// use cloudflare::{ ApiClient, apis::zero_trust_certificates };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = create_zero_trust_certificate(&api)
-///     .with_account_id("value")
+/// # let body: crate::models::zero_trust_gateway_generate_cert_request::ZeroTrustGatewayGenerateCertRequest = todo!();
+/// let response = create_zero_trust_certificate(&api)
+///     .with_account_id("account_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -105,7 +125,7 @@ pub fn create_zero_trust_certificate(api: &ApiClient) -> CreateZeroTrustCertific
 
 #[derive(Debug)]
 pub struct CertificateDetailsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, ZeroTrustGatewaySingleResponse>,
 }
 
 impl<'a> CertificateDetailsRequest<'a> {
@@ -128,19 +148,28 @@ impl<'a> CertificateDetailsRequest<'a> {
         self.builder = self.builder.path_param("certificate_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<ZeroTrustGatewaySingleResponse> {
         self.builder.send().await
     }
 }
-
 /// Get Zero Trust certificate details
+///
+/// Fetches a single Zero Trust certificate.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/gateway/certificates/{certificate_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `certificate_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zero_trust_certificates };
+/// use cloudflare::{ ApiClient, apis::zero_trust_certificates };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = certificate_details(&api)
-///     .with_account_id("value")
-///     .with_certificate_id("value")
+/// let response = certificate_details(&api)
+///     .with_account_id("account_id")
+///     .with_certificate_id("certificate_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -150,7 +179,7 @@ pub fn certificate_details(api: &ApiClient) -> CertificateDetailsRequest<'_> {
 
 #[derive(Debug)]
 pub struct DeleteZeroTrustCertificateRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, ZeroTrustGatewaySingleResponse>,
 }
 
 impl<'a> DeleteZeroTrustCertificateRequest<'a> {
@@ -173,19 +202,28 @@ impl<'a> DeleteZeroTrustCertificateRequest<'a> {
         self.builder = self.builder.path_param("certificate_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<ZeroTrustGatewaySingleResponse> {
         self.builder.send().await
     }
 }
-
 /// Delete Zero Trust certificate
+///
+/// Deletes a gateway-managed Zero Trust certificate. A certificate must be deactivated from the edge (inactive) before it is deleted.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/accounts/{account_id}/gateway/certificates/{certificate_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `certificate_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zero_trust_certificates };
+/// use cloudflare::{ ApiClient, apis::zero_trust_certificates };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete_zero_trust_certificate(&api)
-///     .with_account_id("value")
-///     .with_certificate_id("value")
+/// let response = delete_zero_trust_certificate(&api)
+///     .with_account_id("account_id")
+///     .with_certificate_id("certificate_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -222,15 +260,24 @@ impl<'a> ActivateZeroTrustCertificateRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Activate a Zero Trust certificate
+///
+/// Binds a single Zero Trust certificate to the edge.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/gateway/certificates/{certificate_id}/activate`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `certificate_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zero_trust_certificates };
+/// use cloudflare::{ ApiClient, apis::zero_trust_certificates };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = activate_zero_trust_certificate(&api)
-///     .with_account_id("value")
-///     .with_certificate_id("value")
+/// let response = activate_zero_trust_certificate(&api)
+///     .with_account_id("account_id")
+///     .with_certificate_id("certificate_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -240,7 +287,7 @@ pub fn activate_zero_trust_certificate(api: &ApiClient) -> ActivateZeroTrustCert
 
 #[derive(Debug)]
 pub struct DeactivateZeroTrustCertificateRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, ZeroTrustGatewaySingleResponse>,
 }
 
 impl<'a> DeactivateZeroTrustCertificateRequest<'a> {
@@ -263,19 +310,28 @@ impl<'a> DeactivateZeroTrustCertificateRequest<'a> {
         self.builder = self.builder.path_param("certificate_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<ZeroTrustGatewaySingleResponse> {
         self.builder.send().await
     }
 }
-
 /// Deactivate a Zero Trust certificate
+///
+/// Unbinds a single Zero Trust certificate from the edge
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/gateway/certificates/{certificate_id}/deactivate`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `certificate_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zero_trust_certificates };
+/// use cloudflare::{ ApiClient, apis::zero_trust_certificates };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = deactivate_zero_trust_certificate(&api)
-///     .with_account_id("value")
-///     .with_certificate_id("value")
+/// let response = deactivate_zero_trust_certificate(&api)
+///     .with_account_id("account_id")
+///     .with_certificate_id("certificate_id")
 ///     .send()
 ///     .await?;
 /// ```

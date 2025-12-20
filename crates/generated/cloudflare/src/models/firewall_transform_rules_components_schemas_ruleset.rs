@@ -19,7 +19,6 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct FirewallTransformRulesComponentsSchemasRuleset {
-
     pub description: Option<serde_json::Value>,
     pub id: Option<serde_json::Value>,
     pub kind: Option<serde_json::Value>,

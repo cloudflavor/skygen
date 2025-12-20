@@ -19,13 +19,13 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct MqQueue {
-    pub consumers: Option<Vec<serde_json::Value>>,
+    pub consumers: Option<Vec<crate::models::mq_consumer::MqConsumer>>,
     pub consumers_total_count: Option<f64>,
     pub created_on: Option<String>,
     pub modified_on: Option<String>,
-    pub producers: Option<Vec<serde_json::Value>>,
+    pub producers: Option<Vec<crate::models::mq_producer::MqProducer>>,
     pub producers_total_count: Option<f64>,
     pub queue_id: Option<String>,
-    pub queue_name: Option<serde_json::Value>,
+    pub queue_name: Option<crate::models::mq_queue_name::MqQueueName>,
     pub settings: Option<crate::models::mq_queue_settings::MqQueueSettings>,
 }

@@ -75,15 +75,40 @@ impl<'a> TableRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Table
+///
+/// Retrieves a list of summarised aggregate metrics over a given time period.
+///
+/// See [Analytics API properties](<https://developers.cloudflare.com/dns/reference/analytics-api-properties/)> for detailed information about the available query parameters.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/dns_firewall/{dns_firewall_id}/dns_analytics/report`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `dns_firewall_id` (path, required)
+/// - `metrics` (query,optional)
+/// - `dimensions` (query,optional)
+/// - `since` (query,optional)
+/// - `until` (query,optional)
+/// - `limit` (query,optional)
+/// - `sort` (query,optional)
+/// - `filters` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::dns_firewall_analytics };
+/// use cloudflare::{ ApiClient, apis::dns_firewall_analytics };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = table(&api)
-///     .with_account_id("value")
-///     .with_dns_firewall_id("value")
+/// let response = table(&api)
+///     .with_account_id("account_id")
+///     .with_dns_firewall_id("dns_firewall_id")
+///     .with_metrics("metrics")
+///     .with_dimensions("dimensions")
+///     .with_since("since")
+///     .with_until("until")
+///     .with_limit("limit")
+///     .with_sort("sort")
+///     .with_filters("filters")
 ///     .send()
 ///     .await?;
 /// ```
@@ -152,15 +177,42 @@ impl<'a> GetRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// By Time
+///
+/// Retrieves a list of aggregate metrics grouped by time interval.
+///
+/// See [Analytics API properties](<https://developers.cloudflare.com/dns/reference/analytics-api-properties/)> for detailed information about the available query parameters.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/dns_firewall/{dns_firewall_id}/dns_analytics/report/bytime`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `dns_firewall_id` (path, required)
+/// - `metrics` (query,optional)
+/// - `dimensions` (query,optional)
+/// - `since` (query,optional)
+/// - `until` (query,optional)
+/// - `limit` (query,optional)
+/// - `sort` (query,optional)
+/// - `filters` (query,optional)
+/// - `time_delta` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::dns_firewall_analytics };
+/// use cloudflare::{ ApiClient, apis::dns_firewall_analytics };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get(&api)
-///     .with_account_id("value")
-///     .with_dns_firewall_id("value")
+/// let response = get(&api)
+///     .with_account_id("account_id")
+///     .with_dns_firewall_id("dns_firewall_id")
+///     .with_metrics("metrics")
+///     .with_dimensions("dimensions")
+///     .with_since("since")
+///     .with_until("until")
+///     .with_limit("limit")
+///     .with_sort("sort")
+///     .with_filters("filters")
+///     .with_time_delta("time_delta")
 ///     .send()
 ///     .await?;
 /// ```

@@ -46,14 +46,31 @@ impl<'a> PostRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// [Public Preview] Initiate a Reserved IPv6 Action
+///
+/// To initiate an action on a reserved IPv6 send a POST request to
+/// `/v2/reserved_ipv6/$RESERVED_IPV6/actions`. In the JSON body to the request,
+/// set the `type` attribute to on of the supported action types:
+///
+/// | Action     | Details
+/// |------------|--------
+/// | `assign`   | Assigns a reserved IPv6 to a Droplet
+/// | `unassign` | Unassign a reserved IPv6 from a Droplet
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/v2/reserved_ipv6/{reserved_ipv6}/actions`
+///
+/// **Parameters**
+/// - `reserved_ipv6` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::public_preview_reserved_i_pv6_actions };
+/// use digitalocean::{ ApiClient, apis::public_preview_reserved_i_pv6_actions };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = post(&api)
-///     .with_reserved_ipv6("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = post(&api)
+///     .with_reserved_ipv6("reserved_ipv6")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```

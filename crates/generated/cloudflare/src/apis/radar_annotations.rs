@@ -65,13 +65,36 @@ impl<'a> GetAnnotationsRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get latest annotations
+///
+/// Retrieves the latest annotations.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/annotations`
+///
+/// **Parameters**
+/// - `limit` (query,optional)
+/// - `offset` (query,optional)
+/// - `dateRange` (query,optional)
+/// - `dateStart` (query,optional)
+/// - `dateEnd` (query,optional)
+/// - `asn` (query,optional)
+/// - `location` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_annotations };
+/// use cloudflare::{ ApiClient, apis::radar_annotations };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_annotations(&api)
+/// let response = get_annotations(&api)
+///     .with_limit("limit")
+///     .with_offset("offset")
+///     .with_date_range("dateRange")
+///     .with_date_start("dateStart")
+///     .with_date_end("dateEnd")
+///     .with_asn("asn")
+///     .with_location("location")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```
@@ -126,13 +149,36 @@ impl<'a> GetAnnotationsOutagesRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get latest Internet outages and anomalies
+///
+/// Retrieves the latest Internet outages and anomalies.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/annotations/outages`
+///
+/// **Parameters**
+/// - `limit` (query,optional)
+/// - `offset` (query,optional)
+/// - `dateRange` (query,optional)
+/// - `dateStart` (query,optional)
+/// - `dateEnd` (query,optional)
+/// - `asn` (query,optional)
+/// - `location` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_annotations };
+/// use cloudflare::{ ApiClient, apis::radar_annotations };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_annotations_outages(&api)
+/// let response = get_annotations_outages(&api)
+///     .with_limit("limit")
+///     .with_offset("offset")
+///     .with_date_range("dateRange")
+///     .with_date_start("dateStart")
+///     .with_date_end("dateEnd")
+///     .with_asn("asn")
+///     .with_location("location")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```
@@ -176,13 +222,30 @@ impl<'a> GetAnnotationsOutagesTopRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get the number of outages by location
+///
+/// Retrieves the number of outages by location.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/annotations/outages/locations`
+///
+/// **Parameters**
+/// - `limit` (query,optional)
+/// - `dateRange` (query,optional)
+/// - `dateStart` (query,optional)
+/// - `dateEnd` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_annotations };
+/// use cloudflare::{ ApiClient, apis::radar_annotations };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_annotations_outages_top(&api)
+/// let response = get_annotations_outages_top(&api)
+///     .with_limit("limit")
+///     .with_date_range("dateRange")
+///     .with_date_start("dateStart")
+///     .with_date_end("dateEnd")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```

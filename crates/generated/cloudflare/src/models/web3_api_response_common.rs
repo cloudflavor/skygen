@@ -19,8 +19,8 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct Web3ApiResponseCommon {
-    pub errors: serde_json::Value,
-    pub messages: serde_json::Value,
+    pub errors: crate::models::web3_messages::Web3Messages,
+    pub messages: crate::models::web3_messages::Web3Messages,
     pub result: serde_json::Value,
     pub success: bool,
 }

@@ -97,13 +97,52 @@ impl<'a> GetBgpHijacksEventsRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get BGP hijack events
+///
+/// Retrieves the BGP hijack events.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/bgp/hijacks/events`
+///
+/// **Parameters**
+/// - `page` (query,optional)
+/// - `per_page` (query,optional)
+/// - `eventId` (query,optional)
+/// - `hijackerAsn` (query,optional)
+/// - `victimAsn` (query,optional)
+/// - `involvedAsn` (query,optional)
+/// - `involvedCountry` (query,optional)
+/// - `prefix` (query,optional)
+/// - `minConfidence` (query,optional)
+/// - `maxConfidence` (query,optional)
+/// - `dateRange` (query,optional)
+/// - `dateStart` (query,optional)
+/// - `dateEnd` (query,optional)
+/// - `sortBy` (query,optional)
+/// - `sortOrder` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_bgp };
+/// use cloudflare::{ ApiClient, apis::radar_bgp };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_bgp_hijacks_events(&api)
+/// let response = get_bgp_hijacks_events(&api)
+///     .with_page("page")
+///     .with_per_page("per_page")
+///     .with_event_id("eventId")
+///     .with_hijacker_asn("hijackerAsn")
+///     .with_victim_asn("victimAsn")
+///     .with_involved_asn("involvedAsn")
+///     .with_involved_country("involvedCountry")
+///     .with_prefix("prefix")
+///     .with_min_confidence("minConfidence")
+///     .with_max_confidence("maxConfidence")
+///     .with_date_range("dateRange")
+///     .with_date_start("dateStart")
+///     .with_date_end("dateEnd")
+///     .with_sort_by("sortBy")
+///     .with_sort_order("sortOrder")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```
@@ -162,13 +201,38 @@ impl<'a> GetBgpIpsTimeseriesRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get announced IP address space time series
+///
+/// Retrieves time series data for the announced IP space count, represented as the number of IPv4 /24s and IPv6 /48s, for a given ASN.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/bgp/ips/timeseries`
+///
+/// **Parameters**
+/// - `name` (query,optional)
+/// - `dateRange` (query,optional)
+/// - `dateStart` (query,optional)
+/// - `dateEnd` (query,optional)
+/// - `asn` (query,optional)
+/// - `location` (query,optional)
+/// - `ipVersion` (query,optional)
+/// - `includeDelay` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_bgp };
+/// use cloudflare::{ ApiClient, apis::radar_bgp };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_bgp_ips_timeseries(&api)
+/// let response = get_bgp_ips_timeseries(&api)
+///     .with_name("name")
+///     .with_date_range("dateRange")
+///     .with_date_start("dateStart")
+///     .with_date_end("dateEnd")
+///     .with_asn("asn")
+///     .with_location("location")
+///     .with_ip_version("ipVersion")
+///     .with_include_delay("includeDelay")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```
@@ -239,13 +303,44 @@ impl<'a> GetBgpRouteLeakRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get BGP route leak events
+///
+/// Retrieves the BGP route leak events.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/bgp/leaks/events`
+///
+/// **Parameters**
+/// - `page` (query,optional)
+/// - `per_page` (query,optional)
+/// - `eventId` (query,optional)
+/// - `leakAsn` (query,optional)
+/// - `involvedAsn` (query,optional)
+/// - `involvedCountry` (query,optional)
+/// - `dateRange` (query,optional)
+/// - `dateStart` (query,optional)
+/// - `dateEnd` (query,optional)
+/// - `sortBy` (query,optional)
+/// - `sortOrder` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_bgp };
+/// use cloudflare::{ ApiClient, apis::radar_bgp };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_bgp_route_leak(&api)
+/// let response = get_bgp_route_leak(&api)
+///     .with_page("page")
+///     .with_per_page("per_page")
+///     .with_event_id("eventId")
+///     .with_leak_asn("leakAsn")
+///     .with_involved_asn("involvedAsn")
+///     .with_involved_country("involvedCountry")
+///     .with_date_range("dateRange")
+///     .with_date_start("dateStart")
+///     .with_date_end("dateEnd")
+///     .with_sort_by("sortBy")
+///     .with_sort_order("sortOrder")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```
@@ -288,13 +383,30 @@ impl<'a> GetBgpRoutesAsnsRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// List ASes from global routing tables
+///
+/// Retrieves all ASes in the current global routing tables with routing statistics.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/bgp/routes/ases`
+///
+/// **Parameters**
+/// - `location` (query,optional)
+/// - `limit` (query,optional)
+/// - `sortBy` (query,optional)
+/// - `sortOrder` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_bgp };
+/// use cloudflare::{ ApiClient, apis::radar_bgp };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_bgp_routes_asns(&api)
+/// let response = get_bgp_routes_asns(&api)
+///     .with_location("location")
+///     .with_limit("limit")
+///     .with_sort_by("sortBy")
+///     .with_sort_order("sortOrder")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```
@@ -333,13 +445,28 @@ impl<'a> GetBgpPfx2asMoasRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get Multi-Origin AS (MOAS) prefixes
+///
+/// Retrieves all Multi-Origin AS (MOAS) prefixes in the global routing tables.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/bgp/routes/moas`
+///
+/// **Parameters**
+/// - `origin` (query,optional)
+/// - `prefix` (query,optional)
+/// - `invalid_only` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_bgp };
+/// use cloudflare::{ ApiClient, apis::radar_bgp };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_bgp_pfx2as_moas(&api)
+/// let response = get_bgp_pfx2as_moas(&api)
+///     .with_origin("origin")
+///     .with_prefix("prefix")
+///     .with_invalid_only("invalid_only")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```
@@ -382,13 +509,30 @@ impl<'a> GetBgpPfx2asRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get prefix-to-ASN mapping
+///
+/// Retrieves the prefix-to-ASN mapping from global routing tables.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/bgp/routes/pfx2as`
+///
+/// **Parameters**
+/// - `prefix` (query,optional)
+/// - `origin` (query,optional)
+/// - `rpkiStatus` (query,optional)
+/// - `longestPrefixMatch` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_bgp };
+/// use cloudflare::{ ApiClient, apis::radar_bgp };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_bgp_pfx2as(&api)
+/// let response = get_bgp_pfx2as(&api)
+///     .with_prefix("prefix")
+///     .with_origin("origin")
+///     .with_rpki_status("rpkiStatus")
+///     .with_longest_prefix_match("longestPrefixMatch")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```
@@ -419,13 +563,24 @@ impl<'a> GetBgpRoutesRealtimeRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get real-time BGP routes for a prefix
+///
+/// Retrieves real-time BGP routes for a prefix, using public real-time data collectors (RouteViews and RIPE RIS).
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/bgp/routes/realtime`
+///
+/// **Parameters**
+/// - `prefix` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_bgp };
+/// use cloudflare::{ ApiClient, apis::radar_bgp };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_bgp_routes_realtime(&api)
+/// let response = get_bgp_routes_realtime(&api)
+///     .with_prefix("prefix")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```
@@ -460,13 +615,26 @@ impl<'a> GetBgpRoutesStatsRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get BGP routing table stats
+///
+/// Retrieves the BGP routing table stats.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/bgp/routes/stats`
+///
+/// **Parameters**
+/// - `asn` (query,optional)
+/// - `location` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_bgp };
+/// use cloudflare::{ ApiClient, apis::radar_bgp };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_bgp_routes_stats(&api)
+/// let response = get_bgp_routes_stats(&api)
+///     .with_asn("asn")
+///     .with_location("location")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```
@@ -525,13 +693,38 @@ impl<'a> GetBgpTimeseriesRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get BGP time series
+///
+/// Retrieves BGP updates over time. When requesting updates for an autonomous system, only BGP updates of type announcement are returned.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/bgp/timeseries`
+///
+/// **Parameters**
+/// - `aggInterval` (query,optional)
+/// - `name` (query,optional)
+/// - `dateRange` (query,optional)
+/// - `dateStart` (query,optional)
+/// - `dateEnd` (query,optional)
+/// - `prefix` (query,optional)
+/// - `updateType` (query,optional)
+/// - `asn` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_bgp };
+/// use cloudflare::{ ApiClient, apis::radar_bgp };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_bgp_timeseries(&api)
+/// let response = get_bgp_timeseries(&api)
+///     .with_agg_interval("aggInterval")
+///     .with_name("name")
+///     .with_date_range("dateRange")
+///     .with_date_start("dateStart")
+///     .with_date_end("dateEnd")
+///     .with_prefix("prefix")
+///     .with_update_type("updateType")
+///     .with_asn("asn")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```
@@ -590,13 +783,38 @@ impl<'a> GetBgpTopAsesRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get top ASes by BGP updates
+///
+/// Retrieves the top autonomous systems by BGP updates (announcements only).
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/bgp/top/ases`
+///
+/// **Parameters**
+/// - `limit` (query,optional)
+/// - `name` (query,optional)
+/// - `dateRange` (query,optional)
+/// - `dateStart` (query,optional)
+/// - `dateEnd` (query,optional)
+/// - `asn` (query,optional)
+/// - `prefix` (query,optional)
+/// - `updateType` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_bgp };
+/// use cloudflare::{ ApiClient, apis::radar_bgp };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_bgp_top_ases(&api)
+/// let response = get_bgp_top_ases(&api)
+///     .with_limit("limit")
+///     .with_name("name")
+///     .with_date_range("dateRange")
+///     .with_date_start("dateStart")
+///     .with_date_end("dateEnd")
+///     .with_asn("asn")
+///     .with_prefix("prefix")
+///     .with_update_type("updateType")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```
@@ -631,13 +849,26 @@ impl<'a> GetBgpTopAsnsRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get top ASes by prefix count
+///
+/// Retrieves the full list of autonomous systems on the global routing table ordered by announced prefixes count. The data comes from public BGP MRT data archives and updates every 2 hours.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/bgp/top/ases/prefixes`
+///
+/// **Parameters**
+/// - `country` (query,optional)
+/// - `limit` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_bgp };
+/// use cloudflare::{ ApiClient, apis::radar_bgp };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_bgp_top_asns(&api)
+/// let response = get_bgp_top_asns(&api)
+///     .with_country("country")
+///     .with_limit("limit")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```
@@ -692,13 +923,36 @@ impl<'a> GetBgpTopPrefixesRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get top prefixes by BGP updates
+///
+/// Retrieves the top network prefixes by BGP updates.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/bgp/top/prefixes`
+///
+/// **Parameters**
+/// - `limit` (query,optional)
+/// - `name` (query,optional)
+/// - `dateRange` (query,optional)
+/// - `dateStart` (query,optional)
+/// - `dateEnd` (query,optional)
+/// - `asn` (query,optional)
+/// - `updateType` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_bgp };
+/// use cloudflare::{ ApiClient, apis::radar_bgp };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_bgp_top_prefixes(&api)
+/// let response = get_bgp_top_prefixes(&api)
+///     .with_limit("limit")
+///     .with_name("name")
+///     .with_date_range("dateRange")
+///     .with_date_start("dateStart")
+///     .with_date_end("dateEnd")
+///     .with_asn("asn")
+///     .with_update_type("updateType")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```

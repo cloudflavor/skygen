@@ -19,8 +19,8 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct FirewallApiResponseCommon {
-    pub errors: serde_json::Value,
-    pub messages: serde_json::Value,
+    pub errors: crate::models::firewall_messages::FirewallMessages,
+    pub messages: crate::models::firewall_messages::FirewallMessages,
     pub result: serde_json::Value,
     pub success: bool,
 }

@@ -20,5 +20,5 @@ use serde::{Deserialize, Serialize};
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct IamCreateUserGroupBody {
     pub name: String,
-    pub policies: Vec<serde_json::Value>,
+    pub policies: Vec<crate::models::iam_user_group_policy_write_body::IamUserGroupPolicyWriteBody>,
 }

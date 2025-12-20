@@ -19,11 +19,12 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct WorkersNamespaceResponse {
-    pub created_by: Option<serde_json::Value>,
-    pub created_on: Option<serde_json::Value>,
-    pub modified_by: Option<serde_json::Value>,
-    pub modified_on: Option<serde_json::Value>,
-    pub namespace_id: Option<serde_json::Value>,
-    pub namespace_name: Option<serde_json::Value>,
-    pub script_count: Option<serde_json::Value>,
+    pub created_by: Option<crate::models::workers_identifier::WorkersIdentifier>,
+    pub created_on: Option<crate::models::workers_created_on::WorkersCreatedOn>,
+    pub modified_by: Option<crate::models::workers_identifier::WorkersIdentifier>,
+    pub modified_on: Option<crate::models::workers_modified_on::WorkersModifiedOn>,
+    pub namespace_id: Option<crate::models::workers_uuid::WorkersUuid>,
+    pub namespace_name:
+        Option<crate::models::workers_dispatch_namespace_name::WorkersDispatchNamespaceName>,
+    pub script_count: Option<crate::models::workers_script_count::WorkersScriptCount>,
 }

@@ -19,7 +19,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct ApiShieldSchemasPublicSchema {
-    pub created_at: serde_json::Value,
+    pub created_at: crate::models::api_shield_schemas_timestamp::ApiShieldSchemasTimestamp,
     pub kind: String,
     pub name: String,
     pub schema_id: serde_json::Value,

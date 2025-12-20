@@ -15,12 +15,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::images_image_key_response_collection::ImagesImageKeyResponseCollection;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct ListSigningKeysRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, ImagesImageKeyResponseCollection>,
 }
 
 impl<'a> ListSigningKeysRequest<'a> {
@@ -35,18 +36,26 @@ impl<'a> ListSigningKeysRequest<'a> {
         self.builder = self.builder.path_param("account_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<ImagesImageKeyResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// List Signing Keys
+///
+/// Lists your signing keys. These can be found on your Cloudflare Images dashboard.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/images/v1/keys`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::cloudflare_images_keys };
+/// use cloudflare::{ ApiClient, apis::cloudflare_images_keys };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_signing_keys(&api)
-///     .with_account_id("value")
+/// let response = list_signing_keys(&api)
+///     .with_account_id("account_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -56,7 +65,7 @@ pub fn list_signing_keys(api: &ApiClient) -> ListSigningKeysRequest<'_> {
 
 #[derive(Debug)]
 pub struct AddSigningKeyRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, ImagesImageKeyResponseCollection>,
 }
 
 impl<'a> AddSigningKeyRequest<'a> {
@@ -79,19 +88,28 @@ impl<'a> AddSigningKeyRequest<'a> {
         self.builder = self.builder.path_param("signing_key_name", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<ImagesImageKeyResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// Create a new Signing Key
+///
+/// Create a new signing key with specified name. Returns all keys available.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/accounts/{account_id}/images/v1/keys/{signing_key_name}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `signing_key_name` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::cloudflare_images_keys };
+/// use cloudflare::{ ApiClient, apis::cloudflare_images_keys };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = add_signing_key(&api)
-///     .with_account_id("value")
-///     .with_signing_key_name("value")
+/// let response = add_signing_key(&api)
+///     .with_account_id("account_id")
+///     .with_signing_key_name("signing_key_name")
 ///     .send()
 ///     .await?;
 /// ```
@@ -101,7 +119,7 @@ pub fn add_signing_key(api: &ApiClient) -> AddSigningKeyRequest<'_> {
 
 #[derive(Debug)]
 pub struct DeleteSigningKeyRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, ImagesImageKeyResponseCollection>,
 }
 
 impl<'a> DeleteSigningKeyRequest<'a> {
@@ -124,19 +142,29 @@ impl<'a> DeleteSigningKeyRequest<'a> {
         self.builder = self.builder.path_param("signing_key_name", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<ImagesImageKeyResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// Delete Signing Key
+///
+/// Delete signing key with specified name. Returns all keys available.
+/// When last key is removed, a new default signing key will be generated.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/accounts/{account_id}/images/v1/keys/{signing_key_name}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `signing_key_name` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::cloudflare_images_keys };
+/// use cloudflare::{ ApiClient, apis::cloudflare_images_keys };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete_signing_key(&api)
-///     .with_account_id("value")
-///     .with_signing_key_name("value")
+/// let response = delete_signing_key(&api)
+///     .with_account_id("account_id")
+///     .with_signing_key_name("signing_key_name")
 ///     .send()
 ///     .await?;
 /// ```

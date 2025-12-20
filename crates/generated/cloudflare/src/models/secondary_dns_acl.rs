@@ -19,7 +19,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct SecondaryDnsAcl {
-    pub id: serde_json::Value,
-    pub ip_range: serde_json::Value,
-    pub name: serde_json::Value,
+    pub id: crate::models::secondary_dns_components_schemas_identifier::SecondaryDnsComponentsSchemasIdentifier,
+    pub ip_range: crate::models::secondary_dns_ip_range::SecondaryDnsIpRange,
+    pub name: crate::models::secondary_dns_acl_components_schemas_name::SecondaryDnsAclComponentsSchemasName,
 }

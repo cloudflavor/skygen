@@ -19,7 +19,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct NscSlotInfo {
-    pub account: Option<serde_json::Value>,
+    pub account: Option<crate::models::nsc_account_tag::NscAccountTag>,
     pub facility: crate::models::nsc_facility_info::NscFacilityInfo,
     pub id: String,
     pub occupied: bool,

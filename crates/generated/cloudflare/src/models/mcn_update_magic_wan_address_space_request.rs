@@ -19,5 +19,5 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct McnUpdateMagicWanAddressSpaceRequest {
-    pub prefixes: Vec<serde_json::Value>,
+    pub prefixes: Vec<crate::models::mcn_cidr_prefix::McnCidrPrefix>,
 }

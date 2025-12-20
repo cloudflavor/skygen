@@ -21,6 +21,6 @@ use serde::{Deserialize, Serialize};
 pub struct McnObservation {
     pub first_observed_at: String,
     pub last_observed_at: String,
-    pub provider_id: serde_json::Value,
-    pub resource_id: serde_json::Value,
+    pub provider_id: crate::models::mcn_provider_id::McnProviderId,
+    pub resource_id: crate::models::mcn_resource_id::McnResourceId,
 }

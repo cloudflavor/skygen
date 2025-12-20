@@ -15,12 +15,16 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::firewall_filter_delete_response_collection::FirewallFilterDeleteResponseCollection;
+use crate::models::firewall_filter_delete_response_single::FirewallFilterDeleteResponseSingle;
+use crate::models::firewall_filter_response_collection::FirewallFilterResponseCollection;
+use crate::models::firewall_filter_response_single::FirewallFilterResponseSingle;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct ListFiltersRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, FirewallFilterResponseCollection>,
 }
 
 impl<'a> ListFiltersRequest<'a> {
@@ -62,18 +66,40 @@ impl<'a> ListFiltersRequest<'a> {
         self.builder = self.builder.header_param("id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<FirewallFilterResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// List filters
+///
+/// Fetches filters in a zone. You can filter the results using several optional parameters.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/filters`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `paused` (query,optional)
+/// - `expression` (query,optional)
+/// - `description` (query,optional)
+/// - `ref` (query,optional)
+/// - `page` (query,optional)
+/// - `per_page` (query,optional)
+/// - `id` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::filters };
+/// use cloudflare::{ ApiClient, apis::filters };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_filters(&api)
-///     .with_zone_id("value")
+/// let response = list_filters(&api)
+///     .with_zone_id("zone_id")
+///     .with_paused("paused")
+///     .with_expression("expression")
+///     .with_description("description")
+///     .with_ref_param("ref")
+///     .with_page("page")
+///     .with_per_page("per_page")
+///     .with_id("id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -109,14 +135,24 @@ impl<'a> CreateFiltersRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Create filters
+///
+/// Creates one or more filters.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/zones/{zone_id}/filters`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::filters };
+/// use cloudflare::{ ApiClient, apis::filters };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = create_filters(&api)
-///     .with_zone_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = create_filters(&api)
+///     .with_zone_id("zone_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -126,7 +162,7 @@ pub fn create_filters(api: &ApiClient) -> CreateFiltersRequest<'_> {
 
 #[derive(Debug)]
 pub struct UpdateFiltersRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, FirewallFilterResponseCollection>,
 }
 
 impl<'a> UpdateFiltersRequest<'a> {
@@ -148,18 +184,28 @@ impl<'a> UpdateFiltersRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<FirewallFilterResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// Update filters
+///
+/// Updates one or more existing filters.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/zones/{zone_id}/filters`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::filters };
+/// use cloudflare::{ ApiClient, apis::filters };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = update_filters(&api)
-///     .with_zone_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = update_filters(&api)
+///     .with_zone_id("zone_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -169,7 +215,7 @@ pub fn update_filters(api: &ApiClient) -> UpdateFiltersRequest<'_> {
 
 #[derive(Debug)]
 pub struct DeleteFiltersRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, FirewallFilterDeleteResponseCollection>,
 }
 
 impl<'a> DeleteFiltersRequest<'a> {
@@ -191,18 +237,28 @@ impl<'a> DeleteFiltersRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<FirewallFilterDeleteResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// Delete filters
+///
+/// Deletes one or more existing filters.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/zones/{zone_id}/filters`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::filters };
+/// use cloudflare::{ ApiClient, apis::filters };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete_filters(&api)
-///     .with_zone_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = delete_filters(&api)
+///     .with_zone_id("zone_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -212,7 +268,7 @@ pub fn delete_filters(api: &ApiClient) -> DeleteFiltersRequest<'_> {
 
 #[derive(Debug)]
 pub struct GetFilterRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, FirewallFilterResponseSingle>,
 }
 
 impl<'a> GetFilterRequest<'a> {
@@ -232,19 +288,28 @@ impl<'a> GetFilterRequest<'a> {
         self.builder = self.builder.path_param("filter_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<FirewallFilterResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Get a filter
+///
+/// Fetches the details of a filter.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/filters/{filter_id}`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `filter_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::filters };
+/// use cloudflare::{ ApiClient, apis::filters };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_filter(&api)
-///     .with_zone_id("value")
-///     .with_filter_id("value")
+/// let response = get_filter(&api)
+///     .with_zone_id("zone_id")
+///     .with_filter_id("filter_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -254,7 +319,7 @@ pub fn get_filter(api: &ApiClient) -> GetFilterRequest<'_> {
 
 #[derive(Debug)]
 pub struct UpdateFilterRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, FirewallFilterResponseSingle>,
 }
 
 impl<'a> UpdateFilterRequest<'a> {
@@ -279,19 +344,30 @@ impl<'a> UpdateFilterRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<FirewallFilterResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Update a filter
+///
+/// Updates an existing filter.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/zones/{zone_id}/filters/{filter_id}`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `filter_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::filters };
+/// use cloudflare::{ ApiClient, apis::filters };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = update_filter(&api)
-///     .with_zone_id("value")
-///     .with_filter_id("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = update_filter(&api)
+///     .with_zone_id("zone_id")
+///     .with_filter_id("filter_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -301,7 +377,7 @@ pub fn update_filter(api: &ApiClient) -> UpdateFilterRequest<'_> {
 
 #[derive(Debug)]
 pub struct DeleteFilterRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, FirewallFilterDeleteResponseSingle>,
 }
 
 impl<'a> DeleteFilterRequest<'a> {
@@ -321,19 +397,28 @@ impl<'a> DeleteFilterRequest<'a> {
         self.builder = self.builder.path_param("filter_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<FirewallFilterDeleteResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Delete a filter
+///
+/// Deletes an existing filter.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/zones/{zone_id}/filters/{filter_id}`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `filter_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::filters };
+/// use cloudflare::{ ApiClient, apis::filters };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete_filter(&api)
-///     .with_zone_id("value")
-///     .with_filter_id("value")
+/// let response = delete_filter(&api)
+///     .with_zone_id("zone_id")
+///     .with_filter_id("filter_id")
 ///     .send()
 ///     .await?;
 /// ```

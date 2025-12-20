@@ -15,12 +15,23 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::waitingroom_event_details_response::WaitingroomEventDetailsResponse;
+use crate::models::waitingroom_event_id_response::WaitingroomEventIdResponse;
+use crate::models::waitingroom_event_response::WaitingroomEventResponse;
+use crate::models::waitingroom_event_response_collection::WaitingroomEventResponseCollection;
+use crate::models::waitingroom_preview_response::WaitingroomPreviewResponse;
+use crate::models::waitingroom_response_collection::WaitingroomResponseCollection;
+use crate::models::waitingroom_rules_response_collection::WaitingroomRulesResponseCollection;
+use crate::models::waitingroom_single_response::WaitingroomSingleResponse;
+use crate::models::waitingroom_status_response::WaitingroomStatusResponse;
+use crate::models::waitingroom_waiting_room_id_response::WaitingroomWaitingRoomIdResponse;
+use crate::models::waitingroom_zone_settings_response::WaitingroomZoneSettingsResponse;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct ListWaitingRoomsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, WaitingroomResponseCollection>,
 }
 
 impl<'a> ListWaitingRoomsRequest<'a> {
@@ -35,18 +46,26 @@ impl<'a> ListWaitingRoomsRequest<'a> {
         self.builder = self.builder.path_param("account_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<WaitingroomResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// List waiting rooms for account
+///
+/// Lists waiting rooms for account.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/waiting_rooms`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::waiting_room };
+/// use cloudflare::{ ApiClient, apis::waiting_room };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_waiting_rooms(&api)
-///     .with_account_id("value")
+/// let response = list_waiting_rooms(&api)
+///     .with_account_id("account_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -56,7 +75,7 @@ pub fn list_waiting_rooms(api: &ApiClient) -> ListWaitingRoomsRequest<'_> {
 
 #[derive(Debug)]
 pub struct ListWaitingRoomsGetRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, WaitingroomResponseCollection>,
 }
 
 impl<'a> ListWaitingRoomsGetRequest<'a> {
@@ -70,18 +89,26 @@ impl<'a> ListWaitingRoomsGetRequest<'a> {
         self.builder = self.builder.path_param("zone_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<WaitingroomResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// List waiting rooms for zone
+///
+/// Lists waiting rooms for zone.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/waiting_rooms`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::waiting_room };
+/// use cloudflare::{ ApiClient, apis::waiting_room };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_waiting_rooms_get(&api)
-///     .with_zone_id("value")
+/// let response = list_waiting_rooms_get(&api)
+///     .with_zone_id("zone_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -91,7 +118,7 @@ pub fn list_waiting_rooms_get(api: &ApiClient) -> ListWaitingRoomsGetRequest<'_>
 
 #[derive(Debug)]
 pub struct CreateWaitingRoomRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, WaitingroomSingleResponse>,
 }
 
 impl<'a> CreateWaitingRoomRequest<'a> {
@@ -113,18 +140,28 @@ impl<'a> CreateWaitingRoomRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<WaitingroomSingleResponse> {
         self.builder.send().await
     }
 }
-
 /// Create waiting room
+///
+/// Creates a new waiting room.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/zones/{zone_id}/waiting_rooms`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::waiting_room };
+/// use cloudflare::{ ApiClient, apis::waiting_room };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = create_waiting_room(&api)
-///     .with_zone_id("value")
+/// # let body: crate::models::waitingroom_query_waitingroom::WaitingroomQueryWaitingroom = todo!();
+/// let response = create_waiting_room(&api)
+///     .with_zone_id("zone_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -134,7 +171,7 @@ pub fn create_waiting_room(api: &ApiClient) -> CreateWaitingRoomRequest<'_> {
 
 #[derive(Debug)]
 pub struct CreateCustomWaitingRoomRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, WaitingroomPreviewResponse>,
 }
 
 impl<'a> CreateCustomWaitingRoomRequest<'a> {
@@ -157,18 +194,45 @@ impl<'a> CreateCustomWaitingRoomRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<WaitingroomPreviewResponse> {
         self.builder.send().await
     }
 }
-
 /// Create a custom waiting room page preview
+///
+/// Creates a waiting room page preview. Upload a custom waiting room page for preview. You will receive a preview URL in the form `<http://waitingrooms.dev/preview/<uuid>`.> You can use the following query parameters to change the state of the preview:
+/// 1. `force_queue`: Boolean indicating if all users will be queued in the waiting room and no one will be let into the origin website (also known as queueAll).
+/// 2. `queue_is_full`: Boolean indicating if the waiting room's queue is currently full and not accepting new users at the moment.
+/// 3. `queueing_method`: The queueing method currently used by the waiting room.
+/// - **fifo** indicates a FIFO queue.
+/// - **random** indicates a Random queue.
+/// - **passthrough** indicates a Passthrough queue. Keep in mind that the waiting room page will only be displayed if `force_queue=true` or `event=prequeueing` — for other cases the request will pass through to the origin. For our preview, this will be a fake origin website returning \"Welcome\".
+/// - **reject** indicates a Reject queue.
+/// 4. `event`: Used to preview a waiting room event.
+/// - **none** indicates no event is occurring.
+/// - **prequeueing** indicates that an event is prequeueing (between `prequeue_start_time` and `event_start_time`).
+/// - **started** indicates that an event has started (between `event_start_time` and `event_end_time`).
+/// 5. `shuffle_at_event_start`: Boolean indicating if the event will shuffle users in the prequeue when it starts. This can only be set to **true** if an event is active (`event` is not **none**).
+///
+/// For example, you can make a request to `<http://waitingrooms.dev/preview/<uuid>?force_queue=false&queue_is_full=false&queueing_method=random&event=started&shuffle_at_event_start=true`>
+/// 6. `waitTime`: Non-zero, positive integer indicating the estimated wait time in minutes. The default value is 10 minutes.
+///
+/// For example, you can make a request to `<http://waitingrooms.dev/preview/<uuid>?waitTime=50`> to configure the estimated wait time as 50 minutes.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/zones/{zone_id}/waiting_rooms/preview`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::waiting_room };
+/// use cloudflare::{ ApiClient, apis::waiting_room };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = create_custom_waiting_room(&api)
-///     .with_zone_id("value")
+/// # let body: crate::models::waitingroom_query_preview::WaitingroomQueryPreview = todo!();
+/// let response = create_custom_waiting_room(&api)
+///     .with_zone_id("zone_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -178,7 +242,7 @@ pub fn create_custom_waiting_room(api: &ApiClient) -> CreateCustomWaitingRoomReq
 
 #[derive(Debug)]
 pub struct GetSettingsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, WaitingroomZoneSettingsResponse>,
 }
 
 impl<'a> GetSettingsRequest<'a> {
@@ -193,18 +257,24 @@ impl<'a> GetSettingsRequest<'a> {
         self.builder = self.builder.path_param("zone_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<WaitingroomZoneSettingsResponse> {
         self.builder.send().await
     }
 }
-
 /// Get zone-level Waiting Room settings
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/waiting_rooms/settings`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::waiting_room };
+/// use cloudflare::{ ApiClient, apis::waiting_room };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_settings(&api)
-///     .with_zone_id("value")
+/// let response = get_settings(&api)
+///     .with_zone_id("zone_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -214,7 +284,7 @@ pub fn get_settings(api: &ApiClient) -> GetSettingsRequest<'_> {
 
 #[derive(Debug)]
 pub struct UpdateSettingsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, WaitingroomZoneSettingsResponse>,
 }
 
 impl<'a> UpdateSettingsRequest<'a> {
@@ -237,18 +307,26 @@ impl<'a> UpdateSettingsRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<WaitingroomZoneSettingsResponse> {
         self.builder.send().await
     }
 }
-
 /// Update zone-level Waiting Room settings
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/zones/{zone_id}/waiting_rooms/settings`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::waiting_room };
+/// use cloudflare::{ ApiClient, apis::waiting_room };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = update_settings(&api)
-///     .with_zone_id("value")
+/// # let body: crate::models::waitingroom_zone_settings::WaitingroomZoneSettings = todo!();
+/// let response = update_settings(&api)
+///     .with_zone_id("zone_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -258,7 +336,7 @@ pub fn update_settings(api: &ApiClient) -> UpdateSettingsRequest<'_> {
 
 #[derive(Debug)]
 pub struct PatchSettingsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, WaitingroomZoneSettingsResponse>,
 }
 
 impl<'a> PatchSettingsRequest<'a> {
@@ -281,18 +359,26 @@ impl<'a> PatchSettingsRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<WaitingroomZoneSettingsResponse> {
         self.builder.send().await
     }
 }
-
 /// Patch zone-level Waiting Room settings
+///
+/// **HTTP Method:** `PATCH`
+/// **Path:** `/zones/{zone_id}/waiting_rooms/settings`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::waiting_room };
+/// use cloudflare::{ ApiClient, apis::waiting_room };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = patch_settings(&api)
-///     .with_zone_id("value")
+/// # let body: crate::models::waitingroom_zone_settings::WaitingroomZoneSettings = todo!();
+/// let response = patch_settings(&api)
+///     .with_zone_id("zone_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -302,7 +388,7 @@ pub fn patch_settings(api: &ApiClient) -> PatchSettingsRequest<'_> {
 
 #[derive(Debug)]
 pub struct DetailsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, WaitingroomSingleResponse>,
 }
 
 impl<'a> DetailsRequest<'a> {
@@ -325,19 +411,28 @@ impl<'a> DetailsRequest<'a> {
         self.builder = self.builder.path_param("waiting_room_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<WaitingroomSingleResponse> {
         self.builder.send().await
     }
 }
-
 /// Waiting room details
+///
+/// Fetches a single configured waiting room.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/waiting_rooms/{waiting_room_id}`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `waiting_room_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::waiting_room };
+/// use cloudflare::{ ApiClient, apis::waiting_room };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = details(&api)
-///     .with_zone_id("value")
-///     .with_waiting_room_id("value")
+/// let response = details(&api)
+///     .with_zone_id("zone_id")
+///     .with_waiting_room_id("waiting_room_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -347,7 +442,7 @@ pub fn details(api: &ApiClient) -> DetailsRequest<'_> {
 
 #[derive(Debug)]
 pub struct UpdateWaitingRoomRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, WaitingroomSingleResponse>,
 }
 
 impl<'a> UpdateWaitingRoomRequest<'a> {
@@ -378,19 +473,30 @@ impl<'a> UpdateWaitingRoomRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<WaitingroomSingleResponse> {
         self.builder.send().await
     }
 }
-
 /// Update waiting room
+///
+/// Updates a configured waiting room.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/zones/{zone_id}/waiting_rooms/{waiting_room_id}`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `waiting_room_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::waiting_room };
+/// use cloudflare::{ ApiClient, apis::waiting_room };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = update_waiting_room(&api)
-///     .with_zone_id("value")
-///     .with_waiting_room_id("value")
+/// # let body: crate::models::waitingroom_query_waitingroom::WaitingroomQueryWaitingroom = todo!();
+/// let response = update_waiting_room(&api)
+///     .with_zone_id("zone_id")
+///     .with_waiting_room_id("waiting_room_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -400,7 +506,7 @@ pub fn update_waiting_room(api: &ApiClient) -> UpdateWaitingRoomRequest<'_> {
 
 #[derive(Debug)]
 pub struct DeleteWaitingRoomRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, WaitingroomWaitingRoomIdResponse>,
 }
 
 impl<'a> DeleteWaitingRoomRequest<'a> {
@@ -423,19 +529,28 @@ impl<'a> DeleteWaitingRoomRequest<'a> {
         self.builder = self.builder.path_param("waiting_room_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<WaitingroomWaitingRoomIdResponse> {
         self.builder.send().await
     }
 }
-
 /// Delete waiting room
+///
+/// Deletes a waiting room.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/zones/{zone_id}/waiting_rooms/{waiting_room_id}`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `waiting_room_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::waiting_room };
+/// use cloudflare::{ ApiClient, apis::waiting_room };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete_waiting_room(&api)
-///     .with_zone_id("value")
-///     .with_waiting_room_id("value")
+/// let response = delete_waiting_room(&api)
+///     .with_zone_id("zone_id")
+///     .with_waiting_room_id("waiting_room_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -445,7 +560,7 @@ pub fn delete_waiting_room(api: &ApiClient) -> DeleteWaitingRoomRequest<'_> {
 
 #[derive(Debug)]
 pub struct PatchWaitingRoomRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, WaitingroomSingleResponse>,
 }
 
 impl<'a> PatchWaitingRoomRequest<'a> {
@@ -476,19 +591,30 @@ impl<'a> PatchWaitingRoomRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<WaitingroomSingleResponse> {
         self.builder.send().await
     }
 }
-
 /// Patch waiting room
+///
+/// Patches a configured waiting room.
+///
+/// **HTTP Method:** `PATCH`
+/// **Path:** `/zones/{zone_id}/waiting_rooms/{waiting_room_id}`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `waiting_room_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::waiting_room };
+/// use cloudflare::{ ApiClient, apis::waiting_room };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = patch_waiting_room(&api)
-///     .with_zone_id("value")
-///     .with_waiting_room_id("value")
+/// # let body: crate::models::waitingroom_query_waitingroom::WaitingroomQueryWaitingroom = todo!();
+/// let response = patch_waiting_room(&api)
+///     .with_zone_id("zone_id")
+///     .with_waiting_room_id("waiting_room_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -498,7 +624,7 @@ pub fn patch_waiting_room(api: &ApiClient) -> PatchWaitingRoomRequest<'_> {
 
 #[derive(Debug)]
 pub struct ListEventsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, WaitingroomEventResponseCollection>,
 }
 
 impl<'a> ListEventsRequest<'a> {
@@ -521,19 +647,28 @@ impl<'a> ListEventsRequest<'a> {
         self.builder = self.builder.path_param("waiting_room_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<WaitingroomEventResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// List events
+///
+/// Lists events for a waiting room.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/waiting_rooms/{waiting_room_id}/events`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `waiting_room_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::waiting_room };
+/// use cloudflare::{ ApiClient, apis::waiting_room };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_events(&api)
-///     .with_zone_id("value")
-///     .with_waiting_room_id("value")
+/// let response = list_events(&api)
+///     .with_zone_id("zone_id")
+///     .with_waiting_room_id("waiting_room_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -543,7 +678,7 @@ pub fn list_events(api: &ApiClient) -> ListEventsRequest<'_> {
 
 #[derive(Debug)]
 pub struct CreateEventRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, WaitingroomEventResponse>,
 }
 
 impl<'a> CreateEventRequest<'a> {
@@ -574,19 +709,30 @@ impl<'a> CreateEventRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<WaitingroomEventResponse> {
         self.builder.send().await
     }
 }
-
 /// Create event
+///
+/// Only available for the Waiting Room Advanced subscription. Creates an event for a waiting room. An event takes place during a specified period of time, temporarily changing the behavior of a waiting room. While the event is active, some of the properties in the event's configuration may either override or inherit from the waiting room's configuration. Note that events cannot overlap with each other, so only one event can be active at a time.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/zones/{zone_id}/waiting_rooms/{waiting_room_id}/events`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `waiting_room_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::waiting_room };
+/// use cloudflare::{ ApiClient, apis::waiting_room };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = create_event(&api)
-///     .with_zone_id("value")
-///     .with_waiting_room_id("value")
+/// # let body: crate::models::waitingroom_query_event::WaitingroomQueryEvent = todo!();
+/// let response = create_event(&api)
+///     .with_zone_id("zone_id")
+///     .with_waiting_room_id("waiting_room_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -596,7 +742,7 @@ pub fn create_event(api: &ApiClient) -> CreateEventRequest<'_> {
 
 #[derive(Debug)]
 pub struct EventDetailsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, WaitingroomEventResponse>,
 }
 
 impl<'a> EventDetailsRequest<'a> {
@@ -624,20 +770,30 @@ impl<'a> EventDetailsRequest<'a> {
         self.builder = self.builder.path_param("event_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<WaitingroomEventResponse> {
         self.builder.send().await
     }
 }
-
 /// Event details
+///
+/// Fetches a single configured event for a waiting room.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/waiting_rooms/{waiting_room_id}/events/{event_id}`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `waiting_room_id` (path, required)
+/// - `event_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::waiting_room };
+/// use cloudflare::{ ApiClient, apis::waiting_room };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = event_details(&api)
-///     .with_zone_id("value")
-///     .with_waiting_room_id("value")
-///     .with_event_id("value")
+/// let response = event_details(&api)
+///     .with_zone_id("zone_id")
+///     .with_waiting_room_id("waiting_room_id")
+///     .with_event_id("event_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -647,7 +803,7 @@ pub fn event_details(api: &ApiClient) -> EventDetailsRequest<'_> {
 
 #[derive(Debug)]
 pub struct UpdateEventRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, WaitingroomEventResponse>,
 }
 
 impl<'a> UpdateEventRequest<'a> {
@@ -683,20 +839,32 @@ impl<'a> UpdateEventRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<WaitingroomEventResponse> {
         self.builder.send().await
     }
 }
-
 /// Update event
+///
+/// Updates a configured event for a waiting room.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/zones/{zone_id}/waiting_rooms/{waiting_room_id}/events/{event_id}`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `waiting_room_id` (path, required)
+/// - `event_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::waiting_room };
+/// use cloudflare::{ ApiClient, apis::waiting_room };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = update_event(&api)
-///     .with_zone_id("value")
-///     .with_waiting_room_id("value")
-///     .with_event_id("value")
+/// # let body: crate::models::waitingroom_query_event::WaitingroomQueryEvent = todo!();
+/// let response = update_event(&api)
+///     .with_zone_id("zone_id")
+///     .with_waiting_room_id("waiting_room_id")
+///     .with_event_id("event_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -706,7 +874,7 @@ pub fn update_event(api: &ApiClient) -> UpdateEventRequest<'_> {
 
 #[derive(Debug)]
 pub struct DeleteEventRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, WaitingroomEventIdResponse>,
 }
 
 impl<'a> DeleteEventRequest<'a> {
@@ -734,20 +902,30 @@ impl<'a> DeleteEventRequest<'a> {
         self.builder = self.builder.path_param("event_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<WaitingroomEventIdResponse> {
         self.builder.send().await
     }
 }
-
 /// Delete event
+///
+/// Deletes an event for a waiting room.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/zones/{zone_id}/waiting_rooms/{waiting_room_id}/events/{event_id}`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `waiting_room_id` (path, required)
+/// - `event_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::waiting_room };
+/// use cloudflare::{ ApiClient, apis::waiting_room };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete_event(&api)
-///     .with_zone_id("value")
-///     .with_waiting_room_id("value")
-///     .with_event_id("value")
+/// let response = delete_event(&api)
+///     .with_zone_id("zone_id")
+///     .with_waiting_room_id("waiting_room_id")
+///     .with_event_id("event_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -757,7 +935,7 @@ pub fn delete_event(api: &ApiClient) -> DeleteEventRequest<'_> {
 
 #[derive(Debug)]
 pub struct PatchEventRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, WaitingroomEventResponse>,
 }
 
 impl<'a> PatchEventRequest<'a> {
@@ -793,20 +971,32 @@ impl<'a> PatchEventRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<WaitingroomEventResponse> {
         self.builder.send().await
     }
 }
-
 /// Patch event
+///
+/// Patches a configured event for a waiting room.
+///
+/// **HTTP Method:** `PATCH`
+/// **Path:** `/zones/{zone_id}/waiting_rooms/{waiting_room_id}/events/{event_id}`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `waiting_room_id` (path, required)
+/// - `event_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::waiting_room };
+/// use cloudflare::{ ApiClient, apis::waiting_room };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = patch_event(&api)
-///     .with_zone_id("value")
-///     .with_waiting_room_id("value")
-///     .with_event_id("value")
+/// # let body: crate::models::waitingroom_query_event::WaitingroomQueryEvent = todo!();
+/// let response = patch_event(&api)
+///     .with_zone_id("zone_id")
+///     .with_waiting_room_id("waiting_room_id")
+///     .with_event_id("event_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -816,7 +1006,7 @@ pub fn patch_event(api: &ApiClient) -> PatchEventRequest<'_> {
 
 #[derive(Debug)]
 pub struct PreviewActiveEventDetailsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, WaitingroomEventDetailsResponse>,
 }
 
 impl<'a> PreviewActiveEventDetailsRequest<'a> {
@@ -844,20 +1034,30 @@ impl<'a> PreviewActiveEventDetailsRequest<'a> {
         self.builder = self.builder.path_param("event_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<WaitingroomEventDetailsResponse> {
         self.builder.send().await
     }
 }
-
 /// Preview active event details
+///
+/// Previews an event's configuration as if it was active. Inherited fields from the waiting room will be displayed with their current values.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/waiting_rooms/{waiting_room_id}/events/{event_id}/details`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `waiting_room_id` (path, required)
+/// - `event_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::waiting_room };
+/// use cloudflare::{ ApiClient, apis::waiting_room };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = preview_active_event_details(&api)
-///     .with_zone_id("value")
-///     .with_waiting_room_id("value")
-///     .with_event_id("value")
+/// let response = preview_active_event_details(&api)
+///     .with_zone_id("zone_id")
+///     .with_waiting_room_id("waiting_room_id")
+///     .with_event_id("event_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -867,7 +1067,7 @@ pub fn preview_active_event_details(api: &ApiClient) -> PreviewActiveEventDetail
 
 #[derive(Debug)]
 pub struct ListWaitingRoomRulesRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, WaitingroomRulesResponseCollection>,
 }
 
 impl<'a> ListWaitingRoomRulesRequest<'a> {
@@ -890,19 +1090,28 @@ impl<'a> ListWaitingRoomRulesRequest<'a> {
         self.builder = self.builder.path_param("waiting_room_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<WaitingroomRulesResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// List Waiting Room Rules
+///
+/// Lists rules for a waiting room.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/waiting_rooms/{waiting_room_id}/rules`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `waiting_room_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::waiting_room };
+/// use cloudflare::{ ApiClient, apis::waiting_room };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_waiting_room_rules(&api)
-///     .with_zone_id("value")
-///     .with_waiting_room_id("value")
+/// let response = list_waiting_room_rules(&api)
+///     .with_zone_id("zone_id")
+///     .with_waiting_room_id("waiting_room_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -912,7 +1121,7 @@ pub fn list_waiting_room_rules(api: &ApiClient) -> ListWaitingRoomRulesRequest<'
 
 #[derive(Debug)]
 pub struct CreateWaitingRoomRuleRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, WaitingroomRulesResponseCollection>,
 }
 
 impl<'a> CreateWaitingRoomRuleRequest<'a> {
@@ -943,19 +1152,30 @@ impl<'a> CreateWaitingRoomRuleRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<WaitingroomRulesResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// Create Waiting Room Rule
+///
+/// Only available for the Waiting Room Advanced subscription. Creates a rule for a waiting room.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/zones/{zone_id}/waiting_rooms/{waiting_room_id}/rules`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `waiting_room_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::waiting_room };
+/// use cloudflare::{ ApiClient, apis::waiting_room };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = create_waiting_room_rule(&api)
-///     .with_zone_id("value")
-///     .with_waiting_room_id("value")
+/// # let body: crate::models::waitingroom_create_rule::WaitingroomCreateRule = todo!();
+/// let response = create_waiting_room_rule(&api)
+///     .with_zone_id("zone_id")
+///     .with_waiting_room_id("waiting_room_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -965,7 +1185,7 @@ pub fn create_waiting_room_rule(api: &ApiClient) -> CreateWaitingRoomRuleRequest
 
 #[derive(Debug)]
 pub struct ReplaceWaitingRoomRulesRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, WaitingroomRulesResponseCollection>,
 }
 
 impl<'a> ReplaceWaitingRoomRulesRequest<'a> {
@@ -989,23 +1209,37 @@ impl<'a> ReplaceWaitingRoomRulesRequest<'a> {
         self.builder = self.builder.path_param("waiting_room_id", value);
         self
     }
-    pub fn with_body(mut self, body: serde_json::Value) -> Self {
+    pub fn with_body(
+        mut self,
+        body: crate::models::waitingroom_update_rules::WaitingroomUpdateRules,
+    ) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<WaitingroomRulesResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// Replace Waiting Room Rules
+///
+/// Only available for the Waiting Room Advanced subscription. Replaces all rules for a waiting room.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/zones/{zone_id}/waiting_rooms/{waiting_room_id}/rules`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `waiting_room_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::waiting_room };
+/// use cloudflare::{ ApiClient, apis::waiting_room };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = replace_waiting_room_rules(&api)
-///     .with_zone_id("value")
-///     .with_waiting_room_id("value")
+/// # let body: crate::models::waitingroom_update_rules::WaitingroomUpdateRules = todo!();
+/// let response = replace_waiting_room_rules(&api)
+///     .with_zone_id("zone_id")
+///     .with_waiting_room_id("waiting_room_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -1015,7 +1249,7 @@ pub fn replace_waiting_room_rules(api: &ApiClient) -> ReplaceWaitingRoomRulesReq
 
 #[derive(Debug)]
 pub struct DeleteWaitingRoomRuleRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, WaitingroomRulesResponseCollection>,
 }
 
 impl<'a> DeleteWaitingRoomRuleRequest<'a> {
@@ -1043,20 +1277,30 @@ impl<'a> DeleteWaitingRoomRuleRequest<'a> {
         self.builder = self.builder.path_param("rule_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<WaitingroomRulesResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// Delete Waiting Room Rule
+///
+/// Deletes a rule for a waiting room.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/zones/{zone_id}/waiting_rooms/{waiting_room_id}/rules/{rule_id}`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `waiting_room_id` (path, required)
+/// - `rule_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::waiting_room };
+/// use cloudflare::{ ApiClient, apis::waiting_room };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete_waiting_room_rule(&api)
-///     .with_zone_id("value")
-///     .with_waiting_room_id("value")
-///     .with_rule_id("value")
+/// let response = delete_waiting_room_rule(&api)
+///     .with_zone_id("zone_id")
+///     .with_waiting_room_id("waiting_room_id")
+///     .with_rule_id("rule_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -1066,7 +1310,7 @@ pub fn delete_waiting_room_rule(api: &ApiClient) -> DeleteWaitingRoomRuleRequest
 
 #[derive(Debug)]
 pub struct PatchWaitingRoomRuleRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, WaitingroomRulesResponseCollection>,
 }
 
 impl<'a> PatchWaitingRoomRuleRequest<'a> {
@@ -1102,20 +1346,32 @@ impl<'a> PatchWaitingRoomRuleRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<WaitingroomRulesResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// Patch Waiting Room Rule
+///
+/// Patches a rule for a waiting room.
+///
+/// **HTTP Method:** `PATCH`
+/// **Path:** `/zones/{zone_id}/waiting_rooms/{waiting_room_id}/rules/{rule_id}`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `waiting_room_id` (path, required)
+/// - `rule_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::waiting_room };
+/// use cloudflare::{ ApiClient, apis::waiting_room };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = patch_waiting_room_rule(&api)
-///     .with_zone_id("value")
-///     .with_waiting_room_id("value")
-///     .with_rule_id("value")
+/// # let body: crate::models::waitingroom_patch_rule::WaitingroomPatchRule = todo!();
+/// let response = patch_waiting_room_rule(&api)
+///     .with_zone_id("zone_id")
+///     .with_waiting_room_id("waiting_room_id")
+///     .with_rule_id("rule_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -1125,7 +1381,7 @@ pub fn patch_waiting_room_rule(api: &ApiClient) -> PatchWaitingRoomRuleRequest<'
 
 #[derive(Debug)]
 pub struct GetWaitingRoomStatusRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, WaitingroomStatusResponse>,
 }
 
 impl<'a> GetWaitingRoomStatusRequest<'a> {
@@ -1148,19 +1404,37 @@ impl<'a> GetWaitingRoomStatusRequest<'a> {
         self.builder = self.builder.path_param("waiting_room_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<WaitingroomStatusResponse> {
         self.builder.send().await
     }
 }
-
 /// Get waiting room status
+///
+/// Fetches the status of a configured waiting room. Response fields include:
+/// 1. `status`: String indicating the status of the waiting room. The possible status are:
+/// - **not_queueing** indicates that the configured thresholds have not been met and all users are going through to the origin.
+/// - **queueing** indicates that the thresholds have been met and some users are held in the waiting room.
+/// - **event_prequeueing** indicates that an event is active and is currently prequeueing users before it starts.
+/// - **suspended** indicates that the room is suspended.
+/// 2. `event_id`: String of the current event's `id` if an event is active, otherwise an empty string.
+/// 3. `estimated_queued_users`: Integer of the estimated number of users currently waiting in the queue.
+/// 4. `estimated_total_active_users`: Integer of the estimated number of users currently active on the origin.
+/// 5. `max_estimated_time_minutes`: Integer of the maximum estimated time currently presented to the users.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/waiting_rooms/{waiting_room_id}/status`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `waiting_room_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::waiting_room };
+/// use cloudflare::{ ApiClient, apis::waiting_room };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_waiting_room_status(&api)
-///     .with_zone_id("value")
-///     .with_waiting_room_id("value")
+/// let response = get_waiting_room_status(&api)
+///     .with_zone_id("zone_id")
+///     .with_waiting_room_id("waiting_room_id")
 ///     .send()
 ///     .await?;
 /// ```

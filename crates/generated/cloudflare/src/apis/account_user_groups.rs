@@ -15,6 +15,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::iam_api_response_single_id::IamApiResponseSingleId;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
@@ -63,14 +64,34 @@ impl<'a> GroupListRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// List User Groups
+///
+/// List all the user groups for an account.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/iam/user_groups`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `id` (query,optional)
+/// - `name` (query,optional)
+/// - `fuzzyName` (query,optional)
+/// - `page` (query,optional)
+/// - `per_page` (query,optional)
+/// - `direction` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::account_user_groups };
+/// use cloudflare::{ ApiClient, apis::account_user_groups };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = group_list(&api)
-///     .with_account_id("value")
+/// let response = group_list(&api)
+///     .with_account_id("account_id")
+///     .with_id("id")
+///     .with_name("name")
+///     .with_fuzzy_name("fuzzyName")
+///     .with_page("page")
+///     .with_per_page("per_page")
+///     .with_direction("direction")
 ///     .send()
 ///     .await?;
 /// ```
@@ -107,14 +128,24 @@ impl<'a> GroupCreateRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Create User Group
+///
+/// Create a new user group under the specified account.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/iam/user_groups`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::account_user_groups };
+/// use cloudflare::{ ApiClient, apis::account_user_groups };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = group_create(&api)
-///     .with_account_id("value")
+/// # let body: crate::models::iam_create_user_group_body::IamCreateUserGroupBody = todo!();
+/// let response = group_create(&api)
+///     .with_account_id("account_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -151,15 +182,24 @@ impl<'a> GroupDetailsRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// User Group Details
+///
+/// Get information about a specific user group in an account.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/iam/user_groups/{user_group_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `user_group_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::account_user_groups };
+/// use cloudflare::{ ApiClient, apis::account_user_groups };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = group_details(&api)
-///     .with_account_id("value")
-///     .with_user_group_id("value")
+/// let response = group_details(&api)
+///     .with_account_id("account_id")
+///     .with_user_group_id("user_group_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -204,15 +244,26 @@ impl<'a> GroupUpdateRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Update User Group
+///
+/// Modify an existing user group.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/accounts/{account_id}/iam/user_groups/{user_group_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `user_group_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::account_user_groups };
+/// use cloudflare::{ ApiClient, apis::account_user_groups };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = group_update(&api)
-///     .with_account_id("value")
-///     .with_user_group_id("value")
+/// # let body: crate::models::iam_update_user_group_body::IamUpdateUserGroupBody = todo!();
+/// let response = group_update(&api)
+///     .with_account_id("account_id")
+///     .with_user_group_id("user_group_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -222,7 +273,7 @@ pub fn group_update(api: &ApiClient) -> GroupUpdateRequest<'_> {
 
 #[derive(Debug)]
 pub struct GroupDeleteRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, IamApiResponseSingleId>,
 }
 
 impl<'a> GroupDeleteRequest<'a> {
@@ -245,19 +296,28 @@ impl<'a> GroupDeleteRequest<'a> {
         self.builder = self.builder.path_param("user_group_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<IamApiResponseSingleId> {
         self.builder.send().await
     }
 }
-
 /// Remove User Group
+///
+/// Remove a user group from an account.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/accounts/{account_id}/iam/user_groups/{user_group_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `user_group_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::account_user_groups };
+/// use cloudflare::{ ApiClient, apis::account_user_groups };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = group_delete(&api)
-///     .with_account_id("value")
-///     .with_user_group_id("value")
+/// let response = group_delete(&api)
+///     .with_account_id("account_id")
+///     .with_user_group_id("user_group_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -302,15 +362,28 @@ impl<'a> GroupMemberListRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// List User Group Members
+///
+/// List all the members attached to a user group.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/iam/user_groups/{user_group_id}/members`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `user_group_id` (path, required)
+/// - `page` (query,optional)
+/// - `per_page` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::account_user_groups };
+/// use cloudflare::{ ApiClient, apis::account_user_groups };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = group_member_list(&api)
-///     .with_account_id("value")
-///     .with_user_group_id("value")
+/// let response = group_member_list(&api)
+///     .with_account_id("account_id")
+///     .with_user_group_id("user_group_id")
+///     .with_page("page")
+///     .with_per_page("per_page")
 ///     .send()
 ///     .await?;
 /// ```
@@ -355,15 +428,26 @@ impl<'a> GroupMemberCreateRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Add User Group Members
+///
+/// Add members to a User Group.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/iam/user_groups/{user_group_id}/members`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `user_group_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::account_user_groups };
+/// use cloudflare::{ ApiClient, apis::account_user_groups };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = group_member_create(&api)
-///     .with_account_id("value")
-///     .with_user_group_id("value")
+/// # let body: Vec<std::collections::BTreeMap<String, serde_json::Value>> = todo!();
+/// let response = group_member_create(&api)
+///     .with_account_id("account_id")
+///     .with_user_group_id("user_group_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -408,15 +492,26 @@ impl<'a> GroupMembersUpdateRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Update User Group Members
+///
+/// Replace the set of members attached to a User Group.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/accounts/{account_id}/iam/user_groups/{user_group_id}/members`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `user_group_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::account_user_groups };
+/// use cloudflare::{ ApiClient, apis::account_user_groups };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = group_members_update(&api)
-///     .with_account_id("value")
-///     .with_user_group_id("value")
+/// # let body: Vec<std::collections::BTreeMap<String, serde_json::Value>> = todo!();
+/// let response = group_members_update(&api)
+///     .with_account_id("account_id")
+///     .with_user_group_id("user_group_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -458,16 +553,26 @@ impl<'a> GroupMemberDeleteRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Remove User Group Member
+///
+/// Remove a member from User Group
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/accounts/{account_id}/iam/user_groups/{user_group_id}/members/{member_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `user_group_id` (path, required)
+/// - `member_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::account_user_groups };
+/// use cloudflare::{ ApiClient, apis::account_user_groups };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = group_member_delete(&api)
-///     .with_account_id("value")
-///     .with_user_group_id("value")
-///     .with_member_id("value")
+/// let response = group_member_delete(&api)
+///     .with_account_id("account_id")
+///     .with_user_group_id("user_group_id")
+///     .with_member_id("member_id")
 ///     .send()
 ///     .await?;
 /// ```

@@ -19,8 +19,8 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct HyperdriveHyperdriveConfigPatch {
-    pub caching: Option<serde_json::Value>,
+    pub caching: Option<crate::models::hyperdrive_hyperdrive_caching::HyperdriveHyperdriveCaching>,
     pub mtls: Option<crate::models::hyperdrive_hyperdrive_mtls::HyperdriveHyperdriveMtls>,
-    pub name: Option<serde_json::Value>,
+    pub name: Option<crate::models::hyperdrive_hyperdrive_name::HyperdriveHyperdriveName>,
     pub origin: Option<serde_json::Value>,
 }

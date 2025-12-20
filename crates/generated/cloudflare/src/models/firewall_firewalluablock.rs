@@ -19,10 +19,9 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct FirewallFirewalluablock {
-    pub configuration:
-        Option<crate::models::firewall_schemas_configuration::FirewallSchemasConfiguration>,
-    pub description: Option<serde_json::Value>,
-    pub id: Option<serde_json::Value>,
-    pub mode: Option<serde_json::Value>,
-    pub paused: Option<serde_json::Value>,
+    pub configuration: Option<crate::models::firewall_schemas_configuration::FirewallSchemasConfiguration>,
+    pub description: Option<crate::models::firewall_ua_rules_components_schemas_description::FirewallUaRulesComponentsSchemasDescription>,
+    pub id: Option<crate::models::firewall_components_ua_rule_id::FirewallComponentsUaRuleId>,
+    pub mode: Option<crate::models::firewall_components_schemas_mode::FirewallComponentsSchemasMode>,
+    pub paused: Option<crate::models::firewall_schemas_paused::FirewallSchemasPaused>,
 }

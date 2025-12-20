@@ -52,15 +52,26 @@ impl<'a> GetEventNotificationConfigsRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// List Event Notification Rules
+///
+/// List all event notification rules for a bucket.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/event_notifications/r2/{bucket_name}/configuration`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `bucket_name` (path, required)
+/// - `cf-r2-jurisdiction` (header,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::r2_bucket };
+/// use cloudflare::{ ApiClient, apis::r2_bucket };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_event_notification_configs(&api)
-///     .with_account_id("value")
-///     .with_bucket_name("value")
+/// let response = get_event_notification_configs(&api)
+///     .with_account_id("account_id")
+///     .with_bucket_name("bucket_name")
+///     .with_cf_r2_jurisdiction("cf-r2-jurisdiction")
 ///     .send()
 ///     .await?;
 /// ```
@@ -102,16 +113,28 @@ impl<'a> GetEventNotificationConfigRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get Event Notification Rule
+///
+/// Get a single event notification rule.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/event_notifications/r2/{bucket_name}/configuration/queues/{queue_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `bucket_name` (path, required)
+/// - `queue_id` (path, required)
+/// - `cf-r2-jurisdiction` (header,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::r2_bucket };
+/// use cloudflare::{ ApiClient, apis::r2_bucket };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_event_notification_config(&api)
-///     .with_account_id("value")
-///     .with_bucket_name("value")
-///     .with_queue_id("value")
+/// let response = get_event_notification_config(&api)
+///     .with_account_id("account_id")
+///     .with_bucket_name("bucket_name")
+///     .with_queue_id("queue_id")
+///     .with_cf_r2_jurisdiction("cf-r2-jurisdiction")
 ///     .send()
 ///     .await?;
 /// ```
@@ -161,16 +184,30 @@ impl<'a> PutEventNotificationConfigRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Create Event Notification Rule
+///
+/// Create event notification rule.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/accounts/{account_id}/event_notifications/r2/{bucket_name}/configuration/queues/{queue_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `bucket_name` (path, required)
+/// - `queue_id` (path, required)
+/// - `cf-r2-jurisdiction` (header,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::r2_bucket };
+/// use cloudflare::{ ApiClient, apis::r2_bucket };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = put_event_notification_config(&api)
-///     .with_account_id("value")
-///     .with_bucket_name("value")
-///     .with_queue_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = put_event_notification_config(&api)
+///     .with_account_id("account_id")
+///     .with_bucket_name("bucket_name")
+///     .with_queue_id("queue_id")
+///     .with_cf_r2_jurisdiction("cf-r2-jurisdiction")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -219,16 +256,30 @@ impl<'a> EventNotificationDeleteConfigRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Delete Event Notification Rules
+///
+/// Delete an event notification rule. **If no body is provided, all rules for specified queue will be deleted**.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/accounts/{account_id}/event_notifications/r2/{bucket_name}/configuration/queues/{queue_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `bucket_name` (path, required)
+/// - `queue_id` (path, required)
+/// - `cf-r2-jurisdiction` (header,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::r2_bucket };
+/// use cloudflare::{ ApiClient, apis::r2_bucket };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = event_notification_delete_config(&api)
-///     .with_account_id("value")
-///     .with_bucket_name("value")
-///     .with_queue_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = event_notification_delete_config(&api)
+///     .with_account_id("account_id")
+///     .with_bucket_name("bucket_name")
+///     .with_queue_id("queue_id")
+///     .with_cf_r2_jurisdiction("cf-r2-jurisdiction")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -286,14 +337,36 @@ impl<'a> ListBucketsRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// List Buckets
+///
+/// Lists all R2 buckets on your account.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/r2/buckets`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `name_contains` (query,optional)
+/// - `start_after` (query,optional)
+/// - `per_page` (query,optional)
+/// - `order` (query,optional)
+/// - `direction` (query,optional)
+/// - `cursor` (query,optional)
+/// - `cf-r2-jurisdiction` (header,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::r2_bucket };
+/// use cloudflare::{ ApiClient, apis::r2_bucket };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_buckets(&api)
-///     .with_account_id("value")
+/// let response = list_buckets(&api)
+///     .with_account_id("account_id")
+///     .with_name_contains("name_contains")
+///     .with_start_after("start_after")
+///     .with_per_page("per_page")
+///     .with_order("order")
+///     .with_direction("direction")
+///     .with_cursor("cursor")
+///     .with_cf_r2_jurisdiction("cf-r2-jurisdiction")
 ///     .send()
 ///     .await?;
 /// ```
@@ -333,14 +406,26 @@ impl<'a> CreateBucketRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Create Bucket
+///
+/// Creates a new R2 bucket.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/r2/buckets`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `cf-r2-jurisdiction` (header,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::r2_bucket };
+/// use cloudflare::{ ApiClient, apis::r2_bucket };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = create_bucket(&api)
-///     .with_account_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = create_bucket(&api)
+///     .with_account_id("account_id")
+///     .with_cf_r2_jurisdiction("cf-r2-jurisdiction")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -381,15 +466,26 @@ impl<'a> GetBucketRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get Bucket
+///
+/// Gets properties of an existing R2 bucket.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/r2/buckets/{bucket_name}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `bucket_name` (path, required)
+/// - `cf-r2-jurisdiction` (header,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::r2_bucket };
+/// use cloudflare::{ ApiClient, apis::r2_bucket };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_bucket(&api)
-///     .with_account_id("value")
-///     .with_bucket_name("value")
+/// let response = get_bucket(&api)
+///     .with_account_id("account_id")
+///     .with_bucket_name("bucket_name")
+///     .with_cf_r2_jurisdiction("cf-r2-jurisdiction")
 ///     .send()
 ///     .await?;
 /// ```
@@ -430,15 +526,26 @@ impl<'a> DeleteBucketRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Delete Bucket
+///
+/// Deletes an existing R2 bucket.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/accounts/{account_id}/r2/buckets/{bucket_name}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `bucket_name` (path, required)
+/// - `cf-r2-jurisdiction` (header,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::r2_bucket };
+/// use cloudflare::{ ApiClient, apis::r2_bucket };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete_bucket(&api)
-///     .with_account_id("value")
-///     .with_bucket_name("value")
+/// let response = delete_bucket(&api)
+///     .with_account_id("account_id")
+///     .with_bucket_name("bucket_name")
+///     .with_cf_r2_jurisdiction("cf-r2-jurisdiction")
 ///     .send()
 ///     .await?;
 /// ```
@@ -483,15 +590,28 @@ impl<'a> PatchBucketRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Patch Bucket
+///
+/// Updates properties of an existing R2 bucket.
+///
+/// **HTTP Method:** `PATCH`
+/// **Path:** `/accounts/{account_id}/r2/buckets/{bucket_name}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `bucket_name` (path, required)
+/// - `cf-r2-jurisdiction` (header,optional)
+/// - `cf-r2-storage-class` (header,required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::r2_bucket };
+/// use cloudflare::{ ApiClient, apis::r2_bucket };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = patch_bucket(&api)
-///     .with_account_id("value")
-///     .with_bucket_name("value")
+/// let response = patch_bucket(&api)
+///     .with_account_id("account_id")
+///     .with_bucket_name("bucket_name")
+///     .with_cf_r2_jurisdiction("cf-r2-jurisdiction")
+///     .with_cf_r2_storage_class("cf-r2-storage-class")
 ///     .send()
 ///     .await?;
 /// ```
@@ -532,15 +652,26 @@ impl<'a> GetBucketCorsPolicyRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get Bucket CORS Policy
+///
+/// Get the CORS policy for a bucket.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/r2/buckets/{bucket_name}/cors`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `bucket_name` (path, required)
+/// - `cf-r2-jurisdiction` (header,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::r2_bucket };
+/// use cloudflare::{ ApiClient, apis::r2_bucket };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_bucket_cors_policy(&api)
-///     .with_account_id("value")
-///     .with_bucket_name("value")
+/// let response = get_bucket_cors_policy(&api)
+///     .with_account_id("account_id")
+///     .with_bucket_name("bucket_name")
+///     .with_cf_r2_jurisdiction("cf-r2-jurisdiction")
 ///     .send()
 ///     .await?;
 /// ```
@@ -589,15 +720,28 @@ impl<'a> PutBucketCorsPolicyRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Put Bucket CORS Policy
+///
+/// Set the CORS policy for a bucket.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/accounts/{account_id}/r2/buckets/{bucket_name}/cors`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `bucket_name` (path, required)
+/// - `cf-r2-jurisdiction` (header,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::r2_bucket };
+/// use cloudflare::{ ApiClient, apis::r2_bucket };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = put_bucket_cors_policy(&api)
-///     .with_account_id("value")
-///     .with_bucket_name("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = put_bucket_cors_policy(&api)
+///     .with_account_id("account_id")
+///     .with_bucket_name("bucket_name")
+///     .with_cf_r2_jurisdiction("cf-r2-jurisdiction")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -638,15 +782,26 @@ impl<'a> DeleteBucketCorsPolicyRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Delete Bucket CORS Policy
+///
+/// Delete the CORS policy for a bucket.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/accounts/{account_id}/r2/buckets/{bucket_name}/cors`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `bucket_name` (path, required)
+/// - `cf-r2-jurisdiction` (header,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::r2_bucket };
+/// use cloudflare::{ ApiClient, apis::r2_bucket };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete_bucket_cors_policy(&api)
-///     .with_account_id("value")
-///     .with_bucket_name("value")
+/// let response = delete_bucket_cors_policy(&api)
+///     .with_account_id("account_id")
+///     .with_bucket_name("bucket_name")
+///     .with_cf_r2_jurisdiction("cf-r2-jurisdiction")
 ///     .send()
 ///     .await?;
 /// ```
@@ -687,15 +842,26 @@ impl<'a> ListCustomDomainsRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// List Custom Domains of Bucket
+///
+/// Gets a list of all custom domains registered with an existing R2 bucket.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/r2/buckets/{bucket_name}/domains/custom`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `bucket_name` (path, required)
+/// - `cf-r2-jurisdiction` (header,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::r2_bucket };
+/// use cloudflare::{ ApiClient, apis::r2_bucket };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_custom_domains(&api)
-///     .with_account_id("value")
-///     .with_bucket_name("value")
+/// let response = list_custom_domains(&api)
+///     .with_account_id("account_id")
+///     .with_bucket_name("bucket_name")
+///     .with_cf_r2_jurisdiction("cf-r2-jurisdiction")
 ///     .send()
 ///     .await?;
 /// ```
@@ -744,15 +910,28 @@ impl<'a> AddCustomDomainRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Attach Custom Domain To Bucket
+///
+/// Register a new custom domain for an existing R2 bucket.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/r2/buckets/{bucket_name}/domains/custom`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `bucket_name` (path, required)
+/// - `cf-r2-jurisdiction` (header,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::r2_bucket };
+/// use cloudflare::{ ApiClient, apis::r2_bucket };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = add_custom_domain(&api)
-///     .with_account_id("value")
-///     .with_bucket_name("value")
+/// # let body: crate::models::r2_add_custom_domain_request::R2AddCustomDomainRequest = todo!();
+/// let response = add_custom_domain(&api)
+///     .with_account_id("account_id")
+///     .with_bucket_name("bucket_name")
+///     .with_cf_r2_jurisdiction("cf-r2-jurisdiction")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -798,16 +977,28 @@ impl<'a> GetCustomDomainSettingsRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get Custom Domain Settings
+///
+/// Get the configuration for a custom domain on an existing R2 bucket.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/r2/buckets/{bucket_name}/domains/custom/{domain}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `bucket_name` (path, required)
+/// - `domain` (path, required)
+/// - `cf-r2-jurisdiction` (header,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::r2_bucket };
+/// use cloudflare::{ ApiClient, apis::r2_bucket };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_custom_domain_settings(&api)
-///     .with_account_id("value")
-///     .with_bucket_name("value")
-///     .with_domain("value")
+/// let response = get_custom_domain_settings(&api)
+///     .with_account_id("account_id")
+///     .with_bucket_name("bucket_name")
+///     .with_domain("domain")
+///     .with_cf_r2_jurisdiction("cf-r2-jurisdiction")
 ///     .send()
 ///     .await?;
 /// ```
@@ -861,16 +1052,30 @@ impl<'a> EditCustomDomainSettingsRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Configure Custom Domain Settings
+///
+/// Edit the configuration for a custom domain on an existing R2 bucket.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/accounts/{account_id}/r2/buckets/{bucket_name}/domains/custom/{domain}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `bucket_name` (path, required)
+/// - `domain` (path, required)
+/// - `cf-r2-jurisdiction` (header,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::r2_bucket };
+/// use cloudflare::{ ApiClient, apis::r2_bucket };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = edit_custom_domain_settings(&api)
-///     .with_account_id("value")
-///     .with_bucket_name("value")
-///     .with_domain("value")
+/// # let body: crate::models::r2_edit_custom_domain_request::R2EditCustomDomainRequest = todo!();
+/// let response = edit_custom_domain_settings(&api)
+///     .with_account_id("account_id")
+///     .with_bucket_name("bucket_name")
+///     .with_domain("domain")
+///     .with_cf_r2_jurisdiction("cf-r2-jurisdiction")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -916,16 +1121,28 @@ impl<'a> DeleteCustomDomainRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Remove Custom Domain From Bucket
+///
+/// Remove custom domain registration from an existing R2 bucket.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/accounts/{account_id}/r2/buckets/{bucket_name}/domains/custom/{domain}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `bucket_name` (path, required)
+/// - `domain` (path, required)
+/// - `cf-r2-jurisdiction` (header,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::r2_bucket };
+/// use cloudflare::{ ApiClient, apis::r2_bucket };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete_custom_domain(&api)
-///     .with_account_id("value")
-///     .with_bucket_name("value")
-///     .with_domain("value")
+/// let response = delete_custom_domain(&api)
+///     .with_account_id("account_id")
+///     .with_bucket_name("bucket_name")
+///     .with_domain("domain")
+///     .with_cf_r2_jurisdiction("cf-r2-jurisdiction")
 ///     .send()
 ///     .await?;
 /// ```
@@ -966,15 +1183,26 @@ impl<'a> GetBucketPublicPolicyRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get r2.dev Domain of Bucket
+///
+/// Gets state of public access over the bucket's R2-managed (r2.dev) domain.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/r2/buckets/{bucket_name}/domains/managed`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `bucket_name` (path, required)
+/// - `cf-r2-jurisdiction` (header,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::r2_bucket };
+/// use cloudflare::{ ApiClient, apis::r2_bucket };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_bucket_public_policy(&api)
-///     .with_account_id("value")
-///     .with_bucket_name("value")
+/// let response = get_bucket_public_policy(&api)
+///     .with_account_id("account_id")
+///     .with_bucket_name("bucket_name")
+///     .with_cf_r2_jurisdiction("cf-r2-jurisdiction")
 ///     .send()
 ///     .await?;
 /// ```
@@ -1023,15 +1251,28 @@ impl<'a> PutBucketPublicPolicyRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Update r2.dev Domain of Bucket
+///
+/// Updates state of public access over the bucket's R2-managed (r2.dev) domain.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/accounts/{account_id}/r2/buckets/{bucket_name}/domains/managed`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `bucket_name` (path, required)
+/// - `cf-r2-jurisdiction` (header,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::r2_bucket };
+/// use cloudflare::{ ApiClient, apis::r2_bucket };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = put_bucket_public_policy(&api)
-///     .with_account_id("value")
-///     .with_bucket_name("value")
+/// # let body: crate::models::r2_edit_managed_domain_request::R2EditManagedDomainRequest = todo!();
+/// let response = put_bucket_public_policy(&api)
+///     .with_account_id("account_id")
+///     .with_bucket_name("bucket_name")
+///     .with_cf_r2_jurisdiction("cf-r2-jurisdiction")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -1072,15 +1313,26 @@ impl<'a> GetBucketLifecycleConfigurationRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get Object Lifecycle Rules
+///
+/// Get object lifecycle rules for a bucket.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/r2/buckets/{bucket_name}/lifecycle`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `bucket_name` (path, required)
+/// - `cf-r2-jurisdiction` (header,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::r2_bucket };
+/// use cloudflare::{ ApiClient, apis::r2_bucket };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_bucket_lifecycle_configuration(&api)
-///     .with_account_id("value")
-///     .with_bucket_name("value")
+/// let response = get_bucket_lifecycle_configuration(&api)
+///     .with_account_id("account_id")
+///     .with_bucket_name("bucket_name")
+///     .with_cf_r2_jurisdiction("cf-r2-jurisdiction")
 ///     .send()
 ///     .await?;
 /// ```
@@ -1131,15 +1383,28 @@ impl<'a> PutBucketLifecycleConfigurationRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Put Object Lifecycle Rules
+///
+/// Set the object lifecycle rules for a bucket.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/accounts/{account_id}/r2/buckets/{bucket_name}/lifecycle`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `bucket_name` (path, required)
+/// - `cf-r2-jurisdiction` (header,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::r2_bucket };
+/// use cloudflare::{ ApiClient, apis::r2_bucket };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = put_bucket_lifecycle_configuration(&api)
-///     .with_account_id("value")
-///     .with_bucket_name("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = put_bucket_lifecycle_configuration(&api)
+///     .with_account_id("account_id")
+///     .with_bucket_name("bucket_name")
+///     .with_cf_r2_jurisdiction("cf-r2-jurisdiction")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -1182,15 +1447,26 @@ impl<'a> GetBucketLockConfigurationRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get Bucket Lock Rules
+///
+/// Get lock rules for a bucket.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/r2/buckets/{bucket_name}/lock`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `bucket_name` (path, required)
+/// - `cf-r2-jurisdiction` (header,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::r2_bucket };
+/// use cloudflare::{ ApiClient, apis::r2_bucket };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_bucket_lock_configuration(&api)
-///     .with_account_id("value")
-///     .with_bucket_name("value")
+/// let response = get_bucket_lock_configuration(&api)
+///     .with_account_id("account_id")
+///     .with_bucket_name("bucket_name")
+///     .with_cf_r2_jurisdiction("cf-r2-jurisdiction")
 ///     .send()
 ///     .await?;
 /// ```
@@ -1239,15 +1515,28 @@ impl<'a> PutBucketLockConfigurationRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Put Bucket Lock Rules
+///
+/// Set lock rules for a bucket.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/accounts/{account_id}/r2/buckets/{bucket_name}/lock`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `bucket_name` (path, required)
+/// - `cf-r2-jurisdiction` (header,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::r2_bucket };
+/// use cloudflare::{ ApiClient, apis::r2_bucket };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = put_bucket_lock_configuration(&api)
-///     .with_account_id("value")
-///     .with_bucket_name("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = put_bucket_lock_configuration(&api)
+///     .with_account_id("account_id")
+///     .with_bucket_name("bucket_name")
+///     .with_cf_r2_jurisdiction("cf-r2-jurisdiction")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -1288,15 +1577,26 @@ impl<'a> GetBucketSippyConfigRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get Sippy Configuration
+///
+/// Gets configuration for Sippy for an existing R2 bucket.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/r2/buckets/{bucket_name}/sippy`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `bucket_name` (path, required)
+/// - `cf-r2-jurisdiction` (header,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::r2_bucket };
+/// use cloudflare::{ ApiClient, apis::r2_bucket };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_bucket_sippy_config(&api)
-///     .with_account_id("value")
-///     .with_bucket_name("value")
+/// let response = get_bucket_sippy_config(&api)
+///     .with_account_id("account_id")
+///     .with_bucket_name("bucket_name")
+///     .with_cf_r2_jurisdiction("cf-r2-jurisdiction")
 ///     .send()
 ///     .await?;
 /// ```
@@ -1342,15 +1642,28 @@ impl<'a> PutBucketSippyConfigRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Enable Sippy
+///
+/// Sets configuration for Sippy for an existing R2 bucket.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/accounts/{account_id}/r2/buckets/{bucket_name}/sippy`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `bucket_name` (path, required)
+/// - `cf-r2-jurisdiction` (header,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::r2_bucket };
+/// use cloudflare::{ ApiClient, apis::r2_bucket };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = put_bucket_sippy_config(&api)
-///     .with_account_id("value")
-///     .with_bucket_name("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = put_bucket_sippy_config(&api)
+///     .with_account_id("account_id")
+///     .with_bucket_name("bucket_name")
+///     .with_cf_r2_jurisdiction("cf-r2-jurisdiction")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -1391,15 +1704,26 @@ impl<'a> DeleteBucketSippyConfigRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Disable Sippy
+///
+/// Disables Sippy on this bucket.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/accounts/{account_id}/r2/buckets/{bucket_name}/sippy`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `bucket_name` (path, required)
+/// - `cf-r2-jurisdiction` (header,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::r2_bucket };
+/// use cloudflare::{ ApiClient, apis::r2_bucket };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete_bucket_sippy_config(&api)
-///     .with_account_id("value")
-///     .with_bucket_name("value")
+/// let response = delete_bucket_sippy_config(&api)
+///     .with_account_id("account_id")
+///     .with_bucket_name("bucket_name")
+///     .with_cf_r2_jurisdiction("cf-r2-jurisdiction")
 ///     .send()
 ///     .await?;
 /// ```
@@ -1439,14 +1763,24 @@ impl<'a> CreateTempAccessCredentialsRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Create Temporary Access Credentials
+///
+/// Creates temporary access credentials on a bucket that can be optionally scoped to prefixes or objects.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/r2/temp-access-credentials`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::r2_bucket };
+/// use cloudflare::{ ApiClient, apis::r2_bucket };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = create_temp_access_credentials(&api)
-///     .with_account_id("value")
+/// # let body: crate::models::r2_temp_access_creds_request::R2TempAccessCredsRequest = todo!();
+/// let response = create_temp_access_credentials(&api)
+///     .with_account_id("account_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```

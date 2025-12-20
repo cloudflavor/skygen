@@ -16,7 +16,6 @@
 // limitations under the License.
 
 use crate::models::balance::Balance;
-use crate::models::billing_history::BillingHistory;
 use crate::models::invoice_summary::InvoiceSummary;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
@@ -36,13 +35,18 @@ impl<'a> BalanceGetRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get Customer Balance
+///
+/// To retrieve the balances on a customer's account, send a GET request to `/v2/customers/my/balance`.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/customers/my/balance`
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::billing };
+/// use digitalocean::{ ApiClient, apis::billing };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = balance_get(&api)
+/// let response = balance_get(&api)
 ///     .send()
 ///     .await?;
 /// ```
@@ -52,7 +56,7 @@ pub fn balance_get(api: &ApiClient) -> BalanceGetRequest<'_> {
 
 #[derive(Debug)]
 pub struct HistoryListRequest<'a> {
-    builder: ApiRequestBuilder<'a, BillingHistory>,
+    builder: ApiRequestBuilder<'a, serde_json::Value>,
 }
 
 impl<'a> HistoryListRequest<'a> {
@@ -61,17 +65,22 @@ impl<'a> HistoryListRequest<'a> {
 
         Self { builder }
     }
-    pub async fn send(self) -> ApiResult<BillingHistory> {
+    pub async fn send(self) -> ApiResult<serde_json::Value> {
         self.builder.send().await
     }
 }
-
 /// List Billing History
+///
+/// To retrieve a list of all billing history entries, send a GET request to `/v2/customers/my/billing_history`.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/customers/my/billing_history`
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::billing };
+/// use digitalocean::{ ApiClient, apis::billing };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = history_list(&api)
+/// let response = history_list(&api)
 ///     .send()
 ///     .await?;
 /// ```
@@ -94,13 +103,18 @@ impl<'a> InvoicesListRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// List All Invoices
+///
+/// To retrieve a list of all invoices, send a GET request to `/v2/customers/my/invoices`.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/customers/my/invoices`
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::billing };
+/// use digitalocean::{ ApiClient, apis::billing };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = invoices_list(&api)
+/// let response = invoices_list(&api)
 ///     .send()
 ///     .await?;
 /// ```
@@ -129,14 +143,22 @@ impl<'a> InvoicesGetRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Retrieve an Invoice by UUID
+///
+/// To retrieve the invoice items for an invoice, send a GET request to `/v2/customers/my/invoices/$INVOICE_UUID`.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/customers/my/invoices/{invoice_uuid}`
+///
+/// **Parameters**
+/// - `invoice_uuid` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::billing };
+/// use digitalocean::{ ApiClient, apis::billing };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = invoices_get(&api)
-///     .with_invoice_uuid("value")
+/// let response = invoices_get(&api)
+///     .with_invoice_uuid("invoice_uuid")
 ///     .send()
 ///     .await?;
 /// ```
@@ -168,14 +190,22 @@ impl<'a> InvoicesGetCsvRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Retrieve an Invoice CSV by UUID
+///
+/// To retrieve a CSV for an invoice, send a GET request to `/v2/customers/my/invoices/$INVOICE_UUID/csv`.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/customers/my/invoices/{invoice_uuid}/csv`
+///
+/// **Parameters**
+/// - `invoice_uuid` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::billing };
+/// use digitalocean::{ ApiClient, apis::billing };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = invoices_get_csv(&api)
-///     .with_invoice_uuid("value")
+/// let response = invoices_get_csv(&api)
+///     .with_invoice_uuid("invoice_uuid")
 ///     .send()
 ///     .await?;
 /// ```
@@ -207,14 +237,22 @@ impl<'a> InvoicesGetPdfRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Retrieve an Invoice PDF by UUID
+///
+/// To retrieve a PDF for an invoice, send a GET request to `/v2/customers/my/invoices/$INVOICE_UUID/pdf`.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/customers/my/invoices/{invoice_uuid}/pdf`
+///
+/// **Parameters**
+/// - `invoice_uuid` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::billing };
+/// use digitalocean::{ ApiClient, apis::billing };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = invoices_get_pdf(&api)
-///     .with_invoice_uuid("value")
+/// let response = invoices_get_pdf(&api)
+///     .with_invoice_uuid("invoice_uuid")
 ///     .send()
 ///     .await?;
 /// ```
@@ -246,14 +284,22 @@ impl<'a> InvoicesGetSummaryRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Retrieve an Invoice Summary by UUID
+///
+/// To retrieve a summary for an invoice, send a GET request to `/v2/customers/my/invoices/$INVOICE_UUID/summary`.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/customers/my/invoices/{invoice_uuid}/summary`
+///
+/// **Parameters**
+/// - `invoice_uuid` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::billing };
+/// use digitalocean::{ ApiClient, apis::billing };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = invoices_get_summary(&api)
-///     .with_invoice_uuid("value")
+/// let response = invoices_get_summary(&api)
+///     .with_invoice_uuid("invoice_uuid")
 ///     .send()
 ///     .await?;
 /// ```

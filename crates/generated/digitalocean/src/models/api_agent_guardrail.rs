@@ -29,7 +29,7 @@ pub struct ApiAgentGuardrail {
     pub metadata: Option<std::collections::BTreeMap<String, serde_json::Value>>,
     pub name: Option<String>,
     pub priority: Option<i64>,
-    pub r#type: Option<serde_json::Value>,
+    pub r#type: Option<crate::models::api_guardrail_type::ApiGuardrailType>,
     pub updated_at: Option<String>,
     pub uuid: Option<String>,
 }

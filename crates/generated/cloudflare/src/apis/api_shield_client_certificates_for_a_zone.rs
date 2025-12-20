@@ -15,12 +15,15 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::tls_certificates_and_hostnames_client_certificate_response_collection::TlsCertificatesAndHostnamesClientCertificateResponseCollection;
+use crate::models::tls_certificates_and_hostnames_client_certificate_response_single::TlsCertificatesAndHostnamesClientCertificateResponseSingle;
+use crate::models::tls_certificates_and_hostnames_hostname_associations_response::TlsCertificatesAndHostnamesHostnameAssociationsResponse;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct CertificateListHostnameAssociationsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, TlsCertificatesAndHostnamesHostnameAssociationsResponse>,
 }
 
 impl<'a> CertificateListHostnameAssociationsRequest<'a> {
@@ -42,18 +45,28 @@ impl<'a> CertificateListHostnameAssociationsRequest<'a> {
         self.builder = self.builder.header_param("mtls_certificate_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<TlsCertificatesAndHostnamesHostnameAssociationsResponse> {
         self.builder.send().await
     }
 }
-
 /// List Hostname Associations
+///
+/// List Hostname Associations
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/certificate_authorities/hostname_associations`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `mtls_certificate_id` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::api_shield_client_certificates_for_a_zone };
+/// use cloudflare::{ ApiClient, apis::api_shield_client_certificates_for_a_zone };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = certificate_list_hostname_associations(&api)
-///     .with_zone_id("value")
+/// let response = certificate_list_hostname_associations(&api)
+///     .with_zone_id("zone_id")
+///     .with_mtls_certificate_id("mtls_certificate_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -65,7 +78,7 @@ pub fn certificate_list_hostname_associations(
 
 #[derive(Debug)]
 pub struct CertificatePutHostnameAssociationsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, TlsCertificatesAndHostnamesHostnameAssociationsResponse>,
 }
 
 impl<'a> CertificatePutHostnameAssociationsRequest<'a> {
@@ -91,18 +104,28 @@ impl<'a> CertificatePutHostnameAssociationsRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<TlsCertificatesAndHostnamesHostnameAssociationsResponse> {
         self.builder.send().await
     }
 }
-
 /// Replace Hostname Associations
+///
+/// Replace Hostname Associations
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/zones/{zone_id}/certificate_authorities/hostname_associations`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::api_shield_client_certificates_for_a_zone };
+/// use cloudflare::{ ApiClient, apis::api_shield_client_certificates_for_a_zone };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = certificate_put_hostname_associations(&api)
-///     .with_zone_id("value")
+/// # let body: crate::models::tls_certificates_and_hostnames_hostname_association::TlsCertificatesAndHostnamesHostnameAssociation = todo!();
+/// let response = certificate_put_hostname_associations(&api)
+///     .with_zone_id("zone_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -114,7 +137,7 @@ pub fn certificate_put_hostname_associations(
 
 #[derive(Debug)]
 pub struct CertificateListClientCertificatesRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, TlsCertificatesAndHostnamesClientCertificateResponseCollection>,
 }
 
 impl<'a> CertificateListClientCertificatesRequest<'a> {
@@ -149,18 +172,38 @@ impl<'a> CertificateListClientCertificatesRequest<'a> {
         self.builder = self.builder.header_param("offset", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(
+        self,
+    ) -> ApiResult<TlsCertificatesAndHostnamesClientCertificateResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// List Client Certificates
+///
+/// List all of your Zone's API Shield mTLS Client Certificates by Status and/or using Pagination
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/client_certificates`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `status` (query,optional)
+/// - `page` (query,optional)
+/// - `per_page` (query,optional)
+/// - `limit` (query,optional)
+/// - `offset` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::api_shield_client_certificates_for_a_zone };
+/// use cloudflare::{ ApiClient, apis::api_shield_client_certificates_for_a_zone };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = certificate_list_client_certificates(&api)
-///     .with_zone_id("value")
+/// let response = certificate_list_client_certificates(&api)
+///     .with_zone_id("zone_id")
+///     .with_status("status")
+///     .with_page("page")
+///     .with_per_page("per_page")
+///     .with_limit("limit")
+///     .with_offset("offset")
 ///     .send()
 ///     .await?;
 /// ```
@@ -172,7 +215,7 @@ pub fn certificate_list_client_certificates(
 
 #[derive(Debug)]
 pub struct CertificateCreateClientCertificateRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, TlsCertificatesAndHostnamesClientCertificateResponseSingle>,
 }
 
 impl<'a> CertificateCreateClientCertificateRequest<'a> {
@@ -195,18 +238,30 @@ impl<'a> CertificateCreateClientCertificateRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(
+        self,
+    ) -> ApiResult<TlsCertificatesAndHostnamesClientCertificateResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Create Client Certificate
+///
+/// Create a new API Shield mTLS Client Certificate
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/zones/{zone_id}/client_certificates`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::api_shield_client_certificates_for_a_zone };
+/// use cloudflare::{ ApiClient, apis::api_shield_client_certificates_for_a_zone };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = certificate_create_client_certificate(&api)
-///     .with_zone_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = certificate_create_client_certificate(&api)
+///     .with_zone_id("zone_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -218,7 +273,7 @@ pub fn certificate_create_client_certificate(
 
 #[derive(Debug)]
 pub struct CertificateClientCertificateDetailsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, TlsCertificatesAndHostnamesClientCertificateResponseSingle>,
 }
 
 impl<'a> CertificateClientCertificateDetailsRequest<'a> {
@@ -241,19 +296,30 @@ impl<'a> CertificateClientCertificateDetailsRequest<'a> {
         self.builder = self.builder.path_param("client_certificate_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(
+        self,
+    ) -> ApiResult<TlsCertificatesAndHostnamesClientCertificateResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Client Certificate Details
+///
+/// Get Details for a single mTLS API Shield Client Certificate
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/client_certificates/{client_certificate_id}`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `client_certificate_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::api_shield_client_certificates_for_a_zone };
+/// use cloudflare::{ ApiClient, apis::api_shield_client_certificates_for_a_zone };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = certificate_client_certificate_details(&api)
-///     .with_zone_id("value")
-///     .with_client_certificate_id("value")
+/// let response = certificate_client_certificate_details(&api)
+///     .with_zone_id("zone_id")
+///     .with_client_certificate_id("client_certificate_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -265,7 +331,7 @@ pub fn certificate_client_certificate_details(
 
 #[derive(Debug)]
 pub struct CertificateDeleteClientCertificateRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, TlsCertificatesAndHostnamesClientCertificateResponseSingle>,
 }
 
 impl<'a> CertificateDeleteClientCertificateRequest<'a> {
@@ -288,19 +354,30 @@ impl<'a> CertificateDeleteClientCertificateRequest<'a> {
         self.builder = self.builder.path_param("client_certificate_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(
+        self,
+    ) -> ApiResult<TlsCertificatesAndHostnamesClientCertificateResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Revoke Client Certificate
+///
+/// Set a API Shield mTLS Client Certificate to pending_revocation status for processing to revoked status.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/zones/{zone_id}/client_certificates/{client_certificate_id}`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `client_certificate_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::api_shield_client_certificates_for_a_zone };
+/// use cloudflare::{ ApiClient, apis::api_shield_client_certificates_for_a_zone };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = certificate_delete_client_certificate(&api)
-///     .with_zone_id("value")
-///     .with_client_certificate_id("value")
+/// let response = certificate_delete_client_certificate(&api)
+///     .with_zone_id("zone_id")
+///     .with_client_certificate_id("client_certificate_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -312,7 +389,7 @@ pub fn certificate_delete_client_certificate(
 
 #[derive(Debug)]
 pub struct CertificateEditClientCertificateRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, TlsCertificatesAndHostnamesClientCertificateResponseSingle>,
 }
 
 impl<'a> CertificateEditClientCertificateRequest<'a> {
@@ -335,19 +412,30 @@ impl<'a> CertificateEditClientCertificateRequest<'a> {
         self.builder = self.builder.path_param("client_certificate_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(
+        self,
+    ) -> ApiResult<TlsCertificatesAndHostnamesClientCertificateResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Reactivate Client Certificate
+///
+/// If a API Shield mTLS Client Certificate is in a pending_revocation state, you may reactivate it with this endpoint.
+///
+/// **HTTP Method:** `PATCH`
+/// **Path:** `/zones/{zone_id}/client_certificates/{client_certificate_id}`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `client_certificate_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::api_shield_client_certificates_for_a_zone };
+/// use cloudflare::{ ApiClient, apis::api_shield_client_certificates_for_a_zone };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = certificate_edit_client_certificate(&api)
-///     .with_zone_id("value")
-///     .with_client_certificate_id("value")
+/// let response = certificate_edit_client_certificate(&api)
+///     .with_zone_id("zone_id")
+///     .with_client_certificate_id("client_certificate_id")
 ///     .send()
 ///     .await?;
 /// ```

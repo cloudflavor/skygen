@@ -62,14 +62,34 @@ impl<'a> GetRankingDomainDetailsRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get domain rank details
+///
+/// Retrieves domain rank details. Cloudflare provides an ordered rank for the top 100 domains, but for the remainder it only provides ranking buckets like top 200 thousand, top one million, etc.. These are available through Radar datasets endpoints.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/ranking/domain/{domain}`
+///
+/// **Parameters**
+/// - `domain` (path, required)
+/// - `limit` (query,optional)
+/// - `rankingType` (query,optional)
+/// - `name` (query,optional)
+/// - `includeTopLocations` (query,optional)
+/// - `date` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_domains_ranking };
+/// use cloudflare::{ ApiClient, apis::radar_domains_ranking };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_ranking_domain_details(&api)
-///     .with_domain("value")
+/// let response = get_ranking_domain_details(&api)
+///     .with_domain("domain")
+///     .with_limit("limit")
+///     .with_ranking_type("rankingType")
+///     .with_name("name")
+///     .with_include_top_locations("includeTopLocations")
+///     .with_date("date")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```
@@ -132,13 +152,40 @@ impl<'a> GetRankingDomainTimeseriesRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get domains rank time series
+///
+/// Retrieves domains rank over time.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/ranking/timeseries_groups`
+///
+/// **Parameters**
+/// - `limit` (query,optional)
+/// - `rankingType` (query,optional)
+/// - `name` (query,optional)
+/// - `location` (query,optional)
+/// - `domains` (query,optional)
+/// - `domainCategory` (query,optional)
+/// - `dateRange` (query,optional)
+/// - `dateStart` (query,optional)
+/// - `dateEnd` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_domains_ranking };
+/// use cloudflare::{ ApiClient, apis::radar_domains_ranking };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_ranking_domain_timeseries(&api)
+/// let response = get_ranking_domain_timeseries(&api)
+///     .with_limit("limit")
+///     .with_ranking_type("rankingType")
+///     .with_name("name")
+///     .with_location("location")
+///     .with_domains("domains")
+///     .with_domain_category("domainCategory")
+///     .with_date_range("dateRange")
+///     .with_date_start("dateStart")
+///     .with_date_end("dateEnd")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```
@@ -189,13 +236,34 @@ impl<'a> GetRankingTopDomainsRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get top or trending domains
+///
+/// Retrieves the top or trending domains based on their rank. Popular domains are domains of broad appeal based on how people use the Internet. Trending domains are domains that are generating a surge in interest. For more information on top domains, see <https://blog.cloudflare.com/radar-domain-rankings/.>
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/ranking/top`
+///
+/// **Parameters**
+/// - `limit` (query,optional)
+/// - `name` (query,optional)
+/// - `location` (query,optional)
+/// - `domainCategory` (query,optional)
+/// - `date` (query,optional)
+/// - `rankingType` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_domains_ranking };
+/// use cloudflare::{ ApiClient, apis::radar_domains_ranking };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_ranking_top_domains(&api)
+/// let response = get_ranking_top_domains(&api)
+///     .with_limit("limit")
+///     .with_name("name")
+///     .with_location("location")
+///     .with_domain_category("domainCategory")
+///     .with_date("date")
+///     .with_ranking_type("rankingType")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```

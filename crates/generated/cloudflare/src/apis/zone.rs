@@ -15,6 +15,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::cache_purge_api_response_single_id::CachePurgeApiResponseSingleId;
+use crate::models::zones_api_response_single_id::ZonesApiResponseSingleId;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
@@ -69,13 +71,39 @@ impl<'a> ZonesGetRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// List Zones
+///
+/// Lists, searches, sorts, and filters your zones. Listing zones across more than 500 accounts
+/// is currently not allowed.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones`
+///
+/// **Parameters**
+/// - `name` (query,optional)
+/// - `status` (query,optional)
+/// - `account.id` (query,optional)
+/// - `account.name` (query,optional)
+/// - `page` (query,optional)
+/// - `per_page` (query,optional)
+/// - `order` (query,optional)
+/// - `direction` (query,optional)
+/// - `match` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zone };
+/// use cloudflare::{ ApiClient, apis::zone };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = zones_get(&api)
+/// let response = zones_get(&api)
+///     .with_name("name")
+///     .with_status("status")
+///     .with_account_id("account.id")
+///     .with_account_name("account.name")
+///     .with_page("page")
+///     .with_per_page("per_page")
+///     .with_order("order")
+///     .with_direction("direction")
+///     .with_match_param("match")
 ///     .send()
 ///     .await?;
 /// ```
@@ -105,13 +133,18 @@ impl<'a> ZonesPostRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Create Zone
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/zones`
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zone };
+/// use cloudflare::{ ApiClient, apis::zone };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = zones_post(&api)
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = zones_post(&api)
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -139,14 +172,20 @@ impl<'a> ZonesGetGetRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Zone Details
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zone };
+/// use cloudflare::{ ApiClient, apis::zone };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = zones_get_get(&api)
-///     .with_zone_id("value")
+/// let response = zones_get_get(&api)
+///     .with_zone_id("zone_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -156,7 +195,7 @@ pub fn zones_get_get(api: &ApiClient) -> ZonesGetGetRequest<'_> {
 
 #[derive(Debug)]
 pub struct ZonesDeleteRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, ZonesApiResponseSingleId>,
 }
 
 impl<'a> ZonesDeleteRequest<'a> {
@@ -170,18 +209,26 @@ impl<'a> ZonesDeleteRequest<'a> {
         self.builder = self.builder.path_param("zone_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<ZonesApiResponseSingleId> {
         self.builder.send().await
     }
 }
-
 /// Delete Zone
+///
+/// Deletes an existing zone.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/zones/{zone_id}`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zone };
+/// use cloudflare::{ ApiClient, apis::zone };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = zones_delete(&api)
-///     .with_zone_id("value")
+/// let response = zones_delete(&api)
+///     .with_zone_id("zone_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -217,14 +264,24 @@ impl<'a> ZonesPatchRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Edit Zone
+///
+/// Edits a zone. Only one zone property can be changed at a time.
+///
+/// **HTTP Method:** `PATCH`
+/// **Path:** `/zones/{zone_id}`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zone };
+/// use cloudflare::{ ApiClient, apis::zone };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = zones_patch(&api)
-///     .with_zone_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = zones_patch(&api)
+///     .with_zone_id("zone_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -252,14 +309,24 @@ impl<'a> ZonesActivationCheckRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Rerun the Activation Check
+///
+/// Triggeres a new activation check for a PENDING Zone. This can be
+/// triggered every 5 min for paygo/ent customers, every hour for FREE
+/// Zones.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/zones/{zone_id}/activation_check`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zone };
+/// use cloudflare::{ ApiClient, apis::zone };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = zones_activation_check(&api)
-///     .with_zone_id("value")
+/// let response = zones_activation_check(&api)
+///     .with_zone_id("zone_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -269,7 +336,7 @@ pub fn zones_activation_check(api: &ApiClient) -> ZonesActivationCheckRequest<'_
 
 #[derive(Debug)]
 pub struct PurgeRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, CachePurgeApiResponseSingleId>,
 }
 
 impl<'a> PurgeRequest<'a> {
@@ -288,18 +355,67 @@ impl<'a> PurgeRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<CachePurgeApiResponseSingleId> {
         self.builder.send().await
     }
 }
-
 /// Purge Cached Content
+///
+/// ### Purge All Cached Content
+/// Removes ALL files from Cloudflare's cache. All tiers can purge everything.
+/// ```
+/// {"purge_everything": true}
+/// ```
+///
+/// ### Purge Cached Content by URL
+/// Granularly removes one or more files from Cloudflare's cache by specifying URLs. All tiers can purge by URL.
+///
+/// To purge files with custom cache keys, include the headers used to compute the cache key as in the example. If you have a device type or geo in your cache key, you will need to include the CF-Device-Type or CF-IPCountry headers. If you have lang in your cache key, you will need to include the Accept-Language header.
+///
+/// **NB:** When including the Origin header, be sure to include the **scheme** and **hostname**. The port number can be omitted if it is the default port (80 for http, 443 for https), but must be included otherwise.
+///
+/// Single file purge example with files:
+/// ```
+/// {"files": ["<http://www.example.com/css/styles.css",> "<http://www.example.com/js/index.js"]}>
+/// ```
+/// Single file purge example with url and header pairs:
+/// ```
+/// {"files": [{url: "<http://www.example.com/cat_picture.jpg",> headers: { "CF-IPCountry": "US", "CF-Device-Type": "desktop", "Accept-Language": "zh-CN" }}, {url: "<http://www.example.com/dog_picture.jpg",> headers: { "CF-IPCountry": "EU", "CF-Device-Type": "mobile", "Accept-Language": "en-US" }}]}
+/// ```
+///
+/// ### Purge Cached Content by Tag, Host or Prefix
+/// Granularly removes one or more files from Cloudflare's cache either by specifying the host, the associated Cache-Tag, or a Prefix.
+///
+/// Flex purge with tags:
+/// ```
+/// {"tags": ["a-cache-tag", "another-cache-tag"]}
+/// ```
+/// Flex purge with hosts:
+/// ```
+/// {"hosts": ["www.example.com", "images.example.com"]}
+/// ```
+/// Flex purge with prefixes:
+/// ```
+/// {"prefixes": ["www.example.com/foo", "images.example.com/bar/baz"]}
+/// ```
+///
+/// ### Availability and limits
+/// please refer to [purge cache availability and limits documentation page](<https://developers.cloudflare.com/cache/how-to/purge-cache/#availability-and-limits).>
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/zones/{zone_id}/purge_cache`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zone };
+/// use cloudflare::{ ApiClient, apis::zone };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = purge(&api)
-///     .with_zone_id("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = purge(&api)
+///     .with_zone_id("zone_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```

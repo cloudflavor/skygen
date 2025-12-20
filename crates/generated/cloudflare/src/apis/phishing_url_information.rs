@@ -15,12 +15,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::intel_phishing_url_info_components_schemas_single_response::IntelPhishingUrlInfoComponentsSchemasSingleResponse;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct GetResultsUrlScanRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, IntelPhishingUrlInfoComponentsSchemasSingleResponse>,
 }
 
 impl<'a> GetResultsUrlScanRequest<'a> {
@@ -46,18 +47,30 @@ impl<'a> GetResultsUrlScanRequest<'a> {
         self.builder = self.builder.header_param("url", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<IntelPhishingUrlInfoComponentsSchemasSingleResponse> {
         self.builder.send().await
     }
 }
-
 /// Get results for a URL scan
+///
+/// Gets phishing details about a URL.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/brand-protection/url-info`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `url_id` (query,optional)
+/// - `url` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::phishing_url_information };
+/// use cloudflare::{ ApiClient, apis::phishing_url_information };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_results_url_scan(&api)
-///     .with_account_id("value")
+/// let response = get_results_url_scan(&api)
+///     .with_account_id("account_id")
+///     .with_url_id("url_id")
+///     .with_url("url")
 ///     .send()
 ///     .await?;
 /// ```

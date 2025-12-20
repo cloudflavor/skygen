@@ -38,14 +38,22 @@ impl<'a> ZonesHoldGetRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get Zone Hold
+///
+/// Retrieve whether the zone is subject to a zone hold, and metadata about the hold.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/hold`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zone_holds };
+/// use cloudflare::{ ApiClient, apis::zone_holds };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = zones_hold_get(&api)
-///     .with_zone_id("value")
+/// let response = zones_hold_get(&api)
+///     .with_zone_id("zone_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -77,14 +85,24 @@ impl<'a> ZonesHoldPostRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Create Zone Hold
+///
+/// Enforce a zone hold on the zone, blocking the creation and activation of zones with this zone's hostname.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/zones/{zone_id}/hold`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `include_subdomains` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zone_holds };
+/// use cloudflare::{ ApiClient, apis::zone_holds };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = zones_hold_post(&api)
-///     .with_zone_id("value")
+/// let response = zones_hold_post(&api)
+///     .with_zone_id("zone_id")
+///     .with_include_subdomains("include_subdomains")
 ///     .send()
 ///     .await?;
 /// ```
@@ -116,14 +134,25 @@ impl<'a> ZonesHoldDeleteRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Remove Zone Hold
+///
+/// Stop enforcement of a zone hold on the zone, permanently or temporarily, allowing the
+/// creation and activation of zones with this zone's hostname.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/zones/{zone_id}/hold`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `hold_after` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zone_holds };
+/// use cloudflare::{ ApiClient, apis::zone_holds };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = zones_hold_delete(&api)
-///     .with_zone_id("value")
+/// let response = zones_hold_delete(&api)
+///     .with_zone_id("zone_id")
+///     .with_hold_after("hold_after")
 ///     .send()
 ///     .await?;
 /// ```
@@ -159,14 +188,25 @@ impl<'a> ZonesHoldPatchRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Update Zone Hold
+///
+/// Update the `hold_after` and/or `include_subdomains` values on an existing zone hold.
+/// The hold is enabled if the `hold_after` date-time value is in the past.
+///
+/// **HTTP Method:** `PATCH`
+/// **Path:** `/zones/{zone_id}/hold`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zone_holds };
+/// use cloudflare::{ ApiClient, apis::zone_holds };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = zones_hold_patch(&api)
-///     .with_zone_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = zones_hold_patch(&api)
+///     .with_zone_id("zone_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```

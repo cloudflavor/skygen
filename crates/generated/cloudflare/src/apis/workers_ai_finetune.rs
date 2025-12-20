@@ -39,14 +39,20 @@ impl<'a> ListFinetunesRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// List Finetunes
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/ai/finetunes`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::workers_ai_finetune };
+/// use cloudflare::{ ApiClient, apis::workers_ai_finetune };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_finetunes(&api)
-///     .with_account_id("value")
+/// let response = list_finetunes(&api)
+///     .with_account_id("account_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -82,14 +88,22 @@ impl<'a> CreateFinetuneRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Create a new Finetune
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/ai/finetunes`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::workers_ai_finetune };
+/// use cloudflare::{ ApiClient, apis::workers_ai_finetune };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = create_finetune(&api)
-///     .with_account_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = create_finetune(&api)
+///     .with_account_id("account_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -133,14 +147,26 @@ impl<'a> ListPublicFinetunesRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// List Public Finetunes
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/ai/finetunes/public`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `limit` (query,optional)
+/// - `offset` (query,optional)
+/// - `orderBy` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::workers_ai_finetune };
+/// use cloudflare::{ ApiClient, apis::workers_ai_finetune };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_public_finetunes(&api)
-///     .with_account_id("value")
+/// let response = list_public_finetunes(&api)
+///     .with_account_id("account_id")
+///     .with_limit("limit")
+///     .with_offset("offset")
+///     .with_order_by("orderBy")
 ///     .send()
 ///     .await?;
 /// ```
@@ -177,15 +203,22 @@ impl<'a> UploadFinetuneAssetRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Upload a Finetune Asset
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/ai/finetunes/{finetune_id}/finetune-assets`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `finetune_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::workers_ai_finetune };
+/// use cloudflare::{ ApiClient, apis::workers_ai_finetune };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = upload_finetune_asset(&api)
-///     .with_account_id("value")
-///     .with_finetune_id("value")
+/// let response = upload_finetune_asset(&api)
+///     .with_account_id("account_id")
+///     .with_finetune_id("finetune_id")
 ///     .send()
 ///     .await?;
 /// ```

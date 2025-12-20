@@ -19,5 +19,5 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct TeamsDevicesMatchItem {
-    pub platform: Option<serde_json::Value>,
+    pub platform: Option<crate::models::teams_devices_platform::TeamsDevicesPlatform>,
 }

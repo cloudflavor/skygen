@@ -15,7 +15,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-use crate::models::reserved_ip::ReservedIp;
+use crate::models::error::Error;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
@@ -34,13 +34,18 @@ impl<'a> ListRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// List All Reserved IPs
+///
+/// To list all of the reserved IPs available on your account, send a GET request to `/v2/reserved_ips`.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/reserved_ips`
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::reserved_i_ps };
+/// use digitalocean::{ ApiClient, apis::reserved_i_ps };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list(&api)
+/// let response = list(&api)
 ///     .send()
 ///     .await?;
 /// ```
@@ -50,7 +55,7 @@ pub fn list(api: &ApiClient) -> ListRequest<'_> {
 
 #[derive(Debug)]
 pub struct CreateRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, Error>,
 }
 
 impl<'a> CreateRequest<'a> {
@@ -59,21 +64,35 @@ impl<'a> CreateRequest<'a> {
 
         Self { builder }
     }
-    pub fn with_body(mut self, body: serde_json::Value) -> Self {
+    pub fn with_body(mut self, body: crate::models::reserved_ip_create::ReservedIpCreate) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<Error> {
         self.builder.send().await
     }
 }
-
 /// Create a New Reserved IP
+///
+/// On creation, a reserved IP must be either assigned to a Droplet or reserved to a region.
+/// * To create a new reserved IP assigned to a Droplet, send a POST
+/// request to `/v2/reserved_ips` with the `droplet_id` attribute.
+///
+/// * To create a new reserved IP reserved to a region, send a POST request to
+/// `/v2/reserved_ips` with the `region` attribute.
+///
+/// **Note**:  In addition to the standard rate limiting, only 12 reserved IPs may be created per 60 seconds.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/v2/reserved_ips`
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::reserved_i_ps };
+/// use digitalocean::{ ApiClient, apis::reserved_i_ps };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = create(&api)
+/// # let body: crate::models::reserved_ip_create::ReservedIpCreate = todo!();
+/// let response = create(&api)
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -83,7 +102,7 @@ pub fn create(api: &ApiClient) -> CreateRequest<'_> {
 
 #[derive(Debug)]
 pub struct GetRequest<'a> {
-    builder: ApiRequestBuilder<'a, ReservedIp>,
+    builder: ApiRequestBuilder<'a, std::collections::BTreeMap<String, serde_json::Value>>,
 }
 
 impl<'a> GetRequest<'a> {
@@ -97,18 +116,26 @@ impl<'a> GetRequest<'a> {
         self.builder = self.builder.path_param("reserved_ip", value);
         self
     }
-    pub async fn send(self) -> ApiResult<ReservedIp> {
+    pub async fn send(self) -> ApiResult<std::collections::BTreeMap<String, serde_json::Value>> {
         self.builder.send().await
     }
 }
-
 /// Retrieve an Existing Reserved IP
+///
+/// To show information about a reserved IP, send a GET request to `/v2/reserved_ips/$RESERVED_IP_ADDR`.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/reserved_ips/{reserved_ip}`
+///
+/// **Parameters**
+/// - `reserved_ip` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::reserved_i_ps };
+/// use digitalocean::{ ApiClient, apis::reserved_i_ps };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get(&api)
-///     .with_reserved_ip("value")
+/// let response = get(&api)
+///     .with_reserved_ip("reserved_ip")
 ///     .send()
 ///     .await?;
 /// ```
@@ -118,7 +145,7 @@ pub fn get(api: &ApiClient) -> GetRequest<'_> {
 
 #[derive(Debug)]
 pub struct DeleteRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, Error>,
 }
 
 impl<'a> DeleteRequest<'a> {
@@ -132,18 +159,30 @@ impl<'a> DeleteRequest<'a> {
         self.builder = self.builder.path_param("reserved_ip", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<Error> {
         self.builder.send().await
     }
 }
-
 /// Delete a Reserved IP
+///
+/// To delete a reserved IP and remove it from your account, send a DELETE request
+/// to `/v2/reserved_ips/$RESERVED_IP_ADDR`.
+///
+/// A successful request will receive a 204 status code with no body in response.
+/// This indicates that the request was processed successfully.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/v2/reserved_ips/{reserved_ip}`
+///
+/// **Parameters**
+/// - `reserved_ip` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::reserved_i_ps };
+/// use digitalocean::{ ApiClient, apis::reserved_i_ps };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete(&api)
-///     .with_reserved_ip("value")
+/// let response = delete(&api)
+///     .with_reserved_ip("reserved_ip")
 ///     .send()
 ///     .await?;
 /// ```

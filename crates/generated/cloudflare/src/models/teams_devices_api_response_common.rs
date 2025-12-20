@@ -19,8 +19,8 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct TeamsDevicesApiResponseCommon {
-    pub errors: serde_json::Value,
-    pub messages: serde_json::Value,
+    pub errors: crate::models::teams_devices_messages::TeamsDevicesMessages,
+    pub messages: crate::models::teams_devices_messages::TeamsDevicesMessages,
     pub result: serde_json::Value,
     pub success: bool,
 }

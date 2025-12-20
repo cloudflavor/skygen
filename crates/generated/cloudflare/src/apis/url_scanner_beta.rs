@@ -51,14 +51,24 @@ impl<'a> UrlscannerCreateScanBulkRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Bulk create URL Scans
+///
+/// Submit URLs to scan. Check limits at <https://developers.cloudflare.com/security-center/investigate/scan-limits/> and take into account scans submitted in bulk have lower priority and may take longer to finish.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/urlscanner/v2/bulk`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::url_scanner_beta };
+/// use cloudflare::{ ApiClient, apis::url_scanner_beta };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = urlscanner_create_scan_bulk(&api)
-///     .with_account_id("value")
+/// # let body: Vec<std::collections::BTreeMap<String, serde_json::Value>> = todo!();
+/// let response = urlscanner_create_scan_bulk(&api)
+///     .with_account_id("account_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -95,15 +105,24 @@ impl<'a> UrlscannerGetScanDomRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get URL scan's DOM
+///
+/// Returns a plain text response, with the scan's DOM content as rendered by Chrome.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/urlscanner/v2/dom/{scan_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `scan_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::url_scanner_beta };
+/// use cloudflare::{ ApiClient, apis::url_scanner_beta };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = urlscanner_get_scan_dom(&api)
-///     .with_account_id("value")
-///     .with_scan_id("value")
+/// let response = urlscanner_get_scan_dom(&api)
+///     .with_account_id("account_id")
+///     .with_scan_id("scan_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -140,15 +159,24 @@ impl<'a> UrlscannerGetScanHarRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get URL scan's HAR
+///
+/// Get a URL scan's HAR file. See HAR spec at <http://www.softwareishard.com/blog/har-12-spec/.>
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/urlscanner/v2/har/{scan_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `scan_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::url_scanner_beta };
+/// use cloudflare::{ ApiClient, apis::url_scanner_beta };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = urlscanner_get_scan_har(&api)
-///     .with_account_id("value")
-///     .with_scan_id("value")
+/// let response = urlscanner_get_scan_har(&api)
+///     .with_account_id("account_id")
+///     .with_scan_id("scan_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -185,15 +213,24 @@ impl<'a> UrlscannerGetResponseV2Request<'a> {
         self.builder.send().await
     }
 }
-
 /// Get raw response
+///
+/// Returns the raw response of the network request. Find the `response_id` in the `data.requests.response.hash`.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/urlscanner/v2/responses/{response_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `response_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::url_scanner_beta };
+/// use cloudflare::{ ApiClient, apis::url_scanner_beta };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = urlscanner_get_response_v2(&api)
-///     .with_account_id("value")
-///     .with_response_id("value")
+/// let response = urlscanner_get_response_v2(&api)
+///     .with_account_id("account_id")
+///     .with_response_id("response_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -230,15 +267,24 @@ impl<'a> UrlscannerGetScanV2Request<'a> {
         self.builder.send().await
     }
 }
-
 /// Get URL scan
+///
+/// Get URL scan by uuid
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/urlscanner/v2/result/{scan_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `scan_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::url_scanner_beta };
+/// use cloudflare::{ ApiClient, apis::url_scanner_beta };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = urlscanner_get_scan_v2(&api)
-///     .with_account_id("value")
-///     .with_scan_id("value")
+/// let response = urlscanner_get_scan_v2(&api)
+///     .with_account_id("account_id")
+///     .with_scan_id("scan_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -277,14 +323,24 @@ impl<'a> UrlscannerCreateScanV2Request<'a> {
         self.builder.send().await
     }
 }
-
 /// Create URL Scan
+///
+/// Submit a URL to scan. Check limits at <https://developers.cloudflare.com/security-center/investigate/scan-limits/.>
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/urlscanner/v2/scan`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::url_scanner_beta };
+/// use cloudflare::{ ApiClient, apis::url_scanner_beta };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = urlscanner_create_scan_v2(&api)
-///     .with_account_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = urlscanner_create_scan_v2(&api)
+///     .with_account_id("account_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -325,15 +381,26 @@ impl<'a> UrlscannerGetScanScreenshotRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get screenshot
+///
+/// Get scan's screenshot by resolution (desktop/mobile/tablet).
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/urlscanner/v2/screenshots/{scan_id}.png`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `scan_id` (path, required)
+/// - `resolution` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::url_scanner_beta };
+/// use cloudflare::{ ApiClient, apis::url_scanner_beta };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = urlscanner_get_scan_screenshot(&api)
-///     .with_account_id("value")
-///     .with_scan_id("value")
+/// let response = urlscanner_get_scan_screenshot(&api)
+///     .with_account_id("account_id")
+///     .with_scan_id("scan_id")
+///     .with_resolution("resolution")
 ///     .send()
 ///     .await?;
 /// ```
@@ -373,14 +440,26 @@ impl<'a> UrlscannerSearchScansV2Request<'a> {
         self.builder.send().await
     }
 }
-
 /// Search URL scans
+///
+/// Use a subset of ElasticSearch Query syntax to filter scans. Some example queries:<br/> <br/>- 'path:"/bundles/jquery.js"': Searches for scans who requested resources with the given path.<br/>- 'page.asn:AS24940 AND hash:xxx': Websites hosted in AS24940 where a resource with the given hash was downloaded.<br/>- 'page.domain:microsoft* AND verdicts.malicious:true AND NOT page.domain:microsoft.com': malicious scans whose hostname starts with "microsoft".<br/>- 'apikey:me AND date:[2025-01 TO 2025-02]': my scans from 2025 January to 2025 February.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/urlscanner/v2/search`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `size` (query,optional)
+/// - `q` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::url_scanner_beta };
+/// use cloudflare::{ ApiClient, apis::url_scanner_beta };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = urlscanner_search_scans_v2(&api)
-///     .with_account_id("value")
+/// let response = urlscanner_search_scans_v2(&api)
+///     .with_account_id("account_id")
+///     .with_size("size")
+///     .with_q("q")
 ///     .send()
 ///     .await?;
 /// ```

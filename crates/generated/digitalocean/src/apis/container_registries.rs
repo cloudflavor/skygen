@@ -16,7 +16,7 @@
 // limitations under the License.
 
 use crate::models::docker_credentials::DockerCredentials;
-use crate::models::garbage_collection::GarbageCollection;
+use crate::models::error::Error;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
@@ -35,13 +35,18 @@ impl<'a> ListRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// [Public Preview] List All Container Registries
+///
+/// To get information about any container registry in your account, send a GET request to `/v2/registries/`.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/registries`
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::container_registries };
+/// use digitalocean::{ ApiClient, apis::container_registries };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list(&api)
+/// let response = list(&api)
 ///     .send()
 ///     .await?;
 /// ```
@@ -71,13 +76,24 @@ impl<'a> CreateRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// [Public Preview] Create Container Registry
+///
+/// To create your container registry, send a POST request to `/v2/registries`.
+///
+/// The `name` becomes part of the URL for images stored in the registry. For
+/// example, if your registry is called `example`, an image in it will have the
+/// URL `registry.digitalocean.com/example/image:tag`.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/v2/registries`
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::container_registries };
+/// use digitalocean::{ ApiClient, apis::container_registries };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = create(&api)
+/// # let body: crate::models::multiregistry_create::MultiregistryCreate = todo!();
+/// let response = create(&api)
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -87,7 +103,7 @@ pub fn create(api: &ApiClient) -> CreateRequest<'_> {
 
 #[derive(Debug)]
 pub struct GetOptionsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, std::collections::BTreeMap<String, serde_json::Value>>,
 }
 
 impl<'a> GetOptionsRequest<'a> {
@@ -96,17 +112,25 @@ impl<'a> GetOptionsRequest<'a> {
 
         Self { builder }
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<std::collections::BTreeMap<String, serde_json::Value>> {
         self.builder.send().await
     }
 }
-
 /// [Public Preview] List Registry Options (Subscription Tiers and Available Regions)
+///
+/// This endpoint serves to provide additional information as to which option values are available when creating a container registry.
+/// There are multiple subscription tiers available for container registry. Each tier allows a different number of image repositories to be created in your registry, and has a different amount of storage and transfer included.
+/// There are multiple regions available for container registry and controls where your data is stored.
+/// To list the available options, send a GET request to `/v2/registries/options`. This is similar to GET `/v2/registry/options` and exists for backward compatibility.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/registries/options`
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::container_registries };
+/// use digitalocean::{ ApiClient, apis::container_registries };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_options(&api)
+/// let response = get_options(&api)
 ///     .send()
 ///     .await?;
 /// ```
@@ -129,13 +153,18 @@ impl<'a> GetSubscriptionRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// [Public Preview] Get Subscription Information
+///
+/// A subscription is automatically created when you configure your container registry. To get information about your subscription, send a GET request to `/v2/registries/subscription`. It is similar to GET `/v2/registry/subscription` and exists for backward compatibility.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/registries/subscription`
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::container_registries };
+/// use digitalocean::{ ApiClient, apis::container_registries };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_subscription(&api)
+/// let response = get_subscription(&api)
 ///     .send()
 ///     .await?;
 /// ```
@@ -165,13 +194,20 @@ impl<'a> UpdateSubscriptionRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// [Public Preview] Update Subscription Tier
+///
+/// After creating your registry, you can switch to a different subscription tier to better suit your needs. To do this, send a POST request to `/v2/registries/subscription`. It is similar to POST `/v2/registry/subscription` and exists for backward compatibility.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/v2/registries/subscription`
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::container_registries };
+/// use digitalocean::{ ApiClient, apis::container_registries };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = update_subscription(&api)
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = update_subscription(&api)
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -181,7 +217,7 @@ pub fn update_subscription(api: &ApiClient) -> UpdateSubscriptionRequest<'_> {
 
 #[derive(Debug)]
 pub struct ValidateNameRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, Error>,
 }
 
 impl<'a> ValidateNameRequest<'a> {
@@ -195,17 +231,31 @@ impl<'a> ValidateNameRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<Error> {
         self.builder.send().await
     }
 }
-
 /// [Public Preview] Validate a Container Registry Name
+///
+/// To validate that a container registry name is available for use, send a POST
+/// request to `/v2/registries/validate-name`.
+///
+/// If the name is both formatted correctly and available, the response code will
+/// be 204 and contain no body. If the name is already in use, the response will
+/// be a 409 Conflict.
+///
+/// It is similar to `/v2/registry/validate-name` and exists for backward compatibility.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/v2/registries/validate-name`
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::container_registries };
+/// use digitalocean::{ ApiClient, apis::container_registries };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = validate_name(&api)
+/// # let body: crate::models::validate_registry::ValidateRegistry = todo!();
+/// let response = validate_name(&api)
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -233,14 +283,22 @@ impl<'a> GetRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// [Public Preview] Get a Container Registry By Name
+///
+/// To get information about any container registry in your account, send a GET request to `/v2/registries/{registry_name}`.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/registries/{registry_name}`
+///
+/// **Parameters**
+/// - `registry_name` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::container_registries };
+/// use digitalocean::{ ApiClient, apis::container_registries };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get(&api)
-///     .with_registry_name("value")
+/// let response = get(&api)
+///     .with_registry_name("registry_name")
 ///     .send()
 ///     .await?;
 /// ```
@@ -250,7 +308,7 @@ pub fn get(api: &ApiClient) -> GetRequest<'_> {
 
 #[derive(Debug)]
 pub struct DeleteRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, Error>,
 }
 
 impl<'a> DeleteRequest<'a> {
@@ -264,18 +322,26 @@ impl<'a> DeleteRequest<'a> {
         self.builder = self.builder.path_param("registry_name", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<Error> {
         self.builder.send().await
     }
 }
-
 /// [Public Preview] Delete Container Registry By Name
+///
+/// To delete your container registry, destroying all container image data stored in it, send a DELETE request to `/v2/registries/{registry_name}`.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/v2/registries/{registry_name}`
+///
+/// **Parameters**
+/// - `registry_name` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::container_registries };
+/// use digitalocean::{ ApiClient, apis::container_registries };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete(&api)
-///     .with_registry_name("value")
+/// let response = delete(&api)
+///     .with_registry_name("registry_name")
 ///     .send()
 ///     .await?;
 /// ```
@@ -307,14 +373,43 @@ impl<'a> GetDockerCredentialsRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// [Public Preview] Get Docker Credentials By Registry Name
+///
+/// In order to access your container registry with the Docker client or from a
+/// Kubernetes cluster, you will need to configure authentication. The necessary
+/// JSON configuration can be retrieved by sending a GET request to
+/// `/v2/registries/{registry_name}/docker-credentials`.
+///
+/// The response will be in the format of a Docker `config.json` file. To use the
+/// config in your Kubernetes cluster, create a Secret with:
+///
+/// kubectl create secret generic docr \
+/// --from-file=.dockerconfigjson=config.json \
+/// --type=kubernetes.io/dockerconfigjson
+///
+/// By default, the returned credentials have read-only access to your registry
+/// and cannot be used to push images. This is appropriate for most Kubernetes
+/// clusters. To retrieve read/write credentials, suitable for use with the Docker
+/// client or in a CI system, read_write may be provided as query parameter. For
+/// example: `/v2/registries/{registry_name}/docker-credentials?read_write=true`
+///
+/// By default, the returned credentials will not expire. To retrieve credentials
+/// with an expiry set, expiry_seconds may be provided as a query parameter. For
+/// example: `/v2/registries/{registry_name}/docker-credentials?expiry_seconds=3600` will return
+/// credentials that expire after one hour.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/registries/{registry_name}/docker-credentials`
+///
+/// **Parameters**
+/// - `registry_name` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::container_registries };
+/// use digitalocean::{ ApiClient, apis::container_registries };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_docker_credentials(&api)
-///     .with_registry_name("value")
+/// let response = get_docker_credentials(&api)
+///     .with_registry_name("registry_name")
 ///     .send()
 ///     .await?;
 /// ```
@@ -324,7 +419,7 @@ pub fn get_docker_credentials(api: &ApiClient) -> GetDockerCredentialsRequest<'_
 
 #[derive(Debug)]
 pub struct GetGarbageCollectionRequest<'a> {
-    builder: ApiRequestBuilder<'a, GarbageCollection>,
+    builder: ApiRequestBuilder<'a, std::collections::BTreeMap<String, serde_json::Value>>,
 }
 
 impl<'a> GetGarbageCollectionRequest<'a> {
@@ -342,18 +437,26 @@ impl<'a> GetGarbageCollectionRequest<'a> {
         self.builder = self.builder.path_param("registry_name", value);
         self
     }
-    pub async fn send(self) -> ApiResult<GarbageCollection> {
+    pub async fn send(self) -> ApiResult<std::collections::BTreeMap<String, serde_json::Value>> {
         self.builder.send().await
     }
 }
-
 /// [Public Preview] Get Active Garbage Collection
+///
+/// To get information about the currently-active garbage collection for a registry, send a GET request to `/v2/registry/$REGISTRY_NAME/garbage-collection`.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/registries/{registry_name}/garbage-collection`
+///
+/// **Parameters**
+/// - `registry_name` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::container_registries };
+/// use digitalocean::{ ApiClient, apis::container_registries };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_garbage_collection(&api)
-///     .with_registry_name("value")
+/// let response = get_garbage_collection(&api)
+///     .with_registry_name("registry_name")
 ///     .send()
 ///     .await?;
 /// ```
@@ -363,7 +466,7 @@ pub fn get_garbage_collection(api: &ApiClient) -> GetGarbageCollectionRequest<'_
 
 #[derive(Debug)]
 pub struct RunGarbageCollectionRequest<'a> {
-    builder: ApiRequestBuilder<'a, GarbageCollection>,
+    builder: ApiRequestBuilder<'a, std::collections::BTreeMap<String, serde_json::Value>>,
 }
 
 impl<'a> RunGarbageCollectionRequest<'a> {
@@ -381,18 +484,46 @@ impl<'a> RunGarbageCollectionRequest<'a> {
         self.builder = self.builder.path_param("registry_name", value);
         self
     }
-    pub async fn send(self) -> ApiResult<GarbageCollection> {
+    pub async fn send(self) -> ApiResult<std::collections::BTreeMap<String, serde_json::Value>> {
         self.builder.send().await
     }
 }
-
 /// [Public Preview] Start Garbage Collection
+///
+/// Garbage collection enables users to clear out unreferenced blobs (layer &
+/// manifest data) after deleting one or more manifests from a repository. If
+/// there are no unreferenced blobs resulting from the deletion of one or more
+/// manifests, garbage collection is effectively a noop.
+/// [See here for more information](<https://docs.digitalocean.com/products/container-registry/how-to/clean-up-container-registry/)>
+/// about how and why you should clean up your container registry periodically.
+///
+/// To request a garbage collection run on your registry, send a POST request to
+/// `/v2/registries/$REGISTRY_NAME/garbage-collection`. This will initiate the
+/// following sequence of events on your registry.
+///
+/// * Set the registry to read-only mode, meaning no further write-scoped
+/// JWTs will be issued to registry clients. Existing write-scoped JWTs will
+/// continue to work until they expire which can take up to 15 minutes.
+/// * Wait until all existing write-scoped JWTs have expired.
+/// * Scan all registry manifests to determine which blobs are unreferenced.
+/// * Delete all unreferenced blobs from the registry.
+/// * Record the number of blobs deleted and bytes freed, mark the garbage
+/// collection status as `success`.
+/// * Remove the read-only mode restriction from the registry, meaning write-scoped
+/// JWTs will once again be issued to registry clients.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/v2/registries/{registry_name}/garbage-collection`
+///
+/// **Parameters**
+/// - `registry_name` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::container_registries };
+/// use digitalocean::{ ApiClient, apis::container_registries };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = run_garbage_collection(&api)
-///     .with_registry_name("value")
+/// let response = run_garbage_collection(&api)
+///     .with_registry_name("registry_name")
 ///     .send()
 ///     .await?;
 /// ```
@@ -402,7 +533,7 @@ pub fn run_garbage_collection(api: &ApiClient) -> RunGarbageCollectionRequest<'_
 
 #[derive(Debug)]
 pub struct UpdateGarbageCollectionRequest<'a> {
-    builder: ApiRequestBuilder<'a, GarbageCollection>,
+    builder: ApiRequestBuilder<'a, std::collections::BTreeMap<String, serde_json::Value>>,
 }
 
 impl<'a> UpdateGarbageCollectionRequest<'a> {
@@ -430,19 +561,30 @@ impl<'a> UpdateGarbageCollectionRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<GarbageCollection> {
+    pub async fn send(self) -> ApiResult<std::collections::BTreeMap<String, serde_json::Value>> {
         self.builder.send().await
     }
 }
-
 /// [Public Preview] Update Garbage Collection
+///
+/// To cancel the currently-active garbage collection for a registry, send a PUT request to `/v2/registries/$REGISTRY_NAME/garbage-collection/$GC_UUID` and specify one or more of the attributes below. It is similar to PUT `/v2/registries/$REGISTRY_NAME/garbage-collection/$GC_UUID` and exists for backward compatibility.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/v2/registries/{registry_name}/garbage-collection/{garbage_collection_uuid}`
+///
+/// **Parameters**
+/// - `registry_name` (path, required)
+/// - `garbage_collection_uuid` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::container_registries };
+/// use digitalocean::{ ApiClient, apis::container_registries };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = update_garbage_collection(&api)
-///     .with_registry_name("value")
-///     .with_garbage_collection_uuid("value")
+/// # let body: crate::models::update_registry::UpdateRegistry = todo!();
+/// let response = update_garbage_collection(&api)
+///     .with_registry_name("registry_name")
+///     .with_garbage_collection_uuid("garbage_collection_uuid")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -452,7 +594,7 @@ pub fn update_garbage_collection(api: &ApiClient) -> UpdateGarbageCollectionRequ
 
 #[derive(Debug)]
 pub struct ListGarbageCollectionsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, std::collections::BTreeMap<String, serde_json::Value>>,
 }
 
 impl<'a> ListGarbageCollectionsRequest<'a> {
@@ -470,18 +612,26 @@ impl<'a> ListGarbageCollectionsRequest<'a> {
         self.builder = self.builder.path_param("registry_name", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<std::collections::BTreeMap<String, serde_json::Value>> {
         self.builder.send().await
     }
 }
-
 /// [Public Preview] List Garbage Collections
+///
+/// To get information about past garbage collections for a registry, send a GET request to `/v2/registry/$REGISTRY_NAME/garbage-collections`.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/registries/{registry_name}/garbage-collections`
+///
+/// **Parameters**
+/// - `registry_name` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::container_registries };
+/// use digitalocean::{ ApiClient, apis::container_registries };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_garbage_collections(&api)
-///     .with_registry_name("value")
+/// let response = list_garbage_collections(&api)
+///     .with_registry_name("registry_name")
 ///     .send()
 ///     .await?;
 /// ```
@@ -491,7 +641,7 @@ pub fn list_garbage_collections(api: &ApiClient) -> ListGarbageCollectionsReques
 
 #[derive(Debug)]
 pub struct DeleteRepositoryRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, Error>,
 }
 
 impl<'a> DeleteRepositoryRequest<'a> {
@@ -514,19 +664,32 @@ impl<'a> DeleteRepositoryRequest<'a> {
         self.builder = self.builder.path_param("repository_name", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<Error> {
         self.builder.send().await
     }
 }
-
 /// [Public Preview] Delete Container Registry Repository
+///
+/// To delete a container repository including all of its tags, send a DELETE request to
+/// `/v2/registries/$REGISTRY_NAME/repositories/$REPOSITORY_NAME`.
+///
+/// A successful request will receive a 204 status code with no body in response.
+/// This indicates that the request was processed successfully.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/v2/registries/{registry_name}/repositories/{repository_name}`
+///
+/// **Parameters**
+/// - `registry_name` (path, required)
+/// - `repository_name` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::container_registries };
+/// use digitalocean::{ ApiClient, apis::container_registries };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete_repository(&api)
-///     .with_registry_name("value")
-///     .with_repository_name("value")
+/// let response = delete_repository(&api)
+///     .with_registry_name("registry_name")
+///     .with_repository_name("repository_name")
 ///     .send()
 ///     .await?;
 /// ```
@@ -563,15 +726,32 @@ impl<'a> ListRepositoryManifestsRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// [Public Preview] List All Container Registry Repository Manifests
+///
+/// To list all manifests in your container registry repository, send a GET
+/// request to `/v2/registries/$REGISTRY_NAME/repositories/$REPOSITORY_NAME/digests`.
+///
+/// Note that if your repository name contains `/` characters, it must be
+/// URL-encoded in the request URL. For example, to list manifests for
+/// `registry.digitalocean.com/example/my/repo`, the path would be
+/// `/v2/registry/example/repositories/my%2Frepo/digests`.
+///
+/// It is similar to `/v2/registry/$REGISTRY_NAME/repositories/$REPOSITORY_NAME/digests` and exists for backward compatibility.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/registries/{registry_name}/repositories/{repository_name}/digests`
+///
+/// **Parameters**
+/// - `registry_name` (path, required)
+/// - `repository_name` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::container_registries };
+/// use digitalocean::{ ApiClient, apis::container_registries };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_repository_manifests(&api)
-///     .with_registry_name("value")
-///     .with_repository_name("value")
+/// let response = list_repository_manifests(&api)
+///     .with_registry_name("registry_name")
+///     .with_repository_name("repository_name")
 ///     .send()
 ///     .await?;
 /// ```
@@ -581,7 +761,7 @@ pub fn list_repository_manifests(api: &ApiClient) -> ListRepositoryManifestsRequ
 
 #[derive(Debug)]
 pub struct DeleteRepositoryManifestRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, Error>,
 }
 
 impl<'a> DeleteRepositoryManifestRequest<'a> {
@@ -605,20 +785,41 @@ impl<'a> DeleteRepositoryManifestRequest<'a> {
         self.builder = self.builder.path_param("manifest_digest", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<Error> {
         self.builder.send().await
     }
 }
-
 /// [Public Preview] Delete Container Registry Repository Manifest
+///
+/// To delete a container repository manifest by digest in one of your registries, send a DELETE request to
+/// `/v2/registries/$REGISTRY_NAME/repositories/$REPOSITORY_NAME/digests/$MANIFEST_DIGEST`.
+///
+/// Note that if your repository name contains `/` characters, it must be
+/// URL-encoded in the request URL. For example, to delete
+/// `registry.digitalocean.com/example/my/repo@sha256:abcd`, the path would be
+/// `/v2/registry/example/repositories/my%2Frepo/digests/sha256:abcd`.
+///
+/// A successful request will receive a 204 status code with no body in response.
+/// This indicates that the request was processed successfully.
+///
+/// It is similar to DELETE `/v2/registry/$REGISTRY_NAME/repositories/$REPOSITORY_NAME/digests/$MANIFEST_DIGEST` and exists for backward compatibility.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/v2/registries/{registry_name}/repositories/{repository_name}/digests/{manifest_digest}`
+///
+/// **Parameters**
+/// - `registry_name` (path, required)
+/// - `repository_name` (path, required)
+/// - `manifest_digest` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::container_registries };
+/// use digitalocean::{ ApiClient, apis::container_registries };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete_repository_manifest(&api)
-///     .with_registry_name("value")
-///     .with_repository_name("value")
-///     .with_manifest_digest("value")
+/// let response = delete_repository_manifest(&api)
+///     .with_registry_name("registry_name")
+///     .with_repository_name("repository_name")
+///     .with_manifest_digest("manifest_digest")
 ///     .send()
 ///     .await?;
 /// ```
@@ -655,15 +856,32 @@ impl<'a> ListRepositoryTagsRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// [Public Preview] List All Container Registry Repository Tags
+///
+/// To list all tags in one of your container registry's repository, send a GET
+/// request to `/v2/registries/$REGISTRY_NAME/repositories/$REPOSITORY_NAME/tags`.
+///
+/// Note that if your repository name contains `/` characters, it must be
+/// URL-encoded in the request URL. For example, to list tags for
+/// `registry.digitalocean.com/example/my/repo`, the path would be
+/// `/v2/registry/example/repositories/my%2Frepo/tags`.
+///
+/// It is similar to GET `/v2/registry/$REGISTRY_NAME/repositories/$REPOSITORY_NAME/tags` and exists for backward compatibility.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/registries/{registry_name}/repositories/{repository_name}/tags`
+///
+/// **Parameters**
+/// - `registry_name` (path, required)
+/// - `repository_name` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::container_registries };
+/// use digitalocean::{ ApiClient, apis::container_registries };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_repository_tags(&api)
-///     .with_registry_name("value")
-///     .with_repository_name("value")
+/// let response = list_repository_tags(&api)
+///     .with_registry_name("registry_name")
+///     .with_repository_name("repository_name")
 ///     .send()
 ///     .await?;
 /// ```
@@ -673,7 +891,7 @@ pub fn list_repository_tags(api: &ApiClient) -> ListRepositoryTagsRequest<'_> {
 
 #[derive(Debug)]
 pub struct DeleteRepositoryTagRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, Error>,
 }
 
 impl<'a> DeleteRepositoryTagRequest<'a> {
@@ -701,20 +919,39 @@ impl<'a> DeleteRepositoryTagRequest<'a> {
         self.builder = self.builder.path_param("repository_tag", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<Error> {
         self.builder.send().await
     }
 }
-
 /// [Public Preview] Delete Container Registry Repository Tag
+///
+/// To delete a container repository tag in on of our container registries, send a DELETE request to
+/// `/v2/registries/$REGISTRY_NAME/repositories/$REPOSITORY_NAME/tags/$TAG`.
+///
+/// Note that if your repository name contains `/` characters, it must be
+/// URL-encoded in the request URL. For example, to delete
+/// `registry.digitalocean.com/example/my/repo:mytag`, the path would be
+/// `/v2/registry/example/repositories/my%2Frepo/tags/mytag`.
+///
+/// A successful request will receive a 204 status code with no body in response.
+/// This indicates that the request was processed successfully. It is similar to DELETE `/v2/registry/$REGISTRY_NAME/repositories/$REPOSITORY_NAME/tags/$TAG` and exists for backward compatibility.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/v2/registries/{registry_name}/repositories/{repository_name}/tags/{repository_tag}`
+///
+/// **Parameters**
+/// - `registry_name` (path, required)
+/// - `repository_name` (path, required)
+/// - `repository_tag` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::container_registries };
+/// use digitalocean::{ ApiClient, apis::container_registries };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete_repository_tag(&api)
-///     .with_registry_name("value")
-///     .with_repository_name("value")
-///     .with_repository_tag("value")
+/// let response = delete_repository_tag(&api)
+///     .with_registry_name("registry_name")
+///     .with_repository_name("repository_name")
+///     .with_repository_tag("repository_tag")
 ///     .send()
 ///     .await?;
 /// ```
@@ -746,14 +983,22 @@ impl<'a> ListRepositoriesV2Request<'a> {
         self.builder.send().await
     }
 }
-
 /// [Public Preview] List All Container Registry Repositories (V2)
+///
+/// To list all repositories in your container registry, send a GET request to `/v2/registries/$REGISTRY_NAME/repositoriesV2`. It is similar to GET `/v2/registry/$REGISTRY_NAME/repositoriesV2` and exists for backward compatibility.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/registries/{registry_name}/repositoriesV2`
+///
+/// **Parameters**
+/// - `registry_name` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::container_registries };
+/// use digitalocean::{ ApiClient, apis::container_registries };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_repositories_v2(&api)
-///     .with_registry_name("value")
+/// let response = list_repositories_v2(&api)
+///     .with_registry_name("registry_name")
 ///     .send()
 ///     .await?;
 /// ```

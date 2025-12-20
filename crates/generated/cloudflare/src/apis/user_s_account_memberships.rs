@@ -15,6 +15,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::iam_single_membership_response_with_policies::IamSingleMembershipResponseWithPolicies;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
@@ -61,13 +62,34 @@ impl<'a> ListMembershipsRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// List Memberships
+///
+/// List memberships of accounts the user can access.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/memberships`
+///
+/// **Parameters**
+/// - `account.name` (query,optional)
+/// - `page` (query,optional)
+/// - `per_page` (query,optional)
+/// - `order` (query,optional)
+/// - `direction` (query,optional)
+/// - `name` (query,optional)
+/// - `status` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::user_s_account_memberships };
+/// use cloudflare::{ ApiClient, apis::user_s_account_memberships };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_memberships(&api)
+/// let response = list_memberships(&api)
+///     .with_account_name("account.name")
+///     .with_page("page")
+///     .with_per_page("per_page")
+///     .with_order("order")
+///     .with_direction("direction")
+///     .with_name("name")
+///     .with_status("status")
 ///     .send()
 ///     .await?;
 /// ```
@@ -77,7 +99,7 @@ pub fn list_memberships(api: &ApiClient) -> ListMembershipsRequest<'_> {
 
 #[derive(Debug)]
 pub struct MembershipDetailsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, IamSingleMembershipResponseWithPolicies>,
 }
 
 impl<'a> MembershipDetailsRequest<'a> {
@@ -91,18 +113,26 @@ impl<'a> MembershipDetailsRequest<'a> {
         self.builder = self.builder.path_param("membership_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<IamSingleMembershipResponseWithPolicies> {
         self.builder.send().await
     }
 }
-
 /// Membership Details
+///
+/// Get a specific membership.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/memberships/{membership_id}`
+///
+/// **Parameters**
+/// - `membership_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::user_s_account_memberships };
+/// use cloudflare::{ ApiClient, apis::user_s_account_memberships };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = membership_details(&api)
-///     .with_membership_id("value")
+/// let response = membership_details(&api)
+///     .with_membership_id("membership_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -112,7 +142,7 @@ pub fn membership_details(api: &ApiClient) -> MembershipDetailsRequest<'_> {
 
 #[derive(Debug)]
 pub struct UpdateMembershipRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, IamSingleMembershipResponseWithPolicies>,
 }
 
 impl<'a> UpdateMembershipRequest<'a> {
@@ -131,18 +161,28 @@ impl<'a> UpdateMembershipRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<IamSingleMembershipResponseWithPolicies> {
         self.builder.send().await
     }
 }
-
 /// Update Membership
+///
+/// Accept or reject this account invitation.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/memberships/{membership_id}`
+///
+/// **Parameters**
+/// - `membership_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::user_s_account_memberships };
+/// use cloudflare::{ ApiClient, apis::user_s_account_memberships };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = update_membership(&api)
-///     .with_membership_id("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = update_membership(&api)
+///     .with_membership_id("membership_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -170,14 +210,22 @@ impl<'a> DeleteMembershipRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Delete Membership
+///
+/// Remove the associated member from an account.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/memberships/{membership_id}`
+///
+/// **Parameters**
+/// - `membership_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::user_s_account_memberships };
+/// use cloudflare::{ ApiClient, apis::user_s_account_memberships };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete_membership(&api)
-///     .with_membership_id("value")
+/// let response = delete_membership(&api)
+///     .with_membership_id("membership_id")
 ///     .send()
 ///     .await?;
 /// ```

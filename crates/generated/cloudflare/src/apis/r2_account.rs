@@ -38,14 +38,22 @@ impl<'a> GetLevelMetricsRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get Account-Level Metrics
+///
+/// Get Storage/Object Count Metrics across all buckets in your account. Note that Account-Level Metrics may not immediately reflect the latest data.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/r2/metrics`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::r2_account };
+/// use cloudflare::{ ApiClient, apis::r2_account };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_level_metrics(&api)
-///     .with_account_id("value")
+/// let response = get_level_metrics(&api)
+///     .with_account_id("account_id")
 ///     .send()
 ///     .await?;
 /// ```

@@ -20,8 +20,8 @@ use serde::{Deserialize, Serialize};
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct AccessGroups {
     pub display_name: Option<String>,
-    pub external_id: Option<serde_json::Value>,
-    pub id: Option<serde_json::Value>,
+    pub external_id: Option<crate::models::access_external_id::AccessExternalId>,
+    pub id: Option<crate::models::access_id::AccessId>,
     pub meta: Option<crate::models::access_meta::AccessMeta>,
     pub schemas: Option<Vec<String>>,
 }

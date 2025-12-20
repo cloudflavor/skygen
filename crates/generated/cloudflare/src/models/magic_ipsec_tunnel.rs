@@ -19,16 +19,20 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct MagicIpsecTunnel {
-    pub allow_null_cipher: Option<serde_json::Value>,
-    pub cloudflare_endpoint: serde_json::Value,
-    pub created_on: Option<serde_json::Value>,
-    pub customer_endpoint: Option<serde_json::Value>,
-    pub description: Option<serde_json::Value>,
-    pub health_check: Option<serde_json::Value>,
-    pub id: serde_json::Value,
-    pub interface_address: serde_json::Value,
-    pub modified_on: Option<serde_json::Value>,
-    pub name: serde_json::Value,
+    pub allow_null_cipher: Option<crate::models::magic_allow_null_cipher::MagicAllowNullCipher>,
+    pub cloudflare_endpoint:
+        crate::models::magic_cloudflare_ipsec_endpoint::MagicCloudflareIpsecEndpoint,
+    pub created_on: Option<crate::models::magic_schemas_created_on::MagicSchemasCreatedOn>,
+    pub customer_endpoint:
+        Option<crate::models::magic_customer_ipsec_endpoint::MagicCustomerIpsecEndpoint>,
+    pub description: Option<
+        crate::models::magic_components_schemas_description::MagicComponentsSchemasDescription,
+    >,
+    pub health_check: Option<crate::models::magic_tunnel_health_check::MagicTunnelHealthCheck>,
+    pub id: crate::models::magic_schemas_identifier::MagicSchemasIdentifier,
+    pub interface_address: crate::models::magic_interface_address::MagicInterfaceAddress,
+    pub modified_on: Option<crate::models::magic_schemas_modified_on::MagicSchemasModifiedOn>,
+    pub name: crate::models::magic_ipsec_tunnel_name::MagicIpsecTunnelName,
     pub psk_metadata: Option<crate::models::magic_psk_metadata::MagicPskMetadata>,
-    pub replay_protection: Option<serde_json::Value>,
+    pub replay_protection: Option<crate::models::magic_replay_protection::MagicReplayProtection>,
 }

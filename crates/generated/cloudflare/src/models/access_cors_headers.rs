@@ -19,12 +19,12 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct AccessCorsHeaders {
-    pub allow_all_headers: Option<serde_json::Value>,
-    pub allow_all_methods: Option<serde_json::Value>,
-    pub allow_all_origins: Option<serde_json::Value>,
-    pub allow_credentials: Option<serde_json::Value>,
-    pub allowed_headers: Option<serde_json::Value>,
-    pub allowed_methods: Option<serde_json::Value>,
-    pub allowed_origins: Option<serde_json::Value>,
-    pub max_age: Option<serde_json::Value>,
+    pub allow_all_headers: Option<crate::models::access_allow_all_headers::AccessAllowAllHeaders>,
+    pub allow_all_methods: Option<crate::models::access_allow_all_methods::AccessAllowAllMethods>,
+    pub allow_all_origins: Option<crate::models::access_allow_all_origins::AccessAllowAllOrigins>,
+    pub allow_credentials: Option<crate::models::access_allow_credentials::AccessAllowCredentials>,
+    pub allowed_headers: Option<crate::models::access_allowed_headers::AccessAllowedHeaders>,
+    pub allowed_methods: Option<crate::models::access_allowed_methods::AccessAllowedMethods>,
+    pub allowed_origins: Option<crate::models::access_allowed_origins::AccessAllowedOrigins>,
+    pub max_age: Option<crate::models::access_max_age::AccessMaxAge>,
 }

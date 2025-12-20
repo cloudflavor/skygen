@@ -15,12 +15,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::access_identity_providers_components_schemas_response_collection::AccessIdentityProvidersComponentsSchemasResponseCollection;
+use crate::models::access_identity_providers_components_schemas_single_response::AccessIdentityProvidersComponentsSchemasSingleResponse;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct ListAccessIdentityProvidersRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, AccessIdentityProvidersComponentsSchemasResponseCollection>,
 }
 
 impl<'a> ListAccessIdentityProvidersRequest<'a> {
@@ -38,18 +40,28 @@ impl<'a> ListAccessIdentityProvidersRequest<'a> {
         self.builder = self.builder.path_param("zone_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(
+        self,
+    ) -> ApiResult<AccessIdentityProvidersComponentsSchemasResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// List Access identity providers
+///
+/// Lists all configured identity providers.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/access/identity_providers`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zone_level_access_identity_providers };
+/// use cloudflare::{ ApiClient, apis::zone_level_access_identity_providers };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_access_identity_providers(&api)
-///     .with_zone_id("value")
+/// let response = list_access_identity_providers(&api)
+///     .with_zone_id("zone_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -59,7 +71,7 @@ pub fn list_access_identity_providers(api: &ApiClient) -> ListAccessIdentityProv
 
 #[derive(Debug)]
 pub struct AddAccessIdentityProviderRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, AccessIdentityProvidersComponentsSchemasSingleResponse>,
 }
 
 impl<'a> AddAccessIdentityProviderRequest<'a> {
@@ -78,22 +90,35 @@ impl<'a> AddAccessIdentityProviderRequest<'a> {
         self.builder = self.builder.path_param("zone_id", value);
         self
     }
-    pub fn with_body(mut self, body: serde_json::Value) -> Self {
+    pub fn with_body(
+        mut self,
+        body: crate::models::access_schemas_identity_providers::AccessSchemasIdentityProviders,
+    ) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<AccessIdentityProvidersComponentsSchemasSingleResponse> {
         self.builder.send().await
     }
 }
-
 /// Add an Access identity provider
+///
+/// Adds a new identity provider to Access.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/zones/{zone_id}/access/identity_providers`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zone_level_access_identity_providers };
+/// use cloudflare::{ ApiClient, apis::zone_level_access_identity_providers };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = add_access_identity_provider(&api)
-///     .with_zone_id("value")
+/// # let body: crate::models::access_schemas_identity_providers::AccessSchemasIdentityProviders = todo!();
+/// let response = add_access_identity_provider(&api)
+///     .with_zone_id("zone_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -103,7 +128,7 @@ pub fn add_access_identity_provider(api: &ApiClient) -> AddAccessIdentityProvide
 
 #[derive(Debug)]
 pub struct GetAccessIdentityProviderRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, AccessIdentityProvidersComponentsSchemasSingleResponse>,
 }
 
 impl<'a> GetAccessIdentityProviderRequest<'a> {
@@ -126,19 +151,28 @@ impl<'a> GetAccessIdentityProviderRequest<'a> {
         self.builder = self.builder.path_param("identity_provider_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<AccessIdentityProvidersComponentsSchemasSingleResponse> {
         self.builder.send().await
     }
 }
-
 /// Get an Access identity provider
+///
+/// Fetches a configured identity provider.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/access/identity_providers/{identity_provider_id}`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `identity_provider_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zone_level_access_identity_providers };
+/// use cloudflare::{ ApiClient, apis::zone_level_access_identity_providers };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_access_identity_provider(&api)
-///     .with_zone_id("value")
-///     .with_identity_provider_id("value")
+/// let response = get_access_identity_provider(&api)
+///     .with_zone_id("zone_id")
+///     .with_identity_provider_id("identity_provider_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -148,7 +182,7 @@ pub fn get_access_identity_provider(api: &ApiClient) -> GetAccessIdentityProvide
 
 #[derive(Debug)]
 pub struct UpdateAccessIdentityProviderRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, AccessIdentityProvidersComponentsSchemasSingleResponse>,
 }
 
 impl<'a> UpdateAccessIdentityProviderRequest<'a> {
@@ -172,23 +206,37 @@ impl<'a> UpdateAccessIdentityProviderRequest<'a> {
         self.builder = self.builder.path_param("identity_provider_id", value);
         self
     }
-    pub fn with_body(mut self, body: serde_json::Value) -> Self {
+    pub fn with_body(
+        mut self,
+        body: crate::models::access_schemas_identity_providers::AccessSchemasIdentityProviders,
+    ) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<AccessIdentityProvidersComponentsSchemasSingleResponse> {
         self.builder.send().await
     }
 }
-
 /// Update an Access identity provider
+///
+/// Updates a configured identity provider.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/zones/{zone_id}/access/identity_providers/{identity_provider_id}`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `identity_provider_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zone_level_access_identity_providers };
+/// use cloudflare::{ ApiClient, apis::zone_level_access_identity_providers };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = update_access_identity_provider(&api)
-///     .with_zone_id("value")
-///     .with_identity_provider_id("value")
+/// # let body: crate::models::access_schemas_identity_providers::AccessSchemasIdentityProviders = todo!();
+/// let response = update_access_identity_provider(&api)
+///     .with_zone_id("zone_id")
+///     .with_identity_provider_id("identity_provider_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -225,15 +273,24 @@ impl<'a> DeleteAccessIdentityProviderRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Delete an Access identity provider
+///
+/// Deletes an identity provider from Access.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/zones/{zone_id}/access/identity_providers/{identity_provider_id}`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `identity_provider_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zone_level_access_identity_providers };
+/// use cloudflare::{ ApiClient, apis::zone_level_access_identity_providers };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete_access_identity_provider(&api)
-///     .with_zone_id("value")
-///     .with_identity_provider_id("value")
+/// let response = delete_access_identity_provider(&api)
+///     .with_zone_id("zone_id")
+///     .with_identity_provider_id("identity_provider_id")
 ///     .send()
 ///     .await?;
 /// ```

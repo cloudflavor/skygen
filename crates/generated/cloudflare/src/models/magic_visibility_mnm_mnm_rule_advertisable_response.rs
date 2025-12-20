@@ -19,5 +19,5 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct MagicVisibilityMnmMnmRuleAdvertisableResponse {
-    pub automatic_advertisement: serde_json::Value,
+    pub automatic_advertisement: crate::models::magic_visibility_mnm_mnm_rule_automatic_advertisement::MagicVisibilityMnmMnmRuleAutomaticAdvertisement,
 }

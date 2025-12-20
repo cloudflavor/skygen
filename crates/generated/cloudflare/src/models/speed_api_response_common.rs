@@ -19,7 +19,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct SpeedApiResponseCommon {
-    pub errors: serde_json::Value,
-    pub messages: serde_json::Value,
+    pub errors: crate::models::speed_messages::SpeedMessages,
+    pub messages: crate::models::speed_messages::SpeedMessages,
     pub success: bool,
 }

@@ -42,14 +42,20 @@ impl<'a> ScannerGetMappingRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get mapping
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/dlp/email/account_mapping`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::dlp_email };
+/// use cloudflare::{ ApiClient, apis::dlp_email };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = scanner_get_mapping(&api)
-///     .with_account_id("value")
+/// let response = scanner_get_mapping(&api)
+///     .with_account_id("account_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -89,14 +95,22 @@ impl<'a> ScannerCreateMappingRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Create mapping
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/dlp/email/account_mapping`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::dlp_email };
+/// use cloudflare::{ ApiClient, apis::dlp_email };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = scanner_create_mapping(&api)
-///     .with_account_id("value")
+/// # let body: crate::models::dlp_update_addin_account_mapping::DlpUpdateAddinAccountMapping = todo!();
+/// let response = scanner_create_mapping(&api)
+///     .with_account_id("account_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -125,14 +139,22 @@ impl<'a> ScannerListAllRulesRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// List all email scanner rules
+///
+/// Lists all email scanner rules for an account.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/dlp/email/rules`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::dlp_email };
+/// use cloudflare::{ ApiClient, apis::dlp_email };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = scanner_list_all_rules(&api)
-///     .with_account_id("value")
+/// let response = scanner_list_all_rules(&api)
+///     .with_account_id("account_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -169,14 +191,22 @@ impl<'a> ScannerCreateRuleRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Create email scanner rule
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/dlp/email/rules`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::dlp_email };
+/// use cloudflare::{ ApiClient, apis::dlp_email };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = scanner_create_rule(&api)
-///     .with_account_id("value")
+/// # let body: crate::models::dlp_create_email_rule::DlpCreateEmailRule = todo!();
+/// let response = scanner_create_rule(&api)
+///     .with_account_id("account_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -213,14 +243,22 @@ impl<'a> ScannerUpdateRulePrioritiesRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Update email scanner rule priorities
+///
+/// **HTTP Method:** `PATCH`
+/// **Path:** `/accounts/{account_id}/dlp/email/rules`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::dlp_email };
+/// use cloudflare::{ ApiClient, apis::dlp_email };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = scanner_update_rule_priorities(&api)
-///     .with_account_id("value")
+/// # let body: crate::models::dlp_update_email_rule_priorities::DlpUpdateEmailRulePriorities = todo!();
+/// let response = scanner_update_rule_priorities(&api)
+///     .with_account_id("account_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -257,15 +295,22 @@ impl<'a> ScannerGetRuleRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get an email scanner rule
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/dlp/email/rules/{rule_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `rule_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::dlp_email };
+/// use cloudflare::{ ApiClient, apis::dlp_email };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = scanner_get_rule(&api)
-///     .with_account_id("value")
-///     .with_rule_id("value")
+/// let response = scanner_get_rule(&api)
+///     .with_account_id("account_id")
+///     .with_rule_id("rule_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -310,15 +355,24 @@ impl<'a> ScannerUpdateRuleRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Update email scanner rule
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/accounts/{account_id}/dlp/email/rules/{rule_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `rule_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::dlp_email };
+/// use cloudflare::{ ApiClient, apis::dlp_email };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = scanner_update_rule(&api)
-///     .with_account_id("value")
-///     .with_rule_id("value")
+/// # let body: crate::models::dlp_create_email_rule::DlpCreateEmailRule = todo!();
+/// let response = scanner_update_rule(&api)
+///     .with_account_id("account_id")
+///     .with_rule_id("rule_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -355,15 +409,22 @@ impl<'a> ScannerDeleteRuleRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Delete email scanner rule
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/accounts/{account_id}/dlp/email/rules/{rule_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `rule_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::dlp_email };
+/// use cloudflare::{ ApiClient, apis::dlp_email };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = scanner_delete_rule(&api)
-///     .with_account_id("value")
-///     .with_rule_id("value")
+/// let response = scanner_delete_rule(&api)
+///     .with_account_id("account_id")
+///     .with_rule_id("rule_id")
 ///     .send()
 ///     .await?;
 /// ```

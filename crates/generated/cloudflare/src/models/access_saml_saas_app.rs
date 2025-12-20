@@ -21,7 +21,7 @@ use serde::{Deserialize, Serialize};
 pub struct AccessSamlSaasApp {
     pub auth_type: Option<String>,
     pub consumer_service_url: Option<String>,
-    pub created_at: Option<serde_json::Value>,
+    pub created_at: Option<crate::models::access_timestamp::AccessTimestamp>,
     pub custom_attributes: Option<Vec<std::collections::BTreeMap<String, serde_json::Value>>>,
     pub default_relay_state: Option<String>,
     pub idp_entity_id: Option<String>,
@@ -31,5 +31,5 @@ pub struct AccessSamlSaasApp {
     pub saml_attribute_transform_jsonata: Option<String>,
     pub sp_entity_id: Option<String>,
     pub sso_endpoint: Option<String>,
-    pub updated_at: Option<serde_json::Value>,
+    pub updated_at: Option<crate::models::access_timestamp::AccessTimestamp>,
 }

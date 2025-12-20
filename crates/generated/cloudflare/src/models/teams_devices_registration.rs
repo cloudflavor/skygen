@@ -19,7 +19,6 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct TeamsDevicesRegistration {
-
     pub created_at: String,
     pub deleted_at: Option<String>,
     pub device: crate::models::teams_devices_registration_device_details::TeamsDevicesRegistrationDeviceDetails,

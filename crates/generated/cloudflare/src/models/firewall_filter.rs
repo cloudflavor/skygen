@@ -19,9 +19,9 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct FirewallFilter {
-    pub description: Option<serde_json::Value>,
-    pub expression: Option<serde_json::Value>,
-    pub id: Option<serde_json::Value>,
-    pub paused: Option<serde_json::Value>,
-    pub r#ref: Option<serde_json::Value>,
+    pub description: Option<crate::models::firewall_filters_components_schemas_description::FirewallFiltersComponentsSchemasDescription>,
+    pub expression: Option<crate::models::firewall_expression::FirewallExpression>,
+    pub id: Option<crate::models::firewall_filters_components_schemas_id::FirewallFiltersComponentsSchemasId>,
+    pub paused: Option<crate::models::firewall_filters_components_schemas_paused::FirewallFiltersComponentsSchemasPaused>,
+    pub r#ref: Option<crate::models::firewall_schemas_ref::FirewallSchemasRef>,
 }

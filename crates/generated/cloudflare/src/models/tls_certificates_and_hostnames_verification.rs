@@ -19,13 +19,12 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct TlsCertificatesAndHostnamesVerification {
-
-    pub brand_check: Option<serde_json::Value>,
-    pub cert_pack_uuid: Option<serde_json::Value>,
-    pub certificate_status: serde_json::Value,
-    pub signature: Option<serde_json::Value>,
-    pub validation_method: Option<serde_json::Value>,
+    pub brand_check: Option<crate::models::tls_certificates_and_hostnames_brand_check::TlsCertificatesAndHostnamesBrandCheck>,
+    pub cert_pack_uuid: Option<crate::models::tls_certificates_and_hostnames_cert_pack_uuid::TlsCertificatesAndHostnamesCertPackUuid>,
+    pub certificate_status: crate::models::tls_certificates_and_hostnames_certificate_status::TlsCertificatesAndHostnamesCertificateStatus,
+    pub signature: Option<crate::models::tls_certificates_and_hostnames_schemas_signature::TlsCertificatesAndHostnamesSchemasSignature>,
+    pub validation_method: Option<crate::models::tls_certificates_and_hostnames_schemas_validation_method::TlsCertificatesAndHostnamesSchemasValidationMethod>,
     pub verification_info: Option<crate::models::tls_certificates_and_hostnames_verification_info::TlsCertificatesAndHostnamesVerificationInfo>,
-    pub verification_status: Option<serde_json::Value>,
-    pub verification_type: Option<serde_json::Value>,
+    pub verification_status: Option<crate::models::tls_certificates_and_hostnames_verification_status::TlsCertificatesAndHostnamesVerificationStatus>,
+    pub verification_type: Option<crate::models::tls_certificates_and_hostnames_verification_type::TlsCertificatesAndHostnamesVerificationType>,
 }

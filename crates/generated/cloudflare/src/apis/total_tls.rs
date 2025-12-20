@@ -15,12 +15,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::tls_certificates_and_hostnames_total_tls_settings_response::TlsCertificatesAndHostnamesTotalTlsSettingsResponse;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct SettingsDetailsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, TlsCertificatesAndHostnamesTotalTlsSettingsResponse>,
 }
 
 impl<'a> SettingsDetailsRequest<'a> {
@@ -34,18 +35,26 @@ impl<'a> SettingsDetailsRequest<'a> {
         self.builder = self.builder.path_param("zone_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<TlsCertificatesAndHostnamesTotalTlsSettingsResponse> {
         self.builder.send().await
     }
 }
-
 /// Total TLS Settings Details
+///
+/// Get Total TLS Settings for a Zone.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/acm/total_tls`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::total_tls };
+/// use cloudflare::{ ApiClient, apis::total_tls };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = settings_details(&api)
-///     .with_zone_id("value")
+/// let response = settings_details(&api)
+///     .with_zone_id("zone_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -55,7 +64,7 @@ pub fn settings_details(api: &ApiClient) -> SettingsDetailsRequest<'_> {
 
 #[derive(Debug)]
 pub struct EnableDisableTotalTlsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, TlsCertificatesAndHostnamesTotalTlsSettingsResponse>,
 }
 
 impl<'a> EnableDisableTotalTlsRequest<'a> {
@@ -74,18 +83,28 @@ impl<'a> EnableDisableTotalTlsRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<TlsCertificatesAndHostnamesTotalTlsSettingsResponse> {
         self.builder.send().await
     }
 }
-
 /// Enable or Disable Total TLS
+///
+/// Set Total TLS Settings or disable the feature for a Zone.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/zones/{zone_id}/acm/total_tls`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::total_tls };
+/// use cloudflare::{ ApiClient, apis::total_tls };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = enable_disable_total_tls(&api)
-///     .with_zone_id("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = enable_disable_total_tls(&api)
+///     .with_zone_id("zone_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```

@@ -19,6 +19,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct TeamsDevicesGlobalWarpOverrideRequest {
-    pub disconnect: serde_json::Value,
-    pub justification: Option<serde_json::Value>,
+    pub disconnect: crate::models::teams_devices_disconnect::TeamsDevicesDisconnect,
+    pub justification:
+        Option<crate::models::teams_devices_justification::TeamsDevicesJustification>,
 }

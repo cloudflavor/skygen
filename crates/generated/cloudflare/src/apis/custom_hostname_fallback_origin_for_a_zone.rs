@@ -15,12 +15,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::tls_certificates_and_hostnames_fallback_origin_response::TlsCertificatesAndHostnamesFallbackOriginResponse;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct GetFallbackOriginCustomRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, TlsCertificatesAndHostnamesFallbackOriginResponse>,
 }
 
 impl<'a> GetFallbackOriginCustomRequest<'a> {
@@ -38,18 +39,24 @@ impl<'a> GetFallbackOriginCustomRequest<'a> {
         self.builder = self.builder.path_param("zone_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<TlsCertificatesAndHostnamesFallbackOriginResponse> {
         self.builder.send().await
     }
 }
-
 /// Get Fallback Origin for Custom Hostnames
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/custom_hostnames/fallback_origin`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::custom_hostname_fallback_origin_for_a_zone };
+/// use cloudflare::{ ApiClient, apis::custom_hostname_fallback_origin_for_a_zone };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_fallback_origin_custom(&api)
-///     .with_zone_id("value")
+/// let response = get_fallback_origin_custom(&api)
+///     .with_zone_id("zone_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -59,7 +66,7 @@ pub fn get_fallback_origin_custom(api: &ApiClient) -> GetFallbackOriginCustomReq
 
 #[derive(Debug)]
 pub struct UpdateFallbackOriginCustomRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, TlsCertificatesAndHostnamesFallbackOriginResponse>,
 }
 
 impl<'a> UpdateFallbackOriginCustomRequest<'a> {
@@ -85,18 +92,26 @@ impl<'a> UpdateFallbackOriginCustomRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<TlsCertificatesAndHostnamesFallbackOriginResponse> {
         self.builder.send().await
     }
 }
-
 /// Update Fallback Origin for Custom Hostnames
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/zones/{zone_id}/custom_hostnames/fallback_origin`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::custom_hostname_fallback_origin_for_a_zone };
+/// use cloudflare::{ ApiClient, apis::custom_hostname_fallback_origin_for_a_zone };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = update_fallback_origin_custom(&api)
-///     .with_zone_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = update_fallback_origin_custom(&api)
+///     .with_zone_id("zone_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -106,7 +121,7 @@ pub fn update_fallback_origin_custom(api: &ApiClient) -> UpdateFallbackOriginCus
 
 #[derive(Debug)]
 pub struct DeleteFallbackOriginCustomRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, TlsCertificatesAndHostnamesFallbackOriginResponse>,
 }
 
 impl<'a> DeleteFallbackOriginCustomRequest<'a> {
@@ -124,18 +139,24 @@ impl<'a> DeleteFallbackOriginCustomRequest<'a> {
         self.builder = self.builder.path_param("zone_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<TlsCertificatesAndHostnamesFallbackOriginResponse> {
         self.builder.send().await
     }
 }
-
 /// Delete Fallback Origin for Custom Hostnames
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/zones/{zone_id}/custom_hostnames/fallback_origin`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::custom_hostname_fallback_origin_for_a_zone };
+/// use cloudflare::{ ApiClient, apis::custom_hostname_fallback_origin_for_a_zone };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete_fallback_origin_custom(&api)
-///     .with_zone_id("value")
+/// let response = delete_fallback_origin_custom(&api)
+///     .with_zone_id("zone_id")
 ///     .send()
 ///     .await?;
 /// ```

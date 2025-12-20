@@ -19,10 +19,10 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct ZeroTrustGatewayProxyEndpoints {
-    pub created_at: Option<serde_json::Value>,
-    pub id: Option<serde_json::Value>,
-    pub ips: Option<serde_json::Value>,
-    pub name: Option<serde_json::Value>,
-    pub subdomain: Option<serde_json::Value>,
-    pub updated_at: Option<serde_json::Value>,
+    pub created_at: Option<crate::models::zero_trust_gateway_read_only_timestamp::ZeroTrustGatewayReadOnlyTimestamp>,
+    pub id: Option<crate::models::zero_trust_gateway_components_schemas_uuid::ZeroTrustGatewayComponentsSchemasUuid>,
+    pub ips: Option<crate::models::zero_trust_gateway_ips::ZeroTrustGatewayIps>,
+    pub name: Option<crate::models::zero_trust_gateway_proxy_endpoints_components_schemas_name::ZeroTrustGatewayProxyEndpointsComponentsSchemasName>,
+    pub subdomain: Option<crate::models::zero_trust_gateway_schemas_subdomain::ZeroTrustGatewaySchemasSubdomain>,
+    pub updated_at: Option<crate::models::zero_trust_gateway_read_only_timestamp::ZeroTrustGatewayReadOnlyTimestamp>,
 }

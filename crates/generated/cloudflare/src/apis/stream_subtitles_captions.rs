@@ -15,12 +15,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::stream_language_response_collection::StreamLanguageResponseCollection;
+use crate::models::stream_language_response_single::StreamLanguageResponseSingle;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct ListCaptionsSubtitlesRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, StreamLanguageResponseCollection>,
 }
 
 impl<'a> ListCaptionsSubtitlesRequest<'a> {
@@ -43,19 +45,28 @@ impl<'a> ListCaptionsSubtitlesRequest<'a> {
         self.builder = self.builder.path_param("identifier", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<StreamLanguageResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// List captions or subtitles
+///
+/// Lists the available captions or subtitles for a specific video.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/stream/{identifier}/captions`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `identifier` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::stream_subtitles_captions };
+/// use cloudflare::{ ApiClient, apis::stream_subtitles_captions };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_captions_subtitles(&api)
-///     .with_account_id("value")
-///     .with_identifier("value")
+/// let response = list_captions_subtitles(&api)
+///     .with_account_id("account_id")
+///     .with_identifier("identifier")
 ///     .send()
 ///     .await?;
 /// ```
@@ -65,7 +76,7 @@ pub fn list_captions_subtitles(api: &ApiClient) -> ListCaptionsSubtitlesRequest<
 
 #[derive(Debug)]
 pub struct GetCaptionSubtitleLanguageRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, StreamLanguageResponseSingle>,
 }
 
 impl<'a> GetCaptionSubtitleLanguageRequest<'a> {
@@ -93,20 +104,30 @@ impl<'a> GetCaptionSubtitleLanguageRequest<'a> {
         self.builder = self.builder.path_param("language", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<StreamLanguageResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// List captions or subtitles for a provided language
+///
+/// Lists the captions or subtitles for provided language.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/stream/{identifier}/captions/{language}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `identifier` (path, required)
+/// - `language` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::stream_subtitles_captions };
+/// use cloudflare::{ ApiClient, apis::stream_subtitles_captions };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_caption_subtitle_language(&api)
-///     .with_account_id("value")
-///     .with_identifier("value")
-///     .with_language("value")
+/// let response = get_caption_subtitle_language(&api)
+///     .with_account_id("account_id")
+///     .with_identifier("identifier")
+///     .with_language("language")
 ///     .send()
 ///     .await?;
 /// ```
@@ -116,7 +137,7 @@ pub fn get_caption_subtitle_language(api: &ApiClient) -> GetCaptionSubtitleLangu
 
 #[derive(Debug)]
 pub struct UploadCaptionsSubtitlesRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, StreamLanguageResponseSingle>,
 }
 
 impl<'a> UploadCaptionsSubtitlesRequest<'a> {
@@ -144,20 +165,30 @@ impl<'a> UploadCaptionsSubtitlesRequest<'a> {
         self.builder = self.builder.path_param("language", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<StreamLanguageResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Upload captions or subtitles
+///
+/// Uploads the caption or subtitle file to the endpoint for a specific BCP47 language. One caption or subtitle file per language is allowed.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/accounts/{account_id}/stream/{identifier}/captions/{language}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `identifier` (path, required)
+/// - `language` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::stream_subtitles_captions };
+/// use cloudflare::{ ApiClient, apis::stream_subtitles_captions };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = upload_captions_subtitles(&api)
-///     .with_account_id("value")
-///     .with_identifier("value")
-///     .with_language("value")
+/// let response = upload_captions_subtitles(&api)
+///     .with_account_id("account_id")
+///     .with_identifier("identifier")
+///     .with_language("language")
 ///     .send()
 ///     .await?;
 /// ```
@@ -199,16 +230,26 @@ impl<'a> DeleteCaptionsSubtitlesRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Delete captions or subtitles
+///
+/// Removes the captions or subtitles from a video.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/accounts/{account_id}/stream/{identifier}/captions/{language}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `identifier` (path, required)
+/// - `language` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::stream_subtitles_captions };
+/// use cloudflare::{ ApiClient, apis::stream_subtitles_captions };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete_captions_subtitles(&api)
-///     .with_account_id("value")
-///     .with_identifier("value")
-///     .with_language("value")
+/// let response = delete_captions_subtitles(&api)
+///     .with_account_id("account_id")
+///     .with_identifier("identifier")
+///     .with_language("language")
 ///     .send()
 ///     .await?;
 /// ```
@@ -218,7 +259,7 @@ pub fn delete_captions_subtitles(api: &ApiClient) -> DeleteCaptionsSubtitlesRequ
 
 #[derive(Debug)]
 pub struct GenerateCaptionSubtitleLanguageRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, StreamLanguageResponseSingle>,
 }
 
 impl<'a> GenerateCaptionSubtitleLanguageRequest<'a> {
@@ -246,20 +287,30 @@ impl<'a> GenerateCaptionSubtitleLanguageRequest<'a> {
         self.builder = self.builder.path_param("language", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<StreamLanguageResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Generate captions or subtitles for a provided language via AI
+///
+/// Generate captions or subtitles for provided language via AI.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/stream/{identifier}/captions/{language}/generate`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `identifier` (path, required)
+/// - `language` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::stream_subtitles_captions };
+/// use cloudflare::{ ApiClient, apis::stream_subtitles_captions };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = generate_caption_subtitle_language(&api)
-///     .with_account_id("value")
-///     .with_identifier("value")
-///     .with_language("value")
+/// let response = generate_caption_subtitle_language(&api)
+///     .with_account_id("account_id")
+///     .with_identifier("identifier")
+///     .with_language("language")
 ///     .send()
 ///     .await?;
 /// ```
@@ -303,16 +354,26 @@ impl<'a> GetVttCaptionSubtitleRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Return WebVTT captions for a provided language
+///
+/// Return WebVTT captions for a provided language.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/stream/{identifier}/captions/{language}/vtt`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `identifier` (path, required)
+/// - `language` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::stream_subtitles_captions };
+/// use cloudflare::{ ApiClient, apis::stream_subtitles_captions };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_vtt_caption_subtitle(&api)
-///     .with_account_id("value")
-///     .with_identifier("value")
-///     .with_language("value")
+/// let response = get_vtt_caption_subtitle(&api)
+///     .with_account_id("account_id")
+///     .with_identifier("identifier")
+///     .with_language("language")
 ///     .send()
 ///     .await?;
 /// ```

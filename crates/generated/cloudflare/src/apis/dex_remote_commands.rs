@@ -71,14 +71,38 @@ impl<'a> GetRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// List account commands
+///
+/// Retrieves a paginated list of commands issued to devices under the specified account, optionally filtered by time range, device, or other parameters
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/dex/commands`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `page` (query,required)
+/// - `per_page` (query,required)
+/// - `from` (query,optional)
+/// - `to` (query,optional)
+/// - `device_id` (query,optional)
+/// - `user_email` (query,optional)
+/// - `command_type` (query,optional)
+/// - `status` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::dex_remote_commands };
+/// use cloudflare::{ ApiClient, apis::dex_remote_commands };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get(&api)
-///     .with_account_id("value")
+/// let response = get(&api)
+///     .with_account_id("account_id")
+///     .with_page("page")
+///     .with_per_page("per_page")
+///     .with_from("from")
+///     .with_to("to")
+///     .with_device_id("device_id")
+///     .with_user_email("user_email")
+///     .with_command_type("command_type")
+///     .with_status("status")
 ///     .send()
 ///     .await?;
 /// ```
@@ -115,14 +139,24 @@ impl<'a> PostRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Create account commands
+///
+/// Initiate commands for up to 10 devices per account
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/dex/commands`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::dex_remote_commands };
+/// use cloudflare::{ ApiClient, apis::dex_remote_commands };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = post(&api)
-///     .with_account_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = post(&api)
+///     .with_account_id("account_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -166,14 +200,28 @@ impl<'a> EligibleDevicesRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// List devices eligible for remote captures
+///
+/// List devices with WARP client support for remote captures which have been connected in the last 1 hour.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/dex/commands/devices`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `page` (query,required)
+/// - `per_page` (query,required)
+/// - `search` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::dex_remote_commands };
+/// use cloudflare::{ ApiClient, apis::dex_remote_commands };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = eligible_devices(&api)
-///     .with_account_id("value")
+/// let response = eligible_devices(&api)
+///     .with_account_id("account_id")
+///     .with_page("page")
+///     .with_per_page("per_page")
+///     .with_search("search")
 ///     .send()
 ///     .await?;
 /// ```
@@ -202,14 +250,22 @@ impl<'a> QuotaRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Returns account commands usage, quota, and reset time
+///
+/// Retrieves the current quota usage and limits for device commands within a specific account, including the time when the quota will reset
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/dex/commands/quota`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::dex_remote_commands };
+/// use cloudflare::{ ApiClient, apis::dex_remote_commands };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = quota(&api)
-///     .with_account_id("value")
+/// let response = quota(&api)
+///     .with_account_id("account_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -251,16 +307,26 @@ impl<'a> CommandDownloadsFilenameRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Download command output file
+///
+/// Downloads artifacts for an executed command. Bulk downloads are not supported
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/dex/commands/{command_id}/downloads/{filename}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `command_id` (path, required)
+/// - `filename` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::dex_remote_commands };
+/// use cloudflare::{ ApiClient, apis::dex_remote_commands };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = command_downloads_filename(&api)
-///     .with_account_id("value")
-///     .with_command_id("value")
-///     .with_filename("value")
+/// let response = command_downloads_filename(&api)
+///     .with_account_id("account_id")
+///     .with_command_id("command_id")
+///     .with_filename("filename")
 ///     .send()
 ///     .await?;
 /// ```

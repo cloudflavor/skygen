@@ -20,7 +20,7 @@ use serde::{Deserialize, Serialize};
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct IamAccount {
     pub created_on: Option<String>,
-    pub id: serde_json::Value,
+    pub id: crate::models::iam_common_components_schemas_identifier::IamCommonComponentsSchemasIdentifier,
     pub name: String,
     pub settings: Option<std::collections::BTreeMap<String, serde_json::Value>>,
 }

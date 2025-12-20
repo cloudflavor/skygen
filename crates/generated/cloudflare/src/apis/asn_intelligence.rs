@@ -15,12 +15,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::intel_asn_components_schemas_response::IntelAsnComponentsSchemasResponse;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct GetAsnOverviewRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, IntelAsnComponentsSchemasResponse>,
 }
 
 impl<'a> GetAsnOverviewRequest<'a> {
@@ -40,19 +41,28 @@ impl<'a> GetAsnOverviewRequest<'a> {
         self.builder = self.builder.path_param("asn", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<IntelAsnComponentsSchemasResponse> {
         self.builder.send().await
     }
 }
-
 /// Get ASN Overview.
+///
+/// Gets an overview of the Autonomous System Number (ASN) and a list of subnets for it.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/intel/asn/{asn}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `asn` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::asn_intelligence };
+/// use cloudflare::{ ApiClient, apis::asn_intelligence };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_asn_overview(&api)
-///     .with_account_id("value")
-///     .with_asn("value")
+/// let response = get_asn_overview(&api)
+///     .with_account_id("account_id")
+///     .with_asn("asn")
 ///     .send()
 ///     .await?;
 /// ```
@@ -89,15 +99,24 @@ impl<'a> GetAsnSubnetsRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get ASN Subnets
+///
+/// Get ASN Subnets.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/intel/asn/{asn}/subnets`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `asn` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::asn_intelligence };
+/// use cloudflare::{ ApiClient, apis::asn_intelligence };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_asn_subnets(&api)
-///     .with_account_id("value")
-///     .with_asn("value")
+/// let response = get_asn_subnets(&api)
+///     .with_account_id("account_id")
+///     .with_asn("asn")
 ///     .send()
 ///     .await?;
 /// ```

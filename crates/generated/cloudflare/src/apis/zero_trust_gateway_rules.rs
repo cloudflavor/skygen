@@ -15,12 +15,15 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::zero_trust_gateway_components_schemas_single_response::ZeroTrustGatewayComponentsSchemasSingleResponse;
+use crate::models::zero_trust_gateway_empty_response::ZeroTrustGatewayEmptyResponse;
+use crate::models::zero_trust_gateway_rules_components_schemas_response_collection::ZeroTrustGatewayRulesComponentsSchemasResponseCollection;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct ListZeroTrustGatewayRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, ZeroTrustGatewayRulesComponentsSchemasResponseCollection>,
 }
 
 impl<'a> ListZeroTrustGatewayRequest<'a> {
@@ -35,18 +38,26 @@ impl<'a> ListZeroTrustGatewayRequest<'a> {
         self.builder = self.builder.path_param("account_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<ZeroTrustGatewayRulesComponentsSchemasResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// List Zero Trust Gateway rules
+///
+/// Fetches the Zero Trust Gateway rules for an account.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/gateway/rules`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zero_trust_gateway_rules };
+/// use cloudflare::{ ApiClient, apis::zero_trust_gateway_rules };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_zero_trust_gateway(&api)
-///     .with_account_id("value")
+/// let response = list_zero_trust_gateway(&api)
+///     .with_account_id("account_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -56,7 +67,7 @@ pub fn list_zero_trust_gateway(api: &ApiClient) -> ListZeroTrustGatewayRequest<'
 
 #[derive(Debug)]
 pub struct CreateZeroTrustGatewayRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, ZeroTrustGatewayComponentsSchemasSingleResponse>,
 }
 
 impl<'a> CreateZeroTrustGatewayRequest<'a> {
@@ -79,18 +90,28 @@ impl<'a> CreateZeroTrustGatewayRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<ZeroTrustGatewayComponentsSchemasSingleResponse> {
         self.builder.send().await
     }
 }
-
 /// Create a Zero Trust Gateway rule
+///
+/// Creates a new Zero Trust Gateway rule.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/gateway/rules`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zero_trust_gateway_rules };
+/// use cloudflare::{ ApiClient, apis::zero_trust_gateway_rules };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = create_zero_trust_gateway(&api)
-///     .with_account_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = create_zero_trust_gateway(&api)
+///     .with_account_id("account_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -100,7 +121,7 @@ pub fn create_zero_trust_gateway(api: &ApiClient) -> CreateZeroTrustGatewayReque
 
 #[derive(Debug)]
 pub struct RuleDetailsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, ZeroTrustGatewayComponentsSchemasSingleResponse>,
 }
 
 impl<'a> RuleDetailsRequest<'a> {
@@ -123,19 +144,28 @@ impl<'a> RuleDetailsRequest<'a> {
         self.builder = self.builder.path_param("rule_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<ZeroTrustGatewayComponentsSchemasSingleResponse> {
         self.builder.send().await
     }
 }
-
 /// Get Zero Trust Gateway rule details
+///
+/// Fetches a single Zero Trust Gateway rule.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/gateway/rules/{rule_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `rule_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zero_trust_gateway_rules };
+/// use cloudflare::{ ApiClient, apis::zero_trust_gateway_rules };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = rule_details(&api)
-///     .with_account_id("value")
-///     .with_rule_id("value")
+/// let response = rule_details(&api)
+///     .with_account_id("account_id")
+///     .with_rule_id("rule_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -145,7 +175,7 @@ pub fn rule_details(api: &ApiClient) -> RuleDetailsRequest<'_> {
 
 #[derive(Debug)]
 pub struct UpdateZeroTrustGatewayRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, ZeroTrustGatewayComponentsSchemasSingleResponse>,
 }
 
 impl<'a> UpdateZeroTrustGatewayRequest<'a> {
@@ -176,19 +206,30 @@ impl<'a> UpdateZeroTrustGatewayRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<ZeroTrustGatewayComponentsSchemasSingleResponse> {
         self.builder.send().await
     }
 }
-
 /// Update a Zero Trust Gateway rule
+///
+/// Updates a configured Zero Trust Gateway rule.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/accounts/{account_id}/gateway/rules/{rule_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `rule_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zero_trust_gateway_rules };
+/// use cloudflare::{ ApiClient, apis::zero_trust_gateway_rules };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = update_zero_trust_gateway(&api)
-///     .with_account_id("value")
-///     .with_rule_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = update_zero_trust_gateway(&api)
+///     .with_account_id("account_id")
+///     .with_rule_id("rule_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -198,7 +239,7 @@ pub fn update_zero_trust_gateway(api: &ApiClient) -> UpdateZeroTrustGatewayReque
 
 #[derive(Debug)]
 pub struct DeleteZeroTrustGatewayRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, ZeroTrustGatewayEmptyResponse>,
 }
 
 impl<'a> DeleteZeroTrustGatewayRequest<'a> {
@@ -221,19 +262,28 @@ impl<'a> DeleteZeroTrustGatewayRequest<'a> {
         self.builder = self.builder.path_param("rule_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<ZeroTrustGatewayEmptyResponse> {
         self.builder.send().await
     }
 }
-
 /// Delete a Zero Trust Gateway rule
+///
+/// Deletes a Zero Trust Gateway rule.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/accounts/{account_id}/gateway/rules/{rule_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `rule_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zero_trust_gateway_rules };
+/// use cloudflare::{ ApiClient, apis::zero_trust_gateway_rules };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete_zero_trust_gateway(&api)
-///     .with_account_id("value")
-///     .with_rule_id("value")
+/// let response = delete_zero_trust_gateway(&api)
+///     .with_account_id("account_id")
+///     .with_rule_id("rule_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -243,7 +293,7 @@ pub fn delete_zero_trust_gateway(api: &ApiClient) -> DeleteZeroTrustGatewayReque
 
 #[derive(Debug)]
 pub struct ResetExpirationZeroTrustRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, ZeroTrustGatewayComponentsSchemasSingleResponse>,
 }
 
 impl<'a> ResetExpirationZeroTrustRequest<'a> {
@@ -266,19 +316,30 @@ impl<'a> ResetExpirationZeroTrustRequest<'a> {
         self.builder = self.builder.path_param("rule_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<ZeroTrustGatewayComponentsSchemasSingleResponse> {
         self.builder.send().await
     }
 }
-
 /// Reset the expiration of a Zero Trust Gateway Rule
+///
+/// Resets the expiration of a Zero Trust Gateway Rule if its duration has elapsed and it has a default duration.
+///
+/// The Zero Trust Gateway Rule must have values for both `expiration.expires_at` and `expiration.duration`.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/gateway/rules/{rule_id}/reset_expiration`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `rule_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zero_trust_gateway_rules };
+/// use cloudflare::{ ApiClient, apis::zero_trust_gateway_rules };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = reset_expiration_zero_trust(&api)
-///     .with_account_id("value")
-///     .with_rule_id("value")
+/// let response = reset_expiration_zero_trust(&api)
+///     .with_account_id("account_id")
+///     .with_rule_id("rule_id")
 ///     .send()
 ///     .await?;
 /// ```

@@ -17,10 +17,14 @@
 
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
+use crate::models::tls_certificates_and_hostnames_hostname_aop_response_collection::TlsCertificatesAndHostnamesHostnameAopResponseCollection;
+use crate::models::tls_certificates_and_hostnames_hostname_aop_single_response::TlsCertificatesAndHostnamesHostnameAopSingleResponse;
+use crate::models::tls_certificates_and_hostnames_hostname_authenticated_origin_pull_components_schemas_certificate_response_collection::TlsCertificatesAndHostnamesHostnameAuthenticatedOriginPullComponentsSchemasCertificateResponseCollection;
+use crate::models::tls_certificates_and_hostnames_hostname_authenticated_origin_pull_components_schemas_certificate_response_single::TlsCertificatesAndHostnamesHostnameAuthenticatedOriginPullComponentsSchemasCertificateResponseSingle;
 
 #[derive(Debug)]
 pub struct EnableDisableHostnameClientRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, TlsCertificatesAndHostnamesHostnameAopResponseCollection>,
 }
 
 impl<'a> EnableDisableHostnameClientRequest<'a> {
@@ -43,18 +47,28 @@ impl<'a> EnableDisableHostnameClientRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<TlsCertificatesAndHostnamesHostnameAopResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// Enable or Disable a Hostname for Client Authentication
+///
+/// Associate a hostname to a certificate and enable, disable or invalidate the association. If disabled, client certificate will not be sent to the hostname even if activated at the zone level. 100 maximum associations on a single certificate are allowed. Note: Use a null value for parameter *enabled* to invalidate the association.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/zones/{zone_id}/origin_tls_client_auth/hostnames`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::per_hostname_authenticated_origin_pull };
+/// use cloudflare::{ ApiClient, apis::per_hostname_authenticated_origin_pull };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = enable_disable_hostname_client(&api)
-///     .with_zone_id("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = enable_disable_hostname_client(&api)
+///     .with_zone_id("zone_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -64,7 +78,7 @@ pub fn enable_disable_hostname_client(api: &ApiClient) -> EnableDisableHostnameC
 
 #[derive(Debug)]
 pub struct ListCertificatesRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, TlsCertificatesAndHostnamesHostnameAuthenticatedOriginPullComponentsSchemasCertificateResponseCollection>,
 }
 
 impl<'a> ListCertificatesRequest<'a> {
@@ -82,18 +96,24 @@ impl<'a> ListCertificatesRequest<'a> {
         self.builder = self.builder.path_param("zone_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<TlsCertificatesAndHostnamesHostnameAuthenticatedOriginPullComponentsSchemasCertificateResponseCollection>{
         self.builder.send().await
     }
 }
-
 /// List Certificates
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/origin_tls_client_auth/hostnames/certificates`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::per_hostname_authenticated_origin_pull };
+/// use cloudflare::{ ApiClient, apis::per_hostname_authenticated_origin_pull };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_certificates(&api)
-///     .with_zone_id("value")
+/// let response = list_certificates(&api)
+///     .with_zone_id("zone_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -103,7 +123,7 @@ pub fn list_certificates(api: &ApiClient) -> ListCertificatesRequest<'_> {
 
 #[derive(Debug)]
 pub struct UploadHostnameClientCertificateRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, TlsCertificatesAndHostnamesHostnameAuthenticatedOriginPullComponentsSchemasCertificateResponseSingle>,
 }
 
 impl<'a> UploadHostnameClientCertificateRequest<'a> {
@@ -129,18 +149,28 @@ impl<'a> UploadHostnameClientCertificateRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<TlsCertificatesAndHostnamesHostnameAuthenticatedOriginPullComponentsSchemasCertificateResponseSingle>{
         self.builder.send().await
     }
 }
-
 /// Upload a Hostname Client Certificate
+///
+/// Upload a certificate to be used for client authentication on a hostname. 10 hostname certificates per zone are allowed.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/zones/{zone_id}/origin_tls_client_auth/hostnames/certificates`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::per_hostname_authenticated_origin_pull };
+/// use cloudflare::{ ApiClient, apis::per_hostname_authenticated_origin_pull };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = upload_hostname_client_certificate(&api)
-///     .with_zone_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = upload_hostname_client_certificate(&api)
+///     .with_zone_id("zone_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -152,7 +182,7 @@ pub fn upload_hostname_client_certificate(
 
 #[derive(Debug)]
 pub struct GetHostnameClientCertificateRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, TlsCertificatesAndHostnamesHostnameAuthenticatedOriginPullComponentsSchemasCertificateResponseSingle>,
 }
 
 impl<'a> GetHostnameClientCertificateRequest<'a> {
@@ -175,19 +205,28 @@ impl<'a> GetHostnameClientCertificateRequest<'a> {
         self.builder = self.builder.path_param("certificate_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<TlsCertificatesAndHostnamesHostnameAuthenticatedOriginPullComponentsSchemasCertificateResponseSingle>{
         self.builder.send().await
     }
 }
-
 /// Get the Hostname Client Certificate
+///
+/// Get the certificate by ID to be used for client authentication on a hostname.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/origin_tls_client_auth/hostnames/certificates/{certificate_id}`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `certificate_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::per_hostname_authenticated_origin_pull };
+/// use cloudflare::{ ApiClient, apis::per_hostname_authenticated_origin_pull };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_hostname_client_certificate(&api)
-///     .with_zone_id("value")
-///     .with_certificate_id("value")
+/// let response = get_hostname_client_certificate(&api)
+///     .with_zone_id("zone_id")
+///     .with_certificate_id("certificate_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -197,7 +236,7 @@ pub fn get_hostname_client_certificate(api: &ApiClient) -> GetHostnameClientCert
 
 #[derive(Debug)]
 pub struct DeleteHostnameClientCertificateRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, TlsCertificatesAndHostnamesHostnameAuthenticatedOriginPullComponentsSchemasCertificateResponseSingle>,
 }
 
 impl<'a> DeleteHostnameClientCertificateRequest<'a> {
@@ -220,19 +259,26 @@ impl<'a> DeleteHostnameClientCertificateRequest<'a> {
         self.builder = self.builder.path_param("certificate_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<TlsCertificatesAndHostnamesHostnameAuthenticatedOriginPullComponentsSchemasCertificateResponseSingle>{
         self.builder.send().await
     }
 }
-
 /// Delete Hostname Client Certificate
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/zones/{zone_id}/origin_tls_client_auth/hostnames/certificates/{certificate_id}`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `certificate_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::per_hostname_authenticated_origin_pull };
+/// use cloudflare::{ ApiClient, apis::per_hostname_authenticated_origin_pull };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete_hostname_client_certificate(&api)
-///     .with_zone_id("value")
-///     .with_certificate_id("value")
+/// let response = delete_hostname_client_certificate(&api)
+///     .with_zone_id("zone_id")
+///     .with_certificate_id("certificate_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -244,7 +290,7 @@ pub fn delete_hostname_client_certificate(
 
 #[derive(Debug)]
 pub struct GetHostnameStatusClientRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, TlsCertificatesAndHostnamesHostnameAopSingleResponse>,
 }
 
 impl<'a> GetHostnameStatusClientRequest<'a> {
@@ -267,19 +313,26 @@ impl<'a> GetHostnameStatusClientRequest<'a> {
         self.builder = self.builder.path_param("hostname", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<TlsCertificatesAndHostnamesHostnameAopSingleResponse> {
         self.builder.send().await
     }
 }
-
 /// Get the Hostname Status for Client Authentication
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/origin_tls_client_auth/hostnames/{hostname}`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `hostname` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::per_hostname_authenticated_origin_pull };
+/// use cloudflare::{ ApiClient, apis::per_hostname_authenticated_origin_pull };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_hostname_status_client(&api)
-///     .with_zone_id("value")
-///     .with_hostname("value")
+/// let response = get_hostname_status_client(&api)
+///     .with_zone_id("zone_id")
+///     .with_hostname("hostname")
 ///     .send()
 ///     .await?;
 /// ```

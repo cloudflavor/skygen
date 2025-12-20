@@ -16,6 +16,8 @@
 // limitations under the License.
 
 use crate::models::digital_experience_monitoring_device::DigitalExperienceMonitoringDevice;
+use crate::models::digital_experience_monitoring_fleet_status_devices_response::DigitalExperienceMonitoringFleetStatusDevicesResponse;
+use crate::models::digital_experience_monitoring_fleet_status_live_response::DigitalExperienceMonitoringFleetStatusLiveResponse;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
@@ -51,14 +53,28 @@ impl<'a> EndpointsListColosRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// List Cloudflare colos
+///
+/// List Cloudflare colos that account's devices were connected to during a time period, sorted by usage starting from the most used colo. Colos without traffic are also returned and sorted alphabetically.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/dex/colos`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `from` (query,required)
+/// - `to` (query,required)
+/// - `sortBy` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::dex_synthetic_application_monitoring };
+/// use cloudflare::{ ApiClient, apis::dex_synthetic_application_monitoring };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = endpoints_list_colos(&api)
-///     .with_account_id("value")
+/// let response = endpoints_list_colos(&api)
+///     .with_account_id("account_id")
+///     .with_from("from")
+///     .with_to("to")
+///     .with_sort_by("sortBy")
 ///     .send()
 ///     .await?;
 /// ```
@@ -107,15 +123,30 @@ impl<'a> DevicesLiveStatusRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get the live status of a latest device
+///
+/// Get the live status of a latest device given device_id from the device_state table
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/dex/devices/{device_id}/fleet-status/live`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `device_id` (path, required)
+/// - `since_minutes` (query,required)
+/// - `time_now` (query,optional)
+/// - `colo` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::dex_synthetic_application_monitoring };
+/// use cloudflare::{ ApiClient, apis::dex_synthetic_application_monitoring };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = devices_live_status(&api)
-///     .with_account_id("value")
-///     .with_device_id("value")
+/// let response = devices_live_status(&api)
+///     .with_account_id("account_id")
+///     .with_device_id("device_id")
+///     .with_since_minutes("since_minutes")
+///     .with_time_now("time_now")
+///     .with_colo("colo")
 ///     .send()
 ///     .await?;
 /// ```
@@ -125,7 +156,7 @@ pub fn devices_live_status(api: &ApiClient) -> DevicesLiveStatusRequest<'_> {
 
 #[derive(Debug)]
 pub struct FleetStatusDevicesRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, DigitalExperienceMonitoringFleetStatusDevicesResponse>,
 }
 
 impl<'a> FleetStatusDevicesRequest<'a> {
@@ -191,18 +222,50 @@ impl<'a> FleetStatusDevicesRequest<'a> {
         self.builder = self.builder.header_param("source", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<DigitalExperienceMonitoringFleetStatusDevicesResponse> {
         self.builder.send().await
     }
 }
-
 /// List fleet status devices
+///
+/// List details for devices using WARP
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/dex/fleet-status/devices`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `to` (query,required)
+/// - `from` (query,required)
+/// - `page` (query,required)
+/// - `per_page` (query,required)
+/// - `sort_by` (query,optional)
+/// - `colo` (query,optional)
+/// - `device_id` (query,optional)
+/// - `mode` (query,optional)
+/// - `status` (query,optional)
+/// - `platform` (query,optional)
+/// - `version` (query,optional)
+/// - `source` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::dex_synthetic_application_monitoring };
+/// use cloudflare::{ ApiClient, apis::dex_synthetic_application_monitoring };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = fleet_status_devices(&api)
-///     .with_account_id("value")
+/// let response = fleet_status_devices(&api)
+///     .with_account_id("account_id")
+///     .with_to("to")
+///     .with_from("from")
+///     .with_page("page")
+///     .with_per_page("per_page")
+///     .with_sort_by("sort_by")
+///     .with_colo("colo")
+///     .with_device_id("device_id")
+///     .with_mode("mode")
+///     .with_status("status")
+///     .with_platform("platform")
+///     .with_version("version")
+///     .with_source("source")
 ///     .send()
 ///     .await?;
 /// ```
@@ -212,7 +275,7 @@ pub fn fleet_status_devices(api: &ApiClient) -> FleetStatusDevicesRequest<'_> {
 
 #[derive(Debug)]
 pub struct FleetStatusLiveRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, DigitalExperienceMonitoringFleetStatusLiveResponse>,
 }
 
 impl<'a> FleetStatusLiveRequest<'a> {
@@ -234,18 +297,28 @@ impl<'a> FleetStatusLiveRequest<'a> {
         self.builder = self.builder.header_param("since_minutes", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<DigitalExperienceMonitoringFleetStatusLiveResponse> {
         self.builder.send().await
     }
 }
-
 /// List fleet status details by dimension
+///
+/// List details for live (up to 60 minutes) devices using WARP
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/dex/fleet-status/live`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `since_minutes` (query,required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::dex_synthetic_application_monitoring };
+/// use cloudflare::{ ApiClient, apis::dex_synthetic_application_monitoring };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = fleet_status_live(&api)
-///     .with_account_id("value")
+/// let response = fleet_status_live(&api)
+///     .with_account_id("account_id")
+///     .with_since_minutes("since_minutes")
 ///     .send()
 ///     .await?;
 /// ```
@@ -293,14 +366,30 @@ impl<'a> FleetStatusOverTimeRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// List fleet status aggregate details by dimension
+///
+/// List details for devices using WARP, up to 7 days
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/dex/fleet-status/over-time`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `to` (query,required)
+/// - `from` (query,required)
+/// - `colo` (query,optional)
+/// - `device_id` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::dex_synthetic_application_monitoring };
+/// use cloudflare::{ ApiClient, apis::dex_synthetic_application_monitoring };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = fleet_status_over_time(&api)
-///     .with_account_id("value")
+/// let response = fleet_status_over_time(&api)
+///     .with_account_id("account_id")
+///     .with_to("to")
+///     .with_from("from")
+///     .with_colo("colo")
+///     .with_device_id("device_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -357,15 +446,34 @@ impl<'a> EndpointsHttpTestDetailsRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get details and aggregate metrics for an http test
+///
+/// Get test details and aggregate performance metrics for an http test for a given time period between 1 hour and 7 days.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/dex/http-tests/{test_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `test_id` (path, required)
+/// - `deviceId` (query,optional)
+/// - `from` (query,required)
+/// - `to` (query,required)
+/// - `interval` (query,required)
+/// - `colo` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::dex_synthetic_application_monitoring };
+/// use cloudflare::{ ApiClient, apis::dex_synthetic_application_monitoring };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = endpoints_http_test_details(&api)
-///     .with_account_id("value")
-///     .with_test_id("value")
+/// let response = endpoints_http_test_details(&api)
+///     .with_account_id("account_id")
+///     .with_test_id("test_id")
+///     .with_device_id("deviceId")
+///     .with_from("from")
+///     .with_to("to")
+///     .with_interval("interval")
+///     .with_colo("colo")
 ///     .send()
 ///     .await?;
 /// ```
@@ -418,15 +526,32 @@ impl<'a> EndpointsHttpTestPercentilesRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get percentiles for an http test
+///
+/// Get percentiles for an http test for a given time period between 1 hour and 7 days.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/dex/http-tests/{test_id}/percentiles`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `test_id` (path, required)
+/// - `deviceId` (query,optional)
+/// - `from` (query,required)
+/// - `to` (query,required)
+/// - `colo` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::dex_synthetic_application_monitoring };
+/// use cloudflare::{ ApiClient, apis::dex_synthetic_application_monitoring };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = endpoints_http_test_percentiles(&api)
-///     .with_account_id("value")
-///     .with_test_id("value")
+/// let response = endpoints_http_test_percentiles(&api)
+///     .with_account_id("account_id")
+///     .with_test_id("test_id")
+///     .with_device_id("deviceId")
+///     .with_from("from")
+///     .with_to("to")
+///     .with_colo("colo")
 ///     .send()
 ///     .await?;
 /// ```
@@ -475,14 +600,32 @@ impl<'a> EndpointsListTestsOverviewRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// List DEX test analytics
+///
+/// List DEX tests with overview metrics
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/dex/tests/overview`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `colo` (query,optional)
+/// - `testName` (query,optional)
+/// - `deviceId` (query,optional)
+/// - `page` (query,optional)
+/// - `per_page` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::dex_synthetic_application_monitoring };
+/// use cloudflare::{ ApiClient, apis::dex_synthetic_application_monitoring };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = endpoints_list_tests_overview(&api)
-///     .with_account_id("value")
+/// let response = endpoints_list_tests_overview(&api)
+///     .with_account_id("account_id")
+///     .with_colo("colo")
+///     .with_test_name("testName")
+///     .with_device_id("deviceId")
+///     .with_page("page")
+///     .with_per_page("per_page")
 ///     .send()
 ///     .await?;
 /// ```
@@ -522,14 +665,26 @@ impl<'a> EndpointsTestsUniqueDevicesRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get count of devices targeted
+///
+/// Returns unique count of devices that have run synthetic application monitoring tests in the past 7 days.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/dex/tests/unique-devices`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `testName` (query,optional)
+/// - `deviceId` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::dex_synthetic_application_monitoring };
+/// use cloudflare::{ ApiClient, apis::dex_synthetic_application_monitoring };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = endpoints_tests_unique_devices(&api)
-///     .with_account_id("value")
+/// let response = endpoints_tests_unique_devices(&api)
+///     .with_account_id("account_id")
+///     .with_test_name("testName")
+///     .with_device_id("deviceId")
 ///     .send()
 ///     .await?;
 /// ```
@@ -566,15 +721,24 @@ impl<'a> EndpointsTracerouteTestResultRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get details for a specific traceroute test run
+///
+/// Get a breakdown of hops and performance metrics for a specific traceroute test run
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/dex/traceroute-test-results/{test_result_id}/network-path`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `test_result_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::dex_synthetic_application_monitoring };
+/// use cloudflare::{ ApiClient, apis::dex_synthetic_application_monitoring };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = endpoints_traceroute_test_result(&api)
-///     .with_account_id("value")
-///     .with_test_result_id("value")
+/// let response = endpoints_traceroute_test_result(&api)
+///     .with_account_id("account_id")
+///     .with_test_result_id("test_result_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -633,15 +797,34 @@ impl<'a> EndpointsTracerouteTestDetailsRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get details and aggregate metrics for a traceroute test
+///
+/// Get test details and aggregate performance metrics for an traceroute test for a given time period between 1 hour and 7 days.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/dex/traceroute-tests/{test_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `test_id` (path, required)
+/// - `deviceId` (query,optional)
+/// - `from` (query,required)
+/// - `to` (query,required)
+/// - `interval` (query,required)
+/// - `colo` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::dex_synthetic_application_monitoring };
+/// use cloudflare::{ ApiClient, apis::dex_synthetic_application_monitoring };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = endpoints_traceroute_test_details(&api)
-///     .with_account_id("value")
-///     .with_test_id("value")
+/// let response = endpoints_traceroute_test_details(&api)
+///     .with_account_id("account_id")
+///     .with_test_id("test_id")
+///     .with_device_id("deviceId")
+///     .with_from("from")
+///     .with_to("to")
+///     .with_interval("interval")
+///     .with_colo("colo")
 ///     .send()
 ///     .await?;
 /// ```
@@ -696,15 +879,32 @@ impl<'a> EndpointsTracerouteTestNetworkRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get network path breakdown for a traceroute test
+///
+/// Get a breakdown of metrics by hop for individual traceroute test runs
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/dex/traceroute-tests/{test_id}/network-path`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `test_id` (path, required)
+/// - `deviceId` (query,required)
+/// - `from` (query,required)
+/// - `to` (query,required)
+/// - `interval` (query,required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::dex_synthetic_application_monitoring };
+/// use cloudflare::{ ApiClient, apis::dex_synthetic_application_monitoring };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = endpoints_traceroute_test_network(&api)
-///     .with_account_id("value")
-///     .with_test_id("value")
+/// let response = endpoints_traceroute_test_network(&api)
+///     .with_account_id("account_id")
+///     .with_test_id("test_id")
+///     .with_device_id("deviceId")
+///     .with_from("from")
+///     .with_to("to")
+///     .with_interval("interval")
 ///     .send()
 ///     .await?;
 /// ```
@@ -759,15 +959,32 @@ impl<'a> EndpointsTracerouteTestPercentilesRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get percentiles for a traceroute test
+///
+/// Get percentiles for a traceroute test for a given time period between 1 hour and 7 days.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/dex/traceroute-tests/{test_id}/percentiles`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `test_id` (path, required)
+/// - `deviceId` (query,optional)
+/// - `from` (query,required)
+/// - `to` (query,required)
+/// - `colo` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::dex_synthetic_application_monitoring };
+/// use cloudflare::{ ApiClient, apis::dex_synthetic_application_monitoring };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = endpoints_traceroute_test_percentiles(&api)
-///     .with_account_id("value")
-///     .with_test_id("value")
+/// let response = endpoints_traceroute_test_percentiles(&api)
+///     .with_account_id("account_id")
+///     .with_test_id("test_id")
+///     .with_device_id("deviceId")
+///     .with_from("from")
+///     .with_to("to")
+///     .with_colo("colo")
 ///     .send()
 ///     .await?;
 /// ```

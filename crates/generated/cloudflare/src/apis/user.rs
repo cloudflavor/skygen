@@ -15,12 +15,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::iam_single_user_response::IamSingleUserResponse;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct DetailsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, IamSingleUserResponse>,
 }
 
 impl<'a> DetailsRequest<'a> {
@@ -29,17 +30,20 @@ impl<'a> DetailsRequest<'a> {
 
         Self { builder }
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<IamSingleUserResponse> {
         self.builder.send().await
     }
 }
-
 /// User Details
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/user`
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::user };
+/// use cloudflare::{ ApiClient, apis::user };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = details(&api)
+/// let response = details(&api)
 ///     .send()
 ///     .await?;
 /// ```
@@ -49,7 +53,7 @@ pub fn details(api: &ApiClient) -> DetailsRequest<'_> {
 
 #[derive(Debug)]
 pub struct EditRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, IamSingleUserResponse>,
 }
 
 impl<'a> EditRequest<'a> {
@@ -62,17 +66,24 @@ impl<'a> EditRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<IamSingleUserResponse> {
         self.builder.send().await
     }
 }
-
 /// Edit User
+///
+/// Edit part of your user details.
+///
+/// **HTTP Method:** `PATCH`
+/// **Path:** `/user`
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::user };
+/// use cloudflare::{ ApiClient, apis::user };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = edit(&api)
+/// # let body: serde_json::Value = todo!();
+/// let response = edit(&api)
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```

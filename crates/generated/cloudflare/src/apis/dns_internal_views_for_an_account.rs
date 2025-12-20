@@ -15,12 +15,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::dns_settings_dns_view_response_collection::DnsSettingsDnsViewResponseCollection;
+use crate::models::dns_settings_dns_view_response_single::DnsSettingsDnsViewResponseSingle;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct ListInternalDnsViewsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, DnsSettingsDnsViewResponseCollection>,
 }
 
 impl<'a> ListInternalDnsViewsRequest<'a> {
@@ -83,18 +85,50 @@ impl<'a> ListInternalDnsViewsRequest<'a> {
         self.builder = self.builder.header_param("direction", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<DnsSettingsDnsViewResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// List Internal DNS Views
+///
+/// List DNS Internal Views for an Account
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/dns_settings/views`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `name` (query,optional)
+/// - `name.exact` (query,optional)
+/// - `name.contains` (query,optional)
+/// - `name.startswith` (query,optional)
+/// - `name.endswith` (query,optional)
+/// - `zone_id` (query,optional)
+/// - `zone_name` (query,optional)
+/// - `match` (query,optional)
+/// - `page` (query,optional)
+/// - `per_page` (query,optional)
+/// - `order` (query,optional)
+/// - `direction` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::dns_internal_views_for_an_account };
+/// use cloudflare::{ ApiClient, apis::dns_internal_views_for_an_account };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_internal_dns_views(&api)
-///     .with_account_id("value")
+/// let response = list_internal_dns_views(&api)
+///     .with_account_id("account_id")
+///     .with_name("name")
+///     .with_name_exact("name.exact")
+///     .with_name_contains("name.contains")
+///     .with_name_startswith("name.startswith")
+///     .with_name_endswith("name.endswith")
+///     .with_zone_id("zone_id")
+///     .with_zone_name("zone_name")
+///     .with_match_param("match")
+///     .with_page("page")
+///     .with_per_page("per_page")
+///     .with_order("order")
+///     .with_direction("direction")
 ///     .send()
 ///     .await?;
 /// ```
@@ -104,7 +138,7 @@ pub fn list_internal_dns_views(api: &ApiClient) -> ListInternalDnsViewsRequest<'
 
 #[derive(Debug)]
 pub struct CreateInternalDnsViewsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, DnsSettingsDnsViewResponseSingle>,
 }
 
 impl<'a> CreateInternalDnsViewsRequest<'a> {
@@ -123,22 +157,35 @@ impl<'a> CreateInternalDnsViewsRequest<'a> {
         self.builder = self.builder.path_param("account_id", value);
         self
     }
-    pub fn with_body(mut self, body: serde_json::Value) -> Self {
+    pub fn with_body(
+        mut self,
+        body: crate::models::dns_settings_dns_view_post::DnsSettingsDnsViewPost,
+    ) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<DnsSettingsDnsViewResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Create Internal DNS View
+///
+/// Create Internal DNS View for an account
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/dns_settings/views`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::dns_internal_views_for_an_account };
+/// use cloudflare::{ ApiClient, apis::dns_internal_views_for_an_account };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = create_internal_dns_views(&api)
-///     .with_account_id("value")
+/// # let body: crate::models::dns_settings_dns_view_post::DnsSettingsDnsViewPost = todo!();
+/// let response = create_internal_dns_views(&api)
+///     .with_account_id("account_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -148,7 +195,7 @@ pub fn create_internal_dns_views(api: &ApiClient) -> CreateInternalDnsViewsReque
 
 #[derive(Debug)]
 pub struct GetInternalDnsViewRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, DnsSettingsDnsViewResponseSingle>,
 }
 
 impl<'a> GetInternalDnsViewRequest<'a> {
@@ -171,19 +218,28 @@ impl<'a> GetInternalDnsViewRequest<'a> {
         self.builder = self.builder.path_param("view_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<DnsSettingsDnsViewResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// DNS Internal View Details
+///
+/// Get DNS Internal View
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/dns_settings/views/{view_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `view_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::dns_internal_views_for_an_account };
+/// use cloudflare::{ ApiClient, apis::dns_internal_views_for_an_account };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_internal_dns_view(&api)
-///     .with_account_id("value")
-///     .with_view_id("value")
+/// let response = get_internal_dns_view(&api)
+///     .with_account_id("account_id")
+///     .with_view_id("view_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -220,15 +276,24 @@ impl<'a> DeleteInternalDnsViewRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Delete Internal DNS View
+///
+/// Delete an existing Internal DNS View
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/accounts/{account_id}/dns_settings/views/{view_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `view_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::dns_internal_views_for_an_account };
+/// use cloudflare::{ ApiClient, apis::dns_internal_views_for_an_account };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete_internal_dns_view(&api)
-///     .with_account_id("value")
-///     .with_view_id("value")
+/// let response = delete_internal_dns_view(&api)
+///     .with_account_id("account_id")
+///     .with_view_id("view_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -238,7 +303,7 @@ pub fn delete_internal_dns_view(api: &ApiClient) -> DeleteInternalDnsViewRequest
 
 #[derive(Debug)]
 pub struct UpdateInternalDnsViewRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, DnsSettingsDnsViewResponseSingle>,
 }
 
 impl<'a> UpdateInternalDnsViewRequest<'a> {
@@ -262,23 +327,37 @@ impl<'a> UpdateInternalDnsViewRequest<'a> {
         self.builder = self.builder.path_param("view_id", value);
         self
     }
-    pub fn with_body(mut self, body: serde_json::Value) -> Self {
+    pub fn with_body(
+        mut self,
+        body: crate::models::dns_settings_dns_view_patch::DnsSettingsDnsViewPatch,
+    ) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<DnsSettingsDnsViewResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Update Internal DNS View
+///
+/// Update an existing Internal DNS View
+///
+/// **HTTP Method:** `PATCH`
+/// **Path:** `/accounts/{account_id}/dns_settings/views/{view_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `view_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::dns_internal_views_for_an_account };
+/// use cloudflare::{ ApiClient, apis::dns_internal_views_for_an_account };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = update_internal_dns_view(&api)
-///     .with_account_id("value")
-///     .with_view_id("value")
+/// # let body: crate::models::dns_settings_dns_view_patch::DnsSettingsDnsViewPatch = todo!();
+/// let response = update_internal_dns_view(&api)
+///     .with_account_id("account_id")
+///     .with_view_id("view_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```

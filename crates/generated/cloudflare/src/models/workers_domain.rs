@@ -19,10 +19,10 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct WorkersDomain {
-    pub environment: Option<serde_json::Value>,
-    pub hostname: Option<serde_json::Value>,
-    pub id: Option<serde_json::Value>,
-    pub service: Option<serde_json::Value>,
-    pub zone_id: Option<serde_json::Value>,
-    pub zone_name: Option<serde_json::Value>,
+    pub environment: Option<crate::models::workers_schemas_environment::WorkersSchemasEnvironment>,
+    pub hostname: Option<crate::models::workers_hostname::WorkersHostname>,
+    pub id: Option<crate::models::workers_domain_identifier::WorkersDomainIdentifier>,
+    pub service: Option<crate::models::workers_schemas_service::WorkersSchemasService>,
+    pub zone_id: Option<crate::models::workers_zone_identifier::WorkersZoneIdentifier>,
+    pub zone_name: Option<crate::models::workers_zone_name::WorkersZoneName>,
 }

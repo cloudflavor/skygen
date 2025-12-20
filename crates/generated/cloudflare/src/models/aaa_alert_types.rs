@@ -19,8 +19,8 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct AaaAlertTypes {
-    pub description: Option<serde_json::Value>,
-    pub display_name: Option<serde_json::Value>,
-    pub filter_options: Option<serde_json::Value>,
-    pub r#type: Option<serde_json::Value>,
+    pub description: Option<crate::models::aaa_description::AaaDescription>,
+    pub display_name: Option<crate::models::aaa_display_name::AaaDisplayName>,
+    pub filter_options: Option<crate::models::aaa_filter_options::AaaFilterOptions>,
+    pub r#type: Option<crate::models::aaa_type::AaaType>,
 }

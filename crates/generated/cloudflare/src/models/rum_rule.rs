@@ -19,9 +19,9 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct RumRule {
-    pub created: Option<serde_json::Value>,
+    pub created: Option<crate::models::rum_timestamp::RumTimestamp>,
     pub host: Option<String>,
-    pub id: Option<serde_json::Value>,
+    pub id: Option<crate::models::rum_rule_identifier::RumRuleIdentifier>,
     pub inclusive: Option<bool>,
     pub is_paused: Option<bool>,
     pub paths: Option<Vec<String>>,

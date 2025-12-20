@@ -19,5 +19,6 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct CacheRulesOriginMaxHttpVersionResponseValue {
-    pub result: Option<serde_json::Value>,
+    pub result:
+        Option<crate::models::cache_rules_origin_max_http_version::CacheRulesOriginMaxHttpVersion>,
 }

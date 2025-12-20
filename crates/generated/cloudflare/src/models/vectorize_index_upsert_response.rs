@@ -20,5 +20,5 @@ use serde::{Deserialize, Serialize};
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct VectorizeIndexUpsertResponse {
     pub count: Option<i64>,
-    pub ids: Option<Vec<serde_json::Value>>,
+    pub ids: Option<Vec<crate::models::vectorize_vector_identifier::VectorizeVectorIdentifier>>,
 }

@@ -15,12 +15,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::firewall_firewalluablock_response_collection::FirewallFirewalluablockResponseCollection;
+use crate::models::firewall_firewalluablock_response_single::FirewallFirewalluablockResponseSingle;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct ListAgentBlockingRulesRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, FirewallFirewalluablockResponseCollection>,
 }
 
 impl<'a> ListAgentBlockingRulesRequest<'a> {
@@ -54,18 +56,36 @@ impl<'a> ListAgentBlockingRulesRequest<'a> {
         self.builder = self.builder.header_param("ua_search", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<FirewallFirewalluablockResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// List User Agent Blocking rules
+///
+/// Fetches User Agent Blocking rules in a zone. You can filter the results using several optional parameters.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/firewall/ua_rules`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `page` (query,optional)
+/// - `description` (query,optional)
+/// - `description_search` (query,optional)
+/// - `per_page` (query,optional)
+/// - `ua_search` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::user_agent_blocking_rules };
+/// use cloudflare::{ ApiClient, apis::user_agent_blocking_rules };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_agent_blocking_rules(&api)
-///     .with_zone_id("value")
+/// let response = list_agent_blocking_rules(&api)
+///     .with_zone_id("zone_id")
+///     .with_page("page")
+///     .with_description("description")
+///     .with_description_search("description_search")
+///     .with_per_page("per_page")
+///     .with_ua_search("ua_search")
 ///     .send()
 ///     .await?;
 /// ```
@@ -75,7 +95,7 @@ pub fn list_agent_blocking_rules(api: &ApiClient) -> ListAgentBlockingRulesReque
 
 #[derive(Debug)]
 pub struct CreateAgentBlockingRuleRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, FirewallFirewalluablockResponseSingle>,
 }
 
 impl<'a> CreateAgentBlockingRuleRequest<'a> {
@@ -98,18 +118,28 @@ impl<'a> CreateAgentBlockingRuleRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<FirewallFirewalluablockResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Create a User Agent Blocking rule
+///
+/// Creates a new User Agent Blocking rule in a zone.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/zones/{zone_id}/firewall/ua_rules`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::user_agent_blocking_rules };
+/// use cloudflare::{ ApiClient, apis::user_agent_blocking_rules };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = create_agent_blocking_rule(&api)
-///     .with_zone_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = create_agent_blocking_rule(&api)
+///     .with_zone_id("zone_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -119,7 +149,7 @@ pub fn create_agent_blocking_rule(api: &ApiClient) -> CreateAgentBlockingRuleReq
 
 #[derive(Debug)]
 pub struct GetAgentBlockingRuleRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, FirewallFirewalluablockResponseSingle>,
 }
 
 impl<'a> GetAgentBlockingRuleRequest<'a> {
@@ -142,19 +172,28 @@ impl<'a> GetAgentBlockingRuleRequest<'a> {
         self.builder = self.builder.path_param("ua_rule_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<FirewallFirewalluablockResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Get a User Agent Blocking rule
+///
+/// Fetches the details of a User Agent Blocking rule.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/firewall/ua_rules/{ua_rule_id}`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `ua_rule_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::user_agent_blocking_rules };
+/// use cloudflare::{ ApiClient, apis::user_agent_blocking_rules };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_agent_blocking_rule(&api)
-///     .with_zone_id("value")
-///     .with_ua_rule_id("value")
+/// let response = get_agent_blocking_rule(&api)
+///     .with_zone_id("zone_id")
+///     .with_ua_rule_id("ua_rule_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -164,7 +203,7 @@ pub fn get_agent_blocking_rule(api: &ApiClient) -> GetAgentBlockingRuleRequest<'
 
 #[derive(Debug)]
 pub struct UpdateAgentBlockingRuleRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, FirewallFirewalluablockResponseSingle>,
 }
 
 impl<'a> UpdateAgentBlockingRuleRequest<'a> {
@@ -195,19 +234,30 @@ impl<'a> UpdateAgentBlockingRuleRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<FirewallFirewalluablockResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Update a User Agent Blocking rule
+///
+/// Updates an existing User Agent Blocking rule.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/zones/{zone_id}/firewall/ua_rules/{ua_rule_id}`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `ua_rule_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::user_agent_blocking_rules };
+/// use cloudflare::{ ApiClient, apis::user_agent_blocking_rules };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = update_agent_blocking_rule(&api)
-///     .with_zone_id("value")
-///     .with_ua_rule_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = update_agent_blocking_rule(&api)
+///     .with_zone_id("zone_id")
+///     .with_ua_rule_id("ua_rule_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -244,15 +294,24 @@ impl<'a> DeleteAgentBlockingRuleRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Delete a User Agent Blocking rule
+///
+/// Deletes an existing User Agent Blocking rule.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/zones/{zone_id}/firewall/ua_rules/{ua_rule_id}`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `ua_rule_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::user_agent_blocking_rules };
+/// use cloudflare::{ ApiClient, apis::user_agent_blocking_rules };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete_agent_blocking_rule(&api)
-///     .with_zone_id("value")
-///     .with_ua_rule_id("value")
+/// let response = delete_agent_blocking_rule(&api)
+///     .with_zone_id("zone_id")
+///     .with_ua_rule_id("ua_rule_id")
 ///     .send()
 ///     .await?;
 /// ```

@@ -19,5 +19,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct CloudforceOneRequestsRequestMessageEdit {
-    pub content: Option<serde_json::Value>,
+    pub content: Option<
+        crate::models::cloudforce_one_requests_message_content::CloudforceOneRequestsMessageContent,
+    >,
 }

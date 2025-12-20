@@ -19,7 +19,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct DnsAnalyticsResult {
-    pub data: serde_json::Value,
+    pub data: crate::models::dns_analytics_data::DnsAnalyticsData,
     pub data_lag: f64,
     pub max: std::collections::BTreeMap<String, serde_json::Value>,
     pub min: std::collections::BTreeMap<String, serde_json::Value>,

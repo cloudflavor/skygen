@@ -19,7 +19,9 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct CustomIndicatorFeedsApiResponseCommon {
-    pub errors: serde_json::Value,
-    pub messages: serde_json::Value,
+    pub errors:
+        crate::models::custom_indicator_feeds_schemas_messages::CustomIndicatorFeedsSchemasMessages,
+    pub messages:
+        crate::models::custom_indicator_feeds_schemas_messages::CustomIndicatorFeedsSchemasMessages,
     pub success: bool,
 }

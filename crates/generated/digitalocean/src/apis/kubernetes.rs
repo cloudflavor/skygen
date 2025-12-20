@@ -15,9 +15,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::associated_kubernetes_resources::AssociatedKubernetesResources;
 use crate::models::clusterlint_results::ClusterlintResults;
 use crate::models::credentials::Credentials;
-use crate::models::status_messages::StatusMessages;
+use crate::models::error::Error;
+use crate::models::kubernetes_options::KubernetesOptions;
+use crate::models::user::User;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
@@ -36,13 +39,19 @@ impl<'a> ListClustersRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// List All Kubernetes Clusters
+///
+/// To list all of the Kubernetes clusters on your account, send a GET request
+/// to `/v2/kubernetes/clusters`.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/kubernetes/clusters`
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::kubernetes };
+/// use digitalocean::{ ApiClient, apis::kubernetes };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_clusters(&api)
+/// let response = list_clusters(&api)
 ///     .send()
 ///     .await?;
 /// ```
@@ -70,13 +79,28 @@ impl<'a> CreateClusterRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Create a New Kubernetes Cluster
+///
+/// To create a new Kubernetes cluster, send a POST request to
+/// `/v2/kubernetes/clusters`. The request must contain at least one node pool
+/// with at least one worker.
+///
+/// The request may contain a maintenance window policy describing a time period
+/// when disruptive maintenance tasks may be carried out. Omitting the policy
+/// implies that a window will be chosen automatically. See
+/// [here](<https://docs.digitalocean.com/products/kubernetes/how-to/upgrade-cluster/)>
+/// for details.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/v2/kubernetes/clusters`
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::kubernetes };
+/// use digitalocean::{ ApiClient, apis::kubernetes };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = create_cluster(&api)
+/// # let body: crate::models::cluster::Cluster = todo!();
+/// let response = create_cluster(&api)
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -105,14 +129,23 @@ impl<'a> GetClusterRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Retrieve an Existing Kubernetes Cluster
+///
+/// To show information about an existing Kubernetes cluster, send a GET request
+/// to `/v2/kubernetes/clusters/$K8S_CLUSTER_ID`.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/kubernetes/clusters/{cluster_id}`
+///
+/// **Parameters**
+/// - `cluster_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::kubernetes };
+/// use digitalocean::{ ApiClient, apis::kubernetes };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_cluster(&api)
-///     .with_cluster_id("value")
+/// let response = get_cluster(&api)
+///     .with_cluster_id("cluster_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -122,7 +155,7 @@ pub fn get_cluster(api: &ApiClient) -> GetClusterRequest<'_> {
 
 #[derive(Debug)]
 pub struct UpdateClusterRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, Error>,
 }
 
 impl<'a> UpdateClusterRequest<'a> {
@@ -142,18 +175,30 @@ impl<'a> UpdateClusterRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<Error> {
         self.builder.send().await
     }
 }
-
 /// Update a Kubernetes Cluster
+///
+/// To update a Kubernetes cluster, send a PUT request to
+/// `/v2/kubernetes/clusters/$K8S_CLUSTER_ID` and specify one or more of the
+/// attributes below.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/v2/kubernetes/clusters/{cluster_id}`
+///
+/// **Parameters**
+/// - `cluster_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::kubernetes };
+/// use digitalocean::{ ApiClient, apis::kubernetes };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = update_cluster(&api)
-///     .with_cluster_id("value")
+/// # let body: crate::models::cluster_update::ClusterUpdate = todo!();
+/// let response = update_cluster(&api)
+///     .with_cluster_id("cluster_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -163,7 +208,7 @@ pub fn update_cluster(api: &ApiClient) -> UpdateClusterRequest<'_> {
 
 #[derive(Debug)]
 pub struct DeleteClusterRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, Error>,
 }
 
 impl<'a> DeleteClusterRequest<'a> {
@@ -178,18 +223,30 @@ impl<'a> DeleteClusterRequest<'a> {
         self.builder = self.builder.path_param("cluster_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<Error> {
         self.builder.send().await
     }
 }
-
 /// Delete a Kubernetes Cluster
+///
+/// To delete a Kubernetes cluster and all services deployed to it, send a DELETE
+/// request to `/v2/kubernetes/clusters/$K8S_CLUSTER_ID`.
+///
+/// A 204 status code with no body will be returned in response to a successful
+/// request.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/v2/kubernetes/clusters/{cluster_id}`
+///
+/// **Parameters**
+/// - `cluster_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::kubernetes };
+/// use digitalocean::{ ApiClient, apis::kubernetes };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete_cluster(&api)
-///     .with_cluster_id("value")
+/// let response = delete_cluster(&api)
+///     .with_cluster_id("cluster_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -221,14 +278,28 @@ impl<'a> GetClusterLintResultsRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Fetch Clusterlint Diagnostics for a Kubernetes Cluster
+///
+/// To request clusterlint diagnostics for your cluster, send a GET request to
+/// `/v2/kubernetes/clusters/$K8S_CLUSTER_ID/clusterlint`. If the `run_id` query
+/// parameter is provided, then the diagnostics for the specific run is fetched.
+/// By default, the latest results are shown.
+///
+/// To find out how to address clusterlint feedback, please refer to
+/// [the clusterlint check documentation](<https://github.com/digitalocean/clusterlint/blob/master/checks.md).>
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/kubernetes/clusters/{cluster_id}/clusterlint`
+///
+/// **Parameters**
+/// - `cluster_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::kubernetes };
+/// use digitalocean::{ ApiClient, apis::kubernetes };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_cluster_lint_results(&api)
-///     .with_cluster_id("value")
+/// let response = get_cluster_lint_results(&api)
+///     .with_cluster_id("cluster_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -238,7 +309,7 @@ pub fn get_cluster_lint_results(api: &ApiClient) -> GetClusterLintResultsRequest
 
 #[derive(Debug)]
 pub struct RunClusterLintRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, Error>,
 }
 
 impl<'a> RunClusterLintRequest<'a> {
@@ -263,18 +334,38 @@ impl<'a> RunClusterLintRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<Error> {
         self.builder.send().await
     }
 }
-
 /// Run Clusterlint Checks on a Kubernetes Cluster
+///
+/// Clusterlint helps operators conform to Kubernetes best practices around
+/// resources, security and reliability to avoid common problems while operating
+/// or upgrading the clusters.
+///
+/// To request a clusterlint run on your cluster, send a POST request to
+/// `/v2/kubernetes/clusters/$K8S_CLUSTER_ID/clusterlint`. This will run all
+/// checks present in the `doks` group by default, if a request body is not
+/// specified. Optionally specify the below attributes.
+///
+/// For information about the available checks, please refer to
+/// [the clusterlint check documentation](<https://github.com/digitalocean/clusterlint/blob/master/checks.md).>
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/v2/kubernetes/clusters/{cluster_id}/clusterlint`
+///
+/// **Parameters**
+/// - `cluster_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::kubernetes };
+/// use digitalocean::{ ApiClient, apis::kubernetes };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = run_cluster_lint(&api)
-///     .with_cluster_id("value")
+/// # let body: crate::models::clusterlint_request::ClusterlintRequest = todo!();
+/// let response = run_cluster_lint(&api)
+///     .with_cluster_id("cluster_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -306,14 +397,37 @@ impl<'a> GetCredentialsRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Retrieve Credentials for a Kubernetes Cluster
+///
+/// This endpoint returns a JSON object . It can be used to programmatically
+/// construct Kubernetes clients which cannot parse kubeconfig files.
+///
+/// The resulting JSON object contains token-based authentication for clusters
+/// supporting it, and certificate-based authentication otherwise. For a list of
+/// supported versions and more information, see "[How to Connect to a DigitalOcean
+/// Kubernetes Cluster](<https://docs.digitalocean.com/products/kubernetes/how-to/connect-to-cluster/)".>
+///
+/// To retrieve credentials for accessing a Kubernetes cluster, send a GET
+/// request to `/v2/kubernetes/clusters/$K8S_CLUSTER_ID/credentials`.
+///
+/// Clusters supporting token-based authentication may define an expiration by
+/// passing a duration in seconds as a query parameter to
+/// `/v2/kubernetes/clusters/$K8S_CLUSTER_ID/credentials?expiry_seconds=$DURATION_IN_SECONDS`.
+/// If not set or 0, then the token will have a 7 day expiry. The query parameter
+/// has no impact in certificate-based authentication.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/kubernetes/clusters/{cluster_id}/credentials`
+///
+/// **Parameters**
+/// - `cluster_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::kubernetes };
+/// use digitalocean::{ ApiClient, apis::kubernetes };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_credentials(&api)
-///     .with_cluster_id("value")
+/// let response = get_credentials(&api)
+///     .with_cluster_id("cluster_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -323,7 +437,7 @@ pub fn get_credentials(api: &ApiClient) -> GetCredentialsRequest<'_> {
 
 #[derive(Debug)]
 pub struct ListAssociatedResourcesRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, AssociatedKubernetesResources>,
 }
 
 impl<'a> ListAssociatedResourcesRequest<'a> {
@@ -341,18 +455,26 @@ impl<'a> ListAssociatedResourcesRequest<'a> {
         self.builder = self.builder.path_param("cluster_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<AssociatedKubernetesResources> {
         self.builder.send().await
     }
 }
-
 /// List Associated Resources for Cluster Deletion
+///
+/// To list the associated billable resources that can be destroyed along with a cluster, send a GET request to the `/v2/kubernetes/clusters/$K8S_CLUSTER_ID/destroy_with_associated_resources` endpoint.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/kubernetes/clusters/{cluster_id}/destroy_with_associated_resources`
+///
+/// **Parameters**
+/// - `cluster_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::kubernetes };
+/// use digitalocean::{ ApiClient, apis::kubernetes };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_associated_resources(&api)
-///     .with_cluster_id("value")
+/// let response = list_associated_resources(&api)
+///     .with_cluster_id("cluster_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -362,7 +484,7 @@ pub fn list_associated_resources(api: &ApiClient) -> ListAssociatedResourcesRequ
 
 #[derive(Debug)]
 pub struct DestroyAssociatedResourcesDangerousRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, Error>,
 }
 
 impl<'a> DestroyAssociatedResourcesDangerousRequest<'a> {
@@ -380,18 +502,28 @@ impl<'a> DestroyAssociatedResourcesDangerousRequest<'a> {
         self.builder = self.builder.path_param("cluster_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<Error> {
         self.builder.send().await
     }
 }
-
 /// Delete a Cluster and All of its Associated Resources (Dangerous)
+///
+/// To delete a Kubernetes cluster with all of its associated resources, send a
+/// DELETE request to `/v2/kubernetes/clusters/$K8S_CLUSTER_ID/destroy_with_associated_resources/dangerous`.
+/// A 204 status code with no body will be returned in response to a successful request.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/v2/kubernetes/clusters/{cluster_id}/destroy_with_associated_resources/dangerous`
+///
+/// **Parameters**
+/// - `cluster_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::kubernetes };
+/// use digitalocean::{ ApiClient, apis::kubernetes };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = destroy_associated_resources_dangerous(&api)
-///     .with_cluster_id("value")
+/// let response = destroy_associated_resources_dangerous(&api)
+///     .with_cluster_id("cluster_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -403,7 +535,7 @@ pub fn destroy_associated_resources_dangerous(
 
 #[derive(Debug)]
 pub struct DestroyAssociatedResourcesSelectiveRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, Error>,
 }
 
 impl<'a> DestroyAssociatedResourcesSelectiveRequest<'a> {
@@ -429,18 +561,37 @@ impl<'a> DestroyAssociatedResourcesSelectiveRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<Error> {
         self.builder.send().await
     }
 }
-
 /// Selectively Delete a Cluster and its Associated Resources
+///
+/// To delete a Kubernetes cluster along with a subset of its associated resources,
+/// send a DELETE request to `/v2/kubernetes/clusters/$K8S_CLUSTER_ID/destroy_with_associated_resources/selective`.
+///
+/// The JSON body of the request should include `load_balancers`, `volumes`, or
+/// `volume_snapshots` keys each set to an array of IDs for the associated
+/// resources to be destroyed.
+///
+/// The IDs can be found by querying the cluster's associated resources endpoint.
+/// Any associated resource not included in the request will remain and continue
+/// to accrue changes on your account.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/v2/kubernetes/clusters/{cluster_id}/destroy_with_associated_resources/selective`
+///
+/// **Parameters**
+/// - `cluster_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::kubernetes };
+/// use digitalocean::{ ApiClient, apis::kubernetes };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = destroy_associated_resources_selective(&api)
-///     .with_cluster_id("value")
+/// # let body: crate::models::destroy_associated_kubernetes_resources::DestroyAssociatedKubernetesResources = todo!();
+/// let response = destroy_associated_resources_selective(&api)
+///     .with_cluster_id("cluster_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -474,14 +625,44 @@ impl<'a> GetKubeconfigRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Retrieve the kubeconfig for a Kubernetes Cluster
+///
+/// This endpoint returns a kubeconfig file in YAML format. It can be used to
+/// connect to and administer the cluster using the Kubernetes command line tool,
+/// `kubectl`, or other programs supporting kubeconfig files (e.g., client libraries).
+///
+/// The resulting kubeconfig file uses token-based authentication for clusters
+/// supporting it, and certificate-based authentication otherwise. For a list of
+/// supported versions and more information, see "[How to Connect to a DigitalOcean
+/// Kubernetes Cluster](<https://docs.digitalocean.com/products/kubernetes/how-to/connect-to-cluster/)".>
+///
+/// To retrieve a kubeconfig file for use with a Kubernetes cluster, send a GET
+/// request to `/v2/kubernetes/clusters/$K8S_CLUSTER_ID/kubeconfig`.
+///
+/// Clusters supporting token-based authentication may define an expiration by
+/// passing a duration in seconds as a query parameter to
+/// `/v2/kubernetes/clusters/$K8S_CLUSTER_ID/kubeconfig?expiry_seconds=$DURATION_IN_SECONDS`.
+/// If not set or 0, then the token will have a 7 day expiry. The query parameter
+/// has no impact in certificate-based authentication.
+///
+/// Kubernetes Roles granted to a user with a token-based kubeconfig are derived from that user's
+/// DigitalOcean role. Predefined roles (Owner, Member, Modifier etc.) have an automatic mapping
+/// to Kubernetes roles. Custom roles are not automatically mapped to any Kubernetes roles,
+/// and require [additional configuration](<https://docs.digitalocean.com/products/kubernetes/how-to/set-up-custom-rolebindings/)>
+/// by a cluster administrator.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/kubernetes/clusters/{cluster_id}/kubeconfig`
+///
+/// **Parameters**
+/// - `cluster_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::kubernetes };
+/// use digitalocean::{ ApiClient, apis::kubernetes };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_kubeconfig(&api)
-///     .with_cluster_id("value")
+/// let response = get_kubeconfig(&api)
+///     .with_cluster_id("cluster_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -513,14 +694,23 @@ impl<'a> ListNodePoolsRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// List All Node Pools in a Kubernetes Clusters
+///
+/// To list all of the node pools in a Kubernetes clusters, send a GET request to
+/// `/v2/kubernetes/clusters/$K8S_CLUSTER_ID/node_pools`.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/kubernetes/clusters/{cluster_id}/node_pools`
+///
+/// **Parameters**
+/// - `cluster_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::kubernetes };
+/// use digitalocean::{ ApiClient, apis::kubernetes };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_node_pools(&api)
-///     .with_cluster_id("value")
+/// let response = list_node_pools(&api)
+///     .with_cluster_id("cluster_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -549,7 +739,10 @@ impl<'a> AddNodePoolRequest<'a> {
         self.builder = self.builder.path_param("cluster_id", value);
         self
     }
-    pub fn with_body(mut self, body: serde_json::Value) -> Self {
+    pub fn with_body(
+        mut self,
+        body: crate::models::kubernetes_node_pool::KubernetesNodePool,
+    ) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
@@ -557,14 +750,26 @@ impl<'a> AddNodePoolRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Add a Node Pool to a Kubernetes Cluster
+///
+/// To add an additional node pool to a Kubernetes clusters, send a POST request
+/// to `/v2/kubernetes/clusters/$K8S_CLUSTER_ID/node_pools` with the following
+/// attributes.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/v2/kubernetes/clusters/{cluster_id}/node_pools`
+///
+/// **Parameters**
+/// - `cluster_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::kubernetes };
+/// use digitalocean::{ ApiClient, apis::kubernetes };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = add_node_pool(&api)
-///     .with_cluster_id("value")
+/// # let body: crate::models::kubernetes_node_pool::KubernetesNodePool = todo!();
+/// let response = add_node_pool(&api)
+///     .with_cluster_id("cluster_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -601,15 +806,25 @@ impl<'a> GetNodePoolRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Retrieve a Node Pool for a Kubernetes Cluster
+///
+/// To show information about a specific node pool in a Kubernetes cluster, send
+/// a GET request to `/v2/kubernetes/clusters/$K8S_CLUSTER_ID/node_pools/$NODE_POOL_ID`.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/kubernetes/clusters/{cluster_id}/node_pools/{node_pool_id}`
+///
+/// **Parameters**
+/// - `cluster_id` (path, required)
+/// - `node_pool_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::kubernetes };
+/// use digitalocean::{ ApiClient, apis::kubernetes };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_node_pool(&api)
-///     .with_cluster_id("value")
-///     .with_node_pool_id("value")
+/// let response = get_node_pool(&api)
+///     .with_cluster_id("cluster_id")
+///     .with_node_pool_id("node_pool_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -619,7 +834,7 @@ pub fn get_node_pool(api: &ApiClient) -> GetNodePoolRequest<'_> {
 
 #[derive(Debug)]
 pub struct UpdateNodePoolRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, Error>,
 }
 
 impl<'a> UpdateNodePoolRequest<'a> {
@@ -643,23 +858,40 @@ impl<'a> UpdateNodePoolRequest<'a> {
         self.builder = self.builder.path_param("node_pool_id", value);
         self
     }
-    pub fn with_body(mut self, body: serde_json::Value) -> Self {
+    pub fn with_body(
+        mut self,
+        body: crate::models::kubernetes_node_pool_update::KubernetesNodePoolUpdate,
+    ) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<Error> {
         self.builder.send().await
     }
 }
-
 /// Update a Node Pool in a Kubernetes Cluster
+///
+/// To update the name of a node pool, edit the tags applied to it, or adjust its
+/// number of nodes, send a PUT request to
+/// `/v2/kubernetes/clusters/$K8S_CLUSTER_ID/node_pools/$NODE_POOL_ID` with the
+/// following attributes.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/v2/kubernetes/clusters/{cluster_id}/node_pools/{node_pool_id}`
+///
+/// **Parameters**
+/// - `cluster_id` (path, required)
+/// - `node_pool_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::kubernetes };
+/// use digitalocean::{ ApiClient, apis::kubernetes };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = update_node_pool(&api)
-///     .with_cluster_id("value")
-///     .with_node_pool_id("value")
+/// # let body: crate::models::kubernetes_node_pool_update::KubernetesNodePoolUpdate = todo!();
+/// let response = update_node_pool(&api)
+///     .with_cluster_id("cluster_id")
+///     .with_node_pool_id("node_pool_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -669,7 +901,7 @@ pub fn update_node_pool(api: &ApiClient) -> UpdateNodePoolRequest<'_> {
 
 #[derive(Debug)]
 pub struct DeleteNodePoolRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, Error>,
 }
 
 impl<'a> DeleteNodePoolRequest<'a> {
@@ -692,19 +924,32 @@ impl<'a> DeleteNodePoolRequest<'a> {
         self.builder = self.builder.path_param("node_pool_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<Error> {
         self.builder.send().await
     }
 }
-
 /// Delete a Node Pool in a Kubernetes Cluster
+///
+/// To delete a node pool, send a DELETE request to
+/// `/v2/kubernetes/clusters/$K8S_CLUSTER_ID/node_pools/$NODE_POOL_ID`.
+///
+/// A 204 status code with no body will be returned in response to a successful
+/// request. Nodes in the pool will subsequently be drained and deleted.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/v2/kubernetes/clusters/{cluster_id}/node_pools/{node_pool_id}`
+///
+/// **Parameters**
+/// - `cluster_id` (path, required)
+/// - `node_pool_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::kubernetes };
+/// use digitalocean::{ ApiClient, apis::kubernetes };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete_node_pool(&api)
-///     .with_cluster_id("value")
-///     .with_node_pool_id("value")
+/// let response = delete_node_pool(&api)
+///     .with_cluster_id("cluster_id")
+///     .with_node_pool_id("node_pool_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -714,7 +959,7 @@ pub fn delete_node_pool(api: &ApiClient) -> DeleteNodePoolRequest<'_> {
 
 #[derive(Debug)]
 pub struct DeleteNodeRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, Error>,
 }
 
 impl<'a> DeleteNodeRequest<'a> {
@@ -742,20 +987,39 @@ impl<'a> DeleteNodeRequest<'a> {
         self.builder = self.builder.path_param("node_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<Error> {
         self.builder.send().await
     }
 }
-
 /// Delete a Node in a Kubernetes Cluster
+///
+/// To delete a single node in a pool, send a DELETE request to
+/// `/v2/kubernetes/clusters/$K8S_CLUSTER_ID/node_pools/$NODE_POOL_ID/nodes/$NODE_ID`.
+///
+/// Appending the `skip_drain=1` query parameter to the request causes node
+/// draining to be skipped. Omitting the query parameter or setting its value to
+/// `0` carries out draining prior to deletion.
+///
+/// Appending the `replace=1` query parameter to the request causes the node to
+/// be replaced by a new one after deletion. Omitting the query parameter or
+/// setting its value to `0` deletes without replacement.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/v2/kubernetes/clusters/{cluster_id}/node_pools/{node_pool_id}/nodes/{node_id}`
+///
+/// **Parameters**
+/// - `cluster_id` (path, required)
+/// - `node_pool_id` (path, required)
+/// - `node_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::kubernetes };
+/// use digitalocean::{ ApiClient, apis::kubernetes };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete_node(&api)
-///     .with_cluster_id("value")
-///     .with_node_pool_id("value")
-///     .with_node_id("value")
+/// let response = delete_node(&api)
+///     .with_cluster_id("cluster_id")
+///     .with_node_pool_id("node_pool_id")
+///     .with_node_id("node_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -765,7 +1029,7 @@ pub fn delete_node(api: &ApiClient) -> DeleteNodeRequest<'_> {
 
 #[derive(Debug)]
 pub struct RecycleNodePoolRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, Error>,
 }
 
 impl<'a> RecycleNodePoolRequest<'a> {
@@ -793,19 +1057,32 @@ impl<'a> RecycleNodePoolRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<Error> {
         self.builder.send().await
     }
 }
-
 /// Recycle a Kubernetes Node Pool
+///
+/// The endpoint has been deprecated. Please use the DELETE
+/// `/v2/kubernetes/clusters/$K8S_CLUSTER_ID/node_pools/$NODE_POOL_ID/nodes/$NODE_ID`
+/// method instead.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/v2/kubernetes/clusters/{cluster_id}/node_pools/{node_pool_id}/recycle`
+///
+/// **Parameters**
+/// - `cluster_id` (path, required)
+/// - `node_pool_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::kubernetes };
+/// use digitalocean::{ ApiClient, apis::kubernetes };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = recycle_node_pool(&api)
-///     .with_cluster_id("value")
-///     .with_node_pool_id("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = recycle_node_pool(&api)
+///     .with_cluster_id("cluster_id")
+///     .with_node_pool_id("node_pool_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -815,7 +1092,7 @@ pub fn recycle_node_pool(api: &ApiClient) -> RecycleNodePoolRequest<'_> {
 
 #[derive(Debug)]
 pub struct GetStatusMessagesRequest<'a> {
-    builder: ApiRequestBuilder<'a, StatusMessages>,
+    builder: ApiRequestBuilder<'a, serde_json::Value>,
 }
 
 impl<'a> GetStatusMessagesRequest<'a> {
@@ -833,18 +1110,27 @@ impl<'a> GetStatusMessagesRequest<'a> {
         self.builder = self.builder.path_param("cluster_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<StatusMessages> {
+    pub async fn send(self) -> ApiResult<serde_json::Value> {
         self.builder.send().await
     }
 }
-
 /// Fetch Status Messages for a Kubernetes Cluster
+///
+/// To retrieve status messages for a Kubernetes cluster, send a GET request to
+/// `/v2/kubernetes/clusters/$K8S_CLUSTER_ID/status_messages`. Status messages inform users of any issues that come up during the cluster lifecycle.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/kubernetes/clusters/{cluster_id}/status_messages`
+///
+/// **Parameters**
+/// - `cluster_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::kubernetes };
+/// use digitalocean::{ ApiClient, apis::kubernetes };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_status_messages(&api)
-///     .with_cluster_id("value")
+/// let response = get_status_messages(&api)
+///     .with_cluster_id("cluster_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -854,7 +1140,7 @@ pub fn get_status_messages(api: &ApiClient) -> GetStatusMessagesRequest<'_> {
 
 #[derive(Debug)]
 pub struct UpgradeClusterRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, Error>,
 }
 
 impl<'a> UpgradeClusterRequest<'a> {
@@ -877,18 +1163,33 @@ impl<'a> UpgradeClusterRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<Error> {
         self.builder.send().await
     }
 }
-
 /// Upgrade a Kubernetes Cluster
+///
+/// To immediately upgrade a Kubernetes cluster to a newer patch release of
+/// Kubernetes, send a POST request to `/v2/kubernetes/clusters/$K8S_CLUSTER_ID/upgrade`.
+/// The body of the request must specify a version attribute.
+///
+/// Available upgrade versions for a cluster can be fetched from
+/// `/v2/kubernetes/clusters/$K8S_CLUSTER_ID/upgrades`.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/v2/kubernetes/clusters/{cluster_id}/upgrade`
+///
+/// **Parameters**
+/// - `cluster_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::kubernetes };
+/// use digitalocean::{ ApiClient, apis::kubernetes };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = upgrade_cluster(&api)
-///     .with_cluster_id("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = upgrade_cluster(&api)
+///     .with_cluster_id("cluster_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -898,7 +1199,7 @@ pub fn upgrade_cluster(api: &ApiClient) -> UpgradeClusterRequest<'_> {
 
 #[derive(Debug)]
 pub struct GetAvailableUpgradesRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, std::collections::BTreeMap<String, serde_json::Value>>,
 }
 
 impl<'a> GetAvailableUpgradesRequest<'a> {
@@ -916,18 +1217,28 @@ impl<'a> GetAvailableUpgradesRequest<'a> {
         self.builder = self.builder.path_param("cluster_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<std::collections::BTreeMap<String, serde_json::Value>> {
         self.builder.send().await
     }
 }
-
 /// Retrieve Available Upgrades for an Existing Kubernetes Cluster
+///
+/// To determine whether a cluster can be upgraded, and the versions to which it
+/// can be upgraded, send a GET request to
+/// `/v2/kubernetes/clusters/$K8S_CLUSTER_ID/upgrades`.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/kubernetes/clusters/{cluster_id}/upgrades`
+///
+/// **Parameters**
+/// - `cluster_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::kubernetes };
+/// use digitalocean::{ ApiClient, apis::kubernetes };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_available_upgrades(&api)
-///     .with_cluster_id("value")
+/// let response = get_available_upgrades(&api)
+///     .with_cluster_id("cluster_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -937,7 +1248,7 @@ pub fn get_available_upgrades(api: &ApiClient) -> GetAvailableUpgradesRequest<'_
 
 #[derive(Debug)]
 pub struct GetClusterGetRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, User>,
 }
 
 impl<'a> GetClusterGetRequest<'a> {
@@ -952,18 +1263,27 @@ impl<'a> GetClusterGetRequest<'a> {
         self.builder = self.builder.path_param("cluster_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<User> {
         self.builder.send().await
     }
 }
-
 /// Retrieve User Information for a Kubernetes Cluster
+///
+/// To show information the user associated with a Kubernetes cluster, send a GET
+/// request to `/v2/kubernetes/clusters/$K8S_CLUSTER_ID/user`.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/kubernetes/clusters/{cluster_id}/user`
+///
+/// **Parameters**
+/// - `cluster_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::kubernetes };
+/// use digitalocean::{ ApiClient, apis::kubernetes };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_cluster_get(&api)
-///     .with_cluster_id("value")
+/// let response = get_cluster_get(&api)
+///     .with_cluster_id("cluster_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -973,7 +1293,7 @@ pub fn get_cluster_get(api: &ApiClient) -> GetClusterGetRequest<'_> {
 
 #[derive(Debug)]
 pub struct ListOptionsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, KubernetesOptions>,
 }
 
 impl<'a> ListOptionsRequest<'a> {
@@ -982,17 +1302,22 @@ impl<'a> ListOptionsRequest<'a> {
 
         Self { builder }
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<KubernetesOptions> {
         self.builder.send().await
     }
 }
-
 /// List Available Regions, Node Sizes, and Versions of Kubernetes
+///
+/// To list the versions of Kubernetes available for use, the regions that support Kubernetes, and the available node sizes, send a GET request to `/v2/kubernetes/options`.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/kubernetes/options`
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::kubernetes };
+/// use digitalocean::{ ApiClient, apis::kubernetes };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_options(&api)
+/// let response = list_options(&api)
 ///     .send()
 ///     .await?;
 /// ```
@@ -1002,7 +1327,7 @@ pub fn list_options(api: &ApiClient) -> ListOptionsRequest<'_> {
 
 #[derive(Debug)]
 pub struct AddRegistryRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, Error>,
 }
 
 impl<'a> AddRegistryRequest<'a> {
@@ -1015,17 +1340,24 @@ impl<'a> AddRegistryRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<Error> {
         self.builder.send().await
     }
 }
-
 /// Add Container Registry to Kubernetes Clusters
+///
+/// To integrate the container registry with Kubernetes clusters, send a POST request to `/v2/kubernetes/registry`.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/v2/kubernetes/registry`
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::kubernetes };
+/// use digitalocean::{ ApiClient, apis::kubernetes };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = add_registry(&api)
+/// # let body: crate::models::cluster_registries::ClusterRegistries = todo!();
+/// let response = add_registry(&api)
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -1035,7 +1367,7 @@ pub fn add_registry(api: &ApiClient) -> AddRegistryRequest<'_> {
 
 #[derive(Debug)]
 pub struct RemoveRegistryRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, Error>,
 }
 
 impl<'a> RemoveRegistryRequest<'a> {
@@ -1048,17 +1380,24 @@ impl<'a> RemoveRegistryRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<Error> {
         self.builder.send().await
     }
 }
-
 /// Remove Container Registry from Kubernetes Clusters
+///
+/// To remove the container registry from Kubernetes clusters, send a DELETE request to `/v2/kubernetes/registry`.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/v2/kubernetes/registry`
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::kubernetes };
+/// use digitalocean::{ ApiClient, apis::kubernetes };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = remove_registry(&api)
+/// # let body: crate::models::cluster_registries::ClusterRegistries = todo!();
+/// let response = remove_registry(&api)
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```

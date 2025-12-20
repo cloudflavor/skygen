@@ -15,12 +15,15 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::healthchecks_id_response::HealthchecksIdResponse;
+use crate::models::healthchecks_response_collection::HealthchecksResponseCollection;
+use crate::models::healthchecks_single_response::HealthchecksSingleResponse;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct ListHealthChecksRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, HealthchecksResponseCollection>,
 }
 
 impl<'a> ListHealthChecksRequest<'a> {
@@ -34,18 +37,26 @@ impl<'a> ListHealthChecksRequest<'a> {
         self.builder = self.builder.path_param("zone_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<HealthchecksResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// List Health Checks
+///
+/// List configured health checks.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/healthchecks`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::health_checks };
+/// use cloudflare::{ ApiClient, apis::health_checks };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_health_checks(&api)
-///     .with_zone_id("value")
+/// let response = list_health_checks(&api)
+///     .with_zone_id("zone_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -55,7 +66,7 @@ pub fn list_health_checks(api: &ApiClient) -> ListHealthChecksRequest<'_> {
 
 #[derive(Debug)]
 pub struct CreateHealthCheckRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, HealthchecksSingleResponse>,
 }
 
 impl<'a> CreateHealthCheckRequest<'a> {
@@ -77,18 +88,28 @@ impl<'a> CreateHealthCheckRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<HealthchecksSingleResponse> {
         self.builder.send().await
     }
 }
-
 /// Create Health Check
+///
+/// Create a new health check.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/zones/{zone_id}/healthchecks`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::health_checks };
+/// use cloudflare::{ ApiClient, apis::health_checks };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = create_health_check(&api)
-///     .with_zone_id("value")
+/// # let body: crate::models::healthchecks_query_healthcheck::HealthchecksQueryHealthcheck = todo!();
+/// let response = create_health_check(&api)
+///     .with_zone_id("zone_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -98,7 +119,7 @@ pub fn create_health_check(api: &ApiClient) -> CreateHealthCheckRequest<'_> {
 
 #[derive(Debug)]
 pub struct CreatePreviewHealthCheckRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, HealthchecksSingleResponse>,
 }
 
 impl<'a> CreatePreviewHealthCheckRequest<'a> {
@@ -121,18 +142,28 @@ impl<'a> CreatePreviewHealthCheckRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<HealthchecksSingleResponse> {
         self.builder.send().await
     }
 }
-
 /// Create Preview Health Check
+///
+/// Create a new preview health check.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/zones/{zone_id}/healthchecks/preview`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::health_checks };
+/// use cloudflare::{ ApiClient, apis::health_checks };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = create_preview_health_check(&api)
-///     .with_zone_id("value")
+/// # let body: crate::models::healthchecks_query_healthcheck::HealthchecksQueryHealthcheck = todo!();
+/// let response = create_preview_health_check(&api)
+///     .with_zone_id("zone_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -142,7 +173,7 @@ pub fn create_preview_health_check(api: &ApiClient) -> CreatePreviewHealthCheckR
 
 #[derive(Debug)]
 pub struct CheckPreviewDetailsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, HealthchecksSingleResponse>,
 }
 
 impl<'a> CheckPreviewDetailsRequest<'a> {
@@ -165,19 +196,28 @@ impl<'a> CheckPreviewDetailsRequest<'a> {
         self.builder = self.builder.path_param("healthcheck_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<HealthchecksSingleResponse> {
         self.builder.send().await
     }
 }
-
 /// Health Check Preview Details
+///
+/// Fetch a single configured health check preview.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/healthchecks/preview/{healthcheck_id}`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `healthcheck_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::health_checks };
+/// use cloudflare::{ ApiClient, apis::health_checks };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = check_preview_details(&api)
-///     .with_zone_id("value")
-///     .with_healthcheck_id("value")
+/// let response = check_preview_details(&api)
+///     .with_zone_id("zone_id")
+///     .with_healthcheck_id("healthcheck_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -187,7 +227,7 @@ pub fn check_preview_details(api: &ApiClient) -> CheckPreviewDetailsRequest<'_> 
 
 #[derive(Debug)]
 pub struct DeletePreviewHealthCheckRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, HealthchecksIdResponse>,
 }
 
 impl<'a> DeletePreviewHealthCheckRequest<'a> {
@@ -210,19 +250,28 @@ impl<'a> DeletePreviewHealthCheckRequest<'a> {
         self.builder = self.builder.path_param("healthcheck_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<HealthchecksIdResponse> {
         self.builder.send().await
     }
 }
-
 /// Delete Preview Health Check
+///
+/// Delete a health check.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/zones/{zone_id}/healthchecks/preview/{healthcheck_id}`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `healthcheck_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::health_checks };
+/// use cloudflare::{ ApiClient, apis::health_checks };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete_preview_health_check(&api)
-///     .with_zone_id("value")
-///     .with_healthcheck_id("value")
+/// let response = delete_preview_health_check(&api)
+///     .with_zone_id("zone_id")
+///     .with_healthcheck_id("healthcheck_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -232,7 +281,7 @@ pub fn delete_preview_health_check(api: &ApiClient) -> DeletePreviewHealthCheckR
 
 #[derive(Debug)]
 pub struct CheckDetailsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, HealthchecksSingleResponse>,
 }
 
 impl<'a> CheckDetailsRequest<'a> {
@@ -255,19 +304,28 @@ impl<'a> CheckDetailsRequest<'a> {
         self.builder = self.builder.path_param("healthcheck_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<HealthchecksSingleResponse> {
         self.builder.send().await
     }
 }
-
 /// Health Check Details
+///
+/// Fetch a single configured health check.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/healthchecks/{healthcheck_id}`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `healthcheck_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::health_checks };
+/// use cloudflare::{ ApiClient, apis::health_checks };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = check_details(&api)
-///     .with_zone_id("value")
-///     .with_healthcheck_id("value")
+/// let response = check_details(&api)
+///     .with_zone_id("zone_id")
+///     .with_healthcheck_id("healthcheck_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -277,7 +335,7 @@ pub fn check_details(api: &ApiClient) -> CheckDetailsRequest<'_> {
 
 #[derive(Debug)]
 pub struct UpdateHealthCheckRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, HealthchecksSingleResponse>,
 }
 
 impl<'a> UpdateHealthCheckRequest<'a> {
@@ -308,19 +366,30 @@ impl<'a> UpdateHealthCheckRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<HealthchecksSingleResponse> {
         self.builder.send().await
     }
 }
-
 /// Update Health Check
+///
+/// Update a configured health check.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/zones/{zone_id}/healthchecks/{healthcheck_id}`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `healthcheck_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::health_checks };
+/// use cloudflare::{ ApiClient, apis::health_checks };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = update_health_check(&api)
-///     .with_zone_id("value")
-///     .with_healthcheck_id("value")
+/// # let body: crate::models::healthchecks_query_healthcheck::HealthchecksQueryHealthcheck = todo!();
+/// let response = update_health_check(&api)
+///     .with_zone_id("zone_id")
+///     .with_healthcheck_id("healthcheck_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -330,7 +399,7 @@ pub fn update_health_check(api: &ApiClient) -> UpdateHealthCheckRequest<'_> {
 
 #[derive(Debug)]
 pub struct DeleteHealthCheckRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, HealthchecksIdResponse>,
 }
 
 impl<'a> DeleteHealthCheckRequest<'a> {
@@ -353,19 +422,28 @@ impl<'a> DeleteHealthCheckRequest<'a> {
         self.builder = self.builder.path_param("healthcheck_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<HealthchecksIdResponse> {
         self.builder.send().await
     }
 }
-
 /// Delete Health Check
+///
+/// Delete a health check.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/zones/{zone_id}/healthchecks/{healthcheck_id}`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `healthcheck_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::health_checks };
+/// use cloudflare::{ ApiClient, apis::health_checks };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete_health_check(&api)
-///     .with_zone_id("value")
-///     .with_healthcheck_id("value")
+/// let response = delete_health_check(&api)
+///     .with_zone_id("zone_id")
+///     .with_healthcheck_id("healthcheck_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -375,7 +453,7 @@ pub fn delete_health_check(api: &ApiClient) -> DeleteHealthCheckRequest<'_> {
 
 #[derive(Debug)]
 pub struct PatchHealthCheckRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, HealthchecksSingleResponse>,
 }
 
 impl<'a> PatchHealthCheckRequest<'a> {
@@ -406,19 +484,30 @@ impl<'a> PatchHealthCheckRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<HealthchecksSingleResponse> {
         self.builder.send().await
     }
 }
-
 /// Patch Health Check
+///
+/// Patch a configured health check.
+///
+/// **HTTP Method:** `PATCH`
+/// **Path:** `/zones/{zone_id}/healthchecks/{healthcheck_id}`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `healthcheck_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::health_checks };
+/// use cloudflare::{ ApiClient, apis::health_checks };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = patch_health_check(&api)
-///     .with_zone_id("value")
-///     .with_healthcheck_id("value")
+/// # let body: crate::models::healthchecks_query_healthcheck::HealthchecksQueryHealthcheck = todo!();
+/// let response = patch_health_check(&api)
+///     .with_zone_id("zone_id")
+///     .with_healthcheck_id("healthcheck_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```

@@ -19,6 +19,6 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct MagicTransitColo {
-    pub city: Option<serde_json::Value>,
-    pub name: Option<serde_json::Value>,
+    pub city: Option<crate::models::magic_transit_colo_city::MagicTransitColoCity>,
+    pub name: Option<crate::models::magic_transit_colo_name::MagicTransitColoName>,
 }

@@ -20,10 +20,10 @@ use serde::{Deserialize, Serialize};
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct DnsAnalyticsQuery {
     pub dimensions: Vec<String>,
-    pub filters: Option<serde_json::Value>,
-    pub limit: serde_json::Value,
+    pub filters: Option<crate::models::dns_analytics_filters::DnsAnalyticsFilters>,
+    pub limit: crate::models::dns_analytics_limit::DnsAnalyticsLimit,
     pub metrics: Vec<String>,
-    pub since: serde_json::Value,
+    pub since: crate::models::dns_analytics_since::DnsAnalyticsSince,
     pub sort: Option<Vec<String>>,
-    pub until: serde_json::Value,
+    pub until: crate::models::dns_analytics_until::DnsAnalyticsUntil,
 }

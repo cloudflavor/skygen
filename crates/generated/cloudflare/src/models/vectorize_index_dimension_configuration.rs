@@ -19,6 +19,6 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct VectorizeIndexDimensionConfiguration {
-    pub dimensions: serde_json::Value,
-    pub metric: serde_json::Value,
+    pub dimensions: crate::models::vectorize_index_dimensions::VectorizeIndexDimensions,
+    pub metric: crate::models::vectorize_index_metric::VectorizeIndexMetric,
 }

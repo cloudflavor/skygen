@@ -15,13 +15,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-use crate::models::rulesets_managed_transforms::RulesetsManagedTransforms;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct ListManagedTransformsRequest<'a> {
-    builder: ApiRequestBuilder<'a, RulesetsManagedTransforms>,
+    builder: ApiRequestBuilder<'a, serde_json::Value>,
 }
 
 impl<'a> ListManagedTransformsRequest<'a> {
@@ -35,18 +34,26 @@ impl<'a> ListManagedTransformsRequest<'a> {
         self.builder = self.builder.path_param("zone_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<RulesetsManagedTransforms> {
+    pub async fn send(self) -> ApiResult<serde_json::Value> {
         self.builder.send().await
     }
 }
-
 /// List Managed Transforms
+///
+/// Fetches a list of all Managed Transforms.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/managed_headers`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::managed_transforms };
+/// use cloudflare::{ ApiClient, apis::managed_transforms };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_managed_transforms(&api)
-///     .with_zone_id("value")
+/// let response = list_managed_transforms(&api)
+///     .with_zone_id("zone_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -75,14 +82,22 @@ impl<'a> DeleteRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Delete Managed Transforms
+///
+/// Disables all Managed Transforms.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/zones/{zone_id}/managed_headers`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::managed_transforms };
+/// use cloudflare::{ ApiClient, apis::managed_transforms };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete(&api)
-///     .with_zone_id("value")
+/// let response = delete(&api)
+///     .with_zone_id("zone_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -92,7 +107,7 @@ pub fn delete(api: &ApiClient) -> DeleteRequest<'_> {
 
 #[derive(Debug)]
 pub struct UpdateManagedTransformsRequest<'a> {
-    builder: ApiRequestBuilder<'a, RulesetsManagedTransforms>,
+    builder: ApiRequestBuilder<'a, serde_json::Value>,
 }
 
 impl<'a> UpdateManagedTransformsRequest<'a> {
@@ -107,22 +122,35 @@ impl<'a> UpdateManagedTransformsRequest<'a> {
         self.builder = self.builder.path_param("zone_id", value);
         self
     }
-    pub fn with_body(mut self, body: RulesetsManagedTransforms) -> Self {
+    pub fn with_body(
+        mut self,
+        body: crate::models::rulesets_managed_transforms::RulesetsManagedTransforms,
+    ) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<RulesetsManagedTransforms> {
+    pub async fn send(self) -> ApiResult<serde_json::Value> {
         self.builder.send().await
     }
 }
-
 /// Update Managed Transforms
+///
+/// Updates the status of one or more Managed Transforms.
+///
+/// **HTTP Method:** `PATCH`
+/// **Path:** `/zones/{zone_id}/managed_headers`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::managed_transforms };
+/// use cloudflare::{ ApiClient, apis::managed_transforms };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = update_managed_transforms(&api)
-///     .with_zone_id("value")
+/// # let body: crate::models::rulesets_managed_transforms::RulesetsManagedTransforms = todo!();
+/// let response = update_managed_transforms(&api)
+///     .with_zone_id("zone_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```

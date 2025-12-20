@@ -15,12 +15,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::intel_api_response_single::IntelApiResponseSingle;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct CreateMiscategorizationRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, IntelApiResponseSingle>,
 }
 
 impl<'a> CreateMiscategorizationRequest<'a> {
@@ -46,18 +47,28 @@ impl<'a> CreateMiscategorizationRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<IntelApiResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Create Miscategorization
+///
+/// Allows you to submit requests to change a domain’s category.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/intel/miscategorization`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::miscategorization };
+/// use cloudflare::{ ApiClient, apis::miscategorization };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = create_miscategorization(&api)
-///     .with_account_id("value")
+/// # let body: crate::models::intel_miscategorization::IntelMiscategorization = todo!();
+/// let response = create_miscategorization(&api)
+///     .with_account_id("account_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```

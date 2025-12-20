@@ -33,8 +33,10 @@ pub struct McnProviderStatus {
     pub last_discovery_completed_at_v2: Option<String>,
     pub last_discovery_started_at: Option<String>,
     pub last_discovery_started_at_v2: Option<String>,
-    pub last_discovery_status: serde_json::Value,
-    pub last_discovery_status_v2: serde_json::Value,
+    pub last_discovery_status:
+        crate::models::mcn_provider_discovery_status::McnProviderDiscoveryStatus,
+    pub last_discovery_status_v2:
+        crate::models::mcn_provider_discovery_status::McnProviderDiscoveryStatus,
     pub last_updated: Option<String>,
     pub regions: Vec<String>,
 }

@@ -15,12 +15,23 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::mconn_customer_connector_create_response::MconnCustomerConnectorCreateResponse;
+use crate::models::mconn_customer_connector_delete_response::MconnCustomerConnectorDeleteResponse;
+use crate::models::mconn_customer_connector_fetch_response::MconnCustomerConnectorFetchResponse;
+use crate::models::mconn_customer_connector_list_response::MconnCustomerConnectorListResponse;
+use crate::models::mconn_customer_connector_update_response::MconnCustomerConnectorUpdateResponse;
+use crate::models::mconn_customer_event_get_success::MconnCustomerEventGetSuccess;
+use crate::models::mconn_customer_events_get_latest_success::MconnCustomerEventsGetLatestSuccess;
+use crate::models::mconn_customer_events_get_success::MconnCustomerEventsGetSuccess;
+use crate::models::mconn_customer_snapshot_get_success::MconnCustomerSnapshotGetSuccess;
+use crate::models::mconn_customer_snapshots_get_latest_success::MconnCustomerSnapshotsGetLatestSuccess;
+use crate::models::mconn_customer_snapshots_get_success::MconnCustomerSnapshotsGetSuccess;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct MconnConnectorListRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, MconnCustomerConnectorListResponse>,
 }
 
 impl<'a> MconnConnectorListRequest<'a> {
@@ -35,18 +46,24 @@ impl<'a> MconnConnectorListRequest<'a> {
         self.builder = self.builder.path_param("account_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<MconnCustomerConnectorListResponse> {
         self.builder.send().await
     }
 }
-
 /// List Connectors
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/magic/connectors`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::magic_connectors };
+/// use cloudflare::{ ApiClient, apis::magic_connectors };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = mconn_connector_list(&api)
-///     .with_account_id("value")
+/// let response = mconn_connector_list(&api)
+///     .with_account_id("account_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -56,7 +73,7 @@ pub fn mconn_connector_list(api: &ApiClient) -> MconnConnectorListRequest<'_> {
 
 #[derive(Debug)]
 pub struct MconnConnectorCreateRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, MconnCustomerConnectorCreateResponse>,
 }
 
 impl<'a> MconnConnectorCreateRequest<'a> {
@@ -72,22 +89,33 @@ impl<'a> MconnConnectorCreateRequest<'a> {
         self.builder = self.builder.path_param("account_id", value);
         self
     }
-    pub fn with_body(mut self, body: serde_json::Value) -> Self {
+    pub fn with_body(
+        mut self,
+        body: crate::models::mconn_customer_connector_create_request::MconnCustomerConnectorCreateRequest,
+    ) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<MconnCustomerConnectorCreateResponse> {
         self.builder.send().await
     }
 }
-
 /// Add a connector to your account
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/magic/connectors`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::magic_connectors };
+/// use cloudflare::{ ApiClient, apis::magic_connectors };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = mconn_connector_create(&api)
-///     .with_account_id("value")
+/// # let body: crate::models::mconn_customer_connector_create_request::MconnCustomerConnectorCreateRequest = todo!();
+/// let response = mconn_connector_create(&api)
+///     .with_account_id("account_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -97,7 +125,7 @@ pub fn mconn_connector_create(api: &ApiClient) -> MconnConnectorCreateRequest<'_
 
 #[derive(Debug)]
 pub struct MconnConnectorFetchRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, MconnCustomerConnectorFetchResponse>,
 }
 
 impl<'a> MconnConnectorFetchRequest<'a> {
@@ -120,19 +148,26 @@ impl<'a> MconnConnectorFetchRequest<'a> {
         self.builder = self.builder.path_param("connector_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<MconnCustomerConnectorFetchResponse> {
         self.builder.send().await
     }
 }
-
 /// Fetch Connector
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/magic/connectors/{connector_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `connector_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::magic_connectors };
+/// use cloudflare::{ ApiClient, apis::magic_connectors };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = mconn_connector_fetch(&api)
-///     .with_account_id("value")
-///     .with_connector_id("value")
+/// let response = mconn_connector_fetch(&api)
+///     .with_account_id("account_id")
+///     .with_connector_id("connector_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -142,7 +177,7 @@ pub fn mconn_connector_fetch(api: &ApiClient) -> MconnConnectorFetchRequest<'_> 
 
 #[derive(Debug)]
 pub struct MconnConnectorReplaceRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, MconnCustomerConnectorUpdateResponse>,
 }
 
 impl<'a> MconnConnectorReplaceRequest<'a> {
@@ -166,23 +201,35 @@ impl<'a> MconnConnectorReplaceRequest<'a> {
         self.builder = self.builder.path_param("connector_id", value);
         self
     }
-    pub fn with_body(mut self, body: serde_json::Value) -> Self {
+    pub fn with_body(
+        mut self,
+        body: crate::models::mconn_customer_connector_update_request::MconnCustomerConnectorUpdateRequest,
+    ) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<MconnCustomerConnectorUpdateResponse> {
         self.builder.send().await
     }
 }
-
 /// Replace Connector
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/accounts/{account_id}/magic/connectors/{connector_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `connector_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::magic_connectors };
+/// use cloudflare::{ ApiClient, apis::magic_connectors };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = mconn_connector_replace(&api)
-///     .with_account_id("value")
-///     .with_connector_id("value")
+/// # let body: crate::models::mconn_customer_connector_update_request::MconnCustomerConnectorUpdateRequest = todo!();
+/// let response = mconn_connector_replace(&api)
+///     .with_account_id("account_id")
+///     .with_connector_id("connector_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -192,7 +239,7 @@ pub fn mconn_connector_replace(api: &ApiClient) -> MconnConnectorReplaceRequest<
 
 #[derive(Debug)]
 pub struct MconnConnectorDeleteRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, MconnCustomerConnectorDeleteResponse>,
 }
 
 impl<'a> MconnConnectorDeleteRequest<'a> {
@@ -215,19 +262,26 @@ impl<'a> MconnConnectorDeleteRequest<'a> {
         self.builder = self.builder.path_param("connector_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<MconnCustomerConnectorDeleteResponse> {
         self.builder.send().await
     }
 }
-
 /// Remove a connector from your account
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/accounts/{account_id}/magic/connectors/{connector_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `connector_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::magic_connectors };
+/// use cloudflare::{ ApiClient, apis::magic_connectors };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = mconn_connector_delete(&api)
-///     .with_account_id("value")
-///     .with_connector_id("value")
+/// let response = mconn_connector_delete(&api)
+///     .with_account_id("account_id")
+///     .with_connector_id("connector_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -237,7 +291,7 @@ pub fn mconn_connector_delete(api: &ApiClient) -> MconnConnectorDeleteRequest<'_
 
 #[derive(Debug)]
 pub struct MconnConnectorUpdateRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, MconnCustomerConnectorUpdateResponse>,
 }
 
 impl<'a> MconnConnectorUpdateRequest<'a> {
@@ -261,23 +315,35 @@ impl<'a> MconnConnectorUpdateRequest<'a> {
         self.builder = self.builder.path_param("connector_id", value);
         self
     }
-    pub fn with_body(mut self, body: serde_json::Value) -> Self {
+    pub fn with_body(
+        mut self,
+        body: crate::models::mconn_customer_connector_update_request::MconnCustomerConnectorUpdateRequest,
+    ) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<MconnCustomerConnectorUpdateResponse> {
         self.builder.send().await
     }
 }
-
 /// Update Connector
+///
+/// **HTTP Method:** `PATCH`
+/// **Path:** `/accounts/{account_id}/magic/connectors/{connector_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `connector_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::magic_connectors };
+/// use cloudflare::{ ApiClient, apis::magic_connectors };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = mconn_connector_update(&api)
-///     .with_account_id("value")
-///     .with_connector_id("value")
+/// # let body: crate::models::mconn_customer_connector_update_request::MconnCustomerConnectorUpdateRequest = todo!();
+/// let response = mconn_connector_update(&api)
+///     .with_account_id("account_id")
+///     .with_connector_id("connector_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -287,7 +353,7 @@ pub fn mconn_connector_update(api: &ApiClient) -> MconnConnectorUpdateRequest<'_
 
 #[derive(Debug)]
 pub struct MconnConnectorTelemetryEventsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, MconnCustomerEventsGetSuccess>,
 }
 
 impl<'a> MconnConnectorTelemetryEventsRequest<'a> {
@@ -326,19 +392,34 @@ impl<'a> MconnConnectorTelemetryEventsRequest<'a> {
         self.builder = self.builder.header_param("cursor", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<MconnCustomerEventsGetSuccess> {
         self.builder.send().await
     }
 }
-
 /// List Events
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/magic/connectors/{connector_id}/telemetry/events`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `connector_id` (path, required)
+/// - `from` (query,required)
+/// - `to` (query,required)
+/// - `limit` (query,optional)
+/// - `cursor` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::magic_connectors };
+/// use cloudflare::{ ApiClient, apis::magic_connectors };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = mconn_connector_telemetry_events(&api)
-///     .with_account_id("value")
-///     .with_connector_id("value")
+/// let response = mconn_connector_telemetry_events(&api)
+///     .with_account_id("account_id")
+///     .with_connector_id("connector_id")
+///     .with_from("from")
+///     .with_to("to")
+///     .with_limit("limit")
+///     .with_cursor("cursor")
 ///     .send()
 ///     .await?;
 /// ```
@@ -350,7 +431,7 @@ pub fn mconn_connector_telemetry_events(
 
 #[derive(Debug)]
 pub struct MconnConnectorTelemetryEventsGetRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, MconnCustomerEventsGetLatestSuccess>,
 }
 
 impl<'a> MconnConnectorTelemetryEventsGetRequest<'a> {
@@ -373,19 +454,26 @@ impl<'a> MconnConnectorTelemetryEventsGetRequest<'a> {
         self.builder = self.builder.path_param("connector_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<MconnCustomerEventsGetLatestSuccess> {
         self.builder.send().await
     }
 }
-
 /// Get latest Events
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/magic/connectors/{connector_id}/telemetry/events/latest`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `connector_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::magic_connectors };
+/// use cloudflare::{ ApiClient, apis::magic_connectors };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = mconn_connector_telemetry_events_get(&api)
-///     .with_account_id("value")
-///     .with_connector_id("value")
+/// let response = mconn_connector_telemetry_events_get(&api)
+///     .with_account_id("account_id")
+///     .with_connector_id("connector_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -397,7 +485,7 @@ pub fn mconn_connector_telemetry_events_get(
 
 #[derive(Debug)]
 pub struct MconnConnectorTelemetryEventsGet3Request<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, MconnCustomerEventGetSuccess>,
 }
 
 impl<'a> MconnConnectorTelemetryEventsGet3Request<'a> {
@@ -426,21 +514,30 @@ impl<'a> MconnConnectorTelemetryEventsGet3Request<'a> {
         self.builder = self.builder.path_param("event_n", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<MconnCustomerEventGetSuccess> {
         self.builder.send().await
     }
 }
-
 /// Get Event
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/magic/connectors/{connector_id}/telemetry/events/{event_t}.{event_n}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `connector_id` (path, required)
+/// - `event_t` (path, required)
+/// - `event_n` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::magic_connectors };
+/// use cloudflare::{ ApiClient, apis::magic_connectors };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = mconn_connector_telemetry_events_get_3(&api)
-///     .with_account_id("value")
-///     .with_connector_id("value")
-///     .with_event_t("value")
-///     .with_event_n("value")
+/// let response = mconn_connector_telemetry_events_get_3(&api)
+///     .with_account_id("account_id")
+///     .with_connector_id("connector_id")
+///     .with_event_t("event_t")
+///     .with_event_n("event_n")
 ///     .send()
 ///     .await?;
 /// ```
@@ -452,7 +549,7 @@ pub fn mconn_connector_telemetry_events_get_3(
 
 #[derive(Debug)]
 pub struct MconnConnectorTelemetrySnapshotsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, MconnCustomerSnapshotsGetSuccess>,
 }
 
 impl<'a> MconnConnectorTelemetrySnapshotsRequest<'a> {
@@ -491,19 +588,34 @@ impl<'a> MconnConnectorTelemetrySnapshotsRequest<'a> {
         self.builder = self.builder.header_param("cursor", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<MconnCustomerSnapshotsGetSuccess> {
         self.builder.send().await
     }
 }
-
 /// List Snapshots
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/magic/connectors/{connector_id}/telemetry/snapshots`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `connector_id` (path, required)
+/// - `from` (query,required)
+/// - `to` (query,required)
+/// - `limit` (query,optional)
+/// - `cursor` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::magic_connectors };
+/// use cloudflare::{ ApiClient, apis::magic_connectors };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = mconn_connector_telemetry_snapshots(&api)
-///     .with_account_id("value")
-///     .with_connector_id("value")
+/// let response = mconn_connector_telemetry_snapshots(&api)
+///     .with_account_id("account_id")
+///     .with_connector_id("connector_id")
+///     .with_from("from")
+///     .with_to("to")
+///     .with_limit("limit")
+///     .with_cursor("cursor")
 ///     .send()
 ///     .await?;
 /// ```
@@ -515,7 +627,7 @@ pub fn mconn_connector_telemetry_snapshots(
 
 #[derive(Debug)]
 pub struct MconnConnectorTelemetrySnapshotsGetRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, MconnCustomerSnapshotsGetLatestSuccess>,
 }
 
 impl<'a> MconnConnectorTelemetrySnapshotsGetRequest<'a> {
@@ -538,19 +650,26 @@ impl<'a> MconnConnectorTelemetrySnapshotsGetRequest<'a> {
         self.builder = self.builder.path_param("connector_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<MconnCustomerSnapshotsGetLatestSuccess> {
         self.builder.send().await
     }
 }
-
 /// Get latest Snapshots
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/magic/connectors/{connector_id}/telemetry/snapshots/latest`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `connector_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::magic_connectors };
+/// use cloudflare::{ ApiClient, apis::magic_connectors };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = mconn_connector_telemetry_snapshots_get(&api)
-///     .with_account_id("value")
-///     .with_connector_id("value")
+/// let response = mconn_connector_telemetry_snapshots_get(&api)
+///     .with_account_id("account_id")
+///     .with_connector_id("connector_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -562,7 +681,7 @@ pub fn mconn_connector_telemetry_snapshots_get(
 
 #[derive(Debug)]
 pub struct MconnConnectorTelemetrySnapshotsGet3Request<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, MconnCustomerSnapshotGetSuccess>,
 }
 
 impl<'a> MconnConnectorTelemetrySnapshotsGet3Request<'a> {
@@ -586,20 +705,28 @@ impl<'a> MconnConnectorTelemetrySnapshotsGet3Request<'a> {
         self.builder = self.builder.path_param("snapshot_t", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<MconnCustomerSnapshotGetSuccess> {
         self.builder.send().await
     }
 }
-
 /// Get Snapshot
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/magic/connectors/{connector_id}/telemetry/snapshots/{snapshot_t}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `connector_id` (path, required)
+/// - `snapshot_t` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::magic_connectors };
+/// use cloudflare::{ ApiClient, apis::magic_connectors };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = mconn_connector_telemetry_snapshots_get_3(&api)
-///     .with_account_id("value")
-///     .with_connector_id("value")
-///     .with_snapshot_t("value")
+/// let response = mconn_connector_telemetry_snapshots_get_3(&api)
+///     .with_account_id("account_id")
+///     .with_connector_id("connector_id")
+///     .with_snapshot_t("snapshot_t")
 ///     .send()
 ///     .await?;
 /// ```

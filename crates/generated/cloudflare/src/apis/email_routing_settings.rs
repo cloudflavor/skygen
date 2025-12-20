@@ -15,12 +15,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::email_email_settings_response_single::EmailEmailSettingsResponseSingle;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct GetEmailRoutingSettingsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, EmailEmailSettingsResponseSingle>,
 }
 
 impl<'a> GetEmailRoutingSettingsRequest<'a> {
@@ -34,18 +35,26 @@ impl<'a> GetEmailRoutingSettingsRequest<'a> {
         self.builder = self.builder.path_param("zone_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<EmailEmailSettingsResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Get Email Routing settings
+///
+/// Get information about the settings for your Email Routing zone.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/email/routing`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::email_routing_settings };
+/// use cloudflare::{ ApiClient, apis::email_routing_settings };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_email_routing_settings(&api)
-///     .with_zone_id("value")
+/// let response = get_email_routing_settings(&api)
+///     .with_zone_id("zone_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -55,7 +64,7 @@ pub fn get_email_routing_settings(api: &ApiClient) -> GetEmailRoutingSettingsReq
 
 #[derive(Debug)]
 pub struct DisableEmailRoutingRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, EmailEmailSettingsResponseSingle>,
 }
 
 impl<'a> DisableEmailRoutingRequest<'a> {
@@ -70,18 +79,26 @@ impl<'a> DisableEmailRoutingRequest<'a> {
         self.builder = self.builder.path_param("zone_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<EmailEmailSettingsResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Disable Email Routing
+///
+/// Disable your Email Routing zone. Also removes additional MX records previously required for Email Routing to work.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/zones/{zone_id}/email/routing/disable`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::email_routing_settings };
+/// use cloudflare::{ ApiClient, apis::email_routing_settings };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = disable_email_routing(&api)
-///     .with_zone_id("value")
+/// let response = disable_email_routing(&api)
+///     .with_zone_id("zone_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -113,14 +130,24 @@ impl<'a> DnsSettingsRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Email Routing - DNS settings
+///
+/// Show the DNS records needed to configure your Email Routing zone.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/email/routing/dns`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `subdomain` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::email_routing_settings };
+/// use cloudflare::{ ApiClient, apis::email_routing_settings };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = dns_settings(&api)
-///     .with_zone_id("value")
+/// let response = dns_settings(&api)
+///     .with_zone_id("zone_id")
+///     .with_subdomain("subdomain")
 ///     .send()
 ///     .await?;
 /// ```
@@ -130,7 +157,7 @@ pub fn dns_settings(api: &ApiClient) -> DnsSettingsRequest<'_> {
 
 #[derive(Debug)]
 pub struct EnableEmailRoutingDnsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, EmailEmailSettingsResponseSingle>,
 }
 
 impl<'a> EnableEmailRoutingDnsRequest<'a> {
@@ -152,18 +179,28 @@ impl<'a> EnableEmailRoutingDnsRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<EmailEmailSettingsResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Enable Email Routing
+///
+/// Enable you Email Routing zone. Add and lock the necessary MX and SPF records.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/zones/{zone_id}/email/routing/dns`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::email_routing_settings };
+/// use cloudflare::{ ApiClient, apis::email_routing_settings };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = enable_email_routing_dns(&api)
-///     .with_zone_id("value")
+/// # let body: crate::models::email_email_setting_dns_request_body::EmailEmailSettingDnsRequestBody = todo!();
+/// let response = enable_email_routing_dns(&api)
+///     .with_zone_id("zone_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -199,14 +236,24 @@ impl<'a> DisableEmailRoutingDnsRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Disable Email Routing
+///
+/// Disable your Email Routing zone. Also removes additional MX records previously required for Email Routing to work.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/zones/{zone_id}/email/routing/dns`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::email_routing_settings };
+/// use cloudflare::{ ApiClient, apis::email_routing_settings };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = disable_email_routing_dns(&api)
-///     .with_zone_id("value")
+/// # let body: crate::models::email_email_setting_dns_request_body::EmailEmailSettingDnsRequestBody = todo!();
+/// let response = disable_email_routing_dns(&api)
+///     .with_zone_id("zone_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -216,7 +263,7 @@ pub fn disable_email_routing_dns(api: &ApiClient) -> DisableEmailRoutingDnsReque
 
 #[derive(Debug)]
 pub struct UnlockEmailRoutingDnsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, EmailEmailSettingsResponseSingle>,
 }
 
 impl<'a> UnlockEmailRoutingDnsRequest<'a> {
@@ -238,18 +285,28 @@ impl<'a> UnlockEmailRoutingDnsRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<EmailEmailSettingsResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Unlock Email Routing
+///
+/// Unlock MX Records previously locked by Email Routing.
+///
+/// **HTTP Method:** `PATCH`
+/// **Path:** `/zones/{zone_id}/email/routing/dns`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::email_routing_settings };
+/// use cloudflare::{ ApiClient, apis::email_routing_settings };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = unlock_email_routing_dns(&api)
-///     .with_zone_id("value")
+/// # let body: crate::models::email_email_setting_dns_request_body::EmailEmailSettingDnsRequestBody = todo!();
+/// let response = unlock_email_routing_dns(&api)
+///     .with_zone_id("zone_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -259,7 +316,7 @@ pub fn unlock_email_routing_dns(api: &ApiClient) -> UnlockEmailRoutingDnsRequest
 
 #[derive(Debug)]
 pub struct EnableEmailRoutingRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, EmailEmailSettingsResponseSingle>,
 }
 
 impl<'a> EnableEmailRoutingRequest<'a> {
@@ -274,18 +331,26 @@ impl<'a> EnableEmailRoutingRequest<'a> {
         self.builder = self.builder.path_param("zone_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<EmailEmailSettingsResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Enable Email Routing
+///
+/// Enable you Email Routing zone. Add and lock the necessary MX and SPF records.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/zones/{zone_id}/email/routing/enable`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::email_routing_settings };
+/// use cloudflare::{ ApiClient, apis::email_routing_settings };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = enable_email_routing(&api)
-///     .with_zone_id("value")
+/// let response = enable_email_routing(&api)
+///     .with_zone_id("zone_id")
 ///     .send()
 ///     .await?;
 /// ```

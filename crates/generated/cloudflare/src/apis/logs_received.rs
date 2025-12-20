@@ -15,13 +15,15 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::logcontrol_retention_flag_response_single::LogcontrolRetentionFlagResponseSingle;
 use crate::models::logshare_fields_response::LogshareFieldsResponse;
+use crate::models::logshare_logs_response_json_lines::LogshareLogsResponseJsonLines;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct ZonesLogsControlRetentionRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, LogcontrolRetentionFlagResponseSingle>,
 }
 
 impl<'a> ZonesLogsControlRetentionRequest<'a> {
@@ -39,18 +41,26 @@ impl<'a> ZonesLogsControlRetentionRequest<'a> {
         self.builder = self.builder.path_param("zone_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<LogcontrolRetentionFlagResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Get log retention flag
+///
+/// Gets log retention flag for Logpull API.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/logs/control/retention/flag`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::logs_received };
+/// use cloudflare::{ ApiClient, apis::logs_received };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = zones_logs_control_retention(&api)
-///     .with_zone_id("value")
+/// let response = zones_logs_control_retention(&api)
+///     .with_zone_id("zone_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -60,7 +70,7 @@ pub fn zones_logs_control_retention(api: &ApiClient) -> ZonesLogsControlRetentio
 
 #[derive(Debug)]
 pub struct ZonesLogsControlRetentionPostRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, LogcontrolRetentionFlagResponseSingle>,
 }
 
 impl<'a> ZonesLogsControlRetentionPostRequest<'a> {
@@ -86,18 +96,28 @@ impl<'a> ZonesLogsControlRetentionPostRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<LogcontrolRetentionFlagResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Update log retention flag
+///
+/// Updates log retention flag for Logpull API.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/zones/{zone_id}/logs/control/retention/flag`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::logs_received };
+/// use cloudflare::{ ApiClient, apis::logs_received };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = zones_logs_control_retention_post(&api)
-///     .with_zone_id("value")
+/// # let body: crate::models::logcontrol_retention_flag::LogcontrolRetentionFlag = todo!();
+/// let response = zones_logs_control_retention_post(&api)
+///     .with_zone_id("zone_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -109,7 +129,7 @@ pub fn zones_logs_control_retention_post(
 
 #[derive(Debug)]
 pub struct ZonesLogsRayidsRayRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, LogshareLogsResponseJsonLines>,
 }
 
 impl<'a> ZonesLogsRayidsRayRequest<'a> {
@@ -137,19 +157,32 @@ impl<'a> ZonesLogsRayidsRayRequest<'a> {
         self.builder = self.builder.header_param("timestamps", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<LogshareLogsResponseJsonLines> {
         self.builder.send().await
     }
 }
-
 /// Get logs RayIDs
+///
+/// The `/rayids` api route allows lookups by specific rayid. The rayids route will return zero, one, or more records (ray ids are not unique).
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/logs/rayids/{ray_id}`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `ray_id` (path, required)
+/// - `fields` (query,optional)
+/// - `timestamps` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::logs_received };
+/// use cloudflare::{ ApiClient, apis::logs_received };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = zones_logs_rayids_ray(&api)
-///     .with_zone_id("value")
-///     .with_ray_id("value")
+/// let response = zones_logs_rayids_ray(&api)
+///     .with_zone_id("zone_id")
+///     .with_ray_id("ray_id")
+///     .with_fields("fields")
+///     .with_timestamps("timestamps")
 ///     .send()
 ///     .await?;
 /// ```
@@ -159,7 +192,7 @@ pub fn zones_logs_rayids_ray(api: &ApiClient) -> ZonesLogsRayidsRayRequest<'_> {
 
 #[derive(Debug)]
 pub struct ZonesLogsReceivedRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, LogshareLogsResponseJsonLines>,
 }
 
 impl<'a> ZonesLogsReceivedRequest<'a> {
@@ -197,18 +230,38 @@ impl<'a> ZonesLogsReceivedRequest<'a> {
         self.builder = self.builder.header_param("timestamps", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<LogshareLogsResponseJsonLines> {
         self.builder.send().await
     }
 }
-
 /// Get logs received
+///
+/// The `/received` api route allows customers to retrieve their edge HTTP logs. The basic access pattern is "give me all the logs for zone Z for minute M", where the minute M refers to the time records were received at Cloudflare's central data center. `start` is inclusive, and `end` is exclusive. Because of that, to get all data, at minutely cadence, starting at 10AM, the proper values are: `start=2018-05-20T10:00:00Z&end=2018-05-20T10:01:00Z`, then `start=2018-05-20T10:01:00Z&end=2018-05-20T10:02:00Z` and so on; the overlap will be handled properly.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/logs/received`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `start` (query,optional)
+/// - `end` (query,required)
+/// - `fields` (query,optional)
+/// - `sample` (query,optional)
+/// - `count` (query,optional)
+/// - `timestamps` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::logs_received };
+/// use cloudflare::{ ApiClient, apis::logs_received };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = zones_logs_received(&api)
-///     .with_zone_id("value")
+/// let response = zones_logs_received(&api)
+///     .with_zone_id("zone_id")
+///     .with_start("start")
+///     .with_end("end")
+///     .with_fields("fields")
+///     .with_sample("sample")
+///     .with_count("count")
+///     .with_timestamps("timestamps")
 ///     .send()
 ///     .await?;
 /// ```
@@ -237,14 +290,22 @@ impl<'a> ZonesLogsReceivedFieldsRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// List fields
+///
+/// Lists all fields available. The response is json object with key-value pairs, where keys are field names, and values are descriptions.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/logs/received/fields`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::logs_received };
+/// use cloudflare::{ ApiClient, apis::logs_received };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = zones_logs_received_fields(&api)
-///     .with_zone_id("value")
+/// let response = zones_logs_received_fields(&api)
+///     .with_zone_id("zone_id")
 ///     .send()
 ///     .await?;
 /// ```

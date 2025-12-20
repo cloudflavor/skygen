@@ -57,13 +57,32 @@ impl<'a> GetEntitiesAsnListRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// List autonomous systems
+///
+/// Retrieves a list of autonomous systems.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/entities/asns`
+///
+/// **Parameters**
+/// - `limit` (query,optional)
+/// - `offset` (query,optional)
+/// - `asn` (query,optional)
+/// - `location` (query,optional)
+/// - `orderBy` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_entities };
+/// use cloudflare::{ ApiClient, apis::radar_entities };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_entities_asn_list(&api)
+/// let response = get_entities_asn_list(&api)
+///     .with_limit("limit")
+///     .with_offset("offset")
+///     .with_asn("asn")
+///     .with_location("location")
+///     .with_order_by("orderBy")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```
@@ -94,13 +113,24 @@ impl<'a> GetEntitiesAsnRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get AS details by IP address
+///
+/// Retrieves the requested autonomous system information based on IP address. Population estimates come from APNIC (refer to <https://labs.apnic.net/?p=526).>
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/entities/asns/ip`
+///
+/// **Parameters**
+/// - `ip` (query,required)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_entities };
+/// use cloudflare::{ ApiClient, apis::radar_entities };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_entities_asn(&api)
+/// let response = get_entities_asn(&api)
+///     .with_ip("ip")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```
@@ -132,14 +162,24 @@ impl<'a> GetEntitiesAsnGetRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get AS details by ASN
+///
+/// Retrieves the requested autonomous system information. (A confidence level below `5` indicates a low level of confidence in the traffic data - normally this happens because Cloudflare has a small amount of traffic from/to this AS). Population estimates come from APNIC (refer to <https://labs.apnic.net/?p=526).>
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/entities/asns/{asn}`
+///
+/// **Parameters**
+/// - `asn` (path, required)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_entities };
+/// use cloudflare::{ ApiClient, apis::radar_entities };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_entities_asn_get(&api)
-///     .with_asn("value")
+/// let response = get_entities_asn_get(&api)
+///     .with_asn("asn")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```
@@ -175,14 +215,26 @@ impl<'a> GetAsnsRelRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get AS-level relationships by ASN
+///
+/// Retrieves AS-level relationship for given networks.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/entities/asns/{asn}/rel`
+///
+/// **Parameters**
+/// - `asn` (path, required)
+/// - `asn2` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_entities };
+/// use cloudflare::{ ApiClient, apis::radar_entities };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_asns_rel(&api)
-///     .with_asn("value")
+/// let response = get_asns_rel(&api)
+///     .with_asn("asn")
+///     .with_asn2("asn2")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```
@@ -213,13 +265,24 @@ impl<'a> GetEntitiesIpRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get IP address details
+///
+/// Retrieves IP address information.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/entities/ip`
+///
+/// **Parameters**
+/// - `ip` (query,required)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_entities };
+/// use cloudflare::{ ApiClient, apis::radar_entities };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_entities_ip(&api)
+/// let response = get_entities_ip(&api)
+///     .with_ip("ip")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```
@@ -258,13 +321,28 @@ impl<'a> GetEntitiesLocationsRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// List locations
+///
+/// Retrieves a list of locations.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/entities/locations`
+///
+/// **Parameters**
+/// - `limit` (query,optional)
+/// - `offset` (query,optional)
+/// - `location` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_entities };
+/// use cloudflare::{ ApiClient, apis::radar_entities };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_entities_locations(&api)
+/// let response = get_entities_locations(&api)
+///     .with_limit("limit")
+///     .with_offset("offset")
+///     .with_location("location")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```
@@ -297,14 +375,24 @@ impl<'a> GetEntitiesLocationRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get location details
+///
+/// Retrieves the requested location information. (A confidence level below `5` indicates a low level of confidence in the traffic data - normally this happens because Cloudflare has a small amount of traffic from/to this location).
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/entities/locations/{location}`
+///
+/// **Parameters**
+/// - `location` (path, required)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_entities };
+/// use cloudflare::{ ApiClient, apis::radar_entities };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_entities_location(&api)
-///     .with_location("value")
+/// let response = get_entities_location(&api)
+///     .with_location("location")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```

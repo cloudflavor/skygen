@@ -15,12 +15,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::aaa_history_components_schemas_response_collection::AaaHistoryComponentsSchemasResponseCollection;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct ListHistoryRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, AaaHistoryComponentsSchemasResponseCollection>,
 }
 
 impl<'a> ListHistoryRequest<'a> {
@@ -54,18 +55,34 @@ impl<'a> ListHistoryRequest<'a> {
         self.builder = self.builder.header_param("since", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<AaaHistoryComponentsSchemasResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// List History
+///
+/// Gets a list of history records for notifications sent to an account. The records are displayed for last `x` number of days based on the zone plan (free = 30, pro = 30, biz = 30, ent = 90).
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/alerting/v3/history`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `per_page` (query,optional)
+/// - `before` (query,optional)
+/// - `page` (query,optional)
+/// - `since` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::notification_history };
+/// use cloudflare::{ ApiClient, apis::notification_history };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_history(&api)
-///     .with_account_id("value")
+/// let response = list_history(&api)
+///     .with_account_id("account_id")
+///     .with_per_page("per_page")
+///     .with_before("before")
+///     .with_page("page")
+///     .with_since("since")
 ///     .send()
 ///     .await?;
 /// ```

@@ -15,6 +15,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::error::Error;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
@@ -33,13 +34,41 @@ impl<'a> ListRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// List All Images
+///
+/// To list all of the images available on your account, send a GET request to /v2/images.
+///
+/// ## Filtering Results
+/// -----
+///
+/// It's possible to request filtered results by including certain query parameters.
+///
+/// **Image Type**
+///
+/// Either 1-Click Application or OS Distribution images can be filtered by using the `type` query parameter.
+///
+/// > Important: The `type` query parameter does not directly relate to the `type` attribute.
+///
+/// To retrieve only ***distribution*** images, include the `type` query parameter set to distribution, `/v2/images?type=distribution`.
+///
+/// To retrieve only ***application*** images, include the `type` query parameter set to application, `/v2/images?type=application`.
+///
+/// **User Images**
+///
+/// To retrieve only the private images of a user, include the `private` query parameter set to true, `/v2/images?private=true`.
+///
+/// **Tags**
+///
+/// To list all images assigned to a specific tag, include the `tag_name` query parameter set to the name of the tag in your GET request. For example, `/v2/images?tag_name=$TAG_NAME`.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/images`
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::images };
+/// use digitalocean::{ ApiClient, apis::images };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list(&api)
+/// let response = list(&api)
 ///     .send()
 ///     .await?;
 /// ```
@@ -49,7 +78,7 @@ pub fn list(api: &ApiClient) -> ListRequest<'_> {
 
 #[derive(Debug)]
 pub struct CreateCustomRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, Error>,
 }
 
 impl<'a> CreateCustomRequest<'a> {
@@ -58,21 +87,33 @@ impl<'a> CreateCustomRequest<'a> {
 
         Self { builder }
     }
-    pub fn with_body(mut self, body: serde_json::Value) -> Self {
+    pub fn with_body(mut self, body: crate::models::image_new_custom::ImageNewCustom) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<Error> {
         self.builder.send().await
     }
 }
-
 /// Create a Custom Image
+///
+/// To create a new custom image, send a POST request to /v2/images.
+/// The body must contain a url attribute pointing to a Linux virtual machine
+/// image to be imported into DigitalOcean.
+/// The image must be in the raw, qcow2, vhdx, vdi, or vmdk format.
+/// It may be compressed using gzip or bzip2 and must be smaller than 100 GB after
+/// being decompressed.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/v2/images`
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::images };
+/// use digitalocean::{ ApiClient, apis::images };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = create_custom(&api)
+/// # let body: crate::models::image_new_custom::ImageNewCustom = todo!();
+/// let response = create_custom(&api)
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -82,7 +123,7 @@ pub fn create_custom(api: &ApiClient) -> CreateCustomRequest<'_> {
 
 #[derive(Debug)]
 pub struct GetRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, std::collections::BTreeMap<String, serde_json::Value>>,
 }
 
 impl<'a> GetRequest<'a> {
@@ -96,18 +137,27 @@ impl<'a> GetRequest<'a> {
         self.builder = self.builder.path_param("image_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<std::collections::BTreeMap<String, serde_json::Value>> {
         self.builder.send().await
     }
 }
-
 /// Retrieve an Existing Image
+///
+/// To retrieve information about an image, send a `GET` request to
+/// `/v2/images/$IDENTIFIER`.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/images/{image_id}`
+///
+/// **Parameters**
+/// - `image_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::images };
+/// use digitalocean::{ ApiClient, apis::images };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get(&api)
-///     .with_image_id("value")
+/// let response = get(&api)
+///     .with_image_id("image_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -117,7 +167,7 @@ pub fn get(api: &ApiClient) -> GetRequest<'_> {
 
 #[derive(Debug)]
 pub struct UpdateRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, std::collections::BTreeMap<String, serde_json::Value>>,
 }
 
 impl<'a> UpdateRequest<'a> {
@@ -136,18 +186,30 @@ impl<'a> UpdateRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<std::collections::BTreeMap<String, serde_json::Value>> {
         self.builder.send().await
     }
 }
-
 /// Update an Image
+///
+/// To update an image, send a `PUT` request to `/v2/images/$IMAGE_ID`.
+/// Set the `name` attribute to the new value you would like to use.
+/// For custom images, the `description` and `distribution` attributes may also be updated.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/v2/images/{image_id}`
+///
+/// **Parameters**
+/// - `image_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::images };
+/// use digitalocean::{ ApiClient, apis::images };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = update(&api)
-///     .with_image_id("value")
+/// # let body: crate::models::image_update::ImageUpdate = todo!();
+/// let response = update(&api)
+///     .with_image_id("image_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -157,7 +219,7 @@ pub fn update(api: &ApiClient) -> UpdateRequest<'_> {
 
 #[derive(Debug)]
 pub struct DeleteRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, Error>,
 }
 
 impl<'a> DeleteRequest<'a> {
@@ -171,18 +233,26 @@ impl<'a> DeleteRequest<'a> {
         self.builder = self.builder.path_param("image_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<Error> {
         self.builder.send().await
     }
 }
-
 /// Delete an Image
+///
+/// To delete a snapshot or custom image, send a `DELETE` request to `/v2/images/$IMAGE_ID`.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/v2/images/{image_id}`
+///
+/// **Parameters**
+/// - `image_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::images };
+/// use digitalocean::{ ApiClient, apis::images };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete(&api)
-///     .with_image_id("value")
+/// let response = delete(&api)
+///     .with_image_id("image_id")
 ///     .send()
 ///     .await?;
 /// ```

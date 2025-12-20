@@ -19,5 +19,5 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct WaitingroomQueryPreview {
-    pub custom_html: serde_json::Value,
+    pub custom_html: crate::models::waitingroom_custom_page_html::WaitingroomCustomPageHtml,
 }

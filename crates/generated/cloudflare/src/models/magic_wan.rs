@@ -20,12 +20,12 @@ use serde::{Deserialize, Serialize};
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct MagicWan {
     pub health_check_rate: Option<String>,
-    pub id: Option<serde_json::Value>,
+    pub id: Option<crate::models::magic_identifier::MagicIdentifier>,
     pub name: Option<String>,
-    pub physport: Option<serde_json::Value>,
+    pub physport: Option<crate::models::magic_port::MagicPort>,
     pub priority: Option<i64>,
-    pub site_id: Option<serde_json::Value>,
+    pub site_id: Option<crate::models::magic_identifier::MagicIdentifier>,
     pub static_addressing:
         Option<crate::models::magic_wan_static_addressing::MagicWanStaticAddressing>,
-    pub vlan_tag: Option<serde_json::Value>,
+    pub vlan_tag: Option<crate::models::magic_vlan_tag::MagicVlanTag>,
 }

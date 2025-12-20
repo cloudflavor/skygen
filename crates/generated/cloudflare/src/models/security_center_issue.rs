@@ -21,13 +21,13 @@ use serde::{Deserialize, Serialize};
 pub struct SecurityCenterIssue {
     pub dismissed: Option<bool>,
     pub id: Option<String>,
-    pub issue_class: Option<serde_json::Value>,
-    pub issue_type: Option<serde_json::Value>,
+    pub issue_class: Option<crate::models::security_center_issue_class::SecurityCenterIssueClass>,
+    pub issue_type: Option<crate::models::security_center_issue_type::SecurityCenterIssueType>,
     pub payload: Option<std::collections::BTreeMap<String, serde_json::Value>>,
     pub resolve_link: Option<String>,
     pub resolve_text: Option<String>,
     pub severity: Option<String>,
     pub since: Option<String>,
-    pub subject: Option<serde_json::Value>,
+    pub subject: Option<crate::models::security_center_subject::SecurityCenterSubject>,
     pub timestamp: Option<String>,
 }

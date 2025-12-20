@@ -15,12 +15,15 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::secondary_dns_response_collection::SecondaryDnsResponseCollection;
+use crate::models::secondary_dns_schemas_id_response::SecondaryDnsSchemasIdResponse;
+use crate::models::secondary_dns_single_response::SecondaryDnsSingleResponse;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct ListTsiGsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, SecondaryDnsResponseCollection>,
 }
 
 impl<'a> ListTsiGsRequest<'a> {
@@ -38,18 +41,26 @@ impl<'a> ListTsiGsRequest<'a> {
         self.builder = self.builder.path_param("account_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<SecondaryDnsResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// List TSIGs
+///
+/// List TSIGs.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/secondary_dns/tsigs`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::secondary_dns_tsig };
+/// use cloudflare::{ ApiClient, apis::secondary_dns_tsig };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_tsi_gs(&api)
-///     .with_account_id("value")
+/// let response = list_tsi_gs(&api)
+///     .with_account_id("account_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -59,7 +70,7 @@ pub fn list_tsi_gs(api: &ApiClient) -> ListTsiGsRequest<'_> {
 
 #[derive(Debug)]
 pub struct CreateTsigRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, SecondaryDnsSingleResponse>,
 }
 
 impl<'a> CreateTsigRequest<'a> {
@@ -82,18 +93,28 @@ impl<'a> CreateTsigRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<SecondaryDnsSingleResponse> {
         self.builder.send().await
     }
 }
-
 /// Create TSIG
+///
+/// Create TSIG.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/secondary_dns/tsigs`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::secondary_dns_tsig };
+/// use cloudflare::{ ApiClient, apis::secondary_dns_tsig };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = create_tsig(&api)
-///     .with_account_id("value")
+/// # let body: crate::models::secondary_dns_tsig::SecondaryDnsTsig = todo!();
+/// let response = create_tsig(&api)
+///     .with_account_id("account_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -103,7 +124,7 @@ pub fn create_tsig(api: &ApiClient) -> CreateTsigRequest<'_> {
 
 #[derive(Debug)]
 pub struct DetailsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, SecondaryDnsSingleResponse>,
 }
 
 impl<'a> DetailsRequest<'a> {
@@ -126,19 +147,28 @@ impl<'a> DetailsRequest<'a> {
         self.builder = self.builder.path_param("tsig_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<SecondaryDnsSingleResponse> {
         self.builder.send().await
     }
 }
-
 /// TSIG Details
+///
+/// Get TSIG.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/secondary_dns/tsigs/{tsig_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `tsig_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::secondary_dns_tsig };
+/// use cloudflare::{ ApiClient, apis::secondary_dns_tsig };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = details(&api)
-///     .with_account_id("value")
-///     .with_tsig_id("value")
+/// let response = details(&api)
+///     .with_account_id("account_id")
+///     .with_tsig_id("tsig_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -148,7 +178,7 @@ pub fn details(api: &ApiClient) -> DetailsRequest<'_> {
 
 #[derive(Debug)]
 pub struct UpdateTsigRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, SecondaryDnsSingleResponse>,
 }
 
 impl<'a> UpdateTsigRequest<'a> {
@@ -176,19 +206,30 @@ impl<'a> UpdateTsigRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<SecondaryDnsSingleResponse> {
         self.builder.send().await
     }
 }
-
 /// Update TSIG
+///
+/// Modify TSIG.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/accounts/{account_id}/secondary_dns/tsigs/{tsig_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `tsig_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::secondary_dns_tsig };
+/// use cloudflare::{ ApiClient, apis::secondary_dns_tsig };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = update_tsig(&api)
-///     .with_account_id("value")
-///     .with_tsig_id("value")
+/// # let body: crate::models::secondary_dns_tsig::SecondaryDnsTsig = todo!();
+/// let response = update_tsig(&api)
+///     .with_account_id("account_id")
+///     .with_tsig_id("tsig_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -198,7 +239,7 @@ pub fn update_tsig(api: &ApiClient) -> UpdateTsigRequest<'_> {
 
 #[derive(Debug)]
 pub struct DeleteTsigRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, SecondaryDnsSchemasIdResponse>,
 }
 
 impl<'a> DeleteTsigRequest<'a> {
@@ -221,19 +262,28 @@ impl<'a> DeleteTsigRequest<'a> {
         self.builder = self.builder.path_param("tsig_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<SecondaryDnsSchemasIdResponse> {
         self.builder.send().await
     }
 }
-
 /// Delete TSIG
+///
+/// Delete TSIG.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/accounts/{account_id}/secondary_dns/tsigs/{tsig_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `tsig_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::secondary_dns_tsig };
+/// use cloudflare::{ ApiClient, apis::secondary_dns_tsig };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete_tsig(&api)
-///     .with_account_id("value")
-///     .with_tsig_id("value")
+/// let response = delete_tsig(&api)
+///     .with_account_id("account_id")
+///     .with_tsig_id("tsig_id")
 ///     .send()
 ///     .await?;
 /// ```

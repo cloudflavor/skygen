@@ -19,7 +19,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct AddressingApiResponseCommon {
-    pub errors: serde_json::Value,
-    pub messages: serde_json::Value,
+    pub errors: crate::models::addressing_messages::AddressingMessages,
+    pub messages: crate::models::addressing_messages::AddressingMessages,
     pub success: bool,
 }

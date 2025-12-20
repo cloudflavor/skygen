@@ -19,16 +19,16 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct TunnelCfdTunnel {
-    pub account_tag: Option<serde_json::Value>,
-    pub connections: Option<serde_json::Value>,
-    pub conns_active_at: Option<serde_json::Value>,
-    pub conns_inactive_at: Option<serde_json::Value>,
-    pub created_at: Option<serde_json::Value>,
-    pub deleted_at: Option<serde_json::Value>,
-    pub id: Option<serde_json::Value>,
+    pub account_tag: Option<crate::models::tunnel_account_id::TunnelAccountId>,
+    pub connections: Option<crate::models::tunnel_connections::TunnelConnections>,
+    pub conns_active_at: Option<crate::models::tunnel_conns_active_at::TunnelConnsActiveAt>,
+    pub conns_inactive_at: Option<crate::models::tunnel_conns_inactive_at::TunnelConnsInactiveAt>,
+    pub created_at: Option<crate::models::tunnel_created_at::TunnelCreatedAt>,
+    pub deleted_at: Option<crate::models::tunnel_deleted_at::TunnelDeletedAt>,
+    pub id: Option<crate::models::tunnel_tunnel_id::TunnelTunnelId>,
     pub metadata: Option<crate::models::tunnel_metadata::TunnelMetadata>,
-    pub name: Option<serde_json::Value>,
-    pub remote_config: Option<serde_json::Value>,
-    pub status: Option<serde_json::Value>,
-    pub tun_type: Option<serde_json::Value>,
+    pub name: Option<crate::models::tunnel_tunnel_name::TunnelTunnelName>,
+    pub remote_config: Option<crate::models::tunnel_remote_config::TunnelRemoteConfig>,
+    pub status: Option<crate::models::tunnel_status::TunnelStatus>,
+    pub tun_type: Option<crate::models::tunnel_tunnel_type::TunnelTunnelType>,
 }

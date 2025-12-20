@@ -21,7 +21,7 @@ use serde::{Deserialize, Serialize};
 pub struct MconnControllerDevice {
     pub crypt_key: String,
     pub crypt_key_rotation_finished_at: Option<String>,
-    pub id: serde_json::Value,
+    pub id: crate::models::mconn_uuid::MconnUuid,
     pub imaged_at: Option<String>,
     pub last_crypt_key: Option<String>,
     pub license_key_sha256: Option<String>,

@@ -20,8 +20,8 @@ use serde::{Deserialize, Serialize};
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct R2Bucket {
     pub creation_date: Option<String>,
-    pub jurisdiction: Option<serde_json::Value>,
-    pub location: Option<serde_json::Value>,
-    pub name: Option<serde_json::Value>,
-    pub storage_class: Option<serde_json::Value>,
+    pub jurisdiction: Option<crate::models::r2_jurisdiction::R2Jurisdiction>,
+    pub location: Option<crate::models::r2_bucket_location::R2BucketLocation>,
+    pub name: Option<crate::models::r2_bucket_name::R2BucketName>,
+    pub storage_class: Option<crate::models::r2_storage_class::R2StorageClass>,
 }

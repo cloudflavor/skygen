@@ -19,9 +19,15 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct CloudforceOneRequestsRequestEdit {
-    pub content: Option<serde_json::Value>,
+    pub content: Option<
+        crate::models::cloudforce_one_requests_request_content::CloudforceOneRequestsRequestContent,
+    >,
     pub priority: Option<String>,
-    pub request_type: Option<serde_json::Value>,
-    pub summary: Option<serde_json::Value>,
-    pub tlp: Option<serde_json::Value>,
+    pub request_type: Option<
+        crate::models::cloudforce_one_requests_request_type::CloudforceOneRequestsRequestType,
+    >,
+    pub summary: Option<
+        crate::models::cloudforce_one_requests_request_summary::CloudforceOneRequestsRequestSummary,
+    >,
+    pub tlp: Option<crate::models::cloudforce_one_requests_tlp::CloudforceOneRequestsTlp>,
 }

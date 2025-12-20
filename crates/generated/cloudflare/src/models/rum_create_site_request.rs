@@ -19,7 +19,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct RumCreateSiteRequest {
-    pub auto_install: Option<serde_json::Value>,
-    pub host: Option<serde_json::Value>,
-    pub zone_tag: Option<serde_json::Value>,
+    pub auto_install: Option<crate::models::rum_auto_install::RumAutoInstall>,
+    pub host: Option<crate::models::rum_host::RumHost>,
+    pub zone_tag: Option<crate::models::rum_zone_tag::RumZoneTag>,
 }

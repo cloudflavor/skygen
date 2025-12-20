@@ -20,15 +20,16 @@ use serde::{Deserialize, Serialize};
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct McnCatalogSync {
     pub description: String,
-    pub destination_id: serde_json::Value,
-    pub destination_type: serde_json::Value,
+    pub destination_id: crate::models::mcn_catalog_sync_destination_id::McnCatalogSyncDestinationId,
+    pub destination_type:
+        crate::models::mcn_catalog_sync_destination_type::McnCatalogSyncDestinationType,
     pub errors: Option<std::collections::BTreeMap<String, serde_json::Value>>,
-    pub id: serde_json::Value,
+    pub id: crate::models::mcn_catalog_sync_id::McnCatalogSyncId,
     pub includes_discoveries_until: Option<String>,
     pub last_attempted_update_at: Option<String>,
     pub last_successful_update_at: Option<String>,
     pub last_user_update_at: String,
     pub name: String,
     pub policy: String,
-    pub update_mode: serde_json::Value,
+    pub update_mode: crate::models::mcn_catalog_sync_update_mode::McnCatalogSyncUpdateMode,
 }

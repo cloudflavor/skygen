@@ -15,12 +15,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::stream_watermark_response_collection::StreamWatermarkResponseCollection;
+use crate::models::stream_watermark_response_single::StreamWatermarkResponseSingle;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct ListWatermarkProfilesRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, StreamWatermarkResponseCollection>,
 }
 
 impl<'a> ListWatermarkProfilesRequest<'a> {
@@ -35,18 +37,26 @@ impl<'a> ListWatermarkProfilesRequest<'a> {
         self.builder = self.builder.path_param("account_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<StreamWatermarkResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// List watermark profiles
+///
+/// Lists all watermark profiles for an account.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/stream/watermarks`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::stream_watermark_profile };
+/// use cloudflare::{ ApiClient, apis::stream_watermark_profile };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_watermark_profiles(&api)
-///     .with_account_id("value")
+/// let response = list_watermark_profiles(&api)
+///     .with_account_id("account_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -56,7 +66,7 @@ pub fn list_watermark_profiles(api: &ApiClient) -> ListWatermarkProfilesRequest<
 
 #[derive(Debug)]
 pub struct CreateWatermarkProfilesBasicRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, StreamWatermarkResponseSingle>,
 }
 
 impl<'a> CreateWatermarkProfilesBasicRequest<'a> {
@@ -71,18 +81,26 @@ impl<'a> CreateWatermarkProfilesBasicRequest<'a> {
         self.builder = self.builder.path_param("account_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<StreamWatermarkResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Create watermark profiles via basic upload
+///
+/// Creates watermark profiles using a single `HTTP POST multipart/form-data` request.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/stream/watermarks`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::stream_watermark_profile };
+/// use cloudflare::{ ApiClient, apis::stream_watermark_profile };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = create_watermark_profiles_basic(&api)
-///     .with_account_id("value")
+/// let response = create_watermark_profiles_basic(&api)
+///     .with_account_id("account_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -92,7 +110,7 @@ pub fn create_watermark_profiles_basic(api: &ApiClient) -> CreateWatermarkProfil
 
 #[derive(Debug)]
 pub struct DetailsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, StreamWatermarkResponseSingle>,
 }
 
 impl<'a> DetailsRequest<'a> {
@@ -115,19 +133,28 @@ impl<'a> DetailsRequest<'a> {
         self.builder = self.builder.path_param("identifier", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<StreamWatermarkResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Watermark profile details
+///
+/// Retrieves details for a single watermark profile.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/stream/watermarks/{identifier}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `identifier` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::stream_watermark_profile };
+/// use cloudflare::{ ApiClient, apis::stream_watermark_profile };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = details(&api)
-///     .with_account_id("value")
-///     .with_identifier("value")
+/// let response = details(&api)
+///     .with_account_id("account_id")
+///     .with_identifier("identifier")
 ///     .send()
 ///     .await?;
 /// ```
@@ -164,15 +191,24 @@ impl<'a> DeleteWatermarkProfilesRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Delete watermark profiles
+///
+/// Deletes a watermark profile.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/accounts/{account_id}/stream/watermarks/{identifier}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `identifier` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::stream_watermark_profile };
+/// use cloudflare::{ ApiClient, apis::stream_watermark_profile };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete_watermark_profiles(&api)
-///     .with_account_id("value")
-///     .with_identifier("value")
+/// let response = delete_watermark_profiles(&api)
+///     .with_account_id("account_id")
+///     .with_identifier("identifier")
 ///     .send()
 ///     .await?;
 /// ```

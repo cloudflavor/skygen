@@ -44,14 +44,20 @@ impl<'a> ListRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Lists all datasets in an account
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/cloudforce-one/events/dataset`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::dataset };
+/// use cloudflare::{ ApiClient, apis::dataset };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list(&api)
-///     .with_account_id("value")
+/// let response = list(&api)
+///     .with_account_id("account_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -90,14 +96,22 @@ impl<'a> CreateRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Creates a dataset
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/cloudforce-one/events/dataset/create`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::dataset };
+/// use cloudflare::{ ApiClient, apis::dataset };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = create(&api)
-///     .with_account_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = create(&api)
+///     .with_account_id("account_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -134,15 +148,22 @@ impl<'a> ReadRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Reads a dataset
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/cloudforce-one/events/dataset/{dataset_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `dataset_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::dataset };
+/// use cloudflare::{ ApiClient, apis::dataset };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = read(&api)
-///     .with_account_id("value")
-///     .with_dataset_id("value")
+/// let response = read(&api)
+///     .with_account_id("account_id")
+///     .with_dataset_id("dataset_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -186,15 +207,24 @@ impl<'a> UpdateRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Updates an existing dataset
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/cloudforce-one/events/dataset/{dataset_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `dataset_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::dataset };
+/// use cloudflare::{ ApiClient, apis::dataset };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = update(&api)
-///     .with_account_id("value")
-///     .with_dataset_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = update(&api)
+///     .with_account_id("account_id")
+///     .with_dataset_id("dataset_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -238,15 +268,24 @@ impl<'a> UpdatePatchRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Updates an existing dataset
+///
+/// **HTTP Method:** `PATCH`
+/// **Path:** `/accounts/{account_id}/cloudforce-one/events/dataset/{dataset_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `dataset_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::dataset };
+/// use cloudflare::{ ApiClient, apis::dataset };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = update_patch(&api)
-///     .with_account_id("value")
-///     .with_dataset_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = update_patch(&api)
+///     .with_account_id("account_id")
+///     .with_dataset_id("dataset_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```

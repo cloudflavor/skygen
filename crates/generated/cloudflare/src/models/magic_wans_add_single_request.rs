@@ -20,9 +20,9 @@ use serde::{Deserialize, Serialize};
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct MagicWansAddSingleRequest {
     pub name: Option<String>,
-    pub physport: serde_json::Value,
+    pub physport: crate::models::magic_port::MagicPort,
     pub priority: Option<i64>,
     pub static_addressing:
         Option<crate::models::magic_wan_static_addressing::MagicWanStaticAddressing>,
-    pub vlan_tag: Option<serde_json::Value>,
+    pub vlan_tag: Option<crate::models::magic_vlan_tag::MagicVlanTag>,
 }

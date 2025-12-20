@@ -19,5 +19,6 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct CacheRulesOriginH2MaxStreamsResponseValue {
-    pub result: Option<serde_json::Value>,
+    pub result:
+        Option<crate::models::cache_rules_origin_h2_max_streams::CacheRulesOriginH2MaxStreams>,
 }

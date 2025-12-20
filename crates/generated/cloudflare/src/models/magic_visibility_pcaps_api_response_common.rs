@@ -19,8 +19,8 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct MagicVisibilityPcapsApiResponseCommon {
-    pub errors: serde_json::Value,
-    pub messages: serde_json::Value,
+    pub errors: crate::models::magic_visibility_pcaps_messages::MagicVisibilityPcapsMessages,
+    pub messages: crate::models::magic_visibility_pcaps_messages::MagicVisibilityPcapsMessages,
     pub result: serde_json::Value,
     pub success: bool,
 }

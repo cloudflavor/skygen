@@ -19,5 +19,5 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct AddressingBgpPrefixCreate {
-    pub cidr: Option<serde_json::Value>,
+    pub cidr: Option<crate::models::addressing_cidr::AddressingCidr>,
 }

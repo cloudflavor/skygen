@@ -19,7 +19,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct ApiShieldBasicOperation {
-    pub endpoint: serde_json::Value,
-    pub host: serde_json::Value,
-    pub method: serde_json::Value,
+    pub endpoint: crate::models::api_shield_endpoint::ApiShieldEndpoint,
+    pub host: crate::models::api_shield_host::ApiShieldHost,
+    pub method: crate::models::api_shield_method::ApiShieldMethod,
 }

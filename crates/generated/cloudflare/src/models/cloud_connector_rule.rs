@@ -24,5 +24,5 @@ pub struct CloudConnectorRule {
     pub expression: Option<String>,
     pub id: Option<String>,
     pub parameters: Option<std::collections::BTreeMap<String, serde_json::Value>>,
-    pub provider: Option<serde_json::Value>,
+    pub provider: Option<crate::models::cloud_connector_provider::CloudConnectorProvider>,
 }

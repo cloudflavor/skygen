@@ -19,7 +19,6 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct AppIngressSpecRuleMatch {
-
     pub authority: Option<crate::models::app_ingress_spec_rule_string_match_exact::AppIngressSpecRuleStringMatchExact>,
     pub path: Option<crate::models::app_ingress_spec_rule_string_match_prefix::AppIngressSpecRuleStringMatchPrefix>,
 }

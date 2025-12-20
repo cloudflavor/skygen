@@ -51,14 +51,22 @@ impl<'a> CloudforceOnePriorityListRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// List Priority Intelligence Requirements
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/cloudforce-one/requests/priority`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::priority_intelligence_requirements_pir };
+/// use cloudflare::{ ApiClient, apis::priority_intelligence_requirements_pir };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = cloudforce_one_priority_list(&api)
-///     .with_account_id("value")
+/// # let body: crate::models::cloudforce_one_requests_priority_list::CloudforceOneRequestsPriorityList = todo!();
+/// let response = cloudforce_one_priority_list(&api)
+///     .with_account_id("account_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -98,14 +106,22 @@ impl<'a> CloudforceOnePriorityNewRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Create a New Priority Intelligence Requirement
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/cloudforce-one/requests/priority/new`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::priority_intelligence_requirements_pir };
+/// use cloudflare::{ ApiClient, apis::priority_intelligence_requirements_pir };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = cloudforce_one_priority_new(&api)
-///     .with_account_id("value")
+/// # let body: crate::models::cloudforce_one_requests_priority_edit::CloudforceOneRequestsPriorityEdit = todo!();
+/// let response = cloudforce_one_priority_new(&api)
+///     .with_account_id("account_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -137,14 +153,20 @@ impl<'a> CloudforceOnePriorityQuotaRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get Priority Intelligence Requirement Quota
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/cloudforce-one/requests/priority/quota`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::priority_intelligence_requirements_pir };
+/// use cloudflare::{ ApiClient, apis::priority_intelligence_requirements_pir };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = cloudforce_one_priority_quota(&api)
-///     .with_account_id("value")
+/// let response = cloudforce_one_priority_quota(&api)
+///     .with_account_id("account_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -181,15 +203,22 @@ impl<'a> CloudforceOnePriorityGetRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get a Priority Intelligence Requirement
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/cloudforce-one/requests/priority/{priority_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `priority_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::priority_intelligence_requirements_pir };
+/// use cloudflare::{ ApiClient, apis::priority_intelligence_requirements_pir };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = cloudforce_one_priority_get(&api)
-///     .with_account_id("value")
-///     .with_priority_id("value")
+/// let response = cloudforce_one_priority_get(&api)
+///     .with_account_id("account_id")
+///     .with_priority_id("priority_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -234,15 +263,24 @@ impl<'a> CloudforceOnePriorityUpdateRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Update a Priority Intelligence Requirement
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/accounts/{account_id}/cloudforce-one/requests/priority/{priority_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `priority_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::priority_intelligence_requirements_pir };
+/// use cloudflare::{ ApiClient, apis::priority_intelligence_requirements_pir };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = cloudforce_one_priority_update(&api)
-///     .with_account_id("value")
-///     .with_priority_id("value")
+/// # let body: crate::models::cloudforce_one_requests_priority_edit::CloudforceOneRequestsPriorityEdit = todo!();
+/// let response = cloudforce_one_priority_update(&api)
+///     .with_account_id("account_id")
+///     .with_priority_id("priority_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -279,15 +317,22 @@ impl<'a> CloudforceOnePriorityDeleteRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Delete a Priority Intelligence Requirement
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/accounts/{account_id}/cloudforce-one/requests/priority/{priority_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `priority_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::priority_intelligence_requirements_pir };
+/// use cloudflare::{ ApiClient, apis::priority_intelligence_requirements_pir };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = cloudforce_one_priority_delete(&api)
-///     .with_account_id("value")
-///     .with_priority_id("value")
+/// let response = cloudforce_one_priority_delete(&api)
+///     .with_account_id("account_id")
+///     .with_priority_id("priority_id")
 ///     .send()
 ///     .await?;
 /// ```

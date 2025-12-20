@@ -19,6 +19,6 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct Web3ContentListUpdateRequest {
-    pub action: serde_json::Value,
-    pub entries: serde_json::Value,
+    pub action: crate::models::web3_content_list_action::Web3ContentListAction,
+    pub entries: crate::models::web3_content_list_entries::Web3ContentListEntries,
 }

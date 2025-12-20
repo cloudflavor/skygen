@@ -19,7 +19,9 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct CloudforceOnePortScanApiApiResponseCommon {
-    pub errors: serde_json::Value,
-    pub messages: serde_json::Value,
+    pub errors:
+        crate::models::cloudforce_one_port_scan_api_messages::CloudforceOnePortScanApiMessages,
+    pub messages:
+        crate::models::cloudforce_one_port_scan_api_messages::CloudforceOnePortScanApiMessages,
     pub success: bool,
 }

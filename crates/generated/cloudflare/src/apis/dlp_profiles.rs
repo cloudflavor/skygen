@@ -43,14 +43,24 @@ impl<'a> ListAllProfilesRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// List all profiles
+///
+/// Lists all DLP profiles in an account.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/dlp/profiles`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `all` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::dlp_profiles };
+/// use cloudflare::{ ApiClient, apis::dlp_profiles };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_all_profiles(&api)
-///     .with_account_id("value")
+/// let response = list_all_profiles(&api)
+///     .with_account_id("account_id")
+///     .with_all("all")
 ///     .send()
 ///     .await?;
 /// ```
@@ -90,14 +100,24 @@ impl<'a> CreateCustomProfilesRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Create custom profile
+///
+/// Creates a DLP custom profile.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/dlp/profiles/custom`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::dlp_profiles };
+/// use cloudflare::{ ApiClient, apis::dlp_profiles };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = create_custom_profiles(&api)
-///     .with_account_id("value")
+/// # let body: crate::models::dlp_new_custom_profile::DlpNewCustomProfile = todo!();
+/// let response = create_custom_profiles(&api)
+///     .with_account_id("account_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -134,15 +154,24 @@ impl<'a> GetCustomProfileRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get custom profile
+///
+/// Fetches a custom DLP profile by id.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/dlp/profiles/custom/{profile_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `profile_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::dlp_profiles };
+/// use cloudflare::{ ApiClient, apis::dlp_profiles };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_custom_profile(&api)
-///     .with_account_id("value")
-///     .with_profile_id("value")
+/// let response = get_custom_profile(&api)
+///     .with_account_id("account_id")
+///     .with_profile_id("profile_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -187,15 +216,26 @@ impl<'a> UpdateCustomProfileRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Update custom profile
+///
+/// Updates a DLP custom profile.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/accounts/{account_id}/dlp/profiles/custom/{profile_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `profile_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::dlp_profiles };
+/// use cloudflare::{ ApiClient, apis::dlp_profiles };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = update_custom_profile(&api)
-///     .with_account_id("value")
-///     .with_profile_id("value")
+/// # let body: crate::models::dlp_custom_profile_update::DlpCustomProfileUpdate = todo!();
+/// let response = update_custom_profile(&api)
+///     .with_account_id("account_id")
+///     .with_profile_id("profile_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -232,15 +272,24 @@ impl<'a> DeleteCustomProfileRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Delete custom profile
+///
+/// Deletes a DLP custom profile.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/accounts/{account_id}/dlp/profiles/custom/{profile_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `profile_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::dlp_profiles };
+/// use cloudflare::{ ApiClient, apis::dlp_profiles };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete_custom_profile(&api)
-///     .with_account_id("value")
-///     .with_profile_id("value")
+/// let response = delete_custom_profile(&api)
+///     .with_account_id("account_id")
+///     .with_profile_id("profile_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -277,15 +326,24 @@ impl<'a> GetPredefinedProfileRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get predefined profile
+///
+/// Fetches a predefined DLP profile by id.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/dlp/profiles/predefined/{profile_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `profile_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::dlp_profiles };
+/// use cloudflare::{ ApiClient, apis::dlp_profiles };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_predefined_profile(&api)
-///     .with_account_id("value")
-///     .with_profile_id("value")
+/// let response = get_predefined_profile(&api)
+///     .with_account_id("account_id")
+///     .with_profile_id("profile_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -330,15 +388,26 @@ impl<'a> UpdatePredefinedProfileRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Update predefined profile
+///
+/// Updates a DLP predefined profile. Only supports enabling/disabling entries.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/accounts/{account_id}/dlp/profiles/predefined/{profile_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `profile_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::dlp_profiles };
+/// use cloudflare::{ ApiClient, apis::dlp_profiles };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = update_predefined_profile(&api)
-///     .with_account_id("value")
-///     .with_profile_id("value")
+/// # let body: crate::models::dlp_predefined_profile_update::DlpPredefinedProfileUpdate = todo!();
+/// let response = update_predefined_profile(&api)
+///     .with_account_id("account_id")
+///     .with_profile_id("profile_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -375,15 +444,24 @@ impl<'a> GetDlpProfileRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get DLP Profile
+///
+/// Fetches a DLP profile by ID.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/dlp/profiles/{profile_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `profile_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::dlp_profiles };
+/// use cloudflare::{ ApiClient, apis::dlp_profiles };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_dlp_profile(&api)
-///     .with_account_id("value")
-///     .with_profile_id("value")
+/// let response = get_dlp_profile(&api)
+///     .with_account_id("account_id")
+///     .with_profile_id("profile_id")
 ///     .send()
 ///     .await?;
 /// ```

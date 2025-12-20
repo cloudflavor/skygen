@@ -39,14 +39,20 @@ impl<'a> ReadAllRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Fetch all datasets
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/dlp/datasets`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::dlp_datasets };
+/// use cloudflare::{ ApiClient, apis::dlp_datasets };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = read_all(&api)
-///     .with_account_id("value")
+/// let response = read_all(&api)
+///     .with_account_id("account_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -80,14 +86,22 @@ impl<'a> CreateRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Create a new dataset
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/dlp/datasets`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::dlp_datasets };
+/// use cloudflare::{ ApiClient, apis::dlp_datasets };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = create(&api)
-///     .with_account_id("value")
+/// # let body: crate::models::dlp_new_dataset::DlpNewDataset = todo!();
+/// let response = create(&api)
+///     .with_account_id("account_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -124,15 +138,22 @@ impl<'a> ReadRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Fetch a specific dataset
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/dlp/datasets/{dataset_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `dataset_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::dlp_datasets };
+/// use cloudflare::{ ApiClient, apis::dlp_datasets };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = read(&api)
-///     .with_account_id("value")
-///     .with_dataset_id("value")
+/// let response = read(&api)
+///     .with_account_id("account_id")
+///     .with_dataset_id("dataset_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -174,15 +195,24 @@ impl<'a> UpdateRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Update details about a dataset
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/accounts/{account_id}/dlp/datasets/{dataset_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `dataset_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::dlp_datasets };
+/// use cloudflare::{ ApiClient, apis::dlp_datasets };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = update(&api)
-///     .with_account_id("value")
-///     .with_dataset_id("value")
+/// # let body: crate::models::dlp_dataset_update::DlpDatasetUpdate = todo!();
+/// let response = update(&api)
+///     .with_account_id("account_id")
+///     .with_dataset_id("dataset_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -219,15 +249,24 @@ impl<'a> DeleteRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Delete a dataset
+///
+/// This deletes all versions of the dataset.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/accounts/{account_id}/dlp/datasets/{dataset_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `dataset_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::dlp_datasets };
+/// use cloudflare::{ ApiClient, apis::dlp_datasets };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete(&api)
-///     .with_account_id("value")
-///     .with_dataset_id("value")
+/// let response = delete(&api)
+///     .with_account_id("account_id")
+///     .with_dataset_id("dataset_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -264,15 +303,22 @@ impl<'a> CreateVersionRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Prepare to upload a new version of a dataset
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/dlp/datasets/{dataset_id}/upload`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `dataset_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::dlp_datasets };
+/// use cloudflare::{ ApiClient, apis::dlp_datasets };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = create_version(&api)
-///     .with_account_id("value")
-///     .with_dataset_id("value")
+/// let response = create_version(&api)
+///     .with_account_id("account_id")
+///     .with_dataset_id("dataset_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -314,16 +360,29 @@ impl<'a> UploadVersionRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Upload a new version of a dataset
+///
+/// This is used for single-column EDMv1 and Custom Word Lists. The EDM format
+/// can only be created in the Cloudflare dashboard. For other clients, this
+/// operation can only be used for non-secret Custom Word Lists. The body must
+/// be a UTF-8 encoded, newline (NL or CRNL) separated list of words to be matched.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/dlp/datasets/{dataset_id}/upload/{version}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `dataset_id` (path, required)
+/// - `version` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::dlp_datasets };
+/// use cloudflare::{ ApiClient, apis::dlp_datasets };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = upload_version(&api)
-///     .with_account_id("value")
-///     .with_dataset_id("value")
-///     .with_version("value")
+/// let response = upload_version(&api)
+///     .with_account_id("account_id")
+///     .with_dataset_id("dataset_id")
+///     .with_version("version")
 ///     .send()
 ///     .await?;
 /// ```
@@ -362,7 +421,10 @@ impl<'a> DefineColumnsRequest<'a> {
         self.builder = self.builder.path_param("version", value);
         self
     }
-    pub fn with_body(mut self, body: Vec<serde_json::Value>) -> Self {
+    pub fn with_body(
+        mut self,
+        body: Vec<crate::models::dlp_new_dataset_column::DlpNewDatasetColumn>,
+    ) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
@@ -370,16 +432,30 @@ impl<'a> DefineColumnsRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Sets the column information for a multi-column upload
+///
+/// This is used for multi-column EDMv2 datasets. The EDMv2 format can only be
+/// created in the Cloudflare dashboard. The columns in the response appear in
+/// the same order as in the request.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/dlp/datasets/{dataset_id}/versions/{version}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `dataset_id` (path, required)
+/// - `version` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::dlp_datasets };
+/// use cloudflare::{ ApiClient, apis::dlp_datasets };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = define_columns(&api)
-///     .with_account_id("value")
-///     .with_dataset_id("value")
-///     .with_version("value")
+/// # let body: Vec<crate::models::dlp_new_dataset_column::DlpNewDatasetColumn> = todo!();
+/// let response = define_columns(&api)
+///     .with_account_id("account_id")
+///     .with_dataset_id("dataset_id")
+///     .with_version("version")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -426,17 +502,29 @@ impl<'a> UploadDatasetColumnRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Upload a new version of a multi-column dataset
+///
+/// This is used for multi-column EDMv2 datasets. The EDMv2 format can only be
+/// created in the Cloudflare dashboard.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/dlp/datasets/{dataset_id}/versions/{version}/entries/{entry_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `dataset_id` (path, required)
+/// - `version` (path, required)
+/// - `entry_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::dlp_datasets };
+/// use cloudflare::{ ApiClient, apis::dlp_datasets };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = upload_dataset_column(&api)
-///     .with_account_id("value")
-///     .with_dataset_id("value")
-///     .with_version("value")
-///     .with_entry_id("value")
+/// let response = upload_dataset_column(&api)
+///     .with_account_id("account_id")
+///     .with_dataset_id("dataset_id")
+///     .with_version("version")
+///     .with_entry_id("entry_id")
 ///     .send()
 ///     .await?;
 /// ```

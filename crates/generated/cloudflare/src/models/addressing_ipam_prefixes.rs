@@ -19,17 +19,22 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct AddressingIpamPrefixes {
-    pub account_id: Option<serde_json::Value>,
-    pub advertised: Option<serde_json::Value>,
-    pub advertised_modified_at: Option<serde_json::Value>,
-    pub approved: Option<serde_json::Value>,
-    pub asn: Option<serde_json::Value>,
-    pub cidr: Option<serde_json::Value>,
-    pub created_at: Option<serde_json::Value>,
-    pub description: Option<serde_json::Value>,
-    pub id: Option<serde_json::Value>,
-    pub loa_document_id: Option<serde_json::Value>,
-    pub modified_at: Option<serde_json::Value>,
-    pub on_demand_enabled: Option<serde_json::Value>,
-    pub on_demand_locked: Option<serde_json::Value>,
+    pub account_id:
+        Option<crate::models::addressing_account_identifier::AddressingAccountIdentifier>,
+    pub advertised: Option<crate::models::addressing_advertised::AddressingAdvertised>,
+    pub advertised_modified_at:
+        Option<crate::models::addressing_modified_at_nullable::AddressingModifiedAtNullable>,
+    pub approved: Option<crate::models::addressing_approved::AddressingApproved>,
+    pub asn: Option<crate::models::addressing_asn::AddressingAsn>,
+    pub cidr: Option<crate::models::addressing_cidr::AddressingCidr>,
+    pub created_at: Option<crate::models::addressing_timestamp::AddressingTimestamp>,
+    pub description: Option<crate::models::addressing_description::AddressingDescription>,
+    pub id: Option<crate::models::addressing_prefix_identifier::AddressingPrefixIdentifier>,
+    pub loa_document_id:
+        Option<crate::models::addressing_loa_document_identifier::AddressingLoaDocumentIdentifier>,
+    pub modified_at: Option<crate::models::addressing_timestamp::AddressingTimestamp>,
+    pub on_demand_enabled:
+        Option<crate::models::addressing_on_demand_enabled::AddressingOnDemandEnabled>,
+    pub on_demand_locked:
+        Option<crate::models::addressing_on_demand_locked::AddressingOnDemandLocked>,
 }

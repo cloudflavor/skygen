@@ -19,5 +19,5 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct StreamPlaybackWebrtc {
-    pub url: Option<serde_json::Value>,
+    pub url: Option<crate::models::stream_playback_webrtc_url::StreamPlaybackWebrtcUrl>,
 }

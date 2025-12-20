@@ -39,14 +39,22 @@ impl<'a> GetCacheReserveSettingRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get Cache Reserve setting
+///
+/// Increase cache lifetimes by automatically storing all cacheable files into Cloudflare's persistent object storage buckets. Requires Cache Reserve subscription. Note: using Tiered Cache with Cache Reserve is highly recommended to reduce Reserve operations costs. See the [developer docs](<https://developers.cloudflare.com/cache/about/cache-reserve)> for more information.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/cache/cache_reserve`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zone_cache_settings };
+/// use cloudflare::{ ApiClient, apis::zone_cache_settings };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_cache_reserve_setting(&api)
-///     .with_zone_id("value")
+/// let response = get_cache_reserve_setting(&api)
+///     .with_zone_id("zone_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -83,14 +91,24 @@ impl<'a> ChangeCacheReserveSettingRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Change Cache Reserve setting
+///
+/// Increase cache lifetimes by automatically storing all cacheable files into Cloudflare's persistent object storage buckets. Requires Cache Reserve subscription. Note: using Tiered Cache with Cache Reserve is highly recommended to reduce Reserve operations costs. See the [developer docs](<https://developers.cloudflare.com/cache/about/cache-reserve)> for more information.
+///
+/// **HTTP Method:** `PATCH`
+/// **Path:** `/zones/{zone_id}/cache/cache_reserve`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zone_cache_settings };
+/// use cloudflare::{ ApiClient, apis::zone_cache_settings };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = change_cache_reserve_setting(&api)
-///     .with_zone_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = change_cache_reserve_setting(&api)
+///     .with_zone_id("zone_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -122,14 +140,22 @@ impl<'a> GetCacheReserveClearRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get Cache Reserve Clear
+///
+/// You can use Cache Reserve Clear to clear your Cache Reserve, but you must first disable Cache Reserve. In most cases, this will be accomplished within 24 hours. You cannot re-enable Cache Reserve while this process is ongoing. Keep in mind that you cannot undo or cancel this operation.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/cache/cache_reserve_clear`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zone_cache_settings };
+/// use cloudflare::{ ApiClient, apis::zone_cache_settings };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_cache_reserve_clear(&api)
-///     .with_zone_id("value")
+/// let response = get_cache_reserve_clear(&api)
+///     .with_zone_id("zone_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -161,14 +187,22 @@ impl<'a> StartCacheReserveClearRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Start Cache Reserve Clear
+///
+/// You can use Cache Reserve Clear to clear your Cache Reserve, but you must first disable Cache Reserve. In most cases, this will be accomplished within 24 hours. You cannot re-enable Cache Reserve while this process is ongoing. Keep in mind that you cannot undo or cancel this operation.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/zones/{zone_id}/cache/cache_reserve_clear`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zone_cache_settings };
+/// use cloudflare::{ ApiClient, apis::zone_cache_settings };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = start_cache_reserve_clear(&api)
-///     .with_zone_id("value")
+/// let response = start_cache_reserve_clear(&api)
+///     .with_zone_id("zone_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -200,14 +234,22 @@ impl<'a> GetRegionalTieredCacheRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get Regional Tiered Cache setting
+///
+/// Instructs Cloudflare to check a regional hub data center on the way to your upper tier. This can help improve performance for smart and custom tiered cache topologies.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/cache/regional_tiered_cache`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zone_cache_settings };
+/// use cloudflare::{ ApiClient, apis::zone_cache_settings };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_regional_tiered_cache(&api)
-///     .with_zone_id("value")
+/// let response = get_regional_tiered_cache(&api)
+///     .with_zone_id("zone_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -247,14 +289,24 @@ impl<'a> ChangeRegionalTieredCacheRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Change Regional Tiered Cache setting
+///
+/// Instructs Cloudflare to check a regional hub data center on the way to your upper tier. This can help improve performance for smart and custom tiered cache topologies.
+///
+/// **HTTP Method:** `PATCH`
+/// **Path:** `/zones/{zone_id}/cache/regional_tiered_cache`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zone_cache_settings };
+/// use cloudflare::{ ApiClient, apis::zone_cache_settings };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = change_regional_tiered_cache(&api)
-///     .with_zone_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = change_regional_tiered_cache(&api)
+///     .with_zone_id("zone_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -282,14 +334,22 @@ impl<'a> GetVariantsSettingRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get variants setting
+///
+/// Variant support enables caching variants of images with certain file extensions in addition to the original. This only applies when the origin server sends the 'Vary: Accept' response header. If the origin server sends 'Vary: Accept' but does not serve the variant requested, the response will not be cached. This will be indicated with BYPASS cache status in the response headers.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/cache/variants`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zone_cache_settings };
+/// use cloudflare::{ ApiClient, apis::zone_cache_settings };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_variants_setting(&api)
-///     .with_zone_id("value")
+/// let response = get_variants_setting(&api)
+///     .with_zone_id("zone_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -317,14 +377,22 @@ impl<'a> DeleteVariantsSettingRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Delete variants setting
+///
+/// Variant support enables caching variants of images with certain file extensions in addition to the original. This only applies when the origin server sends the 'Vary: Accept' response header. If the origin server sends 'Vary: Accept' but does not serve the variant requested, the response will not be cached. This will be indicated with BYPASS cache status in the response headers.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/zones/{zone_id}/cache/variants`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zone_cache_settings };
+/// use cloudflare::{ ApiClient, apis::zone_cache_settings };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete_variants_setting(&api)
-///     .with_zone_id("value")
+/// let response = delete_variants_setting(&api)
+///     .with_zone_id("zone_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -360,14 +428,24 @@ impl<'a> ChangeVariantsSettingRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Change variants setting
+///
+/// Variant support enables caching variants of images with certain file extensions in addition to the original. This only applies when the origin server sends the 'Vary: Accept' response header. If the origin server sends 'Vary: Accept' but does not serve the variant requested, the response will not be cached. This will be indicated with BYPASS cache status in the response headers.
+///
+/// **HTTP Method:** `PATCH`
+/// **Path:** `/zones/{zone_id}/cache/variants`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zone_cache_settings };
+/// use cloudflare::{ ApiClient, apis::zone_cache_settings };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = change_variants_setting(&api)
-///     .with_zone_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = change_variants_setting(&api)
+///     .with_zone_id("zone_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```

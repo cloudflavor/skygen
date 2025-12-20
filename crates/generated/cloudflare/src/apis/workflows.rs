@@ -50,14 +50,26 @@ impl<'a> WorListWorkflowsRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// List all Workflows
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/workflows`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `per_page` (query,optional)
+/// - `page` (query,optional)
+/// - `search` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::workflows };
+/// use cloudflare::{ ApiClient, apis::workflows };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = wor_list_workflows(&api)
-///     .with_account_id("value")
+/// let response = wor_list_workflows(&api)
+///     .with_account_id("account_id")
+///     .with_per_page("per_page")
+///     .with_page("page")
+///     .with_search("search")
 ///     .send()
 ///     .await?;
 /// ```
@@ -94,15 +106,22 @@ impl<'a> WorGetWorkflowDetailsRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get Workflow details
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/workflows/{workflow_name}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `workflow_name` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::workflows };
+/// use cloudflare::{ ApiClient, apis::workflows };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = wor_get_workflow_details(&api)
-///     .with_account_id("value")
-///     .with_workflow_name("value")
+/// let response = wor_get_workflow_details(&api)
+///     .with_account_id("account_id")
+///     .with_workflow_name("workflow_name")
 ///     .send()
 ///     .await?;
 /// ```
@@ -147,15 +166,24 @@ impl<'a> WorCreateModifyWorkflowRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Create/modify Workflow
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/accounts/{account_id}/workflows/{workflow_name}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `workflow_name` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::workflows };
+/// use cloudflare::{ ApiClient, apis::workflows };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = wor_create_modify_workflow(&api)
-///     .with_account_id("value")
-///     .with_workflow_name("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = wor_create_modify_workflow(&api)
+///     .with_account_id("account_id")
+///     .with_workflow_name("workflow_name")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -192,15 +220,24 @@ impl<'a> WorDeleteWorkflowRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Deletes a Workflow
+///
+/// Deletes a Workflow. This only deletes the Workflow and does not delete or modify any Worker associated to this Workflow or bounded to it.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/accounts/{account_id}/workflows/{workflow_name}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `workflow_name` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::workflows };
+/// use cloudflare::{ ApiClient, apis::workflows };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = wor_delete_workflow(&api)
-///     .with_account_id("value")
-///     .with_workflow_name("value")
+/// let response = wor_delete_workflow(&api)
+///     .with_account_id("account_id")
+///     .with_workflow_name("workflow_name")
 ///     .send()
 ///     .await?;
 /// ```
@@ -257,15 +294,32 @@ impl<'a> WorListWorkflowInstancesRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// List of workflow instances
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/workflows/{workflow_name}/instances`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `workflow_name` (path, required)
+/// - `per_page` (query,optional)
+/// - `page` (query,optional)
+/// - `status` (query,optional)
+/// - `date_start` (query,optional)
+/// - `date_end` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::workflows };
+/// use cloudflare::{ ApiClient, apis::workflows };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = wor_list_workflow_instances(&api)
-///     .with_account_id("value")
-///     .with_workflow_name("value")
+/// let response = wor_list_workflow_instances(&api)
+///     .with_account_id("account_id")
+///     .with_workflow_name("workflow_name")
+///     .with_per_page("per_page")
+///     .with_page("page")
+///     .with_status("status")
+///     .with_date_start("date_start")
+///     .with_date_end("date_end")
 ///     .send()
 ///     .await?;
 /// ```
@@ -309,15 +363,24 @@ impl<'a> WorCreateNewWorkflowRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Create a new workflow instance
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/workflows/{workflow_name}/instances`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `workflow_name` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::workflows };
+/// use cloudflare::{ ApiClient, apis::workflows };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = wor_create_new_workflow(&api)
-///     .with_account_id("value")
-///     .with_workflow_name("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = wor_create_new_workflow(&api)
+///     .with_account_id("account_id")
+///     .with_workflow_name("workflow_name")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -361,15 +424,24 @@ impl<'a> WorBatchCreateWorkflowRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Batch create new Workflow instances
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/workflows/{workflow_name}/instances/batch`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `workflow_name` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::workflows };
+/// use cloudflare::{ ApiClient, apis::workflows };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = wor_batch_create_workflow(&api)
-///     .with_account_id("value")
-///     .with_workflow_name("value")
+/// # let body: Vec<std::collections::BTreeMap<String, serde_json::Value>> = todo!();
+/// let response = wor_batch_create_workflow(&api)
+///     .with_account_id("account_id")
+///     .with_workflow_name("workflow_name")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -410,15 +482,24 @@ impl<'a> WorBatchTerminateWorkflowRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Batch terminate instances of a workflow
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/workflows/{workflow_name}/instances/batch/terminate`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `workflow_name` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::workflows };
+/// use cloudflare::{ ApiClient, apis::workflows };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = wor_batch_terminate_workflow(&api)
-///     .with_account_id("value")
-///     .with_workflow_name("value")
+/// # let body: Vec<serde_json::Value> = todo!();
+/// let response = wor_batch_terminate_workflow(&api)
+///     .with_account_id("account_id")
+///     .with_workflow_name("workflow_name")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -455,15 +536,22 @@ impl<'a> WorStatusTerminateWorkflowRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get status of the job responsible for terminate all instances of a workflow
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/workflows/{workflow_name}/instances/terminate`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `workflow_name` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::workflows };
+/// use cloudflare::{ ApiClient, apis::workflows };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = wor_status_terminate_workflow(&api)
-///     .with_account_id("value")
-///     .with_workflow_name("value")
+/// let response = wor_status_terminate_workflow(&api)
+///     .with_account_id("account_id")
+///     .with_workflow_name("workflow_name")
 ///     .send()
 ///     .await?;
 /// ```
@@ -505,16 +593,24 @@ impl<'a> WorDescribeWorkflowInstanceRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get logs and status from instance
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/workflows/{workflow_name}/instances/{instance_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `workflow_name` (path, required)
+/// - `instance_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::workflows };
+/// use cloudflare::{ ApiClient, apis::workflows };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = wor_describe_workflow_instance(&api)
-///     .with_account_id("value")
-///     .with_workflow_name("value")
-///     .with_instance_id("value")
+/// let response = wor_describe_workflow_instance(&api)
+///     .with_account_id("account_id")
+///     .with_workflow_name("workflow_name")
+///     .with_instance_id("instance_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -564,17 +660,28 @@ impl<'a> WorSendEventWorkflowRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Send event to instance
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/workflows/{workflow_name}/instances/{instance_id}/events/{event_type}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `workflow_name` (path, required)
+/// - `instance_id` (path, required)
+/// - `event_type` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::workflows };
+/// use cloudflare::{ ApiClient, apis::workflows };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = wor_send_event_workflow(&api)
-///     .with_account_id("value")
-///     .with_workflow_name("value")
-///     .with_instance_id("value")
-///     .with_event_type("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = wor_send_event_workflow(&api)
+///     .with_account_id("account_id")
+///     .with_workflow_name("workflow_name")
+///     .with_instance_id("instance_id")
+///     .with_event_type("event_type")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -623,16 +730,26 @@ impl<'a> WorChangeStatusWorkflowRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Change status of instance
+///
+/// **HTTP Method:** `PATCH`
+/// **Path:** `/accounts/{account_id}/workflows/{workflow_name}/instances/{instance_id}/status`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `workflow_name` (path, required)
+/// - `instance_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::workflows };
+/// use cloudflare::{ ApiClient, apis::workflows };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = wor_change_status_workflow(&api)
-///     .with_account_id("value")
-///     .with_workflow_name("value")
-///     .with_instance_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = wor_change_status_workflow(&api)
+///     .with_account_id("account_id")
+///     .with_workflow_name("workflow_name")
+///     .with_instance_id("instance_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -677,15 +794,26 @@ impl<'a> WorListWorkflowVersionsRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// List deployed Workflow versions
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/workflows/{workflow_name}/versions`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `workflow_name` (path, required)
+/// - `per_page` (query,optional)
+/// - `page` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::workflows };
+/// use cloudflare::{ ApiClient, apis::workflows };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = wor_list_workflow_versions(&api)
-///     .with_account_id("value")
-///     .with_workflow_name("value")
+/// let response = wor_list_workflow_versions(&api)
+///     .with_account_id("account_id")
+///     .with_workflow_name("workflow_name")
+///     .with_per_page("per_page")
+///     .with_page("page")
 ///     .send()
 ///     .await?;
 /// ```
@@ -727,16 +855,24 @@ impl<'a> WorDescribeWorkflowVersionsRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get Workflow version details
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/workflows/{workflow_name}/versions/{version_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `workflow_name` (path, required)
+/// - `version_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::workflows };
+/// use cloudflare::{ ApiClient, apis::workflows };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = wor_describe_workflow_versions(&api)
-///     .with_account_id("value")
-///     .with_workflow_name("value")
-///     .with_version_id("value")
+/// let response = wor_describe_workflow_versions(&api)
+///     .with_account_id("account_id")
+///     .with_workflow_name("workflow_name")
+///     .with_version_id("version_id")
 ///     .send()
 ///     .await?;
 /// ```

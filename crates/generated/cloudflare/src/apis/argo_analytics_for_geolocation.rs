@@ -15,12 +15,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::argo_analytics_response_single::ArgoAnalyticsResponseSingle;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct AtDifferentPoPsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, ArgoAnalyticsResponseSingle>,
 }
 
 impl<'a> AtDifferentPoPsRequest<'a> {
@@ -35,18 +36,24 @@ impl<'a> AtDifferentPoPsRequest<'a> {
         self.builder = self.builder.path_param("zone_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<ArgoAnalyticsResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Argo Analytics for a zone at different PoPs
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/analytics/latency/colos`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::argo_analytics_for_geolocation };
+/// use cloudflare::{ ApiClient, apis::argo_analytics_for_geolocation };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = at_different_po_ps(&api)
-///     .with_zone_id("value")
+/// let response = at_different_po_ps(&api)
+///     .with_zone_id("zone_id")
 ///     .send()
 ///     .await?;
 /// ```

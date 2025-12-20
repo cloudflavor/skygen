@@ -19,7 +19,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct RegistrarApiDomainUpdateProperties {
-    pub auto_renew: Option<serde_json::Value>,
-    pub locked: Option<serde_json::Value>,
-    pub privacy: Option<serde_json::Value>,
+    pub auto_renew: Option<crate::models::registrar_api_auto_renew::RegistrarApiAutoRenew>,
+    pub locked: Option<crate::models::registrar_api_locked::RegistrarApiLocked>,
+    pub privacy: Option<crate::models::registrar_api_privacy::RegistrarApiPrivacy>,
 }

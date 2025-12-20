@@ -15,12 +15,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::stream_deleted_response::StreamDeletedResponse;
+use crate::models::stream_downloads_response::StreamDownloadsResponse;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct MPDownloadsListRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, StreamDownloadsResponse>,
 }
 
 impl<'a> MPDownloadsListRequest<'a> {
@@ -43,19 +45,28 @@ impl<'a> MPDownloadsListRequest<'a> {
         self.builder = self.builder.path_param("identifier", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<StreamDownloadsResponse> {
         self.builder.send().await
     }
 }
-
 /// List downloads
+///
+/// Lists the downloads created for a video.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/stream/{identifier}/downloads`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `identifier` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::stream_mp4_downloads };
+/// use cloudflare::{ ApiClient, apis::stream_mp4_downloads };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = m_p_downloads_list(&api)
-///     .with_account_id("value")
-///     .with_identifier("value")
+/// let response = m_p_downloads_list(&api)
+///     .with_account_id("account_id")
+///     .with_identifier("identifier")
 ///     .send()
 ///     .await?;
 /// ```
@@ -65,7 +76,7 @@ pub fn m_p_downloads_list(api: &ApiClient) -> MPDownloadsListRequest<'_> {
 
 #[derive(Debug)]
 pub struct MPDownloadsCreateRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, StreamDownloadsResponse>,
 }
 
 impl<'a> MPDownloadsCreateRequest<'a> {
@@ -88,19 +99,28 @@ impl<'a> MPDownloadsCreateRequest<'a> {
         self.builder = self.builder.path_param("identifier", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<StreamDownloadsResponse> {
         self.builder.send().await
     }
 }
-
 /// Create downloads
+///
+/// Creates a download for a video when a video is ready to view.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/stream/{identifier}/downloads`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `identifier` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::stream_mp4_downloads };
+/// use cloudflare::{ ApiClient, apis::stream_mp4_downloads };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = m_p_downloads_create(&api)
-///     .with_account_id("value")
-///     .with_identifier("value")
+/// let response = m_p_downloads_create(&api)
+///     .with_account_id("account_id")
+///     .with_identifier("identifier")
 ///     .send()
 ///     .await?;
 /// ```
@@ -110,7 +130,7 @@ pub fn m_p_downloads_create(api: &ApiClient) -> MPDownloadsCreateRequest<'_> {
 
 #[derive(Debug)]
 pub struct MPDownloadsDeleteRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, StreamDeletedResponse>,
 }
 
 impl<'a> MPDownloadsDeleteRequest<'a> {
@@ -133,19 +153,28 @@ impl<'a> MPDownloadsDeleteRequest<'a> {
         self.builder = self.builder.path_param("identifier", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<StreamDeletedResponse> {
         self.builder.send().await
     }
 }
-
 /// Delete downloads
+///
+/// Delete the downloads for a video.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/accounts/{account_id}/stream/{identifier}/downloads`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `identifier` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::stream_mp4_downloads };
+/// use cloudflare::{ ApiClient, apis::stream_mp4_downloads };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = m_p_downloads_delete(&api)
-///     .with_account_id("value")
-///     .with_identifier("value")
+/// let response = m_p_downloads_delete(&api)
+///     .with_account_id("account_id")
+///     .with_identifier("identifier")
 ///     .send()
 ///     .await?;
 /// ```

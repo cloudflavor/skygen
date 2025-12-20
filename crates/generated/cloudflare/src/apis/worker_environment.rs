@@ -15,6 +15,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::workers_script_response_single::WorkersScriptResponseSingle;
+use crate::models::workers_script_settings_response::WorkersScriptSettingsResponse;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
@@ -48,16 +50,26 @@ impl<'a> GetScriptContentRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get script content
+///
+/// Get script content from a worker with an environment.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/workers/services/{service_name}/environments/{environment_name}/content`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `service_name` (path, required)
+/// - `environment_name` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::worker_environment };
+/// use cloudflare::{ ApiClient, apis::worker_environment };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_script_content(&api)
-///     .with_account_id("value")
-///     .with_service_name("value")
-///     .with_environment_name("value")
+/// let response = get_script_content(&api)
+///     .with_account_id("account_id")
+///     .with_service_name("service_name")
+///     .with_environment_name("environment_name")
 ///     .send()
 ///     .await?;
 /// ```
@@ -67,7 +79,7 @@ pub fn get_script_content(api: &ApiClient) -> GetScriptContentRequest<'_> {
 
 #[derive(Debug)]
 pub struct PutScriptContentRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, WorkersScriptResponseSingle>,
 }
 
 impl<'a> PutScriptContentRequest<'a> {
@@ -101,20 +113,34 @@ impl<'a> PutScriptContentRequest<'a> {
             .header_param("CF-WORKER-MAIN-MODULE-PART", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<WorkersScriptResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Put script content
+///
+/// Put script content from a worker with an environment.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/accounts/{account_id}/workers/services/{service_name}/environments/{environment_name}/content`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `service_name` (path, required)
+/// - `environment_name` (path, required)
+/// - `CF-WORKER-BODY-PART` (header,optional)
+/// - `CF-WORKER-MAIN-MODULE-PART` (header,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::worker_environment };
+/// use cloudflare::{ ApiClient, apis::worker_environment };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = put_script_content(&api)
-///     .with_account_id("value")
-///     .with_service_name("value")
-///     .with_environment_name("value")
+/// let response = put_script_content(&api)
+///     .with_account_id("account_id")
+///     .with_service_name("service_name")
+///     .with_environment_name("environment_name")
+///     .with_cf_worker_body_part("CF-WORKER-BODY-PART")
+///     .with_cf_worker_main_module_part("CF-WORKER-MAIN-MODULE-PART")
 ///     .send()
 ///     .await?;
 /// ```
@@ -124,7 +150,7 @@ pub fn put_script_content(api: &ApiClient) -> PutScriptContentRequest<'_> {
 
 #[derive(Debug)]
 pub struct ScriptEnvironmentGetSettingsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, WorkersScriptSettingsResponse>,
 }
 
 impl<'a> ScriptEnvironmentGetSettingsRequest<'a> {
@@ -148,20 +174,30 @@ impl<'a> ScriptEnvironmentGetSettingsRequest<'a> {
         self.builder = self.builder.path_param("environment_name", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<WorkersScriptSettingsResponse> {
         self.builder.send().await
     }
 }
-
 /// Get Script Settings
+///
+/// Get script settings from a worker with an environment.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/workers/services/{service_name}/environments/{environment_name}/settings`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `service_name` (path, required)
+/// - `environment_name` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::worker_environment };
+/// use cloudflare::{ ApiClient, apis::worker_environment };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = script_environment_get_settings(&api)
-///     .with_account_id("value")
-///     .with_service_name("value")
-///     .with_environment_name("value")
+/// let response = script_environment_get_settings(&api)
+///     .with_account_id("account_id")
+///     .with_service_name("service_name")
+///     .with_environment_name("environment_name")
 ///     .send()
 ///     .await?;
 /// ```
@@ -171,7 +207,7 @@ pub fn script_environment_get_settings(api: &ApiClient) -> ScriptEnvironmentGetS
 
 #[derive(Debug)]
 pub struct ScriptEnvironmentPatchSettingsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, WorkersScriptSettingsResponse>,
 }
 
 impl<'a> ScriptEnvironmentPatchSettingsRequest<'a> {
@@ -196,24 +232,36 @@ impl<'a> ScriptEnvironmentPatchSettingsRequest<'a> {
         self.builder = self.builder.path_param("environment_name", value);
         self
     }
-    pub fn with_body(mut self, body: serde_json::Value) -> Self {
+    pub fn with_body(mut self, body: WorkersScriptSettingsResponse) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<WorkersScriptSettingsResponse> {
         self.builder.send().await
     }
 }
-
 /// Patch Script Settings
+///
+/// Patch script metadata, such as bindings.
+///
+/// **HTTP Method:** `PATCH`
+/// **Path:** `/accounts/{account_id}/workers/services/{service_name}/environments/{environment_name}/settings`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `service_name` (path, required)
+/// - `environment_name` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::worker_environment };
+/// use cloudflare::{ ApiClient, apis::worker_environment };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = script_environment_patch_settings(&api)
-///     .with_account_id("value")
-///     .with_service_name("value")
-///     .with_environment_name("value")
+/// # let body: WorkersScriptSettingsResponse = todo!();
+/// let response = script_environment_patch_settings(&api)
+///     .with_account_id("account_id")
+///     .with_service_name("service_name")
+///     .with_environment_name("environment_name")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```

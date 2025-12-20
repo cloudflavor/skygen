@@ -15,12 +15,16 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::firewall_filter_rules_response_collection::FirewallFilterRulesResponseCollection;
+use crate::models::firewall_filter_rules_response_collection_delete::FirewallFilterRulesResponseCollectionDelete;
+use crate::models::firewall_filter_rules_single_response::FirewallFilterRulesSingleResponse;
+use crate::models::firewall_filter_rules_single_response_delete::FirewallFilterRulesSingleResponseDelete;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct ListFirewallRulesRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, FirewallFilterRulesResponseCollection>,
 }
 
 impl<'a> ListFirewallRulesRequest<'a> {
@@ -58,18 +62,38 @@ impl<'a> ListFirewallRulesRequest<'a> {
         self.builder = self.builder.header_param("paused", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<FirewallFilterRulesResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// List firewall rules
+///
+/// Fetches firewall rules in a zone. You can filter the results using several optional parameters.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/firewall/rules`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `description` (query,optional)
+/// - `action` (query,optional)
+/// - `page` (query,optional)
+/// - `per_page` (query,optional)
+/// - `id` (query,optional)
+/// - `paused` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::firewall_rules };
+/// use cloudflare::{ ApiClient, apis::firewall_rules };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_firewall_rules(&api)
-///     .with_zone_id("value")
+/// let response = list_firewall_rules(&api)
+///     .with_zone_id("zone_id")
+///     .with_description("description")
+///     .with_action("action")
+///     .with_page("page")
+///     .with_per_page("per_page")
+///     .with_id("id")
+///     .with_paused("paused")
 ///     .send()
 ///     .await?;
 /// ```
@@ -79,7 +103,7 @@ pub fn list_firewall_rules(api: &ApiClient) -> ListFirewallRulesRequest<'_> {
 
 #[derive(Debug)]
 pub struct CreateFirewallRulesRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, FirewallFilterRulesResponseCollection>,
 }
 
 impl<'a> CreateFirewallRulesRequest<'a> {
@@ -101,18 +125,28 @@ impl<'a> CreateFirewallRulesRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<FirewallFilterRulesResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// Create firewall rules
+///
+/// Create one or more firewall rules.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/zones/{zone_id}/firewall/rules`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::firewall_rules };
+/// use cloudflare::{ ApiClient, apis::firewall_rules };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = create_firewall_rules(&api)
-///     .with_zone_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = create_firewall_rules(&api)
+///     .with_zone_id("zone_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -122,7 +156,7 @@ pub fn create_firewall_rules(api: &ApiClient) -> CreateFirewallRulesRequest<'_> 
 
 #[derive(Debug)]
 pub struct UpdateFirewallRulesRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, FirewallFilterRulesResponseCollection>,
 }
 
 impl<'a> UpdateFirewallRulesRequest<'a> {
@@ -141,18 +175,28 @@ impl<'a> UpdateFirewallRulesRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<FirewallFilterRulesResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// Update firewall rules
+///
+/// Updates one or more existing firewall rules.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/zones/{zone_id}/firewall/rules`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::firewall_rules };
+/// use cloudflare::{ ApiClient, apis::firewall_rules };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = update_firewall_rules(&api)
-///     .with_zone_id("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = update_firewall_rules(&api)
+///     .with_zone_id("zone_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -162,7 +206,7 @@ pub fn update_firewall_rules(api: &ApiClient) -> UpdateFirewallRulesRequest<'_> 
 
 #[derive(Debug)]
 pub struct DeleteFirewallRulesRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, FirewallFilterRulesResponseCollectionDelete>,
 }
 
 impl<'a> DeleteFirewallRulesRequest<'a> {
@@ -184,18 +228,28 @@ impl<'a> DeleteFirewallRulesRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<FirewallFilterRulesResponseCollectionDelete> {
         self.builder.send().await
     }
 }
-
 /// Delete firewall rules
+///
+/// Deletes existing firewall rules.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/zones/{zone_id}/firewall/rules`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::firewall_rules };
+/// use cloudflare::{ ApiClient, apis::firewall_rules };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete_firewall_rules(&api)
-///     .with_zone_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = delete_firewall_rules(&api)
+///     .with_zone_id("zone_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -205,7 +259,7 @@ pub fn delete_firewall_rules(api: &ApiClient) -> DeleteFirewallRulesRequest<'_> 
 
 #[derive(Debug)]
 pub struct UpdatePriorityFirewallRulesRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, FirewallFilterRulesResponseCollection>,
 }
 
 impl<'a> UpdatePriorityFirewallRulesRequest<'a> {
@@ -224,18 +278,28 @@ impl<'a> UpdatePriorityFirewallRulesRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<FirewallFilterRulesResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// Update priority of firewall rules
+///
+/// Updates the priority of existing firewall rules.
+///
+/// **HTTP Method:** `PATCH`
+/// **Path:** `/zones/{zone_id}/firewall/rules`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::firewall_rules };
+/// use cloudflare::{ ApiClient, apis::firewall_rules };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = update_priority_firewall_rules(&api)
-///     .with_zone_id("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = update_priority_firewall_rules(&api)
+///     .with_zone_id("zone_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -245,7 +309,7 @@ pub fn update_priority_firewall_rules(api: &ApiClient) -> UpdatePriorityFirewall
 
 #[derive(Debug)]
 pub struct GetFirewallRuleRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, FirewallFilterRulesSingleResponse>,
 }
 
 impl<'a> GetFirewallRuleRequest<'a> {
@@ -269,19 +333,30 @@ impl<'a> GetFirewallRuleRequest<'a> {
         self.builder = self.builder.header_param("id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<FirewallFilterRulesSingleResponse> {
         self.builder.send().await
     }
 }
-
 /// Get a firewall rule
+///
+/// Fetches the details of a firewall rule.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/firewall/rules/{rule_id}`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `rule_id` (path, required)
+/// - `id` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::firewall_rules };
+/// use cloudflare::{ ApiClient, apis::firewall_rules };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_firewall_rule(&api)
-///     .with_zone_id("value")
-///     .with_rule_id("value")
+/// let response = get_firewall_rule(&api)
+///     .with_zone_id("zone_id")
+///     .with_rule_id("rule_id")
+///     .with_id("id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -291,7 +366,7 @@ pub fn get_firewall_rule(api: &ApiClient) -> GetFirewallRuleRequest<'_> {
 
 #[derive(Debug)]
 pub struct UpdateFirewallRuleRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, FirewallFilterRulesSingleResponse>,
 }
 
 impl<'a> UpdateFirewallRuleRequest<'a> {
@@ -319,19 +394,30 @@ impl<'a> UpdateFirewallRuleRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<FirewallFilterRulesSingleResponse> {
         self.builder.send().await
     }
 }
-
 /// Update a firewall rule
+///
+/// Updates an existing firewall rule.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/zones/{zone_id}/firewall/rules/{rule_id}`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `rule_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::firewall_rules };
+/// use cloudflare::{ ApiClient, apis::firewall_rules };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = update_firewall_rule(&api)
-///     .with_zone_id("value")
-///     .with_rule_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = update_firewall_rule(&api)
+///     .with_zone_id("zone_id")
+///     .with_rule_id("rule_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -341,7 +427,7 @@ pub fn update_firewall_rule(api: &ApiClient) -> UpdateFirewallRuleRequest<'_> {
 
 #[derive(Debug)]
 pub struct DeleteFirewallRuleRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, FirewallFilterRulesSingleResponseDelete>,
 }
 
 impl<'a> DeleteFirewallRuleRequest<'a> {
@@ -372,19 +458,30 @@ impl<'a> DeleteFirewallRuleRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<FirewallFilterRulesSingleResponseDelete> {
         self.builder.send().await
     }
 }
-
 /// Delete a firewall rule
+///
+/// Deletes an existing firewall rule.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/zones/{zone_id}/firewall/rules/{rule_id}`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `rule_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::firewall_rules };
+/// use cloudflare::{ ApiClient, apis::firewall_rules };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete_firewall_rule(&api)
-///     .with_zone_id("value")
-///     .with_rule_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = delete_firewall_rule(&api)
+///     .with_zone_id("zone_id")
+///     .with_rule_id("rule_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -394,7 +491,7 @@ pub fn delete_firewall_rule(api: &ApiClient) -> DeleteFirewallRuleRequest<'_> {
 
 #[derive(Debug)]
 pub struct UpdatePriorityFirewallRuleRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, FirewallFilterRulesResponseCollection>,
 }
 
 impl<'a> UpdatePriorityFirewallRuleRequest<'a> {
@@ -425,19 +522,30 @@ impl<'a> UpdatePriorityFirewallRuleRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<FirewallFilterRulesResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// Update priority of a firewall rule
+///
+/// Updates the priority of an existing firewall rule.
+///
+/// **HTTP Method:** `PATCH`
+/// **Path:** `/zones/{zone_id}/firewall/rules/{rule_id}`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `rule_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::firewall_rules };
+/// use cloudflare::{ ApiClient, apis::firewall_rules };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = update_priority_firewall_rule(&api)
-///     .with_zone_id("value")
-///     .with_rule_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = update_priority_firewall_rule(&api)
+///     .with_zone_id("zone_id")
+///     .with_rule_id("rule_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```

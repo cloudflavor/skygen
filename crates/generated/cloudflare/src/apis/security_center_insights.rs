@@ -15,6 +15,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::security_center_value_counts_response::SecurityCenterValueCountsResponse;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
@@ -42,14 +43,20 @@ impl<'a> IssueTypesRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get Security Center Issues Types
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/intel/attack-surface-report/issue-types`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::security_center_insights };
+/// use cloudflare::{ ApiClient, apis::security_center_insights };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = issue_types(&api)
-///     .with_account_id("value")
+/// let response = issue_types(&api)
+///     .with_account_id("account_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -133,14 +140,46 @@ impl<'a> IssuesRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get Security Center Issues
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/intel/attack-surface-report/issues`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `dismissed` (query,optional)
+/// - `issue_class` (query,optional)
+/// - `issue_type` (query,optional)
+/// - `product` (query,optional)
+/// - `severity` (query,optional)
+/// - `subject` (query,optional)
+/// - `issue_class~neq` (query,optional)
+/// - `issue_type~neq` (query,optional)
+/// - `product~neq` (query,optional)
+/// - `severity~neq` (query,optional)
+/// - `subject~neq` (query,optional)
+/// - `page` (query,optional)
+/// - `per_page` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::security_center_insights };
+/// use cloudflare::{ ApiClient, apis::security_center_insights };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = issues(&api)
-///     .with_account_id("value")
+/// let response = issues(&api)
+///     .with_account_id("account_id")
+///     .with_dismissed("dismissed")
+///     .with_issue_class("issue_class")
+///     .with_issue_type("issue_type")
+///     .with_product("product")
+///     .with_severity("severity")
+///     .with_subject("subject")
+///     .with_issue_class_neq("issue_class~neq")
+///     .with_issue_type_neq("issue_type~neq")
+///     .with_product_neq("product~neq")
+///     .with_severity_neq("severity~neq")
+///     .with_subject_neq("subject~neq")
+///     .with_page("page")
+///     .with_per_page("per_page")
 ///     .send()
 ///     .await?;
 /// ```
@@ -150,7 +189,7 @@ pub fn issues(api: &ApiClient) -> IssuesRequest<'_> {
 
 #[derive(Debug)]
 pub struct IssueCountsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, SecurityCenterValueCountsResponse>,
 }
 
 impl<'a> IssueCountsRequest<'a> {
@@ -212,18 +251,46 @@ impl<'a> IssueCountsRequest<'a> {
         self.builder = self.builder.header_param("subject~neq", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<SecurityCenterValueCountsResponse> {
         self.builder.send().await
     }
 }
-
 /// Get Security Center Issue Counts by Class
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/intel/attack-surface-report/issues/class`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `dismissed` (query,optional)
+/// - `issue_class` (query,optional)
+/// - `issue_type` (query,optional)
+/// - `product` (query,optional)
+/// - `severity` (query,optional)
+/// - `subject` (query,optional)
+/// - `issue_class~neq` (query,optional)
+/// - `issue_type~neq` (query,optional)
+/// - `product~neq` (query,optional)
+/// - `severity~neq` (query,optional)
+/// - `subject~neq` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::security_center_insights };
+/// use cloudflare::{ ApiClient, apis::security_center_insights };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = issue_counts(&api)
-///     .with_account_id("value")
+/// let response = issue_counts(&api)
+///     .with_account_id("account_id")
+///     .with_dismissed("dismissed")
+///     .with_issue_class("issue_class")
+///     .with_issue_type("issue_type")
+///     .with_product("product")
+///     .with_severity("severity")
+///     .with_subject("subject")
+///     .with_issue_class_neq("issue_class~neq")
+///     .with_issue_type_neq("issue_type~neq")
+///     .with_product_neq("product~neq")
+///     .with_severity_neq("severity~neq")
+///     .with_subject_neq("subject~neq")
 ///     .send()
 ///     .await?;
 /// ```
@@ -233,7 +300,7 @@ pub fn issue_counts(api: &ApiClient) -> IssueCountsRequest<'_> {
 
 #[derive(Debug)]
 pub struct IssueCountsGetRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, SecurityCenterValueCountsResponse>,
 }
 
 impl<'a> IssueCountsGetRequest<'a> {
@@ -295,18 +362,46 @@ impl<'a> IssueCountsGetRequest<'a> {
         self.builder = self.builder.header_param("subject~neq", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<SecurityCenterValueCountsResponse> {
         self.builder.send().await
     }
 }
-
 /// Get Security Center Issue Counts by Severity
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/intel/attack-surface-report/issues/severity`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `dismissed` (query,optional)
+/// - `issue_class` (query,optional)
+/// - `issue_type` (query,optional)
+/// - `product` (query,optional)
+/// - `severity` (query,optional)
+/// - `subject` (query,optional)
+/// - `issue_class~neq` (query,optional)
+/// - `issue_type~neq` (query,optional)
+/// - `product~neq` (query,optional)
+/// - `severity~neq` (query,optional)
+/// - `subject~neq` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::security_center_insights };
+/// use cloudflare::{ ApiClient, apis::security_center_insights };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = issue_counts_get(&api)
-///     .with_account_id("value")
+/// let response = issue_counts_get(&api)
+///     .with_account_id("account_id")
+///     .with_dismissed("dismissed")
+///     .with_issue_class("issue_class")
+///     .with_issue_type("issue_type")
+///     .with_product("product")
+///     .with_severity("severity")
+///     .with_subject("subject")
+///     .with_issue_class_neq("issue_class~neq")
+///     .with_issue_type_neq("issue_type~neq")
+///     .with_product_neq("product~neq")
+///     .with_severity_neq("severity~neq")
+///     .with_subject_neq("subject~neq")
 ///     .send()
 ///     .await?;
 /// ```
@@ -316,7 +411,7 @@ pub fn issue_counts_get(api: &ApiClient) -> IssueCountsGetRequest<'_> {
 
 #[derive(Debug)]
 pub struct IssueCountsGet3Request<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, SecurityCenterValueCountsResponse>,
 }
 
 impl<'a> IssueCountsGet3Request<'a> {
@@ -378,18 +473,46 @@ impl<'a> IssueCountsGet3Request<'a> {
         self.builder = self.builder.header_param("subject~neq", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<SecurityCenterValueCountsResponse> {
         self.builder.send().await
     }
 }
-
 /// Get Security Center Issue Counts by Type
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/intel/attack-surface-report/issues/type`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `dismissed` (query,optional)
+/// - `issue_class` (query,optional)
+/// - `issue_type` (query,optional)
+/// - `product` (query,optional)
+/// - `severity` (query,optional)
+/// - `subject` (query,optional)
+/// - `issue_class~neq` (query,optional)
+/// - `issue_type~neq` (query,optional)
+/// - `product~neq` (query,optional)
+/// - `severity~neq` (query,optional)
+/// - `subject~neq` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::security_center_insights };
+/// use cloudflare::{ ApiClient, apis::security_center_insights };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = issue_counts_get_3(&api)
-///     .with_account_id("value")
+/// let response = issue_counts_get_3(&api)
+///     .with_account_id("account_id")
+///     .with_dismissed("dismissed")
+///     .with_issue_class("issue_class")
+///     .with_issue_type("issue_type")
+///     .with_product("product")
+///     .with_severity("severity")
+///     .with_subject("subject")
+///     .with_issue_class_neq("issue_class~neq")
+///     .with_issue_type_neq("issue_type~neq")
+///     .with_product_neq("product~neq")
+///     .with_severity_neq("severity~neq")
+///     .with_subject_neq("subject~neq")
 ///     .send()
 ///     .await?;
 /// ```
@@ -434,15 +557,24 @@ impl<'a> ArchiveSecurityCenterInsightRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Archive Security Center Insight
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/accounts/{account_id}/intel/attack-surface-report/{issue_id}/dismiss`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `issue_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::security_center_insights };
+/// use cloudflare::{ ApiClient, apis::security_center_insights };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = archive_security_center_insight(&api)
-///     .with_account_id("value")
-///     .with_issue_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = archive_security_center_insight(&api)
+///     .with_account_id("account_id")
+///     .with_issue_id("issue_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -526,14 +658,46 @@ impl<'a> GetRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get Security Center Insights
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/security-center/insights`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `dismissed` (query,optional)
+/// - `issue_class` (query,optional)
+/// - `issue_type` (query,optional)
+/// - `product` (query,optional)
+/// - `severity` (query,optional)
+/// - `subject` (query,optional)
+/// - `issue_class~neq` (query,optional)
+/// - `issue_type~neq` (query,optional)
+/// - `product~neq` (query,optional)
+/// - `severity~neq` (query,optional)
+/// - `subject~neq` (query,optional)
+/// - `page` (query,optional)
+/// - `per_page` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::security_center_insights };
+/// use cloudflare::{ ApiClient, apis::security_center_insights };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get(&api)
-///     .with_account_id("value")
+/// let response = get(&api)
+///     .with_account_id("account_id")
+///     .with_dismissed("dismissed")
+///     .with_issue_class("issue_class")
+///     .with_issue_type("issue_type")
+///     .with_product("product")
+///     .with_severity("severity")
+///     .with_subject("subject")
+///     .with_issue_class_neq("issue_class~neq")
+///     .with_issue_type_neq("issue_type~neq")
+///     .with_product_neq("product~neq")
+///     .with_severity_neq("severity~neq")
+///     .with_subject_neq("subject~neq")
+///     .with_page("page")
+///     .with_per_page("per_page")
 ///     .send()
 ///     .await?;
 /// ```
@@ -543,7 +707,7 @@ pub fn get(api: &ApiClient) -> GetRequest<'_> {
 
 #[derive(Debug)]
 pub struct InsightCountsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, SecurityCenterValueCountsResponse>,
 }
 
 impl<'a> InsightCountsRequest<'a> {
@@ -605,18 +769,46 @@ impl<'a> InsightCountsRequest<'a> {
         self.builder = self.builder.header_param("subject~neq", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<SecurityCenterValueCountsResponse> {
         self.builder.send().await
     }
 }
-
 /// Get Security Center Insight Counts by Class
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/security-center/insights/class`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `dismissed` (query,optional)
+/// - `issue_class` (query,optional)
+/// - `issue_type` (query,optional)
+/// - `product` (query,optional)
+/// - `severity` (query,optional)
+/// - `subject` (query,optional)
+/// - `issue_class~neq` (query,optional)
+/// - `issue_type~neq` (query,optional)
+/// - `product~neq` (query,optional)
+/// - `severity~neq` (query,optional)
+/// - `subject~neq` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::security_center_insights };
+/// use cloudflare::{ ApiClient, apis::security_center_insights };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = insight_counts(&api)
-///     .with_account_id("value")
+/// let response = insight_counts(&api)
+///     .with_account_id("account_id")
+///     .with_dismissed("dismissed")
+///     .with_issue_class("issue_class")
+///     .with_issue_type("issue_type")
+///     .with_product("product")
+///     .with_severity("severity")
+///     .with_subject("subject")
+///     .with_issue_class_neq("issue_class~neq")
+///     .with_issue_type_neq("issue_type~neq")
+///     .with_product_neq("product~neq")
+///     .with_severity_neq("severity~neq")
+///     .with_subject_neq("subject~neq")
 ///     .send()
 ///     .await?;
 /// ```
@@ -626,7 +818,7 @@ pub fn insight_counts(api: &ApiClient) -> InsightCountsRequest<'_> {
 
 #[derive(Debug)]
 pub struct InsightCountsGetRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, SecurityCenterValueCountsResponse>,
 }
 
 impl<'a> InsightCountsGetRequest<'a> {
@@ -688,18 +880,46 @@ impl<'a> InsightCountsGetRequest<'a> {
         self.builder = self.builder.header_param("subject~neq", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<SecurityCenterValueCountsResponse> {
         self.builder.send().await
     }
 }
-
 /// Get Security Center Insight Counts by Severity
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/security-center/insights/severity`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `dismissed` (query,optional)
+/// - `issue_class` (query,optional)
+/// - `issue_type` (query,optional)
+/// - `product` (query,optional)
+/// - `severity` (query,optional)
+/// - `subject` (query,optional)
+/// - `issue_class~neq` (query,optional)
+/// - `issue_type~neq` (query,optional)
+/// - `product~neq` (query,optional)
+/// - `severity~neq` (query,optional)
+/// - `subject~neq` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::security_center_insights };
+/// use cloudflare::{ ApiClient, apis::security_center_insights };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = insight_counts_get(&api)
-///     .with_account_id("value")
+/// let response = insight_counts_get(&api)
+///     .with_account_id("account_id")
+///     .with_dismissed("dismissed")
+///     .with_issue_class("issue_class")
+///     .with_issue_type("issue_type")
+///     .with_product("product")
+///     .with_severity("severity")
+///     .with_subject("subject")
+///     .with_issue_class_neq("issue_class~neq")
+///     .with_issue_type_neq("issue_type~neq")
+///     .with_product_neq("product~neq")
+///     .with_severity_neq("severity~neq")
+///     .with_subject_neq("subject~neq")
 ///     .send()
 ///     .await?;
 /// ```
@@ -709,7 +929,7 @@ pub fn insight_counts_get(api: &ApiClient) -> InsightCountsGetRequest<'_> {
 
 #[derive(Debug)]
 pub struct InsightCountsGet3Request<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, SecurityCenterValueCountsResponse>,
 }
 
 impl<'a> InsightCountsGet3Request<'a> {
@@ -771,18 +991,46 @@ impl<'a> InsightCountsGet3Request<'a> {
         self.builder = self.builder.header_param("subject~neq", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<SecurityCenterValueCountsResponse> {
         self.builder.send().await
     }
 }
-
 /// Get Security Center Insight Counts by Type
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/security-center/insights/type`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `dismissed` (query,optional)
+/// - `issue_class` (query,optional)
+/// - `issue_type` (query,optional)
+/// - `product` (query,optional)
+/// - `severity` (query,optional)
+/// - `subject` (query,optional)
+/// - `issue_class~neq` (query,optional)
+/// - `issue_type~neq` (query,optional)
+/// - `product~neq` (query,optional)
+/// - `severity~neq` (query,optional)
+/// - `subject~neq` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::security_center_insights };
+/// use cloudflare::{ ApiClient, apis::security_center_insights };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = insight_counts_get_3(&api)
-///     .with_account_id("value")
+/// let response = insight_counts_get_3(&api)
+///     .with_account_id("account_id")
+///     .with_dismissed("dismissed")
+///     .with_issue_class("issue_class")
+///     .with_issue_type("issue_type")
+///     .with_product("product")
+///     .with_severity("severity")
+///     .with_subject("subject")
+///     .with_issue_class_neq("issue_class~neq")
+///     .with_issue_type_neq("issue_type~neq")
+///     .with_product_neq("product~neq")
+///     .with_severity_neq("severity~neq")
+///     .with_subject_neq("subject~neq")
 ///     .send()
 ///     .await?;
 /// ```
@@ -827,15 +1075,24 @@ impl<'a> ArchiveSecurityCenterInsightPutRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Archive Security Center Insight
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/accounts/{account_id}/security-center/insights/{issue_id}/dismiss`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `issue_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::security_center_insights };
+/// use cloudflare::{ ApiClient, apis::security_center_insights };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = archive_security_center_insight_put(&api)
-///     .with_account_id("value")
-///     .with_issue_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = archive_security_center_insight_put(&api)
+///     .with_account_id("account_id")
+///     .with_issue_id("issue_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -918,14 +1175,46 @@ impl<'a> ZoneSecurityCenterInsightsRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get Zone Security Center Insights
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/security-center/insights`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `dismissed` (query,optional)
+/// - `issue_class` (query,optional)
+/// - `issue_type` (query,optional)
+/// - `product` (query,optional)
+/// - `severity` (query,optional)
+/// - `subject` (query,optional)
+/// - `issue_class~neq` (query,optional)
+/// - `issue_type~neq` (query,optional)
+/// - `product~neq` (query,optional)
+/// - `severity~neq` (query,optional)
+/// - `subject~neq` (query,optional)
+/// - `page` (query,optional)
+/// - `per_page` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::security_center_insights };
+/// use cloudflare::{ ApiClient, apis::security_center_insights };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = zone_security_center_insights(&api)
-///     .with_zone_id("value")
+/// let response = zone_security_center_insights(&api)
+///     .with_zone_id("zone_id")
+///     .with_dismissed("dismissed")
+///     .with_issue_class("issue_class")
+///     .with_issue_type("issue_type")
+///     .with_product("product")
+///     .with_severity("severity")
+///     .with_subject("subject")
+///     .with_issue_class_neq("issue_class~neq")
+///     .with_issue_type_neq("issue_type~neq")
+///     .with_product_neq("product~neq")
+///     .with_severity_neq("severity~neq")
+///     .with_subject_neq("subject~neq")
+///     .with_page("page")
+///     .with_per_page("per_page")
 ///     .send()
 ///     .await?;
 /// ```
@@ -935,7 +1224,7 @@ pub fn zone_security_center_insights(api: &ApiClient) -> ZoneSecurityCenterInsig
 
 #[derive(Debug)]
 pub struct ZoneSecurityCenterInsightRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, SecurityCenterValueCountsResponse>,
 }
 
 impl<'a> ZoneSecurityCenterInsightRequest<'a> {
@@ -997,18 +1286,46 @@ impl<'a> ZoneSecurityCenterInsightRequest<'a> {
         self.builder = self.builder.header_param("subject~neq", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<SecurityCenterValueCountsResponse> {
         self.builder.send().await
     }
 }
-
 /// Get Zone Security Center Insight Counts by Class
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/security-center/insights/class`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `dismissed` (query,optional)
+/// - `issue_class` (query,optional)
+/// - `issue_type` (query,optional)
+/// - `product` (query,optional)
+/// - `severity` (query,optional)
+/// - `subject` (query,optional)
+/// - `issue_class~neq` (query,optional)
+/// - `issue_type~neq` (query,optional)
+/// - `product~neq` (query,optional)
+/// - `severity~neq` (query,optional)
+/// - `subject~neq` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::security_center_insights };
+/// use cloudflare::{ ApiClient, apis::security_center_insights };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = zone_security_center_insight(&api)
-///     .with_zone_id("value")
+/// let response = zone_security_center_insight(&api)
+///     .with_zone_id("zone_id")
+///     .with_dismissed("dismissed")
+///     .with_issue_class("issue_class")
+///     .with_issue_type("issue_type")
+///     .with_product("product")
+///     .with_severity("severity")
+///     .with_subject("subject")
+///     .with_issue_class_neq("issue_class~neq")
+///     .with_issue_type_neq("issue_type~neq")
+///     .with_product_neq("product~neq")
+///     .with_severity_neq("severity~neq")
+///     .with_subject_neq("subject~neq")
 ///     .send()
 ///     .await?;
 /// ```
@@ -1018,7 +1335,7 @@ pub fn zone_security_center_insight(api: &ApiClient) -> ZoneSecurityCenterInsigh
 
 #[derive(Debug)]
 pub struct ZoneSecurityCenterInsightGetRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, SecurityCenterValueCountsResponse>,
 }
 
 impl<'a> ZoneSecurityCenterInsightGetRequest<'a> {
@@ -1080,18 +1397,46 @@ impl<'a> ZoneSecurityCenterInsightGetRequest<'a> {
         self.builder = self.builder.header_param("subject~neq", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<SecurityCenterValueCountsResponse> {
         self.builder.send().await
     }
 }
-
 /// Get Zone Security Center Insight Counts by Severity
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/security-center/insights/severity`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `dismissed` (query,optional)
+/// - `issue_class` (query,optional)
+/// - `issue_type` (query,optional)
+/// - `product` (query,optional)
+/// - `severity` (query,optional)
+/// - `subject` (query,optional)
+/// - `issue_class~neq` (query,optional)
+/// - `issue_type~neq` (query,optional)
+/// - `product~neq` (query,optional)
+/// - `severity~neq` (query,optional)
+/// - `subject~neq` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::security_center_insights };
+/// use cloudflare::{ ApiClient, apis::security_center_insights };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = zone_security_center_insight_get(&api)
-///     .with_zone_id("value")
+/// let response = zone_security_center_insight_get(&api)
+///     .with_zone_id("zone_id")
+///     .with_dismissed("dismissed")
+///     .with_issue_class("issue_class")
+///     .with_issue_type("issue_type")
+///     .with_product("product")
+///     .with_severity("severity")
+///     .with_subject("subject")
+///     .with_issue_class_neq("issue_class~neq")
+///     .with_issue_type_neq("issue_type~neq")
+///     .with_product_neq("product~neq")
+///     .with_severity_neq("severity~neq")
+///     .with_subject_neq("subject~neq")
 ///     .send()
 ///     .await?;
 /// ```
@@ -1103,7 +1448,7 @@ pub fn zone_security_center_insight_get(
 
 #[derive(Debug)]
 pub struct ZoneSecurityCenterInsightGet3Request<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, SecurityCenterValueCountsResponse>,
 }
 
 impl<'a> ZoneSecurityCenterInsightGet3Request<'a> {
@@ -1165,18 +1510,46 @@ impl<'a> ZoneSecurityCenterInsightGet3Request<'a> {
         self.builder = self.builder.header_param("subject~neq", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<SecurityCenterValueCountsResponse> {
         self.builder.send().await
     }
 }
-
 /// Get Zone Security Center Insight Counts by Type
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/security-center/insights/type`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `dismissed` (query,optional)
+/// - `issue_class` (query,optional)
+/// - `issue_type` (query,optional)
+/// - `product` (query,optional)
+/// - `severity` (query,optional)
+/// - `subject` (query,optional)
+/// - `issue_class~neq` (query,optional)
+/// - `issue_type~neq` (query,optional)
+/// - `product~neq` (query,optional)
+/// - `severity~neq` (query,optional)
+/// - `subject~neq` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::security_center_insights };
+/// use cloudflare::{ ApiClient, apis::security_center_insights };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = zone_security_center_insight_get_3(&api)
-///     .with_zone_id("value")
+/// let response = zone_security_center_insight_get_3(&api)
+///     .with_zone_id("zone_id")
+///     .with_dismissed("dismissed")
+///     .with_issue_class("issue_class")
+///     .with_issue_type("issue_type")
+///     .with_product("product")
+///     .with_severity("severity")
+///     .with_subject("subject")
+///     .with_issue_class_neq("issue_class~neq")
+///     .with_issue_type_neq("issue_type~neq")
+///     .with_product_neq("product~neq")
+///     .with_severity_neq("severity~neq")
+///     .with_subject_neq("subject~neq")
 ///     .send()
 ///     .await?;
 /// ```
@@ -1223,15 +1596,24 @@ impl<'a> ArchiveSecurityCenterInsightPut3Request<'a> {
         self.builder.send().await
     }
 }
-
 /// Archive Zone Security Center Insight
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/zones/{zone_id}/security-center/insights/{issue_id}/dismiss`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `issue_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::security_center_insights };
+/// use cloudflare::{ ApiClient, apis::security_center_insights };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = archive_security_center_insight_put_3(&api)
-///     .with_zone_id("value")
-///     .with_issue_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = archive_security_center_insight_put_3(&api)
+///     .with_zone_id("zone_id")
+///     .with_issue_id("issue_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```

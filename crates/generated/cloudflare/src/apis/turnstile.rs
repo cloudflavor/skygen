@@ -55,14 +55,30 @@ impl<'a> AccountsTurnstileWidgetsListRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// List Turnstile Widgets
+///
+/// Lists all turnstile widgets of an account.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/challenges/widgets`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `page` (query,optional)
+/// - `per_page` (query,optional)
+/// - `order` (query,optional)
+/// - `direction` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::turnstile };
+/// use cloudflare::{ ApiClient, apis::turnstile };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = accounts_turnstile_widgets_list(&api)
-///     .with_account_id("value")
+/// let response = accounts_turnstile_widgets_list(&api)
+///     .with_account_id("account_id")
+///     .with_page("page")
+///     .with_per_page("per_page")
+///     .with_order("order")
+///     .with_direction("direction")
 ///     .send()
 ///     .await?;
 /// ```
@@ -118,14 +134,32 @@ impl<'a> AccountsTurnstileWidgetCreateRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Create a Turnstile Widget
+///
+/// Lists challenge widgets.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/challenges/widgets`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `page` (query,optional)
+/// - `per_page` (query,optional)
+/// - `order` (query,optional)
+/// - `direction` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::turnstile };
+/// use cloudflare::{ ApiClient, apis::turnstile };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = accounts_turnstile_widget_create(&api)
-///     .with_account_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = accounts_turnstile_widget_create(&api)
+///     .with_account_id("account_id")
+///     .with_page("page")
+///     .with_per_page("per_page")
+///     .with_order("order")
+///     .with_direction("direction")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -164,15 +198,24 @@ impl<'a> AccountsTurnstileWidgetGetRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Turnstile Widget Details
+///
+/// Show a single challenge widget configuration.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/challenges/widgets/{sitekey}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `sitekey` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::turnstile };
+/// use cloudflare::{ ApiClient, apis::turnstile };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = accounts_turnstile_widget_get(&api)
-///     .with_account_id("value")
-///     .with_sitekey("value")
+/// let response = accounts_turnstile_widget_get(&api)
+///     .with_account_id("account_id")
+///     .with_sitekey("sitekey")
 ///     .send()
 ///     .await?;
 /// ```
@@ -217,15 +260,26 @@ impl<'a> AccountsTurnstileWidgetUpdateRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Update a Turnstile Widget
+///
+/// Update the configuration of a widget.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/accounts/{account_id}/challenges/widgets/{sitekey}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `sitekey` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::turnstile };
+/// use cloudflare::{ ApiClient, apis::turnstile };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = accounts_turnstile_widget_update(&api)
-///     .with_account_id("value")
-///     .with_sitekey("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = accounts_turnstile_widget_update(&api)
+///     .with_account_id("account_id")
+///     .with_sitekey("sitekey")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -264,15 +318,24 @@ impl<'a> AccountsTurnstileWidgetDeleteRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Delete a Turnstile Widget
+///
+/// Destroy a Turnstile Widget.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/accounts/{account_id}/challenges/widgets/{sitekey}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `sitekey` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::turnstile };
+/// use cloudflare::{ ApiClient, apis::turnstile };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = accounts_turnstile_widget_delete(&api)
-///     .with_account_id("value")
-///     .with_sitekey("value")
+/// let response = accounts_turnstile_widget_delete(&api)
+///     .with_account_id("account_id")
+///     .with_sitekey("sitekey")
 ///     .send()
 ///     .await?;
 /// ```
@@ -319,15 +382,29 @@ impl<'a> AccountsTurnstileWidgetRotateRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Rotate Secret for a Turnstile Widget
+///
+/// Generate a new secret key for this widget. If `invalidate_immediately`
+/// is set to `false`, the previous secret remains valid for 2 hours.
+///
+/// Note that secrets cannot be rotated again during the grace period.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/challenges/widgets/{sitekey}/rotate_secret`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `sitekey` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::turnstile };
+/// use cloudflare::{ ApiClient, apis::turnstile };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = accounts_turnstile_widget_rotate(&api)
-///     .with_account_id("value")
-///     .with_sitekey("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = accounts_turnstile_widget_rotate(&api)
+///     .with_account_id("account_id")
+///     .with_sitekey("sitekey")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```

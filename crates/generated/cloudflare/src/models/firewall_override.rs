@@ -19,12 +19,12 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct FirewallOverride {
-    pub description: Option<serde_json::Value>,
+    pub description: Option<crate::models::firewall_components_schemas_description::FirewallComponentsSchemasDescription>,
     pub groups: Option<crate::models::firewall_groups::FirewallGroups>,
-    pub id: Option<serde_json::Value>,
-    pub paused: Option<serde_json::Value>,
-    pub priority: Option<serde_json::Value>,
+    pub id: Option<crate::models::firewall_overrides_id::FirewallOverridesId>,
+    pub paused: Option<crate::models::firewall_paused::FirewallPaused>,
+    pub priority: Option<crate::models::firewall_priority::FirewallPriority>,
     pub rewrite_action: Option<crate::models::firewall_rewrite_action::FirewallRewriteAction>,
     pub rules: Option<crate::models::firewall_rules::FirewallRules>,
-    pub urls: Option<serde_json::Value>,
+    pub urls: Option<crate::models::firewall_urls::FirewallUrls>,
 }

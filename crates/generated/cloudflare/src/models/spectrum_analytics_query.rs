@@ -19,11 +19,12 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct SpectrumAnalyticsQuery {
-    pub dimensions: Option<serde_json::Value>,
-    pub filters: Option<serde_json::Value>,
+    pub dimensions:
+        Option<crate::models::spectrum_analytics_dimensions::SpectrumAnalyticsDimensions>,
+    pub filters: Option<crate::models::spectrum_analytics_filters::SpectrumAnalyticsFilters>,
     pub limit: Option<f64>,
-    pub metrics: Option<serde_json::Value>,
-    pub since: Option<serde_json::Value>,
-    pub sort: Option<serde_json::Value>,
-    pub until: Option<serde_json::Value>,
+    pub metrics: Option<crate::models::spectrum_analytics_metrics::SpectrumAnalyticsMetrics>,
+    pub since: Option<crate::models::spectrum_analytics_since::SpectrumAnalyticsSince>,
+    pub sort: Option<crate::models::spectrum_analytics_sort::SpectrumAnalyticsSort>,
+    pub until: Option<crate::models::spectrum_analytics_until::SpectrumAnalyticsUntil>,
 }

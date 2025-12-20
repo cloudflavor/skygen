@@ -15,12 +15,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::zero_trust_gateway_audit_ssh_settings_components_schemas_single_response::ZeroTrustGatewayAuditSshSettingsComponentsSchemasSingleResponse;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct GetAuditSshSettingsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, ZeroTrustGatewayAuditSshSettingsComponentsSchemasSingleResponse>,
 }
 
 impl<'a> GetAuditSshSettingsRequest<'a> {
@@ -38,18 +39,28 @@ impl<'a> GetAuditSshSettingsRequest<'a> {
         self.builder = self.builder.path_param("account_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(
+        self,
+    ) -> ApiResult<ZeroTrustGatewayAuditSshSettingsComponentsSchemasSingleResponse> {
         self.builder.send().await
     }
 }
-
 /// Get Zero Trust SSH settings
+///
+/// Gets all Zero Trust Audit SSH and SSH with Access for Infrastructure settings for an account.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/gateway/audit_ssh_settings`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zero_trust_ssh_settings };
+/// use cloudflare::{ ApiClient, apis::zero_trust_ssh_settings };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_audit_ssh_settings(&api)
-///     .with_account_id("value")
+/// let response = get_audit_ssh_settings(&api)
+///     .with_account_id("account_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -59,7 +70,7 @@ pub fn get_audit_ssh_settings(api: &ApiClient) -> GetAuditSshSettingsRequest<'_>
 
 #[derive(Debug)]
 pub struct UpdateAuditSshSettingsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, ZeroTrustGatewayAuditSshSettingsComponentsSchemasSingleResponse>,
 }
 
 impl<'a> UpdateAuditSshSettingsRequest<'a> {
@@ -85,18 +96,30 @@ impl<'a> UpdateAuditSshSettingsRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(
+        self,
+    ) -> ApiResult<ZeroTrustGatewayAuditSshSettingsComponentsSchemasSingleResponse> {
         self.builder.send().await
     }
 }
-
 /// Update Zero Trust SSH settings
+///
+/// Updates Zero Trust Audit SSH and SSH with Access for Infrastructure settings for an account.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/accounts/{account_id}/gateway/audit_ssh_settings`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zero_trust_ssh_settings };
+/// use cloudflare::{ ApiClient, apis::zero_trust_ssh_settings };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = update_audit_ssh_settings(&api)
-///     .with_account_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = update_audit_ssh_settings(&api)
+///     .with_account_id("account_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -106,7 +129,7 @@ pub fn update_audit_ssh_settings(api: &ApiClient) -> UpdateAuditSshSettingsReque
 
 #[derive(Debug)]
 pub struct RotateSshSeedRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, ZeroTrustGatewayAuditSshSettingsComponentsSchemasSingleResponse>,
 }
 
 impl<'a> RotateSshSeedRequest<'a> {
@@ -124,18 +147,28 @@ impl<'a> RotateSshSeedRequest<'a> {
         self.builder = self.builder.path_param("account_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(
+        self,
+    ) -> ApiResult<ZeroTrustGatewayAuditSshSettingsComponentsSchemasSingleResponse> {
         self.builder.send().await
     }
 }
-
 /// Rotate Zero Trust SSH Account Seed
+///
+/// Rotates the SSH account seed that is used for generating the host key identity when connecting through the Cloudflare SSH Proxy.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/gateway/audit_ssh_settings/rotate_seed`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zero_trust_ssh_settings };
+/// use cloudflare::{ ApiClient, apis::zero_trust_ssh_settings };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = rotate_ssh_seed(&api)
-///     .with_account_id("value")
+/// let response = rotate_ssh_seed(&api)
+///     .with_account_id("account_id")
 ///     .send()
 ///     .await?;
 /// ```

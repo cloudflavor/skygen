@@ -20,7 +20,7 @@ use serde::{Deserialize, Serialize};
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct MagicTransitHopResult {
     pub nodes: Option<Vec<crate::models::magic_transit_node_result::MagicTransitNodeResult>>,
-    pub packets_lost: Option<serde_json::Value>,
-    pub packets_sent: Option<serde_json::Value>,
-    pub packets_ttl: Option<serde_json::Value>,
+    pub packets_lost: Option<crate::models::magic_transit_packets_lost::MagicTransitPacketsLost>,
+    pub packets_sent: Option<crate::models::magic_transit_packets_sent::MagicTransitPacketsSent>,
+    pub packets_ttl: Option<crate::models::magic_transit_packets_ttl::MagicTransitPacketsTtl>,
 }

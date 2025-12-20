@@ -19,8 +19,8 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct VectorizeApiResponseCommon {
-    pub errors: serde_json::Value,
-    pub messages: serde_json::Value,
+    pub errors: crate::models::vectorize_messages::VectorizeMessages,
+    pub messages: crate::models::vectorize_messages::VectorizeMessages,
     pub result: serde_json::Value,
     pub success: bool,
 }

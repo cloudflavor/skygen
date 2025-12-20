@@ -19,6 +19,6 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct StreamInputRtmps {
-    pub stream_key: Option<serde_json::Value>,
-    pub url: Option<serde_json::Value>,
+    pub stream_key: Option<crate::models::stream_input_rtmps_stream_key::StreamInputRtmpsStreamKey>,
+    pub url: Option<crate::models::stream_input_rtmps_url::StreamInputRtmpsUrl>,
 }

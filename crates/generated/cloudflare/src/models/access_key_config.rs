@@ -19,7 +19,10 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct AccessKeyConfig {
-    pub days_until_next_rotation: Option<serde_json::Value>,
-    pub key_rotation_interval_days: Option<serde_json::Value>,
-    pub last_key_rotation_at: Option<serde_json::Value>,
+    pub days_until_next_rotation:
+        Option<crate::models::access_days_until_next_rotation::AccessDaysUntilNextRotation>,
+    pub key_rotation_interval_days:
+        Option<crate::models::access_key_rotation_interval_days::AccessKeyRotationIntervalDays>,
+    pub last_key_rotation_at:
+        Option<crate::models::access_last_key_rotation_at::AccessLastKeyRotationAt>,
 }

@@ -19,5 +19,5 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct LogcontrolRetentionFlag {
-    pub flag: Option<serde_json::Value>,
+    pub flag: Option<crate::models::logcontrol_flag::LogcontrolFlag>,
 }

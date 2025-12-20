@@ -19,7 +19,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct SpectrumConfigOriginDns {
-    pub name: Option<serde_json::Value>,
-    pub r#type: Option<serde_json::Value>,
-    pub ttl: Option<serde_json::Value>,
+    pub name: Option<crate::models::spectrum_config_origin_dns_name::SpectrumConfigOriginDnsName>,
+    pub r#type: Option<crate::models::spectrum_config_origin_dns_type::SpectrumConfigOriginDnsType>,
+    pub ttl: Option<crate::models::spectrum_config_dns_ttl::SpectrumConfigDnsTtl>,
 }

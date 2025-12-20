@@ -19,6 +19,6 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct StreamEditAudioTrack {
-    pub default: Option<serde_json::Value>,
-    pub label: Option<serde_json::Value>,
+    pub default: Option<crate::models::stream_audio_default::StreamAudioDefault>,
+    pub label: Option<crate::models::stream_audio_label::StreamAudioLabel>,
 }

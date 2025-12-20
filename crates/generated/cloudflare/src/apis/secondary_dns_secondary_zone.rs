@@ -15,12 +15,15 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::secondary_dns_force_response::SecondaryDnsForceResponse;
+use crate::models::secondary_dns_id_response::SecondaryDnsIdResponse;
+use crate::models::secondary_dns_single_response_incoming::SecondaryDnsSingleResponseIncoming;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct ForceAxfrRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, SecondaryDnsForceResponse>,
 }
 
 impl<'a> ForceAxfrRequest<'a> {
@@ -38,18 +41,26 @@ impl<'a> ForceAxfrRequest<'a> {
         self.builder = self.builder.path_param("zone_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<SecondaryDnsForceResponse> {
         self.builder.send().await
     }
 }
-
 /// Force AXFR
+///
+/// Sends AXFR zone transfer request to primary nameserver(s).
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/zones/{zone_id}/secondary_dns/force_axfr`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::secondary_dns_secondary_zone };
+/// use cloudflare::{ ApiClient, apis::secondary_dns_secondary_zone };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = force_axfr(&api)
-///     .with_zone_id("value")
+/// let response = force_axfr(&api)
+///     .with_zone_id("zone_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -59,7 +70,7 @@ pub fn force_axfr(api: &ApiClient) -> ForceAxfrRequest<'_> {
 
 #[derive(Debug)]
 pub struct ConfigurationDetailsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, SecondaryDnsSingleResponseIncoming>,
 }
 
 impl<'a> ConfigurationDetailsRequest<'a> {
@@ -74,18 +85,26 @@ impl<'a> ConfigurationDetailsRequest<'a> {
         self.builder = self.builder.path_param("zone_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<SecondaryDnsSingleResponseIncoming> {
         self.builder.send().await
     }
 }
-
 /// Secondary Zone Configuration Details
+///
+/// Get secondary zone configuration for incoming zone transfers.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/secondary_dns/incoming`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::secondary_dns_secondary_zone };
+/// use cloudflare::{ ApiClient, apis::secondary_dns_secondary_zone };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = configuration_details(&api)
-///     .with_zone_id("value")
+/// let response = configuration_details(&api)
+///     .with_zone_id("zone_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -95,7 +114,7 @@ pub fn configuration_details(api: &ApiClient) -> ConfigurationDetailsRequest<'_>
 
 #[derive(Debug)]
 pub struct CreateSecondaryConfigurationRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, SecondaryDnsSingleResponseIncoming>,
 }
 
 impl<'a> CreateSecondaryConfigurationRequest<'a> {
@@ -118,18 +137,28 @@ impl<'a> CreateSecondaryConfigurationRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<SecondaryDnsSingleResponseIncoming> {
         self.builder.send().await
     }
 }
-
 /// Create Secondary Zone Configuration
+///
+/// Create secondary zone configuration for incoming zone transfers.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/zones/{zone_id}/secondary_dns/incoming`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::secondary_dns_secondary_zone };
+/// use cloudflare::{ ApiClient, apis::secondary_dns_secondary_zone };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = create_secondary_configuration(&api)
-///     .with_zone_id("value")
+/// # let body: crate::models::secondary_dns_dns_secondary_secondary_zone::SecondaryDnsDnsSecondarySecondaryZone = todo!();
+/// let response = create_secondary_configuration(&api)
+///     .with_zone_id("zone_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -139,7 +168,7 @@ pub fn create_secondary_configuration(api: &ApiClient) -> CreateSecondaryConfigu
 
 #[derive(Debug)]
 pub struct UpdateSecondaryConfigurationRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, SecondaryDnsSingleResponseIncoming>,
 }
 
 impl<'a> UpdateSecondaryConfigurationRequest<'a> {
@@ -162,18 +191,28 @@ impl<'a> UpdateSecondaryConfigurationRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<SecondaryDnsSingleResponseIncoming> {
         self.builder.send().await
     }
 }
-
 /// Update Secondary Zone Configuration
+///
+/// Update secondary zone configuration for incoming zone transfers.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/zones/{zone_id}/secondary_dns/incoming`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::secondary_dns_secondary_zone };
+/// use cloudflare::{ ApiClient, apis::secondary_dns_secondary_zone };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = update_secondary_configuration(&api)
-///     .with_zone_id("value")
+/// # let body: crate::models::secondary_dns_dns_secondary_secondary_zone::SecondaryDnsDnsSecondarySecondaryZone = todo!();
+/// let response = update_secondary_configuration(&api)
+///     .with_zone_id("zone_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -183,7 +222,7 @@ pub fn update_secondary_configuration(api: &ApiClient) -> UpdateSecondaryConfigu
 
 #[derive(Debug)]
 pub struct DeleteSecondaryConfigurationRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, SecondaryDnsIdResponse>,
 }
 
 impl<'a> DeleteSecondaryConfigurationRequest<'a> {
@@ -201,18 +240,26 @@ impl<'a> DeleteSecondaryConfigurationRequest<'a> {
         self.builder = self.builder.path_param("zone_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<SecondaryDnsIdResponse> {
         self.builder.send().await
     }
 }
-
 /// Delete Secondary Zone Configuration
+///
+/// Delete secondary zone configuration for incoming zone transfers.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/zones/{zone_id}/secondary_dns/incoming`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::secondary_dns_secondary_zone };
+/// use cloudflare::{ ApiClient, apis::secondary_dns_secondary_zone };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete_secondary_configuration(&api)
-///     .with_zone_id("value")
+/// let response = delete_secondary_configuration(&api)
+///     .with_zone_id("zone_id")
 ///     .send()
 ///     .await?;
 /// ```

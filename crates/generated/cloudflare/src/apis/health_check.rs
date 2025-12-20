@@ -47,15 +47,22 @@ impl<'a> DoHealthCheckRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Benchmark Durable Object warmup
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/cloudforce-one/events/dataset/{dataset_id}/health`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `dataset_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::health_check };
+/// use cloudflare::{ ApiClient, apis::health_check };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = do_health_check(&api)
-///     .with_account_id("value")
-///     .with_dataset_id("value")
+/// let response = do_health_check(&api)
+///     .with_account_id("account_id")
+///     .with_dataset_id("dataset_id")
 ///     .send()
 ///     .await?;
 /// ```

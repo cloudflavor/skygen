@@ -22,13 +22,15 @@ pub struct IntelDomain {
     pub additional_information:
         Option<crate::models::intel_additional_information::IntelAdditionalInformation>,
     pub application: Option<crate::models::intel_application::IntelApplication>,
-    pub content_categories: Option<serde_json::Value>,
-    pub domain: Option<serde_json::Value>,
-    pub inherited_content_categories: Option<serde_json::Value>,
-    pub inherited_from: Option<serde_json::Value>,
-    pub inherited_risk_types: Option<serde_json::Value>,
-    pub popularity_rank: Option<serde_json::Value>,
-    pub resolves_to_refs: Option<serde_json::Value>,
-    pub risk_score: Option<serde_json::Value>,
-    pub risk_types: Option<serde_json::Value>,
+    pub content_categories: Option<crate::models::intel_content_categories::IntelContentCategories>,
+    pub domain: Option<crate::models::intel_domain_name::IntelDomainName>,
+    pub inherited_content_categories:
+        Option<crate::models::intel_inherited_content_categories::IntelInheritedContentCategories>,
+    pub inherited_from: Option<crate::models::intel_inherited_from::IntelInheritedFrom>,
+    pub inherited_risk_types:
+        Option<crate::models::intel_inherited_risk_types::IntelInheritedRiskTypes>,
+    pub popularity_rank: Option<crate::models::intel_popularity_rank::IntelPopularityRank>,
+    pub resolves_to_refs: Option<crate::models::intel_resolves_to_refs::IntelResolvesToRefs>,
+    pub risk_score: Option<crate::models::intel_risk_score::IntelRiskScore>,
+    pub risk_types: Option<crate::models::intel_risk_types::IntelRiskTypes>,
 }

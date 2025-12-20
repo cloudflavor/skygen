@@ -19,14 +19,14 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct MagicInterconnect {
-    pub colo_name: Option<serde_json::Value>,
-    pub created_on: Option<serde_json::Value>,
-    pub description: Option<serde_json::Value>,
+    pub colo_name: Option<crate::models::magic_components_schemas_name::MagicComponentsSchemasName>,
+    pub created_on: Option<crate::models::magic_schemas_created_on::MagicSchemasCreatedOn>,
+    pub description: Option<crate::models::magic_interconnect_components_schemas_description::MagicInterconnectComponentsSchemasDescription>,
     pub gre: Option<crate::models::magic_gre::MagicGre>,
-    pub health_check: Option<serde_json::Value>,
-    pub id: Option<serde_json::Value>,
-    pub interface_address: Option<serde_json::Value>,
-    pub modified_on: Option<serde_json::Value>,
-    pub mtu: Option<serde_json::Value>,
-    pub name: Option<serde_json::Value>,
+    pub health_check: Option<crate::models::magic_interconnect_health_check::MagicInterconnectHealthCheck>,
+    pub id: Option<crate::models::magic_schemas_identifier::MagicSchemasIdentifier>,
+    pub interface_address: Option<crate::models::magic_interface_address::MagicInterfaceAddress>,
+    pub modified_on: Option<crate::models::magic_schemas_modified_on::MagicSchemasModifiedOn>,
+    pub mtu: Option<crate::models::magic_schemas_mtu::MagicSchemasMtu>,
+    pub name: Option<crate::models::magic_components_schemas_name::MagicComponentsSchemasName>,
 }

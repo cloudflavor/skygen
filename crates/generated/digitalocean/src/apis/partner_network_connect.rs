@@ -15,6 +15,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::error::Error;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
@@ -34,13 +35,18 @@ impl<'a> AttachmentsListRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// List all partner attachments
+///
+/// To list all of the Partner Attachments on your account, send a `GET` request to `/v2/partner_network_connect/attachments`.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/partner_network_connect/attachments`
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::partner_network_connect };
+/// use digitalocean::{ ApiClient, apis::partner_network_connect };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = attachments_list(&api)
+/// let response = attachments_list(&api)
 ///     .send()
 ///     .await?;
 /// ```
@@ -50,7 +56,7 @@ pub fn attachments_list(api: &ApiClient) -> AttachmentsListRequest<'_> {
 
 #[derive(Debug)]
 pub struct AttachmentsCreateRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, Error>,
 }
 
 impl<'a> AttachmentsCreateRequest<'a> {
@@ -67,17 +73,26 @@ impl<'a> AttachmentsCreateRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<Error> {
         self.builder.send().await
     }
 }
-
 /// Create a new partner attachment
+///
+/// To create a new partner attachment, send a `POST` request to
+/// `/v2/partner_network_connect/attachments` with a JSON object containing the
+/// required configuration details.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/v2/partner_network_connect/attachments`
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::partner_network_connect };
+/// use digitalocean::{ ApiClient, apis::partner_network_connect };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = attachments_create(&api)
+/// # let body: crate::models::partner_attachment_writable::PartnerAttachmentWritable = todo!();
+/// let response = attachments_create(&api)
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -109,14 +124,23 @@ impl<'a> AttachmentsGetRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Retrieve an existing partner attachment
+///
+/// To get the details of a partner attachment, send a `GET` request to
+/// `/v2/partner_network_connect/attachments/{pa_id}`.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/partner_network_connect/attachments/{pa_id}`
+///
+/// **Parameters**
+/// - `pa_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::partner_network_connect };
+/// use digitalocean::{ ApiClient, apis::partner_network_connect };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = attachments_get(&api)
-///     .with_pa_id("value")
+/// let response = attachments_get(&api)
+///     .with_pa_id("pa_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -126,7 +150,7 @@ pub fn attachments_get(api: &ApiClient) -> AttachmentsGetRequest<'_> {
 
 #[derive(Debug)]
 pub struct AttachmentsDeleteRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, Error>,
 }
 
 impl<'a> AttachmentsDeleteRequest<'a> {
@@ -144,18 +168,27 @@ impl<'a> AttachmentsDeleteRequest<'a> {
         self.builder = self.builder.path_param("pa_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<Error> {
         self.builder.send().await
     }
 }
-
 /// Delete an existing partner attachment
+///
+/// To delete an existing partner attachment, send a `DELETE` request to
+/// `/v2/partner_network_connect/attachments/{pa_id}`.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/v2/partner_network_connect/attachments/{pa_id}`
+///
+/// **Parameters**
+/// - `pa_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::partner_network_connect };
+/// use digitalocean::{ ApiClient, apis::partner_network_connect };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = attachments_delete(&api)
-///     .with_pa_id("value")
+/// let response = attachments_delete(&api)
+///     .with_pa_id("pa_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -165,7 +198,7 @@ pub fn attachments_delete(api: &ApiClient) -> AttachmentsDeleteRequest<'_> {
 
 #[derive(Debug)]
 pub struct AttachmentsPatchRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, Error>,
 }
 
 impl<'a> AttachmentsPatchRequest<'a> {
@@ -183,22 +216,37 @@ impl<'a> AttachmentsPatchRequest<'a> {
         self.builder = self.builder.path_param("pa_id", value);
         self
     }
-    pub fn with_body(mut self, body: serde_json::Value) -> Self {
+    pub fn with_body(
+        mut self,
+        body: crate::models::partner_attachment_updatable::PartnerAttachmentUpdatable,
+    ) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<Error> {
         self.builder.send().await
     }
 }
-
 /// Update an existing partner attachment
+///
+/// To update an existing partner attachment, send a `PATCH` request to
+/// `/v2/partner_network_connect/attachments/{pa_id}` with a JSON object containing the
+/// fields to be updated.
+///
+/// **HTTP Method:** `PATCH`
+/// **Path:** `/v2/partner_network_connect/attachments/{pa_id}`
+///
+/// **Parameters**
+/// - `pa_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::partner_network_connect };
+/// use digitalocean::{ ApiClient, apis::partner_network_connect };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = attachments_patch(&api)
-///     .with_pa_id("value")
+/// # let body: crate::models::partner_attachment_updatable::PartnerAttachmentUpdatable = todo!();
+/// let response = attachments_patch(&api)
+///     .with_pa_id("pa_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -230,14 +278,23 @@ impl<'a> AttachmentsGetBgpAuthRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get current BGP auth key for the partner attachment
+///
+/// To get the current BGP auth key for a partner attachment, send a `GET` request to
+/// `/v2/partner_network_connect/attachments/{pa_id}/bgp_auth_key`.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/partner_network_connect/attachments/{pa_id}/bgp_auth_key`
+///
+/// **Parameters**
+/// - `pa_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::partner_network_connect };
+/// use digitalocean::{ ApiClient, apis::partner_network_connect };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = attachments_get_bgp_auth(&api)
-///     .with_pa_id("value")
+/// let response = attachments_get_bgp_auth(&api)
+///     .with_pa_id("pa_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -269,14 +326,23 @@ impl<'a> AttachmentsListRemoteRoutesRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// List remote routes for a partner attachment
+///
+/// To list all remote routes associated with a partner attachment, send a `GET` request to
+/// `/v2/partner_network_connect/attachments/{pa_id}/remote_routes`.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/partner_network_connect/attachments/{pa_id}/remote_routes`
+///
+/// **Parameters**
+/// - `pa_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::partner_network_connect };
+/// use digitalocean::{ ApiClient, apis::partner_network_connect };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = attachments_list_remote_routes(&api)
-///     .with_pa_id("value")
+/// let response = attachments_list_remote_routes(&api)
+///     .with_pa_id("pa_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -316,14 +382,26 @@ impl<'a> AttachmentsUpdateRemoteRoutesRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Set remote routes for a partner attachment
+///
+/// To set remote routes for a partner attachment, send a `PUT` request to
+/// `/v2/partner_network_connect/attachments/{pa_id}/remote_routes` with a JSON object
+/// containing the remote routes to be set.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/v2/partner_network_connect/attachments/{pa_id}/remote_routes`
+///
+/// **Parameters**
+/// - `pa_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::partner_network_connect };
+/// use digitalocean::{ ApiClient, apis::partner_network_connect };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = attachments_update_remote_routes(&api)
-///     .with_pa_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = attachments_update_remote_routes(&api)
+///     .with_pa_id("pa_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -357,14 +435,23 @@ impl<'a> AttachmentsGetServiceKeyRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get the current service key for the partner attachment
+///
+/// To get the current service key for a partner attachment, send a `GET` request to
+/// `/v2/partner_network_connect/attachments/{pa_id}/service_key`.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/partner_network_connect/attachments/{pa_id}/service_key`
+///
+/// **Parameters**
+/// - `pa_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::partner_network_connect };
+/// use digitalocean::{ ApiClient, apis::partner_network_connect };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = attachments_get_service_key(&api)
-///     .with_pa_id("value")
+/// let response = attachments_get_service_key(&api)
+///     .with_pa_id("pa_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -374,7 +461,7 @@ pub fn attachments_get_service_key(api: &ApiClient) -> AttachmentsGetServiceKeyR
 
 #[derive(Debug)]
 pub struct AttachmentsCreateServiceKeyRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, Error>,
 }
 
 impl<'a> AttachmentsCreateServiceKeyRequest<'a> {
@@ -392,18 +479,26 @@ impl<'a> AttachmentsCreateServiceKeyRequest<'a> {
         self.builder = self.builder.path_param("pa_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<Error> {
         self.builder.send().await
     }
 }
-
 /// Regenerate the service key for the partner attachment
+///
+/// This operation generates a new service key for the specified partner attachment. The operation is asynchronous, and the response is an empty JSON object returned with a 202 status code. To poll for the new service key, send a `GET` request to `/v2/partner_network_connect/attachments/{pa_id}/service_key`.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/v2/partner_network_connect/attachments/{pa_id}/service_key`
+///
+/// **Parameters**
+/// - `pa_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::partner_network_connect };
+/// use digitalocean::{ ApiClient, apis::partner_network_connect };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = attachments_create_service_key(&api)
-///     .with_pa_id("value")
+/// let response = attachments_create_service_key(&api)
+///     .with_pa_id("pa_id")
 ///     .send()
 ///     .await?;
 /// ```

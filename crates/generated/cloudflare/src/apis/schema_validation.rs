@@ -15,6 +15,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::api_shield_public_schema_success_result::ApiShieldPublicSchemaSuccessResult;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
@@ -46,14 +47,22 @@ impl<'a> ListSchemasPaginatedRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// List all uploaded schemas
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/schema_validation/schemas`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `validation_enabled` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::schema_validation };
+/// use cloudflare::{ ApiClient, apis::schema_validation };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_schemas_paginated(&api)
-///     .with_zone_id("value")
+/// let response = list_schemas_paginated(&api)
+///     .with_zone_id("zone_id")
+///     .with_validation_enabled("validation_enabled")
 ///     .send()
 ///     .await?;
 /// ```
@@ -82,7 +91,10 @@ impl<'a> CreateSchemaRequest<'a> {
         self.builder = self.builder.path_param("zone_id", value);
         self
     }
-    pub fn with_body(mut self, body: serde_json::Value) -> Self {
+    pub fn with_body(
+        mut self,
+        body: std::collections::BTreeMap<String, serde_json::Value>,
+    ) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
@@ -90,14 +102,22 @@ impl<'a> CreateSchemaRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Upload a schema
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/zones/{zone_id}/schema_validation/schemas`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::schema_validation };
+/// use cloudflare::{ ApiClient, apis::schema_validation };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = create_schema(&api)
-///     .with_zone_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = create_schema(&api)
+///     .with_zone_id("zone_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -129,14 +149,20 @@ impl<'a> ListSchemaHostsRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// List hosts covered by uploaded schemas
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/schema_validation/schemas/hosts`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::schema_validation };
+/// use cloudflare::{ ApiClient, apis::schema_validation };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_schema_hosts(&api)
-///     .with_zone_id("value")
+/// let response = list_schema_hosts(&api)
+///     .with_zone_id("zone_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -146,7 +172,7 @@ pub fn list_schema_hosts(api: &ApiClient) -> ListSchemaHostsRequest<'_> {
 
 #[derive(Debug)]
 pub struct GetSchemaRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, ApiShieldPublicSchemaSuccessResult>,
 }
 
 impl<'a> GetSchemaRequest<'a> {
@@ -169,19 +195,26 @@ impl<'a> GetSchemaRequest<'a> {
         self.builder = self.builder.path_param("schema_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<ApiShieldPublicSchemaSuccessResult> {
         self.builder.send().await
     }
 }
-
 /// Get details of a schema
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/schema_validation/schemas/{schema_id}`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `schema_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::schema_validation };
+/// use cloudflare::{ ApiClient, apis::schema_validation };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_schema(&api)
-///     .with_zone_id("value")
-///     .with_schema_id("value")
+/// let response = get_schema(&api)
+///     .with_zone_id("zone_id")
+///     .with_schema_id("schema_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -218,15 +251,22 @@ impl<'a> DeleteSchemaRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Delete a schema
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/zones/{zone_id}/schema_validation/schemas/{schema_id}`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `schema_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::schema_validation };
+/// use cloudflare::{ ApiClient, apis::schema_validation };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete_schema(&api)
-///     .with_zone_id("value")
-///     .with_schema_id("value")
+/// let response = delete_schema(&api)
+///     .with_zone_id("zone_id")
+///     .with_schema_id("schema_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -236,7 +276,7 @@ pub fn delete_schema(api: &ApiClient) -> DeleteSchemaRequest<'_> {
 
 #[derive(Debug)]
 pub struct EditSchemaRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, ApiShieldPublicSchemaSuccessResult>,
 }
 
 impl<'a> EditSchemaRequest<'a> {
@@ -260,23 +300,35 @@ impl<'a> EditSchemaRequest<'a> {
         self.builder = self.builder.path_param("schema_id", value);
         self
     }
-    pub fn with_body(mut self, body: serde_json::Value) -> Self {
+    pub fn with_body(
+        mut self,
+        body: std::collections::BTreeMap<String, serde_json::Value>,
+    ) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<ApiShieldPublicSchemaSuccessResult> {
         self.builder.send().await
     }
 }
-
 /// Edit details of a schema to enable validation
+///
+/// **HTTP Method:** `PATCH`
+/// **Path:** `/zones/{zone_id}/schema_validation/schemas/{schema_id}`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `schema_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::schema_validation };
+/// use cloudflare::{ ApiClient, apis::schema_validation };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = edit_schema(&api)
-///     .with_zone_id("value")
-///     .with_schema_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = edit_schema(&api)
+///     .with_zone_id("zone_id")
+///     .with_schema_id("schema_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -317,15 +369,26 @@ impl<'a> ExtractOperationsSchemaRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Retrieve all operations from the schema.
+///
+/// Retrieves all operations from the schema. Operations that already exist in API Shield Endpoint Management will be returned as full operations.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/schema_validation/schemas/{schema_id}/operations`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `schema_id` (path, required)
+/// - `operation_status` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::schema_validation };
+/// use cloudflare::{ ApiClient, apis::schema_validation };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = extract_operations_schema(&api)
-///     .with_zone_id("value")
-///     .with_schema_id("value")
+/// let response = extract_operations_schema(&api)
+///     .with_zone_id("zone_id")
+///     .with_schema_id("schema_id")
+///     .with_operation_status("operation_status")
 ///     .send()
 ///     .await?;
 /// ```

@@ -19,9 +19,9 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct CallsAppWithSecret {
-    pub created: Option<serde_json::Value>,
-    pub modified: Option<serde_json::Value>,
-    pub name: Option<serde_json::Value>,
-    pub secret: Option<serde_json::Value>,
-    pub uid: Option<serde_json::Value>,
+    pub created: Option<crate::models::calls_created::CallsCreated>,
+    pub modified: Option<crate::models::calls_modified::CallsModified>,
+    pub name: Option<crate::models::calls_name::CallsName>,
+    pub secret: Option<crate::models::calls_secret::CallsSecret>,
+    pub uid: Option<crate::models::calls_identifier::CallsIdentifier>,
 }

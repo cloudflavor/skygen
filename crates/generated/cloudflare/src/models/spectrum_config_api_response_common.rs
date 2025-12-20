@@ -19,7 +19,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct SpectrumConfigApiResponseCommon {
-    pub errors: serde_json::Value,
-    pub messages: serde_json::Value,
+    pub errors: crate::models::spectrum_config_messages::SpectrumConfigMessages,
+    pub messages: crate::models::spectrum_config_messages::SpectrumConfigMessages,
     pub success: bool,
 }

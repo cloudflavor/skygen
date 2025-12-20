@@ -19,7 +19,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct ZeroTrustGatewayApiResponseCommon {
-    pub errors: serde_json::Value,
-    pub messages: serde_json::Value,
+    pub errors: crate::models::zero_trust_gateway_messages::ZeroTrustGatewayMessages,
+    pub messages: crate::models::zero_trust_gateway_messages::ZeroTrustGatewayMessages,
     pub success: bool,
 }

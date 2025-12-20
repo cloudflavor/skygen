@@ -15,12 +15,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::error::Error;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct VolumeActionsPostRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, Error>,
 }
 
 impl<'a> VolumeActionsPostRequest<'a> {
@@ -34,17 +35,51 @@ impl<'a> VolumeActionsPostRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<Error> {
         self.builder.send().await
     }
 }
-
 /// Initiate A Block Storage Action By Volume Name
+///
+/// To initiate an action on a block storage volume by Name, send a POST request to
+/// `~/v2/volumes/actions`. The body should contain the appropriate
+/// attributes for the respective action.
+///
+/// ## Attach a Block Storage Volume to a Droplet
+///
+/// | Attribute   | Details                                                             |
+/// | ----------- | ------------------------------------------------------------------- |
+/// | type        | This must be `attach`                                               |
+/// | volume_name | The name of the block storage volume                                |
+/// | droplet_id  | Set to the Droplet's ID                                             |
+/// | region      | Set to the slug representing the region where the volume is located |
+///
+/// Each volume may only be attached to a single Droplet. However, up to fifteen
+/// volumes may be attached to a Droplet at a time. Pre-formatted volumes will be
+/// automatically mounted to Ubuntu, Debian, Fedora, Fedora Atomic, and CentOS
+/// Droplets created on or after April 26, 2018 when attached. On older Droplets,
+/// [additional configuration](<https://docs.digitalocean.com/products/volumes/how-to/mount/)>
+/// is required.
+///
+/// ## Remove a Block Storage Volume from a Droplet
+///
+/// | Attribute   | Details                                                             |
+/// | ----------- | ------------------------------------------------------------------- |
+/// | type        | This must be `detach`                                               |
+/// | volume_name | The name of the block storage volume                                |
+/// | droplet_id  | Set to the Droplet's ID                                             |
+/// | region      | Set to the slug representing the region where the volume is located |
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/v2/volumes/actions`
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::block_storage_actions };
+/// use digitalocean::{ ApiClient, apis::block_storage_actions };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = volume_actions_post(&api)
+/// # let body: serde_json::Value = todo!();
+/// let response = volume_actions_post(&api)
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -72,14 +107,23 @@ impl<'a> VolumeActionsListRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// List All Actions for a Volume
+///
+/// To retrieve all actions that have been executed on a volume, send a GET request to `/v2/volumes/$VOLUME_ID/actions`.
+///
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/volumes/{volume_id}/actions`
+///
+/// **Parameters**
+/// - `volume_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::block_storage_actions };
+/// use digitalocean::{ ApiClient, apis::block_storage_actions };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = volume_actions_list(&api)
-///     .with_volume_id("value")
+/// let response = volume_actions_list(&api)
+///     .with_volume_id("volume_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -89,7 +133,7 @@ pub fn volume_actions_list(api: &ApiClient) -> VolumeActionsListRequest<'_> {
 
 #[derive(Debug)]
 pub struct VolumeActionsPostPostRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, Error>,
 }
 
 impl<'a> VolumeActionsPostPostRequest<'a> {
@@ -108,18 +152,63 @@ impl<'a> VolumeActionsPostPostRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<Error> {
         self.builder.send().await
     }
 }
-
 /// Initiate A Block Storage Action By Volume Id
+///
+/// To initiate an action on a block storage volume by Id, send a POST request to
+/// `~/v2/volumes/$VOLUME_ID/actions`. The body should contain the appropriate
+/// attributes for the respective action.
+///
+/// ## Attach a Block Storage Volume to a Droplet
+///
+/// | Attribute  | Details                                                             |
+/// | ---------- | ------------------------------------------------------------------- |
+/// | type       | This must be `attach`                                               |
+/// | droplet_id | Set to the Droplet's ID                                             |
+/// | region     | Set to the slug representing the region where the volume is located |
+///
+/// Each volume may only be attached to a single Droplet. However, up to fifteen
+/// volumes may be attached to a Droplet at a time. Pre-formatted volumes will be
+/// automatically mounted to Ubuntu, Debian, Fedora, Fedora Atomic, and CentOS
+/// Droplets created on or after April 26, 2018 when attached. On older Droplets,
+/// [additional configuration](<https://docs.digitalocean.com/products/volumes/how-to/mount/)>
+/// is required.
+///
+/// ## Remove a Block Storage Volume from a Droplet
+///
+/// | Attribute  | Details                                                             |
+/// | ---------- | ------------------------------------------------------------------- |
+/// | type       | This must be `detach`                                               |
+/// | droplet_id | Set to the Droplet's ID                                             |
+/// | region     | Set to the slug representing the region where the volume is located |
+///
+/// ## Resize a Volume
+///
+/// | Attribute      | Details                                                             |
+/// | -------------- | ------------------------------------------------------------------- |
+/// | type           | This must be `resize`                                               |
+/// | size_gigabytes | The new size of the block storage volume in GiB (1024^3)            |
+/// | region         | Set to the slug representing the region where the volume is located |
+///
+/// Volumes may only be resized upwards. The maximum size for a volume is 16TiB.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/v2/volumes/{volume_id}/actions`
+///
+/// **Parameters**
+/// - `volume_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::block_storage_actions };
+/// use digitalocean::{ ApiClient, apis::block_storage_actions };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = volume_actions_post_post(&api)
-///     .with_volume_id("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = volume_actions_post_post(&api)
+///     .with_volume_id("volume_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -156,15 +245,25 @@ impl<'a> VolumeActionsGetRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Retrieve an Existing Volume Action
+///
+/// To retrieve the status of a volume action, send a GET request to `/v2/volumes/$VOLUME_ID/actions/$ACTION_ID`.
+///
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/volumes/{volume_id}/actions/{action_id}`
+///
+/// **Parameters**
+/// - `volume_id` (path, required)
+/// - `action_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::block_storage_actions };
+/// use digitalocean::{ ApiClient, apis::block_storage_actions };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = volume_actions_get(&api)
-///     .with_volume_id("value")
-///     .with_action_id("value")
+/// let response = volume_actions_get(&api)
+///     .with_volume_id("volume_id")
+///     .with_action_id("action_id")
 ///     .send()
 ///     .await?;
 /// ```

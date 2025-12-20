@@ -19,7 +19,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct AccessSchemasCa {
-    pub aud: Option<serde_json::Value>,
-    pub id: Option<serde_json::Value>,
-    pub public_key: Option<serde_json::Value>,
+    pub aud: Option<crate::models::access_components_schemas_aud::AccessComponentsSchemasAud>,
+    pub id: Option<crate::models::access_components_schemas_id::AccessComponentsSchemasId>,
+    pub public_key: Option<crate::models::access_public_key::AccessPublicKey>,
 }

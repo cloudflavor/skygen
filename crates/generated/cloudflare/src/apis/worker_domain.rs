@@ -15,12 +15,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::workers_domain_response_collection::WorkersDomainResponseCollection;
+use crate::models::workers_domain_response_single::WorkersDomainResponseSingle;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct ListDomainsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, WorkersDomainResponseCollection>,
 }
 
 impl<'a> ListDomainsRequest<'a> {
@@ -55,18 +57,36 @@ impl<'a> ListDomainsRequest<'a> {
         self.builder = self.builder.header_param("environment", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<WorkersDomainResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// List Domains
+///
+/// Lists all Worker Domains for an account.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/workers/domains`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `zone_name` (query,optional)
+/// - `service` (query,optional)
+/// - `zone_id` (query,optional)
+/// - `hostname` (query,optional)
+/// - `environment` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::worker_domain };
+/// use cloudflare::{ ApiClient, apis::worker_domain };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_domains(&api)
-///     .with_account_id("value")
+/// let response = list_domains(&api)
+///     .with_account_id("account_id")
+///     .with_zone_name("zone_name")
+///     .with_service("service")
+///     .with_zone_id("zone_id")
+///     .with_hostname("hostname")
+///     .with_environment("environment")
 ///     .send()
 ///     .await?;
 /// ```
@@ -76,7 +96,7 @@ pub fn list_domains(api: &ApiClient) -> ListDomainsRequest<'_> {
 
 #[derive(Debug)]
 pub struct AttachDomainRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, WorkersDomainResponseSingle>,
 }
 
 impl<'a> AttachDomainRequest<'a> {
@@ -99,18 +119,28 @@ impl<'a> AttachDomainRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<WorkersDomainResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Attach to Domain
+///
+/// Attaches a Worker to a zone and hostname.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/accounts/{account_id}/workers/domains`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::worker_domain };
+/// use cloudflare::{ ApiClient, apis::worker_domain };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = attach_domain(&api)
-///     .with_account_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = attach_domain(&api)
+///     .with_account_id("account_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -120,7 +150,7 @@ pub fn attach_domain(api: &ApiClient) -> AttachDomainRequest<'_> {
 
 #[derive(Debug)]
 pub struct GetDomainRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, WorkersDomainResponseSingle>,
 }
 
 impl<'a> GetDomainRequest<'a> {
@@ -143,19 +173,28 @@ impl<'a> GetDomainRequest<'a> {
         self.builder = self.builder.path_param("domain_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<WorkersDomainResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Get a Domain
+///
+/// Gets a Worker domain.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/workers/domains/{domain_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `domain_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::worker_domain };
+/// use cloudflare::{ ApiClient, apis::worker_domain };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_domain(&api)
-///     .with_account_id("value")
-///     .with_domain_id("value")
+/// let response = get_domain(&api)
+///     .with_account_id("account_id")
+///     .with_domain_id("domain_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -192,15 +231,24 @@ impl<'a> DetachDomainRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Detach from Domain
+///
+/// Detaches a Worker from a zone and hostname.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/accounts/{account_id}/workers/domains/{domain_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `domain_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::worker_domain };
+/// use cloudflare::{ ApiClient, apis::worker_domain };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = detach_domain(&api)
-///     .with_account_id("value")
-///     .with_domain_id("value")
+/// let response = detach_domain(&api)
+///     .with_account_id("account_id")
+///     .with_domain_id("domain_id")
 ///     .send()
 ///     .await?;
 /// ```

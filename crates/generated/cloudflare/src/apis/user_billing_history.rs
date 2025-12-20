@@ -15,12 +15,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::bill_subs_api_billing_history_collection::BillSubsApiBillingHistoryCollection;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct DeprecatedBillingHistoryDetailsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, BillSubsApiBillingHistoryCollection>,
 }
 
 impl<'a> DeprecatedBillingHistoryDetailsRequest<'a> {
@@ -53,17 +54,36 @@ impl<'a> DeprecatedBillingHistoryDetailsRequest<'a> {
         self.builder = self.builder.header_param("action", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<BillSubsApiBillingHistoryCollection> {
         self.builder.send().await
     }
 }
-
 /// Billing History Details
+///
+/// Accesses your billing history object.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/user/billing/history`
+///
+/// **Parameters**
+/// - `page` (query,optional)
+/// - `per_page` (query,optional)
+/// - `order` (query,optional)
+/// - `occurred_at` (query,optional)
+/// - `type` (query,optional)
+/// - `action` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::user_billing_history };
+/// use cloudflare::{ ApiClient, apis::user_billing_history };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = deprecated_billing_history_details(&api)
+/// let response = deprecated_billing_history_details(&api)
+///     .with_page("page")
+///     .with_per_page("per_page")
+///     .with_order("order")
+///     .with_occurred_at("occurred_at")
+///     .with_type_param("type")
+///     .with_action("action")
 ///     .send()
 ///     .await?;
 /// ```

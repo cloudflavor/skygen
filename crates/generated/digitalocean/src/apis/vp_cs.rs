@@ -15,6 +15,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::error::Error;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
@@ -33,13 +34,18 @@ impl<'a> VpcsListRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// List All VPCs
+///
+/// To list all of the VPCs on your account, send a GET request to `/v2/vpcs`.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/vpcs`
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::vp_cs };
+/// use digitalocean::{ ApiClient, apis::vp_cs };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = vpcs_list(&api)
+/// let response = vpcs_list(&api)
 ///     .send()
 ///     .await?;
 /// ```
@@ -49,7 +55,7 @@ pub fn vpcs_list(api: &ApiClient) -> VpcsListRequest<'_> {
 
 #[derive(Debug)]
 pub struct VpcsCreateRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, std::collections::BTreeMap<String, serde_json::Value>>,
 }
 
 impl<'a> VpcsCreateRequest<'a> {
@@ -62,17 +68,29 @@ impl<'a> VpcsCreateRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<std::collections::BTreeMap<String, serde_json::Value>> {
         self.builder.send().await
     }
 }
-
 /// Create a New VPC
+///
+/// To create a VPC, send a POST request to `/v2/vpcs` specifying the attributes
+/// in the table below in the JSON body.
+///
+/// **Note:** If you do not currently have a VPC network in a specific datacenter
+/// region, the first one that you create will be set as the default for that
+/// region. The default VPC for a region cannot be changed or deleted.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/v2/vpcs`
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::vp_cs };
+/// use digitalocean::{ ApiClient, apis::vp_cs };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = vpcs_create(&api)
+/// # let body: serde_json::Value = todo!();
+/// let response = vpcs_create(&api)
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -82,7 +100,7 @@ pub fn vpcs_create(api: &ApiClient) -> VpcsCreateRequest<'_> {
 
 #[derive(Debug)]
 pub struct VpcsGetRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, std::collections::BTreeMap<String, serde_json::Value>>,
 }
 
 impl<'a> VpcsGetRequest<'a> {
@@ -96,18 +114,26 @@ impl<'a> VpcsGetRequest<'a> {
         self.builder = self.builder.path_param("vpc_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<std::collections::BTreeMap<String, serde_json::Value>> {
         self.builder.send().await
     }
 }
-
 /// Retrieve an Existing VPC
+///
+/// To show information about an existing VPC, send a GET request to `/v2/vpcs/$VPC_ID`.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/vpcs/{vpc_id}`
+///
+/// **Parameters**
+/// - `vpc_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::vp_cs };
+/// use digitalocean::{ ApiClient, apis::vp_cs };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = vpcs_get(&api)
-///     .with_vpc_id("value")
+/// let response = vpcs_get(&api)
+///     .with_vpc_id("vpc_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -117,7 +143,7 @@ pub fn vpcs_get(api: &ApiClient) -> VpcsGetRequest<'_> {
 
 #[derive(Debug)]
 pub struct VpcsUpdateRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, std::collections::BTreeMap<String, serde_json::Value>>,
 }
 
 impl<'a> VpcsUpdateRequest<'a> {
@@ -136,18 +162,28 @@ impl<'a> VpcsUpdateRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<std::collections::BTreeMap<String, serde_json::Value>> {
         self.builder.send().await
     }
 }
-
 /// Update a VPC
+///
+/// To update information about a VPC, send a PUT request to `/v2/vpcs/$VPC_ID`.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/v2/vpcs/{vpc_id}`
+///
+/// **Parameters**
+/// - `vpc_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::vp_cs };
+/// use digitalocean::{ ApiClient, apis::vp_cs };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = vpcs_update(&api)
-///     .with_vpc_id("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = vpcs_update(&api)
+///     .with_vpc_id("vpc_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -157,7 +193,7 @@ pub fn vpcs_update(api: &ApiClient) -> VpcsUpdateRequest<'_> {
 
 #[derive(Debug)]
 pub struct VpcsDeleteRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, Error>,
 }
 
 impl<'a> VpcsDeleteRequest<'a> {
@@ -171,18 +207,32 @@ impl<'a> VpcsDeleteRequest<'a> {
         self.builder = self.builder.path_param("vpc_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<Error> {
         self.builder.send().await
     }
 }
-
 /// Delete a VPC
+///
+/// To delete a VPC, send a DELETE request to `/v2/vpcs/$VPC_ID`. A 204 status
+/// code with no body will be returned in response to a successful request.
+///
+/// The default VPC for a region can not be deleted. Additionally, a VPC can only
+/// be deleted if it does not contain any member resources. Attempting to delete
+/// a region's default VPC or a VPC that still has members will result in a
+/// 403 Forbidden error response.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/v2/vpcs/{vpc_id}`
+///
+/// **Parameters**
+/// - `vpc_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::vp_cs };
+/// use digitalocean::{ ApiClient, apis::vp_cs };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = vpcs_delete(&api)
-///     .with_vpc_id("value")
+/// let response = vpcs_delete(&api)
+///     .with_vpc_id("vpc_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -192,7 +242,7 @@ pub fn vpcs_delete(api: &ApiClient) -> VpcsDeleteRequest<'_> {
 
 #[derive(Debug)]
 pub struct VpcsPatchRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, std::collections::BTreeMap<String, serde_json::Value>>,
 }
 
 impl<'a> VpcsPatchRequest<'a> {
@@ -211,18 +261,29 @@ impl<'a> VpcsPatchRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<std::collections::BTreeMap<String, serde_json::Value>> {
         self.builder.send().await
     }
 }
-
 /// Partially Update a VPC
+///
+/// To update a subset of information about a VPC, send a PATCH request to
+/// `/v2/vpcs/$VPC_ID`.
+///
+/// **HTTP Method:** `PATCH`
+/// **Path:** `/v2/vpcs/{vpc_id}`
+///
+/// **Parameters**
+/// - `vpc_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::vp_cs };
+/// use digitalocean::{ ApiClient, apis::vp_cs };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = vpcs_patch(&api)
-///     .with_vpc_id("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = vpcs_patch(&api)
+///     .with_vpc_id("vpc_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -250,14 +311,27 @@ impl<'a> VpcsListMembersRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// List the Member Resources of a VPC
+///
+/// To list all of the resources that are members of a VPC, send a GET request to
+/// `/v2/vpcs/$VPC_ID/members`.
+///
+/// To only list resources of a specific type that are members of the VPC,
+/// included a `resource_type` query parameter. For example, to only list Droplets
+/// in the VPC, send a GET request to `/v2/vpcs/$VPC_ID/members?resource_type=droplet`.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/vpcs/{vpc_id}/members`
+///
+/// **Parameters**
+/// - `vpc_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::vp_cs };
+/// use digitalocean::{ ApiClient, apis::vp_cs };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = vpcs_list_members(&api)
-///     .with_vpc_id("value")
+/// let response = vpcs_list_members(&api)
+///     .with_vpc_id("vpc_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -285,14 +359,23 @@ impl<'a> VpcsListPeeringsRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// List the Peerings of a VPC
+///
+/// To list all of a VPC's peerings, send a GET request to
+/// `/v2/vpcs/$VPC_ID/peerings`.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/vpcs/{vpc_id}/peerings`
+///
+/// **Parameters**
+/// - `vpc_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::vp_cs };
+/// use digitalocean::{ ApiClient, apis::vp_cs };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = vpcs_list_peerings(&api)
-///     .with_vpc_id("value")
+/// let response = vpcs_list_peerings(&api)
+///     .with_vpc_id("vpc_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -302,7 +385,7 @@ pub fn vpcs_list_peerings(api: &ApiClient) -> VpcsListPeeringsRequest<'_> {
 
 #[derive(Debug)]
 pub struct VpcsCreatePeeringsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, Error>,
 }
 
 impl<'a> VpcsCreatePeeringsRequest<'a> {
@@ -324,18 +407,29 @@ impl<'a> VpcsCreatePeeringsRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<Error> {
         self.builder.send().await
     }
 }
-
 /// Create a Peering with a VPC
+///
+/// To create a new VPC peering for a given VPC, send a POST request to
+/// `/v2/vpcs/$VPC_ID/peerings`.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/v2/vpcs/{vpc_id}/peerings`
+///
+/// **Parameters**
+/// - `vpc_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::vp_cs };
+/// use digitalocean::{ ApiClient, apis::vp_cs };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = vpcs_create_peerings(&api)
-///     .with_vpc_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = vpcs_create_peerings(&api)
+///     .with_vpc_id("vpc_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -345,7 +439,7 @@ pub fn vpcs_create_peerings(api: &ApiClient) -> VpcsCreatePeeringsRequest<'_> {
 
 #[derive(Debug)]
 pub struct VpcsPatchPeeringsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, std::collections::BTreeMap<String, serde_json::Value>>,
 }
 
 impl<'a> VpcsPatchPeeringsRequest<'a> {
@@ -373,19 +467,32 @@ impl<'a> VpcsPatchPeeringsRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<std::collections::BTreeMap<String, serde_json::Value>> {
         self.builder.send().await
     }
 }
-
 /// Update a VPC Peering
+///
+/// To update the name of a VPC peering in a particular VPC, send a PATCH request
+/// to `/v2/vpcs/$VPC_ID/peerings/$VPC_PEERING_ID` with the new `name` in the
+/// request body.
+///
+/// **HTTP Method:** `PATCH`
+/// **Path:** `/v2/vpcs/{vpc_id}/peerings/{vpc_peering_id}`
+///
+/// **Parameters**
+/// - `vpc_id` (path, required)
+/// - `vpc_peering_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::vp_cs };
+/// use digitalocean::{ ApiClient, apis::vp_cs };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = vpcs_patch_peerings(&api)
-///     .with_vpc_id("value")
-///     .with_vpc_peering_id("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = vpcs_patch_peerings(&api)
+///     .with_vpc_id("vpc_id")
+///     .with_vpc_peering_id("vpc_peering_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```

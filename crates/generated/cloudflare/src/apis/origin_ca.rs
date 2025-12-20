@@ -15,12 +15,15 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::tls_certificates_and_hostnames_certificate_revoke_response::TlsCertificatesAndHostnamesCertificateRevokeResponse;
+use crate::models::tls_certificates_and_hostnames_schemas_certificate_response_collection::TlsCertificatesAndHostnamesSchemasCertificateResponseCollection;
+use crate::models::tls_certificates_and_hostnames_schemas_certificate_response_single::TlsCertificatesAndHostnamesSchemasCertificateResponseSingle;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct ListCertificatesRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, TlsCertificatesAndHostnamesSchemasCertificateResponseCollection>,
 }
 
 impl<'a> ListCertificatesRequest<'a> {
@@ -49,17 +52,36 @@ impl<'a> ListCertificatesRequest<'a> {
         self.builder = self.builder.header_param("offset", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(
+        self,
+    ) -> ApiResult<TlsCertificatesAndHostnamesSchemasCertificateResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// List Certificates
+///
+/// List all existing Origin CA certificates for a given zone. You can use an Origin CA Key as your User Service Key or an API token when calling this endpoint ([see above](#requests)).
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/certificates`
+///
+/// **Parameters**
+/// - `zone_id` (query,required)
+/// - `page` (query,optional)
+/// - `per_page` (query,optional)
+/// - `limit` (query,optional)
+/// - `offset` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::origin_ca };
+/// use cloudflare::{ ApiClient, apis::origin_ca };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_certificates(&api)
+/// let response = list_certificates(&api)
+///     .with_zone_id("zone_id")
+///     .with_page("page")
+///     .with_per_page("per_page")
+///     .with_limit("limit")
+///     .with_offset("offset")
 ///     .send()
 ///     .await?;
 /// ```
@@ -69,7 +91,7 @@ pub fn list_certificates(api: &ApiClient) -> ListCertificatesRequest<'_> {
 
 #[derive(Debug)]
 pub struct CreateCertificateRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, TlsCertificatesAndHostnamesSchemasCertificateResponseSingle>,
 }
 
 impl<'a> CreateCertificateRequest<'a> {
@@ -85,17 +107,26 @@ impl<'a> CreateCertificateRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(
+        self,
+    ) -> ApiResult<TlsCertificatesAndHostnamesSchemasCertificateResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Create Certificate
+///
+/// Create an Origin CA certificate. You can use an Origin CA Key as your User Service Key or an API token when calling this endpoint ([see above](#requests)).
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/certificates`
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::origin_ca };
+/// use cloudflare::{ ApiClient, apis::origin_ca };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = create_certificate(&api)
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = create_certificate(&api)
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -105,7 +136,7 @@ pub fn create_certificate(api: &ApiClient) -> CreateCertificateRequest<'_> {
 
 #[derive(Debug)]
 pub struct GetCertificateRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, TlsCertificatesAndHostnamesSchemasCertificateResponseSingle>,
 }
 
 impl<'a> GetCertificateRequest<'a> {
@@ -119,18 +150,28 @@ impl<'a> GetCertificateRequest<'a> {
         self.builder = self.builder.path_param("certificate_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(
+        self,
+    ) -> ApiResult<TlsCertificatesAndHostnamesSchemasCertificateResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Get Certificate
+///
+/// Get an existing Origin CA certificate by its serial number. You can use an Origin CA Key as your User Service Key or an API token when calling this endpoint ([see above](#requests)).
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/certificates/{certificate_id}`
+///
+/// **Parameters**
+/// - `certificate_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::origin_ca };
+/// use cloudflare::{ ApiClient, apis::origin_ca };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_certificate(&api)
-///     .with_certificate_id("value")
+/// let response = get_certificate(&api)
+///     .with_certificate_id("certificate_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -140,7 +181,7 @@ pub fn get_certificate(api: &ApiClient) -> GetCertificateRequest<'_> {
 
 #[derive(Debug)]
 pub struct RevokeCertificateRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, TlsCertificatesAndHostnamesCertificateRevokeResponse>,
 }
 
 impl<'a> RevokeCertificateRequest<'a> {
@@ -154,18 +195,26 @@ impl<'a> RevokeCertificateRequest<'a> {
         self.builder = self.builder.path_param("certificate_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<TlsCertificatesAndHostnamesCertificateRevokeResponse> {
         self.builder.send().await
     }
 }
-
 /// Revoke Certificate
+///
+/// Revoke an existing Origin CA certificate by its serial number. You can use an Origin CA Key as your User Service Key or an API token when calling this endpoint ([see above](#requests)).
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/certificates/{certificate_id}`
+///
+/// **Parameters**
+/// - `certificate_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::origin_ca };
+/// use cloudflare::{ ApiClient, apis::origin_ca };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = revoke_certificate(&api)
-///     .with_certificate_id("value")
+/// let response = revoke_certificate(&api)
+///     .with_certificate_id("certificate_id")
 ///     .send()
 ///     .await?;
 /// ```

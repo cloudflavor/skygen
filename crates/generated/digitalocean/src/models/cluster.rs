@@ -31,7 +31,7 @@ pub struct Cluster {
     pub ipv4: Option<String>,
     pub maintenance_policy: Option<crate::models::maintenance_policy::MaintenancePolicy>,
     pub name: String,
-    pub node_pools: Vec<serde_json::Value>,
+    pub node_pools: Vec<crate::models::kubernetes_node_pool::KubernetesNodePool>,
     pub region: String,
     pub registry_enabled: Option<bool>,
     pub routing_agent: Option<crate::models::routing_agent::RoutingAgent>,

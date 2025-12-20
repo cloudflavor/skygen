@@ -19,5 +19,5 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct MagicLanDhcpRelay {
-    pub server_addresses: Option<Vec<serde_json::Value>>,
+    pub server_addresses: Option<Vec<crate::models::magic_ip_address::MagicIpAddress>>,
 }

@@ -19,8 +19,8 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct RulesetsResponse {
-    pub errors: serde_json::Value,
-    pub messages: serde_json::Value,
+    pub errors: crate::models::rulesets_errors::RulesetsErrors,
+    pub messages: crate::models::rulesets_messages::RulesetsMessages,
     pub result: serde_json::Value,
     pub success: bool,
 }

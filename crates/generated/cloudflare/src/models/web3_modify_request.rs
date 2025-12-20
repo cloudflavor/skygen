@@ -19,6 +19,6 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct Web3ModifyRequest {
-    pub description: Option<serde_json::Value>,
-    pub dnslink: Option<serde_json::Value>,
+    pub description: Option<crate::models::web3_description::Web3Description>,
+    pub dnslink: Option<crate::models::web3_dnslink::Web3Dnslink>,
 }

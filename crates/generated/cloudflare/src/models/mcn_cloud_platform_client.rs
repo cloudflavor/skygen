@@ -20,6 +20,6 @@ use serde::{Deserialize, Serialize};
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct McnCloudPlatformClient {
     pub client_type: String,
-    pub id: serde_json::Value,
+    pub id: crate::models::mcn_platform_client_id::McnPlatformClientId,
     pub name: String,
 }

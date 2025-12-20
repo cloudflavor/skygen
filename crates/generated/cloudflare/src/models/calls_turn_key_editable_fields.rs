@@ -19,5 +19,5 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct CallsTurnKeyEditableFields {
-    pub name: Option<serde_json::Value>,
+    pub name: Option<crate::models::calls_turn_key_name::CallsTurnKeyName>,
 }

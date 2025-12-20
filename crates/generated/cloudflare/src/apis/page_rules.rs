@@ -15,6 +15,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::zones_schemas_api_response_single_id::ZonesSchemasApiResponseSingleId;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
@@ -54,14 +55,30 @@ impl<'a> ListPageRulesRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// List Page Rules
+///
+/// Fetches Page Rules in a zone.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/pagerules`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `order` (query,optional)
+/// - `direction` (query,optional)
+/// - `match` (query,optional)
+/// - `status` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::page_rules };
+/// use cloudflare::{ ApiClient, apis::page_rules };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_page_rules(&api)
-///     .with_zone_id("value")
+/// let response = list_page_rules(&api)
+///     .with_zone_id("zone_id")
+///     .with_order("order")
+///     .with_direction("direction")
+///     .with_match_param("match")
+///     .with_status("status")
 ///     .send()
 ///     .await?;
 /// ```
@@ -97,14 +114,24 @@ impl<'a> CreatePageRuleRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Create a Page Rule
+///
+/// Creates a new Page Rule.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/zones/{zone_id}/pagerules`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::page_rules };
+/// use cloudflare::{ ApiClient, apis::page_rules };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = create_page_rule(&api)
-///     .with_zone_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = create_page_rule(&api)
+///     .with_zone_id("zone_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -138,15 +165,24 @@ impl<'a> GetPageRuleRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get a Page Rule
+///
+/// Fetches the details of a Page Rule.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/pagerules/{pagerule_id}`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `pagerule_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::page_rules };
+/// use cloudflare::{ ApiClient, apis::page_rules };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_page_rule(&api)
-///     .with_zone_id("value")
-///     .with_pagerule_id("value")
+/// let response = get_page_rule(&api)
+///     .with_zone_id("zone_id")
+///     .with_pagerule_id("pagerule_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -188,15 +224,26 @@ impl<'a> UpdatePageRuleRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Update a Page Rule
+///
+/// Replaces the configuration of an existing Page Rule. The configuration of the updated Page Rule will exactly match the data passed in the API request.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/zones/{zone_id}/pagerules/{pagerule_id}`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `pagerule_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::page_rules };
+/// use cloudflare::{ ApiClient, apis::page_rules };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = update_page_rule(&api)
-///     .with_zone_id("value")
-///     .with_pagerule_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = update_page_rule(&api)
+///     .with_zone_id("zone_id")
+///     .with_pagerule_id("pagerule_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -206,7 +253,7 @@ pub fn update_page_rule(api: &ApiClient) -> UpdatePageRuleRequest<'_> {
 
 #[derive(Debug)]
 pub struct DeletePageRuleRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, ZonesSchemasApiResponseSingleId>,
 }
 
 impl<'a> DeletePageRuleRequest<'a> {
@@ -229,19 +276,28 @@ impl<'a> DeletePageRuleRequest<'a> {
         self.builder = self.builder.path_param("pagerule_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<ZonesSchemasApiResponseSingleId> {
         self.builder.send().await
     }
 }
-
 /// Delete a Page Rule
+///
+/// Deletes an existing Page Rule.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/zones/{zone_id}/pagerules/{pagerule_id}`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `pagerule_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::page_rules };
+/// use cloudflare::{ ApiClient, apis::page_rules };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete_page_rule(&api)
-///     .with_zone_id("value")
-///     .with_pagerule_id("value")
+/// let response = delete_page_rule(&api)
+///     .with_zone_id("zone_id")
+///     .with_pagerule_id("pagerule_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -286,15 +342,26 @@ impl<'a> EditPageRuleRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Edit a Page Rule
+///
+/// Updates one or more fields of an existing Page Rule.
+///
+/// **HTTP Method:** `PATCH`
+/// **Path:** `/zones/{zone_id}/pagerules/{pagerule_id}`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `pagerule_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::page_rules };
+/// use cloudflare::{ ApiClient, apis::page_rules };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = edit_page_rule(&api)
-///     .with_zone_id("value")
-///     .with_pagerule_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = edit_page_rule(&api)
+///     .with_zone_id("zone_id")
+///     .with_pagerule_id("pagerule_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```

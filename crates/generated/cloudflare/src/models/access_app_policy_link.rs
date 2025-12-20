@@ -19,6 +19,6 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct AccessAppPolicyLink {
-    pub id: Option<serde_json::Value>,
-    pub precedence: Option<serde_json::Value>,
+    pub id: Option<crate::models::access_schemas_uuid::AccessSchemasUuid>,
+    pub precedence: Option<crate::models::access_precedence::AccessPrecedence>,
 }

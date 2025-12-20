@@ -38,14 +38,22 @@ impl<'a> ListRoutesRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// List Routes
+///
+/// Returns routes for a zone.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/workers/routes`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::worker_routes };
+/// use cloudflare::{ ApiClient, apis::worker_routes };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_routes(&api)
-///     .with_zone_id("value")
+/// let response = list_routes(&api)
+///     .with_zone_id("zone_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -78,14 +86,24 @@ impl<'a> CreateRouteRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Create Route
+///
+/// Creates a route that maps a URL pattern to a Worker.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/zones/{zone_id}/workers/routes`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::worker_routes };
+/// use cloudflare::{ ApiClient, apis::worker_routes };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = create_route(&api)
-///     .with_zone_id("value")
+/// # let body: crate::models::workers_route::WorkersRoute = todo!();
+/// let response = create_route(&api)
+///     .with_zone_id("zone_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -122,15 +140,24 @@ impl<'a> GetRouteRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get Route
+///
+/// Returns information about a route, including URL pattern and Worker.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/workers/routes/{route_id}`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `route_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::worker_routes };
+/// use cloudflare::{ ApiClient, apis::worker_routes };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_route(&api)
-///     .with_zone_id("value")
-///     .with_route_id("value")
+/// let response = get_route(&api)
+///     .with_zone_id("zone_id")
+///     .with_route_id("route_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -172,15 +199,26 @@ impl<'a> UpdateRouteRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Update Route
+///
+/// Updates the URL pattern or Worker associated with a route.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/zones/{zone_id}/workers/routes/{route_id}`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `route_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::worker_routes };
+/// use cloudflare::{ ApiClient, apis::worker_routes };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = update_route(&api)
-///     .with_zone_id("value")
-///     .with_route_id("value")
+/// # let body: crate::models::workers_route::WorkersRoute = todo!();
+/// let response = update_route(&api)
+///     .with_zone_id("zone_id")
+///     .with_route_id("route_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -217,15 +255,24 @@ impl<'a> DeleteRouteRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Delete Route
+///
+/// Deletes a route.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/zones/{zone_id}/workers/routes/{route_id}`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `route_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::worker_routes };
+/// use cloudflare::{ ApiClient, apis::worker_routes };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete_route(&api)
-///     .with_zone_id("value")
-///     .with_route_id("value")
+/// let response = delete_route(&api)
+///     .with_zone_id("zone_id")
+///     .with_route_id("route_id")
 ///     .send()
 ///     .await?;
 /// ```

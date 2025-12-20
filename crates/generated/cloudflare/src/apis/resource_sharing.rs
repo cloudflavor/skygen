@@ -15,12 +15,18 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::resource_sharing_share_recipient_response_collection::ResourceSharingShareRecipientResponseCollection;
+use crate::models::resource_sharing_share_recipient_response_single::ResourceSharingShareRecipientResponseSingle;
+use crate::models::resource_sharing_share_resource_response_collection::ResourceSharingShareResourceResponseCollection;
+use crate::models::resource_sharing_share_resource_response_single::ResourceSharingShareResourceResponseSingle;
+use crate::models::resource_sharing_share_response_collection::ResourceSharingShareResponseCollection;
+use crate::models::resource_sharing_share_response_single::ResourceSharingShareResponseSingle;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct SharesListRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, ResourceSharingShareResponseCollection>,
 }
 
 impl<'a> SharesListRequest<'a> {
@@ -34,18 +40,26 @@ impl<'a> SharesListRequest<'a> {
         self.builder = self.builder.path_param("account_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<ResourceSharingShareResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// List account shares
+///
+/// Lists all account shares.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/shares`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::resource_sharing };
+/// use cloudflare::{ ApiClient, apis::resource_sharing };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = shares_list(&api)
-///     .with_account_id("value")
+/// let response = shares_list(&api)
+///     .with_account_id("account_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -55,7 +69,7 @@ pub fn shares_list(api: &ApiClient) -> SharesListRequest<'_> {
 
 #[derive(Debug)]
 pub struct ShareCreateRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, ResourceSharingShareResponseSingle>,
 }
 
 impl<'a> ShareCreateRequest<'a> {
@@ -77,18 +91,26 @@ impl<'a> ShareCreateRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<ResourceSharingShareResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Create a new share
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/shares`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::resource_sharing };
+/// use cloudflare::{ ApiClient, apis::resource_sharing };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = share_create(&api)
-///     .with_account_id("value")
+/// # let body: crate::models::resource_sharing_create_share_request::ResourceSharingCreateShareRequest = todo!();
+/// let response = share_create(&api)
+///     .with_account_id("account_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -98,7 +120,7 @@ pub fn share_create(api: &ApiClient) -> ShareCreateRequest<'_> {
 
 #[derive(Debug)]
 pub struct SharesGetRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, ResourceSharingShareResponseSingle>,
 }
 
 impl<'a> SharesGetRequest<'a> {
@@ -118,19 +140,28 @@ impl<'a> SharesGetRequest<'a> {
         self.builder = self.builder.path_param("share_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<ResourceSharingShareResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Get account share by ID
+///
+/// Fetches share by ID.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/shares/{share_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `share_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::resource_sharing };
+/// use cloudflare::{ ApiClient, apis::resource_sharing };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = shares_get(&api)
-///     .with_account_id("value")
-///     .with_share_id("value")
+/// let response = shares_get(&api)
+///     .with_account_id("account_id")
+///     .with_share_id("share_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -140,7 +171,7 @@ pub fn shares_get(api: &ApiClient) -> SharesGetRequest<'_> {
 
 #[derive(Debug)]
 pub struct ShareUpdateRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, ResourceSharingShareResponseSingle>,
 }
 
 impl<'a> ShareUpdateRequest<'a> {
@@ -168,19 +199,30 @@ impl<'a> ShareUpdateRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<ResourceSharingShareResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Update a share
+///
+/// Updating is not immediate, an updated share object with a new status will be returned.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/accounts/{account_id}/shares/{share_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `share_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::resource_sharing };
+/// use cloudflare::{ ApiClient, apis::resource_sharing };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = share_update(&api)
-///     .with_account_id("value")
-///     .with_share_id("value")
+/// # let body: crate::models::resource_sharing_update_share_request::ResourceSharingUpdateShareRequest = todo!();
+/// let response = share_update(&api)
+///     .with_account_id("account_id")
+///     .with_share_id("share_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -190,7 +232,7 @@ pub fn share_update(api: &ApiClient) -> ShareUpdateRequest<'_> {
 
 #[derive(Debug)]
 pub struct ShareDeleteRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, ResourceSharingShareResponseSingle>,
 }
 
 impl<'a> ShareDeleteRequest<'a> {
@@ -213,19 +255,28 @@ impl<'a> ShareDeleteRequest<'a> {
         self.builder = self.builder.path_param("share_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<ResourceSharingShareResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Delete a share
+///
+/// Deletion is not immediate, an updated share object with a new status will be returned.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/accounts/{account_id}/shares/{share_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `share_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::resource_sharing };
+/// use cloudflare::{ ApiClient, apis::resource_sharing };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = share_delete(&api)
-///     .with_account_id("value")
-///     .with_share_id("value")
+/// let response = share_delete(&api)
+///     .with_account_id("account_id")
+///     .with_share_id("share_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -235,7 +286,7 @@ pub fn share_delete(api: &ApiClient) -> ShareDeleteRequest<'_> {
 
 #[derive(Debug)]
 pub struct ShareRecipientsListRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, ResourceSharingShareRecipientResponseCollection>,
 }
 
 impl<'a> ShareRecipientsListRequest<'a> {
@@ -258,19 +309,28 @@ impl<'a> ShareRecipientsListRequest<'a> {
         self.builder = self.builder.path_param("share_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<ResourceSharingShareRecipientResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// List share recipients by share ID
+///
+/// List share recipients by share ID.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/shares/{share_id}/recipients`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `share_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::resource_sharing };
+/// use cloudflare::{ ApiClient, apis::resource_sharing };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = share_recipients_list(&api)
-///     .with_account_id("value")
-///     .with_share_id("value")
+/// let response = share_recipients_list(&api)
+///     .with_account_id("account_id")
+///     .with_share_id("share_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -280,7 +340,7 @@ pub fn share_recipients_list(api: &ApiClient) -> ShareRecipientsListRequest<'_> 
 
 #[derive(Debug)]
 pub struct ShareRecipientCreateRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, ResourceSharingShareRecipientResponseSingle>,
 }
 
 impl<'a> ShareRecipientCreateRequest<'a> {
@@ -311,19 +371,28 @@ impl<'a> ShareRecipientCreateRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<ResourceSharingShareRecipientResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Create a new share recipient
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/shares/{share_id}/recipients`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `share_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::resource_sharing };
+/// use cloudflare::{ ApiClient, apis::resource_sharing };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = share_recipient_create(&api)
-///     .with_account_id("value")
-///     .with_share_id("value")
+/// # let body: crate::models::resource_sharing_create_share_recipient_request::ResourceSharingCreateShareRecipientRequest = todo!();
+/// let response = share_recipient_create(&api)
+///     .with_account_id("account_id")
+///     .with_share_id("share_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -333,7 +402,7 @@ pub fn share_recipient_create(api: &ApiClient) -> ShareRecipientCreateRequest<'_
 
 #[derive(Debug)]
 pub struct ShareRecipientsGetRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, ResourceSharingShareRecipientResponseSingle>,
 }
 
 impl<'a> ShareRecipientsGetRequest<'a> {
@@ -361,20 +430,30 @@ impl<'a> ShareRecipientsGetRequest<'a> {
         self.builder = self.builder.path_param("recipient_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<ResourceSharingShareRecipientResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Get share recipient by ID
+///
+/// Get share recipient by ID.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/shares/{share_id}/recipients/{recipient_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `share_id` (path, required)
+/// - `recipient_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::resource_sharing };
+/// use cloudflare::{ ApiClient, apis::resource_sharing };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = share_recipients_get(&api)
-///     .with_account_id("value")
-///     .with_share_id("value")
-///     .with_recipient_id("value")
+/// let response = share_recipients_get(&api)
+///     .with_account_id("account_id")
+///     .with_share_id("share_id")
+///     .with_recipient_id("recipient_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -384,7 +463,7 @@ pub fn share_recipients_get(api: &ApiClient) -> ShareRecipientsGetRequest<'_> {
 
 #[derive(Debug)]
 pub struct ShareRecipientDeleteRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, ResourceSharingShareRecipientResponseSingle>,
 }
 
 impl<'a> ShareRecipientDeleteRequest<'a> {
@@ -412,20 +491,30 @@ impl<'a> ShareRecipientDeleteRequest<'a> {
         self.builder = self.builder.path_param("recipient_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<ResourceSharingShareRecipientResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Delete a share recipient
+///
+/// Deletion is not immediate, an updated share recipient object with a new status will be returned.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/accounts/{account_id}/shares/{share_id}/recipients/{recipient_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `share_id` (path, required)
+/// - `recipient_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::resource_sharing };
+/// use cloudflare::{ ApiClient, apis::resource_sharing };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = share_recipient_delete(&api)
-///     .with_account_id("value")
-///     .with_share_id("value")
-///     .with_recipient_id("value")
+/// let response = share_recipient_delete(&api)
+///     .with_account_id("account_id")
+///     .with_share_id("share_id")
+///     .with_recipient_id("recipient_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -435,7 +524,7 @@ pub fn share_recipient_delete(api: &ApiClient) -> ShareRecipientDeleteRequest<'_
 
 #[derive(Debug)]
 pub struct ShareResourcesListRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, ResourceSharingShareResourceResponseCollection>,
 }
 
 impl<'a> ShareResourcesListRequest<'a> {
@@ -458,19 +547,28 @@ impl<'a> ShareResourcesListRequest<'a> {
         self.builder = self.builder.path_param("share_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<ResourceSharingShareResourceResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// List share resources by share ID
+///
+/// List share resources by share ID.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/shares/{share_id}/resources`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `share_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::resource_sharing };
+/// use cloudflare::{ ApiClient, apis::resource_sharing };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = share_resources_list(&api)
-///     .with_account_id("value")
-///     .with_share_id("value")
+/// let response = share_resources_list(&api)
+///     .with_account_id("account_id")
+///     .with_share_id("share_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -480,7 +578,7 @@ pub fn share_resources_list(api: &ApiClient) -> ShareResourcesListRequest<'_> {
 
 #[derive(Debug)]
 pub struct ShareResourceCreateRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, ResourceSharingShareResourceResponseSingle>,
 }
 
 impl<'a> ShareResourceCreateRequest<'a> {
@@ -511,19 +609,28 @@ impl<'a> ShareResourceCreateRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<ResourceSharingShareResourceResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Create a new share resource
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/shares/{share_id}/resources`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `share_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::resource_sharing };
+/// use cloudflare::{ ApiClient, apis::resource_sharing };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = share_resource_create(&api)
-///     .with_account_id("value")
-///     .with_share_id("value")
+/// # let body: crate::models::resource_sharing_create_share_resource_request::ResourceSharingCreateShareResourceRequest = todo!();
+/// let response = share_resource_create(&api)
+///     .with_account_id("account_id")
+///     .with_share_id("share_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -533,7 +640,7 @@ pub fn share_resource_create(api: &ApiClient) -> ShareResourceCreateRequest<'_> 
 
 #[derive(Debug)]
 pub struct ShareResourcesGetRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, ResourceSharingShareResourceResponseSingle>,
 }
 
 impl<'a> ShareResourcesGetRequest<'a> {
@@ -561,20 +668,30 @@ impl<'a> ShareResourcesGetRequest<'a> {
         self.builder = self.builder.path_param("resource_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<ResourceSharingShareResourceResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Get share resource by ID
+///
+/// Get share resource by ID.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/shares/{share_id}/resources/{resource_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `share_id` (path, required)
+/// - `resource_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::resource_sharing };
+/// use cloudflare::{ ApiClient, apis::resource_sharing };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = share_resources_get(&api)
-///     .with_account_id("value")
-///     .with_share_id("value")
-///     .with_resource_id("value")
+/// let response = share_resources_get(&api)
+///     .with_account_id("account_id")
+///     .with_share_id("share_id")
+///     .with_resource_id("resource_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -584,7 +701,7 @@ pub fn share_resources_get(api: &ApiClient) -> ShareResourcesGetRequest<'_> {
 
 #[derive(Debug)]
 pub struct ShareResourceUpdateRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, ResourceSharingShareResourceResponseSingle>,
 }
 
 impl<'a> ShareResourceUpdateRequest<'a> {
@@ -620,20 +737,32 @@ impl<'a> ShareResourceUpdateRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<ResourceSharingShareResourceResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Update a share resource
+///
+/// Update is not immediate, an updated share resource object with a new status will be returned.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/accounts/{account_id}/shares/{share_id}/resources/{resource_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `share_id` (path, required)
+/// - `resource_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::resource_sharing };
+/// use cloudflare::{ ApiClient, apis::resource_sharing };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = share_resource_update(&api)
-///     .with_account_id("value")
-///     .with_share_id("value")
-///     .with_resource_id("value")
+/// # let body: crate::models::resource_sharing_update_share_resource_request::ResourceSharingUpdateShareResourceRequest = todo!();
+/// let response = share_resource_update(&api)
+///     .with_account_id("account_id")
+///     .with_share_id("share_id")
+///     .with_resource_id("resource_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -643,7 +772,7 @@ pub fn share_resource_update(api: &ApiClient) -> ShareResourceUpdateRequest<'_> 
 
 #[derive(Debug)]
 pub struct ShareResourceDeleteRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, ResourceSharingShareResourceResponseSingle>,
 }
 
 impl<'a> ShareResourceDeleteRequest<'a> {
@@ -671,20 +800,30 @@ impl<'a> ShareResourceDeleteRequest<'a> {
         self.builder = self.builder.path_param("resource_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<ResourceSharingShareResourceResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Delete a share resource
+///
+/// Deletion is not immediate, an updated share resource object with a new status will be returned.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/accounts/{account_id}/shares/{share_id}/resources/{resource_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `share_id` (path, required)
+/// - `resource_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::resource_sharing };
+/// use cloudflare::{ ApiClient, apis::resource_sharing };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = share_resource_delete(&api)
-///     .with_account_id("value")
-///     .with_share_id("value")
-///     .with_resource_id("value")
+/// let response = share_resource_delete(&api)
+///     .with_account_id("account_id")
+///     .with_share_id("share_id")
+///     .with_resource_id("resource_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -694,7 +833,7 @@ pub fn share_resource_delete(api: &ApiClient) -> ShareResourceDeleteRequest<'_> 
 
 #[derive(Debug)]
 pub struct OrganizationSharesListRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, ResourceSharingShareResponseCollection>,
 }
 
 impl<'a> OrganizationSharesListRequest<'a> {
@@ -709,18 +848,26 @@ impl<'a> OrganizationSharesListRequest<'a> {
         self.builder = self.builder.path_param("organization_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<ResourceSharingShareResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// List organization shares
+///
+/// Lists all organization shares.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/organizations/{organization_id}/shares`
+///
+/// **Parameters**
+/// - `organization_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::resource_sharing };
+/// use cloudflare::{ ApiClient, apis::resource_sharing };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = organization_shares_list(&api)
-///     .with_organization_id("value")
+/// let response = organization_shares_list(&api)
+///     .with_organization_id("organization_id")
 ///     .send()
 ///     .await?;
 /// ```

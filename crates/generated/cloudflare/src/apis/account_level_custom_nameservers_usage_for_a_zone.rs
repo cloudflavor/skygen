@@ -15,12 +15,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::dns_custom_nameservers_get_response::DnsCustomNameserversGetResponse;
+use crate::models::dns_custom_nameservers_schemas_empty_response::DnsCustomNameserversSchemasEmptyResponse;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct GetCustomNameserverRelatedRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, DnsCustomNameserversGetResponse>,
 }
 
 impl<'a> GetCustomNameserverRelatedRequest<'a> {
@@ -34,18 +36,28 @@ impl<'a> GetCustomNameserverRelatedRequest<'a> {
         self.builder = self.builder.path_param("zone_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<DnsCustomNameserversGetResponse> {
         self.builder.send().await
     }
 }
-
 /// Get Account Custom Nameserver Related Zone Metadata
+///
+/// Get metadata for account-level custom nameservers on a zone.
+///
+/// Deprecated in favor of [Show DNS Settings](<https://developers.cloudflare.com/api/operations/dns-settings-for-a-zone-list-dns-settings).>
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/custom_ns`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::account_level_custom_nameservers_usage_for_a_zone };
+/// use cloudflare::{ ApiClient, apis::account_level_custom_nameservers_usage_for_a_zone };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_custom_nameserver_related(&api)
-///     .with_zone_id("value")
+/// let response = get_custom_nameserver_related(&api)
+///     .with_zone_id("zone_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -55,7 +67,7 @@ pub fn get_custom_nameserver_related(api: &ApiClient) -> GetCustomNameserverRela
 
 #[derive(Debug)]
 pub struct SetCustomNameserverRelatedRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, DnsCustomNameserversSchemasEmptyResponse>,
 }
 
 impl<'a> SetCustomNameserverRelatedRequest<'a> {
@@ -77,18 +89,32 @@ impl<'a> SetCustomNameserverRelatedRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<DnsCustomNameserversSchemasEmptyResponse> {
         self.builder.send().await
     }
 }
-
 /// Set Account Custom Nameserver Related Zone Metadata
+///
+/// Set metadata for account-level custom nameservers on a zone.
+///
+/// If you would like new zones in the account to use account custom nameservers by default, use PUT /accounts/:identifier to set the account setting use_account_custom_ns_by_default to true.
+///
+/// Deprecated in favor of [Update DNS Settings](<https://developers.cloudflare.com/api/operations/dns-settings-for-a-zone-update-dns-settings).>
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/zones/{zone_id}/custom_ns`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::account_level_custom_nameservers_usage_for_a_zone };
+/// use cloudflare::{ ApiClient, apis::account_level_custom_nameservers_usage_for_a_zone };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = set_custom_nameserver_related(&api)
-///     .with_zone_id("value")
+/// # let body: crate::models::dns_custom_nameservers_zone_metadata::DnsCustomNameserversZoneMetadata = todo!();
+/// let response = set_custom_nameserver_related(&api)
+///     .with_zone_id("zone_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```

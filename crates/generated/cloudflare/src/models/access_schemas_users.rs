@@ -19,15 +19,19 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct AccessSchemasUsers {
-    pub access_seat: Option<serde_json::Value>,
-    pub active_device_count: Option<serde_json::Value>,
-    pub created_at: Option<serde_json::Value>,
-    pub email: Option<serde_json::Value>,
-    pub gateway_seat: Option<serde_json::Value>,
-    pub id: Option<serde_json::Value>,
-    pub last_successful_login: Option<serde_json::Value>,
-    pub name: Option<serde_json::Value>,
-    pub seat_uid: Option<serde_json::Value>,
-    pub uid: Option<serde_json::Value>,
-    pub updated_at: Option<serde_json::Value>,
+    pub access_seat: Option<crate::models::access_schemas_access_seat::AccessSchemasAccessSeat>,
+    pub active_device_count:
+        Option<crate::models::access_active_device_count::AccessActiveDeviceCount>,
+    pub created_at: Option<crate::models::access_timestamp::AccessTimestamp>,
+    pub email: Option<crate::models::access_schemas_email::AccessSchemasEmail>,
+    pub gateway_seat: Option<crate::models::access_schemas_gateway_seat::AccessSchemasGatewaySeat>,
+    pub id: Option<crate::models::access_uuid::AccessUuid>,
+    pub last_successful_login:
+        Option<crate::models::access_last_successful_login::AccessLastSuccessfulLogin>,
+    pub name: Option<
+        crate::models::access_users_components_schemas_name::AccessUsersComponentsSchemasName,
+    >,
+    pub seat_uid: Option<crate::models::access_schemas_seat_uid::AccessSchemasSeatUid>,
+    pub uid: Option<crate::models::access_uid::AccessUid>,
+    pub updated_at: Option<crate::models::access_timestamp::AccessTimestamp>,
 }

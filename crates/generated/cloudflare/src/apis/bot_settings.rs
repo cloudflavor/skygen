@@ -15,12 +15,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::bot_management_bot_management_response_body::BotManagementBotManagementResponseBody;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct ManagementGetConfigRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, BotManagementBotManagementResponseBody>,
 }
 
 impl<'a> ManagementGetConfigRequest<'a> {
@@ -34,18 +35,26 @@ impl<'a> ManagementGetConfigRequest<'a> {
         self.builder = self.builder.path_param("zone_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<BotManagementBotManagementResponseBody> {
         self.builder.send().await
     }
 }
-
 /// Get Zone Bot Management Config
+///
+/// Retrieve a zone's Bot Management Config
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/bot_management`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::bot_settings };
+/// use cloudflare::{ ApiClient, apis::bot_settings };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = management_get_config(&api)
-///     .with_zone_id("value")
+/// let response = management_get_config(&api)
+///     .with_zone_id("zone_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -55,7 +64,7 @@ pub fn management_get_config(api: &ApiClient) -> ManagementGetConfigRequest<'_> 
 
 #[derive(Debug)]
 pub struct ManagementUpdateConfigRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, BotManagementBotManagementResponseBody>,
 }
 
 impl<'a> ManagementUpdateConfigRequest<'a> {
@@ -70,22 +79,81 @@ impl<'a> ManagementUpdateConfigRequest<'a> {
         self.builder = self.builder.path_param("zone_id", value);
         self
     }
-    pub fn with_body(mut self, body: serde_json::Value) -> Self {
+    pub fn with_body(
+        mut self,
+        body: crate::models::bot_management_config_single::BotManagementConfigSingle,
+    ) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<BotManagementBotManagementResponseBody> {
         self.builder.send().await
     }
 }
-
 /// Update Zone Bot Management Config
+///
+/// Updates the Bot Management configuration for a zone.
+///
+/// This API is used to update:
+/// - **Bot Fight Mode**
+/// - **Super Bot Fight Mode**
+/// - **Bot Management for Enterprise**
+///
+/// See [Bot Plans](<https://developers.cloudflare.com/bots/plans/)> for more information on the different plans
+/// \
+/// If you recently upgraded or downgraded your plan, refer to the following examples to clean up old configurations.
+/// Copy and paste the example body to remove old zone configurations based on your current plan.
+/// #### Clean up configuration for Bot Fight Mode plan
+/// ```json
+/// {
+/// "sbfm_likely_automated": "allow",
+/// "sbfm_definitely_automated": "allow",
+/// "sbfm_verified_bots": "allow",
+/// "sbfm_static_resource_protection": false,
+/// "optimize_wordpress": false,
+/// "suppress_session_score": false
+/// }
+/// ```
+/// #### Clean up configuration for SBFM Pro plan
+/// ```json
+/// {
+/// "sbfm_likely_automated": "allow",
+/// "fight_mode": false
+/// }
+/// ```
+/// #### Clean up configuration for SBFM Biz plan
+/// ```json
+/// {
+/// "fight_mode": false
+/// }
+/// ```
+/// #### Clean up configuration for BM Enterprise Subscription plan
+/// It is strongly recommended that you ensure you have [custom rules](<https://developers.cloudflare.com/waf/custom-rules/)> in place to protect your zone before disabling the SBFM rules. Without these protections, your zone is vulnerable to attacks.
+/// ```json
+/// {
+/// "sbfm_likely_automated": "allow",
+/// "sbfm_definitely_automated": "allow",
+/// "sbfm_verified_bots": "allow",
+/// "sbfm_static_resource_protection": false,
+/// "optimize_wordpress": false,
+/// "fight_mode": false
+/// }
+/// ```
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/zones/{zone_id}/bot_management`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::bot_settings };
+/// use cloudflare::{ ApiClient, apis::bot_settings };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = management_update_config(&api)
-///     .with_zone_id("value")
+/// # let body: crate::models::bot_management_config_single::BotManagementConfigSingle = todo!();
+/// let response = management_update_config(&api)
+///     .with_zone_id("zone_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```

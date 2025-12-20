@@ -20,8 +20,9 @@ use serde::{Deserialize, Serialize};
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct McnCreateCatalogSyncRequest {
     pub description: Option<String>,
-    pub destination_type: serde_json::Value,
+    pub destination_type:
+        crate::models::mcn_catalog_sync_destination_type::McnCatalogSyncDestinationType,
     pub name: String,
     pub policy: Option<String>,
-    pub update_mode: serde_json::Value,
+    pub update_mode: crate::models::mcn_catalog_sync_update_mode::McnCatalogSyncUpdateMode,
 }

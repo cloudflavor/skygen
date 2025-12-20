@@ -19,5 +19,5 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct WaitingroomZoneSettings {
-    pub search_engine_crawler_bypass: Option<serde_json::Value>,
+    pub search_engine_crawler_bypass: Option<crate::models::waitingroom_search_engine_crawler_bypass::WaitingroomSearchEngineCrawlerBypass>,
 }

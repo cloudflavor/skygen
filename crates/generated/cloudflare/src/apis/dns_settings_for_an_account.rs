@@ -15,12 +15,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::dns_settings_dns_response_single::DnsSettingsDnsResponseSingle;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct ListDnsSettingsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, DnsSettingsDnsResponseSingle>,
 }
 
 impl<'a> ListDnsSettingsRequest<'a> {
@@ -35,18 +36,26 @@ impl<'a> ListDnsSettingsRequest<'a> {
         self.builder = self.builder.path_param("account_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<DnsSettingsDnsResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Show DNS Settings
+///
+/// Show DNS settings for an account
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/dns_settings`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::dns_settings_for_an_account };
+/// use cloudflare::{ ApiClient, apis::dns_settings_for_an_account };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_dns_settings(&api)
-///     .with_account_id("value")
+/// let response = list_dns_settings(&api)
+///     .with_account_id("account_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -56,7 +65,7 @@ pub fn list_dns_settings(api: &ApiClient) -> ListDnsSettingsRequest<'_> {
 
 #[derive(Debug)]
 pub struct UpdateDnsSettingsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, DnsSettingsDnsResponseSingle>,
 }
 
 impl<'a> UpdateDnsSettingsRequest<'a> {
@@ -79,18 +88,28 @@ impl<'a> UpdateDnsSettingsRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<DnsSettingsDnsResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Update DNS Settings
+///
+/// Update DNS settings for an account
+///
+/// **HTTP Method:** `PATCH`
+/// **Path:** `/accounts/{account_id}/dns_settings`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::dns_settings_for_an_account };
+/// use cloudflare::{ ApiClient, apis::dns_settings_for_an_account };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = update_dns_settings(&api)
-///     .with_account_id("value")
+/// # let body: crate::models::dns_settings_account_settings::DnsSettingsAccountSettings = todo!();
+/// let response = update_dns_settings(&api)
+///     .with_account_id("account_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```

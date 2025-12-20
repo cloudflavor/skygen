@@ -15,6 +15,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::error::Error;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
@@ -33,13 +34,18 @@ impl<'a> ListRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// List All Certificates
+///
+/// To list all of the certificates available on your account, send a GET request to `/v2/certificates`.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/certificates`
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::certificates };
+/// use digitalocean::{ ApiClient, apis::certificates };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list(&api)
+/// let response = list(&api)
 ///     .send()
 ///     .await?;
 /// ```
@@ -49,7 +55,7 @@ pub fn list(api: &ApiClient) -> ListRequest<'_> {
 
 #[derive(Debug)]
 pub struct CreateRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, std::collections::BTreeMap<String, serde_json::Value>>,
 }
 
 impl<'a> CreateRequest<'a> {
@@ -62,17 +68,32 @@ impl<'a> CreateRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<std::collections::BTreeMap<String, serde_json::Value>> {
         self.builder.send().await
     }
 }
-
 /// Create a New Certificate
+///
+/// To upload new SSL certificate which you have previously generated, send a POST
+/// request to `/v2/certificates`.
+///
+/// When uploading a user-generated certificate, the `private_key`,
+/// `leaf_certificate`, and optionally the `certificate_chain` attributes should
+/// be provided. The type must be set to `custom`.
+///
+/// When using Let's Encrypt to create a certificate, the `dns_names` attribute
+/// must be provided, and the type must be set to `lets_encrypt`.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/v2/certificates`
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::certificates };
+/// use digitalocean::{ ApiClient, apis::certificates };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = create(&api)
+/// # let body: serde_json::Value = todo!();
+/// let response = create(&api)
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -82,7 +103,7 @@ pub fn create(api: &ApiClient) -> CreateRequest<'_> {
 
 #[derive(Debug)]
 pub struct GetRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, std::collections::BTreeMap<String, serde_json::Value>>,
 }
 
 impl<'a> GetRequest<'a> {
@@ -96,18 +117,26 @@ impl<'a> GetRequest<'a> {
         self.builder = self.builder.path_param("certificate_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<std::collections::BTreeMap<String, serde_json::Value>> {
         self.builder.send().await
     }
 }
-
 /// Retrieve an Existing Certificate
+///
+/// To show information about an existing certificate, send a GET request to `/v2/certificates/$CERTIFICATE_ID`.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/certificates/{certificate_id}`
+///
+/// **Parameters**
+/// - `certificate_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::certificates };
+/// use digitalocean::{ ApiClient, apis::certificates };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get(&api)
-///     .with_certificate_id("value")
+/// let response = get(&api)
+///     .with_certificate_id("certificate_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -117,7 +146,7 @@ pub fn get(api: &ApiClient) -> GetRequest<'_> {
 
 #[derive(Debug)]
 pub struct DeleteRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, Error>,
 }
 
 impl<'a> DeleteRequest<'a> {
@@ -132,18 +161,27 @@ impl<'a> DeleteRequest<'a> {
         self.builder = self.builder.path_param("certificate_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<Error> {
         self.builder.send().await
     }
 }
-
 /// Delete a Certificate
+///
+/// To delete a specific certificate, send a DELETE request to
+/// `/v2/certificates/$CERTIFICATE_ID`.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/v2/certificates/{certificate_id}`
+///
+/// **Parameters**
+/// - `certificate_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::certificates };
+/// use digitalocean::{ ApiClient, apis::certificates };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete(&api)
-///     .with_certificate_id("value")
+/// let response = delete(&api)
+///     .with_certificate_id("certificate_id")
 ///     .send()
 ///     .await?;
 /// ```

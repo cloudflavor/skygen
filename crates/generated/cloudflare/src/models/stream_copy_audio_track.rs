@@ -19,6 +19,6 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct StreamCopyAudioTrack {
-    pub label: serde_json::Value,
+    pub label: crate::models::stream_audio_label::StreamAudioLabel,
     pub url: Option<String>,
 }

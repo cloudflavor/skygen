@@ -19,15 +19,15 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct MagicVisibilityMnmMnmRule {
-    pub automatic_advertisement: serde_json::Value,
-    pub bandwidth_threshold: Option<serde_json::Value>,
-    pub duration: Option<serde_json::Value>,
-    pub id: Option<serde_json::Value>,
-    pub name: serde_json::Value,
-    pub packet_threshold: Option<serde_json::Value>,
-    pub prefix_match: Option<serde_json::Value>,
-    pub prefixes: serde_json::Value,
-    pub r#type: serde_json::Value,
-    pub zscore_sensitivity: Option<serde_json::Value>,
-    pub zscore_target: Option<serde_json::Value>,
+    pub automatic_advertisement: crate::models::magic_visibility_mnm_mnm_rule_automatic_advertisement::MagicVisibilityMnmMnmRuleAutomaticAdvertisement,
+    pub bandwidth_threshold: Option<crate::models::magic_visibility_mnm_mnm_rule_bandwidth_threshold::MagicVisibilityMnmMnmRuleBandwidthThreshold>,
+    pub duration: Option<crate::models::magic_visibility_mnm_mnm_rule_duration::MagicVisibilityMnmMnmRuleDuration>,
+    pub id: Option<crate::models::magic_visibility_mnm_rule_identifier::MagicVisibilityMnmRuleIdentifier>,
+    pub name: crate::models::magic_visibility_mnm_mnm_rule_name::MagicVisibilityMnmMnmRuleName,
+    pub packet_threshold: Option<crate::models::magic_visibility_mnm_mnm_rule_packet_threshold::MagicVisibilityMnmMnmRulePacketThreshold>,
+    pub prefix_match: Option<crate::models::magic_visibility_mnm_mnm_rule_prefix_match::MagicVisibilityMnmMnmRulePrefixMatch>,
+    pub prefixes: crate::models::magic_visibility_mnm_mnm_rule_ip_prefixes::MagicVisibilityMnmMnmRuleIpPrefixes,
+    pub r#type: crate::models::magic_visibility_mnm_mnm_rule_type::MagicVisibilityMnmMnmRuleType,
+    pub zscore_sensitivity: Option<crate::models::magic_visibility_mnm_mnm_rule_zscore_sensitivity::MagicVisibilityMnmMnmRuleZscoreSensitivity>,
+    pub zscore_target: Option<crate::models::magic_visibility_mnm_mnm_rule_zscore_target::MagicVisibilityMnmMnmRuleZscoreTarget>,
 }

@@ -19,25 +19,31 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct LoadBalancingPool {
-    pub check_regions: Option<serde_json::Value>,
-    pub created_on: Option<serde_json::Value>,
-    pub description: Option<serde_json::Value>,
-    pub disabled_at: Option<serde_json::Value>,
-    pub enabled: Option<serde_json::Value>,
-    pub id: Option<serde_json::Value>,
-    pub latitude: Option<serde_json::Value>,
+    pub check_regions:
+        Option<crate::models::load_balancing_check_regions::LoadBalancingCheckRegions>,
+    pub created_on: Option<crate::models::load_balancing_timestamp::LoadBalancingTimestamp>,
+    pub description:
+        Option<crate::models::load_balancing_schemas_description::LoadBalancingSchemasDescription>,
+    pub disabled_at:
+        Option<crate::models::load_balancing_schemas_disabled_at::LoadBalancingSchemasDisabledAt>,
+    pub enabled: Option<crate::models::load_balancing_enabled::LoadBalancingEnabled>,
+    pub id:
+        Option<crate::models::load_balancing_schemas_identifier::LoadBalancingSchemasIdentifier>,
+    pub latitude: Option<crate::models::load_balancing_latitude::LoadBalancingLatitude>,
     pub load_shedding:
         Option<crate::models::load_balancing_load_shedding::LoadBalancingLoadShedding>,
-    pub longitude: Option<serde_json::Value>,
-    pub minimum_origins: Option<serde_json::Value>,
-    pub modified_on: Option<serde_json::Value>,
-    pub monitor: Option<serde_json::Value>,
-    pub name: Option<serde_json::Value>,
-    pub networks: Option<serde_json::Value>,
-    pub notification_email: Option<serde_json::Value>,
+    pub longitude: Option<crate::models::load_balancing_longitude::LoadBalancingLongitude>,
+    pub minimum_origins:
+        Option<crate::models::load_balancing_minimum_origins::LoadBalancingMinimumOrigins>,
+    pub modified_on: Option<crate::models::load_balancing_timestamp::LoadBalancingTimestamp>,
+    pub monitor: Option<crate::models::load_balancing_monitor_id::LoadBalancingMonitorId>,
+    pub name: Option<crate::models::load_balancing_name::LoadBalancingName>,
+    pub networks: Option<crate::models::load_balancing_networks::LoadBalancingNetworks>,
+    pub notification_email:
+        Option<crate::models::load_balancing_notification_email::LoadBalancingNotificationEmail>,
     pub notification_filter:
         Option<crate::models::load_balancing_notification_filter::LoadBalancingNotificationFilter>,
     pub origin_steering:
         Option<crate::models::load_balancing_origin_steering::LoadBalancingOriginSteering>,
-    pub origins: Option<serde_json::Value>,
+    pub origins: Option<crate::models::load_balancing_origins::LoadBalancingOrigins>,
 }

@@ -53,14 +53,24 @@ impl<'a> PostRunCfFacebookRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Execute @cf/facebook/bart-large-cnn model.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/ai/run/@cf/facebook/bart-large-cnn`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `queueRequest` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::workers_ai_summarization };
+/// use cloudflare::{ ApiClient, apis::workers_ai_summarization };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = post_run_cf_facebook(&api)
-///     .with_account_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = post_run_cf_facebook(&api)
+///     .with_account_id("account_id")
+///     .with_queue_request("queueRequest")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```

@@ -17,10 +17,17 @@
 
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
+use crate::models::tls_certificates_and_hostnames_association_response_collection::TlsCertificatesAndHostnamesAssociationResponseCollection;
+use crate::models::tls_certificates_and_hostnames_certificate_response_single_post::TlsCertificatesAndHostnamesCertificateResponseSinglePost;
+use crate::models::tls_certificates_and_hostnames_mtls_management_components_schemas_certificate_response_collection::TlsCertificatesAndHostnamesMtlsManagementComponentsSchemasCertificateResponseCollection;
+use crate::models::tls_certificates_and_hostnames_mtls_management_components_schemas_certificate_response_single::TlsCertificatesAndHostnamesMtlsManagementComponentsSchemasCertificateResponseSingle;
 
 #[derive(Debug)]
 pub struct ListMTlsCertificatesRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<
+        'a,
+        TlsCertificatesAndHostnamesMtlsManagementComponentsSchemasCertificateResponseCollection,
+    >,
 }
 
 impl<'a> ListMTlsCertificatesRequest<'a> {
@@ -35,18 +42,30 @@ impl<'a> ListMTlsCertificatesRequest<'a> {
         self.builder = self.builder.path_param("account_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(
+        self,
+    ) -> ApiResult<
+        TlsCertificatesAndHostnamesMtlsManagementComponentsSchemasCertificateResponseCollection,
+    > {
         self.builder.send().await
     }
 }
-
 /// List mTLS certificates
+///
+/// Lists all mTLS certificates.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/mtls_certificates`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::m_tls_certificate_management };
+/// use cloudflare::{ ApiClient, apis::m_tls_certificate_management };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_m_tls_certificates(&api)
-///     .with_account_id("value")
+/// let response = list_m_tls_certificates(&api)
+///     .with_account_id("account_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -56,7 +75,7 @@ pub fn list_m_tls_certificates(api: &ApiClient) -> ListMTlsCertificatesRequest<'
 
 #[derive(Debug)]
 pub struct UploadMTlsCertificateRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, TlsCertificatesAndHostnamesCertificateResponseSinglePost>,
 }
 
 impl<'a> UploadMTlsCertificateRequest<'a> {
@@ -79,18 +98,28 @@ impl<'a> UploadMTlsCertificateRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<TlsCertificatesAndHostnamesCertificateResponseSinglePost> {
         self.builder.send().await
     }
 }
-
 /// Upload mTLS certificate
+///
+/// Upload a certificate that you want to use with mTLS-enabled Cloudflare services.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/mtls_certificates`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::m_tls_certificate_management };
+/// use cloudflare::{ ApiClient, apis::m_tls_certificate_management };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = upload_m_tls_certificate(&api)
-///     .with_account_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = upload_m_tls_certificate(&api)
+///     .with_account_id("account_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -100,7 +129,10 @@ pub fn upload_m_tls_certificate(api: &ApiClient) -> UploadMTlsCertificateRequest
 
 #[derive(Debug)]
 pub struct GetMTlsCertificateRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<
+        'a,
+        TlsCertificatesAndHostnamesMtlsManagementComponentsSchemasCertificateResponseSingle,
+    >,
 }
 
 impl<'a> GetMTlsCertificateRequest<'a> {
@@ -123,19 +155,32 @@ impl<'a> GetMTlsCertificateRequest<'a> {
         self.builder = self.builder.path_param("mtls_certificate_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(
+        self,
+    ) -> ApiResult<
+        TlsCertificatesAndHostnamesMtlsManagementComponentsSchemasCertificateResponseSingle,
+    > {
         self.builder.send().await
     }
 }
-
 /// Get mTLS certificate
+///
+/// Fetches a single mTLS certificate.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/mtls_certificates/{mtls_certificate_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `mtls_certificate_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::m_tls_certificate_management };
+/// use cloudflare::{ ApiClient, apis::m_tls_certificate_management };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_m_tls_certificate(&api)
-///     .with_account_id("value")
-///     .with_mtls_certificate_id("value")
+/// let response = get_m_tls_certificate(&api)
+///     .with_account_id("account_id")
+///     .with_mtls_certificate_id("mtls_certificate_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -145,7 +190,10 @@ pub fn get_m_tls_certificate(api: &ApiClient) -> GetMTlsCertificateRequest<'_> {
 
 #[derive(Debug)]
 pub struct DeleteMTlsCertificateRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<
+        'a,
+        TlsCertificatesAndHostnamesMtlsManagementComponentsSchemasCertificateResponseSingle,
+    >,
 }
 
 impl<'a> DeleteMTlsCertificateRequest<'a> {
@@ -168,19 +216,32 @@ impl<'a> DeleteMTlsCertificateRequest<'a> {
         self.builder = self.builder.path_param("mtls_certificate_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(
+        self,
+    ) -> ApiResult<
+        TlsCertificatesAndHostnamesMtlsManagementComponentsSchemasCertificateResponseSingle,
+    > {
         self.builder.send().await
     }
 }
-
 /// Delete mTLS certificate
+///
+/// Deletes the mTLS certificate unless the certificate is in use by one or more Cloudflare services.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/accounts/{account_id}/mtls_certificates/{mtls_certificate_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `mtls_certificate_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::m_tls_certificate_management };
+/// use cloudflare::{ ApiClient, apis::m_tls_certificate_management };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete_m_tls_certificate(&api)
-///     .with_account_id("value")
-///     .with_mtls_certificate_id("value")
+/// let response = delete_m_tls_certificate(&api)
+///     .with_account_id("account_id")
+///     .with_mtls_certificate_id("mtls_certificate_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -190,7 +251,7 @@ pub fn delete_m_tls_certificate(api: &ApiClient) -> DeleteMTlsCertificateRequest
 
 #[derive(Debug)]
 pub struct ListMTlsCertificateRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, TlsCertificatesAndHostnamesAssociationResponseCollection>,
 }
 
 impl<'a> ListMTlsCertificateRequest<'a> {
@@ -213,19 +274,28 @@ impl<'a> ListMTlsCertificateRequest<'a> {
         self.builder = self.builder.path_param("mtls_certificate_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<TlsCertificatesAndHostnamesAssociationResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// List mTLS certificate associations
+///
+/// Lists all active associations between the certificate and Cloudflare services.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/mtls_certificates/{mtls_certificate_id}/associations`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `mtls_certificate_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::m_tls_certificate_management };
+/// use cloudflare::{ ApiClient, apis::m_tls_certificate_management };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_m_tls_certificate(&api)
-///     .with_account_id("value")
-///     .with_mtls_certificate_id("value")
+/// let response = list_m_tls_certificate(&api)
+///     .with_account_id("account_id")
+///     .with_mtls_certificate_id("mtls_certificate_id")
 ///     .send()
 ///     .await?;
 /// ```

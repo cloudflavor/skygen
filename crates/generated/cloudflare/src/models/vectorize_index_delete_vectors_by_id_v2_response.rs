@@ -19,5 +19,5 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct VectorizeIndexDeleteVectorsByIdV2Response {
-    pub mutation_id: Option<serde_json::Value>,
+    pub mutation_id: Option<crate::models::vectorize_mutation_uuid::VectorizeMutationUuid>,
 }

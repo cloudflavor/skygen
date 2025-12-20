@@ -15,6 +15,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::error::Error;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
@@ -33,13 +34,28 @@ impl<'a> VolumesListRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// List All Block Storage Volumes
+///
+/// To list all of the block storage volumes available on your account, send a GET request to `/v2/volumes`.
+/// ## Filtering Results
+/// ### By Region
+/// The `region` may be provided as query parameter in order to restrict results to volumes available in a specific region. For example: `/v2/volumes?region=nyc1`
+/// ### By Name
+/// It is also possible to list volumes on your account that match a specified name. To do so, send a GET request with the volume's name as a query parameter to `/v2/volumes?name=$VOLUME_NAME`.
+/// **Note:** You can only create one volume per region with the same name.
+/// ### By Name and Region
+/// It is also possible to retrieve information about a block storage volume by name. To do so, send a GET request with the volume's name and the region slug for the region it is located in as query parameters to `/v2/volumes?name=$VOLUME_NAME&region=nyc1`.
+///
+///
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/volumes`
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::block_storage };
+/// use digitalocean::{ ApiClient, apis::block_storage };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = volumes_list(&api)
+/// let response = volumes_list(&api)
 ///     .send()
 ///     .await?;
 /// ```
@@ -66,13 +82,20 @@ impl<'a> VolumesCreateRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Create a New Block Storage Volume
+///
+/// To create a new volume, send a POST request to `/v2/volumes`. Optionally, a `filesystem_type` attribute may be provided in order to automatically format the volume's filesystem. Pre-formatted volumes are automatically mounted when attached to Ubuntu, Debian, Fedora, Fedora Atomic, and CentOS Droplets created on or after April 26, 2018. Attaching pre-formatted volumes to Droplets without support for auto-mounting is not recommended.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/v2/volumes`
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::block_storage };
+/// use digitalocean::{ ApiClient, apis::block_storage };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = volumes_create(&api)
+/// # let body: serde_json::Value = todo!();
+/// let response = volumes_create(&api)
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -82,7 +105,7 @@ pub fn volumes_create(api: &ApiClient) -> VolumesCreateRequest<'_> {
 
 #[derive(Debug)]
 pub struct VolumesDeleteRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, Error>,
 }
 
 impl<'a> VolumesDeleteRequest<'a> {
@@ -91,17 +114,24 @@ impl<'a> VolumesDeleteRequest<'a> {
 
         Self { builder }
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<Error> {
         self.builder.send().await
     }
 }
-
 /// Delete a Block Storage Volume by Name
+///
+/// Block storage volumes may also be deleted by name by sending a DELETE request with the volume's **name** and the **region slug** for the region it is located in as query parameters to `/v2/volumes?name=$VOLUME_NAME&region=nyc1`.
+/// No response body will be sent back, but the response code will indicate success. Specifically, the response code will be a 204, which means that the action was successful with no returned body data.
+///
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/v2/volumes`
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::block_storage };
+/// use digitalocean::{ ApiClient, apis::block_storage };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = volumes_delete(&api)
+/// let response = volumes_delete(&api)
 ///     .send()
 ///     .await?;
 /// ```
@@ -130,14 +160,23 @@ impl<'a> VolumeSnapshotsGetRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Retrieve an Existing Volume Snapshot
+///
+/// To retrieve the details of a snapshot that has been created from a volume, send a GET request to `/v2/volumes/snapshots/$VOLUME_SNAPSHOT_ID`.
+///
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/volumes/snapshots/{snapshot_id}`
+///
+/// **Parameters**
+/// - `snapshot_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::block_storage };
+/// use digitalocean::{ ApiClient, apis::block_storage };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = volume_snapshots_get(&api)
-///     .with_snapshot_id("value")
+/// let response = volume_snapshots_get(&api)
+///     .with_snapshot_id("snapshot_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -147,7 +186,7 @@ pub fn volume_snapshots_get(api: &ApiClient) -> VolumeSnapshotsGetRequest<'_> {
 
 #[derive(Debug)]
 pub struct VolumeSnapshotsDeleteRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, Error>,
 }
 
 impl<'a> VolumeSnapshotsDeleteRequest<'a> {
@@ -162,18 +201,30 @@ impl<'a> VolumeSnapshotsDeleteRequest<'a> {
         self.builder = self.builder.path_param("snapshot_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<Error> {
         self.builder.send().await
     }
 }
-
 /// Delete a Volume Snapshot
+///
+/// To delete a volume snapshot, send a DELETE request to
+/// `/v2/volumes/snapshots/$VOLUME_SNAPSHOT_ID`.
+///
+/// A status of 204 will be given. This indicates that the request was processed
+/// successfully, but that no response body is needed.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/v2/volumes/snapshots/{snapshot_id}`
+///
+/// **Parameters**
+/// - `snapshot_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::block_storage };
+/// use digitalocean::{ ApiClient, apis::block_storage };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = volume_snapshots_delete(&api)
-///     .with_snapshot_id("value")
+/// let response = volume_snapshots_delete(&api)
+///     .with_snapshot_id("snapshot_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -201,14 +252,23 @@ impl<'a> VolumesGetRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Retrieve an Existing Block Storage Volume
+///
+/// To show information about a block storage volume, send a GET request to `/v2/volumes/$VOLUME_ID`.
+///
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/volumes/{volume_id}`
+///
+/// **Parameters**
+/// - `volume_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::block_storage };
+/// use digitalocean::{ ApiClient, apis::block_storage };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = volumes_get(&api)
-///     .with_volume_id("value")
+/// let response = volumes_get(&api)
+///     .with_volume_id("volume_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -218,7 +278,7 @@ pub fn volumes_get(api: &ApiClient) -> VolumesGetRequest<'_> {
 
 #[derive(Debug)]
 pub struct VolumesDeleteDeleteRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, Error>,
 }
 
 impl<'a> VolumesDeleteDeleteRequest<'a> {
@@ -232,18 +292,28 @@ impl<'a> VolumesDeleteDeleteRequest<'a> {
         self.builder = self.builder.path_param("volume_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<Error> {
         self.builder.send().await
     }
 }
-
 /// Delete a Block Storage Volume
+///
+/// To delete a block storage volume, destroying all data and removing it from your account, send a DELETE request to `/v2/volumes/$VOLUME_ID`.
+/// No response body will be sent back, but the response code will indicate success. Specifically, the response code will be a 204, which means that the action was successful with no returned body data.
+///
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/v2/volumes/{volume_id}`
+///
+/// **Parameters**
+/// - `volume_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::block_storage };
+/// use digitalocean::{ ApiClient, apis::block_storage };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = volumes_delete_delete(&api)
-///     .with_volume_id("value")
+/// let response = volumes_delete_delete(&api)
+///     .with_volume_id("volume_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -271,14 +341,23 @@ impl<'a> VolumeSnapshotsListRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// List Snapshots for a Volume
+///
+/// To retrieve the snapshots that have been created from a volume, send a GET request to `/v2/volumes/$VOLUME_ID/snapshots`.
+///
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/volumes/{volume_id}/snapshots`
+///
+/// **Parameters**
+/// - `volume_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::block_storage };
+/// use digitalocean::{ ApiClient, apis::block_storage };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = volume_snapshots_list(&api)
-///     .with_volume_id("value")
+/// let response = volume_snapshots_list(&api)
+///     .with_volume_id("volume_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -311,14 +390,24 @@ impl<'a> VolumeSnapshotsCreateRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Create Snapshot from a Volume
+///
+/// To create a snapshot from a volume, sent a POST request to `/v2/volumes/$VOLUME_ID/snapshots`.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/v2/volumes/{volume_id}/snapshots`
+///
+/// **Parameters**
+/// - `volume_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::block_storage };
+/// use digitalocean::{ ApiClient, apis::block_storage };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = volume_snapshots_create(&api)
-///     .with_volume_id("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = volume_snapshots_create(&api)
+///     .with_volume_id("volume_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```

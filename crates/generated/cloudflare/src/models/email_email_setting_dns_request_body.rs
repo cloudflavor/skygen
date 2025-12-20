@@ -19,5 +19,5 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct EmailEmailSettingDnsRequestBody {
-    pub name: serde_json::Value,
+    pub name: crate::models::email_email_setting_name::EmailEmailSettingName,
 }

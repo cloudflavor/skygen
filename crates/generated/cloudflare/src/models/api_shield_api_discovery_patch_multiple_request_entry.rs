@@ -19,5 +19,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct ApiShieldApiDiscoveryPatchMultipleRequestEntry {
-    pub state: Option<serde_json::Value>,
+    pub state: Option<
+        crate::models::api_shield_api_discovery_state_patch::ApiShieldApiDiscoveryStatePatch,
+    >,
 }

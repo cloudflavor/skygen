@@ -20,5 +20,5 @@ use serde::{Deserialize, Serialize};
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct IntelDomainHistory {
     pub categorizations: Option<Vec<std::collections::BTreeMap<String, serde_json::Value>>>,
-    pub domain: Option<serde_json::Value>,
+    pub domain: Option<crate::models::intel_domain_name::IntelDomainName>,
 }

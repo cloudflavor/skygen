@@ -15,12 +15,16 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::access_components_schemas_single_response::AccessComponentsSchemasSingleResponse;
+use crate::models::access_response_collection::AccessResponseCollection;
+use crate::models::access_scim_groups_response::AccessScimGroupsResponse;
+use crate::models::access_scim_users_response::AccessScimUsersResponse;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct ListAccessIdentityProvidersRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, AccessResponseCollection>,
 }
 
 impl<'a> ListAccessIdentityProvidersRequest<'a> {
@@ -42,18 +46,28 @@ impl<'a> ListAccessIdentityProvidersRequest<'a> {
         self.builder = self.builder.header_param("scim_enabled", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<AccessResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// List Access identity providers
+///
+/// Lists all configured identity providers.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/access/identity_providers`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `scim_enabled` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::access_identity_providers };
+/// use cloudflare::{ ApiClient, apis::access_identity_providers };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_access_identity_providers(&api)
-///     .with_account_id("value")
+/// let response = list_access_identity_providers(&api)
+///     .with_account_id("account_id")
+///     .with_scim_enabled("scim_enabled")
 ///     .send()
 ///     .await?;
 /// ```
@@ -63,7 +77,7 @@ pub fn list_access_identity_providers(api: &ApiClient) -> ListAccessIdentityProv
 
 #[derive(Debug)]
 pub struct AddAccessIdentityProviderRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, AccessComponentsSchemasSingleResponse>,
 }
 
 impl<'a> AddAccessIdentityProviderRequest<'a> {
@@ -82,22 +96,35 @@ impl<'a> AddAccessIdentityProviderRequest<'a> {
         self.builder = self.builder.path_param("account_id", value);
         self
     }
-    pub fn with_body(mut self, body: serde_json::Value) -> Self {
+    pub fn with_body(
+        mut self,
+        body: crate::models::access_identity_providers::AccessIdentityProviders,
+    ) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<AccessComponentsSchemasSingleResponse> {
         self.builder.send().await
     }
 }
-
 /// Add an Access identity provider
+///
+/// Adds a new identity provider to Access.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/access/identity_providers`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::access_identity_providers };
+/// use cloudflare::{ ApiClient, apis::access_identity_providers };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = add_access_identity_provider(&api)
-///     .with_account_id("value")
+/// # let body: crate::models::access_identity_providers::AccessIdentityProviders = todo!();
+/// let response = add_access_identity_provider(&api)
+///     .with_account_id("account_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -107,7 +134,7 @@ pub fn add_access_identity_provider(api: &ApiClient) -> AddAccessIdentityProvide
 
 #[derive(Debug)]
 pub struct GetAccessIdentityProviderRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, AccessComponentsSchemasSingleResponse>,
 }
 
 impl<'a> GetAccessIdentityProviderRequest<'a> {
@@ -130,19 +157,28 @@ impl<'a> GetAccessIdentityProviderRequest<'a> {
         self.builder = self.builder.path_param("identity_provider_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<AccessComponentsSchemasSingleResponse> {
         self.builder.send().await
     }
 }
-
 /// Get an Access identity provider
+///
+/// Fetches a configured identity provider.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/access/identity_providers/{identity_provider_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `identity_provider_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::access_identity_providers };
+/// use cloudflare::{ ApiClient, apis::access_identity_providers };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_access_identity_provider(&api)
-///     .with_account_id("value")
-///     .with_identity_provider_id("value")
+/// let response = get_access_identity_provider(&api)
+///     .with_account_id("account_id")
+///     .with_identity_provider_id("identity_provider_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -152,7 +188,7 @@ pub fn get_access_identity_provider(api: &ApiClient) -> GetAccessIdentityProvide
 
 #[derive(Debug)]
 pub struct UpdateAccessIdentityProviderRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, AccessComponentsSchemasSingleResponse>,
 }
 
 impl<'a> UpdateAccessIdentityProviderRequest<'a> {
@@ -176,23 +212,37 @@ impl<'a> UpdateAccessIdentityProviderRequest<'a> {
         self.builder = self.builder.path_param("identity_provider_id", value);
         self
     }
-    pub fn with_body(mut self, body: serde_json::Value) -> Self {
+    pub fn with_body(
+        mut self,
+        body: crate::models::access_identity_providers::AccessIdentityProviders,
+    ) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<AccessComponentsSchemasSingleResponse> {
         self.builder.send().await
     }
 }
-
 /// Update an Access identity provider
+///
+/// Updates a configured identity provider.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/accounts/{account_id}/access/identity_providers/{identity_provider_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `identity_provider_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::access_identity_providers };
+/// use cloudflare::{ ApiClient, apis::access_identity_providers };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = update_access_identity_provider(&api)
-///     .with_account_id("value")
-///     .with_identity_provider_id("value")
+/// # let body: crate::models::access_identity_providers::AccessIdentityProviders = todo!();
+/// let response = update_access_identity_provider(&api)
+///     .with_account_id("account_id")
+///     .with_identity_provider_id("identity_provider_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -229,15 +279,24 @@ impl<'a> DeleteAccessIdentityProviderRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Delete an Access identity provider
+///
+/// Deletes an identity provider from Access.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/accounts/{account_id}/access/identity_providers/{identity_provider_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `identity_provider_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::access_identity_providers };
+/// use cloudflare::{ ApiClient, apis::access_identity_providers };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete_access_identity_provider(&api)
-///     .with_account_id("value")
-///     .with_identity_provider_id("value")
+/// let response = delete_access_identity_provider(&api)
+///     .with_account_id("account_id")
+///     .with_identity_provider_id("identity_provider_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -247,7 +306,7 @@ pub fn delete_access_identity_provider(api: &ApiClient) -> DeleteAccessIdentityP
 
 #[derive(Debug)]
 pub struct ListScimGroupResourcesRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, AccessScimGroupsResponse>,
 }
 
 impl<'a> ListScimGroupResourcesRequest<'a> {
@@ -282,19 +341,34 @@ impl<'a> ListScimGroupResourcesRequest<'a> {
         self.builder = self.builder.header_param("name", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<AccessScimGroupsResponse> {
         self.builder.send().await
     }
 }
-
 /// List SCIM Group resources
+///
+/// Lists SCIM Group resources synced to Cloudflare via the System for Cross-domain Identity Management (SCIM).
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/access/identity_providers/{identity_provider_id}/scim/groups`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `identity_provider_id` (path, required)
+/// - `cf_resource_id` (query,optional)
+/// - `idp_resource_id` (query,optional)
+/// - `name` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::access_identity_providers };
+/// use cloudflare::{ ApiClient, apis::access_identity_providers };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_scim_group_resources(&api)
-///     .with_account_id("value")
-///     .with_identity_provider_id("value")
+/// let response = list_scim_group_resources(&api)
+///     .with_account_id("account_id")
+///     .with_identity_provider_id("identity_provider_id")
+///     .with_cf_resource_id("cf_resource_id")
+///     .with_idp_resource_id("idp_resource_id")
+///     .with_name("name")
 ///     .send()
 ///     .await?;
 /// ```
@@ -304,7 +378,7 @@ pub fn list_scim_group_resources(api: &ApiClient) -> ListScimGroupResourcesReque
 
 #[derive(Debug)]
 pub struct ListScimResourcesRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, AccessScimUsersResponse>,
 }
 
 impl<'a> ListScimResourcesRequest<'a> {
@@ -347,19 +421,38 @@ impl<'a> ListScimResourcesRequest<'a> {
         self.builder = self.builder.header_param("name", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<AccessScimUsersResponse> {
         self.builder.send().await
     }
 }
-
 /// List SCIM User resources
+///
+/// Lists SCIM User resources synced to Cloudflare via the System for Cross-domain Identity Management (SCIM).
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/access/identity_providers/{identity_provider_id}/scim/users`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `identity_provider_id` (path, required)
+/// - `cf_resource_id` (query,optional)
+/// - `idp_resource_id` (query,optional)
+/// - `username` (query,optional)
+/// - `email` (query,optional)
+/// - `name` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::access_identity_providers };
+/// use cloudflare::{ ApiClient, apis::access_identity_providers };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_scim_resources(&api)
-///     .with_account_id("value")
-///     .with_identity_provider_id("value")
+/// let response = list_scim_resources(&api)
+///     .with_account_id("account_id")
+///     .with_identity_provider_id("identity_provider_id")
+///     .with_cf_resource_id("cf_resource_id")
+///     .with_idp_resource_id("idp_resource_id")
+///     .with_username("username")
+///     .with_email("email")
+///     .with_name("name")
 ///     .send()
 ///     .await?;
 /// ```

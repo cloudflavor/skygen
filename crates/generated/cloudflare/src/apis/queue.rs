@@ -39,14 +39,22 @@ impl<'a> QueuesListRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// List Queues
+///
+/// Returns the queues owned by an account.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/queues`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::queue };
+/// use cloudflare::{ ApiClient, apis::queue };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = queues_list(&api)
-///     .with_account_id("value")
+/// let response = queues_list(&api)
+///     .with_account_id("account_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -81,14 +89,24 @@ impl<'a> QueuesCreateRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Create Queue
+///
+/// Create a new queue
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/queues`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::queue };
+/// use cloudflare::{ ApiClient, apis::queue };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = queues_create(&api)
-///     .with_account_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = queues_create(&api)
+///     .with_account_id("account_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -122,15 +140,24 @@ impl<'a> QueuesGetRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get Queue
+///
+/// Get details about a specific queue.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/queues/{queue_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `queue_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::queue };
+/// use cloudflare::{ ApiClient, apis::queue };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = queues_get(&api)
-///     .with_account_id("value")
-///     .with_queue_id("value")
+/// let response = queues_get(&api)
+///     .with_account_id("account_id")
+///     .with_queue_id("queue_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -168,15 +195,26 @@ impl<'a> QueuesUpdateRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Update Queue
+///
+/// Updates a Queue. Note that this endpoint does not support partial updates. If successful, the Queue's configuration is overwritten with the supplied configuration.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/accounts/{account_id}/queues/{queue_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `queue_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::queue };
+/// use cloudflare::{ ApiClient, apis::queue };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = queues_update(&api)
-///     .with_account_id("value")
-///     .with_queue_id("value")
+/// # let body: crate::models::mq_queue::MqQueue = todo!();
+/// let response = queues_update(&api)
+///     .with_account_id("account_id")
+///     .with_queue_id("queue_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -213,15 +251,24 @@ impl<'a> QueuesDeleteRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Delete Queue
+///
+/// Deletes a queue
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/accounts/{account_id}/queues/{queue_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `queue_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::queue };
+/// use cloudflare::{ ApiClient, apis::queue };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = queues_delete(&api)
-///     .with_account_id("value")
-///     .with_queue_id("value")
+/// let response = queues_delete(&api)
+///     .with_account_id("account_id")
+///     .with_queue_id("queue_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -262,15 +309,26 @@ impl<'a> QueuesUpdatePartialRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Update Queue
+///
+/// Updates a Queue.
+///
+/// **HTTP Method:** `PATCH`
+/// **Path:** `/accounts/{account_id}/queues/{queue_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `queue_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::queue };
+/// use cloudflare::{ ApiClient, apis::queue };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = queues_update_partial(&api)
-///     .with_account_id("value")
-///     .with_queue_id("value")
+/// # let body: crate::models::mq_queue::MqQueue = todo!();
+/// let response = queues_update_partial(&api)
+///     .with_account_id("account_id")
+///     .with_queue_id("queue_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -307,15 +365,24 @@ impl<'a> QueuesListConsumersRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// List Queue Consumers
+///
+/// Returns the consumers for a Queue
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/queues/{queue_id}/consumers`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `queue_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::queue };
+/// use cloudflare::{ ApiClient, apis::queue };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = queues_list_consumers(&api)
-///     .with_account_id("value")
-///     .with_queue_id("value")
+/// let response = queues_list_consumers(&api)
+///     .with_account_id("account_id")
+///     .with_queue_id("queue_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -356,15 +423,26 @@ impl<'a> QueuesCreateConsumerRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Create a Queue Consumer
+///
+/// Creates a new consumer for a Queue
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/queues/{queue_id}/consumers`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `queue_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::queue };
+/// use cloudflare::{ ApiClient, apis::queue };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = queues_create_consumer(&api)
-///     .with_account_id("value")
-///     .with_queue_id("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = queues_create_consumer(&api)
+///     .with_account_id("account_id")
+///     .with_queue_id("queue_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -411,16 +489,28 @@ impl<'a> QueuesUpdateConsumerRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Update Queue Consumer
+///
+/// Updates the consumer for a queue, or creates one if it does not exist.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/accounts/{account_id}/queues/{queue_id}/consumers/{consumer_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `queue_id` (path, required)
+/// - `consumer_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::queue };
+/// use cloudflare::{ ApiClient, apis::queue };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = queues_update_consumer(&api)
-///     .with_account_id("value")
-///     .with_queue_id("value")
-///     .with_consumer_id("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = queues_update_consumer(&api)
+///     .with_account_id("account_id")
+///     .with_queue_id("queue_id")
+///     .with_consumer_id("consumer_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -462,16 +552,26 @@ impl<'a> QueuesDeleteConsumerRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Delete Queue Consumer
+///
+/// Deletes the consumer for a queue.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/accounts/{account_id}/queues/{queue_id}/consumers/{consumer_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `queue_id` (path, required)
+/// - `consumer_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::queue };
+/// use cloudflare::{ ApiClient, apis::queue };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = queues_delete_consumer(&api)
-///     .with_account_id("value")
-///     .with_queue_id("value")
-///     .with_consumer_id("value")
+/// let response = queues_delete_consumer(&api)
+///     .with_account_id("account_id")
+///     .with_queue_id("queue_id")
+///     .with_consumer_id("consumer_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -504,7 +604,7 @@ impl<'a> QueuesPushMessageRequest<'a> {
         self.builder = self.builder.path_param("queue_id", value);
         self
     }
-    pub fn with_body(mut self, body: serde_json::Value) -> Self {
+    pub fn with_body(mut self, body: crate::models::mq_queue_message::MqQueueMessage) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
@@ -512,15 +612,26 @@ impl<'a> QueuesPushMessageRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Push Message
+///
+/// Push a message to a Queue
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/queues/{queue_id}/messages`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `queue_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::queue };
+/// use cloudflare::{ ApiClient, apis::queue };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = queues_push_message(&api)
-///     .with_account_id("value")
-///     .with_queue_id("value")
+/// # let body: crate::models::mq_queue_message::MqQueueMessage = todo!();
+/// let response = queues_push_message(&api)
+///     .with_account_id("account_id")
+///     .with_queue_id("queue_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -564,15 +675,26 @@ impl<'a> QueuesAckMessagesRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Acknowledge + Retry Queue Messages
+///
+/// Acknowledge + Retry messages from a Queue
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/queues/{queue_id}/messages/ack`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `queue_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::queue };
+/// use cloudflare::{ ApiClient, apis::queue };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = queues_ack_messages(&api)
-///     .with_account_id("value")
-///     .with_queue_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = queues_ack_messages(&api)
+///     .with_account_id("account_id")
+///     .with_queue_id("queue_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -613,15 +735,26 @@ impl<'a> QueuesPushMessagesRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Push Message Batch
+///
+/// Push a batch of message to a Queue
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/queues/{queue_id}/messages/batch`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `queue_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::queue };
+/// use cloudflare::{ ApiClient, apis::queue };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = queues_push_messages(&api)
-///     .with_account_id("value")
-///     .with_queue_id("value")
+/// # let body: crate::models::mq_queue_batch::MqQueueBatch = todo!();
+/// let response = queues_push_messages(&api)
+///     .with_account_id("account_id")
+///     .with_queue_id("queue_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -665,15 +798,26 @@ impl<'a> QueuesPullMessagesRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Pull Queue Messages
+///
+/// Pull a batch of messages from a Queue
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/queues/{queue_id}/messages/pull`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `queue_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::queue };
+/// use cloudflare::{ ApiClient, apis::queue };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = queues_pull_messages(&api)
-///     .with_account_id("value")
-///     .with_queue_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = queues_pull_messages(&api)
+///     .with_account_id("account_id")
+///     .with_queue_id("queue_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -710,15 +854,24 @@ impl<'a> QueuesPurgeGetRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get Queue Purge Status
+///
+/// Get details about a Queue's purge status.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/queues/{queue_id}/purge`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `queue_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::queue };
+/// use cloudflare::{ ApiClient, apis::queue };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = queues_purge_get(&api)
-///     .with_account_id("value")
-///     .with_queue_id("value")
+/// let response = queues_purge_get(&api)
+///     .with_account_id("account_id")
+///     .with_queue_id("queue_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -762,15 +915,26 @@ impl<'a> QueuesPurgeRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Purge Queue
+///
+/// Deletes all messages from the Queue.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/queues/{queue_id}/purge`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `queue_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::queue };
+/// use cloudflare::{ ApiClient, apis::queue };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = queues_purge(&api)
-///     .with_account_id("value")
-///     .with_queue_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = queues_purge(&api)
+///     .with_account_id("account_id")
+///     .with_queue_id("queue_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```

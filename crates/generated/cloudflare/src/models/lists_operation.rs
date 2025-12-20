@@ -21,6 +21,6 @@ use serde::{Deserialize, Serialize};
 pub struct ListsOperation {
     pub completed: Option<String>,
     pub error: Option<String>,
-    pub id: serde_json::Value,
+    pub id: crate::models::lists_operation_id::ListsOperationId,
     pub status: String,
 }

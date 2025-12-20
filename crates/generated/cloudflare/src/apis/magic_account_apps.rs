@@ -15,12 +15,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::magic_app_single_response::MagicAppSingleResponse;
+use crate::models::magic_apps_collection_response::MagicAppsCollectionResponse;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct ListAppsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, MagicAppsCollectionResponse>,
 }
 
 impl<'a> ListAppsRequest<'a> {
@@ -34,18 +36,26 @@ impl<'a> ListAppsRequest<'a> {
         self.builder = self.builder.path_param("account_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<MagicAppsCollectionResponse> {
         self.builder.send().await
     }
 }
-
 /// List Apps
+///
+/// Lists Apps associated with an account.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/magic/apps`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::magic_account_apps };
+/// use cloudflare::{ ApiClient, apis::magic_account_apps };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_apps(&api)
-///     .with_account_id("value")
+/// let response = list_apps(&api)
+///     .with_account_id("account_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -55,7 +65,7 @@ pub fn list_apps(api: &ApiClient) -> ListAppsRequest<'_> {
 
 #[derive(Debug)]
 pub struct AddAppRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, MagicAppSingleResponse>,
 }
 
 impl<'a> AddAppRequest<'a> {
@@ -70,22 +80,35 @@ impl<'a> AddAppRequest<'a> {
         self.builder = self.builder.path_param("account_id", value);
         self
     }
-    pub fn with_body(mut self, body: serde_json::Value) -> Self {
+    pub fn with_body(
+        mut self,
+        body: crate::models::magic_app_add_single_request::MagicAppAddSingleRequest,
+    ) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<MagicAppSingleResponse> {
         self.builder.send().await
     }
 }
-
 /// Create a new App
+///
+/// Creates a new App for an account
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/magic/apps`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::magic_account_apps };
+/// use cloudflare::{ ApiClient, apis::magic_account_apps };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = add_app(&api)
-///     .with_account_id("value")
+/// # let body: crate::models::magic_app_add_single_request::MagicAppAddSingleRequest = todo!();
+/// let response = add_app(&api)
+///     .with_account_id("account_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -95,7 +118,7 @@ pub fn add_app(api: &ApiClient) -> AddAppRequest<'_> {
 
 #[derive(Debug)]
 pub struct UpdateAppRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, MagicAppSingleResponse>,
 }
 
 impl<'a> UpdateAppRequest<'a> {
@@ -119,23 +142,37 @@ impl<'a> UpdateAppRequest<'a> {
         self.builder = self.builder.path_param("account_app_id", value);
         self
     }
-    pub fn with_body(mut self, body: serde_json::Value) -> Self {
+    pub fn with_body(
+        mut self,
+        body: crate::models::magic_app_update_request::MagicAppUpdateRequest,
+    ) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<MagicAppSingleResponse> {
         self.builder.send().await
     }
 }
-
 /// Update an App
+///
+/// Updates an Account App
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/accounts/{account_id}/magic/apps/{account_app_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `account_app_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::magic_account_apps };
+/// use cloudflare::{ ApiClient, apis::magic_account_apps };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = update_app(&api)
-///     .with_account_id("value")
-///     .with_account_app_id("value")
+/// # let body: crate::models::magic_app_update_request::MagicAppUpdateRequest = todo!();
+/// let response = update_app(&api)
+///     .with_account_id("account_id")
+///     .with_account_app_id("account_app_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -145,7 +182,7 @@ pub fn update_app(api: &ApiClient) -> UpdateAppRequest<'_> {
 
 #[derive(Debug)]
 pub struct DeleteAppRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, MagicAppSingleResponse>,
 }
 
 impl<'a> DeleteAppRequest<'a> {
@@ -168,19 +205,28 @@ impl<'a> DeleteAppRequest<'a> {
         self.builder = self.builder.path_param("account_app_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<MagicAppSingleResponse> {
         self.builder.send().await
     }
 }
-
 /// Delete Account App
+///
+/// Deletes specific Account App.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/accounts/{account_id}/magic/apps/{account_app_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `account_app_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::magic_account_apps };
+/// use cloudflare::{ ApiClient, apis::magic_account_apps };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete_app(&api)
-///     .with_account_id("value")
-///     .with_account_app_id("value")
+/// let response = delete_app(&api)
+///     .with_account_id("account_id")
+///     .with_account_app_id("account_app_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -190,7 +236,7 @@ pub fn delete_app(api: &ApiClient) -> DeleteAppRequest<'_> {
 
 #[derive(Debug)]
 pub struct PatchAppRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, MagicAppSingleResponse>,
 }
 
 impl<'a> PatchAppRequest<'a> {
@@ -214,23 +260,37 @@ impl<'a> PatchAppRequest<'a> {
         self.builder = self.builder.path_param("account_app_id", value);
         self
     }
-    pub fn with_body(mut self, body: serde_json::Value) -> Self {
+    pub fn with_body(
+        mut self,
+        body: crate::models::magic_app_update_request::MagicAppUpdateRequest,
+    ) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<MagicAppSingleResponse> {
         self.builder.send().await
     }
 }
-
 /// Update an App
+///
+/// Updates an Account App
+///
+/// **HTTP Method:** `PATCH`
+/// **Path:** `/accounts/{account_id}/magic/apps/{account_app_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `account_app_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::magic_account_apps };
+/// use cloudflare::{ ApiClient, apis::magic_account_apps };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = patch_app(&api)
-///     .with_account_id("value")
-///     .with_account_app_id("value")
+/// # let body: crate::models::magic_app_update_request::MagicAppUpdateRequest = todo!();
+/// let response = patch_app(&api)
+///     .with_account_id("account_id")
+///     .with_account_app_id("account_app_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```

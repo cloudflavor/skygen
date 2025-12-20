@@ -20,5 +20,5 @@ use serde::{Deserialize, Serialize};
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct ZeroTrustGatewayDotEndpoint {
     pub enabled: Option<bool>,
-    pub networks: Option<serde_json::Value>,
+    pub networks: Option<crate::models::zero_trust_gateway_ip_networks::ZeroTrustGatewayIpNetworks>,
 }

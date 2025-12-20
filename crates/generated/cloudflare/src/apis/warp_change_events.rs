@@ -78,14 +78,40 @@ impl<'a> ListWarpChangeEventsRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// List WARP change events.
+///
+/// List WARP configuration and enablement toggle change events by device.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/dex/warp-change-events`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `page` (query,required)
+/// - `per_page` (query,required)
+/// - `from` (query,required)
+/// - `to` (query,required)
+/// - `type` (query,optional)
+/// - `toggle` (query,optional)
+/// - `config_name` (query,optional)
+/// - `account_name` (query,optional)
+/// - `sort_order` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::warp_change_events };
+/// use cloudflare::{ ApiClient, apis::warp_change_events };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_warp_change_events(&api)
-///     .with_account_id("value")
+/// let response = list_warp_change_events(&api)
+///     .with_account_id("account_id")
+///     .with_page("page")
+///     .with_per_page("per_page")
+///     .with_from("from")
+///     .with_to("to")
+///     .with_type_param("type")
+///     .with_toggle("toggle")
+///     .with_config_name("config_name")
+///     .with_account_name("account_name")
+///     .with_sort_order("sort_order")
 ///     .send()
 ///     .await?;
 /// ```

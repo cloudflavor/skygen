@@ -44,14 +44,20 @@ impl<'a> ListRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Lists categories
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/cloudforce-one/events/categories`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::category };
+/// use cloudflare::{ ApiClient, apis::category };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list(&api)
-///     .with_account_id("value")
+/// let response = list(&api)
+///     .with_account_id("account_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -90,14 +96,22 @@ impl<'a> CreateRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Creates a new category
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/cloudforce-one/events/categories/create`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::category };
+/// use cloudflare::{ ApiClient, apis::category };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = create(&api)
-///     .with_account_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = create(&api)
+///     .with_account_id("account_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -134,15 +148,22 @@ impl<'a> ReadRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Reads a category
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/cloudforce-one/events/categories/{category_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `category_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::category };
+/// use cloudflare::{ ApiClient, apis::category };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = read(&api)
-///     .with_account_id("value")
-///     .with_category_id("value")
+/// let response = read(&api)
+///     .with_account_id("account_id")
+///     .with_category_id("category_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -186,15 +207,24 @@ impl<'a> UpdateRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Updates a category
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/cloudforce-one/events/categories/{category_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `category_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::category };
+/// use cloudflare::{ ApiClient, apis::category };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = update(&api)
-///     .with_account_id("value")
-///     .with_category_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = update(&api)
+///     .with_account_id("account_id")
+///     .with_category_id("category_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -231,15 +261,22 @@ impl<'a> DeleteRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Deletes a category
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/accounts/{account_id}/cloudforce-one/events/categories/{category_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `category_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::category };
+/// use cloudflare::{ ApiClient, apis::category };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete(&api)
-///     .with_account_id("value")
-///     .with_category_id("value")
+/// let response = delete(&api)
+///     .with_account_id("account_id")
+///     .with_category_id("category_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -283,15 +320,24 @@ impl<'a> UpdatePatchRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Updates a category
+///
+/// **HTTP Method:** `PATCH`
+/// **Path:** `/accounts/{account_id}/cloudforce-one/events/categories/{category_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `category_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::category };
+/// use cloudflare::{ ApiClient, apis::category };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = update_patch(&api)
-///     .with_account_id("value")
-///     .with_category_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = update_patch(&api)
+///     .with_account_id("account_id")
+///     .with_category_id("category_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```

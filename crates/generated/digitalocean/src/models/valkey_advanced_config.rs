@@ -23,7 +23,7 @@ pub struct ValkeyAdvancedConfig {
     pub valkey_io_threads: Option<i64>,
     pub valkey_lfu_decay_time: Option<i64>,
     pub valkey_lfu_log_factor: Option<i64>,
-    pub valkey_maxmemory_policy: Option<serde_json::Value>,
+    pub valkey_maxmemory_policy: Option<crate::models::eviction_policy_model::EvictionPolicyModel>,
     pub valkey_notify_keyspace_events: Option<String>,
     pub valkey_number_of_databases: Option<i64>,
     pub valkey_persistence: Option<String>,

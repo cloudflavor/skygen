@@ -19,12 +19,12 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct McnOnramp {
-    pub attached_hubs: Option<Vec<serde_json::Value>>,
-    pub attached_vpcs: Option<Vec<serde_json::Value>>,
-    pub cloud_type: serde_json::Value,
+    pub attached_hubs: Option<Vec<crate::models::mcn_resource_id::McnResourceId>>,
+    pub attached_vpcs: Option<Vec<crate::models::mcn_resource_id::McnResourceId>>,
+    pub cloud_type: crate::models::mcn_onramp_cloud_type::McnOnrampCloudType,
     pub description: Option<String>,
-    pub hub: Option<serde_json::Value>,
-    pub id: serde_json::Value,
+    pub hub: Option<crate::models::mcn_resource_id::McnResourceId>,
+    pub id: crate::models::mcn_onramp_id::McnOnrampId,
     pub install_routes_in_cloud: bool,
     pub install_routes_in_magic_wan: bool,
     pub last_applied_at: Option<String>,
@@ -39,11 +39,11 @@ pub struct McnOnramp {
     pub post_apply_monthly_cost_estimate: Option<crate::models::mcn_cost::McnCost>,
     pub post_apply_resources: Option<std::collections::BTreeMap<String, serde_json::Value>>,
     pub post_apply_resources_unavailable: Option<bool>,
-    pub r#type: serde_json::Value,
+    pub r#type: crate::models::mcn_onramp_type::McnOnrampType,
     pub region: Option<String>,
     pub status: Option<crate::models::mcn_onramp_status::McnOnrampStatus>,
     pub updated_at: String,
-    pub vpc: Option<serde_json::Value>,
+    pub vpc: Option<crate::models::mcn_resource_id::McnResourceId>,
     pub vpcs_by_id: Option<std::collections::BTreeMap<String, serde_json::Value>>,
-    pub vpcs_by_id_unavailable: Option<Vec<serde_json::Value>>,
+    pub vpcs_by_id_unavailable: Option<Vec<crate::models::mcn_resource_id::McnResourceId>>,
 }

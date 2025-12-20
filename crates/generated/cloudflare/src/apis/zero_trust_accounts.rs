@@ -15,13 +15,17 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::teams_devices_zero_trust_account_device_settings_response::TeamsDevicesZeroTrustAccountDeviceSettingsResponse;
 use crate::models::zero_trust_gateway_custom_certificate_settings::ZeroTrustGatewayCustomCertificateSettings;
+use crate::models::zero_trust_gateway_gateway_account::ZeroTrustGatewayGatewayAccount;
+use crate::models::zero_trust_gateway_gateway_account_config::ZeroTrustGatewayGatewayAccountConfig;
+use crate::models::zero_trust_gateway_gateway_account_logging_settings_response::ZeroTrustGatewayGatewayAccountLoggingSettingsResponse;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct GetDeviceSettingsZeroRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, TeamsDevicesZeroTrustAccountDeviceSettingsResponse>,
 }
 
 impl<'a> GetDeviceSettingsZeroRequest<'a> {
@@ -36,18 +40,26 @@ impl<'a> GetDeviceSettingsZeroRequest<'a> {
         self.builder = self.builder.path_param("account_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<TeamsDevicesZeroTrustAccountDeviceSettingsResponse> {
         self.builder.send().await
     }
 }
-
 /// Get device settings for a Zero Trust account
+///
+/// Describes the current device settings for a Zero Trust account.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/devices/settings`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zero_trust_accounts };
+/// use cloudflare::{ ApiClient, apis::zero_trust_accounts };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_device_settings_zero(&api)
-///     .with_account_id("value")
+/// let response = get_device_settings_zero(&api)
+///     .with_account_id("account_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -57,7 +69,7 @@ pub fn get_device_settings_zero(api: &ApiClient) -> GetDeviceSettingsZeroRequest
 
 #[derive(Debug)]
 pub struct UpdateDeviceSettingsZeroRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, TeamsDevicesZeroTrustAccountDeviceSettingsResponse>,
 }
 
 impl<'a> UpdateDeviceSettingsZeroRequest<'a> {
@@ -80,18 +92,28 @@ impl<'a> UpdateDeviceSettingsZeroRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<TeamsDevicesZeroTrustAccountDeviceSettingsResponse> {
         self.builder.send().await
     }
 }
-
 /// Update device settings for a Zero Trust account
+///
+/// Updates the current device settings for a Zero Trust account.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/accounts/{account_id}/devices/settings`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zero_trust_accounts };
+/// use cloudflare::{ ApiClient, apis::zero_trust_accounts };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = update_device_settings_zero(&api)
-///     .with_account_id("value")
+/// # let body: crate::models::teams_devices_zero_trust_account_device_settings::TeamsDevicesZeroTrustAccountDeviceSettings = todo!();
+/// let response = update_device_settings_zero(&api)
+///     .with_account_id("account_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -101,7 +123,7 @@ pub fn update_device_settings_zero(api: &ApiClient) -> UpdateDeviceSettingsZeroR
 
 #[derive(Debug)]
 pub struct DeleteDeviceSettingsZeroRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, TeamsDevicesZeroTrustAccountDeviceSettingsResponse>,
 }
 
 impl<'a> DeleteDeviceSettingsZeroRequest<'a> {
@@ -119,18 +141,26 @@ impl<'a> DeleteDeviceSettingsZeroRequest<'a> {
         self.builder = self.builder.path_param("account_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<TeamsDevicesZeroTrustAccountDeviceSettingsResponse> {
         self.builder.send().await
     }
 }
-
 /// Reset device settings for a Zero Trust account with defaults. This turns off all proxying.
+///
+/// Resets the current device settings for a Zero Trust account.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/accounts/{account_id}/devices/settings`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zero_trust_accounts };
+/// use cloudflare::{ ApiClient, apis::zero_trust_accounts };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete_device_settings_zero(&api)
-///     .with_account_id("value")
+/// let response = delete_device_settings_zero(&api)
+///     .with_account_id("account_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -140,7 +170,7 @@ pub fn delete_device_settings_zero(api: &ApiClient) -> DeleteDeviceSettingsZeroR
 
 #[derive(Debug)]
 pub struct PatchDeviceSettingsZeroRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, TeamsDevicesZeroTrustAccountDeviceSettingsResponse>,
 }
 
 impl<'a> PatchDeviceSettingsZeroRequest<'a> {
@@ -163,18 +193,28 @@ impl<'a> PatchDeviceSettingsZeroRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<TeamsDevicesZeroTrustAccountDeviceSettingsResponse> {
         self.builder.send().await
     }
 }
-
 /// Patch device settings for a Zero Trust account
+///
+/// Patches the current device settings for a Zero Trust account.
+///
+/// **HTTP Method:** `PATCH`
+/// **Path:** `/accounts/{account_id}/devices/settings`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zero_trust_accounts };
+/// use cloudflare::{ ApiClient, apis::zero_trust_accounts };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = patch_device_settings_zero(&api)
-///     .with_account_id("value")
+/// # let body: crate::models::teams_devices_zero_trust_account_device_settings::TeamsDevicesZeroTrustAccountDeviceSettings = todo!();
+/// let response = patch_device_settings_zero(&api)
+///     .with_account_id("account_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -184,7 +224,7 @@ pub fn patch_device_settings_zero(api: &ApiClient) -> PatchDeviceSettingsZeroReq
 
 #[derive(Debug)]
 pub struct GetZeroTrustInformationRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, ZeroTrustGatewayGatewayAccount>,
 }
 
 impl<'a> GetZeroTrustInformationRequest<'a> {
@@ -198,18 +238,26 @@ impl<'a> GetZeroTrustInformationRequest<'a> {
         self.builder = self.builder.path_param("account_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<ZeroTrustGatewayGatewayAccount> {
         self.builder.send().await
     }
 }
-
 /// Get Zero Trust account information
+///
+/// Gets information about the current Zero Trust account.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/gateway`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zero_trust_accounts };
+/// use cloudflare::{ ApiClient, apis::zero_trust_accounts };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_zero_trust_information(&api)
-///     .with_account_id("value")
+/// let response = get_zero_trust_information(&api)
+///     .with_account_id("account_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -219,7 +267,7 @@ pub fn get_zero_trust_information(api: &ApiClient) -> GetZeroTrustInformationReq
 
 #[derive(Debug)]
 pub struct CreateZeroTrustRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, ZeroTrustGatewayGatewayAccount>,
 }
 
 impl<'a> CreateZeroTrustRequest<'a> {
@@ -233,18 +281,26 @@ impl<'a> CreateZeroTrustRequest<'a> {
         self.builder = self.builder.path_param("account_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<ZeroTrustGatewayGatewayAccount> {
         self.builder.send().await
     }
 }
-
 /// Create Zero Trust account
+///
+/// Creates a Zero Trust account with an existing Cloudflare account.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/gateway`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zero_trust_accounts };
+/// use cloudflare::{ ApiClient, apis::zero_trust_accounts };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = create_zero_trust(&api)
-///     .with_account_id("value")
+/// let response = create_zero_trust(&api)
+///     .with_account_id("account_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -254,7 +310,7 @@ pub fn create_zero_trust(api: &ApiClient) -> CreateZeroTrustRequest<'_> {
 
 #[derive(Debug)]
 pub struct GetZeroTrustConfigurationRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, ZeroTrustGatewayGatewayAccountConfig>,
 }
 
 impl<'a> GetZeroTrustConfigurationRequest<'a> {
@@ -272,18 +328,26 @@ impl<'a> GetZeroTrustConfigurationRequest<'a> {
         self.builder = self.builder.path_param("account_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<ZeroTrustGatewayGatewayAccountConfig> {
         self.builder.send().await
     }
 }
-
 /// Get Zero Trust account configuration
+///
+/// Fetches the current Zero Trust account configuration.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/gateway/configuration`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zero_trust_accounts };
+/// use cloudflare::{ ApiClient, apis::zero_trust_accounts };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_zero_trust_configuration(&api)
-///     .with_account_id("value")
+/// let response = get_zero_trust_configuration(&api)
+///     .with_account_id("account_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -293,7 +357,7 @@ pub fn get_zero_trust_configuration(api: &ApiClient) -> GetZeroTrustConfiguratio
 
 #[derive(Debug)]
 pub struct UpdateZeroTrustConfigurationRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, ZeroTrustGatewayGatewayAccountConfig>,
 }
 
 impl<'a> UpdateZeroTrustConfigurationRequest<'a> {
@@ -312,22 +376,35 @@ impl<'a> UpdateZeroTrustConfigurationRequest<'a> {
         self.builder = self.builder.path_param("account_id", value);
         self
     }
-    pub fn with_body(mut self, body: serde_json::Value) -> Self {
+    pub fn with_body(
+        mut self,
+        body: crate::models::zero_trust_gateway_gateway_account_settings::ZeroTrustGatewayGatewayAccountSettings,
+    ) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<ZeroTrustGatewayGatewayAccountConfig> {
         self.builder.send().await
     }
 }
-
 /// Update Zero Trust account configuration
+///
+/// Updates the current Zero Trust account configuration.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/accounts/{account_id}/gateway/configuration`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zero_trust_accounts };
+/// use cloudflare::{ ApiClient, apis::zero_trust_accounts };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = update_zero_trust_configuration(&api)
-///     .with_account_id("value")
+/// # let body: crate::models::zero_trust_gateway_gateway_account_settings::ZeroTrustGatewayGatewayAccountSettings = todo!();
+/// let response = update_zero_trust_configuration(&api)
+///     .with_account_id("account_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -337,7 +414,7 @@ pub fn update_zero_trust_configuration(api: &ApiClient) -> UpdateZeroTrustConfig
 
 #[derive(Debug)]
 pub struct PatchZeroTrustConfigurationRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, ZeroTrustGatewayGatewayAccountConfig>,
 }
 
 impl<'a> PatchZeroTrustConfigurationRequest<'a> {
@@ -356,22 +433,35 @@ impl<'a> PatchZeroTrustConfigurationRequest<'a> {
         self.builder = self.builder.path_param("account_id", value);
         self
     }
-    pub fn with_body(mut self, body: serde_json::Value) -> Self {
+    pub fn with_body(
+        mut self,
+        body: crate::models::zero_trust_gateway_gateway_account_settings::ZeroTrustGatewayGatewayAccountSettings,
+    ) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<ZeroTrustGatewayGatewayAccountConfig> {
         self.builder.send().await
     }
 }
-
 /// Patch Zero Trust account configuration
+///
+/// Patches the current Zero Trust account configuration. This endpoint can update a single subcollection of settings such as `antivirus`, `tls_decrypt`, `activity_log`, `block_page`, `browser_isolation`, `fips`, `body_scanning`, or `certificate`, without updating the entire configuration object. Returns an error if any collection of settings is not properly configured.
+///
+/// **HTTP Method:** `PATCH`
+/// **Path:** `/accounts/{account_id}/gateway/configuration`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zero_trust_accounts };
+/// use cloudflare::{ ApiClient, apis::zero_trust_accounts };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = patch_zero_trust_configuration(&api)
-///     .with_account_id("value")
+/// # let body: crate::models::zero_trust_gateway_gateway_account_settings::ZeroTrustGatewayGatewayAccountSettings = todo!();
+/// let response = patch_zero_trust_configuration(&api)
+///     .with_account_id("account_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -403,14 +493,22 @@ impl<'a> GetZeroTrustCertificateRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get Zero Trust certificate configuration
+///
+/// Fetches the current Zero Trust certificate configuration.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/gateway/configuration/custom_certificate`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zero_trust_accounts };
+/// use cloudflare::{ ApiClient, apis::zero_trust_accounts };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_zero_trust_certificate(&api)
-///     .with_account_id("value")
+/// let response = get_zero_trust_certificate(&api)
+///     .with_account_id("account_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -420,7 +518,7 @@ pub fn get_zero_trust_certificate(api: &ApiClient) -> GetZeroTrustCertificateReq
 
 #[derive(Debug)]
 pub struct GetLoggingSettingsZeroRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, ZeroTrustGatewayGatewayAccountLoggingSettingsResponse>,
 }
 
 impl<'a> GetLoggingSettingsZeroRequest<'a> {
@@ -435,18 +533,26 @@ impl<'a> GetLoggingSettingsZeroRequest<'a> {
         self.builder = self.builder.path_param("account_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<ZeroTrustGatewayGatewayAccountLoggingSettingsResponse> {
         self.builder.send().await
     }
 }
-
 /// Get logging settings for the Zero Trust account
+///
+/// Fetches the current logging settings for Zero Trust account.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/gateway/logging`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zero_trust_accounts };
+/// use cloudflare::{ ApiClient, apis::zero_trust_accounts };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_logging_settings_zero(&api)
-///     .with_account_id("value")
+/// let response = get_logging_settings_zero(&api)
+///     .with_account_id("account_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -456,7 +562,7 @@ pub fn get_logging_settings_zero(api: &ApiClient) -> GetLoggingSettingsZeroReque
 
 #[derive(Debug)]
 pub struct UpdateLoggingSettingsZeroRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, ZeroTrustGatewayGatewayAccountLoggingSettingsResponse>,
 }
 
 impl<'a> UpdateLoggingSettingsZeroRequest<'a> {
@@ -479,18 +585,28 @@ impl<'a> UpdateLoggingSettingsZeroRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<ZeroTrustGatewayGatewayAccountLoggingSettingsResponse> {
         self.builder.send().await
     }
 }
-
 /// Update Zero Trust account logging settings
+///
+/// Updates logging settings for the current Zero Trust account.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/accounts/{account_id}/gateway/logging`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zero_trust_accounts };
+/// use cloudflare::{ ApiClient, apis::zero_trust_accounts };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = update_logging_settings_zero(&api)
-///     .with_account_id("value")
+/// # let body: crate::models::zero_trust_gateway_gateway_account_logging_settings::ZeroTrustGatewayGatewayAccountLoggingSettings = todo!();
+/// let response = update_logging_settings_zero(&api)
+///     .with_account_id("account_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```

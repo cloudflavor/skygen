@@ -15,23 +15,4 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-use serde::{Deserialize, Serialize};
-
-#[derive(Debug, Clone, Serialize, Deserialize)]
-pub struct StreamLiveInput {
-    pub created: Option<serde_json::Value>,
-    pub delete_recording_after_days: Option<serde_json::Value>,
-    pub meta: Option<crate::models::stream_live_input_metadata::StreamLiveInputMetadata>,
-    pub modified: Option<serde_json::Value>,
-    pub recording: Option<
-        crate::models::stream_live_input_recording_settings::StreamLiveInputRecordingSettings,
-    >,
-    pub rtmps: Option<crate::models::stream_input_rtmps::StreamInputRtmps>,
-    pub rtmps_playback: Option<crate::models::stream_playback_rtmps::StreamPlaybackRtmps>,
-    pub srt: Option<crate::models::stream_input_srt::StreamInputSrt>,
-    pub srt_playback: Option<crate::models::stream_playback_srt::StreamPlaybackSrt>,
-    pub status: Option<serde_json::Value>,
-    pub uid: Option<serde_json::Value>,
-    pub web_rtc: Option<crate::models::stream_input_webrtc::StreamInputWebrtc>,
-    pub web_rtc_playback: Option<crate::models::stream_playback_webrtc::StreamPlaybackWebrtc>,
-}
+pub type StreamLiveInput = String;

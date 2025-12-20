@@ -19,27 +19,32 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct StreamVideos {
-    pub allowed_origins: Option<serde_json::Value>,
-    pub created: Option<serde_json::Value>,
-    pub creator: Option<serde_json::Value>,
-    pub duration: Option<serde_json::Value>,
+    pub allowed_origins: Option<crate::models::stream_allowed_origins::StreamAllowedOrigins>,
+    pub created: Option<crate::models::stream_created::StreamCreated>,
+    pub creator: Option<crate::models::stream_creator::StreamCreator>,
+    pub duration: Option<crate::models::stream_duration::StreamDuration>,
     pub input: Option<crate::models::stream_input::StreamInput>,
     pub live_input: Option<crate::models::stream_live_input::StreamLiveInput>,
-    pub max_duration_seconds: Option<serde_json::Value>,
+    pub max_duration_seconds:
+        Option<crate::models::stream_max_duration_seconds::StreamMaxDurationSeconds>,
     pub meta: Option<crate::models::stream_media_metadata::StreamMediaMetadata>,
-    pub modified: Option<serde_json::Value>,
+    pub modified: Option<crate::models::stream_modified::StreamModified>,
     pub playback: Option<crate::models::stream_playback::StreamPlayback>,
-    pub preview: Option<serde_json::Value>,
-    pub ready_to_stream: Option<serde_json::Value>,
-    pub ready_to_stream_at: Option<serde_json::Value>,
-    pub require_signed_ur_ls: Option<serde_json::Value>,
-    pub scheduled_deletion: Option<serde_json::Value>,
-    pub size: Option<serde_json::Value>,
-    pub status: Option<serde_json::Value>,
-    pub thumbnail: Option<serde_json::Value>,
-    pub thumbnail_timestamp_pct: Option<serde_json::Value>,
-    pub uid: Option<serde_json::Value>,
-    pub upload_expiry: Option<serde_json::Value>,
-    pub uploaded: Option<serde_json::Value>,
+    pub preview: Option<crate::models::stream_preview::StreamPreview>,
+    pub ready_to_stream: Option<crate::models::stream_ready_to_stream::StreamReadyToStream>,
+    pub ready_to_stream_at: Option<crate::models::stream_ready_to_stream_at::StreamReadyToStreamAt>,
+    pub require_signed_ur_ls:
+        Option<crate::models::stream_require_signed_ur_ls::StreamRequireSignedUrLs>,
+    pub scheduled_deletion:
+        Option<crate::models::stream_scheduled_deletion::StreamScheduledDeletion>,
+    pub size: Option<crate::models::stream_size::StreamSize>,
+    pub status: Option<crate::models::stream_media_status::StreamMediaStatus>,
+    pub thumbnail: Option<crate::models::stream_thumbnail_url::StreamThumbnailUrl>,
+    pub thumbnail_timestamp_pct:
+        Option<crate::models::stream_thumbnail_timestamp_pct::StreamThumbnailTimestampPct>,
+    pub uid: Option<crate::models::stream_identifier::StreamIdentifier>,
+    pub upload_expiry:
+        Option<crate::models::stream_one_time_upload_expiry::StreamOneTimeUploadExpiry>,
+    pub uploaded: Option<crate::models::stream_uploaded::StreamUploaded>,
     pub watermark: Option<crate::models::stream_watermarks::StreamWatermarks>,
 }

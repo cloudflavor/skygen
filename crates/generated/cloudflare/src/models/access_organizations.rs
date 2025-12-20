@@ -19,17 +19,17 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct AccessOrganizations {
-    pub allow_authenticate_via_warp: Option<serde_json::Value>,
-    pub auth_domain: Option<serde_json::Value>,
-    pub auto_redirect_to_identity: Option<serde_json::Value>,
-    pub created_at: Option<serde_json::Value>,
+    pub allow_authenticate_via_warp: Option<crate::models::access_allow_authenticate_via_warp::AccessAllowAuthenticateViaWarp>,
+    pub auth_domain: Option<crate::models::access_auth_domain::AccessAuthDomain>,
+    pub auto_redirect_to_identity: Option<crate::models::access_auto_redirect_to_identity::AccessAutoRedirectToIdentity>,
+    pub created_at: Option<crate::models::access_timestamp::AccessTimestamp>,
     pub custom_pages: Option<crate::models::access_custom_pages::AccessCustomPages>,
-    pub is_ui_read_only: Option<serde_json::Value>,
+    pub is_ui_read_only: Option<crate::models::access_is_ui_read_only::AccessIsUiReadOnly>,
     pub login_design: Option<crate::models::access_login_design::AccessLoginDesign>,
-    pub name: Option<serde_json::Value>,
-    pub session_duration: Option<serde_json::Value>,
-    pub ui_read_only_toggle_reason: Option<serde_json::Value>,
-    pub updated_at: Option<serde_json::Value>,
-    pub user_seat_expiration_inactive_time: Option<serde_json::Value>,
-    pub warp_auth_session_duration: Option<serde_json::Value>,
+    pub name: Option<crate::models::access_name::AccessName>,
+    pub session_duration: Option<crate::models::access_session_duration::AccessSessionDuration>,
+    pub ui_read_only_toggle_reason: Option<crate::models::access_ui_read_only_toggle_reason::AccessUiReadOnlyToggleReason>,
+    pub updated_at: Option<crate::models::access_timestamp::AccessTimestamp>,
+    pub user_seat_expiration_inactive_time: Option<crate::models::access_user_seat_expiration_inactive_time::AccessUserSeatExpirationInactiveTime>,
+    pub warp_auth_session_duration: Option<crate::models::access_warp_auth_session_duration::AccessWarpAuthSessionDuration>,
 }

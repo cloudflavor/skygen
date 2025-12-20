@@ -19,6 +19,6 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct FirewallUpdateRuleset {
-    pub description: Option<serde_json::Value>,
-    pub rules: serde_json::Value,
+    pub description: Option<crate::models::firewall_rulesets_components_schemas_description::FirewallRulesetsComponentsSchemasDescription>,
+    pub rules: crate::models::firewall_create_update_rules::FirewallCreateUpdateRules,
 }

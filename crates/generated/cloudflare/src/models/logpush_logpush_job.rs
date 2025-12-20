@@ -19,19 +19,21 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct LogpushLogpushJob {
-    pub dataset: Option<serde_json::Value>,
-    pub destination_conf: Option<serde_json::Value>,
-    pub enabled: Option<serde_json::Value>,
-    pub error_message: Option<serde_json::Value>,
-    pub frequency: Option<serde_json::Value>,
-    pub id: Option<serde_json::Value>,
-    pub kind: Option<serde_json::Value>,
-    pub last_complete: Option<serde_json::Value>,
-    pub last_error: Option<serde_json::Value>,
-    pub logpull_options: Option<serde_json::Value>,
-    pub max_upload_bytes: Option<serde_json::Value>,
-    pub max_upload_interval_seconds: Option<serde_json::Value>,
-    pub max_upload_records: Option<serde_json::Value>,
-    pub name: Option<serde_json::Value>,
+    pub dataset: Option<crate::models::logpush_dataset::LogpushDataset>,
+    pub destination_conf: Option<crate::models::logpush_destination_conf::LogpushDestinationConf>,
+    pub enabled: Option<crate::models::logpush_enabled::LogpushEnabled>,
+    pub error_message: Option<crate::models::logpush_error_message::LogpushErrorMessage>,
+    pub frequency: Option<crate::models::logpush_frequency::LogpushFrequency>,
+    pub id: Option<crate::models::logpush_id::LogpushId>,
+    pub kind: Option<crate::models::logpush_kind::LogpushKind>,
+    pub last_complete: Option<crate::models::logpush_last_complete::LogpushLastComplete>,
+    pub last_error: Option<crate::models::logpush_last_error::LogpushLastError>,
+    pub logpull_options: Option<crate::models::logpush_logpull_options::LogpushLogpullOptions>,
+    pub max_upload_bytes: Option<crate::models::logpush_max_upload_bytes::LogpushMaxUploadBytes>,
+    pub max_upload_interval_seconds:
+        Option<crate::models::logpush_max_upload_interval_seconds::LogpushMaxUploadIntervalSeconds>,
+    pub max_upload_records:
+        Option<crate::models::logpush_max_upload_records::LogpushMaxUploadRecords>,
+    pub name: Option<crate::models::logpush_name::LogpushName>,
     pub output_options: Option<crate::models::logpush_output_options::LogpushOutputOptions>,
 }

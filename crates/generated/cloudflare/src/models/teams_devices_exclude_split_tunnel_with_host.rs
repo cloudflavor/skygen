@@ -19,6 +19,8 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct TeamsDevicesExcludeSplitTunnelWithHost {
-    pub description: Option<serde_json::Value>,
-    pub host: serde_json::Value,
+    pub description: Option<
+        crate::models::teams_devices_split_tunnel_description::TeamsDevicesSplitTunnelDescription,
+    >,
+    pub host: crate::models::teams_devices_split_tunnel_host::TeamsDevicesSplitTunnelHost,
 }

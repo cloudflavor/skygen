@@ -19,12 +19,12 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct BillSubsApiBillingHistory {
-    pub action: serde_json::Value,
-    pub amount: serde_json::Value,
-    pub currency: serde_json::Value,
-    pub description: serde_json::Value,
-    pub id: serde_json::Value,
-    pub occurred_at: serde_json::Value,
-    pub r#type: serde_json::Value,
+    pub action: crate::models::bill_subs_api_action::BillSubsApiAction,
+    pub amount: crate::models::bill_subs_api_amount::BillSubsApiAmount,
+    pub currency: crate::models::bill_subs_api_currency::BillSubsApiCurrency,
+    pub description: crate::models::bill_subs_api_description::BillSubsApiDescription,
+    pub id: crate::models::bill_subs_api_components_schemas_identifier::BillSubsApiComponentsSchemasIdentifier,
+    pub occurred_at: crate::models::bill_subs_api_occurred_at::BillSubsApiOccurredAt,
+    pub r#type: crate::models::bill_subs_api_type::BillSubsApiType,
     pub zone: crate::models::bill_subs_api_schemas_zone::BillSubsApiSchemasZone,
 }

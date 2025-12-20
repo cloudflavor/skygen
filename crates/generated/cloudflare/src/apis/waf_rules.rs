@@ -15,12 +15,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::waf_managed_rules_rule_response_collection::WafManagedRulesRuleResponseCollection;
+use crate::models::waf_managed_rules_rule_response_single::WafManagedRulesRuleResponseSingle;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct ListWafRulesRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, WafManagedRulesRuleResponseCollection>,
 }
 
 impl<'a> ListWafRulesRequest<'a> {
@@ -79,19 +81,48 @@ impl<'a> ListWafRulesRequest<'a> {
         self.builder = self.builder.header_param("priority", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<WafManagedRulesRuleResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// List WAF rules
+///
+/// Fetches WAF rules in a WAF package.
+///
+/// **Note:** Applies only to the [previous version of WAF managed rules](<https://developers.cloudflare.com/support/firewall/managed-rules-web-application-firewall-waf/understanding-waf-managed-rules-web-application-firewall/).>
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/firewall/waf/packages/{package_id}/rules`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `package_id` (path, required)
+/// - `mode` (query,optional)
+/// - `group_id` (query,optional)
+/// - `page` (query,optional)
+/// - `per_page` (query,optional)
+/// - `order` (query,optional)
+/// - `direction` (query,optional)
+/// - `match` (query,optional)
+/// - `description` (query,optional)
+/// - `priority` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::waf_rules };
+/// use cloudflare::{ ApiClient, apis::waf_rules };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_waf_rules(&api)
-///     .with_zone_id("value")
-///     .with_package_id("value")
+/// let response = list_waf_rules(&api)
+///     .with_zone_id("zone_id")
+///     .with_package_id("package_id")
+///     .with_mode("mode")
+///     .with_group_id("group_id")
+///     .with_page("page")
+///     .with_per_page("per_page")
+///     .with_order("order")
+///     .with_direction("direction")
+///     .with_match_param("match")
+///     .with_description("description")
+///     .with_priority("priority")
 ///     .send()
 ///     .await?;
 /// ```
@@ -101,7 +132,7 @@ pub fn list_waf_rules(api: &ApiClient) -> ListWafRulesRequest<'_> {
 
 #[derive(Debug)]
 pub struct GetWafRuleRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, WafManagedRulesRuleResponseSingle>,
 }
 
 impl<'a> GetWafRuleRequest<'a> {
@@ -129,20 +160,32 @@ impl<'a> GetWafRuleRequest<'a> {
         self.builder = self.builder.path_param("rule_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<WafManagedRulesRuleResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Get a WAF rule
+///
+/// Fetches the details of a WAF rule in a WAF package.
+///
+/// **Note:** Applies only to the [previous version of WAF managed rules](<https://developers.cloudflare.com/support/firewall/managed-rules-web-application-firewall-waf/understanding-waf-managed-rules-web-application-firewall/).>
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/firewall/waf/packages/{package_id}/rules/{rule_id}`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `package_id` (path, required)
+/// - `rule_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::waf_rules };
+/// use cloudflare::{ ApiClient, apis::waf_rules };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_waf_rule(&api)
-///     .with_zone_id("value")
-///     .with_package_id("value")
-///     .with_rule_id("value")
+/// let response = get_waf_rule(&api)
+///     .with_zone_id("zone_id")
+///     .with_package_id("package_id")
+///     .with_rule_id("rule_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -192,16 +235,30 @@ impl<'a> UpdateWafRuleRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Update a WAF rule
+///
+/// Updates a WAF rule. You can only update the mode/action of the rule.
+///
+/// **Note:** Applies only to the [previous version of WAF managed rules](<https://developers.cloudflare.com/support/firewall/managed-rules-web-application-firewall-waf/understanding-waf-managed-rules-web-application-firewall/).>
+///
+/// **HTTP Method:** `PATCH`
+/// **Path:** `/zones/{zone_id}/firewall/waf/packages/{package_id}/rules/{rule_id}`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `package_id` (path, required)
+/// - `rule_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::waf_rules };
+/// use cloudflare::{ ApiClient, apis::waf_rules };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = update_waf_rule(&api)
-///     .with_zone_id("value")
-///     .with_package_id("value")
-///     .with_rule_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = update_waf_rule(&api)
+///     .with_zone_id("zone_id")
+///     .with_package_id("package_id")
+///     .with_rule_id("rule_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```

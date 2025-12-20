@@ -15,12 +15,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::zero_trust_gateway_categories_components_schemas_response_collection::ZeroTrustGatewayCategoriesComponentsSchemasResponseCollection;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct ListCategoriesRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, ZeroTrustGatewayCategoriesComponentsSchemasResponseCollection>,
 }
 
 impl<'a> ListCategoriesRequest<'a> {
@@ -35,18 +36,28 @@ impl<'a> ListCategoriesRequest<'a> {
         self.builder = self.builder.path_param("account_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(
+        self,
+    ) -> ApiResult<ZeroTrustGatewayCategoriesComponentsSchemasResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// List categories
+///
+/// Fetches a list of all categories.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/gateway/categories`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zero_trust_gateway_categories };
+/// use cloudflare::{ ApiClient, apis::zero_trust_gateway_categories };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_categories(&api)
-///     .with_account_id("value")
+/// let response = list_categories(&api)
+///     .with_account_id("account_id")
 ///     .send()
 ///     .await?;
 /// ```

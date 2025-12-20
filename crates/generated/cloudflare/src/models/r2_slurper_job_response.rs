@@ -24,6 +24,6 @@ pub struct R2SlurperJobResponse {
     pub id: Option<String>,
     pub overwrite: Option<bool>,
     pub source: Option<serde_json::Value>,
-    pub status: Option<serde_json::Value>,
+    pub status: Option<crate::models::r2_slurper_job_status::R2SlurperJobStatus>,
     pub target: Option<serde_json::Value>,
 }

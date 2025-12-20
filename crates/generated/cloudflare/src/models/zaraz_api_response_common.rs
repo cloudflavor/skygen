@@ -19,7 +19,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct ZarazApiResponseCommon {
-    pub errors: serde_json::Value,
-    pub messages: serde_json::Value,
+    pub errors: crate::models::zaraz_messages::ZarazMessages,
+    pub messages: crate::models::zaraz_messages::ZarazMessages,
     pub success: bool,
 }

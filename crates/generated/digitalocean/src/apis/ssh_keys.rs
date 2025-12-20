@@ -15,6 +15,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::error::Error;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
@@ -33,13 +34,18 @@ impl<'a> ListRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// List All SSH Keys
+///
+/// To list all of the keys in your account, send a GET request to `/v2/account/keys`. The response will be a JSON object with a key set to `ssh_keys`. The value of this will be an array of ssh_key objects, each of which contains the standard ssh_key attributes.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/account/keys`
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::ssh_keys };
+/// use digitalocean::{ ApiClient, apis::ssh_keys };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list(&api)
+/// let response = list(&api)
 ///     .send()
 ///     .await?;
 /// ```
@@ -66,13 +72,20 @@ impl<'a> CreateRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Create a New SSH Key
+///
+/// To add a new SSH public key to your DigitalOcean account, send a POST request to `/v2/account/keys`. Set the `name` attribute to the name you wish to use and the `public_key` attribute to the full public key you are adding.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/v2/account/keys`
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::ssh_keys };
+/// use digitalocean::{ ApiClient, apis::ssh_keys };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = create(&api)
+/// # let body: crate::models::ssh_keys::SshKeys = todo!();
+/// let response = create(&api)
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -101,14 +114,23 @@ impl<'a> GetRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Retrieve an Existing SSH Key
+///
+/// To get information about a key, send a GET request to `/v2/account/keys/$KEY_ID` or `/v2/account/keys/$KEY_FINGERPRINT`.
+/// The response will be a JSON object with the key `ssh_key` and value an ssh_key object which contains the standard ssh_key attributes.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/account/keys/{ssh_key_identifier}`
+///
+/// **Parameters**
+/// - `ssh_key_identifier` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::ssh_keys };
+/// use digitalocean::{ ApiClient, apis::ssh_keys };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get(&api)
-///     .with_ssh_key_identifier("value")
+/// let response = get(&api)
+///     .with_ssh_key_identifier("ssh_key_identifier")
 ///     .send()
 ///     .await?;
 /// ```
@@ -145,14 +167,24 @@ impl<'a> UpdateRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Update an SSH Key's Name
+///
+/// To update the name of an SSH key, send a PUT request to either `/v2/account/keys/$SSH_KEY_ID` or `/v2/account/keys/$SSH_KEY_FINGERPRINT`. Set the `name` attribute to the new name you want to use.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/v2/account/keys/{ssh_key_identifier}`
+///
+/// **Parameters**
+/// - `ssh_key_identifier` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::ssh_keys };
+/// use digitalocean::{ ApiClient, apis::ssh_keys };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = update(&api)
-///     .with_ssh_key_identifier("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = update(&api)
+///     .with_ssh_key_identifier("ssh_key_identifier")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -162,7 +194,7 @@ pub fn update(api: &ApiClient) -> UpdateRequest<'_> {
 
 #[derive(Debug)]
 pub struct DeleteRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, Error>,
 }
 
 impl<'a> DeleteRequest<'a> {
@@ -177,18 +209,27 @@ impl<'a> DeleteRequest<'a> {
         self.builder = self.builder.path_param("ssh_key_identifier", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<Error> {
         self.builder.send().await
     }
 }
-
 /// Delete an SSH Key
+///
+/// To destroy a public SSH key that you have in your account, send a DELETE request to `/v2/account/keys/$KEY_ID` or `/v2/account/keys/$KEY_FINGERPRINT`.
+/// A 204 status will be returned, indicating that the action was successful and that the response body is empty.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/v2/account/keys/{ssh_key_identifier}`
+///
+/// **Parameters**
+/// - `ssh_key_identifier` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::ssh_keys };
+/// use digitalocean::{ ApiClient, apis::ssh_keys };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete(&api)
-///     .with_ssh_key_identifier("value")
+/// let response = delete(&api)
+///     .with_ssh_key_identifier("ssh_key_identifier")
 ///     .send()
 ///     .await?;
 /// ```

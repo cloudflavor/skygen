@@ -50,14 +50,24 @@ impl<'a> PostRunCfBaaiRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Execute @cf/baai/bge-base-en-v1.5 model.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/ai/run/@cf/baai/bge-base-en-v1.5`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `queueRequest` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::workers_ai_text_embeddings };
+/// use cloudflare::{ ApiClient, apis::workers_ai_text_embeddings };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = post_run_cf_baai(&api)
-///     .with_account_id("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = post_run_cf_baai(&api)
+///     .with_account_id("account_id")
+///     .with_queue_request("queueRequest")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -97,14 +107,24 @@ impl<'a> PostRunCfBaaiPostRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Execute @cf/baai/bge-large-en-v1.5 model.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/ai/run/@cf/baai/bge-large-en-v1.5`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `queueRequest` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::workers_ai_text_embeddings };
+/// use cloudflare::{ ApiClient, apis::workers_ai_text_embeddings };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = post_run_cf_baai_post(&api)
-///     .with_account_id("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = post_run_cf_baai_post(&api)
+///     .with_account_id("account_id")
+///     .with_queue_request("queueRequest")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -144,14 +164,24 @@ impl<'a> PostRunCfBaaiPost3Request<'a> {
         self.builder.send().await
     }
 }
-
 /// Execute @cf/baai/bge-m3 model.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/ai/run/@cf/baai/bge-m3`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `queueRequest` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::workers_ai_text_embeddings };
+/// use cloudflare::{ ApiClient, apis::workers_ai_text_embeddings };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = post_run_cf_baai_post_3(&api)
-///     .with_account_id("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = post_run_cf_baai_post_3(&api)
+///     .with_account_id("account_id")
+///     .with_queue_request("queueRequest")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -191,14 +221,24 @@ impl<'a> PostRunCfBaaiPost4Request<'a> {
         self.builder.send().await
     }
 }
-
 /// Execute @cf/baai/bge-small-en-v1.5 model.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/ai/run/@cf/baai/bge-small-en-v1.5`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `queueRequest` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::workers_ai_text_embeddings };
+/// use cloudflare::{ ApiClient, apis::workers_ai_text_embeddings };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = post_run_cf_baai_post_4(&api)
-///     .with_account_id("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = post_run_cf_baai_post_4(&api)
+///     .with_account_id("account_id")
+///     .with_queue_request("queueRequest")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```

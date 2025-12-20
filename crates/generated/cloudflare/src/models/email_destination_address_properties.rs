@@ -19,10 +19,12 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct EmailDestinationAddressProperties {
-    pub created: Option<serde_json::Value>,
-    pub email: Option<serde_json::Value>,
-    pub id: Option<serde_json::Value>,
-    pub modified: Option<serde_json::Value>,
-    pub tag: Option<serde_json::Value>,
-    pub verified: Option<serde_json::Value>,
+    pub created: Option<crate::models::email_created::EmailCreated>,
+    pub email: Option<crate::models::email_email::EmailEmail>,
+    pub id: Option<
+        crate::models::email_destination_address_identifier::EmailDestinationAddressIdentifier,
+    >,
+    pub modified: Option<crate::models::email_modified::EmailModified>,
+    pub tag: Option<crate::models::email_destination_address_tag::EmailDestinationAddressTag>,
+    pub verified: Option<crate::models::email_verified::EmailVerified>,
 }

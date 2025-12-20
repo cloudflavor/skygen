@@ -22,6 +22,6 @@ pub struct DlpRiskEvent {
     pub event_details: Option<serde_json::Value>,
     pub id: String,
     pub name: String,
-    pub risk_level: serde_json::Value,
+    pub risk_level: crate::models::dlp_risk_level::DlpRiskLevel,
     pub timestamp: String,
 }

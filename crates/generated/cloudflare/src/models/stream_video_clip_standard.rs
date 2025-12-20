@@ -19,13 +19,17 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct StreamVideoClipStandard {
-    pub allowed_origins: Option<serde_json::Value>,
-    pub clipped_from_video_uid: serde_json::Value,
-    pub creator: Option<serde_json::Value>,
-    pub end_time_seconds: serde_json::Value,
-    pub max_duration_seconds: Option<serde_json::Value>,
-    pub require_signed_ur_ls: Option<serde_json::Value>,
-    pub start_time_seconds: serde_json::Value,
-    pub thumbnail_timestamp_pct: Option<serde_json::Value>,
+    pub allowed_origins: Option<crate::models::stream_allowed_origins::StreamAllowedOrigins>,
+    pub clipped_from_video_uid:
+        crate::models::stream_clipped_from_video_uid::StreamClippedFromVideoUid,
+    pub creator: Option<crate::models::stream_creator::StreamCreator>,
+    pub end_time_seconds: crate::models::stream_end_time_seconds::StreamEndTimeSeconds,
+    pub max_duration_seconds:
+        Option<crate::models::stream_max_duration_seconds::StreamMaxDurationSeconds>,
+    pub require_signed_ur_ls:
+        Option<crate::models::stream_require_signed_ur_ls::StreamRequireSignedUrLs>,
+    pub start_time_seconds: crate::models::stream_start_time_seconds::StreamStartTimeSeconds,
+    pub thumbnail_timestamp_pct:
+        Option<crate::models::stream_thumbnail_timestamp_pct::StreamThumbnailTimestampPct>,
     pub watermark: Option<crate::models::stream_watermark_at_upload::StreamWatermarkAtUpload>,
 }

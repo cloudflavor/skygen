@@ -19,7 +19,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct MqApiV4Failure {
-    pub errors: Option<serde_json::Value>,
-    pub messages: Option<serde_json::Value>,
+    pub errors: Option<crate::models::mq_api_v4_error::MqApiV4Error>,
+    pub messages: Option<crate::models::mq_api_v4_message::MqApiV4Message>,
     pub success: Option<bool>,
 }

@@ -15,6 +15,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::error::Error;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
@@ -33,13 +34,18 @@ impl<'a> ListChecksRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// List All Checks
+///
+/// To list all of the Uptime checks on your account, send a GET request to `/v2/uptime/checks`.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/uptime/checks`
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::uptime };
+/// use digitalocean::{ ApiClient, apis::uptime };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_checks(&api)
+/// let response = list_checks(&api)
 ///     .send()
 ///     .await?;
 /// ```
@@ -49,7 +55,7 @@ pub fn list_checks(api: &ApiClient) -> ListChecksRequest<'_> {
 
 #[derive(Debug)]
 pub struct CreateCheckRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, std::collections::BTreeMap<String, serde_json::Value>>,
 }
 
 impl<'a> CreateCheckRequest<'a> {
@@ -62,17 +68,25 @@ impl<'a> CreateCheckRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<std::collections::BTreeMap<String, serde_json::Value>> {
         self.builder.send().await
     }
 }
-
 /// Create a New Check
+///
+/// To create an Uptime check, send a POST request to `/v2/uptime/checks` specifying the attributes
+/// in the table below in the JSON body.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/v2/uptime/checks`
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::uptime };
+/// use digitalocean::{ ApiClient, apis::uptime };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = create_check(&api)
+/// # let body: serde_json::Value = todo!();
+/// let response = create_check(&api)
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -82,7 +96,7 @@ pub fn create_check(api: &ApiClient) -> CreateCheckRequest<'_> {
 
 #[derive(Debug)]
 pub struct GetCheckRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, std::collections::BTreeMap<String, serde_json::Value>>,
 }
 
 impl<'a> GetCheckRequest<'a> {
@@ -96,18 +110,26 @@ impl<'a> GetCheckRequest<'a> {
         self.builder = self.builder.path_param("check_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<std::collections::BTreeMap<String, serde_json::Value>> {
         self.builder.send().await
     }
 }
-
 /// Retrieve an Existing Check
+///
+/// To show information about an existing check, send a GET request to `/v2/uptime/checks/$CHECK_ID`.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/uptime/checks/{check_id}`
+///
+/// **Parameters**
+/// - `check_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::uptime };
+/// use digitalocean::{ ApiClient, apis::uptime };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_check(&api)
-///     .with_check_id("value")
+/// let response = get_check(&api)
+///     .with_check_id("check_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -117,7 +139,7 @@ pub fn get_check(api: &ApiClient) -> GetCheckRequest<'_> {
 
 #[derive(Debug)]
 pub struct UpdateCheckRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, std::collections::BTreeMap<String, serde_json::Value>>,
 }
 
 impl<'a> UpdateCheckRequest<'a> {
@@ -136,18 +158,28 @@ impl<'a> UpdateCheckRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<std::collections::BTreeMap<String, serde_json::Value>> {
         self.builder.send().await
     }
 }
-
 /// Update a Check
+///
+/// To update the settings of an Uptime check, send a PUT request to `/v2/uptime/checks/$CHECK_ID`.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/v2/uptime/checks/{check_id}`
+///
+/// **Parameters**
+/// - `check_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::uptime };
+/// use digitalocean::{ ApiClient, apis::uptime };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = update_check(&api)
-///     .with_check_id("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = update_check(&api)
+///     .with_check_id("check_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -157,7 +189,7 @@ pub fn update_check(api: &ApiClient) -> UpdateCheckRequest<'_> {
 
 #[derive(Debug)]
 pub struct DeleteCheckRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, Error>,
 }
 
 impl<'a> DeleteCheckRequest<'a> {
@@ -171,18 +203,30 @@ impl<'a> DeleteCheckRequest<'a> {
         self.builder = self.builder.path_param("check_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<Error> {
         self.builder.send().await
     }
 }
-
 /// Delete a Check
+///
+/// To delete an Uptime check, send a DELETE request to `/v2/uptime/checks/$CHECK_ID`. A 204 status
+/// code with no body will be returned in response to a successful request.
+///
+///
+/// Deleting a check will also delete alerts associated with the check.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/v2/uptime/checks/{check_id}`
+///
+/// **Parameters**
+/// - `check_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::uptime };
+/// use digitalocean::{ ApiClient, apis::uptime };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete_check(&api)
-///     .with_check_id("value")
+/// let response = delete_check(&api)
+///     .with_check_id("check_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -211,14 +255,22 @@ impl<'a> ListAlertsRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// List All Alerts
+///
+/// To list all of the alerts for an Uptime check, send a GET request to `/v2/uptime/checks/$CHECK_ID/alerts`.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/uptime/checks/{check_id}/alerts`
+///
+/// **Parameters**
+/// - `check_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::uptime };
+/// use digitalocean::{ ApiClient, apis::uptime };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_alerts(&api)
-///     .with_check_id("value")
+/// let response = list_alerts(&api)
+///     .with_check_id("check_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -228,7 +280,7 @@ pub fn list_alerts(api: &ApiClient) -> ListAlertsRequest<'_> {
 
 #[derive(Debug)]
 pub struct CreateAlertRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, std::collections::BTreeMap<String, serde_json::Value>>,
 }
 
 impl<'a> CreateAlertRequest<'a> {
@@ -248,18 +300,29 @@ impl<'a> CreateAlertRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<std::collections::BTreeMap<String, serde_json::Value>> {
         self.builder.send().await
     }
 }
-
 /// Create a New Alert
+///
+/// To create an Uptime alert, send a POST request to `/v2/uptime/checks/$CHECK_ID/alerts` specifying the attributes
+/// in the table below in the JSON body.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/v2/uptime/checks/{check_id}/alerts`
+///
+/// **Parameters**
+/// - `check_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::uptime };
+/// use digitalocean::{ ApiClient, apis::uptime };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = create_alert(&api)
-///     .with_check_id("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = create_alert(&api)
+///     .with_check_id("check_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -269,7 +332,7 @@ pub fn create_alert(api: &ApiClient) -> CreateAlertRequest<'_> {
 
 #[derive(Debug)]
 pub struct GetAlertRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, std::collections::BTreeMap<String, serde_json::Value>>,
 }
 
 impl<'a> GetAlertRequest<'a> {
@@ -292,19 +355,28 @@ impl<'a> GetAlertRequest<'a> {
         self.builder = self.builder.path_param("alert_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<std::collections::BTreeMap<String, serde_json::Value>> {
         self.builder.send().await
     }
 }
-
 /// Retrieve an Existing Alert
+///
+/// To show information about an existing alert, send a GET request to `/v2/uptime/checks/$CHECK_ID/alerts/$ALERT_ID`.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/uptime/checks/{check_id}/alerts/{alert_id}`
+///
+/// **Parameters**
+/// - `check_id` (path, required)
+/// - `alert_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::uptime };
+/// use digitalocean::{ ApiClient, apis::uptime };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_alert(&api)
-///     .with_check_id("value")
-///     .with_alert_id("value")
+/// let response = get_alert(&api)
+///     .with_check_id("check_id")
+///     .with_alert_id("alert_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -314,7 +386,7 @@ pub fn get_alert(api: &ApiClient) -> GetAlertRequest<'_> {
 
 #[derive(Debug)]
 pub struct UpdateAlertRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, std::collections::BTreeMap<String, serde_json::Value>>,
 }
 
 impl<'a> UpdateAlertRequest<'a> {
@@ -342,19 +414,30 @@ impl<'a> UpdateAlertRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<std::collections::BTreeMap<String, serde_json::Value>> {
         self.builder.send().await
     }
 }
-
 /// Update an Alert
+///
+/// To update the settings of an Uptime alert, send a PUT request to `/v2/uptime/checks/$CHECK_ID/alerts/$ALERT_ID`.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/v2/uptime/checks/{check_id}/alerts/{alert_id}`
+///
+/// **Parameters**
+/// - `check_id` (path, required)
+/// - `alert_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::uptime };
+/// use digitalocean::{ ApiClient, apis::uptime };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = update_alert(&api)
-///     .with_check_id("value")
-///     .with_alert_id("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = update_alert(&api)
+///     .with_check_id("check_id")
+///     .with_alert_id("alert_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -364,7 +447,7 @@ pub fn update_alert(api: &ApiClient) -> UpdateAlertRequest<'_> {
 
 #[derive(Debug)]
 pub struct DeleteAlertRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, Error>,
 }
 
 impl<'a> DeleteAlertRequest<'a> {
@@ -387,19 +470,29 @@ impl<'a> DeleteAlertRequest<'a> {
         self.builder = self.builder.path_param("alert_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<Error> {
         self.builder.send().await
     }
 }
-
 /// Delete an Alert
+///
+/// To delete an Uptime alert, send a DELETE request to `/v2/uptime/checks/$CHECK_ID/alerts/$ALERT_ID`. A 204 status
+/// code with no body will be returned in response to a successful request.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/v2/uptime/checks/{check_id}/alerts/{alert_id}`
+///
+/// **Parameters**
+/// - `check_id` (path, required)
+/// - `alert_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::uptime };
+/// use digitalocean::{ ApiClient, apis::uptime };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete_alert(&api)
-///     .with_check_id("value")
-///     .with_alert_id("value")
+/// let response = delete_alert(&api)
+///     .with_check_id("check_id")
+///     .with_alert_id("alert_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -409,7 +502,7 @@ pub fn delete_alert(api: &ApiClient) -> DeleteAlertRequest<'_> {
 
 #[derive(Debug)]
 pub struct GetCheckStateRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, std::collections::BTreeMap<String, serde_json::Value>>,
 }
 
 impl<'a> GetCheckStateRequest<'a> {
@@ -423,18 +516,26 @@ impl<'a> GetCheckStateRequest<'a> {
         self.builder = self.builder.path_param("check_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<std::collections::BTreeMap<String, serde_json::Value>> {
         self.builder.send().await
     }
 }
-
 /// Retrieve Check State
+///
+/// To show information about an existing check's state, send a GET request to `/v2/uptime/checks/$CHECK_ID/state`.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/uptime/checks/{check_id}/state`
+///
+/// **Parameters**
+/// - `check_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::uptime };
+/// use digitalocean::{ ApiClient, apis::uptime };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_check_state(&api)
-///     .with_check_id("value")
+/// let response = get_check_state(&api)
+///     .with_check_id("check_id")
 ///     .send()
 ///     .await?;
 /// ```

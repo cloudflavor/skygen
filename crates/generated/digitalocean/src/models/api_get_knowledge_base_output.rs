@@ -19,6 +19,6 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct ApiGetKnowledgeBaseOutput {
-    pub database_status: Option<serde_json::Value>,
+    pub database_status: Option<crate::models::dbaas_cluster_status::DbaasClusterStatus>,
     pub knowledge_base: Option<crate::models::api_knowledge_base::ApiKnowledgeBase>,
 }

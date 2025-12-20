@@ -19,7 +19,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct LogpushApiResponseCommon {
-    pub errors: serde_json::Value,
-    pub messages: serde_json::Value,
+    pub errors: crate::models::logpush_messages::LogpushMessages,
+    pub messages: crate::models::logpush_messages::LogpushMessages,
     pub success: bool,
 }

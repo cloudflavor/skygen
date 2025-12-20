@@ -38,14 +38,20 @@ impl<'a> LimitsGetRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Fetch limits associated with DLP for account
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/dlp/limits`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::dlp_settings };
+/// use cloudflare::{ ApiClient, apis::dlp_settings };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = limits_get(&api)
-///     .with_account_id("value")
+/// let response = limits_get(&api)
+///     .with_account_id("account_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -85,14 +91,27 @@ impl<'a> PatternValidateRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Validate a DLP regex pattern
+///
+/// Validates whether this pattern is a valid regular expression. Rejects it if
+/// the regular expression is too complex or can match an unbounded-length
+/// string. The regex will be rejected if it uses `*` or `+`. Bound the maximum
+/// number of characters that can be matched using a range, e.g. `{1,100}`.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/dlp/patterns/validate`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::dlp_settings };
+/// use cloudflare::{ ApiClient, apis::dlp_settings };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = pattern_validate(&api)
-///     .with_account_id("value")
+/// # let body: crate::models::dlp_regex_validation_query::DlpRegexValidationQuery = todo!();
+/// let response = pattern_validate(&api)
+///     .with_account_id("account_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -121,14 +140,20 @@ impl<'a> PayloadLogGetRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get payload log settings
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/dlp/payload_log`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::dlp_settings };
+/// use cloudflare::{ ApiClient, apis::dlp_settings };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = payload_log_get(&api)
-///     .with_account_id("value")
+/// let response = payload_log_get(&api)
+///     .with_account_id("account_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -165,14 +190,22 @@ impl<'a> PayloadLogPutRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Set payload log settings
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/accounts/{account_id}/dlp/payload_log`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::dlp_settings };
+/// use cloudflare::{ ApiClient, apis::dlp_settings };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = payload_log_put(&api)
-///     .with_account_id("value")
+/// # let body: crate::models::dlp_payload_log_setting_update::DlpPayloadLogSettingUpdate = todo!();
+/// let response = payload_log_put(&api)
+///     .with_account_id("account_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```

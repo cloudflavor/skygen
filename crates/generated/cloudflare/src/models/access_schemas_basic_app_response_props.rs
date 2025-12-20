@@ -19,9 +19,9 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct AccessSchemasBasicAppResponseProps {
-    pub aud: Option<serde_json::Value>,
-    pub created_at: Option<serde_json::Value>,
-    pub id: Option<serde_json::Value>,
+    pub aud: Option<crate::models::access_schemas_aud::AccessSchemasAud>,
+    pub created_at: Option<crate::models::access_timestamp::AccessTimestamp>,
+    pub id: Option<crate::models::access_uuid::AccessUuid>,
     pub scim_config: Option<crate::models::access_schemas_scim_config::AccessSchemasScimConfig>,
-    pub updated_at: Option<serde_json::Value>,
+    pub updated_at: Option<crate::models::access_timestamp::AccessTimestamp>,
 }

@@ -94,14 +94,48 @@ impl<'a> ListAllowPoliciesRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// List email allow policies
+///
+/// Lists, searches, and sorts an account’s email allow policies.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/email-security/settings/allow_policies`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `page` (query,optional)
+/// - `per_page` (query,optional)
+/// - `order` (query,optional)
+/// - `direction` (query,optional)
+/// - `search` (query,optional)
+/// - `is_sender` (query,optional)
+/// - `is_trusted_sender` (query,optional)
+/// - `is_recipient` (query,optional)
+/// - `is_exempt_recipient` (query,optional)
+/// - `is_spoof` (query,optional)
+/// - `is_acceptable_sender` (query,optional)
+/// - `verify_sender` (query,optional)
+/// - `pattern_type` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::email_security_settings };
+/// use cloudflare::{ ApiClient, apis::email_security_settings };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_allow_policies(&api)
-///     .with_account_id("value")
+/// let response = list_allow_policies(&api)
+///     .with_account_id("account_id")
+///     .with_page("page")
+///     .with_per_page("per_page")
+///     .with_order("order")
+///     .with_direction("direction")
+///     .with_search("search")
+///     .with_is_sender("is_sender")
+///     .with_is_trusted_sender("is_trusted_sender")
+///     .with_is_recipient("is_recipient")
+///     .with_is_exempt_recipient("is_exempt_recipient")
+///     .with_is_spoof("is_spoof")
+///     .with_is_acceptable_sender("is_acceptable_sender")
+///     .with_verify_sender("verify_sender")
+///     .with_pattern_type("pattern_type")
 ///     .send()
 ///     .await?;
 /// ```
@@ -141,14 +175,22 @@ impl<'a> CreateAllowPolicyRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Create an email allow policy
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/email-security/settings/allow_policies`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::email_security_settings };
+/// use cloudflare::{ ApiClient, apis::email_security_settings };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = create_allow_policy(&api)
-///     .with_account_id("value")
+/// # let body: crate::models::email_security_create_allow_policy::EmailSecurityCreateAllowPolicy = todo!();
+/// let response = create_allow_policy(&api)
+///     .with_account_id("account_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -185,15 +227,22 @@ impl<'a> GetAllowPolicyRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get an email allow policy
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/email-security/settings/allow_policies/{policy_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `policy_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::email_security_settings };
+/// use cloudflare::{ ApiClient, apis::email_security_settings };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_allow_policy(&api)
-///     .with_account_id("value")
-///     .with_policy_id("value")
+/// let response = get_allow_policy(&api)
+///     .with_account_id("account_id")
+///     .with_policy_id("policy_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -230,15 +279,22 @@ impl<'a> DeleteAllowPolicyRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Delete an email allow policy
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/accounts/{account_id}/email-security/settings/allow_policies/{policy_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `policy_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::email_security_settings };
+/// use cloudflare::{ ApiClient, apis::email_security_settings };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete_allow_policy(&api)
-///     .with_account_id("value")
-///     .with_policy_id("value")
+/// let response = delete_allow_policy(&api)
+///     .with_account_id("account_id")
+///     .with_policy_id("policy_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -283,15 +339,24 @@ impl<'a> UpdateAllowPolicyRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Update an email allow policy
+///
+/// **HTTP Method:** `PATCH`
+/// **Path:** `/accounts/{account_id}/email-security/settings/allow_policies/{policy_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `policy_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::email_security_settings };
+/// use cloudflare::{ ApiClient, apis::email_security_settings };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = update_allow_policy(&api)
-///     .with_account_id("value")
-///     .with_policy_id("value")
+/// # let body: crate::models::email_security_update_allow_policy::EmailSecurityUpdateAllowPolicy = todo!();
+/// let response = update_allow_policy(&api)
+///     .with_account_id("account_id")
+///     .with_policy_id("policy_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -347,14 +412,32 @@ impl<'a> ListBlockedSendersRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// List blocked email senders
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/email-security/settings/block_senders`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `page` (query,optional)
+/// - `per_page` (query,optional)
+/// - `order` (query,optional)
+/// - `direction` (query,optional)
+/// - `search` (query,optional)
+/// - `pattern_type` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::email_security_settings };
+/// use cloudflare::{ ApiClient, apis::email_security_settings };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_blocked_senders(&api)
-///     .with_account_id("value")
+/// let response = list_blocked_senders(&api)
+///     .with_account_id("account_id")
+///     .with_page("page")
+///     .with_per_page("per_page")
+///     .with_order("order")
+///     .with_direction("direction")
+///     .with_search("search")
+///     .with_pattern_type("pattern_type")
 ///     .send()
 ///     .await?;
 /// ```
@@ -394,14 +477,22 @@ impl<'a> CreateBlockedSenderRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Create a blocked email sender
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/email-security/settings/block_senders`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::email_security_settings };
+/// use cloudflare::{ ApiClient, apis::email_security_settings };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = create_blocked_sender(&api)
-///     .with_account_id("value")
+/// # let body: crate::models::email_security_create_blocked_sender::EmailSecurityCreateBlockedSender = todo!();
+/// let response = create_blocked_sender(&api)
+///     .with_account_id("account_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -438,15 +529,22 @@ impl<'a> GetBlockedSenderRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get a blocked email sender
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/email-security/settings/block_senders/{pattern_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `pattern_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::email_security_settings };
+/// use cloudflare::{ ApiClient, apis::email_security_settings };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_blocked_sender(&api)
-///     .with_account_id("value")
-///     .with_pattern_id("value")
+/// let response = get_blocked_sender(&api)
+///     .with_account_id("account_id")
+///     .with_pattern_id("pattern_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -483,15 +581,22 @@ impl<'a> DeleteBlockedSenderRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Delete a blocked email sender
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/accounts/{account_id}/email-security/settings/block_senders/{pattern_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `pattern_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::email_security_settings };
+/// use cloudflare::{ ApiClient, apis::email_security_settings };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete_blocked_sender(&api)
-///     .with_account_id("value")
-///     .with_pattern_id("value")
+/// let response = delete_blocked_sender(&api)
+///     .with_account_id("account_id")
+///     .with_pattern_id("pattern_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -536,15 +641,24 @@ impl<'a> UpdateBlockedSenderRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Update a blocked email sender
+///
+/// **HTTP Method:** `PATCH`
+/// **Path:** `/accounts/{account_id}/email-security/settings/block_senders/{pattern_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `pattern_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::email_security_settings };
+/// use cloudflare::{ ApiClient, apis::email_security_settings };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = update_blocked_sender(&api)
-///     .with_account_id("value")
-///     .with_pattern_id("value")
+/// # let body: crate::models::email_security_update_blocked_sender::EmailSecurityUpdateBlockedSender = todo!();
+/// let response = update_blocked_sender(&api)
+///     .with_account_id("account_id")
+///     .with_pattern_id("pattern_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -608,14 +722,38 @@ impl<'a> ListDomainsRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// List protected email domains
+///
+/// Lists, searches, and sorts an account’s email domains.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/email-security/settings/domains`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `page` (query,optional)
+/// - `per_page` (query,optional)
+/// - `order` (query,optional)
+/// - `direction` (query,optional)
+/// - `search` (query,optional)
+/// - `allowed_delivery_mode` (query,optional)
+/// - `domain` (query,optional)
+/// - `active_delivery_mode` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::email_security_settings };
+/// use cloudflare::{ ApiClient, apis::email_security_settings };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_domains(&api)
-///     .with_account_id("value")
+/// let response = list_domains(&api)
+///     .with_account_id("account_id")
+///     .with_page("page")
+///     .with_per_page("per_page")
+///     .with_order("order")
+///     .with_direction("direction")
+///     .with_search("search")
+///     .with_allowed_delivery_mode("allowed_delivery_mode")
+///     .with_domain("domain")
+///     .with_active_delivery_mode("active_delivery_mode")
 ///     .send()
 ///     .await?;
 /// ```
@@ -655,14 +793,22 @@ impl<'a> DeleteDomainsRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Unprotect multiple email domains
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/accounts/{account_id}/email-security/settings/domains`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::email_security_settings };
+/// use cloudflare::{ ApiClient, apis::email_security_settings };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete_domains(&api)
-///     .with_account_id("value")
+/// # let body: Vec<std::collections::BTreeMap<String, serde_json::Value>> = todo!();
+/// let response = delete_domains(&api)
+///     .with_account_id("account_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -699,15 +845,22 @@ impl<'a> GetDomainRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get an email domain
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/email-security/settings/domains/{domain_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `domain_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::email_security_settings };
+/// use cloudflare::{ ApiClient, apis::email_security_settings };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_domain(&api)
-///     .with_account_id("value")
-///     .with_domain_id("value")
+/// let response = get_domain(&api)
+///     .with_account_id("account_id")
+///     .with_domain_id("domain_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -744,15 +897,22 @@ impl<'a> DeleteDomainRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Unprotect an email domain
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/accounts/{account_id}/email-security/settings/domains/{domain_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `domain_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::email_security_settings };
+/// use cloudflare::{ ApiClient, apis::email_security_settings };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete_domain(&api)
-///     .with_account_id("value")
-///     .with_domain_id("value")
+/// let response = delete_domain(&api)
+///     .with_account_id("account_id")
+///     .with_domain_id("domain_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -797,15 +957,24 @@ impl<'a> UpdateDomainRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Update an email domain
+///
+/// **HTTP Method:** `PATCH`
+/// **Path:** `/accounts/{account_id}/email-security/settings/domains/{domain_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `domain_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::email_security_settings };
+/// use cloudflare::{ ApiClient, apis::email_security_settings };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = update_domain(&api)
-///     .with_account_id("value")
-///     .with_domain_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = update_domain(&api)
+///     .with_account_id("account_id")
+///     .with_domain_id("domain_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -861,14 +1030,34 @@ impl<'a> ListDisplayNamesRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// List entries in impersonation registry
+///
+/// Lists, searches, and sorts entries in the impersonation registry.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/email-security/settings/impersonation_registry`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `page` (query,optional)
+/// - `per_page` (query,optional)
+/// - `order` (query,optional)
+/// - `direction` (query,optional)
+/// - `search` (query,optional)
+/// - `provenance` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::email_security_settings };
+/// use cloudflare::{ ApiClient, apis::email_security_settings };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_display_names(&api)
-///     .with_account_id("value")
+/// let response = list_display_names(&api)
+///     .with_account_id("account_id")
+///     .with_page("page")
+///     .with_per_page("per_page")
+///     .with_order("order")
+///     .with_direction("direction")
+///     .with_search("search")
+///     .with_provenance("provenance")
 ///     .send()
 ///     .await?;
 /// ```
@@ -908,14 +1097,22 @@ impl<'a> CreateDisplayNameRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Create an entry in impersonation registry
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/email-security/settings/impersonation_registry`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::email_security_settings };
+/// use cloudflare::{ ApiClient, apis::email_security_settings };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = create_display_name(&api)
-///     .with_account_id("value")
+/// # let body: crate::models::email_security_create_display_name::EmailSecurityCreateDisplayName = todo!();
+/// let response = create_display_name(&api)
+///     .with_account_id("account_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -948,15 +1145,22 @@ impl<'a> GetDisplayNameRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get an entry in impersonation registry
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/email-security/settings/impersonation_registry/{display_name_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `display_name_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::email_security_settings };
+/// use cloudflare::{ ApiClient, apis::email_security_settings };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_display_name(&api)
-///     .with_account_id("value")
-///     .with_display_name_id("value")
+/// let response = get_display_name(&api)
+///     .with_account_id("account_id")
+///     .with_display_name_id("display_name_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -989,15 +1193,22 @@ impl<'a> DeleteDisplayNameRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Delete an entry from impersonation registry
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/accounts/{account_id}/email-security/settings/impersonation_registry/{display_name_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `display_name_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::email_security_settings };
+/// use cloudflare::{ ApiClient, apis::email_security_settings };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete_display_name(&api)
-///     .with_account_id("value")
-///     .with_display_name_id("value")
+/// let response = delete_display_name(&api)
+///     .with_account_id("account_id")
+///     .with_display_name_id("display_name_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -1038,15 +1249,24 @@ impl<'a> UpdateDisplayNameRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Update an entry in impersonation registry
+///
+/// **HTTP Method:** `PATCH`
+/// **Path:** `/accounts/{account_id}/email-security/settings/impersonation_registry/{display_name_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `display_name_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::email_security_settings };
+/// use cloudflare::{ ApiClient, apis::email_security_settings };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = update_display_name(&api)
-///     .with_account_id("value")
-///     .with_display_name_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = update_display_name(&api)
+///     .with_account_id("account_id")
+///     .with_display_name_id("display_name_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -1106,14 +1326,36 @@ impl<'a> ListTrustedDomainsRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// List trusted email domains
+///
+/// Lists, searches, and sorts an account’s trusted email domains.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/email-security/settings/trusted_domains`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `page` (query,optional)
+/// - `per_page` (query,optional)
+/// - `order` (query,optional)
+/// - `direction` (query,optional)
+/// - `search` (query,optional)
+/// - `is_recent` (query,optional)
+/// - `is_similarity` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::email_security_settings };
+/// use cloudflare::{ ApiClient, apis::email_security_settings };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_trusted_domains(&api)
-///     .with_account_id("value")
+/// let response = list_trusted_domains(&api)
+///     .with_account_id("account_id")
+///     .with_page("page")
+///     .with_per_page("per_page")
+///     .with_order("order")
+///     .with_direction("direction")
+///     .with_search("search")
+///     .with_is_recent("is_recent")
+///     .with_is_similarity("is_similarity")
 ///     .send()
 ///     .await?;
 /// ```
@@ -1150,14 +1392,22 @@ impl<'a> CreateTrustedDomainRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Create a trusted email domain
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/email-security/settings/trusted_domains`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::email_security_settings };
+/// use cloudflare::{ ApiClient, apis::email_security_settings };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = create_trusted_domain(&api)
-///     .with_account_id("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = create_trusted_domain(&api)
+///     .with_account_id("account_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -1194,15 +1444,22 @@ impl<'a> GetTrustedDomainRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get a trusted email domain
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/email-security/settings/trusted_domains/{trusted_domain_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `trusted_domain_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::email_security_settings };
+/// use cloudflare::{ ApiClient, apis::email_security_settings };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_trusted_domain(&api)
-///     .with_account_id("value")
-///     .with_trusted_domain_id("value")
+/// let response = get_trusted_domain(&api)
+///     .with_account_id("account_id")
+///     .with_trusted_domain_id("trusted_domain_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -1239,15 +1496,22 @@ impl<'a> DeleteTrustedDomainRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Delete a trusted email domain
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/accounts/{account_id}/email-security/settings/trusted_domains/{trusted_domain_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `trusted_domain_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::email_security_settings };
+/// use cloudflare::{ ApiClient, apis::email_security_settings };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete_trusted_domain(&api)
-///     .with_account_id("value")
-///     .with_trusted_domain_id("value")
+/// let response = delete_trusted_domain(&api)
+///     .with_account_id("account_id")
+///     .with_trusted_domain_id("trusted_domain_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -1292,15 +1556,24 @@ impl<'a> UpdateTrustedDomainRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Update a trusted email domain
+///
+/// **HTTP Method:** `PATCH`
+/// **Path:** `/accounts/{account_id}/email-security/settings/trusted_domains/{trusted_domain_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `trusted_domain_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::email_security_settings };
+/// use cloudflare::{ ApiClient, apis::email_security_settings };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = update_trusted_domain(&api)
-///     .with_account_id("value")
-///     .with_trusted_domain_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = update_trusted_domain(&api)
+///     .with_account_id("account_id")
+///     .with_trusted_domain_id("trusted_domain_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```

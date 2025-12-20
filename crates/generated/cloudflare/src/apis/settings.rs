@@ -40,14 +40,20 @@ impl<'a> GetRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get the current settings for the active account
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/cni/settings`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::settings };
+/// use cloudflare::{ ApiClient, apis::settings };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get(&api)
-///     .with_account_id("value")
+/// let response = get(&api)
+///     .with_account_id("account_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -84,14 +90,22 @@ impl<'a> UpdateSettingsRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Update the current settings for the active account
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/accounts/{account_id}/cni/settings`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::settings };
+/// use cloudflare::{ ApiClient, apis::settings };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = update_settings(&api)
-///     .with_account_id("value")
+/// # let body: crate::models::nsc_settings_request::NscSettingsRequest = todo!();
+/// let response = update_settings(&api)
+///     .with_account_id("account_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```

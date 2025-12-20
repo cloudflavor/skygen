@@ -15,12 +15,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::intel_collection_response::IntelCollectionResponse;
+use crate::models::intel_single_response::IntelSingleResponse;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct GetDomainDetailsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, IntelSingleResponse>,
 }
 
 impl<'a> GetDomainDetailsRequest<'a> {
@@ -39,18 +41,28 @@ impl<'a> GetDomainDetailsRequest<'a> {
         self.builder = self.builder.header_param("domain", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<IntelSingleResponse> {
         self.builder.send().await
     }
 }
-
 /// Get Domain Details
+///
+/// Gets security details and statistics about a domain.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/intel/domain`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `domain` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::domain_intelligence };
+/// use cloudflare::{ ApiClient, apis::domain_intelligence };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_domain_details(&api)
-///     .with_account_id("value")
+/// let response = get_domain_details(&api)
+///     .with_account_id("account_id")
+///     .with_domain("domain")
 ///     .send()
 ///     .await?;
 /// ```
@@ -60,7 +72,7 @@ pub fn get_domain_details(api: &ApiClient) -> GetDomainDetailsRequest<'_> {
 
 #[derive(Debug)]
 pub struct GetMultipleDomainDetailsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, IntelCollectionResponse>,
 }
 
 impl<'a> GetMultipleDomainDetailsRequest<'a> {
@@ -79,18 +91,28 @@ impl<'a> GetMultipleDomainDetailsRequest<'a> {
         self.builder = self.builder.header_param("domain", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<IntelCollectionResponse> {
         self.builder.send().await
     }
 }
-
 /// Get Multiple Domain Details
+///
+/// Same as summary.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/intel/domain/bulk`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `domain` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::domain_intelligence };
+/// use cloudflare::{ ApiClient, apis::domain_intelligence };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_multiple_domain_details(&api)
-///     .with_account_id("value")
+/// let response = get_multiple_domain_details(&api)
+///     .with_account_id("account_id")
+///     .with_domain("domain")
 ///     .send()
 ///     .await?;
 /// ```

@@ -47,15 +47,24 @@ impl<'a> UrlscannerGetResponseTextRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get raw response
+///
+/// Returns the plain response of the network request.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/urlscanner/response/{response_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `response_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::url_scanner };
+/// use cloudflare::{ ApiClient, apis::url_scanner };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = urlscanner_get_response_text(&api)
-///     .with_account_id("value")
-///     .with_response_id("value")
+/// let response = urlscanner_get_response_text(&api)
+///     .with_account_id("account_id")
+///     .with_response_id("response_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -152,14 +161,56 @@ impl<'a> UrlscannerSearchScansRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Search URL scans
+///
+/// Search scans by date and webpages' requests, including full URL (after redirects), hostname, and path. <br/> A successful scan will appear in search results a few minutes after finishing but may take much longer if the system in under load. By default, only successfully completed scans will appear in search results, unless searching by `scanId`. Please take into account that older scans may be removed from the search index at an unspecified time.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/urlscanner/scan`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `scan_id` (query,optional)
+/// - `limit` (query,optional)
+/// - `next_cursor` (query,optional)
+/// - `date_start` (query,optional)
+/// - `date_end` (query,optional)
+/// - `url` (query,optional)
+/// - `hostname` (query,optional)
+/// - `path` (query,optional)
+/// - `ip` (query,optional)
+/// - `hash` (query,optional)
+/// - `page_url` (query,optional)
+/// - `page_hostname` (query,optional)
+/// - `page_path` (query,optional)
+/// - `page_asn` (query,optional)
+/// - `page_ip` (query,optional)
+/// - `account_scans` (query,optional)
+/// - `is_malicious` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::url_scanner };
+/// use cloudflare::{ ApiClient, apis::url_scanner };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = urlscanner_search_scans(&api)
-///     .with_account_id("value")
+/// let response = urlscanner_search_scans(&api)
+///     .with_account_id("account_id")
+///     .with_scan_id("scan_id")
+///     .with_limit("limit")
+///     .with_next_cursor("next_cursor")
+///     .with_date_start("date_start")
+///     .with_date_end("date_end")
+///     .with_url("url")
+///     .with_hostname("hostname")
+///     .with_path("path")
+///     .with_ip("ip")
+///     .with_hash("hash")
+///     .with_page_url("page_url")
+///     .with_page_hostname("page_hostname")
+///     .with_page_path("page_path")
+///     .with_page_asn("page_asn")
+///     .with_page_ip("page_ip")
+///     .with_account_scans("account_scans")
+///     .with_is_malicious("is_malicious")
 ///     .send()
 ///     .await?;
 /// ```
@@ -195,14 +246,24 @@ impl<'a> UrlscannerCreateScanRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Create URL Scan
+///
+/// Submit a URL to scan. You can also set some options, like the visibility level and custom headers. Check limits at <https://developers.cloudflare.com/security-center/investigate/scan-limits/.>
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/urlscanner/scan`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::url_scanner };
+/// use cloudflare::{ ApiClient, apis::url_scanner };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = urlscanner_create_scan(&api)
-///     .with_account_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = urlscanner_create_scan(&api)
+///     .with_account_id("account_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -243,15 +304,26 @@ impl<'a> UrlscannerGetScanRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get URL scan
+///
+/// Get URL scan by uuid
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/urlscanner/scan/{scan_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `scan_id` (path, required)
+/// - `full` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::url_scanner };
+/// use cloudflare::{ ApiClient, apis::url_scanner };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = urlscanner_get_scan(&api)
-///     .with_account_id("value")
-///     .with_scan_id("value")
+/// let response = urlscanner_get_scan(&api)
+///     .with_account_id("account_id")
+///     .with_scan_id("scan_id")
+///     .with_full("full")
 ///     .send()
 ///     .await?;
 /// ```
@@ -288,15 +360,24 @@ impl<'a> UrlscannerGetScanHarRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get URL scan's HAR
+///
+/// Get a URL scan's HAR file. See HAR spec at <http://www.softwareishard.com/blog/har-12-spec/.>
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/urlscanner/scan/{scan_id}/har`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `scan_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::url_scanner };
+/// use cloudflare::{ ApiClient, apis::url_scanner };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = urlscanner_get_scan_har(&api)
-///     .with_account_id("value")
-///     .with_scan_id("value")
+/// let response = urlscanner_get_scan_har(&api)
+///     .with_account_id("account_id")
+///     .with_scan_id("scan_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -337,15 +418,26 @@ impl<'a> UrlscannerGetScanScreenshotRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get screenshot
+///
+/// Get scan's screenshot by resolution (desktop/mobile/tablet).
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/urlscanner/scan/{scan_id}/screenshot`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `scan_id` (path, required)
+/// - `resolution` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::url_scanner };
+/// use cloudflare::{ ApiClient, apis::url_scanner };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = urlscanner_get_scan_screenshot(&api)
-///     .with_account_id("value")
-///     .with_scan_id("value")
+/// let response = urlscanner_get_scan_screenshot(&api)
+///     .with_account_id("account_id")
+///     .with_scan_id("scan_id")
+///     .with_resolution("resolution")
 ///     .send()
 ///     .await?;
 /// ```

@@ -51,15 +51,26 @@ impl<'a> GetDayReportRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get daily report
+///
+/// Gets all the data the botnet tracking database has for a given ASN registered to user account for given date. If no date is given, it will return results for the previous day.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/botnet_feed/asn/{asn_id}/day_report`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `asn_id` (path, required)
+/// - `date` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::botnet_threat_feed };
+/// use cloudflare::{ ApiClient, apis::botnet_threat_feed };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_day_report(&api)
-///     .with_account_id("value")
-///     .with_asn_id("value")
+/// let response = get_day_report(&api)
+///     .with_account_id("account_id")
+///     .with_asn_id("asn_id")
+///     .with_date("date")
 ///     .send()
 ///     .await?;
 /// ```
@@ -96,15 +107,24 @@ impl<'a> GetFullReportRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get full report
+///
+/// Gets all the data the botnet threat feed tracking database has for a given ASN registered to user account.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/botnet_feed/asn/{asn_id}/full_report`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `asn_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::botnet_threat_feed };
+/// use cloudflare::{ ApiClient, apis::botnet_threat_feed };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_full_report(&api)
-///     .with_account_id("value")
-///     .with_asn_id("value")
+/// let response = get_full_report(&api)
+///     .with_account_id("account_id")
+///     .with_asn_id("asn_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -136,14 +156,22 @@ impl<'a> ListAsnRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get list of ASNs
+///
+/// Gets a list of all ASNs registered for a user for the DDoS Botnet Feed API.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/botnet_feed/configs/asn`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::botnet_threat_feed };
+/// use cloudflare::{ ApiClient, apis::botnet_threat_feed };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_asn(&api)
-///     .with_account_id("value")
+/// let response = list_asn(&api)
+///     .with_account_id("account_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -180,15 +208,24 @@ impl<'a> DeleteAsnRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Delete an ASN
+///
+/// Delete an ASN from botnet threat feed for a given user.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/accounts/{account_id}/botnet_feed/configs/asn/{asn_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `asn_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::botnet_threat_feed };
+/// use cloudflare::{ ApiClient, apis::botnet_threat_feed };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete_asn(&api)
-///     .with_account_id("value")
-///     .with_asn_id("value")
+/// let response = delete_asn(&api)
+///     .with_account_id("account_id")
+///     .with_asn_id("asn_id")
 ///     .send()
 ///     .await?;
 /// ```

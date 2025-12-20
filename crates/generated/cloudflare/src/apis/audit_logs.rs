@@ -15,13 +15,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::aaa_audit_logs_response_collection::AaaAuditLogsResponseCollection;
 use crate::models::aaa_audit_logs_v2_response_collection::AaaAuditLogsV2ResponseCollection;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct GetAuditLogsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, AaaAuditLogsResponseCollection>,
 }
 
 impl<'a> GetAuditLogsRequest<'a> {
@@ -83,18 +84,50 @@ impl<'a> GetAuditLogsRequest<'a> {
         self.builder = self.builder.header_param("hide_user_logs", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<AaaAuditLogsResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// Get account audit logs
+///
+/// Gets a list of audit logs for an account. Can be filtered by who made the change, on which zone, and the timeframe of the change.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/audit_logs`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `id` (query,optional)
+/// - `export` (query,optional)
+/// - `action.type` (query,optional)
+/// - `actor.ip` (query,optional)
+/// - `actor.email` (query,optional)
+/// - `since` (query,optional)
+/// - `before` (query,optional)
+/// - `zone.name` (query,optional)
+/// - `direction` (query,optional)
+/// - `per_page` (query,optional)
+/// - `page` (query,optional)
+/// - `hide_user_logs` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::audit_logs };
+/// use cloudflare::{ ApiClient, apis::audit_logs };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_audit_logs(&api)
-///     .with_account_id("value")
+/// let response = get_audit_logs(&api)
+///     .with_account_id("account_id")
+///     .with_id("id")
+///     .with_export("export")
+///     .with_action_type("action.type")
+///     .with_actor_ip("actor.ip")
+///     .with_actor_email("actor.email")
+///     .with_since("since")
+///     .with_before("before")
+///     .with_zone_name("zone.name")
+///     .with_direction("direction")
+///     .with_per_page("per_page")
+///     .with_page("page")
+///     .with_hide_user_logs("hide_user_logs")
 ///     .send()
 ///     .await?;
 /// ```
@@ -310,14 +343,116 @@ impl<'a> V2GetAuditLogsRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get account audit logs (Version 2, Beta release)
+///
+/// Gets a list of audit logs for an account. <br />  <br /> This is the beta release of Audit Logs Version 2. Since this is a beta version, there may be gaps or missing entries in the available audit logs. Be aware of the following limitations.  <br /> <ul> <li>Audit logs are available only for the past 30 days. <br /></li> <li>Error handling is not yet implemented.  <br /> </li> </ul>
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/logs/audit`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `account_name` (query,optional)
+/// - `action_result` (query,optional)
+/// - `action_type` (query,optional)
+/// - `actor_context` (query,optional)
+/// - `actor_email` (query,optional)
+/// - `actor_id` (query,optional)
+/// - `actor_ip_address` (query,optional)
+/// - `actor_token_id` (query,optional)
+/// - `actor_token_name` (query,optional)
+/// - `actor_type` (query,optional)
+/// - `audit_log_id` (query,optional)
+/// - `raw_cf_ray_id` (query,optional)
+/// - `raw_method` (query,optional)
+/// - `raw_status_code` (query,optional)
+/// - `raw_uri` (query,optional)
+/// - `resource_id` (query,optional)
+/// - `resource_product` (query,optional)
+/// - `resource_type` (query,optional)
+/// - `resource_scope` (query,optional)
+/// - `zone_id` (query,optional)
+/// - `zone_name` (query,optional)
+/// - `account_name.not` (query,optional)
+/// - `action_result.not` (query,optional)
+/// - `action_type.not` (query,optional)
+/// - `actor_context.not` (query,optional)
+/// - `actor_email.not` (query,optional)
+/// - `actor_id.not` (query,optional)
+/// - `actor_ip_address.not` (query,optional)
+/// - `actor_token_id.not` (query,optional)
+/// - `actor_token_name.not` (query,optional)
+/// - `actor_type.not` (query,optional)
+/// - `audit_log_id.not` (query,optional)
+/// - `raw_cf_ray_id.not` (query,optional)
+/// - `raw_method.not` (query,optional)
+/// - `raw_status_code.not` (query,optional)
+/// - `raw_uri.not` (query,optional)
+/// - `resource_id.not` (query,optional)
+/// - `resource_product.not` (query,optional)
+/// - `resource_type.not` (query,optional)
+/// - `resource_scope.not` (query,optional)
+/// - `zone_id.not` (query,optional)
+/// - `zone_name.not` (query,optional)
+/// - `since` (query,required)
+/// - `before` (query,required)
+/// - `direction` (query,optional)
+/// - `limit` (query,optional)
+/// - `cursor` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::audit_logs };
+/// use cloudflare::{ ApiClient, apis::audit_logs };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = v2_get_audit_logs(&api)
-///     .with_account_id("value")
+/// let response = v2_get_audit_logs(&api)
+///     .with_account_id("account_id")
+///     .with_account_name("account_name")
+///     .with_action_result("action_result")
+///     .with_action_type("action_type")
+///     .with_actor_context("actor_context")
+///     .with_actor_email("actor_email")
+///     .with_actor_id("actor_id")
+///     .with_actor_ip_address("actor_ip_address")
+///     .with_actor_token_id("actor_token_id")
+///     .with_actor_token_name("actor_token_name")
+///     .with_actor_type("actor_type")
+///     .with_audit_log_id("audit_log_id")
+///     .with_raw_cf_ray_id("raw_cf_ray_id")
+///     .with_raw_method("raw_method")
+///     .with_raw_status_code("raw_status_code")
+///     .with_raw_uri("raw_uri")
+///     .with_resource_id("resource_id")
+///     .with_resource_product("resource_product")
+///     .with_resource_type("resource_type")
+///     .with_resource_scope("resource_scope")
+///     .with_zone_id("zone_id")
+///     .with_zone_name("zone_name")
+///     .with_account_name_not("account_name.not")
+///     .with_action_result_not("action_result.not")
+///     .with_action_type_not("action_type.not")
+///     .with_actor_context_not("actor_context.not")
+///     .with_actor_email_not("actor_email.not")
+///     .with_actor_id_not("actor_id.not")
+///     .with_actor_ip_address_not("actor_ip_address.not")
+///     .with_actor_token_id_not("actor_token_id.not")
+///     .with_actor_token_name_not("actor_token_name.not")
+///     .with_actor_type_not("actor_type.not")
+///     .with_audit_log_id_not("audit_log_id.not")
+///     .with_raw_cf_ray_id_not("raw_cf_ray_id.not")
+///     .with_raw_method_not("raw_method.not")
+///     .with_raw_status_code_not("raw_status_code.not")
+///     .with_raw_uri_not("raw_uri.not")
+///     .with_resource_id_not("resource_id.not")
+///     .with_resource_product_not("resource_product.not")
+///     .with_resource_type_not("resource_type.not")
+///     .with_resource_scope_not("resource_scope.not")
+///     .with_zone_id_not("zone_id.not")
+///     .with_zone_name_not("zone_name.not")
+///     .with_since("since")
+///     .with_before("before")
+///     .with_direction("direction")
+///     .with_limit("limit")
+///     .with_cursor("cursor")
 ///     .send()
 ///     .await?;
 /// ```
@@ -327,7 +462,7 @@ pub fn v2_get_audit_logs(api: &ApiClient) -> V2GetAuditLogsRequest<'_> {
 
 #[derive(Debug)]
 pub struct GetAuditLogsGetRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, AaaAuditLogsResponseCollection>,
 }
 
 impl<'a> GetAuditLogsGetRequest<'a> {
@@ -384,17 +519,48 @@ impl<'a> GetAuditLogsGetRequest<'a> {
         self.builder = self.builder.header_param("hide_user_logs", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<AaaAuditLogsResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// Get user audit logs
+///
+/// Gets a list of audit logs for a user account. Can be filtered by who made the change, on which zone, and the timeframe of the change.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/user/audit_logs`
+///
+/// **Parameters**
+/// - `id` (query,optional)
+/// - `export` (query,optional)
+/// - `action.type` (query,optional)
+/// - `actor.ip` (query,optional)
+/// - `actor.email` (query,optional)
+/// - `since` (query,optional)
+/// - `before` (query,optional)
+/// - `zone.name` (query,optional)
+/// - `direction` (query,optional)
+/// - `per_page` (query,optional)
+/// - `page` (query,optional)
+/// - `hide_user_logs` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::audit_logs };
+/// use cloudflare::{ ApiClient, apis::audit_logs };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_audit_logs_get(&api)
+/// let response = get_audit_logs_get(&api)
+///     .with_id("id")
+///     .with_export("export")
+///     .with_action_type("action.type")
+///     .with_actor_ip("actor.ip")
+///     .with_actor_email("actor.email")
+///     .with_since("since")
+///     .with_before("before")
+///     .with_zone_name("zone.name")
+///     .with_direction("direction")
+///     .with_per_page("per_page")
+///     .with_page("page")
+///     .with_hide_user_logs("hide_user_logs")
 ///     .send()
 ///     .await?;
 /// ```

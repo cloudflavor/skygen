@@ -20,5 +20,5 @@ use serde::{Deserialize, Serialize};
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct MagicTransitTargetResult {
     pub colos: Option<Vec<crate::models::magic_transit_colo_result::MagicTransitColoResult>>,
-    pub target: Option<serde_json::Value>,
+    pub target: Option<crate::models::magic_transit_target::MagicTransitTarget>,
 }

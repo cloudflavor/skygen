@@ -22,5 +22,5 @@ pub struct EmailSecurityCreateBlockedSender {
     pub comments: Option<String>,
     pub is_regex: bool,
     pub pattern: String,
-    pub pattern_type: serde_json::Value,
+    pub pattern_type: crate::models::email_security_pattern_type::EmailSecurityPatternType,
 }

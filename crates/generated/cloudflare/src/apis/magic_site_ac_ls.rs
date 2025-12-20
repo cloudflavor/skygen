@@ -15,12 +15,16 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::magic_acl_deleted_response::MagicAclDeletedResponse;
+use crate::models::magic_acl_modified_response::MagicAclModifiedResponse;
+use crate::models::magic_acl_single_response::MagicAclSingleResponse;
+use crate::models::magic_acls_collection_response::MagicAclsCollectionResponse;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct AclsListAclsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, MagicAclsCollectionResponse>,
 }
 
 impl<'a> AclsListAclsRequest<'a> {
@@ -43,19 +47,28 @@ impl<'a> AclsListAclsRequest<'a> {
         self.builder = self.builder.path_param("site_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<MagicAclsCollectionResponse> {
         self.builder.send().await
     }
 }
-
 /// List Site ACLs
+///
+/// Lists Site ACLs associated with an account.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/magic/sites/{site_id}/acls`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `site_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::magic_site_ac_ls };
+/// use cloudflare::{ ApiClient, apis::magic_site_ac_ls };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = acls_list_acls(&api)
-///     .with_account_id("value")
-///     .with_site_id("value")
+/// let response = acls_list_acls(&api)
+///     .with_account_id("account_id")
+///     .with_site_id("site_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -65,7 +78,7 @@ pub fn acls_list_acls(api: &ApiClient) -> AclsListAclsRequest<'_> {
 
 #[derive(Debug)]
 pub struct AclsCreateAclRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, MagicAclSingleResponse>,
 }
 
 impl<'a> AclsCreateAclRequest<'a> {
@@ -96,19 +109,30 @@ impl<'a> AclsCreateAclRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<MagicAclSingleResponse> {
         self.builder.send().await
     }
 }
-
 /// Create a new Site ACL
+///
+/// Creates a new Site ACL.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/magic/sites/{site_id}/acls`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `site_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::magic_site_ac_ls };
+/// use cloudflare::{ ApiClient, apis::magic_site_ac_ls };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = acls_create_acl(&api)
-///     .with_account_id("value")
-///     .with_site_id("value")
+/// # let body: crate::models::magic_acls_add_single_request::MagicAclsAddSingleRequest = todo!();
+/// let response = acls_create_acl(&api)
+///     .with_account_id("account_id")
+///     .with_site_id("site_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -118,7 +142,7 @@ pub fn acls_create_acl(api: &ApiClient) -> AclsCreateAclRequest<'_> {
 
 #[derive(Debug)]
 pub struct AclsAclDetailsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, MagicAclSingleResponse>,
 }
 
 impl<'a> AclsAclDetailsRequest<'a> {
@@ -146,20 +170,30 @@ impl<'a> AclsAclDetailsRequest<'a> {
         self.builder = self.builder.path_param("acl_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<MagicAclSingleResponse> {
         self.builder.send().await
     }
 }
-
 /// Site ACL Details
+///
+/// Get a specific Site ACL.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/magic/sites/{site_id}/acls/{acl_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `site_id` (path, required)
+/// - `acl_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::magic_site_ac_ls };
+/// use cloudflare::{ ApiClient, apis::magic_site_ac_ls };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = acls_acl_details(&api)
-///     .with_account_id("value")
-///     .with_site_id("value")
-///     .with_acl_id("value")
+/// let response = acls_acl_details(&api)
+///     .with_account_id("account_id")
+///     .with_site_id("site_id")
+///     .with_acl_id("acl_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -169,7 +203,7 @@ pub fn acls_acl_details(api: &ApiClient) -> AclsAclDetailsRequest<'_> {
 
 #[derive(Debug)]
 pub struct AclsUpdateAclRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, MagicAclModifiedResponse>,
 }
 
 impl<'a> AclsUpdateAclRequest<'a> {
@@ -205,20 +239,32 @@ impl<'a> AclsUpdateAclRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<MagicAclModifiedResponse> {
         self.builder.send().await
     }
 }
-
 /// Update Site ACL
+///
+/// Update a specific Site ACL.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/accounts/{account_id}/magic/sites/{site_id}/acls/{acl_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `site_id` (path, required)
+/// - `acl_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::magic_site_ac_ls };
+/// use cloudflare::{ ApiClient, apis::magic_site_ac_ls };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = acls_update_acl(&api)
-///     .with_account_id("value")
-///     .with_site_id("value")
-///     .with_acl_id("value")
+/// # let body: crate::models::magic_acl_update_request::MagicAclUpdateRequest = todo!();
+/// let response = acls_update_acl(&api)
+///     .with_account_id("account_id")
+///     .with_site_id("site_id")
+///     .with_acl_id("acl_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -228,7 +274,7 @@ pub fn acls_update_acl(api: &ApiClient) -> AclsUpdateAclRequest<'_> {
 
 #[derive(Debug)]
 pub struct AclsDeleteAclRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, MagicAclDeletedResponse>,
 }
 
 impl<'a> AclsDeleteAclRequest<'a> {
@@ -256,20 +302,30 @@ impl<'a> AclsDeleteAclRequest<'a> {
         self.builder = self.builder.path_param("acl_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<MagicAclDeletedResponse> {
         self.builder.send().await
     }
 }
-
 /// Delete Site ACL
+///
+/// Remove a specific Site ACL.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/accounts/{account_id}/magic/sites/{site_id}/acls/{acl_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `site_id` (path, required)
+/// - `acl_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::magic_site_ac_ls };
+/// use cloudflare::{ ApiClient, apis::magic_site_ac_ls };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = acls_delete_acl(&api)
-///     .with_account_id("value")
-///     .with_site_id("value")
-///     .with_acl_id("value")
+/// let response = acls_delete_acl(&api)
+///     .with_account_id("account_id")
+///     .with_site_id("site_id")
+///     .with_acl_id("acl_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -279,7 +335,7 @@ pub fn acls_delete_acl(api: &ApiClient) -> AclsDeleteAclRequest<'_> {
 
 #[derive(Debug)]
 pub struct AclsPatchAclRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, MagicAclModifiedResponse>,
 }
 
 impl<'a> AclsPatchAclRequest<'a> {
@@ -315,20 +371,32 @@ impl<'a> AclsPatchAclRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<MagicAclModifiedResponse> {
         self.builder.send().await
     }
 }
-
 /// Patch Site ACL
+///
+/// Patch a specific Site ACL.
+///
+/// **HTTP Method:** `PATCH`
+/// **Path:** `/accounts/{account_id}/magic/sites/{site_id}/acls/{acl_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `site_id` (path, required)
+/// - `acl_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::magic_site_ac_ls };
+/// use cloudflare::{ ApiClient, apis::magic_site_ac_ls };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = acls_patch_acl(&api)
-///     .with_account_id("value")
-///     .with_site_id("value")
-///     .with_acl_id("value")
+/// # let body: crate::models::magic_acl_update_request::MagicAclUpdateRequest = todo!();
+/// let response = acls_patch_acl(&api)
+///     .with_account_id("account_id")
+///     .with_site_id("site_id")
+///     .with_acl_id("acl_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```

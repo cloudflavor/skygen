@@ -15,12 +15,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::intel_components_schemas_single_response::IntelComponentsSchemasSingleResponse;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct GetRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, IntelComponentsSchemasSingleResponse>,
 }
 
 impl<'a> GetRequest<'a> {
@@ -50,18 +51,34 @@ impl<'a> GetRequest<'a> {
         self.builder = self.builder.header_param("per_page", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<IntelComponentsSchemasSingleResponse> {
         self.builder.send().await
     }
 }
-
 /// Get Passive DNS by IP
+///
+/// Gets a list of all the domains that have resolved to a specific IP address.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/intel/dns`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `start_end_params` (query,optional)
+/// - `ipv4` (query,optional)
+/// - `page` (query,optional)
+/// - `per_page` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::passive_dns_by_ip };
+/// use cloudflare::{ ApiClient, apis::passive_dns_by_ip };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get(&api)
-///     .with_account_id("value")
+/// let response = get(&api)
+///     .with_account_id("account_id")
+///     .with_start_end_params("start_end_params")
+///     .with_ipv4("ipv4")
+///     .with_page("page")
+///     .with_per_page("per_page")
 ///     .send()
 ///     .await?;
 /// ```

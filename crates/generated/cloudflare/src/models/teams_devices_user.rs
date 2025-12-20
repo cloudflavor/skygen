@@ -19,7 +19,9 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct TeamsDevicesUser {
-    pub email: Option<serde_json::Value>,
-    pub id: Option<serde_json::Value>,
+    pub email: Option<crate::models::teams_devices_email::TeamsDevicesEmail>,
+    pub id: Option<
+        crate::models::teams_devices_components_schemas_uuid::TeamsDevicesComponentsSchemasUuid,
+    >,
     pub name: Option<String>,
 }

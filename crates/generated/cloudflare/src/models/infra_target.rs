@@ -21,7 +21,7 @@ use serde::{Deserialize, Serialize};
 pub struct InfraTarget {
     pub created_at: String,
     pub hostname: String,
-    pub id: serde_json::Value,
+    pub id: crate::models::infra_target_id::InfraTargetId,
     pub ip: crate::models::infra_ip_info::InfraIpInfo,
     pub modified_at: String,
 }

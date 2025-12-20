@@ -19,5 +19,6 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct DnsSettingsAccountSettings {
-    pub zone_defaults: Option<serde_json::Value>,
+    pub zone_defaults:
+        Option<crate::models::dns_settings_dns_settings_account::DnsSettingsDnsSettingsAccount>,
 }

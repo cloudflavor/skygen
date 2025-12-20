@@ -15,6 +15,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::error::Error;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
@@ -33,13 +34,18 @@ impl<'a> ListNamespacesRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// List Namespaces
+///
+/// Returns a list of namespaces associated with the current user. To get all namespaces, send a GET request to `/v2/functions/namespaces`.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/functions/namespaces`
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::functions };
+/// use digitalocean::{ ApiClient, apis::functions };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_namespaces(&api)
+/// let response = list_namespaces(&api)
 ///     .send()
 ///     .await?;
 /// ```
@@ -49,7 +55,7 @@ pub fn list_namespaces(api: &ApiClient) -> ListNamespacesRequest<'_> {
 
 #[derive(Debug)]
 pub struct CreateNamespaceRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, std::collections::BTreeMap<String, serde_json::Value>>,
 }
 
 impl<'a> CreateNamespaceRequest<'a> {
@@ -63,17 +69,24 @@ impl<'a> CreateNamespaceRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<std::collections::BTreeMap<String, serde_json::Value>> {
         self.builder.send().await
     }
 }
-
 /// Create Namespace
+///
+/// Creates a new serverless functions namespace in the desired region and associates it with the provided label. A namespace is a collection of functions and their associated packages, triggers, and project specifications. To create a namespace, send a POST request to `/v2/functions/namespaces` with the `region` and `label` properties.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/v2/functions/namespaces`
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::functions };
+/// use digitalocean::{ ApiClient, apis::functions };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = create_namespace(&api)
+/// # let body: crate::models::create_namespace::CreateNamespace = todo!();
+/// let response = create_namespace(&api)
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -83,7 +96,7 @@ pub fn create_namespace(api: &ApiClient) -> CreateNamespaceRequest<'_> {
 
 #[derive(Debug)]
 pub struct GetNamespaceRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, std::collections::BTreeMap<String, serde_json::Value>>,
 }
 
 impl<'a> GetNamespaceRequest<'a> {
@@ -98,18 +111,26 @@ impl<'a> GetNamespaceRequest<'a> {
         self.builder = self.builder.path_param("namespace_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<std::collections::BTreeMap<String, serde_json::Value>> {
         self.builder.send().await
     }
 }
-
 /// Get Namespace
+///
+/// Gets the namespace details for the given namespace UUID. To get namespace details, send a GET request to `/v2/functions/namespaces/$NAMESPACE_ID` with no parameters.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/functions/namespaces/{namespace_id}`
+///
+/// **Parameters**
+/// - `namespace_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::functions };
+/// use digitalocean::{ ApiClient, apis::functions };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_namespace(&api)
-///     .with_namespace_id("value")
+/// let response = get_namespace(&api)
+///     .with_namespace_id("namespace_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -119,7 +140,7 @@ pub fn get_namespace(api: &ApiClient) -> GetNamespaceRequest<'_> {
 
 #[derive(Debug)]
 pub struct DeleteNamespaceRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, Error>,
 }
 
 impl<'a> DeleteNamespaceRequest<'a> {
@@ -137,18 +158,28 @@ impl<'a> DeleteNamespaceRequest<'a> {
         self.builder = self.builder.path_param("namespace_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<Error> {
         self.builder.send().await
     }
 }
-
 /// Delete Namespace
+///
+/// Deletes the given namespace.  When a namespace is deleted all assets, in the namespace are deleted, this includes packages, functions and triggers. Deleting a namespace is a destructive operation and assets in the namespace are not recoverable after deletion. Some metadata is retained, such as activations, or soft deleted for reporting purposes.
+/// To delete namespace, send a DELETE request to `/v2/functions/namespaces/$NAMESPACE_ID`.
+/// A successful deletion returns a 204 response.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/v2/functions/namespaces/{namespace_id}`
+///
+/// **Parameters**
+/// - `namespace_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::functions };
+/// use digitalocean::{ ApiClient, apis::functions };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete_namespace(&api)
-///     .with_namespace_id("value")
+/// let response = delete_namespace(&api)
+///     .with_namespace_id("namespace_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -180,14 +211,22 @@ impl<'a> ListTriggersRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// List Triggers
+///
+/// Returns a list of triggers associated with the current user and namespace. To get all triggers, send a GET request to `/v2/functions/namespaces/$NAMESPACE_ID/triggers`.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/functions/namespaces/{namespace_id}/triggers`
+///
+/// **Parameters**
+/// - `namespace_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::functions };
+/// use digitalocean::{ ApiClient, apis::functions };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_triggers(&api)
-///     .with_namespace_id("value")
+/// let response = list_triggers(&api)
+///     .with_namespace_id("namespace_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -197,7 +236,7 @@ pub fn list_triggers(api: &ApiClient) -> ListTriggersRequest<'_> {
 
 #[derive(Debug)]
 pub struct CreateTriggerRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, std::collections::BTreeMap<String, serde_json::Value>>,
 }
 
 impl<'a> CreateTriggerRequest<'a> {
@@ -220,18 +259,28 @@ impl<'a> CreateTriggerRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<std::collections::BTreeMap<String, serde_json::Value>> {
         self.builder.send().await
     }
 }
-
 /// Create Trigger
+///
+/// Creates a new trigger for a given function in a namespace. To create a trigger, send a POST request to `/v2/functions/namespaces/$NAMESPACE_ID/triggers` with the `name`, `function`, `type`, `is_enabled` and `scheduled_details` properties.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/v2/functions/namespaces/{namespace_id}/triggers`
+///
+/// **Parameters**
+/// - `namespace_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::functions };
+/// use digitalocean::{ ApiClient, apis::functions };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = create_trigger(&api)
-///     .with_namespace_id("value")
+/// # let body: crate::models::create_trigger::CreateTrigger = todo!();
+/// let response = create_trigger(&api)
+///     .with_namespace_id("namespace_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -241,7 +290,7 @@ pub fn create_trigger(api: &ApiClient) -> CreateTriggerRequest<'_> {
 
 #[derive(Debug)]
 pub struct GetTriggerRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, std::collections::BTreeMap<String, serde_json::Value>>,
 }
 
 impl<'a> GetTriggerRequest<'a> {
@@ -264,19 +313,28 @@ impl<'a> GetTriggerRequest<'a> {
         self.builder = self.builder.path_param("trigger_name", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<std::collections::BTreeMap<String, serde_json::Value>> {
         self.builder.send().await
     }
 }
-
 /// Get Trigger
+///
+/// Gets the trigger details. To get the trigger details, send a GET request to `/v2/functions/namespaces/$NAMESPACE_ID/triggers/$TRIGGER_NAME`.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/functions/namespaces/{namespace_id}/triggers/{trigger_name}`
+///
+/// **Parameters**
+/// - `namespace_id` (path, required)
+/// - `trigger_name` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::functions };
+/// use digitalocean::{ ApiClient, apis::functions };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_trigger(&api)
-///     .with_namespace_id("value")
-///     .with_trigger_name("value")
+/// let response = get_trigger(&api)
+///     .with_namespace_id("namespace_id")
+///     .with_trigger_name("trigger_name")
 ///     .send()
 ///     .await?;
 /// ```
@@ -286,7 +344,7 @@ pub fn get_trigger(api: &ApiClient) -> GetTriggerRequest<'_> {
 
 #[derive(Debug)]
 pub struct UpdateTriggerRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, std::collections::BTreeMap<String, serde_json::Value>>,
 }
 
 impl<'a> UpdateTriggerRequest<'a> {
@@ -314,19 +372,30 @@ impl<'a> UpdateTriggerRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<std::collections::BTreeMap<String, serde_json::Value>> {
         self.builder.send().await
     }
 }
-
 /// Update Trigger
+///
+/// Updates the details of the given trigger. To update a trigger, send a PUT request to `/v2/functions/namespaces/$NAMESPACE_ID/triggers/$TRIGGER_NAME` with new values for the `is_enabled ` or `scheduled_details` properties.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/v2/functions/namespaces/{namespace_id}/triggers/{trigger_name}`
+///
+/// **Parameters**
+/// - `namespace_id` (path, required)
+/// - `trigger_name` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::functions };
+/// use digitalocean::{ ApiClient, apis::functions };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = update_trigger(&api)
-///     .with_namespace_id("value")
-///     .with_trigger_name("value")
+/// # let body: crate::models::update_trigger::UpdateTrigger = todo!();
+/// let response = update_trigger(&api)
+///     .with_namespace_id("namespace_id")
+///     .with_trigger_name("trigger_name")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -336,7 +405,7 @@ pub fn update_trigger(api: &ApiClient) -> UpdateTriggerRequest<'_> {
 
 #[derive(Debug)]
 pub struct DeleteTriggerRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, Error>,
 }
 
 impl<'a> DeleteTriggerRequest<'a> {
@@ -359,19 +428,30 @@ impl<'a> DeleteTriggerRequest<'a> {
         self.builder = self.builder.path_param("trigger_name", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<Error> {
         self.builder.send().await
     }
 }
-
 /// Delete Trigger
+///
+/// Deletes the given trigger.
+/// To delete trigger, send a DELETE request to `/v2/functions/namespaces/$NAMESPACE_ID/triggers/$TRIGGER_NAME`.
+/// A successful deletion returns a 204 response.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/v2/functions/namespaces/{namespace_id}/triggers/{trigger_name}`
+///
+/// **Parameters**
+/// - `namespace_id` (path, required)
+/// - `trigger_name` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::functions };
+/// use digitalocean::{ ApiClient, apis::functions };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete_trigger(&api)
-///     .with_namespace_id("value")
-///     .with_trigger_name("value")
+/// let response = delete_trigger(&api)
+///     .with_namespace_id("namespace_id")
+///     .with_trigger_name("trigger_name")
 ///     .send()
 ///     .await?;
 /// ```

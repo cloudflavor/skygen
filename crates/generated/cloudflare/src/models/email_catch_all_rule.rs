@@ -19,10 +19,10 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct EmailCatchAllRule {
-    pub actions: Option<serde_json::Value>,
-    pub enabled: Option<serde_json::Value>,
-    pub id: Option<serde_json::Value>,
-    pub matchers: Option<serde_json::Value>,
-    pub name: Option<serde_json::Value>,
-    pub tag: Option<serde_json::Value>,
+    pub actions: Option<crate::models::email_rule_catchall_actions::EmailRuleCatchallActions>,
+    pub enabled: Option<crate::models::email_rule_enabled::EmailRuleEnabled>,
+    pub id: Option<crate::models::email_rule_identifier::EmailRuleIdentifier>,
+    pub matchers: Option<crate::models::email_rule_catchall_matchers::EmailRuleCatchallMatchers>,
+    pub name: Option<crate::models::email_rule_name::EmailRuleName>,
+    pub tag: Option<crate::models::email_rule_tag::EmailRuleTag>,
 }

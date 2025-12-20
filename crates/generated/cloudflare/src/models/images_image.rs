@@ -19,10 +19,11 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct ImagesImage {
-    pub filename: Option<serde_json::Value>,
-    pub id: Option<serde_json::Value>,
+    pub filename: Option<crate::models::images_image_filename::ImagesImageFilename>,
+    pub id: Option<crate::models::images_image_identifier::ImagesImageIdentifier>,
     pub meta: Option<crate::models::images_image_metadata::ImagesImageMetadata>,
-    pub require_signed_ur_ls: Option<serde_json::Value>,
-    pub uploaded: Option<serde_json::Value>,
-    pub variants: Option<serde_json::Value>,
+    pub require_signed_ur_ls:
+        Option<crate::models::images_image_require_signed_ur_ls::ImagesImageRequireSignedUrLs>,
+    pub uploaded: Option<crate::models::images_image_uploaded::ImagesImageUploaded>,
+    pub variants: Option<crate::models::images_image_variants::ImagesImageVariants>,
 }

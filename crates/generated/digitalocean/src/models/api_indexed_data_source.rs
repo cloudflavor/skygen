@@ -29,7 +29,7 @@ pub struct ApiIndexedDataSource {
     pub removed_item_count: Option<String>,
     pub skipped_item_count: Option<String>,
     pub started_at: Option<String>,
-    pub status: Option<serde_json::Value>,
+    pub status: Option<crate::models::api_indexed_data_source_status::ApiIndexedDataSourceStatus>,
     pub total_bytes: Option<String>,
     pub total_bytes_indexed: Option<String>,
     pub total_file_count: Option<String>,

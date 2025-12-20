@@ -19,19 +19,17 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct MagicVisibilityPcapsPcapsResponseFull {
-    pub byte_limit: Option<serde_json::Value>,
-    pub colo_name: Option<serde_json::Value>,
-    pub destination_conf: Option<serde_json::Value>,
-    pub error_message: Option<serde_json::Value>,
-    pub filter_v1: Option<
-        crate::models::magic_visibility_pcaps_pcaps_filter_v1::MagicVisibilityPcapsPcapsFilterV1,
-    >,
-    pub id: Option<serde_json::Value>,
-    pub packets_captured: Option<serde_json::Value>,
-    pub r#type: Option<serde_json::Value>,
-    pub status: Option<serde_json::Value>,
-    pub stop_requested: Option<serde_json::Value>,
-    pub submitted: Option<serde_json::Value>,
-    pub system: Option<serde_json::Value>,
-    pub time_limit: Option<serde_json::Value>,
+    pub byte_limit: Option<crate::models::magic_visibility_pcaps_pcaps_byte_limit::MagicVisibilityPcapsPcapsByteLimit>,
+    pub colo_name: Option<crate::models::magic_visibility_pcaps_pcaps_colo_name::MagicVisibilityPcapsPcapsColoName>,
+    pub destination_conf: Option<crate::models::magic_visibility_pcaps_pcaps_destination_conf::MagicVisibilityPcapsPcapsDestinationConf>,
+    pub error_message: Option<crate::models::magic_visibility_pcaps_pcaps_error_message::MagicVisibilityPcapsPcapsErrorMessage>,
+    pub filter_v1: Option<crate::models::magic_visibility_pcaps_pcaps_filter_v1::MagicVisibilityPcapsPcapsFilterV1>,
+    pub id: Option<crate::models::magic_visibility_pcaps_pcaps_id::MagicVisibilityPcapsPcapsId>,
+    pub packets_captured: Option<crate::models::magic_visibility_pcaps_pcaps_packets_captured::MagicVisibilityPcapsPcapsPacketsCaptured>,
+    pub r#type: Option<crate::models::magic_visibility_pcaps_pcaps_type::MagicVisibilityPcapsPcapsType>,
+    pub status: Option<crate::models::magic_visibility_pcaps_pcaps_status::MagicVisibilityPcapsPcapsStatus>,
+    pub stop_requested: Option<crate::models::magic_visibility_pcaps_pcaps_stop_requested::MagicVisibilityPcapsPcapsStopRequested>,
+    pub submitted: Option<crate::models::magic_visibility_pcaps_pcaps_submitted::MagicVisibilityPcapsPcapsSubmitted>,
+    pub system: Option<crate::models::magic_visibility_pcaps_pcaps_system::MagicVisibilityPcapsPcapsSystem>,
+    pub time_limit: Option<crate::models::magic_visibility_pcaps_pcaps_time_limit_full::MagicVisibilityPcapsPcapsTimeLimitFull>,
 }

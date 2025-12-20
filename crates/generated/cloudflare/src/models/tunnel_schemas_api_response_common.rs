@@ -19,7 +19,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct TunnelSchemasApiResponseCommon {
-    pub errors: serde_json::Value,
-    pub messages: serde_json::Value,
+    pub errors: crate::models::tunnel_schemas_messages::TunnelSchemasMessages,
+    pub messages: crate::models::tunnel_schemas_messages::TunnelSchemasMessages,
     pub success: bool,
 }

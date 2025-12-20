@@ -19,8 +19,8 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct SshKeys {
-    pub fingerprint: Option<serde_json::Value>,
-    pub id: Option<serde_json::Value>,
-    pub name: serde_json::Value,
+    pub fingerprint: Option<crate::models::ssh_key_fingerprint::SshKeyFingerprint>,
+    pub id: Option<crate::models::ssh_key_id::SshKeyId>,
+    pub name: crate::models::ssh_key_name::SshKeyName,
     pub public_key: String,
 }

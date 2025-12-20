@@ -19,16 +19,25 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct ZeroTrustGatewayCertificates {
-    pub binding_status: Option<serde_json::Value>,
+    pub binding_status:
+        Option<crate::models::zero_trust_gateway_binding_status::ZeroTrustGatewayBindingStatus>,
     pub certificate: Option<String>,
-    pub created_at: Option<serde_json::Value>,
-    pub expires_on: Option<serde_json::Value>,
+    pub created_at: Option<
+        crate::models::zero_trust_gateway_read_only_timestamp::ZeroTrustGatewayReadOnlyTimestamp,
+    >,
+    pub expires_on: Option<
+        crate::models::zero_trust_gateway_read_only_timestamp::ZeroTrustGatewayReadOnlyTimestamp,
+    >,
     pub fingerprint: Option<String>,
-    pub id: Option<serde_json::Value>,
+    pub id: Option<crate::models::zero_trust_gateway_uuid::ZeroTrustGatewayUuid>,
     pub in_use: Option<bool>,
     pub issuer_org: Option<String>,
     pub issuer_raw: Option<String>,
-    pub r#type: Option<serde_json::Value>,
-    pub updated_at: Option<serde_json::Value>,
-    pub uploaded_on: Option<serde_json::Value>,
+    pub r#type: Option<crate::models::zero_trust_gateway_type::ZeroTrustGatewayType>,
+    pub updated_at: Option<
+        crate::models::zero_trust_gateway_read_only_timestamp::ZeroTrustGatewayReadOnlyTimestamp,
+    >,
+    pub uploaded_on: Option<
+        crate::models::zero_trust_gateway_read_only_timestamp::ZeroTrustGatewayReadOnlyTimestamp,
+    >,
 }

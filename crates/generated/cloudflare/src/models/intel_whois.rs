@@ -20,7 +20,7 @@ use serde::{Deserialize, Serialize};
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct IntelWhois {
     pub created_date: Option<String>,
-    pub domain: Option<serde_json::Value>,
+    pub domain: Option<crate::models::intel_domain_name::IntelDomainName>,
     pub nameservers: Option<Vec<String>>,
     pub registrant: Option<String>,
     pub registrant_country: Option<String>,

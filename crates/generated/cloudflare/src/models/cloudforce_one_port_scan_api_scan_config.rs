@@ -20,8 +20,9 @@ use serde::{Deserialize, Serialize};
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct CloudforceOnePortScanApiScanConfig {
     pub account_id: String,
-    pub frequency: serde_json::Value,
+    pub frequency:
+        crate::models::cloudforce_one_port_scan_api_frequency::CloudforceOnePortScanApiFrequency,
     pub id: String,
-    pub ips: serde_json::Value,
-    pub ports: serde_json::Value,
+    pub ips: crate::models::cloudforce_one_port_scan_api_ips::CloudforceOnePortScanApiIps,
+    pub ports: crate::models::cloudforce_one_port_scan_api_ports::CloudforceOnePortScanApiPorts,
 }

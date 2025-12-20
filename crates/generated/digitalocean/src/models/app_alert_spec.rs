@@ -20,8 +20,8 @@ use serde::{Deserialize, Serialize};
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct AppAlertSpec {
     pub disabled: Option<bool>,
-    pub operator: Option<serde_json::Value>,
-    pub rule: Option<serde_json::Value>,
+    pub operator: Option<crate::models::app_alert_spec_operator::AppAlertSpecOperator>,
+    pub rule: Option<crate::models::app_alert_spec_rule::AppAlertSpecRule>,
     pub value: Option<f64>,
-    pub window: Option<serde_json::Value>,
+    pub window: Option<crate::models::app_alert_spec_window::AppAlertSpecWindow>,
 }

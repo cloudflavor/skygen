@@ -15,12 +15,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::spectrum_analytics_query_response_aggregate::SpectrumAnalyticsQueryResponseAggregate;
+use crate::models::spectrum_analytics_query_response_single::SpectrumAnalyticsQueryResponseSingle;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct AggregateAnalyticsGetCurrentRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, SpectrumAnalyticsQueryResponseAggregate>,
 }
 
 impl<'a> AggregateAnalyticsGetCurrentRequest<'a> {
@@ -46,18 +48,30 @@ impl<'a> AggregateAnalyticsGetCurrentRequest<'a> {
         self.builder = self.builder.header_param("colo_name", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<SpectrumAnalyticsQueryResponseAggregate> {
         self.builder.send().await
     }
 }
-
 /// Get current aggregated analytics
+///
+/// Retrieves analytics aggregated from the last minute of usage on Spectrum applications underneath a given zone.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/spectrum/analytics/aggregate/current`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `appID` (query,optional)
+/// - `colo_name` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::spectrum_analytics };
+/// use cloudflare::{ ApiClient, apis::spectrum_analytics };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = aggregate_analytics_get_current(&api)
-///     .with_zone_id("value")
+/// let response = aggregate_analytics_get_current(&api)
+///     .with_zone_id("zone_id")
+///     .with_app_id("appID")
+///     .with_colo_name("colo_name")
 ///     .send()
 ///     .await?;
 /// ```
@@ -67,7 +81,7 @@ pub fn aggregate_analytics_get_current(api: &ApiClient) -> AggregateAnalyticsGet
 
 #[derive(Debug)]
 pub struct GetRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, SpectrumAnalyticsQueryResponseSingle>,
 }
 
 impl<'a> GetRequest<'a> {
@@ -113,18 +127,40 @@ impl<'a> GetRequest<'a> {
         self.builder = self.builder.header_param("time_delta", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<SpectrumAnalyticsQueryResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Get analytics by time
+///
+/// Retrieves a list of aggregate metrics grouped by time interval.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/spectrum/analytics/events/bytime`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `dimensions` (query,optional)
+/// - `sort` (query,optional)
+/// - `until` (query,optional)
+/// - `metrics` (query,optional)
+/// - `filters` (query,optional)
+/// - `since` (query,optional)
+/// - `time_delta` (query,required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::spectrum_analytics };
+/// use cloudflare::{ ApiClient, apis::spectrum_analytics };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get(&api)
-///     .with_zone_id("value")
+/// let response = get(&api)
+///     .with_zone_id("zone_id")
+///     .with_dimensions("dimensions")
+///     .with_sort("sort")
+///     .with_until("until")
+///     .with_metrics("metrics")
+///     .with_filters("filters")
+///     .with_since("since")
+///     .with_time_delta("time_delta")
 ///     .send()
 ///     .await?;
 /// ```
@@ -134,7 +170,7 @@ pub fn get(api: &ApiClient) -> GetRequest<'_> {
 
 #[derive(Debug)]
 pub struct SummaryGetAnalyticsSummaryRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, SpectrumAnalyticsQueryResponseSingle>,
 }
 
 impl<'a> SummaryGetAnalyticsSummaryRequest<'a> {
@@ -176,18 +212,38 @@ impl<'a> SummaryGetAnalyticsSummaryRequest<'a> {
         self.builder = self.builder.header_param("since", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<SpectrumAnalyticsQueryResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Get analytics summary
+///
+/// Retrieves a list of summarised aggregate metrics over a given time period.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/spectrum/analytics/events/summary`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `dimensions` (query,optional)
+/// - `sort` (query,optional)
+/// - `until` (query,optional)
+/// - `metrics` (query,optional)
+/// - `filters` (query,optional)
+/// - `since` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::spectrum_analytics };
+/// use cloudflare::{ ApiClient, apis::spectrum_analytics };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = summary_get_analytics_summary(&api)
-///     .with_zone_id("value")
+/// let response = summary_get_analytics_summary(&api)
+///     .with_zone_id("zone_id")
+///     .with_dimensions("dimensions")
+///     .with_sort("sort")
+///     .with_until("until")
+///     .with_metrics("metrics")
+///     .with_filters("filters")
+///     .with_since("since")
 ///     .send()
 ///     .await?;
 /// ```

@@ -19,14 +19,17 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct BillSubsApiAvailableRatePlan {
-    pub can_subscribe: Option<serde_json::Value>,
-    pub currency: Option<serde_json::Value>,
-    pub externally_managed: Option<serde_json::Value>,
-    pub frequency: Option<serde_json::Value>,
-    pub id: Option<serde_json::Value>,
-    pub is_subscribed: Option<serde_json::Value>,
-    pub legacy_discount: Option<serde_json::Value>,
-    pub legacy_id: Option<serde_json::Value>,
-    pub name: Option<serde_json::Value>,
-    pub price: Option<serde_json::Value>,
+    pub can_subscribe: Option<crate::models::bill_subs_api_can_subscribe::BillSubsApiCanSubscribe>,
+    pub currency: Option<crate::models::bill_subs_api_currency::BillSubsApiCurrency>,
+    pub externally_managed:
+        Option<crate::models::bill_subs_api_externally_managed::BillSubsApiExternallyManaged>,
+    pub frequency:
+        Option<crate::models::bill_subs_api_schemas_frequency::BillSubsApiSchemasFrequency>,
+    pub id: Option<crate::models::bill_subs_api_identifier::BillSubsApiIdentifier>,
+    pub is_subscribed: Option<crate::models::bill_subs_api_is_subscribed::BillSubsApiIsSubscribed>,
+    pub legacy_discount:
+        Option<crate::models::bill_subs_api_legacy_discount::BillSubsApiLegacyDiscount>,
+    pub legacy_id: Option<crate::models::bill_subs_api_legacy_id::BillSubsApiLegacyId>,
+    pub name: Option<crate::models::bill_subs_api_schemas_name::BillSubsApiSchemasName>,
+    pub price: Option<crate::models::bill_subs_api_schemas_price::BillSubsApiSchemasPrice>,
 }

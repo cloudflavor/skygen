@@ -20,7 +20,7 @@ use serde::{Deserialize, Serialize};
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct RumRuleset {
     pub enabled: Option<bool>,
-    pub id: Option<serde_json::Value>,
+    pub id: Option<crate::models::rum_ruleset_identifier::RumRulesetIdentifier>,
     pub zone_name: Option<String>,
-    pub zone_tag: Option<serde_json::Value>,
+    pub zone_tag: Option<crate::models::rum_zone_tag::RumZoneTag>,
 }

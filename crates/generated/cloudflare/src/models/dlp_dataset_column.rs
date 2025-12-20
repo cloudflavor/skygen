@@ -22,5 +22,5 @@ pub struct DlpDatasetColumn {
     pub entry_id: String,
     pub header_name: String,
     pub num_cells: i64,
-    pub upload_status: serde_json::Value,
+    pub upload_status: crate::models::dlp_dataset_upload_status::DlpDatasetUploadStatus,
 }

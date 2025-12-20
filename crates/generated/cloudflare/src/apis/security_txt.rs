@@ -42,14 +42,20 @@ impl<'a> GetRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get security.txt
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/security-center/securitytxt`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::security_txt };
+/// use cloudflare::{ ApiClient, apis::security_txt };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get(&api)
-///     .with_zone_id("value")
+/// let response = get(&api)
+///     .with_zone_id("zone_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -89,14 +95,22 @@ impl<'a> UpdateSecurityTxtRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Update security.txt
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/zones/{zone_id}/security-center/securitytxt`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::security_txt };
+/// use cloudflare::{ ApiClient, apis::security_txt };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = update_security_txt(&api)
-///     .with_zone_id("value")
+/// # let body: crate::models::security_center_security_txt::SecurityCenterSecurityTxt = todo!();
+/// let response = update_security_txt(&api)
+///     .with_zone_id("zone_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -128,14 +142,20 @@ impl<'a> DeleteRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Delete security.txt
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/zones/{zone_id}/security-center/securitytxt`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::security_txt };
+/// use cloudflare::{ ApiClient, apis::security_txt };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete(&api)
-///     .with_zone_id("value")
+/// let response = delete(&api)
+///     .with_zone_id("zone_id")
 ///     .send()
 ///     .await?;
 /// ```

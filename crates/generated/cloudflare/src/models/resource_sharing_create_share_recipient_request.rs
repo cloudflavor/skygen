@@ -19,6 +19,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct ResourceSharingCreateShareRecipientRequest {
-    pub account_id: Option<serde_json::Value>,
-    pub organization_id: Option<serde_json::Value>,
+    pub account_id: Option<crate::models::resource_sharing_account_id::ResourceSharingAccountId>,
+    pub organization_id:
+        Option<crate::models::resource_sharing_organization_id::ResourceSharingOrganizationId>,
 }

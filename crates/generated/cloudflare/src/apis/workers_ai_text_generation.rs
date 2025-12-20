@@ -50,14 +50,24 @@ impl<'a> PostRunCfDeepseekRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Execute @cf/deepseek-ai/deepseek-math-7b-instruct model.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/ai/run/@cf/deepseek-ai/deepseek-math-7b-instruct`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `queueRequest` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::workers_ai_text_generation };
+/// use cloudflare::{ ApiClient, apis::workers_ai_text_generation };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = post_run_cf_deepseek(&api)
-///     .with_account_id("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = post_run_cf_deepseek(&api)
+///     .with_account_id("account_id")
+///     .with_queue_request("queueRequest")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -97,14 +107,24 @@ impl<'a> PostRunCfDeepseekPostRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Execute @cf/deepseek-ai/deepseek-r1-distill-qwen-32b model.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/ai/run/@cf/deepseek-ai/deepseek-r1-distill-qwen-32b`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `queueRequest` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::workers_ai_text_generation };
+/// use cloudflare::{ ApiClient, apis::workers_ai_text_generation };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = post_run_cf_deepseek_post(&api)
-///     .with_account_id("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = post_run_cf_deepseek_post(&api)
+///     .with_account_id("account_id")
+///     .with_queue_request("queueRequest")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -144,14 +164,24 @@ impl<'a> PostRunCfDefogRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Execute @cf/defog/sqlcoder-7b-2 model.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/ai/run/@cf/defog/sqlcoder-7b-2`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `queueRequest` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::workers_ai_text_generation };
+/// use cloudflare::{ ApiClient, apis::workers_ai_text_generation };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = post_run_cf_defog(&api)
-///     .with_account_id("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = post_run_cf_defog(&api)
+///     .with_account_id("account_id")
+///     .with_queue_request("queueRequest")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -191,14 +221,24 @@ impl<'a> PostRunCfFblgitRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Execute @cf/fblgit/una-cybertron-7b-v2-bf16 model.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/ai/run/@cf/fblgit/una-cybertron-7b-v2-bf16`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `queueRequest` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::workers_ai_text_generation };
+/// use cloudflare::{ ApiClient, apis::workers_ai_text_generation };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = post_run_cf_fblgit(&api)
-///     .with_account_id("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = post_run_cf_fblgit(&api)
+///     .with_account_id("account_id")
+///     .with_queue_request("queueRequest")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -238,14 +278,24 @@ impl<'a> PostRunCfGoogleRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Execute @cf/google/gemma-2b-it-lora model.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/ai/run/@cf/google/gemma-2b-it-lora`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `queueRequest` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::workers_ai_text_generation };
+/// use cloudflare::{ ApiClient, apis::workers_ai_text_generation };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = post_run_cf_google(&api)
-///     .with_account_id("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = post_run_cf_google(&api)
+///     .with_account_id("account_id")
+///     .with_queue_request("queueRequest")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -285,14 +335,24 @@ impl<'a> PostRunCfGooglePostRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Execute @cf/google/gemma-3-12b-it model.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/ai/run/@cf/google/gemma-3-12b-it`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `queueRequest` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::workers_ai_text_generation };
+/// use cloudflare::{ ApiClient, apis::workers_ai_text_generation };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = post_run_cf_google_post(&api)
-///     .with_account_id("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = post_run_cf_google_post(&api)
+///     .with_account_id("account_id")
+///     .with_queue_request("queueRequest")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -332,14 +392,24 @@ impl<'a> PostRunCfGooglePost3Request<'a> {
         self.builder.send().await
     }
 }
-
 /// Execute @cf/google/gemma-7b-it-lora model.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/ai/run/@cf/google/gemma-7b-it-lora`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `queueRequest` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::workers_ai_text_generation };
+/// use cloudflare::{ ApiClient, apis::workers_ai_text_generation };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = post_run_cf_google_post_3(&api)
-///     .with_account_id("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = post_run_cf_google_post_3(&api)
+///     .with_account_id("account_id")
+///     .with_queue_request("queueRequest")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -379,14 +449,24 @@ impl<'a> PostRunCfMetaRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Execute @cf/meta-llama/llama-2-7b-chat-hf-lora model.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/ai/run/@cf/meta-llama/llama-2-7b-chat-hf-lora`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `queueRequest` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::workers_ai_text_generation };
+/// use cloudflare::{ ApiClient, apis::workers_ai_text_generation };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = post_run_cf_meta(&api)
-///     .with_account_id("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = post_run_cf_meta(&api)
+///     .with_account_id("account_id")
+///     .with_queue_request("queueRequest")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -426,14 +506,24 @@ impl<'a> PostRunCfMetaPostRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Execute @cf/meta/llama-2-7b-chat-fp16 model.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/ai/run/@cf/meta/llama-2-7b-chat-fp16`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `queueRequest` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::workers_ai_text_generation };
+/// use cloudflare::{ ApiClient, apis::workers_ai_text_generation };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = post_run_cf_meta_post(&api)
-///     .with_account_id("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = post_run_cf_meta_post(&api)
+///     .with_account_id("account_id")
+///     .with_queue_request("queueRequest")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -473,14 +563,24 @@ impl<'a> PostRunCfMetaPost3Request<'a> {
         self.builder.send().await
     }
 }
-
 /// Execute @cf/meta/llama-2-7b-chat-int8 model.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/ai/run/@cf/meta/llama-2-7b-chat-int8`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `queueRequest` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::workers_ai_text_generation };
+/// use cloudflare::{ ApiClient, apis::workers_ai_text_generation };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = post_run_cf_meta_post_3(&api)
-///     .with_account_id("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = post_run_cf_meta_post_3(&api)
+///     .with_account_id("account_id")
+///     .with_queue_request("queueRequest")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -520,14 +620,24 @@ impl<'a> PostRunCfMetaPost4Request<'a> {
         self.builder.send().await
     }
 }
-
 /// Execute @cf/meta/llama-3-8b-instruct model.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/ai/run/@cf/meta/llama-3-8b-instruct`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `queueRequest` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::workers_ai_text_generation };
+/// use cloudflare::{ ApiClient, apis::workers_ai_text_generation };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = post_run_cf_meta_post_4(&api)
-///     .with_account_id("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = post_run_cf_meta_post_4(&api)
+///     .with_account_id("account_id")
+///     .with_queue_request("queueRequest")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -567,14 +677,24 @@ impl<'a> PostRunCfMetaPost5Request<'a> {
         self.builder.send().await
     }
 }
-
 /// Execute @cf/meta/llama-3-8b-instruct-awq model.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/ai/run/@cf/meta/llama-3-8b-instruct-awq`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `queueRequest` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::workers_ai_text_generation };
+/// use cloudflare::{ ApiClient, apis::workers_ai_text_generation };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = post_run_cf_meta_post_5(&api)
-///     .with_account_id("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = post_run_cf_meta_post_5(&api)
+///     .with_account_id("account_id")
+///     .with_queue_request("queueRequest")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -614,14 +734,24 @@ impl<'a> PostRunCfMetaPost6Request<'a> {
         self.builder.send().await
     }
 }
-
 /// Execute @cf/meta/llama-3.1-70b-instruct model.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/ai/run/@cf/meta/llama-3.1-70b-instruct`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `queueRequest` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::workers_ai_text_generation };
+/// use cloudflare::{ ApiClient, apis::workers_ai_text_generation };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = post_run_cf_meta_post_6(&api)
-///     .with_account_id("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = post_run_cf_meta_post_6(&api)
+///     .with_account_id("account_id")
+///     .with_queue_request("queueRequest")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -661,14 +791,24 @@ impl<'a> PostRunCfMetaPost7Request<'a> {
         self.builder.send().await
     }
 }
-
 /// Execute @cf/meta/llama-3.1-70b-instruct-preview model.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/ai/run/@cf/meta/llama-3.1-70b-instruct-preview`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `queueRequest` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::workers_ai_text_generation };
+/// use cloudflare::{ ApiClient, apis::workers_ai_text_generation };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = post_run_cf_meta_post_7(&api)
-///     .with_account_id("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = post_run_cf_meta_post_7(&api)
+///     .with_account_id("account_id")
+///     .with_queue_request("queueRequest")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -708,14 +848,24 @@ impl<'a> PostRunCfMetaPost8Request<'a> {
         self.builder.send().await
     }
 }
-
 /// Execute @cf/meta/llama-3.1-70b-preview model.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/ai/run/@cf/meta/llama-3.1-70b-preview`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `queueRequest` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::workers_ai_text_generation };
+/// use cloudflare::{ ApiClient, apis::workers_ai_text_generation };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = post_run_cf_meta_post_8(&api)
-///     .with_account_id("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = post_run_cf_meta_post_8(&api)
+///     .with_account_id("account_id")
+///     .with_queue_request("queueRequest")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -755,14 +905,24 @@ impl<'a> PostRunCfMetaPost9Request<'a> {
         self.builder.send().await
     }
 }
-
 /// Execute @cf/meta/llama-3.1-8b-instruct-awq model.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/ai/run/@cf/meta/llama-3.1-8b-instruct-awq`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `queueRequest` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::workers_ai_text_generation };
+/// use cloudflare::{ ApiClient, apis::workers_ai_text_generation };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = post_run_cf_meta_post_9(&api)
-///     .with_account_id("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = post_run_cf_meta_post_9(&api)
+///     .with_account_id("account_id")
+///     .with_queue_request("queueRequest")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -802,14 +962,24 @@ impl<'a> PostRunCfMetaPost10Request<'a> {
         self.builder.send().await
     }
 }
-
 /// Execute @cf/meta/llama-3.1-8b-instruct-fast model.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/ai/run/@cf/meta/llama-3.1-8b-instruct-fast`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `queueRequest` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::workers_ai_text_generation };
+/// use cloudflare::{ ApiClient, apis::workers_ai_text_generation };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = post_run_cf_meta_post_10(&api)
-///     .with_account_id("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = post_run_cf_meta_post_10(&api)
+///     .with_account_id("account_id")
+///     .with_queue_request("queueRequest")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -849,14 +1019,24 @@ impl<'a> PostRunCfMetaPost11Request<'a> {
         self.builder.send().await
     }
 }
-
 /// Execute @cf/meta/llama-3.1-8b-instruct-fp8 model.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/ai/run/@cf/meta/llama-3.1-8b-instruct-fp8`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `queueRequest` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::workers_ai_text_generation };
+/// use cloudflare::{ ApiClient, apis::workers_ai_text_generation };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = post_run_cf_meta_post_11(&api)
-///     .with_account_id("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = post_run_cf_meta_post_11(&api)
+///     .with_account_id("account_id")
+///     .with_queue_request("queueRequest")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -896,14 +1076,24 @@ impl<'a> PostRunCfMetaPost12Request<'a> {
         self.builder.send().await
     }
 }
-
 /// Execute @cf/meta/llama-3.1-8b-preview model.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/ai/run/@cf/meta/llama-3.1-8b-preview`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `queueRequest` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::workers_ai_text_generation };
+/// use cloudflare::{ ApiClient, apis::workers_ai_text_generation };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = post_run_cf_meta_post_12(&api)
-///     .with_account_id("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = post_run_cf_meta_post_12(&api)
+///     .with_account_id("account_id")
+///     .with_queue_request("queueRequest")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -943,14 +1133,24 @@ impl<'a> PostRunCfMetaPost13Request<'a> {
         self.builder.send().await
     }
 }
-
 /// Execute @cf/meta/llama-3.2-1b-instruct model.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/ai/run/@cf/meta/llama-3.2-1b-instruct`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `queueRequest` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::workers_ai_text_generation };
+/// use cloudflare::{ ApiClient, apis::workers_ai_text_generation };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = post_run_cf_meta_post_13(&api)
-///     .with_account_id("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = post_run_cf_meta_post_13(&api)
+///     .with_account_id("account_id")
+///     .with_queue_request("queueRequest")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -990,14 +1190,24 @@ impl<'a> PostRunCfMetaPost14Request<'a> {
         self.builder.send().await
     }
 }
-
 /// Execute @cf/meta/llama-3.2-3b-instruct model.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/ai/run/@cf/meta/llama-3.2-3b-instruct`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `queueRequest` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::workers_ai_text_generation };
+/// use cloudflare::{ ApiClient, apis::workers_ai_text_generation };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = post_run_cf_meta_post_14(&api)
-///     .with_account_id("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = post_run_cf_meta_post_14(&api)
+///     .with_account_id("account_id")
+///     .with_queue_request("queueRequest")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -1037,14 +1247,24 @@ impl<'a> PostRunCfMetaPost15Request<'a> {
         self.builder.send().await
     }
 }
-
 /// Execute @cf/meta/llama-4-scout-17b-16e-instruct model.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/ai/run/@cf/meta/llama-4-scout-17b-16e-instruct`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `queueRequest` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::workers_ai_text_generation };
+/// use cloudflare::{ ApiClient, apis::workers_ai_text_generation };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = post_run_cf_meta_post_15(&api)
-///     .with_account_id("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = post_run_cf_meta_post_15(&api)
+///     .with_account_id("account_id")
+///     .with_queue_request("queueRequest")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -1087,14 +1307,24 @@ impl<'a> PostRunCfMetaPost16Request<'a> {
         self.builder.send().await
     }
 }
-
 /// Execute @cf/meta/llama-guard-3-8b model.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/ai/run/@cf/meta/llama-guard-3-8b`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `queueRequest` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::workers_ai_text_generation };
+/// use cloudflare::{ ApiClient, apis::workers_ai_text_generation };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = post_run_cf_meta_post_16(&api)
-///     .with_account_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = post_run_cf_meta_post_16(&api)
+///     .with_account_id("account_id")
+///     .with_queue_request("queueRequest")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -1134,14 +1364,24 @@ impl<'a> PostRunCfMicrosoftRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Execute @cf/microsoft/phi-2 model.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/ai/run/@cf/microsoft/phi-2`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `queueRequest` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::workers_ai_text_generation };
+/// use cloudflare::{ ApiClient, apis::workers_ai_text_generation };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = post_run_cf_microsoft(&api)
-///     .with_account_id("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = post_run_cf_microsoft(&api)
+///     .with_account_id("account_id")
+///     .with_queue_request("queueRequest")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -1181,14 +1421,24 @@ impl<'a> PostRunCfMistralRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Execute @cf/mistral/mistral-7b-instruct-v0.1 model.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/ai/run/@cf/mistral/mistral-7b-instruct-v0.1`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `queueRequest` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::workers_ai_text_generation };
+/// use cloudflare::{ ApiClient, apis::workers_ai_text_generation };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = post_run_cf_mistral(&api)
-///     .with_account_id("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = post_run_cf_mistral(&api)
+///     .with_account_id("account_id")
+///     .with_queue_request("queueRequest")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -1228,14 +1478,24 @@ impl<'a> PostRunCfMistralPostRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Execute @cf/mistral/mistral-7b-instruct-v0.2-lora model.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/ai/run/@cf/mistral/mistral-7b-instruct-v0.2-lora`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `queueRequest` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::workers_ai_text_generation };
+/// use cloudflare::{ ApiClient, apis::workers_ai_text_generation };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = post_run_cf_mistral_post(&api)
-///     .with_account_id("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = post_run_cf_mistral_post(&api)
+///     .with_account_id("account_id")
+///     .with_queue_request("queueRequest")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -1275,14 +1535,24 @@ impl<'a> PostRunCfMistralaiRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Execute @cf/mistralai/mistral-small-3.1-24b-instruct model.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/ai/run/@cf/mistralai/mistral-small-3.1-24b-instruct`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `queueRequest` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::workers_ai_text_generation };
+/// use cloudflare::{ ApiClient, apis::workers_ai_text_generation };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = post_run_cf_mistralai(&api)
-///     .with_account_id("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = post_run_cf_mistralai(&api)
+///     .with_account_id("account_id")
+///     .with_queue_request("queueRequest")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -1322,14 +1592,24 @@ impl<'a> PostRunCfOpenchatRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Execute @cf/openchat/openchat-3.5-0106 model.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/ai/run/@cf/openchat/openchat-3.5-0106`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `queueRequest` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::workers_ai_text_generation };
+/// use cloudflare::{ ApiClient, apis::workers_ai_text_generation };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = post_run_cf_openchat(&api)
-///     .with_account_id("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = post_run_cf_openchat(&api)
+///     .with_account_id("account_id")
+///     .with_queue_request("queueRequest")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -1369,14 +1649,24 @@ impl<'a> PostRunCfQwenRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Execute @cf/qwen/qwen1.5-0.5b-chat model.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/ai/run/@cf/qwen/qwen1.5-0.5b-chat`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `queueRequest` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::workers_ai_text_generation };
+/// use cloudflare::{ ApiClient, apis::workers_ai_text_generation };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = post_run_cf_qwen(&api)
-///     .with_account_id("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = post_run_cf_qwen(&api)
+///     .with_account_id("account_id")
+///     .with_queue_request("queueRequest")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -1416,14 +1706,24 @@ impl<'a> PostRunCfQwenPostRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Execute @cf/qwen/qwen1.5-1.8b-chat model.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/ai/run/@cf/qwen/qwen1.5-1.8b-chat`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `queueRequest` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::workers_ai_text_generation };
+/// use cloudflare::{ ApiClient, apis::workers_ai_text_generation };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = post_run_cf_qwen_post(&api)
-///     .with_account_id("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = post_run_cf_qwen_post(&api)
+///     .with_account_id("account_id")
+///     .with_queue_request("queueRequest")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -1463,14 +1763,24 @@ impl<'a> PostRunCfQwenPost3Request<'a> {
         self.builder.send().await
     }
 }
-
 /// Execute @cf/qwen/qwen1.5-14b-chat-awq model.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/ai/run/@cf/qwen/qwen1.5-14b-chat-awq`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `queueRequest` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::workers_ai_text_generation };
+/// use cloudflare::{ ApiClient, apis::workers_ai_text_generation };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = post_run_cf_qwen_post_3(&api)
-///     .with_account_id("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = post_run_cf_qwen_post_3(&api)
+///     .with_account_id("account_id")
+///     .with_queue_request("queueRequest")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -1510,14 +1820,24 @@ impl<'a> PostRunCfQwenPost4Request<'a> {
         self.builder.send().await
     }
 }
-
 /// Execute @cf/qwen/qwen1.5-7b-chat-awq model.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/ai/run/@cf/qwen/qwen1.5-7b-chat-awq`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `queueRequest` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::workers_ai_text_generation };
+/// use cloudflare::{ ApiClient, apis::workers_ai_text_generation };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = post_run_cf_qwen_post_4(&api)
-///     .with_account_id("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = post_run_cf_qwen_post_4(&api)
+///     .with_account_id("account_id")
+///     .with_queue_request("queueRequest")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -1557,14 +1877,24 @@ impl<'a> PostRunCfQwenPost5Request<'a> {
         self.builder.send().await
     }
 }
-
 /// Execute @cf/qwen/qwen2.5-coder-32b-instruct model.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/ai/run/@cf/qwen/qwen2.5-coder-32b-instruct`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `queueRequest` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::workers_ai_text_generation };
+/// use cloudflare::{ ApiClient, apis::workers_ai_text_generation };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = post_run_cf_qwen_post_5(&api)
-///     .with_account_id("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = post_run_cf_qwen_post_5(&api)
+///     .with_account_id("account_id")
+///     .with_queue_request("queueRequest")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -1604,14 +1934,24 @@ impl<'a> PostRunCfQwenPost6Request<'a> {
         self.builder.send().await
     }
 }
-
 /// Execute @cf/qwen/qwq-32b model.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/ai/run/@cf/qwen/qwq-32b`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `queueRequest` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::workers_ai_text_generation };
+/// use cloudflare::{ ApiClient, apis::workers_ai_text_generation };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = post_run_cf_qwen_post_6(&api)
-///     .with_account_id("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = post_run_cf_qwen_post_6(&api)
+///     .with_account_id("account_id")
+///     .with_queue_request("queueRequest")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -1651,14 +1991,24 @@ impl<'a> PostRunCfTheblokeRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Execute @cf/thebloke/discolm-german-7b-v1-awq model.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/ai/run/@cf/thebloke/discolm-german-7b-v1-awq`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `queueRequest` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::workers_ai_text_generation };
+/// use cloudflare::{ ApiClient, apis::workers_ai_text_generation };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = post_run_cf_thebloke(&api)
-///     .with_account_id("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = post_run_cf_thebloke(&api)
+///     .with_account_id("account_id")
+///     .with_queue_request("queueRequest")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -1698,14 +2048,24 @@ impl<'a> PostRunCfTiiuaeRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Execute @cf/tiiuae/falcon-7b-instruct model.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/ai/run/@cf/tiiuae/falcon-7b-instruct`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `queueRequest` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::workers_ai_text_generation };
+/// use cloudflare::{ ApiClient, apis::workers_ai_text_generation };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = post_run_cf_tiiuae(&api)
-///     .with_account_id("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = post_run_cf_tiiuae(&api)
+///     .with_account_id("account_id")
+///     .with_queue_request("queueRequest")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -1745,14 +2105,24 @@ impl<'a> PostRunCfTinyllamaRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Execute @cf/tinyllama/tinyllama-1.1b-chat-v1.0 model.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/ai/run/@cf/tinyllama/tinyllama-1.1b-chat-v1.0`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `queueRequest` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::workers_ai_text_generation };
+/// use cloudflare::{ ApiClient, apis::workers_ai_text_generation };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = post_run_cf_tinyllama(&api)
-///     .with_account_id("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = post_run_cf_tinyllama(&api)
+///     .with_account_id("account_id")
+///     .with_queue_request("queueRequest")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -1792,14 +2162,24 @@ impl<'a> PostRunHfGoogleRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Execute @hf/google/gemma-7b-it model.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/ai/run/@hf/google/gemma-7b-it`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `queueRequest` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::workers_ai_text_generation };
+/// use cloudflare::{ ApiClient, apis::workers_ai_text_generation };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = post_run_hf_google(&api)
-///     .with_account_id("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = post_run_hf_google(&api)
+///     .with_account_id("account_id")
+///     .with_queue_request("queueRequest")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -1839,14 +2219,24 @@ impl<'a> PostRunHfMetaRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Execute @hf/meta-llama/meta-llama-3-8b-instruct model.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/ai/run/@hf/meta-llama/meta-llama-3-8b-instruct`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `queueRequest` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::workers_ai_text_generation };
+/// use cloudflare::{ ApiClient, apis::workers_ai_text_generation };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = post_run_hf_meta(&api)
-///     .with_account_id("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = post_run_hf_meta(&api)
+///     .with_account_id("account_id")
+///     .with_queue_request("queueRequest")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -1886,14 +2276,24 @@ impl<'a> PostRunHfMistralRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Execute @hf/mistral/mistral-7b-instruct-v0.2 model.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/ai/run/@hf/mistral/mistral-7b-instruct-v0.2`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `queueRequest` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::workers_ai_text_generation };
+/// use cloudflare::{ ApiClient, apis::workers_ai_text_generation };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = post_run_hf_mistral(&api)
-///     .with_account_id("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = post_run_hf_mistral(&api)
+///     .with_account_id("account_id")
+///     .with_queue_request("queueRequest")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -1933,14 +2333,24 @@ impl<'a> PostRunHfMistralaiRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Execute @hf/mistralai/mistral-7b-instruct-v0.2 model.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/ai/run/@hf/mistralai/mistral-7b-instruct-v0.2`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `queueRequest` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::workers_ai_text_generation };
+/// use cloudflare::{ ApiClient, apis::workers_ai_text_generation };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = post_run_hf_mistralai(&api)
-///     .with_account_id("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = post_run_hf_mistralai(&api)
+///     .with_account_id("account_id")
+///     .with_queue_request("queueRequest")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -1980,14 +2390,24 @@ impl<'a> PostRunHfNexusflowRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Execute @hf/nexusflow/starling-lm-7b-beta model.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/ai/run/@hf/nexusflow/starling-lm-7b-beta`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `queueRequest` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::workers_ai_text_generation };
+/// use cloudflare::{ ApiClient, apis::workers_ai_text_generation };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = post_run_hf_nexusflow(&api)
-///     .with_account_id("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = post_run_hf_nexusflow(&api)
+///     .with_account_id("account_id")
+///     .with_queue_request("queueRequest")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -2027,14 +2447,24 @@ impl<'a> PostRunHfNousresearchRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Execute @hf/nousresearch/hermes-2-pro-mistral-7b model.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/ai/run/@hf/nousresearch/hermes-2-pro-mistral-7b`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `queueRequest` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::workers_ai_text_generation };
+/// use cloudflare::{ ApiClient, apis::workers_ai_text_generation };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = post_run_hf_nousresearch(&api)
-///     .with_account_id("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = post_run_hf_nousresearch(&api)
+///     .with_account_id("account_id")
+///     .with_queue_request("queueRequest")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -2074,14 +2504,24 @@ impl<'a> PostRunHfTheblokeRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Execute @hf/thebloke/deepseek-coder-6.7b-base-awq model.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/ai/run/@hf/thebloke/deepseek-coder-6.7b-base-awq`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `queueRequest` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::workers_ai_text_generation };
+/// use cloudflare::{ ApiClient, apis::workers_ai_text_generation };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = post_run_hf_thebloke(&api)
-///     .with_account_id("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = post_run_hf_thebloke(&api)
+///     .with_account_id("account_id")
+///     .with_queue_request("queueRequest")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -2121,14 +2561,24 @@ impl<'a> PostRunHfTheblokePostRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Execute @hf/thebloke/deepseek-coder-6.7b-instruct-awq model.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/ai/run/@hf/thebloke/deepseek-coder-6.7b-instruct-awq`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `queueRequest` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::workers_ai_text_generation };
+/// use cloudflare::{ ApiClient, apis::workers_ai_text_generation };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = post_run_hf_thebloke_post(&api)
-///     .with_account_id("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = post_run_hf_thebloke_post(&api)
+///     .with_account_id("account_id")
+///     .with_queue_request("queueRequest")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -2168,14 +2618,24 @@ impl<'a> PostRunHfTheblokePost3Request<'a> {
         self.builder.send().await
     }
 }
-
 /// Execute @hf/thebloke/llama-2-13b-chat-awq model.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/ai/run/@hf/thebloke/llama-2-13b-chat-awq`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `queueRequest` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::workers_ai_text_generation };
+/// use cloudflare::{ ApiClient, apis::workers_ai_text_generation };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = post_run_hf_thebloke_post_3(&api)
-///     .with_account_id("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = post_run_hf_thebloke_post_3(&api)
+///     .with_account_id("account_id")
+///     .with_queue_request("queueRequest")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -2215,14 +2675,24 @@ impl<'a> PostRunHfTheblokePost4Request<'a> {
         self.builder.send().await
     }
 }
-
 /// Execute @hf/thebloke/llamaguard-7b-awq model.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/ai/run/@hf/thebloke/llamaguard-7b-awq`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `queueRequest` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::workers_ai_text_generation };
+/// use cloudflare::{ ApiClient, apis::workers_ai_text_generation };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = post_run_hf_thebloke_post_4(&api)
-///     .with_account_id("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = post_run_hf_thebloke_post_4(&api)
+///     .with_account_id("account_id")
+///     .with_queue_request("queueRequest")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -2262,14 +2732,24 @@ impl<'a> PostRunHfTheblokePost5Request<'a> {
         self.builder.send().await
     }
 }
-
 /// Execute @hf/thebloke/mistral-7b-instruct-v0.1-awq model.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/ai/run/@hf/thebloke/mistral-7b-instruct-v0.1-awq`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `queueRequest` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::workers_ai_text_generation };
+/// use cloudflare::{ ApiClient, apis::workers_ai_text_generation };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = post_run_hf_thebloke_post_5(&api)
-///     .with_account_id("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = post_run_hf_thebloke_post_5(&api)
+///     .with_account_id("account_id")
+///     .with_queue_request("queueRequest")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -2309,14 +2789,24 @@ impl<'a> PostRunHfTheblokePost6Request<'a> {
         self.builder.send().await
     }
 }
-
 /// Execute @hf/thebloke/neural-chat-7b-v3-1-awq model.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/ai/run/@hf/thebloke/neural-chat-7b-v3-1-awq`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `queueRequest` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::workers_ai_text_generation };
+/// use cloudflare::{ ApiClient, apis::workers_ai_text_generation };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = post_run_hf_thebloke_post_6(&api)
-///     .with_account_id("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = post_run_hf_thebloke_post_6(&api)
+///     .with_account_id("account_id")
+///     .with_queue_request("queueRequest")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -2356,14 +2846,24 @@ impl<'a> PostRunHfTheblokePost7Request<'a> {
         self.builder.send().await
     }
 }
-
 /// Execute @hf/thebloke/openhermes-2.5-mistral-7b-awq model.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/ai/run/@hf/thebloke/openhermes-2.5-mistral-7b-awq`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `queueRequest` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::workers_ai_text_generation };
+/// use cloudflare::{ ApiClient, apis::workers_ai_text_generation };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = post_run_hf_thebloke_post_7(&api)
-///     .with_account_id("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = post_run_hf_thebloke_post_7(&api)
+///     .with_account_id("account_id")
+///     .with_queue_request("queueRequest")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -2403,14 +2903,24 @@ impl<'a> PostRunHfTheblokePost8Request<'a> {
         self.builder.send().await
     }
 }
-
 /// Execute @hf/thebloke/zephyr-7b-beta-awq model.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/ai/run/@hf/thebloke/zephyr-7b-beta-awq`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `queueRequest` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::workers_ai_text_generation };
+/// use cloudflare::{ ApiClient, apis::workers_ai_text_generation };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = post_run_hf_thebloke_post_8(&api)
-///     .with_account_id("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = post_run_hf_thebloke_post_8(&api)
+///     .with_account_id("account_id")
+///     .with_queue_request("queueRequest")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```

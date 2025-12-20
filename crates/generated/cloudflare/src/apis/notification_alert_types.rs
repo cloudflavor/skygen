@@ -15,12 +15,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::aaa_response_collection::AaaResponseCollection;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct GetAlertTypesRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, AaaResponseCollection>,
 }
 
 impl<'a> GetAlertTypesRequest<'a> {
@@ -38,18 +39,26 @@ impl<'a> GetAlertTypesRequest<'a> {
         self.builder = self.builder.path_param("account_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<AaaResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// Get Alert Types
+///
+/// Gets a list of all alert types for which an account is eligible.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/alerting/v3/available_alerts`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::notification_alert_types };
+/// use cloudflare::{ ApiClient, apis::notification_alert_types };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_alert_types(&api)
-///     .with_account_id("value")
+/// let response = get_alert_types(&api)
+///     .with_account_id("account_id")
 ///     .send()
 ///     .await?;
 /// ```

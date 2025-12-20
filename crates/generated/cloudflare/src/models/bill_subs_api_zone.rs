@@ -19,6 +19,6 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct BillSubsApiZone {
-    pub id: Option<serde_json::Value>,
-    pub name: Option<serde_json::Value>,
+    pub id: Option<crate::models::bill_subs_api_identifier::BillSubsApiIdentifier>,
+    pub name: Option<crate::models::bill_subs_api_name::BillSubsApiName>,
 }

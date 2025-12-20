@@ -19,6 +19,6 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct TunnelTunnelLink {
-    pub created_at: Option<serde_json::Value>,
-    pub linked_tunnel_id: Option<serde_json::Value>,
+    pub created_at: Option<crate::models::tunnel_created_at::TunnelCreatedAt>,
+    pub linked_tunnel_id: Option<crate::models::tunnel_tunnel_id::TunnelTunnelId>,
 }

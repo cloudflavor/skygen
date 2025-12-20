@@ -19,11 +19,13 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct EmailSecurityDomain {
-    pub allowed_delivery_modes: Vec<serde_json::Value>,
+    pub allowed_delivery_modes:
+        Vec<crate::models::email_security_delivery_mode::EmailSecurityDeliveryMode>,
     pub authorization: Option<serde_json::Value>,
     pub created_at: String,
     pub domain: String,
-    pub drop_dispositions: Vec<serde_json::Value>,
+    pub drop_dispositions:
+        Vec<crate::models::email_security_disposition_label::EmailSecurityDispositionLabel>,
     pub emails_processed: Option<serde_json::Value>,
     pub folder: Option<serde_json::Value>,
     pub id: i64,

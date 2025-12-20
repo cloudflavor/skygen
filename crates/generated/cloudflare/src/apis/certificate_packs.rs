@@ -17,10 +17,15 @@
 
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
+use crate::models::tls_certificates_and_hostnames_advanced_certificate_pack_response_single::TlsCertificatesAndHostnamesAdvancedCertificatePackResponseSingle;
+use crate::models::tls_certificates_and_hostnames_certificate_pack_quota_response::TlsCertificatesAndHostnamesCertificatePackQuotaResponse;
+use crate::models::tls_certificates_and_hostnames_certificate_pack_response_collection::TlsCertificatesAndHostnamesCertificatePackResponseCollection;
+use crate::models::tls_certificates_and_hostnames_certificate_pack_response_single::TlsCertificatesAndHostnamesCertificatePackResponseSingle;
+use crate::models::tls_certificates_and_hostnames_delete_advanced_certificate_pack_response_single::TlsCertificatesAndHostnamesDeleteAdvancedCertificatePackResponseSingle;
 
 #[derive(Debug)]
 pub struct ListCertificatePacksRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, TlsCertificatesAndHostnamesCertificatePackResponseCollection>,
 }
 
 impl<'a> ListCertificatePacksRequest<'a> {
@@ -39,18 +44,30 @@ impl<'a> ListCertificatePacksRequest<'a> {
         self.builder = self.builder.header_param("status", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(
+        self,
+    ) -> ApiResult<TlsCertificatesAndHostnamesCertificatePackResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// List Certificate Packs
+///
+/// For a given zone, list all active certificate packs.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/ssl/certificate_packs`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `status` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::certificate_packs };
+/// use cloudflare::{ ApiClient, apis::certificate_packs };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_certificate_packs(&api)
-///     .with_zone_id("value")
+/// let response = list_certificate_packs(&api)
+///     .with_zone_id("zone_id")
+///     .with_status("status")
 ///     .send()
 ///     .await?;
 /// ```
@@ -60,7 +77,8 @@ pub fn list_certificate_packs(api: &ApiClient) -> ListCertificatePacksRequest<'_
 
 #[derive(Debug)]
 pub struct OrderAdvancedCertificateManagerRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder:
+        ApiRequestBuilder<'a, TlsCertificatesAndHostnamesAdvancedCertificatePackResponseSingle>,
 }
 
 impl<'a> OrderAdvancedCertificateManagerRequest<'a> {
@@ -86,18 +104,30 @@ impl<'a> OrderAdvancedCertificateManagerRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(
+        self,
+    ) -> ApiResult<TlsCertificatesAndHostnamesAdvancedCertificatePackResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Order Advanced Certificate Manager Certificate Pack
+///
+/// For a given zone, order an advanced certificate pack.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/zones/{zone_id}/ssl/certificate_packs/order`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::certificate_packs };
+/// use cloudflare::{ ApiClient, apis::certificate_packs };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = order_advanced_certificate_manager(&api)
-///     .with_zone_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = order_advanced_certificate_manager(&api)
+///     .with_zone_id("zone_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -109,7 +139,7 @@ pub fn order_advanced_certificate_manager(
 
 #[derive(Debug)]
 pub struct GetCertificatePackQuotasRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, TlsCertificatesAndHostnamesCertificatePackQuotaResponse>,
 }
 
 impl<'a> GetCertificatePackQuotasRequest<'a> {
@@ -127,18 +157,26 @@ impl<'a> GetCertificatePackQuotasRequest<'a> {
         self.builder = self.builder.path_param("zone_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<TlsCertificatesAndHostnamesCertificatePackQuotaResponse> {
         self.builder.send().await
     }
 }
-
 /// Get Certificate Pack Quotas
+///
+/// For a given zone, list certificate pack quotas.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/ssl/certificate_packs/quota`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::certificate_packs };
+/// use cloudflare::{ ApiClient, apis::certificate_packs };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_certificate_pack_quotas(&api)
-///     .with_zone_id("value")
+/// let response = get_certificate_pack_quotas(&api)
+///     .with_zone_id("zone_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -148,7 +186,7 @@ pub fn get_certificate_pack_quotas(api: &ApiClient) -> GetCertificatePackQuotasR
 
 #[derive(Debug)]
 pub struct GetCertificatePackRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, TlsCertificatesAndHostnamesCertificatePackResponseSingle>,
 }
 
 impl<'a> GetCertificatePackRequest<'a> {
@@ -171,19 +209,28 @@ impl<'a> GetCertificatePackRequest<'a> {
         self.builder = self.builder.path_param("certificate_pack_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<TlsCertificatesAndHostnamesCertificatePackResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Get Certificate Pack
+///
+/// For a given zone, get a certificate pack.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/ssl/certificate_packs/{certificate_pack_id}`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `certificate_pack_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::certificate_packs };
+/// use cloudflare::{ ApiClient, apis::certificate_packs };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_certificate_pack(&api)
-///     .with_zone_id("value")
-///     .with_certificate_pack_id("value")
+/// let response = get_certificate_pack(&api)
+///     .with_zone_id("zone_id")
+///     .with_certificate_pack_id("certificate_pack_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -193,7 +240,10 @@ pub fn get_certificate_pack(api: &ApiClient) -> GetCertificatePackRequest<'_> {
 
 #[derive(Debug)]
 pub struct DeleteAdvancedCertificateManagerRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<
+        'a,
+        TlsCertificatesAndHostnamesDeleteAdvancedCertificatePackResponseSingle,
+    >,
 }
 
 impl<'a> DeleteAdvancedCertificateManagerRequest<'a> {
@@ -216,19 +266,30 @@ impl<'a> DeleteAdvancedCertificateManagerRequest<'a> {
         self.builder = self.builder.path_param("certificate_pack_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(
+        self,
+    ) -> ApiResult<TlsCertificatesAndHostnamesDeleteAdvancedCertificatePackResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Delete Advanced Certificate Manager Certificate Pack
+///
+/// For a given zone, delete an advanced certificate pack.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/zones/{zone_id}/ssl/certificate_packs/{certificate_pack_id}`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `certificate_pack_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::certificate_packs };
+/// use cloudflare::{ ApiClient, apis::certificate_packs };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete_advanced_certificate_manager(&api)
-///     .with_zone_id("value")
-///     .with_certificate_pack_id("value")
+/// let response = delete_advanced_certificate_manager(&api)
+///     .with_zone_id("zone_id")
+///     .with_certificate_pack_id("certificate_pack_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -240,7 +301,8 @@ pub fn delete_advanced_certificate_manager(
 
 #[derive(Debug)]
 pub struct RestartValidationAdvancedCertificateRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder:
+        ApiRequestBuilder<'a, TlsCertificatesAndHostnamesAdvancedCertificatePackResponseSingle>,
 }
 
 impl<'a> RestartValidationAdvancedCertificateRequest<'a> {
@@ -271,19 +333,32 @@ impl<'a> RestartValidationAdvancedCertificateRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(
+        self,
+    ) -> ApiResult<TlsCertificatesAndHostnamesAdvancedCertificatePackResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Restart Validation or Update Advanced Certificate Manager Certificate Pack
+///
+/// For a given zone, restart validation or add cloudflare branding for an advanced certificate pack.  The former is only a validation operation for a Certificate Pack in a validation_timed_out status.
+///
+/// **HTTP Method:** `PATCH`
+/// **Path:** `/zones/{zone_id}/ssl/certificate_packs/{certificate_pack_id}`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `certificate_pack_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::certificate_packs };
+/// use cloudflare::{ ApiClient, apis::certificate_packs };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = restart_validation_advanced_certificate(&api)
-///     .with_zone_id("value")
-///     .with_certificate_pack_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = restart_validation_advanced_certificate(&api)
+///     .with_zone_id("zone_id")
+///     .with_certificate_pack_id("certificate_pack_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```

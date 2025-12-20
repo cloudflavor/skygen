@@ -19,9 +19,9 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct AccessSeats {
-    pub access_seat: Option<serde_json::Value>,
-    pub created_at: Option<serde_json::Value>,
-    pub gateway_seat: Option<serde_json::Value>,
-    pub seat_uid: Option<serde_json::Value>,
-    pub updated_at: Option<serde_json::Value>,
+    pub access_seat: Option<crate::models::access_access_seat::AccessAccessSeat>,
+    pub created_at: Option<crate::models::access_timestamp::AccessTimestamp>,
+    pub gateway_seat: Option<crate::models::access_gateway_seat::AccessGatewaySeat>,
+    pub seat_uid: Option<crate::models::access_seat_uid::AccessSeatUid>,
+    pub updated_at: Option<crate::models::access_timestamp::AccessTimestamp>,
 }

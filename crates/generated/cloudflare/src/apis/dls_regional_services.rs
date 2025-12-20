@@ -42,14 +42,22 @@ impl<'a> HostnamesListRegionsRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// List Regions
+///
+/// List all Regional Services regions available for use by this account.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/addressing/regional_hostnames/regions`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::dls_regional_services };
+/// use cloudflare::{ ApiClient, apis::dls_regional_services };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = hostnames_list_regions(&api)
-///     .with_account_id("value")
+/// let response = hostnames_list_regions(&api)
+///     .with_account_id("account_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -81,14 +89,22 @@ impl<'a> HostnamesListHostnamesRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// List Regional Hostnames
+///
+/// List all Regional Hostnames within a zone.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/addressing/regional_hostnames`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::dls_regional_services };
+/// use cloudflare::{ ApiClient, apis::dls_regional_services };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = hostnames_list_hostnames(&api)
-///     .with_zone_id("value")
+/// let response = hostnames_list_hostnames(&api)
+///     .with_zone_id("zone_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -127,14 +143,24 @@ impl<'a> HostnamesCreateHostnameRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Create Regional Hostname
+///
+/// Create a new Regional Hostname entry. Cloudflare will only use data centers that are physically located within the chosen region to decrypt and service HTTPS traffic. Learn more about [Regional Services](<https://developers.cloudflare.com/data-localization/regional-services/get-started/).>
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/zones/{zone_id}/addressing/regional_hostnames`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::dls_regional_services };
+/// use cloudflare::{ ApiClient, apis::dls_regional_services };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = hostnames_create_hostname(&api)
-///     .with_zone_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = hostnames_create_hostname(&api)
+///     .with_zone_id("zone_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -171,15 +197,24 @@ impl<'a> HostnamesFetchHostnameRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Fetch Regional Hostname
+///
+/// Fetch the configuration for a specific Regional Hostname, within a zone.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/addressing/regional_hostnames/{hostname}`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `hostname` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::dls_regional_services };
+/// use cloudflare::{ ApiClient, apis::dls_regional_services };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = hostnames_fetch_hostname(&api)
-///     .with_zone_id("value")
-///     .with_hostname("value")
+/// let response = hostnames_fetch_hostname(&api)
+///     .with_zone_id("zone_id")
+///     .with_hostname("hostname")
 ///     .send()
 ///     .await?;
 /// ```
@@ -216,15 +251,24 @@ impl<'a> HostnamesDeleteHostnameRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Delete Regional Hostname
+///
+/// Delete the region configuration for a specific Regional Hostname.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/zones/{zone_id}/addressing/regional_hostnames/{hostname}`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `hostname` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::dls_regional_services };
+/// use cloudflare::{ ApiClient, apis::dls_regional_services };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = hostnames_delete_hostname(&api)
-///     .with_zone_id("value")
-///     .with_hostname("value")
+/// let response = hostnames_delete_hostname(&api)
+///     .with_zone_id("zone_id")
+///     .with_hostname("hostname")
 ///     .send()
 ///     .await?;
 /// ```
@@ -268,15 +312,26 @@ impl<'a> HostnamesPatchHostnameRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Update Regional Hostname
+///
+/// Update the configuration for a specific Regional Hostname. Only the region_key of a hostname is mutable.
+///
+/// **HTTP Method:** `PATCH`
+/// **Path:** `/zones/{zone_id}/addressing/regional_hostnames/{hostname}`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `hostname` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::dls_regional_services };
+/// use cloudflare::{ ApiClient, apis::dls_regional_services };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = hostnames_patch_hostname(&api)
-///     .with_zone_id("value")
-///     .with_hostname("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = hostnames_patch_hostname(&api)
+///     .with_zone_id("zone_id")
+///     .with_hostname("hostname")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```

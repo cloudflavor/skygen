@@ -122,14 +122,63 @@ impl<'a> InfraTargetsListRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// List all targets
+///
+/// Lists and sorts an account’s targets. Filters are optional and are ANDed
+/// together.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/infrastructure/targets`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `hostname` (query,optional)
+/// - `hostname_contains` (query,optional)
+/// - `virtual_network_id` (query,optional)
+/// - `ip_v4` (query,optional)
+/// - `ip_v6` (query,optional)
+/// - `created_before` (query,optional)
+/// - `created_after` (query,optional)
+/// - `modified_before` (query,optional)
+/// - `modified_after` (query,optional)
+/// - `ips` (query,optional)
+/// - `target_ids` (query,optional)
+/// - `ip_like` (query,optional)
+/// - `ipv4_start` (query,optional)
+/// - `ipv4_end` (query,optional)
+/// - `ipv6_start` (query,optional)
+/// - `ipv6_end` (query,optional)
+/// - `page` (query,optional)
+/// - `per_page` (query,optional)
+/// - `order` (query,optional)
+/// - `direction` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::infrastructure_access_targets };
+/// use cloudflare::{ ApiClient, apis::infrastructure_access_targets };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = infra_targets_list(&api)
-///     .with_account_id("value")
+/// let response = infra_targets_list(&api)
+///     .with_account_id("account_id")
+///     .with_hostname("hostname")
+///     .with_hostname_contains("hostname_contains")
+///     .with_virtual_network_id("virtual_network_id")
+///     .with_ip_v4("ip_v4")
+///     .with_ip_v6("ip_v6")
+///     .with_created_before("created_before")
+///     .with_created_after("created_after")
+///     .with_modified_before("modified_before")
+///     .with_modified_after("modified_after")
+///     .with_ips("ips")
+///     .with_target_ids("target_ids")
+///     .with_ip_like("ip_like")
+///     .with_ipv4_start("ipv4_start")
+///     .with_ipv4_end("ipv4_end")
+///     .with_ipv6_start("ipv6_start")
+///     .with_ipv6_end("ipv6_end")
+///     .with_page("page")
+///     .with_per_page("per_page")
+///     .with_order("order")
+///     .with_direction("direction")
 ///     .send()
 ///     .await?;
 /// ```
@@ -169,14 +218,22 @@ impl<'a> InfraTargetsPostRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Create new target
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/infrastructure/targets`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::infrastructure_access_targets };
+/// use cloudflare::{ ApiClient, apis::infrastructure_access_targets };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = infra_targets_post(&api)
-///     .with_account_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = infra_targets_post(&api)
+///     .with_account_id("account_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -216,14 +273,24 @@ impl<'a> InfraTargetsPutBatchRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Create new targets
+///
+/// Adds one or more targets.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/accounts/{account_id}/infrastructure/targets/batch`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::infrastructure_access_targets };
+/// use cloudflare::{ ApiClient, apis::infrastructure_access_targets };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = infra_targets_put_batch(&api)
-///     .with_account_id("value")
+/// # let body: Vec<std::collections::BTreeMap<String, serde_json::Value>> = todo!();
+/// let response = infra_targets_put_batch(&api)
+///     .with_account_id("account_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -263,14 +330,24 @@ impl<'a> InfraTargetsDeleteBatchRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Delete targets
+///
+/// Removes one or more targets.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/accounts/{account_id}/infrastructure/targets/batch`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::infrastructure_access_targets };
+/// use cloudflare::{ ApiClient, apis::infrastructure_access_targets };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = infra_targets_delete_batch(&api)
-///     .with_account_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = infra_targets_delete_batch(&api)
+///     .with_account_id("account_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -310,14 +387,24 @@ impl<'a> InfraTargetsDeleteBatchPostRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Delete targets
+///
+/// Removes one or more targets.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/infrastructure/targets/batch_delete`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::infrastructure_access_targets };
+/// use cloudflare::{ ApiClient, apis::infrastructure_access_targets };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = infra_targets_delete_batch_post(&api)
-///     .with_account_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = infra_targets_delete_batch_post(&api)
+///     .with_account_id("account_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -354,15 +441,22 @@ impl<'a> InfraTargetsGetRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get target
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/infrastructure/targets/{target_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `target_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::infrastructure_access_targets };
+/// use cloudflare::{ ApiClient, apis::infrastructure_access_targets };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = infra_targets_get(&api)
-///     .with_account_id("value")
-///     .with_target_id("value")
+/// let response = infra_targets_get(&api)
+///     .with_account_id("account_id")
+///     .with_target_id("target_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -407,15 +501,24 @@ impl<'a> InfraTargetsPutRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Update target
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/accounts/{account_id}/infrastructure/targets/{target_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `target_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::infrastructure_access_targets };
+/// use cloudflare::{ ApiClient, apis::infrastructure_access_targets };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = infra_targets_put(&api)
-///     .with_account_id("value")
-///     .with_target_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = infra_targets_put(&api)
+///     .with_account_id("account_id")
+///     .with_target_id("target_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -452,15 +555,22 @@ impl<'a> InfraTargetsDeleteRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Delete target
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/accounts/{account_id}/infrastructure/targets/{target_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `target_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::infrastructure_access_targets };
+/// use cloudflare::{ ApiClient, apis::infrastructure_access_targets };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = infra_targets_delete(&api)
-///     .with_account_id("value")
-///     .with_target_id("value")
+/// let response = infra_targets_delete(&api)
+///     .with_account_id("account_id")
+///     .with_target_id("target_id")
 ///     .send()
 ///     .await?;
 /// ```

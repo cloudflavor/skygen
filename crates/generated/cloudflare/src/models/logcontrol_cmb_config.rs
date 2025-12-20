@@ -19,6 +19,8 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct LogcontrolCmbConfig {
-    pub allow_out_of_region_access: Option<serde_json::Value>,
-    pub regions: Option<serde_json::Value>,
+    pub allow_out_of_region_access: Option<
+        crate::models::logcontrol_allow_out_of_region_access::LogcontrolAllowOutOfRegionAccess,
+    >,
+    pub regions: Option<crate::models::logcontrol_regions::LogcontrolRegions>,
 }

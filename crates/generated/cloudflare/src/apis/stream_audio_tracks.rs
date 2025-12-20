@@ -15,12 +15,15 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::stream_add_audio_track_response::StreamAddAudioTrackResponse;
+use crate::models::stream_deleted_response::StreamDeletedResponse;
+use crate::models::stream_list_audio_track_response::StreamListAudioTrackResponse;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct ListAudioTracksRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, StreamListAudioTrackResponse>,
 }
 
 impl<'a> ListAudioTracksRequest<'a> {
@@ -43,19 +46,28 @@ impl<'a> ListAudioTracksRequest<'a> {
         self.builder = self.builder.path_param("identifier", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<StreamListAudioTrackResponse> {
         self.builder.send().await
     }
 }
-
 /// List additional audio tracks on a video
+///
+/// Lists additional audio tracks on a video. Note this API will not return information for audio attached to the video upload.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/stream/{identifier}/audio`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `identifier` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::stream_audio_tracks };
+/// use cloudflare::{ ApiClient, apis::stream_audio_tracks };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_audio_tracks(&api)
-///     .with_account_id("value")
-///     .with_identifier("value")
+/// let response = list_audio_tracks(&api)
+///     .with_account_id("account_id")
+///     .with_identifier("identifier")
 ///     .send()
 ///     .await?;
 /// ```
@@ -65,7 +77,7 @@ pub fn list_audio_tracks(api: &ApiClient) -> ListAudioTracksRequest<'_> {
 
 #[derive(Debug)]
 pub struct AddAudioTrackRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, StreamAddAudioTrackResponse>,
 }
 
 impl<'a> AddAudioTrackRequest<'a> {
@@ -96,19 +108,30 @@ impl<'a> AddAudioTrackRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<StreamAddAudioTrackResponse> {
         self.builder.send().await
     }
 }
-
 /// Add audio tracks to a video
+///
+/// Adds an additional audio track to a video using the provided audio track URL.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/stream/{identifier}/audio/copy`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `identifier` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::stream_audio_tracks };
+/// use cloudflare::{ ApiClient, apis::stream_audio_tracks };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = add_audio_track(&api)
-///     .with_account_id("value")
-///     .with_identifier("value")
+/// # let body: crate::models::stream_copy_audio_track::StreamCopyAudioTrack = todo!();
+/// let response = add_audio_track(&api)
+///     .with_account_id("account_id")
+///     .with_identifier("identifier")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -118,7 +141,7 @@ pub fn add_audio_track(api: &ApiClient) -> AddAudioTrackRequest<'_> {
 
 #[derive(Debug)]
 pub struct DeleteRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, StreamDeletedResponse>,
 }
 
 impl<'a> DeleteRequest<'a> {
@@ -146,20 +169,30 @@ impl<'a> DeleteRequest<'a> {
         self.builder = self.builder.path_param("audio_identifier", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<StreamDeletedResponse> {
         self.builder.send().await
     }
 }
-
 /// Delete additional audio tracks on a video
+///
+/// Deletes additional audio tracks on a video. Deleting a default audio track is not allowed. You must assign another audio track as default prior to deletion.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/accounts/{account_id}/stream/{identifier}/audio/{audio_identifier}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `identifier` (path, required)
+/// - `audio_identifier` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::stream_audio_tracks };
+/// use cloudflare::{ ApiClient, apis::stream_audio_tracks };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete(&api)
-///     .with_account_id("value")
-///     .with_identifier("value")
-///     .with_audio_identifier("value")
+/// let response = delete(&api)
+///     .with_account_id("account_id")
+///     .with_identifier("identifier")
+///     .with_audio_identifier("audio_identifier")
 ///     .send()
 ///     .await?;
 /// ```
@@ -169,7 +202,7 @@ pub fn delete(api: &ApiClient) -> DeleteRequest<'_> {
 
 #[derive(Debug)]
 pub struct EditAudioTracksRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, StreamAddAudioTrackResponse>,
 }
 
 impl<'a> EditAudioTracksRequest<'a> {
@@ -205,20 +238,32 @@ impl<'a> EditAudioTracksRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<StreamAddAudioTrackResponse> {
         self.builder.send().await
     }
 }
-
 /// Edit additional audio tracks on a video
+///
+/// Edits additional audio tracks on a video. Editing the default status of an audio track to `true` will mark all other audio tracks on the video default status to `false`.
+///
+/// **HTTP Method:** `PATCH`
+/// **Path:** `/accounts/{account_id}/stream/{identifier}/audio/{audio_identifier}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `identifier` (path, required)
+/// - `audio_identifier` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::stream_audio_tracks };
+/// use cloudflare::{ ApiClient, apis::stream_audio_tracks };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = edit_audio_tracks(&api)
-///     .with_account_id("value")
-///     .with_identifier("value")
-///     .with_audio_identifier("value")
+/// # let body: crate::models::stream_edit_audio_track::StreamEditAudioTrack = todo!();
+/// let response = edit_audio_tracks(&api)
+///     .with_account_id("account_id")
+///     .with_identifier("identifier")
+///     .with_audio_identifier("audio_identifier")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```

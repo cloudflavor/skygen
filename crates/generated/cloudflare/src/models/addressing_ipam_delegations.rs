@@ -19,10 +19,10 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct AddressingIpamDelegations {
-    pub cidr: Option<serde_json::Value>,
-    pub created_at: Option<serde_json::Value>,
-    pub delegated_account_id: Option<serde_json::Value>,
-    pub id: Option<serde_json::Value>,
-    pub modified_at: Option<serde_json::Value>,
-    pub parent_prefix_id: Option<serde_json::Value>,
+    pub cidr: Option<crate::models::addressing_cidr::AddressingCidr>,
+    pub created_at: Option<crate::models::addressing_timestamp::AddressingTimestamp>,
+    pub delegated_account_id: Option<crate::models::addressing_delegated_account_identifier::AddressingDelegatedAccountIdentifier>,
+    pub id: Option<crate::models::addressing_delegation_identifier::AddressingDelegationIdentifier>,
+    pub modified_at: Option<crate::models::addressing_timestamp::AddressingTimestamp>,
+    pub parent_prefix_id: Option<crate::models::addressing_prefix_identifier::AddressingPrefixIdentifier>,
 }

@@ -20,7 +20,7 @@ use serde::{Deserialize, Serialize};
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct DigitalExperienceMonitoringTracerouteTestNetworkPathResponse {
     pub device_name: Option<String>,
-    pub id: serde_json::Value,
+    pub id: crate::models::digital_experience_monitoring_uuid::DigitalExperienceMonitoringUuid,
     pub interval: Option<String>,
     pub kind: Option<serde_json::Value>,
     pub name: Option<String>,

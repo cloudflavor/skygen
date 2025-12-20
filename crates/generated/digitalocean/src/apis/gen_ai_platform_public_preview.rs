@@ -99,13 +99,26 @@ impl<'a> GenaiListAgentsRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// List Agents
+///
+/// To list all agents, send a GET request to `/v2/gen-ai/agents`.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/gen-ai/agents`
+///
+/// **Parameters**
+/// - `only_deployed` (query,optional)
+/// - `page` (query,optional)
+/// - `per_page` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::gen_ai_platform_public_preview };
+/// use digitalocean::{ ApiClient, apis::gen_ai_platform_public_preview };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = genai_list_agents(&api)
+/// let response = genai_list_agents(&api)
+///     .with_only_deployed("only_deployed")
+///     .with_page("page")
+///     .with_per_page("per_page")
 ///     .send()
 ///     .await?;
 /// ```
@@ -135,13 +148,20 @@ impl<'a> GenaiCreateAgentRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Create an Agent
+///
+/// To create a new agent, send a POST request to `/v2/gen-ai/agents`. The response body contains a JSON object with the newly created agent object.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/v2/gen-ai/agents`
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::gen_ai_platform_public_preview };
+/// use digitalocean::{ ApiClient, apis::gen_ai_platform_public_preview };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = genai_create_agent(&api)
+/// # let body: crate::models::api_create_agent_input_public::ApiCreateAgentInputPublic = todo!();
+/// let response = genai_create_agent(&api)
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -178,14 +198,26 @@ impl<'a> GenaiListAgentApiRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// List Agent API Keys
+///
+/// To list all agent API keys, send a GET request to `/v2/gen-ai/agents/{agent_uuid}/api_keys`.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/gen-ai/agents/{agent_uuid}/api_keys`
+///
+/// **Parameters**
+/// - `agent_uuid` (path, required)
+/// - `page` (query,optional)
+/// - `per_page` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::gen_ai_platform_public_preview };
+/// use digitalocean::{ ApiClient, apis::gen_ai_platform_public_preview };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = genai_list_agent_api(&api)
-///     .with_agent_uuid("value")
+/// let response = genai_list_agent_api(&api)
+///     .with_agent_uuid("agent_uuid")
+///     .with_page("page")
+///     .with_per_page("per_page")
 ///     .send()
 ///     .await?;
 /// ```
@@ -221,14 +253,24 @@ impl<'a> GenaiCreateAgentApiRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Create an Agent API Key
+///
+/// To create an agent API key, send a POST request to `/v2/gen-ai/agents/{agent_uuid}/api_keys`.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/v2/gen-ai/agents/{agent_uuid}/api_keys`
+///
+/// **Parameters**
+/// - `agent_uuid` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::gen_ai_platform_public_preview };
+/// use digitalocean::{ ApiClient, apis::gen_ai_platform_public_preview };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = genai_create_agent_api(&api)
-///     .with_agent_uuid("value")
+/// # let body: crate::models::api_create_agent_api_key_input_public::ApiCreateAgentApiKeyInputPublic = todo!();
+/// let response = genai_create_agent_api(&api)
+///     .with_agent_uuid("agent_uuid")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -272,15 +314,26 @@ impl<'a> GenaiUpdateAgentApiRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Update API Key for an Agent
+///
+/// To update an agent API key, send a PUT request to `/v2/gen-ai/agents/{agent_uuid}/api_keys/{api_key_uuid}`.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/v2/gen-ai/agents/{agent_uuid}/api_keys/{api_key_uuid}`
+///
+/// **Parameters**
+/// - `agent_uuid` (path, required)
+/// - `api_key_uuid` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::gen_ai_platform_public_preview };
+/// use digitalocean::{ ApiClient, apis::gen_ai_platform_public_preview };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = genai_update_agent_api(&api)
-///     .with_agent_uuid("value")
-///     .with_api_key_uuid("value")
+/// # let body: crate::models::api_update_agent_api_key_input_public::ApiUpdateAgentApiKeyInputPublic = todo!();
+/// let response = genai_update_agent_api(&api)
+///     .with_agent_uuid("agent_uuid")
+///     .with_api_key_uuid("api_key_uuid")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -317,15 +370,24 @@ impl<'a> GenaiDeleteAgentApiRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Delete API Key for an Agent
+///
+/// To delete an API key for an agent, send a DELETE request to `/v2/gen-ai/agents/{agent_uuid}/api_keys/{api_key_uuid}`.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/v2/gen-ai/agents/{agent_uuid}/api_keys/{api_key_uuid}`
+///
+/// **Parameters**
+/// - `agent_uuid` (path, required)
+/// - `api_key_uuid` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::gen_ai_platform_public_preview };
+/// use digitalocean::{ ApiClient, apis::gen_ai_platform_public_preview };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = genai_delete_agent_api(&api)
-///     .with_agent_uuid("value")
-///     .with_api_key_uuid("value")
+/// let response = genai_delete_agent_api(&api)
+///     .with_agent_uuid("agent_uuid")
+///     .with_api_key_uuid("api_key_uuid")
 ///     .send()
 ///     .await?;
 /// ```
@@ -362,15 +424,24 @@ impl<'a> GenaiRegenerateAgentApiRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Regenerate API Key for an Agent
+///
+/// To regenerate an agent API key, send a PUT request to `/v2/gen-ai/agents/{agent_uuid}/api_keys/{api_key_uuid}/regenerate`.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/v2/gen-ai/agents/{agent_uuid}/api_keys/{api_key_uuid}/regenerate`
+///
+/// **Parameters**
+/// - `agent_uuid` (path, required)
+/// - `api_key_uuid` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::gen_ai_platform_public_preview };
+/// use digitalocean::{ ApiClient, apis::gen_ai_platform_public_preview };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = genai_regenerate_agent_api(&api)
-///     .with_agent_uuid("value")
-///     .with_api_key_uuid("value")
+/// let response = genai_regenerate_agent_api(&api)
+///     .with_agent_uuid("agent_uuid")
+///     .with_api_key_uuid("api_key_uuid")
 ///     .send()
 ///     .await?;
 /// ```
@@ -406,14 +477,24 @@ impl<'a> GenaiAttachAgentFunctionRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Add Function Route to an Agent
+///
+/// To create a function route for an agent, send a POST request to `/v2/gen-ai/agents/{agent_uuid}/functions`.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/v2/gen-ai/agents/{agent_uuid}/functions`
+///
+/// **Parameters**
+/// - `agent_uuid` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::gen_ai_platform_public_preview };
+/// use digitalocean::{ ApiClient, apis::gen_ai_platform_public_preview };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = genai_attach_agent_function(&api)
-///     .with_agent_uuid("value")
+/// # let body: crate::models::api_link_agent_function_input_public::ApiLinkAgentFunctionInputPublic = todo!();
+/// let response = genai_attach_agent_function(&api)
+///     .with_agent_uuid("agent_uuid")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -457,15 +538,26 @@ impl<'a> GenaiUpdateAgentFunctionRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Update Function Route for an Agent
+///
+/// To update the function route, send a PUT request to `/v2/gen-ai/agents/{agent_uuid}/functions/{function_uuid}`.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/v2/gen-ai/agents/{agent_uuid}/functions/{function_uuid}`
+///
+/// **Parameters**
+/// - `agent_uuid` (path, required)
+/// - `function_uuid` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::gen_ai_platform_public_preview };
+/// use digitalocean::{ ApiClient, apis::gen_ai_platform_public_preview };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = genai_update_agent_function(&api)
-///     .with_agent_uuid("value")
-///     .with_function_uuid("value")
+/// # let body: crate::models::api_update_agent_function_input_public::ApiUpdateAgentFunctionInputPublic = todo!();
+/// let response = genai_update_agent_function(&api)
+///     .with_agent_uuid("agent_uuid")
+///     .with_function_uuid("function_uuid")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -502,15 +594,24 @@ impl<'a> GenaiDetachAgentFunctionRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Delete Function Route for an Agent
+///
+/// To delete a function route from an agent, send a DELETE request to `/v2/gen-ai/agents/{agent_uuid}/functions/{function_uuid}`.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/v2/gen-ai/agents/{agent_uuid}/functions/{function_uuid}`
+///
+/// **Parameters**
+/// - `agent_uuid` (path, required)
+/// - `function_uuid` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::gen_ai_platform_public_preview };
+/// use digitalocean::{ ApiClient, apis::gen_ai_platform_public_preview };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = genai_detach_agent_function(&api)
-///     .with_agent_uuid("value")
-///     .with_function_uuid("value")
+/// let response = genai_detach_agent_function(&api)
+///     .with_agent_uuid("agent_uuid")
+///     .with_function_uuid("function_uuid")
 ///     .send()
 ///     .await?;
 /// ```
@@ -542,14 +643,22 @@ impl<'a> GenaiAttachKnowledgeBasesRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Attach Knowledge Bases to an Agent
+///
+/// To attach knowledge bases to an agent, send a POST request to `/v2/gen-ai/agents/{agent_uuid}/knowledge_bases`
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/v2/gen-ai/agents/{agent_uuid}/knowledge_bases`
+///
+/// **Parameters**
+/// - `agent_uuid` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::gen_ai_platform_public_preview };
+/// use digitalocean::{ ApiClient, apis::gen_ai_platform_public_preview };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = genai_attach_knowledge_bases(&api)
-///     .with_agent_uuid("value")
+/// let response = genai_attach_knowledge_bases(&api)
+///     .with_agent_uuid("agent_uuid")
 ///     .send()
 ///     .await?;
 /// ```
@@ -586,15 +695,24 @@ impl<'a> GenaiAttachKnowledgeBaseRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Attach Knowledge Base to an Agent
+///
+/// To attach a knowledge base to an agent, send a POST request to `/v2/gen-ai/agents/{agent_uuid}/knowledge_bases/{knowledge_base_uuid}`
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/v2/gen-ai/agents/{agent_uuid}/knowledge_bases/{knowledge_base_uuid}`
+///
+/// **Parameters**
+/// - `agent_uuid` (path, required)
+/// - `knowledge_base_uuid` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::gen_ai_platform_public_preview };
+/// use digitalocean::{ ApiClient, apis::gen_ai_platform_public_preview };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = genai_attach_knowledge_base(&api)
-///     .with_agent_uuid("value")
-///     .with_knowledge_base_uuid("value")
+/// let response = genai_attach_knowledge_base(&api)
+///     .with_agent_uuid("agent_uuid")
+///     .with_knowledge_base_uuid("knowledge_base_uuid")
 ///     .send()
 ///     .await?;
 /// ```
@@ -631,15 +749,24 @@ impl<'a> GenaiDetachKnowledgeBaseRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Detach Knowledge Base from an Agent
+///
+/// To detach a knowledge base from an agent, send a DELETE request to `/v2/gen-ai/agents/{agent_uuid}/knowledge_bases/{knowledge_base_uuid}`.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/v2/gen-ai/agents/{agent_uuid}/knowledge_bases/{knowledge_base_uuid}`
+///
+/// **Parameters**
+/// - `agent_uuid` (path, required)
+/// - `knowledge_base_uuid` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::gen_ai_platform_public_preview };
+/// use digitalocean::{ ApiClient, apis::gen_ai_platform_public_preview };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = genai_detach_knowledge_base(&api)
-///     .with_agent_uuid("value")
-///     .with_knowledge_base_uuid("value")
+/// let response = genai_detach_knowledge_base(&api)
+///     .with_agent_uuid("agent_uuid")
+///     .with_knowledge_base_uuid("knowledge_base_uuid")
 ///     .send()
 ///     .await?;
 /// ```
@@ -683,15 +810,26 @@ impl<'a> GenaiAttachAgentRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Add Agent Route to an Agent
+///
+/// To add an agent route to an agent, send a POST request to `/v2/gen-ai/agents/{parent_agent_uuid}/child_agents/{child_agent_uuid}`.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/v2/gen-ai/agents/{parent_agent_uuid}/child_agents/{child_agent_uuid}`
+///
+/// **Parameters**
+/// - `parent_agent_uuid` (path, required)
+/// - `child_agent_uuid` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::gen_ai_platform_public_preview };
+/// use digitalocean::{ ApiClient, apis::gen_ai_platform_public_preview };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = genai_attach_agent(&api)
-///     .with_parent_agent_uuid("value")
-///     .with_child_agent_uuid("value")
+/// # let body: crate::models::api_link_agent_input_public::ApiLinkAgentInputPublic = todo!();
+/// let response = genai_attach_agent(&api)
+///     .with_parent_agent_uuid("parent_agent_uuid")
+///     .with_child_agent_uuid("child_agent_uuid")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -735,15 +873,26 @@ impl<'a> GenaiUpdateAttachedAgentRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Update Agent Route for an Agent
+///
+/// To update an agent route for an agent, send a PUT request to `/v2/gen-ai/agents/{parent_agent_uuid}/child_agents/{child_agent_uuid}`.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/v2/gen-ai/agents/{parent_agent_uuid}/child_agents/{child_agent_uuid}`
+///
+/// **Parameters**
+/// - `parent_agent_uuid` (path, required)
+/// - `child_agent_uuid` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::gen_ai_platform_public_preview };
+/// use digitalocean::{ ApiClient, apis::gen_ai_platform_public_preview };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = genai_update_attached_agent(&api)
-///     .with_parent_agent_uuid("value")
-///     .with_child_agent_uuid("value")
+/// # let body: crate::models::api_update_linked_agent_input_public::ApiUpdateLinkedAgentInputPublic = todo!();
+/// let response = genai_update_attached_agent(&api)
+///     .with_parent_agent_uuid("parent_agent_uuid")
+///     .with_child_agent_uuid("child_agent_uuid")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -780,15 +929,24 @@ impl<'a> GenaiDetachAgentRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Delete Agent Route for an Agent
+///
+/// To delete an agent route from a parent agent, send a DELETE request to `/v2/gen-ai/agents/{parent_agent_uuid}/child_agents/{child_agent_uuid}`.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/v2/gen-ai/agents/{parent_agent_uuid}/child_agents/{child_agent_uuid}`
+///
+/// **Parameters**
+/// - `parent_agent_uuid` (path, required)
+/// - `child_agent_uuid` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::gen_ai_platform_public_preview };
+/// use digitalocean::{ ApiClient, apis::gen_ai_platform_public_preview };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = genai_detach_agent(&api)
-///     .with_parent_agent_uuid("value")
-///     .with_child_agent_uuid("value")
+/// let response = genai_detach_agent(&api)
+///     .with_parent_agent_uuid("parent_agent_uuid")
+///     .with_child_agent_uuid("child_agent_uuid")
 ///     .send()
 ///     .await?;
 /// ```
@@ -816,14 +974,22 @@ impl<'a> GenaiGetAgentRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Retrieve an Existing Agent
+///
+/// To retrieve details of an agent, GET request to `/v2/gen-ai/agents/{uuid}`. The response body is a JSON object containing the agent.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/gen-ai/agents/{uuid}`
+///
+/// **Parameters**
+/// - `uuid` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::gen_ai_platform_public_preview };
+/// use digitalocean::{ ApiClient, apis::gen_ai_platform_public_preview };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = genai_get_agent(&api)
-///     .with_uuid("value")
+/// let response = genai_get_agent(&api)
+///     .with_uuid("uuid")
 ///     .send()
 ///     .await?;
 /// ```
@@ -858,14 +1024,24 @@ impl<'a> GenaiUpdateAgentRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Update an Agent
+///
+/// To update an agent, send a PUT request to `/v2/gen-ai/agents/{uuid}`. The response body is a JSON object containing the agent.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/v2/gen-ai/agents/{uuid}`
+///
+/// **Parameters**
+/// - `uuid` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::gen_ai_platform_public_preview };
+/// use digitalocean::{ ApiClient, apis::gen_ai_platform_public_preview };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = genai_update_agent(&api)
-///     .with_uuid("value")
+/// # let body: crate::models::api_update_agent_input_public::ApiUpdateAgentInputPublic = todo!();
+/// let response = genai_update_agent(&api)
+///     .with_uuid("uuid")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -893,14 +1069,22 @@ impl<'a> GenaiDeleteAgentRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Delete an Agent
+///
+/// To delete an agent, send a DELETE request to `/v2/gen-ai/agents/{uuid}`.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/v2/gen-ai/agents/{uuid}`
+///
+/// **Parameters**
+/// - `uuid` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::gen_ai_platform_public_preview };
+/// use digitalocean::{ ApiClient, apis::gen_ai_platform_public_preview };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = genai_delete_agent(&api)
-///     .with_uuid("value")
+/// let response = genai_delete_agent(&api)
+///     .with_uuid("uuid")
 ///     .send()
 ///     .await?;
 /// ```
@@ -929,14 +1113,22 @@ impl<'a> GenaiGetAgentChildrenRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// View Agent Routes
+///
+/// To view agent routes for an agent, send a GET requtest to `/v2/gen-ai/agents/{uuid}/child_agents`.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/gen-ai/agents/{uuid}/child_agents`
+///
+/// **Parameters**
+/// - `uuid` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::gen_ai_platform_public_preview };
+/// use digitalocean::{ ApiClient, apis::gen_ai_platform_public_preview };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = genai_get_agent_children(&api)
-///     .with_uuid("value")
+/// let response = genai_get_agent_children(&api)
+///     .with_uuid("uuid")
 ///     .send()
 ///     .await?;
 /// ```
@@ -975,14 +1167,24 @@ impl<'a> GenaiUpdateAgentDeploymentRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Update Agent Status
+///
+/// Check whether an agent is public or private. To update the agent status, send a PUT request to `/v2/gen-ai/agents/{uuid}/deployment_visibility`.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/v2/gen-ai/agents/{uuid}/deployment_visibility`
+///
+/// **Parameters**
+/// - `uuid` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::gen_ai_platform_public_preview };
+/// use digitalocean::{ ApiClient, apis::gen_ai_platform_public_preview };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = genai_update_agent_deployment(&api)
-///     .with_uuid("value")
+/// # let body: crate::models::api_update_agent_deployment_visibility_input_public::ApiUpdateAgentDeploymentVisibilityInputPublic = todo!();
+/// let response = genai_update_agent_deployment(&api)
+///     .with_uuid("uuid")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -1018,14 +1220,26 @@ impl<'a> GenaiListAgentVersionsRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// List Agent Versions
+///
+/// To list all agent versions, send a GET request to `/v2/gen-ai/agents/{uuid}/versions`.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/gen-ai/agents/{uuid}/versions`
+///
+/// **Parameters**
+/// - `uuid` (path, required)
+/// - `page` (query,optional)
+/// - `per_page` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::gen_ai_platform_public_preview };
+/// use digitalocean::{ ApiClient, apis::gen_ai_platform_public_preview };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = genai_list_agent_versions(&api)
-///     .with_uuid("value")
+/// let response = genai_list_agent_versions(&api)
+///     .with_uuid("uuid")
+///     .with_page("page")
+///     .with_per_page("per_page")
 ///     .send()
 ///     .await?;
 /// ```
@@ -1060,14 +1274,24 @@ impl<'a> GenaiRollbackAgentVersionRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Rollback to Agent Version
+///
+/// To update to a specific agent version, send a PUT request to `/v2/gen-ai/agents/{uuid}/versions`.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/v2/gen-ai/agents/{uuid}/versions`
+///
+/// **Parameters**
+/// - `uuid` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::gen_ai_platform_public_preview };
+/// use digitalocean::{ ApiClient, apis::gen_ai_platform_public_preview };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = genai_rollback_agent_version(&api)
-///     .with_uuid("value")
+/// # let body: crate::models::api_rollback_to_agent_version_input_public::ApiRollbackToAgentVersionInputPublic = todo!();
+/// let response = genai_rollback_agent_version(&api)
+///     .with_uuid("uuid")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -1098,13 +1322,24 @@ impl<'a> GenaiListAnthropicApiRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// List Anthropic API Keys
+///
+/// To list all Anthropic API keys, send a GET request to `/v2/gen-ai/anthropic/keys`.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/gen-ai/anthropic/keys`
+///
+/// **Parameters**
+/// - `page` (query,optional)
+/// - `per_page` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::gen_ai_platform_public_preview };
+/// use digitalocean::{ ApiClient, apis::gen_ai_platform_public_preview };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = genai_list_anthropic_api(&api)
+/// let response = genai_list_anthropic_api(&api)
+///     .with_page("page")
+///     .with_per_page("per_page")
 ///     .send()
 ///     .await?;
 /// ```
@@ -1134,13 +1369,20 @@ impl<'a> GenaiCreateAnthropicApiRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Create Anthropic API Key
+///
+/// To create an Anthropic API key, send a POST request to `/v2/gen-ai/anthropic/keys`.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/v2/gen-ai/anthropic/keys`
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::gen_ai_platform_public_preview };
+/// use digitalocean::{ ApiClient, apis::gen_ai_platform_public_preview };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = genai_create_anthropic_api(&api)
+/// # let body: crate::models::api_create_anthropic_api_key_input_public::ApiCreateAnthropicApiKeyInputPublic = todo!();
+/// let response = genai_create_anthropic_api(&api)
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -1169,14 +1411,22 @@ impl<'a> GenaiGetAnthropicApiRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get Anthropic API Key
+///
+/// To retrieve details of an Anthropic API key, send a GET request to `/v2/gen-ai/anthropic/keys/{api_key_uuid}`.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/gen-ai/anthropic/keys/{api_key_uuid}`
+///
+/// **Parameters**
+/// - `api_key_uuid` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::gen_ai_platform_public_preview };
+/// use digitalocean::{ ApiClient, apis::gen_ai_platform_public_preview };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = genai_get_anthropic_api(&api)
-///     .with_api_key_uuid("value")
+/// let response = genai_get_anthropic_api(&api)
+///     .with_api_key_uuid("api_key_uuid")
 ///     .send()
 ///     .await?;
 /// ```
@@ -1212,14 +1462,24 @@ impl<'a> GenaiUpdateAnthropicApiRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Update Anthropic API Key
+///
+/// To update an Anthropic API key, send a PUT request to `/v2/gen-ai/anthropic/keys/{api_key_uuid}`.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/v2/gen-ai/anthropic/keys/{api_key_uuid}`
+///
+/// **Parameters**
+/// - `api_key_uuid` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::gen_ai_platform_public_preview };
+/// use digitalocean::{ ApiClient, apis::gen_ai_platform_public_preview };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = genai_update_anthropic_api(&api)
-///     .with_api_key_uuid("value")
+/// # let body: crate::models::api_update_anthropic_api_key_input_public::ApiUpdateAnthropicApiKeyInputPublic = todo!();
+/// let response = genai_update_anthropic_api(&api)
+///     .with_api_key_uuid("api_key_uuid")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -1251,14 +1511,22 @@ impl<'a> GenaiDeleteAnthropicApiRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Delete Anthropic API Key
+///
+/// To delete an Anthropic API key, send a DELETE request to `/v2/gen-ai/anthropic/keys/{api_key_uuid}`.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/v2/gen-ai/anthropic/keys/{api_key_uuid}`
+///
+/// **Parameters**
+/// - `api_key_uuid` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::gen_ai_platform_public_preview };
+/// use digitalocean::{ ApiClient, apis::gen_ai_platform_public_preview };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = genai_delete_anthropic_api(&api)
-///     .with_api_key_uuid("value")
+/// let response = genai_delete_anthropic_api(&api)
+///     .with_api_key_uuid("api_key_uuid")
 ///     .send()
 ///     .await?;
 /// ```
@@ -1295,14 +1563,26 @@ impl<'a> GenaiListAgentsGetRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// List agents by Anthropic key
+///
+/// List Agents by Anthropic Key.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/gen-ai/anthropic/keys/{uuid}/agents`
+///
+/// **Parameters**
+/// - `uuid` (path, required)
+/// - `page` (query,optional)
+/// - `per_page` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::gen_ai_platform_public_preview };
+/// use digitalocean::{ ApiClient, apis::gen_ai_platform_public_preview };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = genai_list_agents_get(&api)
-///     .with_uuid("value")
+/// let response = genai_list_agents_get(&api)
+///     .with_uuid("uuid")
+///     .with_page("page")
+///     .with_per_page("per_page")
 ///     .send()
 ///     .await?;
 /// ```
@@ -1333,13 +1613,24 @@ impl<'a> GenaiListIndexingJobsRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// List Indexing Jobs for a Knowledge Base
+///
+/// To list all indexing jobs for a knowledge base, send a GET request to `/v2/gen-ai/indexing_jobs`.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/gen-ai/indexing_jobs`
+///
+/// **Parameters**
+/// - `page` (query,optional)
+/// - `per_page` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::gen_ai_platform_public_preview };
+/// use digitalocean::{ ApiClient, apis::gen_ai_platform_public_preview };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = genai_list_indexing_jobs(&api)
+/// let response = genai_list_indexing_jobs(&api)
+///     .with_page("page")
+///     .with_per_page("per_page")
 ///     .send()
 ///     .await?;
 /// ```
@@ -1369,13 +1660,20 @@ impl<'a> GenaiCreateIndexingJobRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Start Indexing Job for a Knowledge Base
+///
+/// To start an indexing job for a knowledge base, send a POST request to `/v2/gen-ai/indexing_jobs`.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/v2/gen-ai/indexing_jobs`
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::gen_ai_platform_public_preview };
+/// use digitalocean::{ ApiClient, apis::gen_ai_platform_public_preview };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = genai_create_indexing_job(&api)
+/// # let body: crate::models::api_start_knowledge_base_indexing_job_input_public::ApiStartKnowledgeBaseIndexingJobInputPublic = todo!();
+/// let response = genai_create_indexing_job(&api)
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -1407,14 +1705,22 @@ impl<'a> GenaiListIndexingJobRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// List Data Sources for Indexing Job for a Knowledge Base
+///
+/// To list all datasources for an indexing job, send a GET request to `/v2/gen-ai/indexing_jobs/{indexing_job_uuid}/data_sources`.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/gen-ai/indexing_jobs/{indexing_job_uuid}/data_sources`
+///
+/// **Parameters**
+/// - `indexing_job_uuid` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::gen_ai_platform_public_preview };
+/// use digitalocean::{ ApiClient, apis::gen_ai_platform_public_preview };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = genai_list_indexing_job(&api)
-///     .with_indexing_job_uuid("value")
+/// let response = genai_list_indexing_job(&api)
+///     .with_indexing_job_uuid("indexing_job_uuid")
 ///     .send()
 ///     .await?;
 /// ```
@@ -1442,14 +1748,22 @@ impl<'a> GenaiGetIndexingJobRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Retrieve Status of Indexing Job for a Knowledge Base
+///
+/// To get status of an indexing Job for a knowledge base, send a GET request to `/v2/gen-ai/indexing_jobs/{uuid}`.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/gen-ai/indexing_jobs/{uuid}`
+///
+/// **Parameters**
+/// - `uuid` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::gen_ai_platform_public_preview };
+/// use digitalocean::{ ApiClient, apis::gen_ai_platform_public_preview };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = genai_get_indexing_job(&api)
-///     .with_uuid("value")
+/// let response = genai_get_indexing_job(&api)
+///     .with_uuid("uuid")
 ///     .send()
 ///     .await?;
 /// ```
@@ -1485,14 +1799,24 @@ impl<'a> GenaiCancelIndexingJobRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Cancel Indexing Job for a Knowledge Base
+///
+/// To cancel an indexing job for a knowledge base, send a PUT request to `/v2/gen-ai/indexing_jobs/{uuid}/cancel`.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/v2/gen-ai/indexing_jobs/{uuid}/cancel`
+///
+/// **Parameters**
+/// - `uuid` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::gen_ai_platform_public_preview };
+/// use digitalocean::{ ApiClient, apis::gen_ai_platform_public_preview };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = genai_cancel_indexing_job(&api)
-///     .with_uuid("value")
+/// # let body: crate::models::api_cancel_knowledge_base_indexing_job_input_public::ApiCancelKnowledgeBaseIndexingJobInputPublic = todo!();
+/// let response = genai_cancel_indexing_job(&api)
+///     .with_uuid("uuid")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -1523,13 +1847,24 @@ impl<'a> GenaiListKnowledgeBasesRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// List Knowledge Bases
+///
+/// To list all knowledge bases, send a GET request to `/v2/gen-ai/knowledge_bases`.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/gen-ai/knowledge_bases`
+///
+/// **Parameters**
+/// - `page` (query,optional)
+/// - `per_page` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::gen_ai_platform_public_preview };
+/// use digitalocean::{ ApiClient, apis::gen_ai_platform_public_preview };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = genai_list_knowledge_bases(&api)
+/// let response = genai_list_knowledge_bases(&api)
+///     .with_page("page")
+///     .with_per_page("per_page")
 ///     .send()
 ///     .await?;
 /// ```
@@ -1559,13 +1894,20 @@ impl<'a> GenaiCreateKnowledgeBaseRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Create a Knowledge Base
+///
+/// To create a knowledge base, send a POST request to `/v2/gen-ai/knowledge_bases`.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/v2/gen-ai/knowledge_bases`
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::gen_ai_platform_public_preview };
+/// use digitalocean::{ ApiClient, apis::gen_ai_platform_public_preview };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = genai_create_knowledge_base(&api)
+/// # let body: crate::models::api_create_knowledge_base_input_public::ApiCreateKnowledgeBaseInputPublic = todo!();
+/// let response = genai_create_knowledge_base(&api)
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -1605,14 +1947,26 @@ impl<'a> GenaiListKnowledgeBaseRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// List Data Sources for a Knowledge Base
+///
+/// To list all data sources for a knowledge base, send a GET request to `/v2/gen-ai/knowledge_bases/{knowledge_base_uuid}/data_sources`.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/gen-ai/knowledge_bases/{knowledge_base_uuid}/data_sources`
+///
+/// **Parameters**
+/// - `knowledge_base_uuid` (path, required)
+/// - `page` (query,optional)
+/// - `per_page` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::gen_ai_platform_public_preview };
+/// use digitalocean::{ ApiClient, apis::gen_ai_platform_public_preview };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = genai_list_knowledge_base(&api)
-///     .with_knowledge_base_uuid("value")
+/// let response = genai_list_knowledge_base(&api)
+///     .with_knowledge_base_uuid("knowledge_base_uuid")
+///     .with_page("page")
+///     .with_per_page("per_page")
 ///     .send()
 ///     .await?;
 /// ```
@@ -1651,14 +2005,24 @@ impl<'a> GenaiCreateKnowledgeBasePostRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Add Data Source to a Knowledge Base
+///
+/// To add a data source to a knowledge base, send a POST request to `/v2/gen-ai/knowledge_bases/{knowledge_base_uuid}/data_sources`.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/v2/gen-ai/knowledge_bases/{knowledge_base_uuid}/data_sources`
+///
+/// **Parameters**
+/// - `knowledge_base_uuid` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::gen_ai_platform_public_preview };
+/// use digitalocean::{ ApiClient, apis::gen_ai_platform_public_preview };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = genai_create_knowledge_base_post(&api)
-///     .with_knowledge_base_uuid("value")
+/// # let body: crate::models::api_create_knowledge_base_data_source_input_public::ApiCreateKnowledgeBaseDataSourceInputPublic = todo!();
+/// let response = genai_create_knowledge_base_post(&api)
+///     .with_knowledge_base_uuid("knowledge_base_uuid")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -1697,15 +2061,24 @@ impl<'a> GenaiDeleteKnowledgeBaseRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Delete a Data Source from a Knowledge Base
+///
+/// To delete a data source from a knowledge base, send a DELETE request to `/v2/gen-ai/knowledge_bases/{knowledge_base_uuid}/data_sources/{data_source_uuid}`.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/v2/gen-ai/knowledge_bases/{knowledge_base_uuid}/data_sources/{data_source_uuid}`
+///
+/// **Parameters**
+/// - `knowledge_base_uuid` (path, required)
+/// - `data_source_uuid` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::gen_ai_platform_public_preview };
+/// use digitalocean::{ ApiClient, apis::gen_ai_platform_public_preview };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = genai_delete_knowledge_base(&api)
-///     .with_knowledge_base_uuid("value")
-///     .with_data_source_uuid("value")
+/// let response = genai_delete_knowledge_base(&api)
+///     .with_knowledge_base_uuid("knowledge_base_uuid")
+///     .with_data_source_uuid("data_source_uuid")
 ///     .send()
 ///     .await?;
 /// ```
@@ -1733,14 +2106,22 @@ impl<'a> GenaiGetKnowledgeBaseRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Retrieve Information About an Existing Knowledge Base
+///
+/// To retrive information about an existing knowledge base, send a GET request to `/v2/gen-ai/knowledge_bases/{uuid}`.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/gen-ai/knowledge_bases/{uuid}`
+///
+/// **Parameters**
+/// - `uuid` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::gen_ai_platform_public_preview };
+/// use digitalocean::{ ApiClient, apis::gen_ai_platform_public_preview };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = genai_get_knowledge_base(&api)
-///     .with_uuid("value")
+/// let response = genai_get_knowledge_base(&api)
+///     .with_uuid("uuid")
 ///     .send()
 ///     .await?;
 /// ```
@@ -1775,14 +2156,24 @@ impl<'a> GenaiUpdateKnowledgeBaseRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Update a Knowledge Base
+///
+/// To update a knowledge base, send a PUT request to `/v2/gen-ai/knowledge_bases/{uuid}`.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/v2/gen-ai/knowledge_bases/{uuid}`
+///
+/// **Parameters**
+/// - `uuid` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::gen_ai_platform_public_preview };
+/// use digitalocean::{ ApiClient, apis::gen_ai_platform_public_preview };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = genai_update_knowledge_base(&api)
-///     .with_uuid("value")
+/// # let body: crate::models::api_update_knowledge_base_input_public::ApiUpdateKnowledgeBaseInputPublic = todo!();
+/// let response = genai_update_knowledge_base(&api)
+///     .with_uuid("uuid")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -1811,14 +2202,22 @@ impl<'a> GenaiDeleteKnowledgeBaseDeleteRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Delete a Knowledge Base
+///
+/// To delete a knowledge base, send a DELETE request to `/v2/gen-ai/knowledge_bases/{uuid}`.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/v2/gen-ai/knowledge_bases/{uuid}`
+///
+/// **Parameters**
+/// - `uuid` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::gen_ai_platform_public_preview };
+/// use digitalocean::{ ApiClient, apis::gen_ai_platform_public_preview };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = genai_delete_knowledge_base_delete(&api)
-///     .with_uuid("value")
+/// let response = genai_delete_knowledge_base_delete(&api)
+///     .with_uuid("uuid")
 ///     .send()
 ///     .await?;
 /// ```
@@ -1859,13 +2258,28 @@ impl<'a> GenaiListModelsRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// List Available Models
+///
+/// To list all models, send a GET request to `/v2/gen-ai/models`.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/gen-ai/models`
+///
+/// **Parameters**
+/// - `usecases` (query,optional)
+/// - `public_only` (query,optional)
+/// - `page` (query,optional)
+/// - `per_page` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::gen_ai_platform_public_preview };
+/// use digitalocean::{ ApiClient, apis::gen_ai_platform_public_preview };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = genai_list_models(&api)
+/// let response = genai_list_models(&api)
+///     .with_usecases("usecases")
+///     .with_public_only("public_only")
+///     .with_page("page")
+///     .with_per_page("per_page")
 ///     .send()
 ///     .await?;
 /// ```
@@ -1896,13 +2310,24 @@ impl<'a> GenaiListModelApiRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// List Model API Keys
+///
+/// To list all model API keys, send a GET request to `/v2/gen-ai/models/api_keys`.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/gen-ai/models/api_keys`
+///
+/// **Parameters**
+/// - `page` (query,optional)
+/// - `per_page` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::gen_ai_platform_public_preview };
+/// use digitalocean::{ ApiClient, apis::gen_ai_platform_public_preview };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = genai_list_model_api(&api)
+/// let response = genai_list_model_api(&api)
+///     .with_page("page")
+///     .with_per_page("per_page")
 ///     .send()
 ///     .await?;
 /// ```
@@ -1932,13 +2357,20 @@ impl<'a> GenaiCreateModelApiRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Create a Model API Key
+///
+/// To create a model API key, send a POST request to `/v2/gen-ai/models/api_keys`.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/v2/gen-ai/models/api_keys`
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::gen_ai_platform_public_preview };
+/// use digitalocean::{ ApiClient, apis::gen_ai_platform_public_preview };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = genai_create_model_api(&api)
+/// # let body: crate::models::api_create_model_api_key_input_public::ApiCreateModelApiKeyInputPublic = todo!();
+/// let response = genai_create_model_api(&api)
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -1974,14 +2406,24 @@ impl<'a> GenaiUpdateModelApiRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Update API Key for a Model
+///
+/// To update a model API key, send a PUT request to `/v2/gen-ai/models/api_keys/{api_key_uuid}`.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/v2/gen-ai/models/api_keys/{api_key_uuid}`
+///
+/// **Parameters**
+/// - `api_key_uuid` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::gen_ai_platform_public_preview };
+/// use digitalocean::{ ApiClient, apis::gen_ai_platform_public_preview };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = genai_update_model_api(&api)
-///     .with_api_key_uuid("value")
+/// # let body: crate::models::api_update_model_api_key_input_public::ApiUpdateModelApiKeyInputPublic = todo!();
+/// let response = genai_update_model_api(&api)
+///     .with_api_key_uuid("api_key_uuid")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -2013,14 +2455,22 @@ impl<'a> GenaiDeleteModelApiRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Delete API Key for a Model
+///
+/// To delete an API key for a model, send a DELETE request to `/v2/gen-ai/models/api_keys/{api_key_uuid}`.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/v2/gen-ai/models/api_keys/{api_key_uuid}`
+///
+/// **Parameters**
+/// - `api_key_uuid` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::gen_ai_platform_public_preview };
+/// use digitalocean::{ ApiClient, apis::gen_ai_platform_public_preview };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = genai_delete_model_api(&api)
-///     .with_api_key_uuid("value")
+/// let response = genai_delete_model_api(&api)
+///     .with_api_key_uuid("api_key_uuid")
 ///     .send()
 ///     .await?;
 /// ```
@@ -2052,14 +2502,22 @@ impl<'a> GenaiRegenerateModelApiRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Regenerate API Key for a Model
+///
+/// To regenerate a model API key, send a PUT request to `/v2/gen-ai/models/api_keys/{api_key_uuid}/regenerate`.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/v2/gen-ai/models/api_keys/{api_key_uuid}/regenerate`
+///
+/// **Parameters**
+/// - `api_key_uuid` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::gen_ai_platform_public_preview };
+/// use digitalocean::{ ApiClient, apis::gen_ai_platform_public_preview };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = genai_regenerate_model_api(&api)
-///     .with_api_key_uuid("value")
+/// let response = genai_regenerate_model_api(&api)
+///     .with_api_key_uuid("api_key_uuid")
 ///     .send()
 ///     .await?;
 /// ```
@@ -2090,13 +2548,24 @@ impl<'a> GenaiListOpenaiApiRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// List OpenAI API Keys
+///
+/// To list all OpenAI API keys, send a GET request to `/v2/gen-ai/openai/keys`.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/gen-ai/openai/keys`
+///
+/// **Parameters**
+/// - `page` (query,optional)
+/// - `per_page` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::gen_ai_platform_public_preview };
+/// use digitalocean::{ ApiClient, apis::gen_ai_platform_public_preview };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = genai_list_openai_api(&api)
+/// let response = genai_list_openai_api(&api)
+///     .with_page("page")
+///     .with_per_page("per_page")
 ///     .send()
 ///     .await?;
 /// ```
@@ -2126,13 +2595,20 @@ impl<'a> GenaiCreateOpenaiApiRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Create OpenAI API Key
+///
+/// To create an OpenAI API key, send a POST request to `/v2/gen-ai/openai/keys`.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/v2/gen-ai/openai/keys`
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::gen_ai_platform_public_preview };
+/// use digitalocean::{ ApiClient, apis::gen_ai_platform_public_preview };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = genai_create_openai_api(&api)
+/// # let body: crate::models::api_create_open_aiapi_key_input_public::ApiCreateOpenAiapiKeyInputPublic = todo!();
+/// let response = genai_create_openai_api(&api)
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -2161,14 +2637,22 @@ impl<'a> GenaiGetOpenaiApiRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get OpenAI API Key
+///
+/// To retrieve details of an OpenAI API key, send a GET request to `/v2/gen-ai/openai/keys/{api_key_uuid}`.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/gen-ai/openai/keys/{api_key_uuid}`
+///
+/// **Parameters**
+/// - `api_key_uuid` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::gen_ai_platform_public_preview };
+/// use digitalocean::{ ApiClient, apis::gen_ai_platform_public_preview };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = genai_get_openai_api(&api)
-///     .with_api_key_uuid("value")
+/// let response = genai_get_openai_api(&api)
+///     .with_api_key_uuid("api_key_uuid")
 ///     .send()
 ///     .await?;
 /// ```
@@ -2204,14 +2688,24 @@ impl<'a> GenaiUpdateOpenaiApiRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Update OpenAI API Key
+///
+/// To update an OpenAI API key, send a PUT request to `/v2/gen-ai/openai/keys/{api_key_uuid}`.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/v2/gen-ai/openai/keys/{api_key_uuid}`
+///
+/// **Parameters**
+/// - `api_key_uuid` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::gen_ai_platform_public_preview };
+/// use digitalocean::{ ApiClient, apis::gen_ai_platform_public_preview };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = genai_update_openai_api(&api)
-///     .with_api_key_uuid("value")
+/// # let body: crate::models::api_update_open_aiapi_key_input_public::ApiUpdateOpenAiapiKeyInputPublic = todo!();
+/// let response = genai_update_openai_api(&api)
+///     .with_api_key_uuid("api_key_uuid")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -2240,14 +2734,22 @@ impl<'a> GenaiDeleteOpenaiApiRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Delete OpenAI API Key
+///
+/// To delete an OpenAI API key, send a DELETE request to `/v2/gen-ai/openai/keys/{api_key_uuid}`.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/v2/gen-ai/openai/keys/{api_key_uuid}`
+///
+/// **Parameters**
+/// - `api_key_uuid` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::gen_ai_platform_public_preview };
+/// use digitalocean::{ ApiClient, apis::gen_ai_platform_public_preview };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = genai_delete_openai_api(&api)
-///     .with_api_key_uuid("value")
+/// let response = genai_delete_openai_api(&api)
+///     .with_api_key_uuid("api_key_uuid")
 ///     .send()
 ///     .await?;
 /// ```
@@ -2284,14 +2786,26 @@ impl<'a> GenaiListAgentsGet3Request<'a> {
         self.builder.send().await
     }
 }
-
 /// List agents by OpenAI key
+///
+/// List Agents by OpenAI Key.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/gen-ai/openai/keys/{uuid}/agents`
+///
+/// **Parameters**
+/// - `uuid` (path, required)
+/// - `page` (query,optional)
+/// - `per_page` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::gen_ai_platform_public_preview };
+/// use digitalocean::{ ApiClient, apis::gen_ai_platform_public_preview };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = genai_list_agents_get_3(&api)
-///     .with_uuid("value")
+/// let response = genai_list_agents_get_3(&api)
+///     .with_uuid("uuid")
+///     .with_page("page")
+///     .with_per_page("per_page")
 ///     .send()
 ///     .await?;
 /// ```
@@ -2322,13 +2836,24 @@ impl<'a> GenaiListDatacenterRegionsRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// List Datacenter Regions
+///
+/// To list all datacenter regions, send a GET request to `/v2/gen-ai/regions`.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/gen-ai/regions`
+///
+/// **Parameters**
+/// - `serves_inference` (query,optional)
+/// - `serves_batch` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::gen_ai_platform_public_preview };
+/// use digitalocean::{ ApiClient, apis::gen_ai_platform_public_preview };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = genai_list_datacenter_regions(&api)
+/// let response = genai_list_datacenter_regions(&api)
+///     .with_serves_inference("serves_inference")
+///     .with_serves_batch("serves_batch")
 ///     .send()
 ///     .await?;
 /// ```

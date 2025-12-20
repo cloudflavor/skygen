@@ -42,14 +42,20 @@ impl<'a> UpdateReadRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Reads the last cron update time
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/cloudforce-one/events/cron`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::cron };
+/// use cloudflare::{ ApiClient, apis::cron };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = update_read(&api)
-///     .with_account_id("value")
+/// let response = update_read(&api)
+///     .with_account_id("account_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -81,14 +87,20 @@ impl<'a> UpdateRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Reads the last cron update time
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/cloudforce-one/events/cron`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::cron };
+/// use cloudflare::{ ApiClient, apis::cron };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = update(&api)
-///     .with_account_id("value")
+/// let response = update(&api)
+///     .with_account_id("account_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -120,14 +132,20 @@ impl<'a> UpdatePatchRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Reads the last cron update time
+///
+/// **HTTP Method:** `PATCH`
+/// **Path:** `/accounts/{account_id}/cloudforce-one/events/cron`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::cron };
+/// use cloudflare::{ ApiClient, apis::cron };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = update_patch(&api)
-///     .with_account_id("value")
+/// let response = update_patch(&api)
+///     .with_account_id("account_id")
 ///     .send()
 ///     .await?;
 /// ```

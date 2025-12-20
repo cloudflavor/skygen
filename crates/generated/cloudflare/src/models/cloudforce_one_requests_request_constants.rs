@@ -19,7 +19,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct CloudforceOneRequestsRequestConstants {
-    pub priority: Option<Vec<serde_json::Value>>,
-    pub status: Option<Vec<serde_json::Value>>,
-    pub tlp: Option<Vec<serde_json::Value>>,
+    pub priority: Option<Vec<crate::models::cloudforce_one_requests_priority::CloudforceOneRequestsPriority>>,
+    pub status: Option<Vec<crate::models::cloudforce_one_requests_request_status::CloudforceOneRequestsRequestStatus>>,
+    pub tlp: Option<Vec<crate::models::cloudforce_one_requests_tlp::CloudforceOneRequestsTlp>>,
 }

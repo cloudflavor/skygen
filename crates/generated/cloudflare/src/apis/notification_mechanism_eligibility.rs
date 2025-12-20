@@ -15,12 +15,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::aaa_schemas_response_collection::AaaSchemasResponseCollection;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct GetDeliveryMechanismEligibilityRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, AaaSchemasResponseCollection>,
 }
 
 impl<'a> GetDeliveryMechanismEligibilityRequest<'a> {
@@ -38,18 +39,26 @@ impl<'a> GetDeliveryMechanismEligibilityRequest<'a> {
         self.builder = self.builder.path_param("account_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<AaaSchemasResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// Get delivery mechanism eligibility
+///
+/// Get a list of all delivery mechanism types for which an account is eligible.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/alerting/v3/destinations/eligible`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::notification_mechanism_eligibility };
+/// use cloudflare::{ ApiClient, apis::notification_mechanism_eligibility };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_delivery_mechanism_eligibility(&api)
-///     .with_account_id("value")
+/// let response = get_delivery_mechanism_eligibility(&api)
+///     .with_account_id("account_id")
 ///     .send()
 ///     .await?;
 /// ```

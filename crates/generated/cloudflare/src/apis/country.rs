@@ -44,14 +44,20 @@ impl<'a> ReadRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Retrieves countries information for all countries
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/cloudforce-one/events/countries`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::country };
+/// use cloudflare::{ ApiClient, apis::country };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = read(&api)
-///     .with_account_id("value")
+/// let response = read(&api)
+///     .with_account_id("account_id")
 ///     .send()
 ///     .await?;
 /// ```

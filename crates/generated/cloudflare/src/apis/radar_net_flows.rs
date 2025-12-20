@@ -65,13 +65,36 @@ impl<'a> GetNetflowsSummaryRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get network traffic summary
+///
+/// Retrieves the distribution of network traffic (NetFlows) by HTTP vs other protocols.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/netflows/summary`
+///
+/// **Parameters**
+/// - `name` (query,optional)
+/// - `dateRange` (query,optional)
+/// - `dateStart` (query,optional)
+/// - `dateEnd` (query,optional)
+/// - `asn` (query,optional)
+/// - `location` (query,optional)
+/// - `continent` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_net_flows };
+/// use cloudflare::{ ApiClient, apis::radar_net_flows };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_netflows_summary(&api)
+/// let response = get_netflows_summary(&api)
+///     .with_name("name")
+///     .with_date_range("dateRange")
+///     .with_date_start("dateStart")
+///     .with_date_end("dateEnd")
+///     .with_asn("asn")
+///     .with_location("location")
+///     .with_continent("continent")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```
@@ -138,13 +161,42 @@ impl<'a> GetNetflowsTimeseriesRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get network traffic time series
+///
+/// Retrieves network traffic (NetFlows) over time.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/netflows/timeseries`
+///
+/// **Parameters**
+/// - `aggInterval` (query,optional)
+/// - `name` (query,optional)
+/// - `dateRange` (query,optional)
+/// - `dateStart` (query,optional)
+/// - `dateEnd` (query,optional)
+/// - `product` (query,optional)
+/// - `asn` (query,optional)
+/// - `location` (query,optional)
+/// - `continent` (query,optional)
+/// - `normalization` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_net_flows };
+/// use cloudflare::{ ApiClient, apis::radar_net_flows };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_netflows_timeseries(&api)
+/// let response = get_netflows_timeseries(&api)
+///     .with_agg_interval("aggInterval")
+///     .with_name("name")
+///     .with_date_range("dateRange")
+///     .with_date_start("dateStart")
+///     .with_date_end("dateEnd")
+///     .with_product("product")
+///     .with_asn("asn")
+///     .with_location("location")
+///     .with_continent("continent")
+///     .with_normalization("normalization")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```
@@ -203,13 +255,38 @@ impl<'a> GetNetflowsTopAsesRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get top ASes by network traffic
+///
+/// Retrieves the top autonomous systems by network traffic (NetFlows).
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/netflows/top/ases`
+///
+/// **Parameters**
+/// - `limit` (query,optional)
+/// - `name` (query,optional)
+/// - `dateRange` (query,optional)
+/// - `dateStart` (query,optional)
+/// - `dateEnd` (query,optional)
+/// - `asn` (query,optional)
+/// - `location` (query,optional)
+/// - `continent` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_net_flows };
+/// use cloudflare::{ ApiClient, apis::radar_net_flows };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_netflows_top_ases(&api)
+/// let response = get_netflows_top_ases(&api)
+///     .with_limit("limit")
+///     .with_name("name")
+///     .with_date_range("dateRange")
+///     .with_date_start("dateStart")
+///     .with_date_end("dateEnd")
+///     .with_asn("asn")
+///     .with_location("location")
+///     .with_continent("continent")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```
@@ -268,13 +345,38 @@ impl<'a> GetNetflowsTopLocationsRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get top locations by network traffic
+///
+/// Retrieves the top locations by network traffic (NetFlows).
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/netflows/top/locations`
+///
+/// **Parameters**
+/// - `limit` (query,optional)
+/// - `name` (query,optional)
+/// - `dateRange` (query,optional)
+/// - `dateStart` (query,optional)
+/// - `dateEnd` (query,optional)
+/// - `asn` (query,optional)
+/// - `location` (query,optional)
+/// - `continent` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_net_flows };
+/// use cloudflare::{ ApiClient, apis::radar_net_flows };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_netflows_top_locations(&api)
+/// let response = get_netflows_top_locations(&api)
+///     .with_limit("limit")
+///     .with_name("name")
+///     .with_date_range("dateRange")
+///     .with_date_start("dateStart")
+///     .with_date_end("dateEnd")
+///     .with_asn("asn")
+///     .with_location("location")
+///     .with_continent("continent")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```

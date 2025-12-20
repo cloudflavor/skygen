@@ -19,8 +19,8 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct D1DatabaseResponse {
-    pub created_at: Option<serde_json::Value>,
-    pub name: Option<serde_json::Value>,
-    pub uuid: Option<serde_json::Value>,
-    pub version: Option<serde_json::Value>,
+    pub created_at: Option<crate::models::d1_created_at::D1CreatedAt>,
+    pub name: Option<crate::models::d1_database_name::D1DatabaseName>,
+    pub uuid: Option<crate::models::d1_database_identifier::D1DatabaseIdentifier>,
+    pub version: Option<crate::models::d1_database_version::D1DatabaseVersion>,
 }

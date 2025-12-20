@@ -22,7 +22,7 @@ pub struct DlpUserRiskInfo {
     pub email: String,
     pub event_count: i64,
     pub last_event: String,
-    pub max_risk_level: serde_json::Value,
+    pub max_risk_level: crate::models::dlp_risk_level::DlpRiskLevel,
     pub name: String,
     pub user_id: String,
 }

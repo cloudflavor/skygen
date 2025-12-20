@@ -19,10 +19,10 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct SecondaryDnsPeer {
-    pub id: serde_json::Value,
-    pub ip: Option<serde_json::Value>,
-    pub ixfr_enable: Option<serde_json::Value>,
-    pub name: serde_json::Value,
-    pub port: Option<serde_json::Value>,
-    pub tsig_id: Option<serde_json::Value>,
+    pub id: crate::models::secondary_dns_components_schemas_identifier::SecondaryDnsComponentsSchemasIdentifier,
+    pub ip: Option<crate::models::secondary_dns_ip::SecondaryDnsIp>,
+    pub ixfr_enable: Option<crate::models::secondary_dns_ixfr_enable::SecondaryDnsIxfrEnable>,
+    pub name: crate::models::secondary_dns_components_schemas_name::SecondaryDnsComponentsSchemasName,
+    pub port: Option<crate::models::secondary_dns_port::SecondaryDnsPort>,
+    pub tsig_id: Option<crate::models::secondary_dns_tsig_id::SecondaryDnsTsigId>,
 }

@@ -15,13 +15,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-use crate::models::account::Account;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct GetRequest<'a> {
-    builder: ApiRequestBuilder<'a, Account>,
+    builder: ApiRequestBuilder<'a, serde_json::Value>,
 }
 
 impl<'a> GetRequest<'a> {
@@ -30,17 +29,22 @@ impl<'a> GetRequest<'a> {
 
         Self { builder }
     }
-    pub async fn send(self) -> ApiResult<Account> {
+    pub async fn send(self) -> ApiResult<serde_json::Value> {
         self.builder.send().await
     }
 }
-
 /// Get User Information
+///
+/// To show information about the current user account, send a GET request to `/v2/account`.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/account`
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::account };
+/// use digitalocean::{ ApiClient, apis::account };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get(&api)
+/// let response = get(&api)
 ///     .send()
 ///     .await?;
 /// ```

@@ -21,7 +21,7 @@ use serde::{Deserialize, Serialize};
 pub struct MconnCustomerConnector {
     pub activated: bool,
     pub device: Option<crate::models::mconn_customer_device::MconnCustomerDevice>,
-    pub id: serde_json::Value,
+    pub id: crate::models::mconn_uuid::MconnUuid,
     pub interrupt_window_duration_hours: f64,
     pub interrupt_window_hour_of_day: f64,
     pub last_heartbeat: Option<String>,

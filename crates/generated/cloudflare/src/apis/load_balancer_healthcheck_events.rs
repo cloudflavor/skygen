@@ -15,12 +15,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::load_balancing_components_schemas_response_collection::LoadBalancingComponentsSchemasResponseCollection;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct ListHealthcheckEventsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, LoadBalancingComponentsSchemasResponseCollection>,
 }
 
 impl<'a> ListHealthcheckEventsRequest<'a> {
@@ -58,17 +59,38 @@ impl<'a> ListHealthcheckEventsRequest<'a> {
         self.builder = self.builder.header_param("pool_healthy", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<LoadBalancingComponentsSchemasResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// List Healthcheck Events
+///
+/// List origin health changes.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/user/load_balancing_analytics/events`
+///
+/// **Parameters**
+/// - `until` (query,optional)
+/// - `pool_name` (query,optional)
+/// - `origin_healthy` (query,optional)
+/// - `pool_id` (query,optional)
+/// - `since` (query,optional)
+/// - `origin_name` (query,optional)
+/// - `pool_healthy` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::load_balancer_healthcheck_events };
+/// use cloudflare::{ ApiClient, apis::load_balancer_healthcheck_events };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_healthcheck_events(&api)
+/// let response = list_healthcheck_events(&api)
+///     .with_until("until")
+///     .with_pool_name("pool_name")
+///     .with_origin_healthy("origin_healthy")
+///     .with_pool_id("pool_id")
+///     .with_since("since")
+///     .with_origin_name("origin_name")
+///     .with_pool_healthy("pool_healthy")
 ///     .send()
 ///     .await?;
 /// ```

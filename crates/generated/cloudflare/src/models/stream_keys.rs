@@ -19,8 +19,8 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct StreamKeys {
-    pub created: Option<serde_json::Value>,
-    pub id: Option<serde_json::Value>,
-    pub jwk: Option<serde_json::Value>,
-    pub pem: Option<serde_json::Value>,
+    pub created: Option<crate::models::stream_signing_key_created::StreamSigningKeyCreated>,
+    pub id: Option<crate::models::stream_schemas_identifier::StreamSchemasIdentifier>,
+    pub jwk: Option<crate::models::stream_jwk::StreamJwk>,
+    pub pem: Option<crate::models::stream_pem::StreamPem>,
 }

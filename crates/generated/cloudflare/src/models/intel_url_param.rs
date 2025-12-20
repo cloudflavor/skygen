@@ -19,5 +19,5 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct IntelUrlParam {
-    pub url: Option<serde_json::Value>,
+    pub url: Option<crate::models::intel_url::IntelUrl>,
 }

@@ -19,12 +19,17 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct StreamVideoUpdate {
-    pub allowed_origins: Option<serde_json::Value>,
-    pub creator: Option<serde_json::Value>,
-    pub max_duration_seconds: Option<serde_json::Value>,
+    pub allowed_origins: Option<crate::models::stream_allowed_origins::StreamAllowedOrigins>,
+    pub creator: Option<crate::models::stream_creator::StreamCreator>,
+    pub max_duration_seconds:
+        Option<crate::models::stream_max_duration_seconds::StreamMaxDurationSeconds>,
     pub meta: Option<crate::models::stream_media_metadata::StreamMediaMetadata>,
-    pub require_signed_ur_ls: Option<serde_json::Value>,
-    pub scheduled_deletion: Option<serde_json::Value>,
-    pub thumbnail_timestamp_pct: Option<serde_json::Value>,
-    pub upload_expiry: Option<serde_json::Value>,
+    pub require_signed_ur_ls:
+        Option<crate::models::stream_require_signed_ur_ls::StreamRequireSignedUrLs>,
+    pub scheduled_deletion:
+        Option<crate::models::stream_scheduled_deletion::StreamScheduledDeletion>,
+    pub thumbnail_timestamp_pct:
+        Option<crate::models::stream_thumbnail_timestamp_pct::StreamThumbnailTimestampPct>,
+    pub upload_expiry:
+        Option<crate::models::stream_one_time_upload_expiry::StreamOneTimeUploadExpiry>,
 }

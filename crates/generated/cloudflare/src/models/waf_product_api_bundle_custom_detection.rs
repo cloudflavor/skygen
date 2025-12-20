@@ -19,7 +19,8 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct WafProductApiBundleCustomDetection {
-    pub id: Option<serde_json::Value>,
+    pub id:
+        Option<crate::models::waf_product_api_bundle_detection_id::WafProductApiBundleDetectionId>,
     pub password: Option<String>,
     pub username: Option<String>,
 }

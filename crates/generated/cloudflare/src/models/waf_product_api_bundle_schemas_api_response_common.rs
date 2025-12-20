@@ -19,8 +19,8 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct WafProductApiBundleSchemasApiResponseCommon {
-    pub errors: serde_json::Value,
-    pub messages: serde_json::Value,
+    pub errors: crate::models::waf_product_api_bundle_messages::WafProductApiBundleMessages,
+    pub messages: crate::models::waf_product_api_bundle_messages::WafProductApiBundleMessages,
     pub result: serde_json::Value,
     pub success: bool,
 }

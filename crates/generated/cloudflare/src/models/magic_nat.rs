@@ -19,5 +19,5 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct MagicNat {
-    pub static_prefix: Option<serde_json::Value>,
+    pub static_prefix: Option<crate::models::magic_cidr::MagicCidr>,
 }

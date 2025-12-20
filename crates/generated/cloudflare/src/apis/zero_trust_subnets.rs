@@ -15,12 +15,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::tunnel_subnet_response_collection::TunnelSubnetResponseCollection;
+use crate::models::tunnel_subnet_response_single::TunnelSubnetResponseSingle;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct NetworksSubnetsListRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, TunnelSubnetResponseCollection>,
 }
 
 impl<'a> NetworksSubnetsListRequest<'a> {
@@ -79,18 +81,48 @@ impl<'a> NetworksSubnetsListRequest<'a> {
         self.builder = self.builder.header_param("page", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<TunnelSubnetResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// List Subnets
+///
+/// Lists and filters subnets in an account.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/zerotrust/subnets`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `name` (query,optional)
+/// - `comment` (query,optional)
+/// - `network` (query,optional)
+/// - `existed_at` (query,optional)
+/// - `address_family` (query,optional)
+/// - `is_default_network` (query,optional)
+/// - `is_deleted` (query,optional)
+/// - `sort_order` (query,optional)
+/// - `subnet_types` (query,optional)
+/// - `per_page` (query,optional)
+/// - `page` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zero_trust_subnets };
+/// use cloudflare::{ ApiClient, apis::zero_trust_subnets };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = networks_subnets_list(&api)
-///     .with_account_id("value")
+/// let response = networks_subnets_list(&api)
+///     .with_account_id("account_id")
+///     .with_name("name")
+///     .with_comment("comment")
+///     .with_network("network")
+///     .with_existed_at("existed_at")
+///     .with_address_family("address_family")
+///     .with_is_default_network("is_default_network")
+///     .with_is_deleted("is_deleted")
+///     .with_sort_order("sort_order")
+///     .with_subnet_types("subnet_types")
+///     .with_per_page("per_page")
+///     .with_page("page")
 ///     .send()
 ///     .await?;
 /// ```
@@ -100,7 +132,7 @@ pub fn networks_subnets_list(api: &ApiClient) -> NetworksSubnetsListRequest<'_> 
 
 #[derive(Debug)]
 pub struct NetworksSubnetUpdateCloudflareRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, TunnelSubnetResponseSingle>,
 }
 
 impl<'a> NetworksSubnetUpdateCloudflareRequest<'a> {
@@ -131,19 +163,30 @@ impl<'a> NetworksSubnetUpdateCloudflareRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<TunnelSubnetResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Update Cloudflare Source Subnet
+///
+/// Updates the Cloudflare Source subnet of the given address family
+///
+/// **HTTP Method:** `PATCH`
+/// **Path:** `/accounts/{account_id}/zerotrust/subnets/cloudflare_source/{address_family}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `address_family` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zero_trust_subnets };
+/// use cloudflare::{ ApiClient, apis::zero_trust_subnets };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = networks_subnet_update_cloudflare(&api)
-///     .with_account_id("value")
-///     .with_address_family("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = networks_subnet_update_cloudflare(&api)
+///     .with_account_id("account_id")
+///     .with_address_family("address_family")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```

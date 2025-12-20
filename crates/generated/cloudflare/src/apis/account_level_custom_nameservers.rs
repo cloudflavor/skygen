@@ -15,12 +15,15 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::dns_custom_nameservers_acns_response_collection::DnsCustomNameserversAcnsResponseCollection;
+use crate::models::dns_custom_nameservers_acns_response_single::DnsCustomNameserversAcnsResponseSingle;
+use crate::models::dns_custom_nameservers_empty_response::DnsCustomNameserversEmptyResponse;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct ListCustomNameserversRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, DnsCustomNameserversAcnsResponseCollection>,
 }
 
 impl<'a> ListCustomNameserversRequest<'a> {
@@ -34,18 +37,26 @@ impl<'a> ListCustomNameserversRequest<'a> {
         self.builder = self.builder.path_param("account_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<DnsCustomNameserversAcnsResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// List Account Custom Nameservers
+///
+/// List an account's custom nameservers.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/custom_ns`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::account_level_custom_nameservers };
+/// use cloudflare::{ ApiClient, apis::account_level_custom_nameservers };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_custom_nameservers(&api)
-///     .with_account_id("value")
+/// let response = list_custom_nameservers(&api)
+///     .with_account_id("account_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -55,7 +66,7 @@ pub fn list_custom_nameservers(api: &ApiClient) -> ListCustomNameserversRequest<
 
 #[derive(Debug)]
 pub struct AddCustomNameserverRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, DnsCustomNameserversAcnsResponseSingle>,
 }
 
 impl<'a> AddCustomNameserverRequest<'a> {
@@ -70,22 +81,33 @@ impl<'a> AddCustomNameserverRequest<'a> {
         self.builder = self.builder.path_param("account_id", value);
         self
     }
-    pub fn with_body(mut self, body: serde_json::Value) -> Self {
+    pub fn with_body(
+        mut self,
+        body: crate::models::dns_custom_nameservers_custom_ns_input::DnsCustomNameserversCustomNsInput,
+    ) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<DnsCustomNameserversAcnsResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Add Account Custom Nameserver
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/custom_ns`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::account_level_custom_nameservers };
+/// use cloudflare::{ ApiClient, apis::account_level_custom_nameservers };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = add_custom_nameserver(&api)
-///     .with_account_id("value")
+/// # let body: crate::models::dns_custom_nameservers_custom_ns_input::DnsCustomNameserversCustomNsInput = todo!();
+/// let response = add_custom_nameserver(&api)
+///     .with_account_id("account_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -95,7 +117,7 @@ pub fn add_custom_nameserver(api: &ApiClient) -> AddCustomNameserverRequest<'_> 
 
 #[derive(Debug)]
 pub struct DeleteCustomNameserverRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, DnsCustomNameserversEmptyResponse>,
 }
 
 impl<'a> DeleteCustomNameserverRequest<'a> {
@@ -118,19 +140,26 @@ impl<'a> DeleteCustomNameserverRequest<'a> {
         self.builder = self.builder.path_param("custom_ns_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<DnsCustomNameserversEmptyResponse> {
         self.builder.send().await
     }
 }
-
 /// Delete Account Custom Nameserver
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/accounts/{account_id}/custom_ns/{custom_ns_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `custom_ns_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::account_level_custom_nameservers };
+/// use cloudflare::{ ApiClient, apis::account_level_custom_nameservers };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete_custom_nameserver(&api)
-///     .with_account_id("value")
-///     .with_custom_ns_id("value")
+/// let response = delete_custom_nameserver(&api)
+///     .with_account_id("account_id")
+///     .with_custom_ns_id("custom_ns_id")
 ///     .send()
 ///     .await?;
 /// ```

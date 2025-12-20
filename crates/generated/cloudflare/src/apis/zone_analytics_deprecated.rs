@@ -15,12 +15,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::zone_analytics_api_colo_response::ZoneAnalyticsApiColoResponse;
+use crate::models::zone_analytics_api_dashboard_response::ZoneAnalyticsApiDashboardResponse;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct GetAnalyticsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, ZoneAnalyticsApiColoResponse>,
 }
 
 impl<'a> GetAnalyticsRequest<'a> {
@@ -47,18 +49,32 @@ impl<'a> GetAnalyticsRequest<'a> {
         self.builder = self.builder.header_param("continuous", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<ZoneAnalyticsApiColoResponse> {
         self.builder.send().await
     }
 }
-
 /// Get analytics by Co-locations
+///
+/// This view provides a breakdown of analytics data by datacenter. Note: This is available to Enterprise customers only.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_identifier}/analytics/colos`
+///
+/// **Parameters**
+/// - `zone_identifier` (path, required)
+/// - `until` (query,optional)
+/// - `since` (query,optional)
+/// - `continuous` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zone_analytics_deprecated };
+/// use cloudflare::{ ApiClient, apis::zone_analytics_deprecated };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_analytics(&api)
-///     .with_zone_identifier("value")
+/// let response = get_analytics(&api)
+///     .with_zone_identifier("zone_identifier")
+///     .with_until("until")
+///     .with_since("since")
+///     .with_continuous("continuous")
 ///     .send()
 ///     .await?;
 /// ```
@@ -68,7 +84,7 @@ pub fn get_analytics(api: &ApiClient) -> GetAnalyticsRequest<'_> {
 
 #[derive(Debug)]
 pub struct GetDashboardRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, ZoneAnalyticsApiDashboardResponse>,
 }
 
 impl<'a> GetDashboardRequest<'a> {
@@ -98,18 +114,32 @@ impl<'a> GetDashboardRequest<'a> {
         self.builder = self.builder.header_param("continuous", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<ZoneAnalyticsApiDashboardResponse> {
         self.builder.send().await
     }
 }
-
 /// Get dashboard
+///
+/// The dashboard view provides both totals and timeseries data for the given zone and time period across the entire Cloudflare network.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_identifier}/analytics/dashboard`
+///
+/// **Parameters**
+/// - `zone_identifier` (path, required)
+/// - `until` (query,optional)
+/// - `since` (query,optional)
+/// - `continuous` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zone_analytics_deprecated };
+/// use cloudflare::{ ApiClient, apis::zone_analytics_deprecated };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_dashboard(&api)
-///     .with_zone_identifier("value")
+/// let response = get_dashboard(&api)
+///     .with_zone_identifier("zone_identifier")
+///     .with_until("until")
+///     .with_since("since")
+///     .with_continuous("continuous")
 ///     .send()
 ///     .await?;
 /// ```

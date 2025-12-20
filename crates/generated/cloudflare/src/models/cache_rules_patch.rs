@@ -19,5 +19,5 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct CacheRulesPatch {
-    pub value: serde_json::Value,
+    pub value: crate::models::cache_rules_value::CacheRulesValue,
 }

@@ -19,7 +19,9 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct IamCreateMemberWithRoles {
-    pub email: serde_json::Value,
-    pub roles: Vec<serde_json::Value>,
+    pub email: crate::models::iam_email::IamEmail,
+    pub roles: Vec<
+        crate::models::iam_role_components_schemas_identifier::IamRoleComponentsSchemasIdentifier,
+    >,
     pub status: Option<serde_json::Value>,
 }

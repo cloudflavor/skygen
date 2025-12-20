@@ -19,7 +19,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct IamUserGroupMember {
-    pub email: Option<serde_json::Value>,
+    pub email: Option<crate::models::iam_email::IamEmail>,
     pub id: String,
     pub status: Option<serde_json::Value>,
 }

@@ -15,12 +15,15 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::access_apps_components_schemas_response_collection::AccessAppsComponentsSchemasResponseCollection;
+use crate::models::access_apps_components_schemas_single_response::AccessAppsComponentsSchemasSingleResponse;
+use crate::models::access_policy_check_response::AccessPolicyCheckResponse;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct ListAccessApplicationsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, AccessAppsComponentsSchemasResponseCollection>,
 }
 
 impl<'a> ListAccessApplicationsRequest<'a> {
@@ -50,18 +53,34 @@ impl<'a> ListAccessApplicationsRequest<'a> {
         self.builder = self.builder.header_param("search", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<AccessAppsComponentsSchemasResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// List Access applications
+///
+/// Lists all Access applications in an account.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/access/apps`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `name` (query,optional)
+/// - `domain` (query,optional)
+/// - `aud` (query,optional)
+/// - `search` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::access_applications };
+/// use cloudflare::{ ApiClient, apis::access_applications };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_access_applications(&api)
-///     .with_account_id("value")
+/// let response = list_access_applications(&api)
+///     .with_account_id("account_id")
+///     .with_name("name")
+///     .with_domain("domain")
+///     .with_aud("aud")
+///     .with_search("search")
 ///     .send()
 ///     .await?;
 /// ```
@@ -87,7 +106,7 @@ impl<'a> AddApplicationRequest<'a> {
         self.builder = self.builder.path_param("account_id", value);
         self
     }
-    pub fn with_body(mut self, body: serde_json::Value) -> Self {
+    pub fn with_body(mut self, body: crate::models::access_app_request::AccessAppRequest) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
@@ -95,14 +114,24 @@ impl<'a> AddApplicationRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Add an Access application
+///
+/// Adds a new application to Access.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/access/apps`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::access_applications };
+/// use cloudflare::{ ApiClient, apis::access_applications };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = add_application(&api)
-///     .with_account_id("value")
+/// # let body: crate::models::access_app_request::AccessAppRequest = todo!();
+/// let response = add_application(&api)
+///     .with_account_id("account_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -112,7 +141,7 @@ pub fn add_application(api: &ApiClient) -> AddApplicationRequest<'_> {
 
 #[derive(Debug)]
 pub struct GetAccessApplicationRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, AccessAppsComponentsSchemasSingleResponse>,
 }
 
 impl<'a> GetAccessApplicationRequest<'a> {
@@ -135,19 +164,28 @@ impl<'a> GetAccessApplicationRequest<'a> {
         self.builder = self.builder.path_param("app_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<AccessAppsComponentsSchemasSingleResponse> {
         self.builder.send().await
     }
 }
-
 /// Get an Access application
+///
+/// Fetches information about an Access application.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/access/apps/{app_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `app_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::access_applications };
+/// use cloudflare::{ ApiClient, apis::access_applications };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_access_application(&api)
-///     .with_account_id("value")
-///     .with_app_id("value")
+/// let response = get_access_application(&api)
+///     .with_account_id("account_id")
+///     .with_app_id("app_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -181,7 +219,7 @@ impl<'a> UpdateAccessApplicationRequest<'a> {
         self.builder = self.builder.path_param("app_id", value);
         self
     }
-    pub fn with_body(mut self, body: serde_json::Value) -> Self {
+    pub fn with_body(mut self, body: crate::models::access_app_request::AccessAppRequest) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
@@ -189,15 +227,26 @@ impl<'a> UpdateAccessApplicationRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Update an Access application
+///
+/// Updates an Access application.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/accounts/{account_id}/access/apps/{app_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `app_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::access_applications };
+/// use cloudflare::{ ApiClient, apis::access_applications };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = update_access_application(&api)
-///     .with_account_id("value")
-///     .with_app_id("value")
+/// # let body: crate::models::access_app_request::AccessAppRequest = todo!();
+/// let response = update_access_application(&api)
+///     .with_account_id("account_id")
+///     .with_app_id("app_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -234,15 +283,24 @@ impl<'a> DeleteAccessApplicationRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Delete an Access application
+///
+/// Deletes an application from Access.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/accounts/{account_id}/access/apps/{app_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `app_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::access_applications };
+/// use cloudflare::{ ApiClient, apis::access_applications };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete_access_application(&api)
-///     .with_account_id("value")
-///     .with_app_id("value")
+/// let response = delete_access_application(&api)
+///     .with_account_id("account_id")
+///     .with_app_id("app_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -279,15 +337,24 @@ impl<'a> RevokeServiceTokensRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Revoke application tokens
+///
+/// Revokes all tokens issued for an application.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/access/apps/{app_id}/revoke_tokens`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `app_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::access_applications };
+/// use cloudflare::{ ApiClient, apis::access_applications };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = revoke_service_tokens(&api)
-///     .with_account_id("value")
-///     .with_app_id("value")
+/// let response = revoke_service_tokens(&api)
+///     .with_account_id("account_id")
+///     .with_app_id("app_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -332,15 +399,26 @@ impl<'a> PutUpdateAccessApplicationRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Update Access application settings
+///
+/// Updates Access application settings.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/accounts/{account_id}/access/apps/{app_id}/settings`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `app_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::access_applications };
+/// use cloudflare::{ ApiClient, apis::access_applications };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = put_update_access_application(&api)
-///     .with_account_id("value")
-///     .with_app_id("value")
+/// # let body: crate::models::access_app_settings_request::AccessAppSettingsRequest = todo!();
+/// let response = put_update_access_application(&api)
+///     .with_account_id("account_id")
+///     .with_app_id("app_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -385,15 +463,26 @@ impl<'a> PatchUpdateAccessApplicationRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Update Access application settings
+///
+/// Updates Access application settings.
+///
+/// **HTTP Method:** `PATCH`
+/// **Path:** `/accounts/{account_id}/access/apps/{app_id}/settings`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `app_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::access_applications };
+/// use cloudflare::{ ApiClient, apis::access_applications };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = patch_update_access_application(&api)
-///     .with_account_id("value")
-///     .with_app_id("value")
+/// # let body: crate::models::access_app_settings_request::AccessAppSettingsRequest = todo!();
+/// let response = patch_update_access_application(&api)
+///     .with_account_id("account_id")
+///     .with_app_id("app_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -403,7 +492,7 @@ pub fn patch_update_access_application(api: &ApiClient) -> PatchUpdateAccessAppl
 
 #[derive(Debug)]
 pub struct TestAccessPoliciesRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, AccessPolicyCheckResponse>,
 }
 
 impl<'a> TestAccessPoliciesRequest<'a> {
@@ -426,19 +515,28 @@ impl<'a> TestAccessPoliciesRequest<'a> {
         self.builder = self.builder.path_param("app_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<AccessPolicyCheckResponse> {
         self.builder.send().await
     }
 }
-
 /// Test Access policies
+///
+/// Tests if a specific user has permission to access an application.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/access/apps/{app_id}/user_policy_checks`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `app_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::access_applications };
+/// use cloudflare::{ ApiClient, apis::access_applications };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = test_access_policies(&api)
-///     .with_account_id("value")
-///     .with_app_id("value")
+/// let response = test_access_policies(&api)
+///     .with_account_id("account_id")
+///     .with_app_id("app_id")
 ///     .send()
 ///     .await?;
 /// ```

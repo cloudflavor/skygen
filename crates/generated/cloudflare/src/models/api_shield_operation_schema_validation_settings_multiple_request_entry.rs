@@ -19,5 +19,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct ApiShieldOperationSchemaValidationSettingsMultipleRequestEntry {
-    pub mitigation_action: Option<serde_json::Value>,
+    pub mitigation_action: Option<
+        crate::models::api_shield_operation_mitigation_action::ApiShieldOperationMitigationAction,
+    >,
 }

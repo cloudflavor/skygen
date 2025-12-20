@@ -73,13 +73,40 @@ impl<'a> GetEmailRoutingSummaryRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get email ARC validation summary
+///
+/// Retrieves the distribution of emails by ARC (Authenticated Received Chain) validation.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/email/routing/summary/arc`
+///
+/// **Parameters**
+/// - `name` (query,optional)
+/// - `dateRange` (query,optional)
+/// - `dateStart` (query,optional)
+/// - `dateEnd` (query,optional)
+/// - `dkim` (query,optional)
+/// - `dmarc` (query,optional)
+/// - `spf` (query,optional)
+/// - `ipVersion` (query,optional)
+/// - `encrypted` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_email_routing };
+/// use cloudflare::{ ApiClient, apis::radar_email_routing };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_email_routing_summary(&api)
+/// let response = get_email_routing_summary(&api)
+///     .with_name("name")
+///     .with_date_range("dateRange")
+///     .with_date_start("dateStart")
+///     .with_date_end("dateEnd")
+///     .with_dkim("dkim")
+///     .with_dmarc("dmarc")
+///     .with_spf("spf")
+///     .with_ip_version("ipVersion")
+///     .with_encrypted("encrypted")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```
@@ -142,13 +169,40 @@ impl<'a> GetEmailRoutingSummaryGetRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get email DKIM validation summary
+///
+/// Retrieves the distribution of emails by DKIM (DomainKeys Identified Mail) validation.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/email/routing/summary/dkim`
+///
+/// **Parameters**
+/// - `name` (query,optional)
+/// - `dateRange` (query,optional)
+/// - `dateStart` (query,optional)
+/// - `dateEnd` (query,optional)
+/// - `arc` (query,optional)
+/// - `dmarc` (query,optional)
+/// - `spf` (query,optional)
+/// - `ipVersion` (query,optional)
+/// - `encrypted` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_email_routing };
+/// use cloudflare::{ ApiClient, apis::radar_email_routing };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_email_routing_summary_get(&api)
+/// let response = get_email_routing_summary_get(&api)
+///     .with_name("name")
+///     .with_date_range("dateRange")
+///     .with_date_start("dateStart")
+///     .with_date_end("dateEnd")
+///     .with_arc("arc")
+///     .with_dmarc("dmarc")
+///     .with_spf("spf")
+///     .with_ip_version("ipVersion")
+///     .with_encrypted("encrypted")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```
@@ -211,13 +265,40 @@ impl<'a> GetEmailRoutingSummaryGet3Request<'a> {
         self.builder.send().await
     }
 }
-
 /// Get email DMARC validation summary
+///
+/// Retrieves the distribution of emails by DMARC (Domain-based Message Authentication, Reporting and Conformance) validation.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/email/routing/summary/dmarc`
+///
+/// **Parameters**
+/// - `name` (query,optional)
+/// - `dateRange` (query,optional)
+/// - `dateStart` (query,optional)
+/// - `dateEnd` (query,optional)
+/// - `arc` (query,optional)
+/// - `dkim` (query,optional)
+/// - `spf` (query,optional)
+/// - `ipVersion` (query,optional)
+/// - `encrypted` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_email_routing };
+/// use cloudflare::{ ApiClient, apis::radar_email_routing };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_email_routing_summary_get_3(&api)
+/// let response = get_email_routing_summary_get_3(&api)
+///     .with_name("name")
+///     .with_date_range("dateRange")
+///     .with_date_start("dateStart")
+///     .with_date_end("dateEnd")
+///     .with_arc("arc")
+///     .with_dkim("dkim")
+///     .with_spf("spf")
+///     .with_ip_version("ipVersion")
+///     .with_encrypted("encrypted")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```
@@ -281,13 +362,40 @@ impl<'a> GetEmailRoutingSummaryGet4Request<'a> {
         self.builder.send().await
     }
 }
-
 /// Get email encryption status summary
+///
+/// Retrieves the distribution of emails by encryption status (encrypted vs. not-encrypted).
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/email/routing/summary/encrypted`
+///
+/// **Parameters**
+/// - `name` (query,optional)
+/// - `dateRange` (query,optional)
+/// - `dateStart` (query,optional)
+/// - `dateEnd` (query,optional)
+/// - `arc` (query,optional)
+/// - `dkim` (query,optional)
+/// - `dmarc` (query,optional)
+/// - `spf` (query,optional)
+/// - `ipVersion` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_email_routing };
+/// use cloudflare::{ ApiClient, apis::radar_email_routing };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_email_routing_summary_get_4(&api)
+/// let response = get_email_routing_summary_get_4(&api)
+///     .with_name("name")
+///     .with_date_range("dateRange")
+///     .with_date_start("dateStart")
+///     .with_date_end("dateEnd")
+///     .with_arc("arc")
+///     .with_dkim("dkim")
+///     .with_dmarc("dmarc")
+///     .with_spf("spf")
+///     .with_ip_version("ipVersion")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```
@@ -351,13 +459,40 @@ impl<'a> GetEmailRoutingSummaryGet5Request<'a> {
         self.builder.send().await
     }
 }
-
 /// Get email IP version summary
+///
+/// Retrieves the distribution of emails by IP version.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/email/routing/summary/ip_version`
+///
+/// **Parameters**
+/// - `name` (query,optional)
+/// - `dateRange` (query,optional)
+/// - `dateStart` (query,optional)
+/// - `dateEnd` (query,optional)
+/// - `arc` (query,optional)
+/// - `dkim` (query,optional)
+/// - `dmarc` (query,optional)
+/// - `spf` (query,optional)
+/// - `encrypted` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_email_routing };
+/// use cloudflare::{ ApiClient, apis::radar_email_routing };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_email_routing_summary_get_5(&api)
+/// let response = get_email_routing_summary_get_5(&api)
+///     .with_name("name")
+///     .with_date_range("dateRange")
+///     .with_date_start("dateStart")
+///     .with_date_end("dateEnd")
+///     .with_arc("arc")
+///     .with_dkim("dkim")
+///     .with_dmarc("dmarc")
+///     .with_spf("spf")
+///     .with_encrypted("encrypted")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```
@@ -420,13 +555,40 @@ impl<'a> GetEmailRoutingSummaryGet6Request<'a> {
         self.builder.send().await
     }
 }
-
 /// Get email SPF validation summary
+///
+/// Retrieves the distribution of emails by SPF (Sender Policy Framework) validation.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/email/routing/summary/spf`
+///
+/// **Parameters**
+/// - `name` (query,optional)
+/// - `dateRange` (query,optional)
+/// - `dateStart` (query,optional)
+/// - `dateEnd` (query,optional)
+/// - `arc` (query,optional)
+/// - `dkim` (query,optional)
+/// - `dmarc` (query,optional)
+/// - `ipVersion` (query,optional)
+/// - `encrypted` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_email_routing };
+/// use cloudflare::{ ApiClient, apis::radar_email_routing };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_email_routing_summary_get_6(&api)
+/// let response = get_email_routing_summary_get_6(&api)
+///     .with_name("name")
+///     .with_date_range("dateRange")
+///     .with_date_start("dateStart")
+///     .with_date_end("dateEnd")
+///     .with_arc("arc")
+///     .with_dkim("dkim")
+///     .with_dmarc("dmarc")
+///     .with_ip_version("ipVersion")
+///     .with_encrypted("encrypted")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```
@@ -497,13 +659,42 @@ impl<'a> GetEmailRoutingTimeseriesRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get email ARC validation time series
+///
+/// Retrieves the distribution of emails by ARC (Authenticated Received Chain) validation over time.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/email/routing/timeseries_groups/arc`
+///
+/// **Parameters**
+/// - `aggInterval` (query,optional)
+/// - `name` (query,optional)
+/// - `dateRange` (query,optional)
+/// - `dateStart` (query,optional)
+/// - `dateEnd` (query,optional)
+/// - `dkim` (query,optional)
+/// - `dmarc` (query,optional)
+/// - `spf` (query,optional)
+/// - `ipVersion` (query,optional)
+/// - `encrypted` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_email_routing };
+/// use cloudflare::{ ApiClient, apis::radar_email_routing };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_email_routing_timeseries(&api)
+/// let response = get_email_routing_timeseries(&api)
+///     .with_agg_interval("aggInterval")
+///     .with_name("name")
+///     .with_date_range("dateRange")
+///     .with_date_start("dateStart")
+///     .with_date_end("dateEnd")
+///     .with_dkim("dkim")
+///     .with_dmarc("dmarc")
+///     .with_spf("spf")
+///     .with_ip_version("ipVersion")
+///     .with_encrypted("encrypted")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```
@@ -574,13 +765,42 @@ impl<'a> GetEmailRoutingTimeseriesGetRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get email DKIM validation time series
+///
+/// Retrieves the distribution of emails by DKIM (DomainKeys Identified Mail) validation over time.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/email/routing/timeseries_groups/dkim`
+///
+/// **Parameters**
+/// - `aggInterval` (query,optional)
+/// - `name` (query,optional)
+/// - `dateRange` (query,optional)
+/// - `dateStart` (query,optional)
+/// - `dateEnd` (query,optional)
+/// - `arc` (query,optional)
+/// - `dmarc` (query,optional)
+/// - `spf` (query,optional)
+/// - `ipVersion` (query,optional)
+/// - `encrypted` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_email_routing };
+/// use cloudflare::{ ApiClient, apis::radar_email_routing };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_email_routing_timeseries_get(&api)
+/// let response = get_email_routing_timeseries_get(&api)
+///     .with_agg_interval("aggInterval")
+///     .with_name("name")
+///     .with_date_range("dateRange")
+///     .with_date_start("dateStart")
+///     .with_date_end("dateEnd")
+///     .with_arc("arc")
+///     .with_dmarc("dmarc")
+///     .with_spf("spf")
+///     .with_ip_version("ipVersion")
+///     .with_encrypted("encrypted")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```
@@ -653,13 +873,42 @@ impl<'a> GetEmailRoutingTimeseriesGet3Request<'a> {
         self.builder.send().await
     }
 }
-
 /// Get email DMARC validation time series
+///
+/// Retrieves the distribution of emails by DMARC (Domain-based Message Authentication, Reporting and Conformance) validation over time.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/email/routing/timeseries_groups/dmarc`
+///
+/// **Parameters**
+/// - `aggInterval` (query,optional)
+/// - `name` (query,optional)
+/// - `dateRange` (query,optional)
+/// - `dateStart` (query,optional)
+/// - `dateEnd` (query,optional)
+/// - `arc` (query,optional)
+/// - `dkim` (query,optional)
+/// - `spf` (query,optional)
+/// - `ipVersion` (query,optional)
+/// - `encrypted` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_email_routing };
+/// use cloudflare::{ ApiClient, apis::radar_email_routing };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_email_routing_timeseries_get_3(&api)
+/// let response = get_email_routing_timeseries_get_3(&api)
+///     .with_agg_interval("aggInterval")
+///     .with_name("name")
+///     .with_date_range("dateRange")
+///     .with_date_start("dateStart")
+///     .with_date_end("dateEnd")
+///     .with_arc("arc")
+///     .with_dkim("dkim")
+///     .with_spf("spf")
+///     .with_ip_version("ipVersion")
+///     .with_encrypted("encrypted")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```
@@ -732,13 +981,42 @@ impl<'a> GetEmailRoutingTimeseriesGet4Request<'a> {
         self.builder.send().await
     }
 }
-
 /// Get email encryption status time series
+///
+/// Retrieves the distribution of emails by encryption status (encrypted vs. not-encrypted) over time.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/email/routing/timeseries_groups/encrypted`
+///
+/// **Parameters**
+/// - `aggInterval` (query,optional)
+/// - `name` (query,optional)
+/// - `dateRange` (query,optional)
+/// - `dateStart` (query,optional)
+/// - `dateEnd` (query,optional)
+/// - `arc` (query,optional)
+/// - `dkim` (query,optional)
+/// - `dmarc` (query,optional)
+/// - `spf` (query,optional)
+/// - `ipVersion` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_email_routing };
+/// use cloudflare::{ ApiClient, apis::radar_email_routing };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_email_routing_timeseries_get_4(&api)
+/// let response = get_email_routing_timeseries_get_4(&api)
+///     .with_agg_interval("aggInterval")
+///     .with_name("name")
+///     .with_date_range("dateRange")
+///     .with_date_start("dateStart")
+///     .with_date_end("dateEnd")
+///     .with_arc("arc")
+///     .with_dkim("dkim")
+///     .with_dmarc("dmarc")
+///     .with_spf("spf")
+///     .with_ip_version("ipVersion")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```
@@ -811,13 +1089,42 @@ impl<'a> GetEmailRoutingTimeseriesGet5Request<'a> {
         self.builder.send().await
     }
 }
-
 /// Get email IP version time series
+///
+/// Retrieves the distribution of emails by IP version over time.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/email/routing/timeseries_groups/ip_version`
+///
+/// **Parameters**
+/// - `aggInterval` (query,optional)
+/// - `name` (query,optional)
+/// - `dateRange` (query,optional)
+/// - `dateStart` (query,optional)
+/// - `dateEnd` (query,optional)
+/// - `arc` (query,optional)
+/// - `dkim` (query,optional)
+/// - `dmarc` (query,optional)
+/// - `spf` (query,optional)
+/// - `encrypted` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_email_routing };
+/// use cloudflare::{ ApiClient, apis::radar_email_routing };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_email_routing_timeseries_get_5(&api)
+/// let response = get_email_routing_timeseries_get_5(&api)
+///     .with_agg_interval("aggInterval")
+///     .with_name("name")
+///     .with_date_range("dateRange")
+///     .with_date_start("dateStart")
+///     .with_date_end("dateEnd")
+///     .with_arc("arc")
+///     .with_dkim("dkim")
+///     .with_dmarc("dmarc")
+///     .with_spf("spf")
+///     .with_encrypted("encrypted")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```
@@ -890,13 +1197,42 @@ impl<'a> GetEmailRoutingTimeseriesGet6Request<'a> {
         self.builder.send().await
     }
 }
-
 /// Get email SPF validation time series
+///
+/// Retrieves the distribution of emails by SPF (Sender Policy Framework) validation over time.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/email/routing/timeseries_groups/spf`
+///
+/// **Parameters**
+/// - `aggInterval` (query,optional)
+/// - `name` (query,optional)
+/// - `dateRange` (query,optional)
+/// - `dateStart` (query,optional)
+/// - `dateEnd` (query,optional)
+/// - `arc` (query,optional)
+/// - `dkim` (query,optional)
+/// - `dmarc` (query,optional)
+/// - `ipVersion` (query,optional)
+/// - `encrypted` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_email_routing };
+/// use cloudflare::{ ApiClient, apis::radar_email_routing };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_email_routing_timeseries_get_6(&api)
+/// let response = get_email_routing_timeseries_get_6(&api)
+///     .with_agg_interval("aggInterval")
+///     .with_name("name")
+///     .with_date_range("dateRange")
+///     .with_date_start("dateStart")
+///     .with_date_end("dateEnd")
+///     .with_arc("arc")
+///     .with_dkim("dkim")
+///     .with_dmarc("dmarc")
+///     .with_ip_version("ipVersion")
+///     .with_encrypted("encrypted")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```

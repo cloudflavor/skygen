@@ -69,13 +69,38 @@ impl<'a> GetAiBotsSummaryRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get AI user agents summary
+///
+/// Retrieves the distribution of traffic by AI user agent.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/ai/bots/summary/user_agent`
+///
+/// **Parameters**
+/// - `name` (query,optional)
+/// - `dateRange` (query,optional)
+/// - `dateStart` (query,optional)
+/// - `dateEnd` (query,optional)
+/// - `asn` (query,optional)
+/// - `location` (query,optional)
+/// - `continent` (query,optional)
+/// - `limitPerGroup` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_ai_bots };
+/// use cloudflare::{ ApiClient, apis::radar_ai_bots };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_ai_bots_summary(&api)
+/// let response = get_ai_bots_summary(&api)
+///     .with_name("name")
+///     .with_date_range("dateRange")
+///     .with_date_start("dateStart")
+///     .with_date_end("dateEnd")
+///     .with_asn("asn")
+///     .with_location("location")
+///     .with_continent("continent")
+///     .with_limit_per_group("limitPerGroup")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```
@@ -142,13 +167,40 @@ impl<'a> GetAiBotsTimeseriesRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get AI user agents time series
+///
+/// Retrieves the distribution of traffic by AI user agent over time.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/ai/bots/timeseries_groups/user_agent`
+///
+/// **Parameters**
+/// - `aggInterval` (query,optional)
+/// - `name` (query,optional)
+/// - `dateRange` (query,optional)
+/// - `dateStart` (query,optional)
+/// - `dateEnd` (query,optional)
+/// - `asn` (query,optional)
+/// - `location` (query,optional)
+/// - `continent` (query,optional)
+/// - `limitPerGroup` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_ai_bots };
+/// use cloudflare::{ ApiClient, apis::radar_ai_bots };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_ai_bots_timeseries(&api)
+/// let response = get_ai_bots_timeseries(&api)
+///     .with_agg_interval("aggInterval")
+///     .with_name("name")
+///     .with_date_range("dateRange")
+///     .with_date_start("dateStart")
+///     .with_date_end("dateEnd")
+///     .with_asn("asn")
+///     .with_location("location")
+///     .with_continent("continent")
+///     .with_limit_per_group("limitPerGroup")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```

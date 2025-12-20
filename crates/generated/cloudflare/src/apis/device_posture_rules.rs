@@ -15,12 +15,15 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::teams_devices_id_response::TeamsDevicesIdResponse;
+use crate::models::teams_devices_response_collection::TeamsDevicesResponseCollection;
+use crate::models::teams_devices_single_response::TeamsDevicesSingleResponse;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct ListDevicePostureRulesRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, TeamsDevicesResponseCollection>,
 }
 
 impl<'a> ListDevicePostureRulesRequest<'a> {
@@ -35,18 +38,26 @@ impl<'a> ListDevicePostureRulesRequest<'a> {
         self.builder = self.builder.path_param("account_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<TeamsDevicesResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// List device posture rules
+///
+/// Fetches device posture rules for a Zero Trust account.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/devices/posture`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::device_posture_rules };
+/// use cloudflare::{ ApiClient, apis::device_posture_rules };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_device_posture_rules(&api)
-///     .with_account_id("value")
+/// let response = list_device_posture_rules(&api)
+///     .with_account_id("account_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -56,7 +67,7 @@ pub fn list_device_posture_rules(api: &ApiClient) -> ListDevicePostureRulesReque
 
 #[derive(Debug)]
 pub struct CreateDevicePostureRuleRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, TeamsDevicesSingleResponse>,
 }
 
 impl<'a> CreateDevicePostureRuleRequest<'a> {
@@ -79,18 +90,28 @@ impl<'a> CreateDevicePostureRuleRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<TeamsDevicesSingleResponse> {
         self.builder.send().await
     }
 }
-
 /// Create a device posture rule
+///
+/// Creates a new device posture rule.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/devices/posture`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::device_posture_rules };
+/// use cloudflare::{ ApiClient, apis::device_posture_rules };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = create_device_posture_rule(&api)
-///     .with_account_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = create_device_posture_rule(&api)
+///     .with_account_id("account_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -100,7 +121,7 @@ pub fn create_device_posture_rule(api: &ApiClient) -> CreateDevicePostureRuleReq
 
 #[derive(Debug)]
 pub struct DetailsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, TeamsDevicesSingleResponse>,
 }
 
 impl<'a> DetailsRequest<'a> {
@@ -123,19 +144,28 @@ impl<'a> DetailsRequest<'a> {
         self.builder = self.builder.path_param("rule_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<TeamsDevicesSingleResponse> {
         self.builder.send().await
     }
 }
-
 /// Get device posture rule details
+///
+/// Fetches a single device posture rule.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/devices/posture/{rule_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `rule_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::device_posture_rules };
+/// use cloudflare::{ ApiClient, apis::device_posture_rules };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = details(&api)
-///     .with_account_id("value")
-///     .with_rule_id("value")
+/// let response = details(&api)
+///     .with_account_id("account_id")
+///     .with_rule_id("rule_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -145,7 +175,7 @@ pub fn details(api: &ApiClient) -> DetailsRequest<'_> {
 
 #[derive(Debug)]
 pub struct UpdateDevicePostureRuleRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, TeamsDevicesSingleResponse>,
 }
 
 impl<'a> UpdateDevicePostureRuleRequest<'a> {
@@ -176,19 +206,30 @@ impl<'a> UpdateDevicePostureRuleRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<TeamsDevicesSingleResponse> {
         self.builder.send().await
     }
 }
-
 /// Update a device posture rule
+///
+/// Updates a device posture rule.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/accounts/{account_id}/devices/posture/{rule_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `rule_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::device_posture_rules };
+/// use cloudflare::{ ApiClient, apis::device_posture_rules };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = update_device_posture_rule(&api)
-///     .with_account_id("value")
-///     .with_rule_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = update_device_posture_rule(&api)
+///     .with_account_id("account_id")
+///     .with_rule_id("rule_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -198,7 +239,7 @@ pub fn update_device_posture_rule(api: &ApiClient) -> UpdateDevicePostureRuleReq
 
 #[derive(Debug)]
 pub struct DeleteDevicePostureRuleRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, TeamsDevicesIdResponse>,
 }
 
 impl<'a> DeleteDevicePostureRuleRequest<'a> {
@@ -221,19 +262,28 @@ impl<'a> DeleteDevicePostureRuleRequest<'a> {
         self.builder = self.builder.path_param("rule_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<TeamsDevicesIdResponse> {
         self.builder.send().await
     }
 }
-
 /// Delete a device posture rule
+///
+/// Deletes a device posture rule.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/accounts/{account_id}/devices/posture/{rule_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `rule_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::device_posture_rules };
+/// use cloudflare::{ ApiClient, apis::device_posture_rules };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete_device_posture_rule(&api)
-///     .with_account_id("value")
-///     .with_rule_id("value")
+/// let response = delete_device_posture_rule(&api)
+///     .with_account_id("account_id")
+///     .with_rule_id("rule_id")
 ///     .send()
 ///     .await?;
 /// ```

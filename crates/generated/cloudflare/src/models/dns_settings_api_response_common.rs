@@ -19,7 +19,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct DnsSettingsApiResponseCommon {
-    pub errors: serde_json::Value,
-    pub messages: serde_json::Value,
+    pub errors: crate::models::dns_settings_messages::DnsSettingsMessages,
+    pub messages: crate::models::dns_settings_messages::DnsSettingsMessages,
     pub success: bool,
 }

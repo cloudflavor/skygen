@@ -19,7 +19,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct ZoneAnalyticsApiQueryResponse {
-    pub since: Option<serde_json::Value>,
+    pub since: Option<crate::models::zone_analytics_api_since::ZoneAnalyticsApiSince>,
     pub time_delta: Option<i64>,
-    pub until: Option<serde_json::Value>,
+    pub until: Option<crate::models::zone_analytics_api_until::ZoneAnalyticsApiUntil>,
 }

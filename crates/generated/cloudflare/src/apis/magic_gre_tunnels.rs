@@ -15,12 +15,18 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::magic_create_gre_tunnel_response::MagicCreateGreTunnelResponse;
+use crate::models::magic_modified_tunnels_collection_response::MagicModifiedTunnelsCollectionResponse;
+use crate::models::magic_tunnel_deleted_response::MagicTunnelDeletedResponse;
+use crate::models::magic_tunnel_modified_response::MagicTunnelModifiedResponse;
+use crate::models::magic_tunnel_single_response::MagicTunnelSingleResponse;
+use crate::models::magic_tunnels_collection_response::MagicTunnelsCollectionResponse;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct ListGreTunnelsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, MagicTunnelsCollectionResponse>,
 }
 
 impl<'a> ListGreTunnelsRequest<'a> {
@@ -39,18 +45,28 @@ impl<'a> ListGreTunnelsRequest<'a> {
         self.builder = self.builder.header_param("x-magic-new-hc-target", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<MagicTunnelsCollectionResponse> {
         self.builder.send().await
     }
 }
-
 /// List GRE tunnels
+///
+/// Lists GRE tunnels associated with an account.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/magic/gre_tunnels`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `x-magic-new-hc-target` (header,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::magic_gre_tunnels };
+/// use cloudflare::{ ApiClient, apis::magic_gre_tunnels };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_gre_tunnels(&api)
-///     .with_account_id("value")
+/// let response = list_gre_tunnels(&api)
+///     .with_account_id("account_id")
+///     .with_x_magic_new_hc_target("x-magic-new-hc-target")
 ///     .send()
 ///     .await?;
 /// ```
@@ -60,7 +76,7 @@ pub fn list_gre_tunnels(api: &ApiClient) -> ListGreTunnelsRequest<'_> {
 
 #[derive(Debug)]
 pub struct CreateGreTunnelsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, MagicCreateGreTunnelResponse>,
 }
 
 impl<'a> CreateGreTunnelsRequest<'a> {
@@ -87,18 +103,30 @@ impl<'a> CreateGreTunnelsRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<MagicCreateGreTunnelResponse> {
         self.builder.send().await
     }
 }
-
 /// Create a GRE tunnel
+///
+/// Creates a new GRE tunnel. Use `?validate_only=true` as an optional query parameter to only run validation without persisting changes.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/magic/gre_tunnels`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `x-magic-new-hc-target` (header,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::magic_gre_tunnels };
+/// use cloudflare::{ ApiClient, apis::magic_gre_tunnels };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = create_gre_tunnels(&api)
-///     .with_account_id("value")
+/// # let body: crate::models::magic_create_gre_tunnel_request::MagicCreateGreTunnelRequest = todo!();
+/// let response = create_gre_tunnels(&api)
+///     .with_account_id("account_id")
+///     .with_x_magic_new_hc_target("x-magic-new-hc-target")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -108,7 +136,7 @@ pub fn create_gre_tunnels(api: &ApiClient) -> CreateGreTunnelsRequest<'_> {
 
 #[derive(Debug)]
 pub struct UpdateMultipleGreTunnelsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, MagicModifiedTunnelsCollectionResponse>,
 }
 
 impl<'a> UpdateMultipleGreTunnelsRequest<'a> {
@@ -132,18 +160,30 @@ impl<'a> UpdateMultipleGreTunnelsRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<MagicModifiedTunnelsCollectionResponse> {
         self.builder.send().await
     }
 }
-
 /// Update multiple GRE tunnels
+///
+/// Updates multiple GRE tunnels. Use `?validate_only=true` as an optional query parameter to only run validation without persisting changes.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/accounts/{account_id}/magic/gre_tunnels`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `x-magic-new-hc-target` (header,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::magic_gre_tunnels };
+/// use cloudflare::{ ApiClient, apis::magic_gre_tunnels };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = update_multiple_gre_tunnels(&api)
-///     .with_account_id("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = update_multiple_gre_tunnels(&api)
+///     .with_account_id("account_id")
+///     .with_x_magic_new_hc_target("x-magic-new-hc-target")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -153,7 +193,7 @@ pub fn update_multiple_gre_tunnels(api: &ApiClient) -> UpdateMultipleGreTunnelsR
 
 #[derive(Debug)]
 pub struct ListGreTunnelDetailsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, MagicTunnelSingleResponse>,
 }
 
 impl<'a> ListGreTunnelDetailsRequest<'a> {
@@ -180,19 +220,30 @@ impl<'a> ListGreTunnelDetailsRequest<'a> {
         self.builder = self.builder.header_param("x-magic-new-hc-target", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<MagicTunnelSingleResponse> {
         self.builder.send().await
     }
 }
-
 /// List GRE Tunnel Details
+///
+/// Lists informtion for a specific GRE tunnel.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/magic/gre_tunnels/{gre_tunnel_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `gre_tunnel_id` (path, required)
+/// - `x-magic-new-hc-target` (header,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::magic_gre_tunnels };
+/// use cloudflare::{ ApiClient, apis::magic_gre_tunnels };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_gre_tunnel_details(&api)
-///     .with_account_id("value")
-///     .with_gre_tunnel_id("value")
+/// let response = list_gre_tunnel_details(&api)
+///     .with_account_id("account_id")
+///     .with_gre_tunnel_id("gre_tunnel_id")
+///     .with_x_magic_new_hc_target("x-magic-new-hc-target")
 ///     .send()
 ///     .await?;
 /// ```
@@ -202,7 +253,7 @@ pub fn list_gre_tunnel_details(api: &ApiClient) -> ListGreTunnelDetailsRequest<'
 
 #[derive(Debug)]
 pub struct UpdateGreTunnelRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, MagicTunnelModifiedResponse>,
 }
 
 impl<'a> UpdateGreTunnelRequest<'a> {
@@ -230,23 +281,39 @@ impl<'a> UpdateGreTunnelRequest<'a> {
         self.builder = self.builder.header_param("x-magic-new-hc-target", value);
         self
     }
-    pub fn with_body(mut self, body: serde_json::Value) -> Self {
+    pub fn with_body(
+        mut self,
+        body: crate::models::magic_gre_tunnel_update_request::MagicGreTunnelUpdateRequest,
+    ) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<MagicTunnelModifiedResponse> {
         self.builder.send().await
     }
 }
-
 /// Update GRE Tunnel
+///
+/// Updates a specific GRE tunnel. Use `?validate_only=true` as an optional query parameter to only run validation without persisting changes.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/accounts/{account_id}/magic/gre_tunnels/{gre_tunnel_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `gre_tunnel_id` (path, required)
+/// - `x-magic-new-hc-target` (header,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::magic_gre_tunnels };
+/// use cloudflare::{ ApiClient, apis::magic_gre_tunnels };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = update_gre_tunnel(&api)
-///     .with_account_id("value")
-///     .with_gre_tunnel_id("value")
+/// # let body: crate::models::magic_gre_tunnel_update_request::MagicGreTunnelUpdateRequest = todo!();
+/// let response = update_gre_tunnel(&api)
+///     .with_account_id("account_id")
+///     .with_gre_tunnel_id("gre_tunnel_id")
+///     .with_x_magic_new_hc_target("x-magic-new-hc-target")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -256,7 +323,7 @@ pub fn update_gre_tunnel(api: &ApiClient) -> UpdateGreTunnelRequest<'_> {
 
 #[derive(Debug)]
 pub struct DeleteGreTunnelRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, MagicTunnelDeletedResponse>,
 }
 
 impl<'a> DeleteGreTunnelRequest<'a> {
@@ -283,19 +350,30 @@ impl<'a> DeleteGreTunnelRequest<'a> {
         self.builder = self.builder.header_param("x-magic-new-hc-target", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<MagicTunnelDeletedResponse> {
         self.builder.send().await
     }
 }
-
 /// Delete GRE Tunnel
+///
+/// Disables and removes a specific static GRE tunnel. Use `?validate_only=true` as an optional query parameter to only run validation without persisting changes.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/accounts/{account_id}/magic/gre_tunnels/{gre_tunnel_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `gre_tunnel_id` (path, required)
+/// - `x-magic-new-hc-target` (header,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::magic_gre_tunnels };
+/// use cloudflare::{ ApiClient, apis::magic_gre_tunnels };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete_gre_tunnel(&api)
-///     .with_account_id("value")
-///     .with_gre_tunnel_id("value")
+/// let response = delete_gre_tunnel(&api)
+///     .with_account_id("account_id")
+///     .with_gre_tunnel_id("gre_tunnel_id")
+///     .with_x_magic_new_hc_target("x-magic-new-hc-target")
 ///     .send()
 ///     .await?;
 /// ```

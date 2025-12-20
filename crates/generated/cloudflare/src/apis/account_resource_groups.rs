@@ -15,6 +15,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::iam_api_response_single_id::IamApiResponseSingleId;
+use crate::models::iam_collection_resource_groups_response::IamCollectionResourceGroupsResponse;
 use crate::models::iam_created_resource_group_response::IamCreatedResourceGroupResponse;
 use crate::models::iam_resource_group::IamResourceGroup;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
@@ -22,7 +24,7 @@ use reqwest::Method;
 
 #[derive(Debug)]
 pub struct GroupListRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, IamCollectionResourceGroupsResponse>,
 }
 
 impl<'a> GroupListRequest<'a> {
@@ -56,18 +58,34 @@ impl<'a> GroupListRequest<'a> {
         self.builder = self.builder.header_param("per_page", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<IamCollectionResourceGroupsResponse> {
         self.builder.send().await
     }
 }
-
 /// List Resource Groups
+///
+/// List all the resource groups for an account.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/iam/resource_groups`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `id` (query,optional)
+/// - `name` (query,optional)
+/// - `page` (query,optional)
+/// - `per_page` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::account_resource_groups };
+/// use cloudflare::{ ApiClient, apis::account_resource_groups };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = group_list(&api)
-///     .with_account_id("value")
+/// let response = group_list(&api)
+///     .with_account_id("account_id")
+///     .with_id("id")
+///     .with_name("name")
+///     .with_page("page")
+///     .with_per_page("per_page")
 ///     .send()
 ///     .await?;
 /// ```
@@ -107,14 +125,24 @@ impl<'a> GroupCreateRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Create Resource Group
+///
+/// Create a new Resource Group under the specified account.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/iam/resource_groups`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::account_resource_groups };
+/// use cloudflare::{ ApiClient, apis::account_resource_groups };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = group_create(&api)
-///     .with_account_id("value")
+/// # let body: crate::models::iam_request_create_resource_group::IamRequestCreateResourceGroup = todo!();
+/// let response = group_create(&api)
+///     .with_account_id("account_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -151,15 +179,24 @@ impl<'a> GroupDetailsRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Resource Group Details
+///
+/// Get information about a specific resource group in an account.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/iam/resource_groups/{resource_group_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `resource_group_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::account_resource_groups };
+/// use cloudflare::{ ApiClient, apis::account_resource_groups };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = group_details(&api)
-///     .with_account_id("value")
-///     .with_resource_group_id("value")
+/// let response = group_details(&api)
+///     .with_account_id("account_id")
+///     .with_resource_group_id("resource_group_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -204,15 +241,26 @@ impl<'a> GroupUpdateRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Update Resource Group
+///
+/// Modify an existing resource group.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/accounts/{account_id}/iam/resource_groups/{resource_group_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `resource_group_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::account_resource_groups };
+/// use cloudflare::{ ApiClient, apis::account_resource_groups };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = group_update(&api)
-///     .with_account_id("value")
-///     .with_resource_group_id("value")
+/// # let body: crate::models::iam_request_update_resource_group::IamRequestUpdateResourceGroup = todo!();
+/// let response = group_update(&api)
+///     .with_account_id("account_id")
+///     .with_resource_group_id("resource_group_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -222,7 +270,7 @@ pub fn group_update(api: &ApiClient) -> GroupUpdateRequest<'_> {
 
 #[derive(Debug)]
 pub struct GroupDeleteRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, IamApiResponseSingleId>,
 }
 
 impl<'a> GroupDeleteRequest<'a> {
@@ -245,19 +293,28 @@ impl<'a> GroupDeleteRequest<'a> {
         self.builder = self.builder.path_param("resource_group_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<IamApiResponseSingleId> {
         self.builder.send().await
     }
 }
-
 /// Remove Resource Group
+///
+/// Remove a resource group from an account.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/accounts/{account_id}/iam/resource_groups/{resource_group_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `resource_group_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::account_resource_groups };
+/// use cloudflare::{ ApiClient, apis::account_resource_groups };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = group_delete(&api)
-///     .with_account_id("value")
-///     .with_resource_group_id("value")
+/// let response = group_delete(&api)
+///     .with_account_id("account_id")
+///     .with_resource_group_id("resource_group_id")
 ///     .send()
 ///     .await?;
 /// ```

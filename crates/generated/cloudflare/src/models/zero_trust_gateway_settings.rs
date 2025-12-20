@@ -19,8 +19,8 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct ZeroTrustGatewaySettings {
-    pub created_at: Option<serde_json::Value>,
-    pub public_key: Option<serde_json::Value>,
-    pub seed_id: Option<serde_json::Value>,
-    pub updated_at: Option<serde_json::Value>,
+    pub created_at: Option<crate::models::zero_trust_gateway_read_only_timestamp::ZeroTrustGatewayReadOnlyTimestamp>,
+    pub public_key: Option<crate::models::zero_trust_gateway_public_key::ZeroTrustGatewayPublicKey>,
+    pub seed_id: Option<crate::models::zero_trust_gateway_audit_ssh_settings_components_schemas_uuid::ZeroTrustGatewayAuditSshSettingsComponentsSchemasUuid>,
+    pub updated_at: Option<crate::models::zero_trust_gateway_read_only_timestamp::ZeroTrustGatewayReadOnlyTimestamp>,
 }

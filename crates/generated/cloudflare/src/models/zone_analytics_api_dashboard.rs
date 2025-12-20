@@ -19,6 +19,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct ZoneAnalyticsApiDashboard {
-    pub timeseries: Option<serde_json::Value>,
+    pub timeseries:
+        Option<crate::models::zone_analytics_api_timeseries::ZoneAnalyticsApiTimeseries>,
     pub totals: Option<crate::models::zone_analytics_api_totals::ZoneAnalyticsApiTotals>,
 }

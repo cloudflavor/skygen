@@ -19,5 +19,5 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct MagicPskMetadata {
-    pub last_generated_on: Option<serde_json::Value>,
+    pub last_generated_on: Option<crate::models::magic_schemas_modified_on::MagicSchemasModifiedOn>,
 }

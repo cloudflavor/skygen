@@ -19,10 +19,10 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct TunnelVirtualNetwork {
-    pub comment: serde_json::Value,
-    pub created_at: serde_json::Value,
-    pub deleted_at: Option<serde_json::Value>,
-    pub id: serde_json::Value,
-    pub is_default_network: serde_json::Value,
-    pub name: serde_json::Value,
+    pub comment: crate::models::tunnel_virtual_network_comment::TunnelVirtualNetworkComment,
+    pub created_at: crate::models::tunnel_created_at::TunnelCreatedAt,
+    pub deleted_at: Option<crate::models::tunnel_deleted_at::TunnelDeletedAt>,
+    pub id: crate::models::tunnel_virtual_network_id::TunnelVirtualNetworkId,
+    pub is_default_network: crate::models::tunnel_is_default_network::TunnelIsDefaultNetwork,
+    pub name: crate::models::tunnel_virtual_network_name::TunnelVirtualNetworkName,
 }

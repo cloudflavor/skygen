@@ -19,8 +19,8 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct IamMemberWithPolicies {
-    pub id: Option<serde_json::Value>,
-    pub policies: Option<Vec<serde_json::Value>>,
+    pub id: Option<crate::models::iam_membership_components_schemas_identifier::IamMembershipComponentsSchemasIdentifier>,
+    pub policies: Option<Vec<crate::models::iam_list_member_policy::IamListMemberPolicy>>,
     pub roles: Option<Vec<crate::models::iam_role::IamRole>>,
     pub status: Option<serde_json::Value>,
     pub user: Option<std::collections::BTreeMap<String, serde_json::Value>>,

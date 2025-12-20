@@ -15,12 +15,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::stream_deleted_response::StreamDeletedResponse;
+use crate::models::stream_webhook_response_single::StreamWebhookResponseSingle;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct ViewWebhooksRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, StreamWebhookResponseSingle>,
 }
 
 impl<'a> ViewWebhooksRequest<'a> {
@@ -35,18 +37,26 @@ impl<'a> ViewWebhooksRequest<'a> {
         self.builder = self.builder.path_param("account_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<StreamWebhookResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// View webhooks
+///
+/// Retrieves a list of webhooks.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/stream/webhook`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::stream_webhook };
+/// use cloudflare::{ ApiClient, apis::stream_webhook };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = view_webhooks(&api)
-///     .with_account_id("value")
+/// let response = view_webhooks(&api)
+///     .with_account_id("account_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -56,7 +66,7 @@ pub fn view_webhooks(api: &ApiClient) -> ViewWebhooksRequest<'_> {
 
 #[derive(Debug)]
 pub struct CreateWebhooksRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, StreamWebhookResponseSingle>,
 }
 
 impl<'a> CreateWebhooksRequest<'a> {
@@ -72,22 +82,35 @@ impl<'a> CreateWebhooksRequest<'a> {
         self.builder = self.builder.path_param("account_id", value);
         self
     }
-    pub fn with_body(mut self, body: serde_json::Value) -> Self {
+    pub fn with_body(
+        mut self,
+        body: crate::models::stream_webhook_request::StreamWebhookRequest,
+    ) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<StreamWebhookResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Create webhooks
+///
+/// Creates a webhook notification.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/accounts/{account_id}/stream/webhook`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::stream_webhook };
+/// use cloudflare::{ ApiClient, apis::stream_webhook };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = create_webhooks(&api)
-///     .with_account_id("value")
+/// # let body: crate::models::stream_webhook_request::StreamWebhookRequest = todo!();
+/// let response = create_webhooks(&api)
+///     .with_account_id("account_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -97,7 +120,7 @@ pub fn create_webhooks(api: &ApiClient) -> CreateWebhooksRequest<'_> {
 
 #[derive(Debug)]
 pub struct DeleteWebhooksRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, StreamDeletedResponse>,
 }
 
 impl<'a> DeleteWebhooksRequest<'a> {
@@ -112,18 +135,26 @@ impl<'a> DeleteWebhooksRequest<'a> {
         self.builder = self.builder.path_param("account_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<StreamDeletedResponse> {
         self.builder.send().await
     }
 }
-
 /// Delete webhooks
+///
+/// Deletes a webhook.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/accounts/{account_id}/stream/webhook`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::stream_webhook };
+/// use cloudflare::{ ApiClient, apis::stream_webhook };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete_webhooks(&api)
-///     .with_account_id("value")
+/// let response = delete_webhooks(&api)
+///     .with_account_id("account_id")
 ///     .send()
 ///     .await?;
 /// ```

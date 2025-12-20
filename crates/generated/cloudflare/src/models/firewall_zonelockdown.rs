@@ -19,11 +19,11 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct FirewallZonelockdown {
-    pub configurations: serde_json::Value,
-    pub created_on: serde_json::Value,
-    pub description: serde_json::Value,
-    pub id: serde_json::Value,
-    pub modified_on: serde_json::Value,
-    pub paused: serde_json::Value,
-    pub urls: serde_json::Value,
+    pub configurations: crate::models::firewall_configurations::FirewallConfigurations,
+    pub created_on: crate::models::firewall_created_on::FirewallCreatedOn,
+    pub description: crate::models::firewall_lockdowns_components_schemas_description::FirewallLockdownsComponentsSchemasDescription,
+    pub id: crate::models::firewall_lockdowns_components_schemas_id::FirewallLockdownsComponentsSchemasId,
+    pub modified_on: crate::models::firewall_modified_on::FirewallModifiedOn,
+    pub paused: crate::models::firewall_schemas_paused::FirewallSchemasPaused,
+    pub urls: crate::models::firewall_schemas_urls::FirewallSchemasUrls,
 }

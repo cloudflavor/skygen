@@ -67,15 +67,32 @@ impl<'a> AigConfigListDatasetRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// List Datasets
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/ai-gateway/gateways/{gateway_id}/datasets`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `gateway_id` (path, required)
+/// - `page` (query,optional)
+/// - `per_page` (query,optional)
+/// - `name` (query,optional)
+/// - `enable` (query,optional)
+/// - `search` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::ai_gateway_datasets };
+/// use cloudflare::{ ApiClient, apis::ai_gateway_datasets };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = aig_config_list_dataset(&api)
-///     .with_account_id("value")
-///     .with_gateway_id("value")
+/// let response = aig_config_list_dataset(&api)
+///     .with_account_id("account_id")
+///     .with_gateway_id("gateway_id")
+///     .with_page("page")
+///     .with_per_page("per_page")
+///     .with_name("name")
+///     .with_enable("enable")
+///     .with_search("search")
 ///     .send()
 ///     .await?;
 /// ```
@@ -119,15 +136,24 @@ impl<'a> AigConfigCreateDatasetRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Create a new Dataset
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/ai-gateway/gateways/{gateway_id}/datasets`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `gateway_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::ai_gateway_datasets };
+/// use cloudflare::{ ApiClient, apis::ai_gateway_datasets };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = aig_config_create_dataset(&api)
-///     .with_account_id("value")
-///     .with_gateway_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = aig_config_create_dataset(&api)
+///     .with_account_id("account_id")
+///     .with_gateway_id("gateway_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -169,16 +195,24 @@ impl<'a> AigConfigFetchDatasetRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Fetch a Dataset
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/ai-gateway/gateways/{gateway_id}/datasets/{id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `gateway_id` (path, required)
+/// - `id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::ai_gateway_datasets };
+/// use cloudflare::{ ApiClient, apis::ai_gateway_datasets };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = aig_config_fetch_dataset(&api)
-///     .with_account_id("value")
-///     .with_gateway_id("value")
-///     .with_id("value")
+/// let response = aig_config_fetch_dataset(&api)
+///     .with_account_id("account_id")
+///     .with_gateway_id("gateway_id")
+///     .with_id("id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -227,16 +261,26 @@ impl<'a> AigConfigUpdateDatasetRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Update a Dataset
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/accounts/{account_id}/ai-gateway/gateways/{gateway_id}/datasets/{id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `gateway_id` (path, required)
+/// - `id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::ai_gateway_datasets };
+/// use cloudflare::{ ApiClient, apis::ai_gateway_datasets };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = aig_config_update_dataset(&api)
-///     .with_account_id("value")
-///     .with_gateway_id("value")
-///     .with_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = aig_config_update_dataset(&api)
+///     .with_account_id("account_id")
+///     .with_gateway_id("gateway_id")
+///     .with_id("id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -278,16 +322,24 @@ impl<'a> AigConfigDeleteDatasetRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Delete a Dataset
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/accounts/{account_id}/ai-gateway/gateways/{gateway_id}/datasets/{id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `gateway_id` (path, required)
+/// - `id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::ai_gateway_datasets };
+/// use cloudflare::{ ApiClient, apis::ai_gateway_datasets };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = aig_config_delete_dataset(&api)
-///     .with_account_id("value")
-///     .with_gateway_id("value")
-///     .with_id("value")
+/// let response = aig_config_delete_dataset(&api)
+///     .with_account_id("account_id")
+///     .with_gateway_id("gateway_id")
+///     .with_id("id")
 ///     .send()
 ///     .await?;
 /// ```

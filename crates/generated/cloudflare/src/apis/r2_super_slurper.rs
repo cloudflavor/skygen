@@ -47,14 +47,24 @@ impl<'a> ListJobsRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// List jobs
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/slurper/jobs`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `limit` (query,optional)
+/// - `offset` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::r2_super_slurper };
+/// use cloudflare::{ ApiClient, apis::r2_super_slurper };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_jobs(&api)
-///     .with_account_id("value")
+/// let response = list_jobs(&api)
+///     .with_account_id("account_id")
+///     .with_limit("limit")
+///     .with_offset("offset")
 ///     .send()
 ///     .await?;
 /// ```
@@ -91,14 +101,22 @@ impl<'a> CreateJobRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Create a job
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/slurper/jobs`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::r2_super_slurper };
+/// use cloudflare::{ ApiClient, apis::r2_super_slurper };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = create_job(&api)
-///     .with_account_id("value")
+/// # let body: crate::models::r2_slurper_create_job_request::R2SlurperCreateJobRequest = todo!();
+/// let response = create_job(&api)
+///     .with_account_id("account_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -130,14 +148,20 @@ impl<'a> AbortAllJobsRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Abort all jobs
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/accounts/{account_id}/slurper/jobs/abortAll`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::r2_super_slurper };
+/// use cloudflare::{ ApiClient, apis::r2_super_slurper };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = abort_all_jobs(&api)
-///     .with_account_id("value")
+/// let response = abort_all_jobs(&api)
+///     .with_account_id("account_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -174,15 +198,22 @@ impl<'a> GetJobRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get job details
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/slurper/jobs/{job_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `job_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::r2_super_slurper };
+/// use cloudflare::{ ApiClient, apis::r2_super_slurper };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_job(&api)
-///     .with_account_id("value")
-///     .with_job_id("value")
+/// let response = get_job(&api)
+///     .with_account_id("account_id")
+///     .with_job_id("job_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -219,15 +250,22 @@ impl<'a> AbortJobRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Abort a job
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/accounts/{account_id}/slurper/jobs/{job_id}/abort`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `job_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::r2_super_slurper };
+/// use cloudflare::{ ApiClient, apis::r2_super_slurper };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = abort_job(&api)
-///     .with_account_id("value")
-///     .with_job_id("value")
+/// let response = abort_job(&api)
+///     .with_account_id("account_id")
+///     .with_job_id("job_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -272,15 +310,26 @@ impl<'a> GetJobLogsRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get job logs
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/slurper/jobs/{job_id}/logs`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `job_id` (path, required)
+/// - `limit` (query,optional)
+/// - `offset` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::r2_super_slurper };
+/// use cloudflare::{ ApiClient, apis::r2_super_slurper };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_job_logs(&api)
-///     .with_account_id("value")
-///     .with_job_id("value")
+/// let response = get_job_logs(&api)
+///     .with_account_id("account_id")
+///     .with_job_id("job_id")
+///     .with_limit("limit")
+///     .with_offset("offset")
 ///     .send()
 ///     .await?;
 /// ```
@@ -317,15 +366,22 @@ impl<'a> PauseJobRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Pause a job
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/accounts/{account_id}/slurper/jobs/{job_id}/pause`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `job_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::r2_super_slurper };
+/// use cloudflare::{ ApiClient, apis::r2_super_slurper };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = pause_job(&api)
-///     .with_account_id("value")
-///     .with_job_id("value")
+/// let response = pause_job(&api)
+///     .with_account_id("account_id")
+///     .with_job_id("job_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -362,15 +418,22 @@ impl<'a> GetJobProgressRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get job progress
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/slurper/jobs/{job_id}/progress`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `job_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::r2_super_slurper };
+/// use cloudflare::{ ApiClient, apis::r2_super_slurper };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_job_progress(&api)
-///     .with_account_id("value")
-///     .with_job_id("value")
+/// let response = get_job_progress(&api)
+///     .with_account_id("account_id")
+///     .with_job_id("job_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -407,15 +470,22 @@ impl<'a> ResumeJobRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Resume a job
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/accounts/{account_id}/slurper/jobs/{job_id}/resume`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `job_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::r2_super_slurper };
+/// use cloudflare::{ ApiClient, apis::r2_super_slurper };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = resume_job(&api)
-///     .with_account_id("value")
-///     .with_job_id("value")
+/// let response = resume_job(&api)
+///     .with_account_id("account_id")
+///     .with_job_id("job_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -444,7 +514,10 @@ impl<'a> CheckSourceConnectivityRequest<'a> {
         self.builder = self.builder.path_param("account_id", value);
         self
     }
-    pub fn with_body(mut self, body: serde_json::Value) -> Self {
+    pub fn with_body(
+        mut self,
+        body: crate::models::r2_slurper_source_job_schema::R2SlurperSourceJobSchema,
+    ) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
@@ -452,14 +525,24 @@ impl<'a> CheckSourceConnectivityRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Check source connectivity
+///
+/// Check whether tokens are valid against the source bucket
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/accounts/{account_id}/slurper/source/connectivity-precheck`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::r2_super_slurper };
+/// use cloudflare::{ ApiClient, apis::r2_super_slurper };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = check_source_connectivity(&api)
-///     .with_account_id("value")
+/// # let body: crate::models::r2_slurper_source_job_schema::R2SlurperSourceJobSchema = todo!();
+/// let response = check_source_connectivity(&api)
+///     .with_account_id("account_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -488,7 +571,10 @@ impl<'a> CheckTargetConnectivityRequest<'a> {
         self.builder = self.builder.path_param("account_id", value);
         self
     }
-    pub fn with_body(mut self, body: serde_json::Value) -> Self {
+    pub fn with_body(
+        mut self,
+        body: crate::models::r2_slurper_r2_target_schema::R2SlurperR2TargetSchema,
+    ) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
@@ -496,14 +582,24 @@ impl<'a> CheckTargetConnectivityRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Check target connectivity
+///
+/// Check whether tokens are valid against the target bucket
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/accounts/{account_id}/slurper/target/connectivity-precheck`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::r2_super_slurper };
+/// use cloudflare::{ ApiClient, apis::r2_super_slurper };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = check_target_connectivity(&api)
-///     .with_account_id("value")
+/// # let body: crate::models::r2_slurper_r2_target_schema::R2SlurperR2TargetSchema = todo!();
+/// let response = check_target_connectivity(&api)
+///     .with_account_id("account_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```

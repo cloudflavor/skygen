@@ -23,7 +23,7 @@ pub struct AccessResponses {
     pub error_description: Option<String>,
     pub idp_id: Option<String>,
     pub idp_resource_id: Option<String>,
-    pub logged_at: Option<serde_json::Value>,
+    pub logged_at: Option<crate::models::access_timestamp::AccessTimestamp>,
     pub request_body: Option<String>,
     pub request_method: Option<String>,
     pub resource_group_name: Option<String>,

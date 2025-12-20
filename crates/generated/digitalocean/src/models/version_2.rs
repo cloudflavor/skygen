@@ -19,5 +19,5 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct Version2 {
-    pub version: Option<serde_json::Value>,
+    pub version: Option<crate::models::version::Version>,
 }

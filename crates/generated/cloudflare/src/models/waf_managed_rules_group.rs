@@ -19,10 +19,10 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct WafManagedRulesGroup {
-    pub description: Option<serde_json::Value>,
-    pub id: Option<serde_json::Value>,
-    pub modified_rules_count: Option<serde_json::Value>,
-    pub name: Option<serde_json::Value>,
-    pub package_id: Option<serde_json::Value>,
-    pub rules_count: Option<serde_json::Value>,
+    pub description: Option<crate::models::waf_managed_rules_description::WafManagedRulesDescription>,
+    pub id: Option<crate::models::waf_managed_rules_components_schemas_identifier::WafManagedRulesComponentsSchemasIdentifier>,
+    pub modified_rules_count: Option<crate::models::waf_managed_rules_modified_rules_count::WafManagedRulesModifiedRulesCount>,
+    pub name: Option<crate::models::waf_managed_rules_name::WafManagedRulesName>,
+    pub package_id: Option<crate::models::waf_managed_rules_identifier::WafManagedRulesIdentifier>,
+    pub rules_count: Option<crate::models::waf_managed_rules_rules_count::WafManagedRulesRulesCount>,
 }

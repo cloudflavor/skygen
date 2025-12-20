@@ -15,12 +15,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::pages_domain_response_collection::PagesDomainResponseCollection;
+use crate::models::pages_domain_response_single::PagesDomainResponseSingle;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct GetDomainsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, PagesDomainResponseCollection>,
 }
 
 impl<'a> GetDomainsRequest<'a> {
@@ -43,19 +45,28 @@ impl<'a> GetDomainsRequest<'a> {
         self.builder = self.builder.path_param("project_name", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<PagesDomainResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// Get domains
+///
+/// Fetch a list of all domains associated with a Pages project.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/pages/projects/{project_name}/domains`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `project_name` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::pages_domains };
+/// use cloudflare::{ ApiClient, apis::pages_domains };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_domains(&api)
-///     .with_account_id("value")
-///     .with_project_name("value")
+/// let response = get_domains(&api)
+///     .with_account_id("account_id")
+///     .with_project_name("project_name")
 ///     .send()
 ///     .await?;
 /// ```
@@ -65,7 +76,7 @@ pub fn get_domains(api: &ApiClient) -> GetDomainsRequest<'_> {
 
 #[derive(Debug)]
 pub struct AddDomainRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, PagesDomainResponseSingle>,
 }
 
 impl<'a> AddDomainRequest<'a> {
@@ -93,19 +104,30 @@ impl<'a> AddDomainRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<PagesDomainResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Add domain
+///
+/// Add a new domain for the Pages project.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/pages/projects/{project_name}/domains`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `project_name` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::pages_domains };
+/// use cloudflare::{ ApiClient, apis::pages_domains };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = add_domain(&api)
-///     .with_account_id("value")
-///     .with_project_name("value")
+/// # let body: crate::models::pages_domains_post::PagesDomainsPost = todo!();
+/// let response = add_domain(&api)
+///     .with_account_id("account_id")
+///     .with_project_name("project_name")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -115,7 +137,7 @@ pub fn add_domain(api: &ApiClient) -> AddDomainRequest<'_> {
 
 #[derive(Debug)]
 pub struct GetDomainRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, PagesDomainResponseSingle>,
 }
 
 impl<'a> GetDomainRequest<'a> {
@@ -143,20 +165,30 @@ impl<'a> GetDomainRequest<'a> {
         self.builder = self.builder.path_param("domain_name", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<PagesDomainResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Get domain
+///
+/// Fetch a single domain.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/pages/projects/{project_name}/domains/{domain_name}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `project_name` (path, required)
+/// - `domain_name` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::pages_domains };
+/// use cloudflare::{ ApiClient, apis::pages_domains };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_domain(&api)
-///     .with_account_id("value")
-///     .with_project_name("value")
-///     .with_domain_name("value")
+/// let response = get_domain(&api)
+///     .with_account_id("account_id")
+///     .with_project_name("project_name")
+///     .with_domain_name("domain_name")
 ///     .send()
 ///     .await?;
 /// ```
@@ -198,16 +230,26 @@ impl<'a> DeleteDomainRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Delete domain
+///
+/// Delete a Pages project's domain.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/accounts/{account_id}/pages/projects/{project_name}/domains/{domain_name}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `project_name` (path, required)
+/// - `domain_name` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::pages_domains };
+/// use cloudflare::{ ApiClient, apis::pages_domains };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete_domain(&api)
-///     .with_account_id("value")
-///     .with_project_name("value")
-///     .with_domain_name("value")
+/// let response = delete_domain(&api)
+///     .with_account_id("account_id")
+///     .with_project_name("project_name")
+///     .with_domain_name("domain_name")
 ///     .send()
 ///     .await?;
 /// ```
@@ -217,7 +259,7 @@ pub fn delete_domain(api: &ApiClient) -> DeleteDomainRequest<'_> {
 
 #[derive(Debug)]
 pub struct PatchDomainRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, PagesDomainResponseSingle>,
 }
 
 impl<'a> PatchDomainRequest<'a> {
@@ -245,20 +287,30 @@ impl<'a> PatchDomainRequest<'a> {
         self.builder = self.builder.path_param("domain_name", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<PagesDomainResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Patch domain
+///
+/// Retry the validation status of a single domain.
+///
+/// **HTTP Method:** `PATCH`
+/// **Path:** `/accounts/{account_id}/pages/projects/{project_name}/domains/{domain_name}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `project_name` (path, required)
+/// - `domain_name` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::pages_domains };
+/// use cloudflare::{ ApiClient, apis::pages_domains };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = patch_domain(&api)
-///     .with_account_id("value")
-///     .with_project_name("value")
-///     .with_domain_name("value")
+/// let response = patch_domain(&api)
+///     .with_account_id("account_id")
+///     .with_project_name("project_name")
+///     .with_domain_name("domain_name")
 ///     .send()
 ///     .await?;
 /// ```

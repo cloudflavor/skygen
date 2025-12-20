@@ -15,12 +15,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::zones_zone_settings_response_collection::ZonesZoneSettingsResponseCollection;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct GetAllSettingsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, ZonesZoneSettingsResponseCollection>,
 }
 
 impl<'a> GetAllSettingsRequest<'a> {
@@ -34,18 +35,26 @@ impl<'a> GetAllSettingsRequest<'a> {
         self.builder = self.builder.path_param("zone_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<ZonesZoneSettingsResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// Get all zone settings
+///
+/// Available settings for your user in relation to a zone.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/settings`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zone_settings };
+/// use cloudflare::{ ApiClient, apis::zone_settings };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_all_settings(&api)
-///     .with_zone_id("value")
+/// let response = get_all_settings(&api)
+///     .with_zone_id("zone_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -55,7 +64,7 @@ pub fn get_all_settings(api: &ApiClient) -> GetAllSettingsRequest<'_> {
 
 #[derive(Debug)]
 pub struct EditSettingsInfoRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, ZonesZoneSettingsResponseCollection>,
 }
 
 impl<'a> EditSettingsInfoRequest<'a> {
@@ -70,22 +79,35 @@ impl<'a> EditSettingsInfoRequest<'a> {
         self.builder = self.builder.path_param("zone_id", value);
         self
     }
-    pub fn with_body(mut self, body: serde_json::Value) -> Self {
+    pub fn with_body(
+        mut self,
+        body: crate::models::zones_multiple_settings::ZonesMultipleSettings,
+    ) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<ZonesZoneSettingsResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// Edit multiple zone settings
+///
+/// Edit settings for a zone.
+///
+/// **HTTP Method:** `PATCH`
+/// **Path:** `/zones/{zone_id}/settings`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zone_settings };
+/// use cloudflare::{ ApiClient, apis::zone_settings };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = edit_settings_info(&api)
-///     .with_zone_id("value")
+/// # let body: crate::models::zones_multiple_settings::ZonesMultipleSettings = todo!();
+/// let response = edit_settings_info(&api)
+///     .with_zone_id("zone_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -113,14 +135,22 @@ impl<'a> CacheSettingsGetAegisRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get aegis setting
+///
+/// Aegis provides dedicated egress IPs (from Cloudflare to your origin) for your layer 7 WAF and CDN services. The egress IPs are reserved exclusively for your account so that you can increase your origin security by only allowing traffic from a small list of IP addresses.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/settings/aegis`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zone_settings };
+/// use cloudflare::{ ApiClient, apis::zone_settings };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = cache_settings_get_aegis(&api)
-///     .with_zone_id("value")
+/// let response = cache_settings_get_aegis(&api)
+///     .with_zone_id("zone_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -156,14 +186,24 @@ impl<'a> CacheSettingsChangeAegisRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Change aegis setting
+///
+/// Aegis provides dedicated egress IPs (from Cloudflare to your origin) for your layer 7 WAF and CDN services. The egress IPs are reserved exclusively for your account so that you can increase your origin security by only allowing traffic from a small list of IP addresses.
+///
+/// **HTTP Method:** `PATCH`
+/// **Path:** `/zones/{zone_id}/settings/aegis`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zone_settings };
+/// use cloudflare::{ ApiClient, apis::zone_settings };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = cache_settings_change_aegis(&api)
-///     .with_zone_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = cache_settings_change_aegis(&api)
+///     .with_zone_id("zone_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -191,14 +231,23 @@ impl<'a> GetFontsSettingRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get Cloudflare Fonts setting
+///
+/// Enhance your website's font delivery with Cloudflare Fonts. Deliver Google Hosted fonts from your own domain,
+/// boost performance, and enhance user privacy. Refer to the Cloudflare Fonts documentation for more information.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/settings/fonts`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zone_settings };
+/// use cloudflare::{ ApiClient, apis::zone_settings };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_fonts_setting(&api)
-///     .with_zone_id("value")
+/// let response = get_fonts_setting(&api)
+///     .with_zone_id("zone_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -231,14 +280,25 @@ impl<'a> ChangeFontsSettingRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Change Cloudflare Fonts setting
+///
+/// Enhance your website's font delivery with Cloudflare Fonts. Deliver Google Hosted fonts from your own domain,
+/// boost performance, and enhance user privacy. Refer to the Cloudflare Fonts documentation for more information.
+///
+/// **HTTP Method:** `PATCH`
+/// **Path:** `/zones/{zone_id}/settings/fonts`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zone_settings };
+/// use cloudflare::{ ApiClient, apis::zone_settings };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = change_fonts_setting(&api)
-///     .with_zone_id("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = change_fonts_setting(&api)
+///     .with_zone_id("zone_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -270,14 +330,22 @@ impl<'a> CacheSettingsGetOriginRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get Origin H2 Max Streams Setting
+///
+/// Origin H2 Max Streams configures the max number of concurrent requests that Cloudflare will send within the same connection when communicating with the origin server, if the origin supports it. Note that if your origin does not support H2 multiplexing, 5xx errors may be observed, particularly 520s. Also note that the default value is `100` for all plan types except Enterprise where it is `1`. `1` means that H2 multiplexing is disabled.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/settings/origin_h2_max_streams`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zone_settings };
+/// use cloudflare::{ ApiClient, apis::zone_settings };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = cache_settings_get_origin(&api)
-///     .with_zone_id("value")
+/// let response = cache_settings_get_origin(&api)
+///     .with_zone_id("zone_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -317,14 +385,24 @@ impl<'a> CacheSettingsChangeOriginRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Change Origin H2 Max Streams Setting
+///
+/// Origin H2 Max Streams configures the max number of concurrent requests that Cloudflare will send within the same connection when communicating with the origin server, if the origin supports it. Note that if your origin does not support H2 multiplexing, 5xx errors may be observed, particularly 520s. Also note that the default value is `100` for all plan types except Enterprise where it is `1`. `1` means that H2 multiplexing is disabled.
+///
+/// **HTTP Method:** `PATCH`
+/// **Path:** `/zones/{zone_id}/settings/origin_h2_max_streams`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zone_settings };
+/// use cloudflare::{ ApiClient, apis::zone_settings };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = cache_settings_change_origin(&api)
-///     .with_zone_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = cache_settings_change_origin(&api)
+///     .with_zone_id("zone_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -356,14 +434,22 @@ impl<'a> CacheSettingsGetOriginGetRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get Origin Max HTTP Version Setting
+///
+/// Origin Max HTTP Setting Version sets the highest HTTP version Cloudflare will attempt to use with your origin. This setting allows Cloudflare to make HTTP/2 requests to your origin. (Refer to [Enable HTTP/2 to Origin](<https://developers.cloudflare.com/cache/how-to/enable-http2-to-origin/),> for more information.). The default value is "2" for all plan types except Enterprise where it is "1"
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/settings/origin_max_http_version`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zone_settings };
+/// use cloudflare::{ ApiClient, apis::zone_settings };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = cache_settings_get_origin_get(&api)
-///     .with_zone_id("value")
+/// let response = cache_settings_get_origin_get(&api)
+///     .with_zone_id("zone_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -403,14 +489,24 @@ impl<'a> CacheSettingsChangeOriginPatchRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Change Origin Max HTTP Version Setting
+///
+/// Origin Max HTTP Setting Version sets the highest HTTP version Cloudflare will attempt to use with your origin. This setting allows Cloudflare to make HTTP/2 requests to your origin. (Refer to [Enable HTTP/2 to Origin](<https://developers.cloudflare.com/cache/how-to/enable-http2-to-origin/),> for more information.). The default value is "2" for all plan types except Enterprise where it is "1"
+///
+/// **HTTP Method:** `PATCH`
+/// **Path:** `/zones/{zone_id}/settings/origin_max_http_version`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zone_settings };
+/// use cloudflare::{ ApiClient, apis::zone_settings };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = cache_settings_change_origin_patch(&api)
-///     .with_zone_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = cache_settings_change_origin_patch(&api)
+///     .with_zone_id("zone_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -441,14 +537,23 @@ impl<'a> GetSpeedBrainSettingRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get Cloudflare Speed Brain setting
+///
+/// Speed Brain lets compatible browsers speculate on content which can be prefetched or preloaded, making website
+/// navigation faster. Refer to the Cloudflare Speed Brain documentation for more information.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/settings/speed_brain`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zone_settings };
+/// use cloudflare::{ ApiClient, apis::zone_settings };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_speed_brain_setting(&api)
-///     .with_zone_id("value")
+/// let response = get_speed_brain_setting(&api)
+///     .with_zone_id("zone_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -482,14 +587,25 @@ impl<'a> ChangeSpeedBrainSettingRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Change Cloudflare Speed Brain setting
+///
+/// Speed Brain lets compatible browsers speculate on content which can be prefetched or preloaded, making website
+/// navigation faster. Refer to the Cloudflare Speed Brain documentation for more information.
+///
+/// **HTTP Method:** `PATCH`
+/// **Path:** `/zones/{zone_id}/settings/speed_brain`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zone_settings };
+/// use cloudflare::{ ApiClient, apis::zone_settings };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = change_speed_brain_setting(&api)
-///     .with_zone_id("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = change_speed_brain_setting(&api)
+///     .with_zone_id("zone_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -523,15 +639,24 @@ impl<'a> GetSingleSettingRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get zone setting
+///
+/// Fetch a single zone setting by name
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/settings/{setting_id}`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `setting_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zone_settings };
+/// use cloudflare::{ ApiClient, apis::zone_settings };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_single_setting(&api)
-///     .with_zone_id("value")
-///     .with_setting_id("value")
+/// let response = get_single_setting(&api)
+///     .with_zone_id("zone_id")
+///     .with_setting_id("setting_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -562,7 +687,10 @@ impl<'a> EditSingleSettingRequest<'a> {
         self.builder = self.builder.path_param("setting_id", value);
         self
     }
-    pub fn with_body(mut self, body: serde_json::Value) -> Self {
+    pub fn with_body(
+        mut self,
+        body: crate::models::zones_zone_settings_single_request::ZonesZoneSettingsSingleRequest,
+    ) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
@@ -570,15 +698,26 @@ impl<'a> EditSingleSettingRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Edit zone setting
+///
+/// Updates a single zone setting by the identifier
+///
+/// **HTTP Method:** `PATCH`
+/// **Path:** `/zones/{zone_id}/settings/{setting_id}`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `setting_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zone_settings };
+/// use cloudflare::{ ApiClient, apis::zone_settings };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = edit_single_setting(&api)
-///     .with_zone_id("value")
-///     .with_setting_id("value")
+/// # let body: crate::models::zones_zone_settings_single_request::ZonesZoneSettingsSingleRequest = todo!();
+/// let response = edit_single_setting(&api)
+///     .with_zone_id("zone_id")
+///     .with_setting_id("setting_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```

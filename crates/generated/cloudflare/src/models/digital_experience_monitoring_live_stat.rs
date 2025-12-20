@@ -19,6 +19,6 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct DigitalExperienceMonitoringLiveStat {
-    pub unique_devices_total: Option<serde_json::Value>,
+    pub unique_devices_total: Option<crate::models::digital_experience_monitoring_unique_devices_total::DigitalExperienceMonitoringUniqueDevicesTotal>,
     pub value: Option<String>,
 }

@@ -23,7 +23,7 @@ pub struct DlpPredefinedProfile {
     pub allowed_match_count: i64,
     pub confidence_threshold: Option<serde_json::Value>,
     pub context_awareness: Option<crate::models::dlp_context_awareness::DlpContextAwareness>,
-    pub entries: Vec<serde_json::Value>,
+    pub entries: Vec<crate::models::dlp_entry::DlpEntry>,
     pub id: String,
     pub name: String,
     pub ocr_enabled: Option<bool>,

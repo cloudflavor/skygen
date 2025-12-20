@@ -19,7 +19,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct AccessTagWithoutAppCount {
-    pub created_at: Option<serde_json::Value>,
-    pub name: serde_json::Value,
-    pub updated_at: Option<serde_json::Value>,
+    pub created_at: Option<crate::models::access_timestamp::AccessTimestamp>,
+    pub name: crate::models::access_tags_components_schemas_name::AccessTagsComponentsSchemasName,
+    pub updated_at: Option<crate::models::access_timestamp::AccessTimestamp>,
 }

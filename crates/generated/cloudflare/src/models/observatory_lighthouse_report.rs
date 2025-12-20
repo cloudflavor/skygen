@@ -20,14 +20,14 @@ use serde::{Deserialize, Serialize};
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct ObservatoryLighthouseReport {
     pub cls: Option<f64>,
-    pub device_type: Option<serde_json::Value>,
+    pub device_type: Option<crate::models::observatory_device_type::ObservatoryDeviceType>,
     pub error: Option<std::collections::BTreeMap<String, serde_json::Value>>,
     pub fcp: Option<f64>,
     pub json_report_url: Option<String>,
     pub lcp: Option<f64>,
     pub performance_score: Option<f64>,
     pub si: Option<f64>,
-    pub state: Option<serde_json::Value>,
+    pub state: Option<crate::models::observatory_lighthouse_state::ObservatoryLighthouseState>,
     pub tbt: Option<f64>,
     pub ttfb: Option<f64>,
     pub tti: Option<f64>,

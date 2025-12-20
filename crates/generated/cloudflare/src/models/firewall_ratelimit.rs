@@ -19,12 +19,12 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct FirewallRatelimit {
-    pub action: Option<serde_json::Value>,
-    pub bypass: Option<serde_json::Value>,
-    pub description: Option<serde_json::Value>,
-    pub disabled: Option<serde_json::Value>,
-    pub id: Option<serde_json::Value>,
-    pub period: Option<serde_json::Value>,
-    pub r#match: Option<serde_json::Value>,
-    pub threshold: Option<serde_json::Value>,
+    pub action: Option<crate::models::firewall_action::FirewallAction>,
+    pub bypass: Option<crate::models::firewall_bypass::FirewallBypass>,
+    pub description: Option<crate::models::firewall_description::FirewallDescription>,
+    pub disabled: Option<crate::models::firewall_disabled::FirewallDisabled>,
+    pub id: Option<crate::models::firewall_id::FirewallId>,
+    pub period: Option<crate::models::firewall_period::FirewallPeriod>,
+    pub r#match: Option<crate::models::firewall_match::FirewallMatch>,
+    pub threshold: Option<crate::models::firewall_threshold::FirewallThreshold>,
 }

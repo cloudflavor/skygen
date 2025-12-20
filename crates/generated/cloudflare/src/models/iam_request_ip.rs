@@ -19,6 +19,6 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct IamRequestIp {
-    pub not_in: Option<serde_json::Value>,
-    pub r#in: Option<serde_json::Value>,
+    pub not_in: Option<crate::models::iam_cidr_list::IamCidrList>,
+    pub r#in: Option<crate::models::iam_cidr_list::IamCidrList>,
 }

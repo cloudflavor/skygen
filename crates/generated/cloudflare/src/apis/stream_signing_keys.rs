@@ -15,12 +15,15 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::stream_deleted_response::StreamDeletedResponse;
+use crate::models::stream_key_generation_response::StreamKeyGenerationResponse;
+use crate::models::stream_key_response_collection::StreamKeyResponseCollection;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct ListSigningKeysRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, StreamKeyResponseCollection>,
 }
 
 impl<'a> ListSigningKeysRequest<'a> {
@@ -34,18 +37,26 @@ impl<'a> ListSigningKeysRequest<'a> {
         self.builder = self.builder.path_param("account_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<StreamKeyResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// List signing keys
+///
+/// Lists the video ID and creation date and time when a signing key was created.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/stream/keys`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::stream_signing_keys };
+/// use cloudflare::{ ApiClient, apis::stream_signing_keys };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_signing_keys(&api)
-///     .with_account_id("value")
+/// let response = list_signing_keys(&api)
+///     .with_account_id("account_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -55,7 +66,7 @@ pub fn list_signing_keys(api: &ApiClient) -> ListSigningKeysRequest<'_> {
 
 #[derive(Debug)]
 pub struct CreateSigningKeysRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, StreamKeyGenerationResponse>,
 }
 
 impl<'a> CreateSigningKeysRequest<'a> {
@@ -70,18 +81,26 @@ impl<'a> CreateSigningKeysRequest<'a> {
         self.builder = self.builder.path_param("account_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<StreamKeyGenerationResponse> {
         self.builder.send().await
     }
 }
-
 /// Create signing keys
+///
+/// Creates an RSA private key in PEM and JWK formats. Key files are only displayed once after creation. Keys are created, used, and deleted independently of videos, and every key can sign any video.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/stream/keys`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::stream_signing_keys };
+/// use cloudflare::{ ApiClient, apis::stream_signing_keys };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = create_signing_keys(&api)
-///     .with_account_id("value")
+/// let response = create_signing_keys(&api)
+///     .with_account_id("account_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -91,7 +110,7 @@ pub fn create_signing_keys(api: &ApiClient) -> CreateSigningKeysRequest<'_> {
 
 #[derive(Debug)]
 pub struct DeleteSigningKeysRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, StreamDeletedResponse>,
 }
 
 impl<'a> DeleteSigningKeysRequest<'a> {
@@ -114,19 +133,28 @@ impl<'a> DeleteSigningKeysRequest<'a> {
         self.builder = self.builder.path_param("identifier", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<StreamDeletedResponse> {
         self.builder.send().await
     }
 }
-
 /// Delete signing keys
+///
+/// Deletes signing keys and revokes all signed URLs generated with the key.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/accounts/{account_id}/stream/keys/{identifier}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `identifier` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::stream_signing_keys };
+/// use cloudflare::{ ApiClient, apis::stream_signing_keys };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete_signing_keys(&api)
-///     .with_account_id("value")
-///     .with_identifier("value")
+/// let response = delete_signing_keys(&api)
+///     .with_account_id("account_id")
+///     .with_identifier("identifier")
 ///     .send()
 ///     .await?;
 /// ```

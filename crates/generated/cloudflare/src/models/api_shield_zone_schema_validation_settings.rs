@@ -19,6 +19,6 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct ApiShieldZoneSchemaValidationSettings {
-    pub validation_default_mitigation_action: Option<serde_json::Value>,
-    pub validation_override_mitigation_action: Option<serde_json::Value>,
+    pub validation_default_mitigation_action: Option<crate::models::api_shield_validation_default_mitigation_action::ApiShieldValidationDefaultMitigationAction>,
+    pub validation_override_mitigation_action: Option<crate::models::api_shield_validation_override_mitigation_action::ApiShieldValidationOverrideMitigationAction>,
 }

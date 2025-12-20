@@ -15,18 +15,22 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+//! Auto-generated client for the Cloudflavor SDK.
+
+//!
+//! # Usage
+//! ```no_run
+//! use exoscale_public_api::{ApiClient, apis};
+//! let api = ApiClient::builder("https://api.example.com")
+//!     .build()
+//!     .expect("client");
+//! let _ = apis::anti_affinity_group::list_anti_affinity_groups(&api)
+//!     .path_param("id", "example")
+//!     .send()
+//!     .await;
+//! ```
+
 use reqwest::header::{HeaderMap, HeaderName, HeaderValue};
-/// # Usage
-/// ```no_run
-/// use exoscale_public_api::{ApiClient, apis};
-/// let api = ApiClient::builder("https://api.example.com")
-///     .build()
-///     .expect("client");
-/// let _ = apis::anti_affinity_group::list_anti_affinity_groups(&api)
-///     .path_param("id", "example")
-///     .send()
-///     .await;
-/// ```
 use reqwest::Client;
 use reqwest::ClientBuilder;
 use reqwest::Method;
@@ -79,8 +83,10 @@ pub struct ApiClient {
     inner: Client,
     base_url: String,
     auth_token: Option<String>,
+    api_key: Option<String>,
     default_headers: HeaderMap,
     default_query: Vec<(String, String)>,
+    default_path_params: BTreeMap<String, String>,
 }
 
 impl ApiClient {
@@ -99,8 +105,10 @@ impl ApiClient {
             inner: client,
             base_url: base_url.into(),
             auth_token: None,
+            api_key: None,
             default_headers: HeaderMap::new(),
             default_query: Vec::new(),
+            default_path_params: BTreeMap::new(),
         }
     }
 
@@ -131,6 +139,14 @@ impl ApiClient {
     pub fn default_query_params(&self) -> &[(String, String)] {
         &self.default_query
     }
+
+    fn default_path_params(&self) -> &BTreeMap<String, String> {
+        &self.default_path_params
+    }
+
+    fn api_key(&self) -> Option<&str> {
+        self.api_key.as_deref()
+    }
 }
 
 #[derive(Debug)]
@@ -138,6 +154,9 @@ pub struct ApiClientBuilder {
     base_url: String,
     client_builder: ClientBuilder,
     auth_token: Option<String>,
+    api_key: Option<String>,
+    account_id: Option<String>,
+    zone_id: Option<String>,
     default_headers: HeaderMap,
     default_query: Vec<(String, String)>,
 }
@@ -148,13 +167,37 @@ impl ApiClientBuilder {
             base_url: base_url.into(),
             client_builder: ClientBuilder::new(),
             auth_token: None,
+            api_key: None,
+            account_id: None,
+            zone_id: None,
             default_headers: HeaderMap::new(),
             default_query: Vec::new(),
         }
     }
 
-    pub fn auth_token(mut self, token: impl Into<String>) -> Self {
+    pub fn api_token(mut self, token: impl Into<String>) -> Self {
         self.auth_token = Some(token.into());
+        self
+    }
+
+    #[deprecated(note = "use api_token instead")]
+    pub fn auth_token(self, token: impl Into<String>) -> Self {
+        self.api_token(token)
+    }
+
+    pub fn api_key(mut self, key: impl Into<String>) -> Self {
+        self.api_key = Some(key.into());
+        eprintln!("warning: API keys are deprecated; prefer API tokens when possible");
+        self
+    }
+
+    pub fn account_id(mut self, value: impl Into<String>) -> Self {
+        self.account_id = Some(value.into());
+        self
+    }
+
+    pub fn zone_id(mut self, value: impl Into<String>) -> Self {
+        self.zone_id = Some(value.into());
         self
     }
 
@@ -178,13 +221,25 @@ impl ApiClientBuilder {
     }
 
     pub fn build(self) -> Result<ApiClient, reqwest::Error> {
+        if self.auth_token.is_some() && self.api_key.is_some() {
+            panic!("api_token and api_key are mutually exclusive");
+        }
         let client = self.client_builder.build()?;
+        let mut default_path_params = BTreeMap::new();
+        if let Some(account) = self.account_id {
+            default_path_params.insert("account_id".to_string(), account);
+        }
+        if let Some(zone) = self.zone_id {
+            default_path_params.insert("zone_id".to_string(), zone);
+        }
         Ok(ApiClient {
             inner: client,
             base_url: self.base_url,
             auth_token: self.auth_token,
+            api_key: self.api_key,
             default_headers: self.default_headers,
             default_query: self.default_query,
+            default_path_params,
         })
     }
 }
@@ -213,7 +268,7 @@ impl<'a, Resp> ApiRequestBuilder<'a, Resp> {
             method,
             path: path.into(),
             auth_token: None,
-            path_params: BTreeMap::new(),
+            path_params: api.default_path_params().clone(),
             required_paths: BTreeSet::new(),
             query_params: BTreeMap::new(),
             required_query: BTreeSet::new(),
@@ -335,6 +390,8 @@ impl<'a, Resp> ApiRequestBuilder<'a, Resp> {
             .or_else(|| self.api.auth_header())
         {
             req = req.bearer_auth(token);
+        } else if let Some(key) = self.api.api_key() {
+            req = req.header("X-Auth-Key", key);
         }
 
         if let Some(body) = self.body {

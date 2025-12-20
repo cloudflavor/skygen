@@ -19,13 +19,14 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct ObservatoryPageTest {
-    pub date: Option<serde_json::Value>,
+    pub date: Option<crate::models::observatory_timestamp::ObservatoryTimestamp>,
     pub desktop_report:
         Option<crate::models::observatory_lighthouse_report::ObservatoryLighthouseReport>,
-    pub id: Option<serde_json::Value>,
+    pub id: Option<crate::models::observatory_uuid::ObservatoryUuid>,
     pub mobile_report:
         Option<crate::models::observatory_lighthouse_report::ObservatoryLighthouseReport>,
     pub region: Option<crate::models::observatory_labeled_region::ObservatoryLabeledRegion>,
-    pub schedule_frequency: Option<serde_json::Value>,
-    pub url: Option<serde_json::Value>,
+    pub schedule_frequency:
+        Option<crate::models::observatory_schedule_frequency::ObservatoryScheduleFrequency>,
+    pub url: Option<crate::models::observatory_url::ObservatoryUrl>,
 }

@@ -15,12 +15,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::tls_certificates_and_hostnames_ssl_validation_method_response_collection::TlsCertificatesAndHostnamesSslValidationMethodResponseCollection;
+use crate::models::tls_certificates_and_hostnames_ssl_verification_response_collection::TlsCertificatesAndHostnamesSslVerificationResponseCollection;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct DetailsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, TlsCertificatesAndHostnamesSslVerificationResponseCollection>,
 }
 
 impl<'a> DetailsRequest<'a> {
@@ -38,18 +40,30 @@ impl<'a> DetailsRequest<'a> {
         self.builder = self.builder.header_param("retry", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(
+        self,
+    ) -> ApiResult<TlsCertificatesAndHostnamesSslVerificationResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// SSL Verification Details
+///
+/// Get SSL Verification Info for a Zone.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/ssl/verification`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `retry` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::ssl_verification };
+/// use cloudflare::{ ApiClient, apis::ssl_verification };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = details(&api)
-///     .with_zone_id("value")
+/// let response = details(&api)
+///     .with_zone_id("zone_id")
+///     .with_retry("retry")
 ///     .send()
 ///     .await?;
 /// ```
@@ -59,7 +73,8 @@ pub fn details(api: &ApiClient) -> DetailsRequest<'_> {
 
 #[derive(Debug)]
 pub struct EditSslCertificatePackRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder:
+        ApiRequestBuilder<'a, TlsCertificatesAndHostnamesSslValidationMethodResponseCollection>,
 }
 
 impl<'a> EditSslCertificatePackRequest<'a> {
@@ -90,19 +105,32 @@ impl<'a> EditSslCertificatePackRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(
+        self,
+    ) -> ApiResult<TlsCertificatesAndHostnamesSslValidationMethodResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// Edit SSL Certificate Pack Validation Method
+///
+/// Edit SSL validation method for a certificate pack. A PATCH request will request an immediate validation check on any certificate, and return the updated status. If a validation method is provided, the validation will be immediately attempted using that method.
+///
+/// **HTTP Method:** `PATCH`
+/// **Path:** `/zones/{zone_id}/ssl/verification/{certificate_pack_id}`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `certificate_pack_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::ssl_verification };
+/// use cloudflare::{ ApiClient, apis::ssl_verification };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = edit_ssl_certificate_pack(&api)
-///     .with_zone_id("value")
-///     .with_certificate_pack_id("value")
+/// # let body: crate::models::tls_certificates_and_hostnames_components_schemas_validation_method::TlsCertificatesAndHostnamesComponentsSchemasValidationMethod = todo!();
+/// let response = edit_ssl_certificate_pack(&api)
+///     .with_zone_id("zone_id")
+///     .with_certificate_pack_id("certificate_pack_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```

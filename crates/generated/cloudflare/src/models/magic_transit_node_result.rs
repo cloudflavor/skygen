@@ -19,13 +19,14 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct MagicTransitNodeResult {
-    pub asn: Option<serde_json::Value>,
-    pub ip: Option<serde_json::Value>,
-    pub labels: Option<serde_json::Value>,
-    pub max_rtt_ms: Option<serde_json::Value>,
-    pub mean_rtt_ms: Option<serde_json::Value>,
-    pub min_rtt_ms: Option<serde_json::Value>,
-    pub name: Option<serde_json::Value>,
-    pub packet_count: Option<serde_json::Value>,
-    pub std_dev_rtt_ms: Option<serde_json::Value>,
+    pub asn: Option<crate::models::magic_transit_asn::MagicTransitAsn>,
+    pub ip: Option<crate::models::magic_transit_ip::MagicTransitIp>,
+    pub labels: Option<crate::models::magic_transit_labels::MagicTransitLabels>,
+    pub max_rtt_ms: Option<crate::models::magic_transit_max_rtt_ms::MagicTransitMaxRttMs>,
+    pub mean_rtt_ms: Option<crate::models::magic_transit_mean_rtt_ms::MagicTransitMeanRttMs>,
+    pub min_rtt_ms: Option<crate::models::magic_transit_min_rtt_ms::MagicTransitMinRttMs>,
+    pub name: Option<crate::models::magic_transit_name::MagicTransitName>,
+    pub packet_count: Option<crate::models::magic_transit_packet_count::MagicTransitPacketCount>,
+    pub std_dev_rtt_ms:
+        Option<crate::models::magic_transit_std_dev_rtt_ms::MagicTransitStdDevRttMs>,
 }

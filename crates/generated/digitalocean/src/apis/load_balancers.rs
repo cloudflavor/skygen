@@ -15,6 +15,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::error::Error;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
@@ -33,13 +34,19 @@ impl<'a> ListRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// List All Load Balancers
+///
+/// To list all of the load balancer instances on your account, send a GET request
+/// to `/v2/load_balancers`.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/load_balancers`
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::load_balancers };
+/// use digitalocean::{ ApiClient, apis::load_balancers };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list(&api)
+/// let response = list(&api)
 ///     .send()
 ///     .await?;
 /// ```
@@ -49,7 +56,7 @@ pub fn list(api: &ApiClient) -> ListRequest<'_> {
 
 #[derive(Debug)]
 pub struct CreateRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, Error>,
 }
 
 impl<'a> CreateRequest<'a> {
@@ -58,21 +65,42 @@ impl<'a> CreateRequest<'a> {
 
         Self { builder }
     }
-    pub fn with_body(mut self, body: serde_json::Value) -> Self {
+    pub fn with_body(
+        mut self,
+        body: crate::models::load_balancer_create::LoadBalancerCreate,
+    ) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<Error> {
         self.builder.send().await
     }
 }
-
 /// Create a New Load Balancer
+///
+/// To create a new load balancer instance, send a POST request to
+/// `/v2/load_balancers`.
+///
+/// You can specify the Droplets that will sit behind the load balancer using one
+/// of two methods:
+///
+/// * Set `droplet_ids` to a list of specific Droplet IDs.
+/// * Set `tag` to the name of a tag. All Droplets with this tag applied will be
+/// assigned to the load balancer. Additional Droplets will be automatically
+/// assigned as they are tagged.
+///
+/// These methods are mutually exclusive.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/v2/load_balancers`
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::load_balancers };
+/// use digitalocean::{ ApiClient, apis::load_balancers };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = create(&api)
+/// # let body: crate::models::load_balancer_create::LoadBalancerCreate = todo!();
+/// let response = create(&api)
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -100,14 +128,23 @@ impl<'a> GetRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Retrieve an Existing Load Balancer
+///
+/// To show information about a load balancer instance, send a GET request to
+/// `/v2/load_balancers/$LOAD_BALANCER_ID`.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/load_balancers/{lb_id}`
+///
+/// **Parameters**
+/// - `lb_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::load_balancers };
+/// use digitalocean::{ ApiClient, apis::load_balancers };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get(&api)
-///     .with_lb_id("value")
+/// let response = get(&api)
+///     .with_lb_id("lb_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -132,7 +169,10 @@ impl<'a> UpdateRequest<'a> {
         self.builder = self.builder.path_param("lb_id", value);
         self
     }
-    pub fn with_body(mut self, body: serde_json::Value) -> Self {
+    pub fn with_body(
+        mut self,
+        body: crate::models::load_balancer_create::LoadBalancerCreate,
+    ) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
@@ -140,14 +180,29 @@ impl<'a> UpdateRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Update a Load Balancer
+///
+/// To update a load balancer's settings, send a PUT request to
+/// `/v2/load_balancers/$LOAD_BALANCER_ID`. The request should contain a full
+/// representation of the load balancer including existing attributes. It may
+/// contain _one of_ the `droplets_ids` or `tag` attributes as they are mutually
+/// exclusive. **Note that any attribute that is not provided will be reset to its
+/// default value.**
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/v2/load_balancers/{lb_id}`
+///
+/// **Parameters**
+/// - `lb_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::load_balancers };
+/// use digitalocean::{ ApiClient, apis::load_balancers };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = update(&api)
-///     .with_lb_id("value")
+/// # let body: crate::models::load_balancer_create::LoadBalancerCreate = todo!();
+/// let response = update(&api)
+///     .with_lb_id("lb_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -157,7 +212,7 @@ pub fn update(api: &ApiClient) -> UpdateRequest<'_> {
 
 #[derive(Debug)]
 pub struct DeleteRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, Error>,
 }
 
 impl<'a> DeleteRequest<'a> {
@@ -171,18 +226,31 @@ impl<'a> DeleteRequest<'a> {
         self.builder = self.builder.path_param("lb_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<Error> {
         self.builder.send().await
     }
 }
-
 /// Delete a Load Balancer
+///
+/// To delete a load balancer instance, disassociating any Droplets assigned to it
+/// and removing it from your account, send a DELETE request to
+/// `/v2/load_balancers/$LOAD_BALANCER_ID`.
+///
+/// A successful request will receive a 204 status code with no body in response.
+/// This indicates that the request was processed successfully.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/v2/load_balancers/{lb_id}`
+///
+/// **Parameters**
+/// - `lb_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::load_balancers };
+/// use digitalocean::{ ApiClient, apis::load_balancers };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete(&api)
-///     .with_lb_id("value")
+/// let response = delete(&api)
+///     .with_lb_id("lb_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -192,7 +260,7 @@ pub fn delete(api: &ApiClient) -> DeleteRequest<'_> {
 
 #[derive(Debug)]
 pub struct DeleteCacheRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, Error>,
 }
 
 impl<'a> DeleteCacheRequest<'a> {
@@ -207,18 +275,30 @@ impl<'a> DeleteCacheRequest<'a> {
         self.builder = self.builder.path_param("lb_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<Error> {
         self.builder.send().await
     }
 }
-
 /// Delete a Global Load Balancer CDN Cache
+///
+/// To delete a Global load balancer CDN cache, send a DELETE request to
+/// `/v2/load_balancers/$LOAD_BALANCER_ID/cache`.
+///
+/// A successful request will receive a 204 status code with no body in response.
+/// This indicates that the request was processed successfully.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/v2/load_balancers/{lb_id}/cache`
+///
+/// **Parameters**
+/// - `lb_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::load_balancers };
+/// use digitalocean::{ ApiClient, apis::load_balancers };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete_cache(&api)
-///     .with_lb_id("value")
+/// let response = delete_cache(&api)
+///     .with_lb_id("lb_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -228,7 +308,7 @@ pub fn delete_cache(api: &ApiClient) -> DeleteCacheRequest<'_> {
 
 #[derive(Debug)]
 pub struct AddDropletsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, Error>,
 }
 
 impl<'a> AddDropletsRequest<'a> {
@@ -248,18 +328,37 @@ impl<'a> AddDropletsRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<Error> {
         self.builder.send().await
     }
 }
-
 /// Add Droplets to a Load Balancer
+///
+/// To assign a Droplet to a load balancer instance, send a POST request to
+/// `/v2/load_balancers/$LOAD_BALANCER_ID/droplets`. In the body of the request,
+/// there should be a `droplet_ids` attribute containing a list of Droplet IDs.
+/// Individual Droplets can not be added to a load balancer configured with a
+/// Droplet tag. Attempting to do so will result in a "422 Unprocessable Entity"
+/// response from the API.
+///
+/// No response body will be sent back, but the response code will indicate
+/// success. Specifically, the response code will be a 204, which means that the
+/// action was successful with no returned body data.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/v2/load_balancers/{lb_id}/droplets`
+///
+/// **Parameters**
+/// - `lb_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::load_balancers };
+/// use digitalocean::{ ApiClient, apis::load_balancers };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = add_droplets(&api)
-///     .with_lb_id("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = add_droplets(&api)
+///     .with_lb_id("lb_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -269,7 +368,7 @@ pub fn add_droplets(api: &ApiClient) -> AddDropletsRequest<'_> {
 
 #[derive(Debug)]
 pub struct RemoveDropletsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, Error>,
 }
 
 impl<'a> RemoveDropletsRequest<'a> {
@@ -289,18 +388,34 @@ impl<'a> RemoveDropletsRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<Error> {
         self.builder.send().await
     }
 }
-
 /// Remove Droplets from a Load Balancer
+///
+/// To remove a Droplet from a load balancer instance, send a DELETE request to
+/// `/v2/load_balancers/$LOAD_BALANCER_ID/droplets`. In the body of the request,
+/// there should be a `droplet_ids` attribute containing a list of Droplet IDs.
+///
+/// No response body will be sent back, but the response code will indicate
+/// success. Specifically, the response code will be a 204, which means that the
+/// action was successful with no returned body data.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/v2/load_balancers/{lb_id}/droplets`
+///
+/// **Parameters**
+/// - `lb_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::load_balancers };
+/// use digitalocean::{ ApiClient, apis::load_balancers };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = remove_droplets(&api)
-///     .with_lb_id("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = remove_droplets(&api)
+///     .with_lb_id("lb_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -310,7 +425,7 @@ pub fn remove_droplets(api: &ApiClient) -> RemoveDropletsRequest<'_> {
 
 #[derive(Debug)]
 pub struct AddForwardingRulesRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, Error>,
 }
 
 impl<'a> AddForwardingRulesRequest<'a> {
@@ -333,18 +448,35 @@ impl<'a> AddForwardingRulesRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<Error> {
         self.builder.send().await
     }
 }
-
 /// Add Forwarding Rules to a Load Balancer
+///
+/// To add an additional forwarding rule to a load balancer instance, send a POST
+/// request to `/v2/load_balancers/$LOAD_BALANCER_ID/forwarding_rules`. In the body
+/// of the request, there should be a `forwarding_rules` attribute containing an
+/// array of rules to be added.
+///
+/// No response body will be sent back, but the response code will indicate
+/// success. Specifically, the response code will be a 204, which means that the
+/// action was successful with no returned body data.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/v2/load_balancers/{lb_id}/forwarding_rules`
+///
+/// **Parameters**
+/// - `lb_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::load_balancers };
+/// use digitalocean::{ ApiClient, apis::load_balancers };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = add_forwarding_rules(&api)
-///     .with_lb_id("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = add_forwarding_rules(&api)
+///     .with_lb_id("lb_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -354,7 +486,7 @@ pub fn add_forwarding_rules(api: &ApiClient) -> AddForwardingRulesRequest<'_> {
 
 #[derive(Debug)]
 pub struct RemoveForwardingRulesRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, Error>,
 }
 
 impl<'a> RemoveForwardingRulesRequest<'a> {
@@ -377,18 +509,35 @@ impl<'a> RemoveForwardingRulesRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<Error> {
         self.builder.send().await
     }
 }
-
 /// Remove Forwarding Rules from a Load Balancer
+///
+/// To remove forwarding rules from a load balancer instance, send a DELETE
+/// request to `/v2/load_balancers/$LOAD_BALANCER_ID/forwarding_rules`. In the
+/// body of the request, there should be a `forwarding_rules` attribute containing
+/// an array of rules to be removed.
+///
+/// No response body will be sent back, but the response code will indicate
+/// success. Specifically, the response code will be a 204, which means that the
+/// action was successful with no returned body data.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/v2/load_balancers/{lb_id}/forwarding_rules`
+///
+/// **Parameters**
+/// - `lb_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::load_balancers };
+/// use digitalocean::{ ApiClient, apis::load_balancers };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = remove_forwarding_rules(&api)
-///     .with_lb_id("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = remove_forwarding_rules(&api)
+///     .with_lb_id("lb_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```

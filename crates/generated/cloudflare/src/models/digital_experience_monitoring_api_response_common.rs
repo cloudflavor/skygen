@@ -19,7 +19,9 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct DigitalExperienceMonitoringApiResponseCommon {
-    pub errors: serde_json::Value,
-    pub messages: serde_json::Value,
+    pub errors:
+        crate::models::digital_experience_monitoring_messages::DigitalExperienceMonitoringMessages,
+    pub messages:
+        crate::models::digital_experience_monitoring_messages::DigitalExperienceMonitoringMessages,
     pub success: bool,
 }

@@ -47,15 +47,24 @@ impl<'a> GetCronTriggersRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get Cron Triggers
+///
+/// Fetches Cron Triggers for a Worker.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/workers/scripts/{script_name}/schedules`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `script_name` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::worker_cron_trigger };
+/// use cloudflare::{ ApiClient, apis::worker_cron_trigger };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_cron_triggers(&api)
-///     .with_account_id("value")
-///     .with_script_name("value")
+/// let response = get_cron_triggers(&api)
+///     .with_account_id("account_id")
+///     .with_script_name("script_name")
 ///     .send()
 ///     .await?;
 /// ```
@@ -100,15 +109,26 @@ impl<'a> UpdateCronTriggersRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Update Cron Triggers
+///
+/// Updates Cron Triggers for a Worker.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/accounts/{account_id}/workers/scripts/{script_name}/schedules`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `script_name` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::worker_cron_trigger };
+/// use cloudflare::{ ApiClient, apis::worker_cron_trigger };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = update_cron_triggers(&api)
-///     .with_account_id("value")
-///     .with_script_name("value")
+/// # let body: Vec<crate::models::workers_schedule::WorkersSchedule> = todo!();
+/// let response = update_cron_triggers(&api)
+///     .with_account_id("account_id")
+///     .with_script_name("script_name")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```

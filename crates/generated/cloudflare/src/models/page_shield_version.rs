@@ -19,12 +19,15 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct PageShieldVersion {
-    pub cryptomining_score: Option<serde_json::Value>,
-    pub dataflow_score: Option<serde_json::Value>,
-    pub fetched_at: Option<serde_json::Value>,
-    pub hash: Option<serde_json::Value>,
-    pub js_integrity_score: Option<serde_json::Value>,
-    pub magecart_score: Option<serde_json::Value>,
-    pub malware_score: Option<serde_json::Value>,
-    pub obfuscation_score: Option<serde_json::Value>,
+    pub cryptomining_score:
+        Option<crate::models::page_shield_cryptomining_score::PageShieldCryptominingScore>,
+    pub dataflow_score: Option<crate::models::page_shield_dataflow_score::PageShieldDataflowScore>,
+    pub fetched_at: Option<crate::models::page_shield_fetched_at::PageShieldFetchedAt>,
+    pub hash: Option<crate::models::page_shield_hash::PageShieldHash>,
+    pub js_integrity_score:
+        Option<crate::models::page_shield_js_integrity_score::PageShieldJsIntegrityScore>,
+    pub magecart_score: Option<crate::models::page_shield_magecart_score::PageShieldMagecartScore>,
+    pub malware_score: Option<crate::models::page_shield_malware_score::PageShieldMalwareScore>,
+    pub obfuscation_score:
+        Option<crate::models::page_shield_obfuscation_score::PageShieldObfuscationScore>,
 }

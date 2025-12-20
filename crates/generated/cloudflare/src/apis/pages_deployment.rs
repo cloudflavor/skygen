@@ -15,12 +15,16 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::pages_deployment_list_response::PagesDeploymentListResponse;
+use crate::models::pages_deployment_new_deployment::PagesDeploymentNewDeployment;
+use crate::models::pages_deployment_response_details::PagesDeploymentResponseDetails;
+use crate::models::pages_deployment_response_logs::PagesDeploymentResponseLogs;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct GetDeploymentsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, PagesDeploymentListResponse>,
 }
 
 impl<'a> GetDeploymentsRequest<'a> {
@@ -47,19 +51,30 @@ impl<'a> GetDeploymentsRequest<'a> {
         self.builder = self.builder.header_param("env", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<PagesDeploymentListResponse> {
         self.builder.send().await
     }
 }
-
 /// Get deployments
+///
+/// Fetch a list of project deployments.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/pages/projects/{project_name}/deployments`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `project_name` (path, required)
+/// - `env` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::pages_deployment };
+/// use cloudflare::{ ApiClient, apis::pages_deployment };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_deployments(&api)
-///     .with_account_id("value")
-///     .with_project_name("value")
+/// let response = get_deployments(&api)
+///     .with_account_id("account_id")
+///     .with_project_name("project_name")
+///     .with_env("env")
 ///     .send()
 ///     .await?;
 /// ```
@@ -69,7 +84,7 @@ pub fn get_deployments(api: &ApiClient) -> GetDeploymentsRequest<'_> {
 
 #[derive(Debug)]
 pub struct CreateDeploymentRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, PagesDeploymentNewDeployment>,
 }
 
 impl<'a> CreateDeploymentRequest<'a> {
@@ -92,19 +107,28 @@ impl<'a> CreateDeploymentRequest<'a> {
         self.builder = self.builder.path_param("project_name", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<PagesDeploymentNewDeployment> {
         self.builder.send().await
     }
 }
-
 /// Create deployment
+///
+/// Start a new deployment from production. The repository and account must have already been authorized on the Cloudflare Pages dashboard.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/pages/projects/{project_name}/deployments`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `project_name` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::pages_deployment };
+/// use cloudflare::{ ApiClient, apis::pages_deployment };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = create_deployment(&api)
-///     .with_account_id("value")
-///     .with_project_name("value")
+/// let response = create_deployment(&api)
+///     .with_account_id("account_id")
+///     .with_project_name("project_name")
 ///     .send()
 ///     .await?;
 /// ```
@@ -114,7 +138,7 @@ pub fn create_deployment(api: &ApiClient) -> CreateDeploymentRequest<'_> {
 
 #[derive(Debug)]
 pub struct GetDeploymentInfoRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, PagesDeploymentResponseDetails>,
 }
 
 impl<'a> GetDeploymentInfoRequest<'a> {
@@ -142,20 +166,30 @@ impl<'a> GetDeploymentInfoRequest<'a> {
         self.builder = self.builder.path_param("deployment_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<PagesDeploymentResponseDetails> {
         self.builder.send().await
     }
 }
-
 /// Get deployment info
+///
+/// Fetch information about a deployment.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/pages/projects/{project_name}/deployments/{deployment_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `project_name` (path, required)
+/// - `deployment_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::pages_deployment };
+/// use cloudflare::{ ApiClient, apis::pages_deployment };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_deployment_info(&api)
-///     .with_account_id("value")
-///     .with_project_name("value")
-///     .with_deployment_id("value")
+/// let response = get_deployment_info(&api)
+///     .with_account_id("account_id")
+///     .with_project_name("project_name")
+///     .with_deployment_id("deployment_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -197,16 +231,26 @@ impl<'a> DeleteDeploymentRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Delete deployment
+///
+/// Delete a deployment.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/accounts/{account_id}/pages/projects/{project_name}/deployments/{deployment_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `project_name` (path, required)
+/// - `deployment_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::pages_deployment };
+/// use cloudflare::{ ApiClient, apis::pages_deployment };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete_deployment(&api)
-///     .with_account_id("value")
-///     .with_project_name("value")
-///     .with_deployment_id("value")
+/// let response = delete_deployment(&api)
+///     .with_account_id("account_id")
+///     .with_project_name("project_name")
+///     .with_deployment_id("deployment_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -216,7 +260,7 @@ pub fn delete_deployment(api: &ApiClient) -> DeleteDeploymentRequest<'_> {
 
 #[derive(Debug)]
 pub struct GetDeploymentLogsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, PagesDeploymentResponseLogs>,
 }
 
 impl<'a> GetDeploymentLogsRequest<'a> {
@@ -240,20 +284,30 @@ impl<'a> GetDeploymentLogsRequest<'a> {
         self.builder = self.builder.path_param("deployment_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<PagesDeploymentResponseLogs> {
         self.builder.send().await
     }
 }
-
 /// Get deployment logs
+///
+/// Fetch deployment logs for a project.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/pages/projects/{project_name}/deployments/{deployment_id}/history/logs`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `project_name` (path, required)
+/// - `deployment_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::pages_deployment };
+/// use cloudflare::{ ApiClient, apis::pages_deployment };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_deployment_logs(&api)
-///     .with_account_id("value")
-///     .with_project_name("value")
-///     .with_deployment_id("value")
+/// let response = get_deployment_logs(&api)
+///     .with_account_id("account_id")
+///     .with_project_name("project_name")
+///     .with_deployment_id("deployment_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -263,7 +317,7 @@ pub fn get_deployment_logs(api: &ApiClient) -> GetDeploymentLogsRequest<'_> {
 
 #[derive(Debug)]
 pub struct RetryDeploymentRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, PagesDeploymentNewDeployment>,
 }
 
 impl<'a> RetryDeploymentRequest<'a> {
@@ -291,20 +345,30 @@ impl<'a> RetryDeploymentRequest<'a> {
         self.builder = self.builder.path_param("deployment_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<PagesDeploymentNewDeployment> {
         self.builder.send().await
     }
 }
-
 /// Retry deployment
+///
+/// Retry a previous deployment.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/pages/projects/{project_name}/deployments/{deployment_id}/retry`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `project_name` (path, required)
+/// - `deployment_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::pages_deployment };
+/// use cloudflare::{ ApiClient, apis::pages_deployment };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = retry_deployment(&api)
-///     .with_account_id("value")
-///     .with_project_name("value")
-///     .with_deployment_id("value")
+/// let response = retry_deployment(&api)
+///     .with_account_id("account_id")
+///     .with_project_name("project_name")
+///     .with_deployment_id("deployment_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -314,7 +378,7 @@ pub fn retry_deployment(api: &ApiClient) -> RetryDeploymentRequest<'_> {
 
 #[derive(Debug)]
 pub struct RollbackDeploymentRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, PagesDeploymentResponseDetails>,
 }
 
 impl<'a> RollbackDeploymentRequest<'a> {
@@ -338,20 +402,30 @@ impl<'a> RollbackDeploymentRequest<'a> {
         self.builder = self.builder.path_param("deployment_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<PagesDeploymentResponseDetails> {
         self.builder.send().await
     }
 }
-
 /// Rollback deployment
+///
+/// Rollback the production deployment to a previous deployment. You can only rollback to succesful builds on production.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/pages/projects/{project_name}/deployments/{deployment_id}/rollback`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `project_name` (path, required)
+/// - `deployment_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::pages_deployment };
+/// use cloudflare::{ ApiClient, apis::pages_deployment };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = rollback_deployment(&api)
-///     .with_account_id("value")
-///     .with_project_name("value")
-///     .with_deployment_id("value")
+/// let response = rollback_deployment(&api)
+///     .with_account_id("account_id")
+///     .with_project_name("project_name")
+///     .with_deployment_id("deployment_id")
 ///     .send()
 ///     .await?;
 /// ```

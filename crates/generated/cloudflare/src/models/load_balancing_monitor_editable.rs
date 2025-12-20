@@ -19,20 +19,26 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct LoadBalancingMonitorEditable {
-    pub allow_insecure: Option<serde_json::Value>,
-    pub consecutive_down: Option<serde_json::Value>,
-    pub consecutive_up: Option<serde_json::Value>,
-    pub description: Option<serde_json::Value>,
-    pub expected_body: Option<serde_json::Value>,
-    pub expected_codes: Option<serde_json::Value>,
-    pub follow_redirects: Option<serde_json::Value>,
+    pub allow_insecure:
+        Option<crate::models::load_balancing_allow_insecure::LoadBalancingAllowInsecure>,
+    pub consecutive_down:
+        Option<crate::models::load_balancing_consecutive_down::LoadBalancingConsecutiveDown>,
+    pub consecutive_up:
+        Option<crate::models::load_balancing_consecutive_up::LoadBalancingConsecutiveUp>,
+    pub description: Option<crate::models::load_balancing_description::LoadBalancingDescription>,
+    pub expected_body:
+        Option<crate::models::load_balancing_expected_body::LoadBalancingExpectedBody>,
+    pub expected_codes:
+        Option<crate::models::load_balancing_expected_codes::LoadBalancingExpectedCodes>,
+    pub follow_redirects:
+        Option<crate::models::load_balancing_follow_redirects::LoadBalancingFollowRedirects>,
     pub header: Option<crate::models::load_balancing_header::LoadBalancingHeader>,
-    pub interval: Option<serde_json::Value>,
-    pub method: Option<serde_json::Value>,
-    pub path: Option<serde_json::Value>,
-    pub port: Option<serde_json::Value>,
-    pub probe_zone: Option<serde_json::Value>,
-    pub r#type: Option<serde_json::Value>,
-    pub retries: Option<serde_json::Value>,
-    pub timeout: Option<serde_json::Value>,
+    pub interval: Option<crate::models::load_balancing_interval::LoadBalancingInterval>,
+    pub method: Option<crate::models::load_balancing_method::LoadBalancingMethod>,
+    pub path: Option<crate::models::load_balancing_path::LoadBalancingPath>,
+    pub port: Option<crate::models::load_balancing_port::LoadBalancingPort>,
+    pub probe_zone: Option<crate::models::load_balancing_probe_zone::LoadBalancingProbeZone>,
+    pub r#type: Option<crate::models::load_balancing_type::LoadBalancingType>,
+    pub retries: Option<crate::models::load_balancing_retries::LoadBalancingRetries>,
+    pub timeout: Option<crate::models::load_balancing_timeout::LoadBalancingTimeout>,
 }

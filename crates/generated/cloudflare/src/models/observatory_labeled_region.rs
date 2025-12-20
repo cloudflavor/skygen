@@ -20,5 +20,5 @@ use serde::{Deserialize, Serialize};
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct ObservatoryLabeledRegion {
     pub label: Option<String>,
-    pub value: Option<serde_json::Value>,
+    pub value: Option<crate::models::observatory_region::ObservatoryRegion>,
 }

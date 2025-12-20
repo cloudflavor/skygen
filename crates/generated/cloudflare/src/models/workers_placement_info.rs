@@ -20,6 +20,6 @@ use serde::{Deserialize, Serialize};
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct WorkersPlacementInfo {
     pub last_analyzed_at: Option<String>,
-    pub mode: Option<serde_json::Value>,
-    pub status: Option<serde_json::Value>,
+    pub mode: Option<crate::models::workers_placement_mode::WorkersPlacementMode>,
+    pub status: Option<crate::models::workers_placement_status::WorkersPlacementStatus>,
 }

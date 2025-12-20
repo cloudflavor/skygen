@@ -21,7 +21,8 @@ use serde::{Deserialize, Serialize};
 pub struct AccessSchemasBookmarkProps {
     pub app_launcher_visible: Option<serde_json::Value>,
     pub domain: serde_json::Value,
-    pub logo_url: Option<serde_json::Value>,
-    pub name: Option<serde_json::Value>,
+    pub logo_url: Option<crate::models::access_logo_url::AccessLogoUrl>,
+    pub name:
+        Option<crate::models::access_apps_components_schemas_name::AccessAppsComponentsSchemasName>,
     pub r#type: String,
 }

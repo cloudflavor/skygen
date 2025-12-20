@@ -23,5 +23,5 @@ pub struct AppAlertProgressStep {
     pub name: Option<String>,
     pub reason: Option<crate::models::app_alert_progress_step_reason::AppAlertProgressStepReason>,
     pub started_at: Option<String>,
-    pub status: Option<serde_json::Value>,
+    pub status: Option<crate::models::app_alert_progress_step_status::AppAlertProgressStepStatus>,
 }

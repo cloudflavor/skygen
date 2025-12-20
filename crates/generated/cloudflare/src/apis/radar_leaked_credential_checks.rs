@@ -61,13 +61,32 @@ impl<'a> GetLeakedCredentialChecksRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get HTTP authentication requests by bot class summary
+///
+/// Retrieves the distribution of HTTP authentication requests by bot class.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/leaked_credential_checks/summary/bot_class`
+///
+/// **Parameters**
+/// - `name` (query,optional)
+/// - `dateRange` (query,optional)
+/// - `dateStart` (query,optional)
+/// - `dateEnd` (query,optional)
+/// - `compromised` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_leaked_credential_checks };
+/// use cloudflare::{ ApiClient, apis::radar_leaked_credential_checks };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_leaked_credential_checks(&api)
+/// let response = get_leaked_credential_checks(&api)
+///     .with_name("name")
+///     .with_date_range("dateRange")
+///     .with_date_start("dateStart")
+///     .with_date_end("dateEnd")
+///     .with_compromised("compromised")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```
@@ -118,13 +137,32 @@ impl<'a> GetLeakedCredentialChecksGetRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get HTTP authentication requests by compromised credential status summary
+///
+/// Retrieves the distribution of HTTP authentication requests by compromised credential status.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/leaked_credential_checks/summary/compromised`
+///
+/// **Parameters**
+/// - `name` (query,optional)
+/// - `dateRange` (query,optional)
+/// - `dateStart` (query,optional)
+/// - `dateEnd` (query,optional)
+/// - `botClass` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_leaked_credential_checks };
+/// use cloudflare::{ ApiClient, apis::radar_leaked_credential_checks };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_leaked_credential_checks_get(&api)
+/// let response = get_leaked_credential_checks_get(&api)
+///     .with_name("name")
+///     .with_date_range("dateRange")
+///     .with_date_start("dateStart")
+///     .with_date_end("dateEnd")
+///     .with_bot_class("botClass")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```
@@ -181,13 +219,34 @@ impl<'a> GetLeakedCredentialChecksGet3Request<'a> {
         self.builder.send().await
     }
 }
-
 /// Get HTTP authentication requests by bot class time series
+///
+/// Retrieves the distribution of HTTP authentication requests by bot class over time.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/leaked_credential_checks/timeseries_groups/bot_class`
+///
+/// **Parameters**
+/// - `aggInterval` (query,optional)
+/// - `name` (query,optional)
+/// - `dateRange` (query,optional)
+/// - `dateStart` (query,optional)
+/// - `dateEnd` (query,optional)
+/// - `compromised` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_leaked_credential_checks };
+/// use cloudflare::{ ApiClient, apis::radar_leaked_credential_checks };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_leaked_credential_checks_get_3(&api)
+/// let response = get_leaked_credential_checks_get_3(&api)
+///     .with_agg_interval("aggInterval")
+///     .with_name("name")
+///     .with_date_range("dateRange")
+///     .with_date_start("dateStart")
+///     .with_date_end("dateEnd")
+///     .with_compromised("compromised")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```
@@ -244,13 +303,34 @@ impl<'a> GetLeakedCredentialChecksGet4Request<'a> {
         self.builder.send().await
     }
 }
-
 /// Get HTTP authentication requests by compromised credential status time series
+///
+/// Retrieves the distribution of HTTP authentication requests by compromised credential status over time.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/radar/leaked_credential_checks/timeseries_groups/compromised`
+///
+/// **Parameters**
+/// - `aggInterval` (query,optional)
+/// - `name` (query,optional)
+/// - `dateRange` (query,optional)
+/// - `dateStart` (query,optional)
+/// - `dateEnd` (query,optional)
+/// - `botClass` (query,optional)
+/// - `format` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::radar_leaked_credential_checks };
+/// use cloudflare::{ ApiClient, apis::radar_leaked_credential_checks };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_leaked_credential_checks_get_4(&api)
+/// let response = get_leaked_credential_checks_get_4(&api)
+///     .with_agg_interval("aggInterval")
+///     .with_name("name")
+///     .with_date_range("dateRange")
+///     .with_date_start("dateStart")
+///     .with_date_end("dateEnd")
+///     .with_bot_class("botClass")
+///     .with_format("format")
 ///     .send()
 ///     .await?;
 /// ```

@@ -19,5 +19,5 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct McnDeletedResource {
-    pub id: serde_json::Value,
+    pub id: crate::models::mcn_resource_id::McnResourceId,
 }

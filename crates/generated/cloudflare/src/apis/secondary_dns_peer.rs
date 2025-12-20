@@ -15,12 +15,15 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::secondary_dns_components_schemas_id_response::SecondaryDnsComponentsSchemasIdResponse;
+use crate::models::secondary_dns_schemas_response_collection::SecondaryDnsSchemasResponseCollection;
+use crate::models::secondary_dns_schemas_single_response::SecondaryDnsSchemasSingleResponse;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct ListPeersRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, SecondaryDnsSchemasResponseCollection>,
 }
 
 impl<'a> ListPeersRequest<'a> {
@@ -38,18 +41,26 @@ impl<'a> ListPeersRequest<'a> {
         self.builder = self.builder.path_param("account_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<SecondaryDnsSchemasResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// List Peers
+///
+/// List Peers.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/secondary_dns/peers`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::secondary_dns_peer };
+/// use cloudflare::{ ApiClient, apis::secondary_dns_peer };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_peers(&api)
-///     .with_account_id("value")
+/// let response = list_peers(&api)
+///     .with_account_id("account_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -59,7 +70,7 @@ pub fn list_peers(api: &ApiClient) -> ListPeersRequest<'_> {
 
 #[derive(Debug)]
 pub struct CreatePeerRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, SecondaryDnsSchemasSingleResponse>,
 }
 
 impl<'a> CreatePeerRequest<'a> {
@@ -82,18 +93,28 @@ impl<'a> CreatePeerRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<SecondaryDnsSchemasSingleResponse> {
         self.builder.send().await
     }
 }
-
 /// Create Peer
+///
+/// Create Peer.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/secondary_dns/peers`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::secondary_dns_peer };
+/// use cloudflare::{ ApiClient, apis::secondary_dns_peer };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = create_peer(&api)
-///     .with_account_id("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = create_peer(&api)
+///     .with_account_id("account_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -103,7 +124,7 @@ pub fn create_peer(api: &ApiClient) -> CreatePeerRequest<'_> {
 
 #[derive(Debug)]
 pub struct DetailsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, SecondaryDnsSchemasSingleResponse>,
 }
 
 impl<'a> DetailsRequest<'a> {
@@ -126,19 +147,28 @@ impl<'a> DetailsRequest<'a> {
         self.builder = self.builder.path_param("peer_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<SecondaryDnsSchemasSingleResponse> {
         self.builder.send().await
     }
 }
-
 /// Peer Details
+///
+/// Get Peer.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/secondary_dns/peers/{peer_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `peer_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::secondary_dns_peer };
+/// use cloudflare::{ ApiClient, apis::secondary_dns_peer };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = details(&api)
-///     .with_account_id("value")
-///     .with_peer_id("value")
+/// let response = details(&api)
+///     .with_account_id("account_id")
+///     .with_peer_id("peer_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -148,7 +178,7 @@ pub fn details(api: &ApiClient) -> DetailsRequest<'_> {
 
 #[derive(Debug)]
 pub struct UpdatePeerRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, SecondaryDnsSchemasSingleResponse>,
 }
 
 impl<'a> UpdatePeerRequest<'a> {
@@ -176,19 +206,30 @@ impl<'a> UpdatePeerRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<SecondaryDnsSchemasSingleResponse> {
         self.builder.send().await
     }
 }
-
 /// Update Peer
+///
+/// Modify Peer.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/accounts/{account_id}/secondary_dns/peers/{peer_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `peer_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::secondary_dns_peer };
+/// use cloudflare::{ ApiClient, apis::secondary_dns_peer };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = update_peer(&api)
-///     .with_account_id("value")
-///     .with_peer_id("value")
+/// # let body: crate::models::secondary_dns_peer::SecondaryDnsPeer = todo!();
+/// let response = update_peer(&api)
+///     .with_account_id("account_id")
+///     .with_peer_id("peer_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -198,7 +239,7 @@ pub fn update_peer(api: &ApiClient) -> UpdatePeerRequest<'_> {
 
 #[derive(Debug)]
 pub struct DeletePeerRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, SecondaryDnsComponentsSchemasIdResponse>,
 }
 
 impl<'a> DeletePeerRequest<'a> {
@@ -221,19 +262,28 @@ impl<'a> DeletePeerRequest<'a> {
         self.builder = self.builder.path_param("peer_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<SecondaryDnsComponentsSchemasIdResponse> {
         self.builder.send().await
     }
 }
-
 /// Delete Peer
+///
+/// Delete Peer.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/accounts/{account_id}/secondary_dns/peers/{peer_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `peer_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::secondary_dns_peer };
+/// use cloudflare::{ ApiClient, apis::secondary_dns_peer };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete_peer(&api)
-///     .with_account_id("value")
-///     .with_peer_id("value")
+/// let response = delete_peer(&api)
+///     .with_account_id("account_id")
+///     .with_peer_id("peer_id")
 ///     .send()
 ///     .await?;
 /// ```

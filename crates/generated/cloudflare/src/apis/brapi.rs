@@ -50,14 +50,26 @@ impl<'a> PostContentRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get HTML content.
+///
+/// Fetches rendered HTML content from provided URL or HTML. Check available options like `gotoOptions` and `waitFor*` to control page load behaviour.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/browser-rendering/content`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `cacheTTL` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::brapi };
+/// use cloudflare::{ ApiClient, apis::brapi };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = post_content(&api)
-///     .with_account_id("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = post_content(&api)
+///     .with_account_id("account_id")
+///     .with_cache_ttl("cacheTTL")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -97,14 +109,26 @@ impl<'a> PostJsonRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get json.
+///
+/// Gets json from a webpage from a provided URL or HTML. Pass `prompt` or `schema` in the body. Control page loading with `gotoOptions` and `waitFor*` options.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/browser-rendering/json`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `cacheTTL` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::brapi };
+/// use cloudflare::{ ApiClient, apis::brapi };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = post_json(&api)
-///     .with_account_id("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = post_json(&api)
+///     .with_account_id("account_id")
+///     .with_cache_ttl("cacheTTL")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -144,14 +168,26 @@ impl<'a> PostLinksRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get Links.
+///
+/// Get links from a web page.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/browser-rendering/links`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `cacheTTL` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::brapi };
+/// use cloudflare::{ ApiClient, apis::brapi };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = post_links(&api)
-///     .with_account_id("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = post_links(&api)
+///     .with_account_id("account_id")
+///     .with_cache_ttl("cacheTTL")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -191,14 +227,26 @@ impl<'a> PostMarkdownRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get markdown.
+///
+/// Gets markdown of a webpage from provided URL or HTML. Control page loading with `gotoOptions` and `waitFor*` options.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/browser-rendering/markdown`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `cacheTTL` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::brapi };
+/// use cloudflare::{ ApiClient, apis::brapi };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = post_markdown(&api)
-///     .with_account_id("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = post_markdown(&api)
+///     .with_account_id("account_id")
+///     .with_cache_ttl("cacheTTL")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -238,14 +286,26 @@ impl<'a> PostPdfRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get PDF.
+///
+/// Fetches rendered PDF from provided URL or HTML. Check available options like `gotoOptions` and `waitFor*` to control page load behaviour.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/browser-rendering/pdf`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `cacheTTL` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::brapi };
+/// use cloudflare::{ ApiClient, apis::brapi };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = post_pdf(&api)
-///     .with_account_id("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = post_pdf(&api)
+///     .with_account_id("account_id")
+///     .with_cache_ttl("cacheTTL")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -285,14 +345,26 @@ impl<'a> PostScrapeRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Scrape elements.
+///
+/// Get meta attributes like height, width, text and others of selected elements.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/browser-rendering/scrape`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `cacheTTL` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::brapi };
+/// use cloudflare::{ ApiClient, apis::brapi };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = post_scrape(&api)
-///     .with_account_id("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = post_scrape(&api)
+///     .with_account_id("account_id")
+///     .with_cache_ttl("cacheTTL")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -332,14 +404,26 @@ impl<'a> PostScreenshotRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get screenshot.
+///
+/// Takes a screenshot of a webpage from provided URL or HTML. Control page loading with `gotoOptions` and `waitFor*` options. Customize screenshots with `viewport`, `fullPage`, `clip` and others.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/browser-rendering/screenshot`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `cacheTTL` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::brapi };
+/// use cloudflare::{ ApiClient, apis::brapi };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = post_screenshot(&api)
-///     .with_account_id("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = post_screenshot(&api)
+///     .with_account_id("account_id")
+///     .with_cache_ttl("cacheTTL")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -379,14 +463,26 @@ impl<'a> PostSnapshotRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get HTML content and screenshot.
+///
+/// Returns the page's HTML content and screenshot. Control page loading with `gotoOptions` and `waitFor*` options. Customize screenshots with `viewport`, `fullPage`, `clip` and others.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/browser-rendering/snapshot`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `cacheTTL` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::brapi };
+/// use cloudflare::{ ApiClient, apis::brapi };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = post_snapshot(&api)
-///     .with_account_id("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = post_snapshot(&api)
+///     .with_account_id("account_id")
+///     .with_cache_ttl("cacheTTL")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```

@@ -15,12 +15,16 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::tls_certificates_and_hostnames_per_hostname_settings_response::TlsCertificatesAndHostnamesPerHostnameSettingsResponse;
+use crate::models::tls_certificates_and_hostnames_per_hostname_settings_response_collection::TlsCertificatesAndHostnamesPerHostnameSettingsResponseCollection;
+use crate::models::tls_certificates_and_hostnames_per_hostname_settings_response_delete::TlsCertificatesAndHostnamesPerHostnameSettingsResponseDelete;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct ListRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder:
+        ApiRequestBuilder<'a, TlsCertificatesAndHostnamesPerHostnameSettingsResponseCollection>,
 }
 
 impl<'a> ListRequest<'a> {
@@ -43,19 +47,30 @@ impl<'a> ListRequest<'a> {
         self.builder = self.builder.path_param("setting_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(
+        self,
+    ) -> ApiResult<TlsCertificatesAndHostnamesPerHostnameSettingsResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// List TLS setting for hostnames
+///
+/// List the requested TLS setting for the hostnames under this zone.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/hostnames/settings/{setting_id}`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `setting_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::per_hostname_tls_settings };
+/// use cloudflare::{ ApiClient, apis::per_hostname_tls_settings };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list(&api)
-///     .with_zone_id("value")
-///     .with_setting_id("value")
+/// let response = list(&api)
+///     .with_zone_id("zone_id")
+///     .with_setting_id("setting_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -65,7 +80,7 @@ pub fn list(api: &ApiClient) -> ListRequest<'_> {
 
 #[derive(Debug)]
 pub struct PutRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, TlsCertificatesAndHostnamesPerHostnameSettingsResponse>,
 }
 
 impl<'a> PutRequest<'a> {
@@ -101,20 +116,32 @@ impl<'a> PutRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<TlsCertificatesAndHostnamesPerHostnameSettingsResponse> {
         self.builder.send().await
     }
 }
-
 /// Edit TLS setting for hostname
+///
+/// Update the tls setting value for the hostname.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/zones/{zone_id}/hostnames/settings/{setting_id}/{hostname}`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `setting_id` (path, required)
+/// - `hostname` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::per_hostname_tls_settings };
+/// use cloudflare::{ ApiClient, apis::per_hostname_tls_settings };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = put(&api)
-///     .with_zone_id("value")
-///     .with_setting_id("value")
-///     .with_hostname("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = put(&api)
+///     .with_zone_id("zone_id")
+///     .with_setting_id("setting_id")
+///     .with_hostname("hostname")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -124,7 +151,7 @@ pub fn put(api: &ApiClient) -> PutRequest<'_> {
 
 #[derive(Debug)]
 pub struct DeleteRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, TlsCertificatesAndHostnamesPerHostnameSettingsResponseDelete>,
 }
 
 impl<'a> DeleteRequest<'a> {
@@ -152,20 +179,32 @@ impl<'a> DeleteRequest<'a> {
         self.builder = self.builder.path_param("hostname", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(
+        self,
+    ) -> ApiResult<TlsCertificatesAndHostnamesPerHostnameSettingsResponseDelete> {
         self.builder.send().await
     }
 }
-
 /// Delete TLS setting for hostname
+///
+/// Delete the tls setting value for the hostname.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/zones/{zone_id}/hostnames/settings/{setting_id}/{hostname}`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `setting_id` (path, required)
+/// - `hostname` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::per_hostname_tls_settings };
+/// use cloudflare::{ ApiClient, apis::per_hostname_tls_settings };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete(&api)
-///     .with_zone_id("value")
-///     .with_setting_id("value")
-///     .with_hostname("value")
+/// let response = delete(&api)
+///     .with_zone_id("zone_id")
+///     .with_setting_id("setting_id")
+///     .with_hostname("hostname")
 ///     .send()
 ///     .await?;
 /// ```

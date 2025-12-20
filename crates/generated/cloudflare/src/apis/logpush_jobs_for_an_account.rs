@@ -15,12 +15,19 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::logpush_destination_exists_response::LogpushDestinationExistsResponse;
+use crate::models::logpush_get_ownership_response::LogpushGetOwnershipResponse;
+use crate::models::logpush_logpush_field_response_collection::LogpushLogpushFieldResponseCollection;
+use crate::models::logpush_logpush_job_response_collection::LogpushLogpushJobResponseCollection;
+use crate::models::logpush_logpush_job_response_single::LogpushLogpushJobResponseSingle;
+use crate::models::logpush_validate_ownership_response::LogpushValidateOwnershipResponse;
+use crate::models::logpush_validate_response::LogpushValidateResponse;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct AccountsLogpushDatasetsDatasetRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, LogpushLogpushFieldResponseCollection>,
 }
 
 impl<'a> AccountsLogpushDatasetsDatasetRequest<'a> {
@@ -43,19 +50,28 @@ impl<'a> AccountsLogpushDatasetsDatasetRequest<'a> {
         self.builder = self.builder.path_param("dataset_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<LogpushLogpushFieldResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// List fields
+///
+/// Lists all fields available for a dataset. The response result is an object with key-value pairs, where keys are field names, and values are descriptions.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/logpush/datasets/{dataset_id}/fields`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `dataset_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::logpush_jobs_for_an_account };
+/// use cloudflare::{ ApiClient, apis::logpush_jobs_for_an_account };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = accounts_logpush_datasets_dataset(&api)
-///     .with_account_id("value")
-///     .with_dataset_id("value")
+/// let response = accounts_logpush_datasets_dataset(&api)
+///     .with_account_id("account_id")
+///     .with_dataset_id("dataset_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -67,7 +83,7 @@ pub fn accounts_logpush_datasets_dataset(
 
 #[derive(Debug)]
 pub struct AccountsLogpushDatasetsDatasetGetRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, LogpushLogpushJobResponseCollection>,
 }
 
 impl<'a> AccountsLogpushDatasetsDatasetGetRequest<'a> {
@@ -90,19 +106,28 @@ impl<'a> AccountsLogpushDatasetsDatasetGetRequest<'a> {
         self.builder = self.builder.path_param("dataset_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<LogpushLogpushJobResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// List Logpush jobs for a dataset
+///
+/// Lists Logpush jobs for an account for a dataset.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/logpush/datasets/{dataset_id}/jobs`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `dataset_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::logpush_jobs_for_an_account };
+/// use cloudflare::{ ApiClient, apis::logpush_jobs_for_an_account };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = accounts_logpush_datasets_dataset_get(&api)
-///     .with_account_id("value")
-///     .with_dataset_id("value")
+/// let response = accounts_logpush_datasets_dataset_get(&api)
+///     .with_account_id("account_id")
+///     .with_dataset_id("dataset_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -114,7 +139,7 @@ pub fn accounts_logpush_datasets_dataset_get(
 
 #[derive(Debug)]
 pub struct AccountsLogpushJobsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, LogpushLogpushJobResponseCollection>,
 }
 
 impl<'a> AccountsLogpushJobsRequest<'a> {
@@ -129,18 +154,26 @@ impl<'a> AccountsLogpushJobsRequest<'a> {
         self.builder = self.builder.path_param("account_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<LogpushLogpushJobResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// List Logpush jobs
+///
+/// Lists Logpush jobs for an account.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/logpush/jobs`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::logpush_jobs_for_an_account };
+/// use cloudflare::{ ApiClient, apis::logpush_jobs_for_an_account };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = accounts_logpush_jobs(&api)
-///     .with_account_id("value")
+/// let response = accounts_logpush_jobs(&api)
+///     .with_account_id("account_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -150,7 +183,7 @@ pub fn accounts_logpush_jobs(api: &ApiClient) -> AccountsLogpushJobsRequest<'_> 
 
 #[derive(Debug)]
 pub struct AccountsLogpushJobsPostRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, LogpushLogpushJobResponseSingle>,
 }
 
 impl<'a> AccountsLogpushJobsPostRequest<'a> {
@@ -170,18 +203,28 @@ impl<'a> AccountsLogpushJobsPostRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<LogpushLogpushJobResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Create Logpush job
+///
+/// Creates a new Logpush job for an account.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/logpush/jobs`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::logpush_jobs_for_an_account };
+/// use cloudflare::{ ApiClient, apis::logpush_jobs_for_an_account };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = accounts_logpush_jobs_post(&api)
-///     .with_account_id("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = accounts_logpush_jobs_post(&api)
+///     .with_account_id("account_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -191,7 +234,7 @@ pub fn accounts_logpush_jobs_post(api: &ApiClient) -> AccountsLogpushJobsPostReq
 
 #[derive(Debug)]
 pub struct AccountsLogpushJobsJobRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, LogpushLogpushJobResponseSingle>,
 }
 
 impl<'a> AccountsLogpushJobsJobRequest<'a> {
@@ -214,19 +257,28 @@ impl<'a> AccountsLogpushJobsJobRequest<'a> {
         self.builder = self.builder.path_param("job_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<LogpushLogpushJobResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Get Logpush job details
+///
+/// Gets the details of a Logpush job.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/logpush/jobs/{job_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `job_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::logpush_jobs_for_an_account };
+/// use cloudflare::{ ApiClient, apis::logpush_jobs_for_an_account };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = accounts_logpush_jobs_job(&api)
-///     .with_account_id("value")
-///     .with_job_id("value")
+/// let response = accounts_logpush_jobs_job(&api)
+///     .with_account_id("account_id")
+///     .with_job_id("job_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -236,7 +288,7 @@ pub fn accounts_logpush_jobs_job(api: &ApiClient) -> AccountsLogpushJobsJobReque
 
 #[derive(Debug)]
 pub struct AccountsLogpushJobsJobPutRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, LogpushLogpushJobResponseSingle>,
 }
 
 impl<'a> AccountsLogpushJobsJobPutRequest<'a> {
@@ -264,19 +316,30 @@ impl<'a> AccountsLogpushJobsJobPutRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<LogpushLogpushJobResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Update Logpush job
+///
+/// Updates a Logpush job.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/accounts/{account_id}/logpush/jobs/{job_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `job_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::logpush_jobs_for_an_account };
+/// use cloudflare::{ ApiClient, apis::logpush_jobs_for_an_account };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = accounts_logpush_jobs_job_put(&api)
-///     .with_account_id("value")
-///     .with_job_id("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = accounts_logpush_jobs_job_put(&api)
+///     .with_account_id("account_id")
+///     .with_job_id("job_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -313,15 +376,24 @@ impl<'a> AccountsLogpushJobsJobDeleteRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Delete Logpush job
+///
+/// Deletes a Logpush job.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/accounts/{account_id}/logpush/jobs/{job_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `job_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::logpush_jobs_for_an_account };
+/// use cloudflare::{ ApiClient, apis::logpush_jobs_for_an_account };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = accounts_logpush_jobs_job_delete(&api)
-///     .with_account_id("value")
-///     .with_job_id("value")
+/// let response = accounts_logpush_jobs_job_delete(&api)
+///     .with_account_id("account_id")
+///     .with_job_id("job_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -333,7 +405,7 @@ pub fn accounts_logpush_jobs_job_delete(
 
 #[derive(Debug)]
 pub struct AccountsLogpushOwnershipRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, LogpushGetOwnershipResponse>,
 }
 
 impl<'a> AccountsLogpushOwnershipRequest<'a> {
@@ -353,18 +425,28 @@ impl<'a> AccountsLogpushOwnershipRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<LogpushGetOwnershipResponse> {
         self.builder.send().await
     }
 }
-
 /// Get ownership challenge
+///
+/// Gets a new ownership challenge sent to your destination.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/logpush/ownership`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::logpush_jobs_for_an_account };
+/// use cloudflare::{ ApiClient, apis::logpush_jobs_for_an_account };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = accounts_logpush_ownership(&api)
-///     .with_account_id("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = accounts_logpush_ownership(&api)
+///     .with_account_id("account_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -374,7 +456,7 @@ pub fn accounts_logpush_ownership(api: &ApiClient) -> AccountsLogpushOwnershipRe
 
 #[derive(Debug)]
 pub struct AccountsLogpushOwnershipValidateRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, LogpushValidateOwnershipResponse>,
 }
 
 impl<'a> AccountsLogpushOwnershipValidateRequest<'a> {
@@ -397,18 +479,28 @@ impl<'a> AccountsLogpushOwnershipValidateRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<LogpushValidateOwnershipResponse> {
         self.builder.send().await
     }
 }
-
 /// Validate ownership challenge
+///
+/// Validates ownership challenge of the destination.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/logpush/ownership/validate`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::logpush_jobs_for_an_account };
+/// use cloudflare::{ ApiClient, apis::logpush_jobs_for_an_account };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = accounts_logpush_ownership_validate(&api)
-///     .with_account_id("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = accounts_logpush_ownership_validate(&api)
+///     .with_account_id("account_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -420,7 +512,7 @@ pub fn accounts_logpush_ownership_validate(
 
 #[derive(Debug)]
 pub struct DeleteLogpushValidateDestinationRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, LogpushValidateResponse>,
 }
 
 impl<'a> DeleteLogpushValidateDestinationRequest<'a> {
@@ -443,18 +535,28 @@ impl<'a> DeleteLogpushValidateDestinationRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<LogpushValidateResponse> {
         self.builder.send().await
     }
 }
-
 /// Validate destination
+///
+/// Validates destination.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/logpush/validate/destination`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::logpush_jobs_for_an_account };
+/// use cloudflare::{ ApiClient, apis::logpush_jobs_for_an_account };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete_logpush_validate_destination(&api)
-///     .with_account_id("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = delete_logpush_validate_destination(&api)
+///     .with_account_id("account_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -466,7 +568,7 @@ pub fn delete_logpush_validate_destination(
 
 #[derive(Debug)]
 pub struct DeleteLogpushValidateDestinationPostRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, LogpushDestinationExistsResponse>,
 }
 
 impl<'a> DeleteLogpushValidateDestinationPostRequest<'a> {
@@ -489,18 +591,28 @@ impl<'a> DeleteLogpushValidateDestinationPostRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<LogpushDestinationExistsResponse> {
         self.builder.send().await
     }
 }
-
 /// Check destination exists
+///
+/// Checks if there is an existing job with a destination.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/logpush/validate/destination/exists`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::logpush_jobs_for_an_account };
+/// use cloudflare::{ ApiClient, apis::logpush_jobs_for_an_account };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete_logpush_validate_destination_post(&api)
-///     .with_account_id("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = delete_logpush_validate_destination_post(&api)
+///     .with_account_id("account_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -512,7 +624,7 @@ pub fn delete_logpush_validate_destination_post(
 
 #[derive(Debug)]
 pub struct AccountsLogpushValidateOriginRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, LogpushValidateResponse>,
 }
 
 impl<'a> AccountsLogpushValidateOriginRequest<'a> {
@@ -535,18 +647,28 @@ impl<'a> AccountsLogpushValidateOriginRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<LogpushValidateResponse> {
         self.builder.send().await
     }
 }
-
 /// Validate origin
+///
+/// Validates logpull origin with logpull_options.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/logpush/validate/origin`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::logpush_jobs_for_an_account };
+/// use cloudflare::{ ApiClient, apis::logpush_jobs_for_an_account };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = accounts_logpush_validate_origin(&api)
-///     .with_account_id("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = accounts_logpush_validate_origin(&api)
+///     .with_account_id("account_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```

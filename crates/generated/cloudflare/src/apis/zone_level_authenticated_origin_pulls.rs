@@ -17,10 +17,16 @@
 
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
+use crate::models::tls_certificates_and_hostnames_components_schemas_certificate_response_collection::TlsCertificatesAndHostnamesComponentsSchemasCertificateResponseCollection;
+use crate::models::tls_certificates_and_hostnames_components_schemas_certificate_response_single::TlsCertificatesAndHostnamesComponentsSchemasCertificateResponseSingle;
+use crate::models::tls_certificates_and_hostnames_enabled_response::TlsCertificatesAndHostnamesEnabledResponse;
 
 #[derive(Debug)]
 pub struct ListCertificatesRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<
+        'a,
+        TlsCertificatesAndHostnamesComponentsSchemasCertificateResponseCollection,
+    >,
 }
 
 impl<'a> ListCertificatesRequest<'a> {
@@ -35,18 +41,26 @@ impl<'a> ListCertificatesRequest<'a> {
         self.builder = self.builder.path_param("zone_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(
+        self,
+    ) -> ApiResult<TlsCertificatesAndHostnamesComponentsSchemasCertificateResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// List Certificates
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/origin_tls_client_auth`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zone_level_authenticated_origin_pulls };
+/// use cloudflare::{ ApiClient, apis::zone_level_authenticated_origin_pulls };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_certificates(&api)
-///     .with_zone_id("value")
+/// let response = list_certificates(&api)
+///     .with_zone_id("zone_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -56,7 +70,10 @@ pub fn list_certificates(api: &ApiClient) -> ListCertificatesRequest<'_> {
 
 #[derive(Debug)]
 pub struct UploadCertificateRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<
+        'a,
+        TlsCertificatesAndHostnamesComponentsSchemasCertificateResponseSingle,
+    >,
 }
 
 impl<'a> UploadCertificateRequest<'a> {
@@ -79,18 +96,30 @@ impl<'a> UploadCertificateRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(
+        self,
+    ) -> ApiResult<TlsCertificatesAndHostnamesComponentsSchemasCertificateResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Upload Certificate
+///
+/// Upload your own certificate you want Cloudflare to use for edge-to-origin communication to override the shared certificate. Please note that it is important to keep only one certificate active. Also, make sure to enable zone-level authenticated origin pulls by making a PUT call to settings endpoint to see the uploaded certificate in use.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/zones/{zone_id}/origin_tls_client_auth`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zone_level_authenticated_origin_pulls };
+/// use cloudflare::{ ApiClient, apis::zone_level_authenticated_origin_pulls };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = upload_certificate(&api)
-///     .with_zone_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = upload_certificate(&api)
+///     .with_zone_id("zone_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -100,7 +129,7 @@ pub fn upload_certificate(api: &ApiClient) -> UploadCertificateRequest<'_> {
 
 #[derive(Debug)]
 pub struct GetEnablementSettingRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, TlsCertificatesAndHostnamesEnabledResponse>,
 }
 
 impl<'a> GetEnablementSettingRequest<'a> {
@@ -118,18 +147,26 @@ impl<'a> GetEnablementSettingRequest<'a> {
         self.builder = self.builder.path_param("zone_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<TlsCertificatesAndHostnamesEnabledResponse> {
         self.builder.send().await
     }
 }
-
 /// Get Enablement Setting for Zone
+///
+/// Get whether zone-level authenticated origin pulls is enabled or not. It is false by default.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/origin_tls_client_auth/settings`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zone_level_authenticated_origin_pulls };
+/// use cloudflare::{ ApiClient, apis::zone_level_authenticated_origin_pulls };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_enablement_setting(&api)
-///     .with_zone_id("value")
+/// let response = get_enablement_setting(&api)
+///     .with_zone_id("zone_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -139,7 +176,7 @@ pub fn get_enablement_setting(api: &ApiClient) -> GetEnablementSettingRequest<'_
 
 #[derive(Debug)]
 pub struct SetEnablementRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, TlsCertificatesAndHostnamesEnabledResponse>,
 }
 
 impl<'a> SetEnablementRequest<'a> {
@@ -165,18 +202,28 @@ impl<'a> SetEnablementRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<TlsCertificatesAndHostnamesEnabledResponse> {
         self.builder.send().await
     }
 }
-
 /// Set Enablement for Zone
+///
+/// Enable or disable zone-level authenticated origin pulls. 'enabled' should be set true either before/after the certificate is uploaded to see the certificate in use.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/zones/{zone_id}/origin_tls_client_auth/settings`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zone_level_authenticated_origin_pulls };
+/// use cloudflare::{ ApiClient, apis::zone_level_authenticated_origin_pulls };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = set_enablement(&api)
-///     .with_zone_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = set_enablement(&api)
+///     .with_zone_id("zone_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -186,7 +233,10 @@ pub fn set_enablement(api: &ApiClient) -> SetEnablementRequest<'_> {
 
 #[derive(Debug)]
 pub struct GetCertificateDetailsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<
+        'a,
+        TlsCertificatesAndHostnamesComponentsSchemasCertificateResponseSingle,
+    >,
 }
 
 impl<'a> GetCertificateDetailsRequest<'a> {
@@ -209,19 +259,28 @@ impl<'a> GetCertificateDetailsRequest<'a> {
         self.builder = self.builder.path_param("certificate_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(
+        self,
+    ) -> ApiResult<TlsCertificatesAndHostnamesComponentsSchemasCertificateResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Get Certificate Details
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/origin_tls_client_auth/{certificate_id}`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `certificate_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zone_level_authenticated_origin_pulls };
+/// use cloudflare::{ ApiClient, apis::zone_level_authenticated_origin_pulls };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_certificate_details(&api)
-///     .with_zone_id("value")
-///     .with_certificate_id("value")
+/// let response = get_certificate_details(&api)
+///     .with_zone_id("zone_id")
+///     .with_certificate_id("certificate_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -231,7 +290,10 @@ pub fn get_certificate_details(api: &ApiClient) -> GetCertificateDetailsRequest<
 
 #[derive(Debug)]
 pub struct DeleteCertificateRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<
+        'a,
+        TlsCertificatesAndHostnamesComponentsSchemasCertificateResponseSingle,
+    >,
 }
 
 impl<'a> DeleteCertificateRequest<'a> {
@@ -254,19 +316,28 @@ impl<'a> DeleteCertificateRequest<'a> {
         self.builder = self.builder.path_param("certificate_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(
+        self,
+    ) -> ApiResult<TlsCertificatesAndHostnamesComponentsSchemasCertificateResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Delete Certificate
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/zones/{zone_id}/origin_tls_client_auth/{certificate_id}`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `certificate_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zone_level_authenticated_origin_pulls };
+/// use cloudflare::{ ApiClient, apis::zone_level_authenticated_origin_pulls };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete_certificate(&api)
-///     .with_zone_id("value")
-///     .with_certificate_id("value")
+/// let response = delete_certificate(&api)
+///     .with_zone_id("zone_id")
+///     .with_certificate_id("certificate_id")
 ///     .send()
 ///     .await?;
 /// ```

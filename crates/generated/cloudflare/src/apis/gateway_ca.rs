@@ -15,12 +15,15 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::access_gateway_ca_components_schemas_response_collection::AccessGatewayCaComponentsSchemasResponseCollection;
+use crate::models::access_gateway_ca_components_schemas_single_response::AccessGatewayCaComponentsSchemasSingleResponse;
+use crate::models::access_id_response::AccessIdResponse;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct AccessGatewayCaListRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, AccessGatewayCaComponentsSchemasResponseCollection>,
 }
 
 impl<'a> AccessGatewayCaListRequest<'a> {
@@ -35,18 +38,26 @@ impl<'a> AccessGatewayCaListRequest<'a> {
         self.builder = self.builder.path_param("account_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<AccessGatewayCaComponentsSchemasResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// List SSH Certificate Authorities (CA)
+///
+/// Lists SSH Certificate Authorities (CA).
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/access/gateway_ca`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::gateway_ca };
+/// use cloudflare::{ ApiClient, apis::gateway_ca };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = access_gateway_ca_list(&api)
-///     .with_account_id("value")
+/// let response = access_gateway_ca_list(&api)
+///     .with_account_id("account_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -56,7 +67,7 @@ pub fn access_gateway_ca_list(api: &ApiClient) -> AccessGatewayCaListRequest<'_>
 
 #[derive(Debug)]
 pub struct AccessGatewayCaAddRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, AccessGatewayCaComponentsSchemasSingleResponse>,
 }
 
 impl<'a> AccessGatewayCaAddRequest<'a> {
@@ -71,18 +82,26 @@ impl<'a> AccessGatewayCaAddRequest<'a> {
         self.builder = self.builder.path_param("account_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<AccessGatewayCaComponentsSchemasSingleResponse> {
         self.builder.send().await
     }
 }
-
 /// Add a new SSH Certificate Authority (CA)
+///
+/// Adds a new SSH Certificate Authority (CA).
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/access/gateway_ca`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::gateway_ca };
+/// use cloudflare::{ ApiClient, apis::gateway_ca };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = access_gateway_ca_add(&api)
-///     .with_account_id("value")
+/// let response = access_gateway_ca_add(&api)
+///     .with_account_id("account_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -92,7 +111,7 @@ pub fn access_gateway_ca_add(api: &ApiClient) -> AccessGatewayCaAddRequest<'_> {
 
 #[derive(Debug)]
 pub struct AccessGatewayCaDeleteRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, AccessIdResponse>,
 }
 
 impl<'a> AccessGatewayCaDeleteRequest<'a> {
@@ -115,19 +134,28 @@ impl<'a> AccessGatewayCaDeleteRequest<'a> {
         self.builder = self.builder.path_param("certificate_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<AccessIdResponse> {
         self.builder.send().await
     }
 }
-
 /// Delete an SSH Certificate Authority (CA)
+///
+/// Deletes an SSH Certificate Authority.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/accounts/{account_id}/access/gateway_ca/{certificate_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `certificate_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::gateway_ca };
+/// use cloudflare::{ ApiClient, apis::gateway_ca };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = access_gateway_ca_delete(&api)
-///     .with_account_id("value")
-///     .with_certificate_id("value")
+/// let response = access_gateway_ca_delete(&api)
+///     .with_account_id("account_id")
+///     .with_certificate_id("certificate_id")
 ///     .send()
 ///     .await?;
 /// ```

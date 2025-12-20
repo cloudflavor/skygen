@@ -37,13 +37,22 @@ impl<'a> IpsCloudflareIpDetailsRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Cloudflare/JD Cloud IP Details
+///
+/// Get IPs used on the Cloudflare/JD Cloud network, see <https://www.cloudflare.com/ips> for Cloudflare IPs or <https://developers.cloudflare.com/china-network/reference/infrastructure/> for JD Cloud IPs.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/ips`
+///
+/// **Parameters**
+/// - `networks` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::cloudflare_i_ps };
+/// use cloudflare::{ ApiClient, apis::cloudflare_i_ps };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = ips_cloudflare_ip_details(&api)
+/// let response = ips_cloudflare_ip_details(&api)
+///     .with_networks("networks")
 ///     .send()
 ///     .await?;
 /// ```

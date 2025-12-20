@@ -20,7 +20,8 @@ use serde::{Deserialize, Serialize};
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct IamRole {
     pub description: String,
-    pub id: serde_json::Value,
+    pub id:
+        crate::models::iam_role_components_schemas_identifier::IamRoleComponentsSchemasIdentifier,
     pub name: String,
     pub permissions: serde_json::Value,
 }

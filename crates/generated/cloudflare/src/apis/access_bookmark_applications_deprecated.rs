@@ -15,12 +15,15 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::access_bookmarks_components_schemas_response_collection::AccessBookmarksComponentsSchemasResponseCollection;
+use crate::models::access_bookmarks_components_schemas_single_response::AccessBookmarksComponentsSchemasSingleResponse;
+use crate::models::access_id_response::AccessIdResponse;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct ListBookmarkApplicationsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, AccessBookmarksComponentsSchemasResponseCollection>,
 }
 
 impl<'a> ListBookmarkApplicationsRequest<'a> {
@@ -35,18 +38,26 @@ impl<'a> ListBookmarkApplicationsRequest<'a> {
         self.builder = self.builder.path_param("account_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<AccessBookmarksComponentsSchemasResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// List Bookmark applications
+///
+/// Lists Bookmark applications.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/access/bookmarks`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::access_bookmark_applications_deprecated };
+/// use cloudflare::{ ApiClient, apis::access_bookmark_applications_deprecated };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_bookmark_applications(&api)
-///     .with_account_id("value")
+/// let response = list_bookmark_applications(&api)
+///     .with_account_id("account_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -56,7 +67,7 @@ pub fn list_bookmark_applications(api: &ApiClient) -> ListBookmarkApplicationsRe
 
 #[derive(Debug)]
 pub struct GetBookmarkApplicationRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, AccessBookmarksComponentsSchemasSingleResponse>,
 }
 
 impl<'a> GetBookmarkApplicationRequest<'a> {
@@ -79,19 +90,28 @@ impl<'a> GetBookmarkApplicationRequest<'a> {
         self.builder = self.builder.path_param("bookmark_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<AccessBookmarksComponentsSchemasSingleResponse> {
         self.builder.send().await
     }
 }
-
 /// Get a Bookmark application
+///
+/// Fetches a single Bookmark application.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/access/bookmarks/{bookmark_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `bookmark_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::access_bookmark_applications_deprecated };
+/// use cloudflare::{ ApiClient, apis::access_bookmark_applications_deprecated };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_bookmark_application(&api)
-///     .with_account_id("value")
-///     .with_bookmark_id("value")
+/// let response = get_bookmark_application(&api)
+///     .with_account_id("account_id")
+///     .with_bookmark_id("bookmark_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -101,7 +121,7 @@ pub fn get_bookmark_application(api: &ApiClient) -> GetBookmarkApplicationReques
 
 #[derive(Debug)]
 pub struct CreateBookmarkApplicationRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, AccessBookmarksComponentsSchemasSingleResponse>,
 }
 
 impl<'a> CreateBookmarkApplicationRequest<'a> {
@@ -124,19 +144,28 @@ impl<'a> CreateBookmarkApplicationRequest<'a> {
         self.builder = self.builder.path_param("bookmark_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<AccessBookmarksComponentsSchemasSingleResponse> {
         self.builder.send().await
     }
 }
-
 /// Create a Bookmark application
+///
+/// Create a new Bookmark application.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/access/bookmarks/{bookmark_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `bookmark_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::access_bookmark_applications_deprecated };
+/// use cloudflare::{ ApiClient, apis::access_bookmark_applications_deprecated };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = create_bookmark_application(&api)
-///     .with_account_id("value")
-///     .with_bookmark_id("value")
+/// let response = create_bookmark_application(&api)
+///     .with_account_id("account_id")
+///     .with_bookmark_id("bookmark_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -146,7 +175,7 @@ pub fn create_bookmark_application(api: &ApiClient) -> CreateBookmarkApplication
 
 #[derive(Debug)]
 pub struct UpdateBookmarkApplicationRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, AccessBookmarksComponentsSchemasSingleResponse>,
 }
 
 impl<'a> UpdateBookmarkApplicationRequest<'a> {
@@ -169,19 +198,28 @@ impl<'a> UpdateBookmarkApplicationRequest<'a> {
         self.builder = self.builder.path_param("bookmark_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<AccessBookmarksComponentsSchemasSingleResponse> {
         self.builder.send().await
     }
 }
-
 /// Update a Bookmark application
+///
+/// Updates a configured Bookmark application.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/accounts/{account_id}/access/bookmarks/{bookmark_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `bookmark_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::access_bookmark_applications_deprecated };
+/// use cloudflare::{ ApiClient, apis::access_bookmark_applications_deprecated };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = update_bookmark_application(&api)
-///     .with_account_id("value")
-///     .with_bookmark_id("value")
+/// let response = update_bookmark_application(&api)
+///     .with_account_id("account_id")
+///     .with_bookmark_id("bookmark_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -191,7 +229,7 @@ pub fn update_bookmark_application(api: &ApiClient) -> UpdateBookmarkApplication
 
 #[derive(Debug)]
 pub struct DeleteBookmarkApplicationRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, AccessIdResponse>,
 }
 
 impl<'a> DeleteBookmarkApplicationRequest<'a> {
@@ -214,19 +252,28 @@ impl<'a> DeleteBookmarkApplicationRequest<'a> {
         self.builder = self.builder.path_param("bookmark_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<AccessIdResponse> {
         self.builder.send().await
     }
 }
-
 /// Delete a Bookmark application
+///
+/// Deletes a Bookmark application.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/accounts/{account_id}/access/bookmarks/{bookmark_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `bookmark_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::access_bookmark_applications_deprecated };
+/// use cloudflare::{ ApiClient, apis::access_bookmark_applications_deprecated };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete_bookmark_application(&api)
-///     .with_account_id("value")
-///     .with_bookmark_id("value")
+/// let response = delete_bookmark_application(&api)
+///     .with_account_id("account_id")
+///     .with_bookmark_id("bookmark_id")
 ///     .send()
 ///     .await?;
 /// ```

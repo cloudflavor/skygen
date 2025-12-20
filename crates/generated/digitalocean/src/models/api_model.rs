@@ -27,11 +27,11 @@ pub struct ApiModel {
     pub metadata: Option<std::collections::BTreeMap<String, serde_json::Value>>,
     pub name: Option<String>,
     pub parent_uuid: Option<String>,
-    pub provider: Option<serde_json::Value>,
+    pub provider: Option<crate::models::api_model_provider::ApiModelProvider>,
     pub updated_at: Option<String>,
     pub upload_complete: Option<bool>,
     pub url: Option<String>,
-    pub usecases: Option<Vec<serde_json::Value>>,
+    pub usecases: Option<Vec<crate::models::api_model_usecase::ApiModelUsecase>>,
     pub uuid: Option<String>,
     pub version: Option<crate::models::api_model_version::ApiModelVersion>,
 }

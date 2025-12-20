@@ -19,9 +19,10 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct LogpushInstantLogsJob {
-    pub destination_conf: Option<serde_json::Value>,
-    pub fields: Option<serde_json::Value>,
-    pub filter: Option<serde_json::Value>,
-    pub sample: Option<serde_json::Value>,
-    pub session_id: Option<serde_json::Value>,
+    pub destination_conf:
+        Option<crate::models::logpush_schemas_destination_conf::LogpushSchemasDestinationConf>,
+    pub fields: Option<crate::models::logpush_fields::LogpushFields>,
+    pub filter: Option<crate::models::logpush_schemas_filter::LogpushSchemasFilter>,
+    pub sample: Option<crate::models::logpush_sample::LogpushSample>,
+    pub session_id: Option<crate::models::logpush_session_id::LogpushSessionId>,
 }

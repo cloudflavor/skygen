@@ -19,9 +19,9 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct MagicInterconnectTunnelUpdateRequest {
-    pub description: Option<serde_json::Value>,
+    pub description: Option<crate::models::magic_interconnect_components_schemas_description::MagicInterconnectComponentsSchemasDescription>,
     pub gre: Option<crate::models::magic_gre::MagicGre>,
-    pub health_check: Option<serde_json::Value>,
-    pub interface_address: Option<serde_json::Value>,
-    pub mtu: Option<serde_json::Value>,
+    pub health_check: Option<crate::models::magic_interconnect_health_check::MagicInterconnectHealthCheck>,
+    pub interface_address: Option<crate::models::magic_interface_address::MagicInterfaceAddress>,
+    pub mtu: Option<crate::models::magic_schemas_mtu::MagicSchemasMtu>,
 }

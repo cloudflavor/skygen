@@ -15,7 +15,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-use crate::models::destination::Destination;
+use crate::models::error::Error;
+use crate::models::metrics::Metrics;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
@@ -34,13 +35,18 @@ impl<'a> ListAlertPolicyRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// List Alert Policies
+///
+/// Returns all alert policies that are configured for the given account. To List all alert policies, send a GET request to `/v2/monitoring/alerts`.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/monitoring/alerts`
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::monitoring };
+/// use digitalocean::{ ApiClient, apis::monitoring };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_alert_policy(&api)
+/// let response = list_alert_policy(&api)
 ///     .send()
 ///     .await?;
 /// ```
@@ -71,13 +77,20 @@ impl<'a> CreateAlertPolicyRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Create Alert Policy
+///
+/// To create a new alert, send a POST request to `/v2/monitoring/alerts`.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/v2/monitoring/alerts`
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::monitoring };
+/// use digitalocean::{ ApiClient, apis::monitoring };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = create_alert_policy(&api)
+/// # let body: crate::models::alert_policy_request::AlertPolicyRequest = todo!();
+/// let response = create_alert_policy(&api)
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -105,14 +118,22 @@ impl<'a> GetAlertPolicyRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Retrieve an Existing Alert Policy
+///
+/// To retrieve a given alert policy, send a GET request to `/v2/monitoring/alerts/{alert_uuid}`
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/monitoring/alerts/{alert_uuid}`
+///
+/// **Parameters**
+/// - `alert_uuid` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::monitoring };
+/// use digitalocean::{ ApiClient, apis::monitoring };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_alert_policy(&api)
-///     .with_alert_uuid("value")
+/// let response = get_alert_policy(&api)
+///     .with_alert_uuid("alert_uuid")
 ///     .send()
 ///     .await?;
 /// ```
@@ -148,14 +169,24 @@ impl<'a> UpdateAlertPolicyRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Update an Alert Policy
+///
+/// To update en existing policy, send a PUT request to `v2/monitoring/alerts/{alert_uuid}`.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/v2/monitoring/alerts/{alert_uuid}`
+///
+/// **Parameters**
+/// - `alert_uuid` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::monitoring };
+/// use digitalocean::{ ApiClient, apis::monitoring };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = update_alert_policy(&api)
-///     .with_alert_uuid("value")
+/// # let body: crate::models::alert_policy_request::AlertPolicyRequest = todo!();
+/// let response = update_alert_policy(&api)
+///     .with_alert_uuid("alert_uuid")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -165,7 +196,7 @@ pub fn update_alert_policy(api: &ApiClient) -> UpdateAlertPolicyRequest<'_> {
 
 #[derive(Debug)]
 pub struct DeleteAlertPolicyRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, Error>,
 }
 
 impl<'a> DeleteAlertPolicyRequest<'a> {
@@ -180,18 +211,26 @@ impl<'a> DeleteAlertPolicyRequest<'a> {
         self.builder = self.builder.path_param("alert_uuid", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<Error> {
         self.builder.send().await
     }
 }
-
 /// Delete an Alert Policy
+///
+/// To delete an alert policy, send a DELETE request to `/v2/monitoring/alerts/{alert_uuid}`
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/v2/monitoring/alerts/{alert_uuid}`
+///
+/// **Parameters**
+/// - `alert_uuid` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::monitoring };
+/// use digitalocean::{ ApiClient, apis::monitoring };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete_alert_policy(&api)
-///     .with_alert_uuid("value")
+/// let response = delete_alert_policy(&api)
+///     .with_alert_uuid("alert_uuid")
 ///     .send()
 ///     .await?;
 /// ```
@@ -201,7 +240,7 @@ pub fn delete_alert_policy(api: &ApiClient) -> DeleteAlertPolicyRequest<'_> {
 
 #[derive(Debug)]
 pub struct GetAppCpuPercentageRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, Metrics>,
 }
 
 impl<'a> GetAppCpuPercentageRequest<'a> {
@@ -214,17 +253,22 @@ impl<'a> GetAppCpuPercentageRequest<'a> {
 
         Self { builder }
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<Metrics> {
         self.builder.send().await
     }
 }
-
 /// Get App CPU Percentage Metrics
+///
+/// To retrieve cpu percentage metrics for a given app, send a GET request to `/v2/monitoring/metrics/apps/cpu_percentage`.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/monitoring/metrics/apps/cpu_percentage`
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::monitoring };
+/// use digitalocean::{ ApiClient, apis::monitoring };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_app_cpu_percentage(&api)
+/// let response = get_app_cpu_percentage(&api)
 ///     .send()
 ///     .await?;
 /// ```
@@ -234,7 +278,7 @@ pub fn get_app_cpu_percentage(api: &ApiClient) -> GetAppCpuPercentageRequest<'_>
 
 #[derive(Debug)]
 pub struct GetAppMemoryPercentageRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, Metrics>,
 }
 
 impl<'a> GetAppMemoryPercentageRequest<'a> {
@@ -247,17 +291,22 @@ impl<'a> GetAppMemoryPercentageRequest<'a> {
 
         Self { builder }
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<Metrics> {
         self.builder.send().await
     }
 }
-
 /// Get App Memory Percentage Metrics
+///
+/// To retrieve memory percentage metrics for a given app, send a GET request to `/v2/monitoring/metrics/apps/memory_percentage`.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/monitoring/metrics/apps/memory_percentage`
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::monitoring };
+/// use digitalocean::{ ApiClient, apis::monitoring };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_app_memory_percentage(&api)
+/// let response = get_app_memory_percentage(&api)
 ///     .send()
 ///     .await?;
 /// ```
@@ -267,7 +316,7 @@ pub fn get_app_memory_percentage(api: &ApiClient) -> GetAppMemoryPercentageReque
 
 #[derive(Debug)]
 pub struct GetAppRestartCountRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, Metrics>,
 }
 
 impl<'a> GetAppRestartCountRequest<'a> {
@@ -277,17 +326,22 @@ impl<'a> GetAppRestartCountRequest<'a> {
 
         Self { builder }
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<Metrics> {
         self.builder.send().await
     }
 }
-
 /// Get App Restart Count Metrics
+///
+/// To retrieve restart count metrics for a given app, send a GET request to `/v2/monitoring/metrics/apps/restart_count`.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/monitoring/metrics/apps/restart_count`
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::monitoring };
+/// use digitalocean::{ ApiClient, apis::monitoring };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_app_restart_count(&api)
+/// let response = get_app_restart_count(&api)
 ///     .send()
 ///     .await?;
 /// ```
@@ -297,7 +351,7 @@ pub fn get_app_restart_count(api: &ApiClient) -> GetAppRestartCountRequest<'_> {
 
 #[derive(Debug)]
 pub struct GetDropletBandwidthMetricsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, Metrics>,
 }
 
 impl<'a> GetDropletBandwidthMetricsRequest<'a> {
@@ -307,17 +361,23 @@ impl<'a> GetDropletBandwidthMetricsRequest<'a> {
 
         Self { builder }
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<Metrics> {
         self.builder.send().await
     }
 }
-
 /// Get Droplet Bandwidth Metrics
+///
+/// To retrieve bandwidth metrics for a given Droplet, send a GET request to `/v2/monitoring/metrics/droplet/bandwidth`. Use the `interface` query parameter to specify if the results should be for the `private` or `public` interface. Use the `direction` query parameter to specify if the results should be for `inbound` or `outbound` traffic.
+/// The metrics in the response body are in megabits per second (Mbps).
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/monitoring/metrics/droplet/bandwidth`
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::monitoring };
+/// use digitalocean::{ ApiClient, apis::monitoring };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_droplet_bandwidth_metrics(&api)
+/// let response = get_droplet_bandwidth_metrics(&api)
 ///     .send()
 ///     .await?;
 /// ```
@@ -327,7 +387,7 @@ pub fn get_droplet_bandwidth_metrics(api: &ApiClient) -> GetDropletBandwidthMetr
 
 #[derive(Debug)]
 pub struct GetDropletCpuMetricsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, Metrics>,
 }
 
 impl<'a> GetDropletCpuMetricsRequest<'a> {
@@ -336,17 +396,22 @@ impl<'a> GetDropletCpuMetricsRequest<'a> {
 
         Self { builder }
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<Metrics> {
         self.builder.send().await
     }
 }
-
 /// Get Droplet CPU Metrics
+///
+/// To retrieve CPU metrics for a given droplet, send a GET request to `/v2/monitoring/metrics/droplet/cpu`.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/monitoring/metrics/droplet/cpu`
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::monitoring };
+/// use digitalocean::{ ApiClient, apis::monitoring };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_droplet_cpu_metrics(&api)
+/// let response = get_droplet_cpu_metrics(&api)
 ///     .send()
 ///     .await?;
 /// ```
@@ -356,7 +421,7 @@ pub fn get_droplet_cpu_metrics(api: &ApiClient) -> GetDropletCpuMetricsRequest<'
 
 #[derive(Debug)]
 pub struct GetDropletFilesystemFreeRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, Metrics>,
 }
 
 impl<'a> GetDropletFilesystemFreeRequest<'a> {
@@ -369,17 +434,22 @@ impl<'a> GetDropletFilesystemFreeRequest<'a> {
 
         Self { builder }
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<Metrics> {
         self.builder.send().await
     }
 }
-
 /// Get Droplet Filesystem Free Metrics
+///
+/// To retrieve filesystem free metrics for a given droplet, send a GET request to `/v2/monitoring/metrics/droplet/filesystem_free`.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/monitoring/metrics/droplet/filesystem_free`
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::monitoring };
+/// use digitalocean::{ ApiClient, apis::monitoring };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_droplet_filesystem_free(&api)
+/// let response = get_droplet_filesystem_free(&api)
 ///     .send()
 ///     .await?;
 /// ```
@@ -389,7 +459,7 @@ pub fn get_droplet_filesystem_free(api: &ApiClient) -> GetDropletFilesystemFreeR
 
 #[derive(Debug)]
 pub struct GetDropletFilesystemSizeRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, Metrics>,
 }
 
 impl<'a> GetDropletFilesystemSizeRequest<'a> {
@@ -402,17 +472,22 @@ impl<'a> GetDropletFilesystemSizeRequest<'a> {
 
         Self { builder }
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<Metrics> {
         self.builder.send().await
     }
 }
-
 /// Get Droplet Filesystem Size Metrics
+///
+/// To retrieve filesystem size metrics for a given droplet, send a GET request to `/v2/monitoring/metrics/droplet/filesystem_size`.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/monitoring/metrics/droplet/filesystem_size`
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::monitoring };
+/// use digitalocean::{ ApiClient, apis::monitoring };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_droplet_filesystem_size(&api)
+/// let response = get_droplet_filesystem_size(&api)
 ///     .send()
 ///     .await?;
 /// ```
@@ -422,7 +497,7 @@ pub fn get_droplet_filesystem_size(api: &ApiClient) -> GetDropletFilesystemSizeR
 
 #[derive(Debug)]
 pub struct GetDropletLoad1MetricsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, Metrics>,
 }
 
 impl<'a> GetDropletLoad1MetricsRequest<'a> {
@@ -432,17 +507,22 @@ impl<'a> GetDropletLoad1MetricsRequest<'a> {
 
         Self { builder }
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<Metrics> {
         self.builder.send().await
     }
 }
-
 /// Get Droplet Load1 Metrics
+///
+/// To retrieve 1 minute load average metrics for a given droplet, send a GET request to `/v2/monitoring/metrics/droplet/load_1`.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/monitoring/metrics/droplet/load_1`
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::monitoring };
+/// use digitalocean::{ ApiClient, apis::monitoring };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_droplet_load1_metrics(&api)
+/// let response = get_droplet_load1_metrics(&api)
 ///     .send()
 ///     .await?;
 /// ```
@@ -452,7 +532,7 @@ pub fn get_droplet_load1_metrics(api: &ApiClient) -> GetDropletLoad1MetricsReque
 
 #[derive(Debug)]
 pub struct GetDropletLoad15MetricsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, Metrics>,
 }
 
 impl<'a> GetDropletLoad15MetricsRequest<'a> {
@@ -462,17 +542,22 @@ impl<'a> GetDropletLoad15MetricsRequest<'a> {
 
         Self { builder }
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<Metrics> {
         self.builder.send().await
     }
 }
-
 /// Get Droplet Load15 Metrics
+///
+/// To retrieve 15 minute load average metrics for a given droplet, send a GET request to `/v2/monitoring/metrics/droplet/load_15`.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/monitoring/metrics/droplet/load_15`
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::monitoring };
+/// use digitalocean::{ ApiClient, apis::monitoring };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_droplet_load15_metrics(&api)
+/// let response = get_droplet_load15_metrics(&api)
 ///     .send()
 ///     .await?;
 /// ```
@@ -482,7 +567,7 @@ pub fn get_droplet_load15_metrics(api: &ApiClient) -> GetDropletLoad15MetricsReq
 
 #[derive(Debug)]
 pub struct GetDropletLoad5MetricsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, Metrics>,
 }
 
 impl<'a> GetDropletLoad5MetricsRequest<'a> {
@@ -492,17 +577,22 @@ impl<'a> GetDropletLoad5MetricsRequest<'a> {
 
         Self { builder }
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<Metrics> {
         self.builder.send().await
     }
 }
-
 /// Get Droplet Load5 Metrics
+///
+/// To retrieve 5 minute load average metrics for a given droplet, send a GET request to `/v2/monitoring/metrics/droplet/load_5`.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/monitoring/metrics/droplet/load_5`
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::monitoring };
+/// use digitalocean::{ ApiClient, apis::monitoring };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_droplet_load5_metrics(&api)
+/// let response = get_droplet_load5_metrics(&api)
 ///     .send()
 ///     .await?;
 /// ```
@@ -512,7 +602,7 @@ pub fn get_droplet_load5_metrics(api: &ApiClient) -> GetDropletLoad5MetricsReque
 
 #[derive(Debug)]
 pub struct GetDropletMemoryAvailableRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, Metrics>,
 }
 
 impl<'a> GetDropletMemoryAvailableRequest<'a> {
@@ -525,17 +615,22 @@ impl<'a> GetDropletMemoryAvailableRequest<'a> {
 
         Self { builder }
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<Metrics> {
         self.builder.send().await
     }
 }
-
 /// Get Droplet Available Memory Metrics
+///
+/// To retrieve available memory metrics for a given droplet, send a GET request to `/v2/monitoring/metrics/droplet/memory_available`.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/monitoring/metrics/droplet/memory_available`
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::monitoring };
+/// use digitalocean::{ ApiClient, apis::monitoring };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_droplet_memory_available(&api)
+/// let response = get_droplet_memory_available(&api)
 ///     .send()
 ///     .await?;
 /// ```
@@ -545,7 +640,7 @@ pub fn get_droplet_memory_available(api: &ApiClient) -> GetDropletMemoryAvailabl
 
 #[derive(Debug)]
 pub struct GetDropletMemoryCachedRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, Metrics>,
 }
 
 impl<'a> GetDropletMemoryCachedRequest<'a> {
@@ -558,17 +653,22 @@ impl<'a> GetDropletMemoryCachedRequest<'a> {
 
         Self { builder }
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<Metrics> {
         self.builder.send().await
     }
 }
-
 /// Get Droplet Cached Memory Metrics
+///
+/// To retrieve cached memory metrics for a given droplet, send a GET request to `/v2/monitoring/metrics/droplet/memory_cached`.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/monitoring/metrics/droplet/memory_cached`
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::monitoring };
+/// use digitalocean::{ ApiClient, apis::monitoring };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_droplet_memory_cached(&api)
+/// let response = get_droplet_memory_cached(&api)
 ///     .send()
 ///     .await?;
 /// ```
@@ -578,7 +678,7 @@ pub fn get_droplet_memory_cached(api: &ApiClient) -> GetDropletMemoryCachedReque
 
 #[derive(Debug)]
 pub struct GetDropletMemoryFreeRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, Metrics>,
 }
 
 impl<'a> GetDropletMemoryFreeRequest<'a> {
@@ -591,17 +691,22 @@ impl<'a> GetDropletMemoryFreeRequest<'a> {
 
         Self { builder }
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<Metrics> {
         self.builder.send().await
     }
 }
-
 /// Get Droplet Free Memory Metrics
+///
+/// To retrieve free memory metrics for a given droplet, send a GET request to `/v2/monitoring/metrics/droplet/memory_free`.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/monitoring/metrics/droplet/memory_free`
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::monitoring };
+/// use digitalocean::{ ApiClient, apis::monitoring };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_droplet_memory_free(&api)
+/// let response = get_droplet_memory_free(&api)
 ///     .send()
 ///     .await?;
 /// ```
@@ -611,7 +716,7 @@ pub fn get_droplet_memory_free(api: &ApiClient) -> GetDropletMemoryFreeRequest<'
 
 #[derive(Debug)]
 pub struct GetDropletMemoryTotalRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, Metrics>,
 }
 
 impl<'a> GetDropletMemoryTotalRequest<'a> {
@@ -624,17 +729,22 @@ impl<'a> GetDropletMemoryTotalRequest<'a> {
 
         Self { builder }
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<Metrics> {
         self.builder.send().await
     }
 }
-
 /// Get Droplet Total Memory Metrics
+///
+/// To retrieve total memory metrics for a given droplet, send a GET request to `/v2/monitoring/metrics/droplet/memory_total`.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/monitoring/metrics/droplet/memory_total`
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::monitoring };
+/// use digitalocean::{ ApiClient, apis::monitoring };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_droplet_memory_total(&api)
+/// let response = get_droplet_memory_total(&api)
 ///     .send()
 ///     .await?;
 /// ```
@@ -644,7 +754,7 @@ pub fn get_droplet_memory_total(api: &ApiClient) -> GetDropletMemoryTotalRequest
 
 #[derive(Debug)]
 pub struct GetDropletAutoscaleCurrentRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, Metrics>,
 }
 
 impl<'a> GetDropletAutoscaleCurrentRequest<'a> {
@@ -657,17 +767,22 @@ impl<'a> GetDropletAutoscaleCurrentRequest<'a> {
 
         Self { builder }
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<Metrics> {
         self.builder.send().await
     }
 }
-
 /// Get Droplet Autoscale Pool Current Average CPU utilization
+///
+/// To retrieve the current average CPU utilization for a given Droplet Autoscale Pool, send a GET request to `/v2/monitoring/metrics/droplet_autoscale/current_cpu_utilization`.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/monitoring/metrics/droplet_autoscale/current_cpu_utilization`
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::monitoring };
+/// use digitalocean::{ ApiClient, apis::monitoring };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_droplet_autoscale_current(&api)
+/// let response = get_droplet_autoscale_current(&api)
 ///     .send()
 ///     .await?;
 /// ```
@@ -677,7 +792,7 @@ pub fn get_droplet_autoscale_current(api: &ApiClient) -> GetDropletAutoscaleCurr
 
 #[derive(Debug)]
 pub struct GetDropletAutoscaleCurrentGetRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, Metrics>,
 }
 
 impl<'a> GetDropletAutoscaleCurrentGetRequest<'a> {
@@ -690,17 +805,22 @@ impl<'a> GetDropletAutoscaleCurrentGetRequest<'a> {
 
         Self { builder }
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<Metrics> {
         self.builder.send().await
     }
 }
-
 /// Get Droplet Autoscale Pool Current Size
+///
+/// To retrieve the current size for a given Droplet Autoscale Pool, send a GET request to `/v2/monitoring/metrics/droplet_autoscale/current_instances`.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/monitoring/metrics/droplet_autoscale/current_instances`
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::monitoring };
+/// use digitalocean::{ ApiClient, apis::monitoring };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_droplet_autoscale_current_get(&api)
+/// let response = get_droplet_autoscale_current_get(&api)
 ///     .send()
 ///     .await?;
 /// ```
@@ -712,7 +832,7 @@ pub fn get_droplet_autoscale_current_get(
 
 #[derive(Debug)]
 pub struct GetDropletAutoscaleCurrentGet3Request<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, Metrics>,
 }
 
 impl<'a> GetDropletAutoscaleCurrentGet3Request<'a> {
@@ -725,17 +845,22 @@ impl<'a> GetDropletAutoscaleCurrentGet3Request<'a> {
 
         Self { builder }
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<Metrics> {
         self.builder.send().await
     }
 }
-
 /// Get Droplet Autoscale Pool Current Average Memory utilization
+///
+/// To retrieve the current average memory utilization for a given Droplet Autoscale Pool, send a GET request to `/v2/monitoring/metrics/droplet_autoscale/current_memory_utilization`.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/monitoring/metrics/droplet_autoscale/current_memory_utilization`
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::monitoring };
+/// use digitalocean::{ ApiClient, apis::monitoring };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_droplet_autoscale_current_get_3(&api)
+/// let response = get_droplet_autoscale_current_get_3(&api)
 ///     .send()
 ///     .await?;
 /// ```
@@ -747,7 +872,7 @@ pub fn get_droplet_autoscale_current_get_3(
 
 #[derive(Debug)]
 pub struct GetDropletAutoscaleTargetRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, Metrics>,
 }
 
 impl<'a> GetDropletAutoscaleTargetRequest<'a> {
@@ -760,17 +885,22 @@ impl<'a> GetDropletAutoscaleTargetRequest<'a> {
 
         Self { builder }
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<Metrics> {
         self.builder.send().await
     }
 }
-
 /// Get Droplet Autoscale Pool Target Average CPU utilization
+///
+/// To retrieve the target average CPU utilization for a given Droplet Autoscale Pool, send a GET request to `/v2/monitoring/metrics/droplet_autoscale/target_cpu_utilization`.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/monitoring/metrics/droplet_autoscale/target_cpu_utilization`
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::monitoring };
+/// use digitalocean::{ ApiClient, apis::monitoring };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_droplet_autoscale_target(&api)
+/// let response = get_droplet_autoscale_target(&api)
 ///     .send()
 ///     .await?;
 /// ```
@@ -780,7 +910,7 @@ pub fn get_droplet_autoscale_target(api: &ApiClient) -> GetDropletAutoscaleTarge
 
 #[derive(Debug)]
 pub struct GetDropletAutoscaleTargetGetRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, Metrics>,
 }
 
 impl<'a> GetDropletAutoscaleTargetGetRequest<'a> {
@@ -793,17 +923,22 @@ impl<'a> GetDropletAutoscaleTargetGetRequest<'a> {
 
         Self { builder }
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<Metrics> {
         self.builder.send().await
     }
 }
-
 /// Get Droplet Autoscale Pool Target Size
+///
+/// To retrieve the target size for a given Droplet Autoscale Pool, send a GET request to `/v2/monitoring/metrics/droplet_autoscale/target_instances`.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/monitoring/metrics/droplet_autoscale/target_instances`
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::monitoring };
+/// use digitalocean::{ ApiClient, apis::monitoring };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_droplet_autoscale_target_get(&api)
+/// let response = get_droplet_autoscale_target_get(&api)
 ///     .send()
 ///     .await?;
 /// ```
@@ -815,7 +950,7 @@ pub fn get_droplet_autoscale_target_get(
 
 #[derive(Debug)]
 pub struct GetDropletAutoscaleTargetGet3Request<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, Metrics>,
 }
 
 impl<'a> GetDropletAutoscaleTargetGet3Request<'a> {
@@ -828,17 +963,22 @@ impl<'a> GetDropletAutoscaleTargetGet3Request<'a> {
 
         Self { builder }
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<Metrics> {
         self.builder.send().await
     }
 }
-
 /// Get Droplet Autoscale Pool Target Average Memory utilization
+///
+/// To retrieve the target average memory utilization for a given Droplet Autoscale Pool, send a GET request to `/v2/monitoring/metrics/droplet_autoscale/target_memory_utilization`.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/monitoring/metrics/droplet_autoscale/target_memory_utilization`
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::monitoring };
+/// use digitalocean::{ ApiClient, apis::monitoring };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_droplet_autoscale_target_get_3(&api)
+/// let response = get_droplet_autoscale_target_get_3(&api)
 ///     .send()
 ///     .await?;
 /// ```
@@ -850,7 +990,7 @@ pub fn get_droplet_autoscale_target_get_3(
 
 #[derive(Debug)]
 pub struct GetLbDropletsConnectionsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, Metrics>,
 }
 
 impl<'a> GetLbDropletsConnectionsRequest<'a> {
@@ -863,17 +1003,22 @@ impl<'a> GetLbDropletsConnectionsRequest<'a> {
 
         Self { builder }
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<Metrics> {
         self.builder.send().await
     }
 }
-
 /// Get Load Balancer Droplets Active Connections Metrics
+///
+/// To retrieve Droplets active connections for a given load balancer, send a GET request to `/v2/monitoring/metrics/load_balancer/droplets_connections`.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/monitoring/metrics/load_balancer/droplets_connections`
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::monitoring };
+/// use digitalocean::{ ApiClient, apis::monitoring };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_lb_droplets_connections(&api)
+/// let response = get_lb_droplets_connections(&api)
 ///     .send()
 ///     .await?;
 /// ```
@@ -883,7 +1028,7 @@ pub fn get_lb_droplets_connections(api: &ApiClient) -> GetLbDropletsConnectionsR
 
 #[derive(Debug)]
 pub struct GetLbDropletsDowntimeRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, Metrics>,
 }
 
 impl<'a> GetLbDropletsDowntimeRequest<'a> {
@@ -896,17 +1041,22 @@ impl<'a> GetLbDropletsDowntimeRequest<'a> {
 
         Self { builder }
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<Metrics> {
         self.builder.send().await
     }
 }
-
 /// Get Load Balancer Droplets Downtime Status Metrics
+///
+/// To retrieve Droplets downtime status for a given load balancer, send a GET request to `/v2/monitoring/metrics/load_balancer/droplets_downtime`.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/monitoring/metrics/load_balancer/droplets_downtime`
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::monitoring };
+/// use digitalocean::{ ApiClient, apis::monitoring };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_lb_droplets_downtime(&api)
+/// let response = get_lb_droplets_downtime(&api)
 ///     .send()
 ///     .await?;
 /// ```
@@ -916,7 +1066,7 @@ pub fn get_lb_droplets_downtime(api: &ApiClient) -> GetLbDropletsDowntimeRequest
 
 #[derive(Debug)]
 pub struct GetLbDropletsHealthRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, Metrics>,
 }
 
 impl<'a> GetLbDropletsHealthRequest<'a> {
@@ -929,17 +1079,22 @@ impl<'a> GetLbDropletsHealthRequest<'a> {
 
         Self { builder }
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<Metrics> {
         self.builder.send().await
     }
 }
-
 /// Get Load Balancer Droplets Health Check Status Metrics
+///
+/// To retrieve Droplets health check status for a given load balancer, send a GET request to `/v2/monitoring/metrics/load_balancer/droplets_health_checks`.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/monitoring/metrics/load_balancer/droplets_health_checks`
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::monitoring };
+/// use digitalocean::{ ApiClient, apis::monitoring };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_lb_droplets_health(&api)
+/// let response = get_lb_droplets_health(&api)
 ///     .send()
 ///     .await?;
 /// ```
@@ -949,7 +1104,7 @@ pub fn get_lb_droplets_health(api: &ApiClient) -> GetLbDropletsHealthRequest<'_>
 
 #[derive(Debug)]
 pub struct GetLbDropletsHttpRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, Metrics>,
 }
 
 impl<'a> GetLbDropletsHttpRequest<'a> {
@@ -962,17 +1117,22 @@ impl<'a> GetLbDropletsHttpRequest<'a> {
 
         Self { builder }
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<Metrics> {
         self.builder.send().await
     }
 }
-
 /// Get Load Balancer Droplets 50th Percentile HTTP Response Time Metrics
+///
+/// To retrieve Droplets 50th percentile HTTP response time in seconds for a given load balancer, send a GET request to `/v2/monitoring/metrics/load_balancer/droplets_http_response_time_50p`.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/monitoring/metrics/load_balancer/droplets_http_response_time_50p`
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::monitoring };
+/// use digitalocean::{ ApiClient, apis::monitoring };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_lb_droplets_http(&api)
+/// let response = get_lb_droplets_http(&api)
 ///     .send()
 ///     .await?;
 /// ```
@@ -982,7 +1142,7 @@ pub fn get_lb_droplets_http(api: &ApiClient) -> GetLbDropletsHttpRequest<'_> {
 
 #[derive(Debug)]
 pub struct GetLbDropletsHttpGetRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, Metrics>,
 }
 
 impl<'a> GetLbDropletsHttpGetRequest<'a> {
@@ -995,17 +1155,22 @@ impl<'a> GetLbDropletsHttpGetRequest<'a> {
 
         Self { builder }
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<Metrics> {
         self.builder.send().await
     }
 }
-
 /// Get Load Balancer Droplets 95th Percentile HTTP Response Time Metrics
+///
+/// To retrieve Droplets 95th percentile HTTP response time in seconds for a given load balancer, send a GET request to `/v2/monitoring/metrics/load_balancer/droplets_http_response_time_95p`.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/monitoring/metrics/load_balancer/droplets_http_response_time_95p`
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::monitoring };
+/// use digitalocean::{ ApiClient, apis::monitoring };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_lb_droplets_http_get(&api)
+/// let response = get_lb_droplets_http_get(&api)
 ///     .send()
 ///     .await?;
 /// ```
@@ -1015,7 +1180,7 @@ pub fn get_lb_droplets_http_get(api: &ApiClient) -> GetLbDropletsHttpGetRequest<
 
 #[derive(Debug)]
 pub struct GetLbDropletsHttpGet3Request<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, Metrics>,
 }
 
 impl<'a> GetLbDropletsHttpGet3Request<'a> {
@@ -1028,17 +1193,22 @@ impl<'a> GetLbDropletsHttpGet3Request<'a> {
 
         Self { builder }
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<Metrics> {
         self.builder.send().await
     }
 }
-
 /// Get Load Balancer Droplets 99th Percentile HTTP Response Time Metrics
+///
+/// To retrieve Droplets 99th percentile HTTP response time in seconds for a given load balancer, send a GET request to `/v2/monitoring/metrics/load_balancer/droplets_http_response_time_99p`.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/monitoring/metrics/load_balancer/droplets_http_response_time_99p`
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::monitoring };
+/// use digitalocean::{ ApiClient, apis::monitoring };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_lb_droplets_http_get_3(&api)
+/// let response = get_lb_droplets_http_get_3(&api)
 ///     .send()
 ///     .await?;
 /// ```
@@ -1048,7 +1218,7 @@ pub fn get_lb_droplets_http_get_3(api: &ApiClient) -> GetLbDropletsHttpGet3Reque
 
 #[derive(Debug)]
 pub struct GetLbDropletsHttpGet4Request<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, Metrics>,
 }
 
 impl<'a> GetLbDropletsHttpGet4Request<'a> {
@@ -1061,17 +1231,22 @@ impl<'a> GetLbDropletsHttpGet4Request<'a> {
 
         Self { builder }
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<Metrics> {
         self.builder.send().await
     }
 }
-
 /// Get Load Balancer Droplets Average HTTP Response Time Metrics
+///
+/// To retrieve Droplets average HTTP response time in seconds for a given load balancer, send a GET request to `/v2/monitoring/metrics/load_balancer/droplets_http_response_time_avg`.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/monitoring/metrics/load_balancer/droplets_http_response_time_avg`
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::monitoring };
+/// use digitalocean::{ ApiClient, apis::monitoring };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_lb_droplets_http_get_4(&api)
+/// let response = get_lb_droplets_http_get_4(&api)
 ///     .send()
 ///     .await?;
 /// ```
@@ -1081,7 +1256,7 @@ pub fn get_lb_droplets_http_get_4(api: &ApiClient) -> GetLbDropletsHttpGet4Reque
 
 #[derive(Debug)]
 pub struct GetLbDropletsHttpGet5Request<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, Metrics>,
 }
 
 impl<'a> GetLbDropletsHttpGet5Request<'a> {
@@ -1094,17 +1269,22 @@ impl<'a> GetLbDropletsHttpGet5Request<'a> {
 
         Self { builder }
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<Metrics> {
         self.builder.send().await
     }
 }
-
 /// Get Load Balancer Droplets HTTP Rate Of Response Code Metrics
+///
+/// To retrieve Droplets HTTP rate of response code for a given load balancer, send a GET request to `/v2/monitoring/metrics/load_balancer/droplets_http_responses`.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/monitoring/metrics/load_balancer/droplets_http_responses`
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::monitoring };
+/// use digitalocean::{ ApiClient, apis::monitoring };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_lb_droplets_http_get_5(&api)
+/// let response = get_lb_droplets_http_get_5(&api)
 ///     .send()
 ///     .await?;
 /// ```
@@ -1114,7 +1294,7 @@ pub fn get_lb_droplets_http_get_5(api: &ApiClient) -> GetLbDropletsHttpGet5Reque
 
 #[derive(Debug)]
 pub struct GetLbDropletsHttpGet6Request<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, Metrics>,
 }
 
 impl<'a> GetLbDropletsHttpGet6Request<'a> {
@@ -1127,17 +1307,22 @@ impl<'a> GetLbDropletsHttpGet6Request<'a> {
 
         Self { builder }
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<Metrics> {
         self.builder.send().await
     }
 }
-
 /// Get Load Balancer Droplets 50th Percentile HTTP Session Duration Metrics
+///
+/// To retrieve Droplets 50th percentile HTTP session duration in seconds for a given load balancer, send a GET request to `/v2/monitoring/metrics/load_balancer/droplets_http_session_duration_50p`.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/monitoring/metrics/load_balancer/droplets_http_session_duration_50p`
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::monitoring };
+/// use digitalocean::{ ApiClient, apis::monitoring };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_lb_droplets_http_get_6(&api)
+/// let response = get_lb_droplets_http_get_6(&api)
 ///     .send()
 ///     .await?;
 /// ```
@@ -1147,7 +1332,7 @@ pub fn get_lb_droplets_http_get_6(api: &ApiClient) -> GetLbDropletsHttpGet6Reque
 
 #[derive(Debug)]
 pub struct GetLbDropletsHttpGet7Request<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, Metrics>,
 }
 
 impl<'a> GetLbDropletsHttpGet7Request<'a> {
@@ -1160,17 +1345,22 @@ impl<'a> GetLbDropletsHttpGet7Request<'a> {
 
         Self { builder }
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<Metrics> {
         self.builder.send().await
     }
 }
-
 /// Get Load Balancer Droplets 95th Percentile HTTP Session Duration Metrics
+///
+/// To retrieve Droplets 95th percentile HTTP session duration in seconds for a given load balancer, send a GET request to `/v2/monitoring/metrics/load_balancer/droplets_http_session_duration_95p`.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/monitoring/metrics/load_balancer/droplets_http_session_duration_95p`
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::monitoring };
+/// use digitalocean::{ ApiClient, apis::monitoring };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_lb_droplets_http_get_7(&api)
+/// let response = get_lb_droplets_http_get_7(&api)
 ///     .send()
 ///     .await?;
 /// ```
@@ -1180,7 +1370,7 @@ pub fn get_lb_droplets_http_get_7(api: &ApiClient) -> GetLbDropletsHttpGet7Reque
 
 #[derive(Debug)]
 pub struct GetLbDropletsHttpGet8Request<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, Metrics>,
 }
 
 impl<'a> GetLbDropletsHttpGet8Request<'a> {
@@ -1193,17 +1383,22 @@ impl<'a> GetLbDropletsHttpGet8Request<'a> {
 
         Self { builder }
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<Metrics> {
         self.builder.send().await
     }
 }
-
 /// Get Load Balancer Droplets Average HTTP Session Duration Metrics
+///
+/// To retrieve Droplets average HTTP session duration in seconds for a given load balancer, send a GET request to `/v2/monitoring/metrics/load_balancer/droplets_http_session_duration_avg`.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/monitoring/metrics/load_balancer/droplets_http_session_duration_avg`
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::monitoring };
+/// use digitalocean::{ ApiClient, apis::monitoring };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_lb_droplets_http_get_8(&api)
+/// let response = get_lb_droplets_http_get_8(&api)
 ///     .send()
 ///     .await?;
 /// ```
@@ -1213,7 +1408,7 @@ pub fn get_lb_droplets_http_get_8(api: &ApiClient) -> GetLbDropletsHttpGet8Reque
 
 #[derive(Debug)]
 pub struct GetLbDropletsQueueRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, Metrics>,
 }
 
 impl<'a> GetLbDropletsQueueRequest<'a> {
@@ -1226,17 +1421,22 @@ impl<'a> GetLbDropletsQueueRequest<'a> {
 
         Self { builder }
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<Metrics> {
         self.builder.send().await
     }
 }
-
 /// Get Load Balancer Droplets Queue Size Metrics
+///
+/// To retrieve Droplets queue size for a given load balancer, send a GET request to `/v2/monitoring/metrics/load_balancer/droplets_queue_size`.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/monitoring/metrics/load_balancer/droplets_queue_size`
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::monitoring };
+/// use digitalocean::{ ApiClient, apis::monitoring };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_lb_droplets_queue(&api)
+/// let response = get_lb_droplets_queue(&api)
 ///     .send()
 ///     .await?;
 /// ```
@@ -1246,7 +1446,7 @@ pub fn get_lb_droplets_queue(api: &ApiClient) -> GetLbDropletsQueueRequest<'_> {
 
 #[derive(Debug)]
 pub struct GetLbFrontendConnectionsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, Metrics>,
 }
 
 impl<'a> GetLbFrontendConnectionsRequest<'a> {
@@ -1259,17 +1459,22 @@ impl<'a> GetLbFrontendConnectionsRequest<'a> {
 
         Self { builder }
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<Metrics> {
         self.builder.send().await
     }
 }
-
 /// Get Load Balancer Frontend Total Current Active Connections Metrics
+///
+/// To retrieve frontend total current active connections for a given load balancer, send a GET request to `/v2/monitoring/metrics/load_balancer/frontend_connections_current`.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/monitoring/metrics/load_balancer/frontend_connections_current`
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::monitoring };
+/// use digitalocean::{ ApiClient, apis::monitoring };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_lb_frontend_connections(&api)
+/// let response = get_lb_frontend_connections(&api)
 ///     .send()
 ///     .await?;
 /// ```
@@ -1279,7 +1484,7 @@ pub fn get_lb_frontend_connections(api: &ApiClient) -> GetLbFrontendConnectionsR
 
 #[derive(Debug)]
 pub struct GetLbFrontendConnectionsGetRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, Metrics>,
 }
 
 impl<'a> GetLbFrontendConnectionsGetRequest<'a> {
@@ -1292,17 +1497,22 @@ impl<'a> GetLbFrontendConnectionsGetRequest<'a> {
 
         Self { builder }
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<Metrics> {
         self.builder.send().await
     }
 }
-
 /// Get Load Balancer Frontend Max Connections Limit Metrics
+///
+/// To retrieve frontend max connections limit for a given load balancer, send a GET request to `/v2/monitoring/metrics/load_balancer/frontend_connections_limit`.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/monitoring/metrics/load_balancer/frontend_connections_limit`
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::monitoring };
+/// use digitalocean::{ ApiClient, apis::monitoring };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_lb_frontend_connections_get(&api)
+/// let response = get_lb_frontend_connections_get(&api)
 ///     .send()
 ///     .await?;
 /// ```
@@ -1312,7 +1522,7 @@ pub fn get_lb_frontend_connections_get(api: &ApiClient) -> GetLbFrontendConnecti
 
 #[derive(Debug)]
 pub struct GetLbFrontendCpuRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, Metrics>,
 }
 
 impl<'a> GetLbFrontendCpuRequest<'a> {
@@ -1325,17 +1535,22 @@ impl<'a> GetLbFrontendCpuRequest<'a> {
 
         Self { builder }
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<Metrics> {
         self.builder.send().await
     }
 }
-
 /// Get Load Balancer Frontend Average Percentage CPU Utilization Metrics
+///
+/// To retrieve frontend average percentage CPU utilization for a given load balancer, send a GET request to `/v2/monitoring/metrics/load_balancer/frontend_cpu_utilization`.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/monitoring/metrics/load_balancer/frontend_cpu_utilization`
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::monitoring };
+/// use digitalocean::{ ApiClient, apis::monitoring };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_lb_frontend_cpu(&api)
+/// let response = get_lb_frontend_cpu(&api)
 ///     .send()
 ///     .await?;
 /// ```
@@ -1345,7 +1560,7 @@ pub fn get_lb_frontend_cpu(api: &ApiClient) -> GetLbFrontendCpuRequest<'_> {
 
 #[derive(Debug)]
 pub struct GetLbFrontendFirewallRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, Metrics>,
 }
 
 impl<'a> GetLbFrontendFirewallRequest<'a> {
@@ -1358,17 +1573,22 @@ impl<'a> GetLbFrontendFirewallRequest<'a> {
 
         Self { builder }
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<Metrics> {
         self.builder.send().await
     }
 }
-
 /// Get Load Balancer Frontend Firewall Dropped Bytes Metrics
+///
+/// To retrieve firewall dropped bytes for a given load balancer, send a GET request to `/v2/monitoring/metrics/load_balancer/frontend_firewall_dropped_bytes`. This is currently only supported for network load balancers.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/monitoring/metrics/load_balancer/frontend_firewall_dropped_bytes`
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::monitoring };
+/// use digitalocean::{ ApiClient, apis::monitoring };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_lb_frontend_firewall(&api)
+/// let response = get_lb_frontend_firewall(&api)
 ///     .send()
 ///     .await?;
 /// ```
@@ -1378,7 +1598,7 @@ pub fn get_lb_frontend_firewall(api: &ApiClient) -> GetLbFrontendFirewallRequest
 
 #[derive(Debug)]
 pub struct GetLbFrontendFirewallGetRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, Metrics>,
 }
 
 impl<'a> GetLbFrontendFirewallGetRequest<'a> {
@@ -1391,17 +1611,22 @@ impl<'a> GetLbFrontendFirewallGetRequest<'a> {
 
         Self { builder }
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<Metrics> {
         self.builder.send().await
     }
 }
-
 /// Get Load Balancer Frontend Firewall Dropped Packets Metrics
+///
+/// To retrieve firewall dropped packets per second for a given load balancer, send a GET request to `/v2/monitoring/metrics/load_balancer/frontend_firewall_dropped_packets`. This is currently only supported for network load balancers.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/monitoring/metrics/load_balancer/frontend_firewall_dropped_packets`
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::monitoring };
+/// use digitalocean::{ ApiClient, apis::monitoring };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_lb_frontend_firewall_get(&api)
+/// let response = get_lb_frontend_firewall_get(&api)
 ///     .send()
 ///     .await?;
 /// ```
@@ -1411,7 +1636,7 @@ pub fn get_lb_frontend_firewall_get(api: &ApiClient) -> GetLbFrontendFirewallGet
 
 #[derive(Debug)]
 pub struct GetLbFrontendHttpRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, Metrics>,
 }
 
 impl<'a> GetLbFrontendHttpRequest<'a> {
@@ -1424,17 +1649,22 @@ impl<'a> GetLbFrontendHttpRequest<'a> {
 
         Self { builder }
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<Metrics> {
         self.builder.send().await
     }
 }
-
 /// Get Load Balancer Frontend HTTP Requests Metrics
+///
+/// To retrieve frontend HTTP requests per second for a given load balancer, send a GET request to `/v2/monitoring/metrics/load_balancer/frontend_http_requests_per_second`.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/monitoring/metrics/load_balancer/frontend_http_requests_per_second`
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::monitoring };
+/// use digitalocean::{ ApiClient, apis::monitoring };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_lb_frontend_http(&api)
+/// let response = get_lb_frontend_http(&api)
 ///     .send()
 ///     .await?;
 /// ```
@@ -1444,7 +1674,7 @@ pub fn get_lb_frontend_http(api: &ApiClient) -> GetLbFrontendHttpRequest<'_> {
 
 #[derive(Debug)]
 pub struct GetLbFrontendHttpGetRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, Metrics>,
 }
 
 impl<'a> GetLbFrontendHttpGetRequest<'a> {
@@ -1457,17 +1687,22 @@ impl<'a> GetLbFrontendHttpGetRequest<'a> {
 
         Self { builder }
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<Metrics> {
         self.builder.send().await
     }
 }
-
 /// Get Load Balancer Frontend HTTP Rate Of Response Code Metrics
+///
+/// To retrieve frontend HTTP rate of response code for a given load balancer, send a GET request to `/v2/monitoring/metrics/load_balancer/frontend_http_responses`.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/monitoring/metrics/load_balancer/frontend_http_responses`
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::monitoring };
+/// use digitalocean::{ ApiClient, apis::monitoring };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_lb_frontend_http_get(&api)
+/// let response = get_lb_frontend_http_get(&api)
 ///     .send()
 ///     .await?;
 /// ```
@@ -1477,7 +1712,7 @@ pub fn get_lb_frontend_http_get(api: &ApiClient) -> GetLbFrontendHttpGetRequest<
 
 #[derive(Debug)]
 pub struct GetLbFrontendNetworkRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, Metrics>,
 }
 
 impl<'a> GetLbFrontendNetworkRequest<'a> {
@@ -1490,17 +1725,22 @@ impl<'a> GetLbFrontendNetworkRequest<'a> {
 
         Self { builder }
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<Metrics> {
         self.builder.send().await
     }
 }
-
 /// Get Load Balancer Frontend HTTP Throughput Metrics
+///
+/// To retrieve frontend HTTP throughput in bytes per second for a given load balancer, send a GET request to `/v2/monitoring/metrics/load_balancer/frontend_network_throughput_http`.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/monitoring/metrics/load_balancer/frontend_network_throughput_http`
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::monitoring };
+/// use digitalocean::{ ApiClient, apis::monitoring };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_lb_frontend_network(&api)
+/// let response = get_lb_frontend_network(&api)
 ///     .send()
 ///     .await?;
 /// ```
@@ -1510,7 +1750,7 @@ pub fn get_lb_frontend_network(api: &ApiClient) -> GetLbFrontendNetworkRequest<'
 
 #[derive(Debug)]
 pub struct GetLbFrontendNetworkGetRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, Metrics>,
 }
 
 impl<'a> GetLbFrontendNetworkGetRequest<'a> {
@@ -1523,17 +1763,22 @@ impl<'a> GetLbFrontendNetworkGetRequest<'a> {
 
         Self { builder }
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<Metrics> {
         self.builder.send().await
     }
 }
-
 /// Get Load Balancer Frontend TCP Throughput Metrics
+///
+/// To retrieve frontend TCP throughput in bytes per second for a given load balancer, send a GET request to `/v2/monitoring/metrics/load_balancer/frontend_network_throughput_tcp`.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/monitoring/metrics/load_balancer/frontend_network_throughput_tcp`
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::monitoring };
+/// use digitalocean::{ ApiClient, apis::monitoring };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_lb_frontend_network_get(&api)
+/// let response = get_lb_frontend_network_get(&api)
 ///     .send()
 ///     .await?;
 /// ```
@@ -1543,7 +1788,7 @@ pub fn get_lb_frontend_network_get(api: &ApiClient) -> GetLbFrontendNetworkGetRe
 
 #[derive(Debug)]
 pub struct GetLbFrontendNetworkGet3Request<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, Metrics>,
 }
 
 impl<'a> GetLbFrontendNetworkGet3Request<'a> {
@@ -1556,17 +1801,22 @@ impl<'a> GetLbFrontendNetworkGet3Request<'a> {
 
         Self { builder }
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<Metrics> {
         self.builder.send().await
     }
 }
-
 /// Get Load Balancer Frontend UDP Throughput Metrics
+///
+/// To retrieve frontend UDP throughput in bytes per second for a given load balancer, send a GET request to `/v2/monitoring/metrics/load_balancer/frontend_network_throughput_udp`.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/monitoring/metrics/load_balancer/frontend_network_throughput_udp`
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::monitoring };
+/// use digitalocean::{ ApiClient, apis::monitoring };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_lb_frontend_network_get_3(&api)
+/// let response = get_lb_frontend_network_get_3(&api)
 ///     .send()
 ///     .await?;
 /// ```
@@ -1576,7 +1826,7 @@ pub fn get_lb_frontend_network_get_3(api: &ApiClient) -> GetLbFrontendNetworkGet
 
 #[derive(Debug)]
 pub struct GetLbFrontendNlbRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, Metrics>,
 }
 
 impl<'a> GetLbFrontendNlbRequest<'a> {
@@ -1589,17 +1839,22 @@ impl<'a> GetLbFrontendNlbRequest<'a> {
 
         Self { builder }
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<Metrics> {
         self.builder.send().await
     }
 }
-
 /// Get Network Load Balancer Frontend TCP Throughput Metrics
+///
+/// To retrieve frontend TCP throughput in bytes per second for a given load balancer, send a GET request to `/v2/monitoring/metrics/load_balancer/frontend_nlb_tcp_network_throughput`.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/monitoring/metrics/load_balancer/frontend_nlb_tcp_network_throughput`
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::monitoring };
+/// use digitalocean::{ ApiClient, apis::monitoring };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_lb_frontend_nlb(&api)
+/// let response = get_lb_frontend_nlb(&api)
 ///     .send()
 ///     .await?;
 /// ```
@@ -1609,7 +1864,7 @@ pub fn get_lb_frontend_nlb(api: &ApiClient) -> GetLbFrontendNlbRequest<'_> {
 
 #[derive(Debug)]
 pub struct GetLbFrontendNlbGetRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, Metrics>,
 }
 
 impl<'a> GetLbFrontendNlbGetRequest<'a> {
@@ -1622,17 +1877,22 @@ impl<'a> GetLbFrontendNlbGetRequest<'a> {
 
         Self { builder }
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<Metrics> {
         self.builder.send().await
     }
 }
-
 /// Get Network Load Balancer Frontend UDP Throughput Metrics
+///
+/// To retrieve frontend UDP throughput in bytes per second for a given load balancer, send a GET request to `/v2/monitoring/metrics/load_balancer/frontend_nlb_udp_network_throughput`.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/monitoring/metrics/load_balancer/frontend_nlb_udp_network_throughput`
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::monitoring };
+/// use digitalocean::{ ApiClient, apis::monitoring };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_lb_frontend_nlb_get(&api)
+/// let response = get_lb_frontend_nlb_get(&api)
 ///     .send()
 ///     .await?;
 /// ```
@@ -1642,7 +1902,7 @@ pub fn get_lb_frontend_nlb_get(api: &ApiClient) -> GetLbFrontendNlbGetRequest<'_
 
 #[derive(Debug)]
 pub struct GetLbFrontendTlsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, Metrics>,
 }
 
 impl<'a> GetLbFrontendTlsRequest<'a> {
@@ -1655,17 +1915,22 @@ impl<'a> GetLbFrontendTlsRequest<'a> {
 
         Self { builder }
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<Metrics> {
         self.builder.send().await
     }
 }
-
 /// Get Load Balancer Frontend Current TLS Connections Rate Metrics
+///
+/// To retrieve frontend current TLS connections rate for a given load balancer, send a GET request to `/v2/monitoring/metrics/load_balancer/frontend_tls_connections_current`.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/monitoring/metrics/load_balancer/frontend_tls_connections_current`
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::monitoring };
+/// use digitalocean::{ ApiClient, apis::monitoring };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_lb_frontend_tls(&api)
+/// let response = get_lb_frontend_tls(&api)
 ///     .send()
 ///     .await?;
 /// ```
@@ -1675,7 +1940,7 @@ pub fn get_lb_frontend_tls(api: &ApiClient) -> GetLbFrontendTlsRequest<'_> {
 
 #[derive(Debug)]
 pub struct GetLbFrontendTlsGetRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, Metrics>,
 }
 
 impl<'a> GetLbFrontendTlsGetRequest<'a> {
@@ -1688,17 +1953,22 @@ impl<'a> GetLbFrontendTlsGetRequest<'a> {
 
         Self { builder }
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<Metrics> {
         self.builder.send().await
     }
 }
-
 /// Get Load Balancer Frontend Closed TLS Connections For Exceeded Rate Limit Metrics
+///
+/// To retrieve frontend closed TLS connections for exceeded rate limit for a given load balancer, send a GET request to `/v2/monitoring/metrics/load_balancer/frontend_tls_connections_exceeding_rate_limit`.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/monitoring/metrics/load_balancer/frontend_tls_connections_exceeding_rate_limit`
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::monitoring };
+/// use digitalocean::{ ApiClient, apis::monitoring };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_lb_frontend_tls_get(&api)
+/// let response = get_lb_frontend_tls_get(&api)
 ///     .send()
 ///     .await?;
 /// ```
@@ -1708,7 +1978,7 @@ pub fn get_lb_frontend_tls_get(api: &ApiClient) -> GetLbFrontendTlsGetRequest<'_
 
 #[derive(Debug)]
 pub struct GetLbFrontendTlsGet3Request<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, Metrics>,
 }
 
 impl<'a> GetLbFrontendTlsGet3Request<'a> {
@@ -1721,17 +1991,22 @@ impl<'a> GetLbFrontendTlsGet3Request<'a> {
 
         Self { builder }
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<Metrics> {
         self.builder.send().await
     }
 }
-
 /// Get Load Balancer Frontend Max TLS Connections Limit Metrics
+///
+/// To retrieve frontend max TLS connections limit for a given load balancer, send a GET request to `/v2/monitoring/metrics/load_balancer/frontend_tls_connections_limit`.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/monitoring/metrics/load_balancer/frontend_tls_connections_limit`
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::monitoring };
+/// use digitalocean::{ ApiClient, apis::monitoring };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_lb_frontend_tls_get_3(&api)
+/// let response = get_lb_frontend_tls_get_3(&api)
 ///     .send()
 ///     .await?;
 /// ```
@@ -1754,13 +2029,18 @@ impl<'a> ListSinksRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Lists all sinks
+///
+/// To list all sinks, send a GET request to `/v2/monitoring/sinks`.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/monitoring/sinks`
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::monitoring };
+/// use digitalocean::{ ApiClient, apis::monitoring };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_sinks(&api)
+/// let response = list_sinks(&api)
 ///     .send()
 ///     .await?;
 /// ```
@@ -1770,7 +2050,7 @@ pub fn list_sinks(api: &ApiClient) -> ListSinksRequest<'_> {
 
 #[derive(Debug)]
 pub struct CreateSinkRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, Error>,
 }
 
 impl<'a> CreateSinkRequest<'a> {
@@ -1784,17 +2064,25 @@ impl<'a> CreateSinkRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<Error> {
         self.builder.send().await
     }
 }
-
 /// Create Sink
+///
+/// To create a new sink, send a POST request to `/v2/monitoring/sinks`. Forwards logs from the
+/// resources identified in `resources` to the specified pre-existing destination.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/v2/monitoring/sinks`
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::monitoring };
+/// use digitalocean::{ ApiClient, apis::monitoring };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = create_sink(&api)
+/// # let body: serde_json::Value = todo!();
+/// let response = create_sink(&api)
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -1817,13 +2105,18 @@ impl<'a> ListDestinationsRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// List Logging Destinations
+///
+/// To list all logging destinations, send a GET request to `/v2/monitoring/sinks/destinations`.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/monitoring/sinks/destinations`
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::monitoring };
+/// use digitalocean::{ ApiClient, apis::monitoring };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_destinations(&api)
+/// let response = list_destinations(&api)
 ///     .send()
 ///     .await?;
 /// ```
@@ -1833,7 +2126,7 @@ pub fn list_destinations(api: &ApiClient) -> ListDestinationsRequest<'_> {
 
 #[derive(Debug)]
 pub struct CreateDestinationRequest<'a> {
-    builder: ApiRequestBuilder<'a, Destination>,
+    builder: ApiRequestBuilder<'a, serde_json::Value>,
 }
 
 impl<'a> CreateDestinationRequest<'a> {
@@ -1850,17 +2143,24 @@ impl<'a> CreateDestinationRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<Destination> {
+    pub async fn send(self) -> ApiResult<serde_json::Value> {
         self.builder.send().await
     }
 }
-
 /// Create Logging Destination
+///
+/// To create a new destination, send a POST request to `/v2/monitoring/sinks/destinations`.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/v2/monitoring/sinks/destinations`
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::monitoring };
+/// use digitalocean::{ ApiClient, apis::monitoring };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = create_destination(&api)
+/// # let body: crate::models::destination_request::DestinationRequest = todo!();
+/// let response = create_destination(&api)
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -1870,7 +2170,7 @@ pub fn create_destination(api: &ApiClient) -> CreateDestinationRequest<'_> {
 
 #[derive(Debug)]
 pub struct GetDestinationRequest<'a> {
-    builder: ApiRequestBuilder<'a, Destination>,
+    builder: ApiRequestBuilder<'a, serde_json::Value>,
 }
 
 impl<'a> GetDestinationRequest<'a> {
@@ -1888,18 +2188,26 @@ impl<'a> GetDestinationRequest<'a> {
         self.builder = self.builder.path_param("destination_uuid", value);
         self
     }
-    pub async fn send(self) -> ApiResult<Destination> {
+    pub async fn send(self) -> ApiResult<serde_json::Value> {
         self.builder.send().await
     }
 }
-
 /// Get Logging Destination
+///
+/// To get the details of a destination, send a GET request to `/v2/monitoring/sinks/destinations/${destination_uuid}`.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/monitoring/sinks/destinations/{destination_uuid}`
+///
+/// **Parameters**
+/// - `destination_uuid` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::monitoring };
+/// use digitalocean::{ ApiClient, apis::monitoring };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_destination(&api)
-///     .with_destination_uuid("value")
+/// let response = get_destination(&api)
+///     .with_destination_uuid("destination_uuid")
 ///     .send()
 ///     .await?;
 /// ```
@@ -1909,7 +2217,7 @@ pub fn get_destination(api: &ApiClient) -> GetDestinationRequest<'_> {
 
 #[derive(Debug)]
 pub struct UpdateDestinationRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, Error>,
 }
 
 impl<'a> UpdateDestinationRequest<'a> {
@@ -1935,18 +2243,28 @@ impl<'a> UpdateDestinationRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<Error> {
         self.builder.send().await
     }
 }
-
 /// Update Logging Destination
+///
+/// To update the details of a destination, send a PATCH request to `/v2/monitoring/sinks/destinations/${destination_uuid}`.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/v2/monitoring/sinks/destinations/{destination_uuid}`
+///
+/// **Parameters**
+/// - `destination_uuid` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::monitoring };
+/// use digitalocean::{ ApiClient, apis::monitoring };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = update_destination(&api)
-///     .with_destination_uuid("value")
+/// # let body: crate::models::destination_request::DestinationRequest = todo!();
+/// let response = update_destination(&api)
+///     .with_destination_uuid("destination_uuid")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -1956,7 +2274,7 @@ pub fn update_destination(api: &ApiClient) -> UpdateDestinationRequest<'_> {
 
 #[derive(Debug)]
 pub struct DeleteDestinationRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, Error>,
 }
 
 impl<'a> DeleteDestinationRequest<'a> {
@@ -1974,18 +2292,26 @@ impl<'a> DeleteDestinationRequest<'a> {
         self.builder = self.builder.path_param("destination_uuid", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<Error> {
         self.builder.send().await
     }
 }
-
 /// Delete Logging Destination
+///
+/// To delete a destination and all associated sinks, send a DELETE request to `/v2/monitoring/sinks/destinations/${destination_uuid}`.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/v2/monitoring/sinks/destinations/{destination_uuid}`
+///
+/// **Parameters**
+/// - `destination_uuid` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::monitoring };
+/// use digitalocean::{ ApiClient, apis::monitoring };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete_destination(&api)
-///     .with_destination_uuid("value")
+/// let response = delete_destination(&api)
+///     .with_destination_uuid("destination_uuid")
 ///     .send()
 ///     .await?;
 /// ```
@@ -2013,14 +2339,22 @@ impl<'a> GetSinkRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get Sink
+///
+/// To get the details of a sink (resources and destination), send a GET request to `/v2/monitoring/sinks/${sink_uuid}`.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/monitoring/sinks/{sink_uuid}`
+///
+/// **Parameters**
+/// - `sink_uuid` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::monitoring };
+/// use digitalocean::{ ApiClient, apis::monitoring };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_sink(&api)
-///     .with_sink_uuid("value")
+/// let response = get_sink(&api)
+///     .with_sink_uuid("sink_uuid")
 ///     .send()
 ///     .await?;
 /// ```
@@ -2030,7 +2364,7 @@ pub fn get_sink(api: &ApiClient) -> GetSinkRequest<'_> {
 
 #[derive(Debug)]
 pub struct DeleteSinkRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, Error>,
 }
 
 impl<'a> DeleteSinkRequest<'a> {
@@ -2045,18 +2379,26 @@ impl<'a> DeleteSinkRequest<'a> {
         self.builder = self.builder.path_param("sink_uuid", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<Error> {
         self.builder.send().await
     }
 }
-
 /// Delete Sink
+///
+/// To delete a sink, send a DELETE request to `/v2/monitoring/sinks/${sink_uuid}`.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/v2/monitoring/sinks/{sink_uuid}`
+///
+/// **Parameters**
+/// - `sink_uuid` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::monitoring };
+/// use digitalocean::{ ApiClient, apis::monitoring };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete_sink(&api)
-///     .with_sink_uuid("value")
+/// let response = delete_sink(&api)
+///     .with_sink_uuid("sink_uuid")
 ///     .send()
 ///     .await?;
 /// ```

@@ -39,14 +39,22 @@ impl<'a> IPsActionsListRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// List All Actions for a Reserved IP
+///
+/// To retrieve all actions that have been executed on a reserved IP, send a GET request to `/v2/reserved_ips/$RESERVED_IP/actions`.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/reserved_ips/{reserved_ip}/actions`
+///
+/// **Parameters**
+/// - `reserved_ip` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::reserved_ip_actions };
+/// use digitalocean::{ ApiClient, apis::reserved_ip_actions };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = i_ps_actions_list(&api)
-///     .with_reserved_ip("value")
+/// let response = i_ps_actions_list(&api)
+///     .with_reserved_ip("reserved_ip")
 ///     .send()
 ///     .await?;
 /// ```
@@ -79,14 +87,31 @@ impl<'a> IPsActionsPostRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Initiate a Reserved IP Action
+///
+/// To initiate an action on a reserved IP send a POST request to
+/// `/v2/reserved_ips/$RESERVED_IP/actions`. In the JSON body to the request,
+/// set the `type` attribute to on of the supported action types:
+///
+/// | Action     | Details
+/// |------------|--------
+/// | `assign`   | Assigns a reserved IP to a Droplet
+/// | `unassign` | Unassign a reserved IP from a Droplet
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/v2/reserved_ips/{reserved_ip}/actions`
+///
+/// **Parameters**
+/// - `reserved_ip` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::reserved_ip_actions };
+/// use digitalocean::{ ApiClient, apis::reserved_ip_actions };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = i_ps_actions_post(&api)
-///     .with_reserved_ip("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = i_ps_actions_post(&api)
+///     .with_reserved_ip("reserved_ip")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -123,15 +148,24 @@ impl<'a> IPsActionsGetRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Retrieve an Existing Reserved IP Action
+///
+/// To retrieve the status of a reserved IP action, send a GET request to `/v2/reserved_ips/$RESERVED_IP/actions/$ACTION_ID`.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/reserved_ips/{reserved_ip}/actions/{action_id}`
+///
+/// **Parameters**
+/// - `reserved_ip` (path, required)
+/// - `action_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::reserved_ip_actions };
+/// use digitalocean::{ ApiClient, apis::reserved_ip_actions };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = i_ps_actions_get(&api)
-///     .with_reserved_ip("value")
-///     .with_action_id("value")
+/// let response = i_ps_actions_get(&api)
+///     .with_reserved_ip("reserved_ip")
+///     .with_action_id("action_id")
 ///     .send()
 ///     .await?;
 /// ```

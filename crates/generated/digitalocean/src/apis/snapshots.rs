@@ -15,6 +15,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::error::Error;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
@@ -33,13 +34,37 @@ impl<'a> ListRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// List All Snapshots
+///
+/// To list all of the snapshots available on your account, send a GET request to
+/// `/v2/snapshots`.
+///
+/// The response will be a JSON object with a key called `snapshots`. This will be
+/// set to an array of `snapshot` objects, each of which will contain the standard
+/// snapshot attributes.
+///
+/// ### Filtering Results by Resource Type
+///
+/// It's possible to request filtered results by including certain query parameters.
+///
+/// #### List Droplet Snapshots
+///
+/// To retrieve only snapshots based on Droplets, include the `resource_type`
+/// query parameter set to `droplet`. For example, `/v2/snapshots?resource_type=droplet`.
+///
+/// #### List Volume Snapshots
+///
+/// To retrieve only snapshots based on volumes, include the `resource_type`
+/// query parameter set to `volume`. For example, `/v2/snapshots?resource_type=volume`.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/snapshots`
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::snapshots };
+/// use digitalocean::{ ApiClient, apis::snapshots };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list(&api)
+/// let response = list(&api)
 ///     .send()
 ///     .await?;
 /// ```
@@ -67,14 +92,26 @@ impl<'a> GetRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Retrieve an Existing Snapshot
+///
+/// To retrieve information about a snapshot, send a GET request to
+/// `/v2/snapshots/$SNAPSHOT_ID`.
+///
+/// The response will be a JSON object with a key called `snapshot`. The value of
+/// this will be an snapshot object containing the standard snapshot attributes.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/v2/snapshots/{snapshot_id}`
+///
+/// **Parameters**
+/// - `snapshot_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::snapshots };
+/// use digitalocean::{ ApiClient, apis::snapshots };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get(&api)
-///     .with_snapshot_id("value")
+/// let response = get(&api)
+///     .with_snapshot_id("snapshot_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -84,7 +121,7 @@ pub fn get(api: &ApiClient) -> GetRequest<'_> {
 
 #[derive(Debug)]
 pub struct DeleteRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, Error>,
 }
 
 impl<'a> DeleteRequest<'a> {
@@ -98,18 +135,31 @@ impl<'a> DeleteRequest<'a> {
         self.builder = self.builder.path_param("snapshot_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<Error> {
         self.builder.send().await
     }
 }
-
 /// Delete a Snapshot
+///
+/// Both Droplet and volume snapshots are managed through the `/v2/snapshots/`
+/// endpoint. To delete a snapshot, send a DELETE request to
+/// `/v2/snapshots/$SNAPSHOT_ID`.
+///
+/// A status of 204 will be given. This indicates that the request was processed
+/// successfully, but that no response body is needed.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/v2/snapshots/{snapshot_id}`
+///
+/// **Parameters**
+/// - `snapshot_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use digital_ocean_api::{ ApiClient, apis::snapshots };
+/// use digitalocean::{ ApiClient, apis::snapshots };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete(&api)
-///     .with_snapshot_id("value")
+/// let response = delete(&api)
+///     .with_snapshot_id("snapshot_id")
 ///     .send()
 ///     .await?;
 /// ```

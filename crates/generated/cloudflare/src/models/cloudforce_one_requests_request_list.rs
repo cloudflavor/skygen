@@ -25,8 +25,12 @@ pub struct CloudforceOneRequestsRequestList {
     pub created_before: Option<serde_json::Value>,
     pub page: i64,
     pub per_page: i64,
-    pub request_type: Option<serde_json::Value>,
+    pub request_type: Option<
+        crate::models::cloudforce_one_requests_request_type::CloudforceOneRequestsRequestType,
+    >,
     pub sort_by: Option<String>,
     pub sort_order: Option<String>,
-    pub status: Option<serde_json::Value>,
+    pub status: Option<
+        crate::models::cloudforce_one_requests_request_status::CloudforceOneRequestsRequestStatus,
+    >,
 }

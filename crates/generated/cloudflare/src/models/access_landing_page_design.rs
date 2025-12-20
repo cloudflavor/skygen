@@ -19,9 +19,9 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct AccessLandingPageDesign {
-    pub button_color: Option<serde_json::Value>,
-    pub button_text_color: Option<serde_json::Value>,
-    pub image_url: Option<serde_json::Value>,
-    pub message: Option<serde_json::Value>,
-    pub title: Option<serde_json::Value>,
+    pub button_color: Option<crate::models::access_button_color::AccessButtonColor>,
+    pub button_text_color: Option<crate::models::access_button_text_color::AccessButtonTextColor>,
+    pub image_url: Option<crate::models::access_image_url::AccessImageUrl>,
+    pub message: Option<crate::models::access_message::AccessMessage>,
+    pub title: Option<crate::models::access_title::AccessTitle>,
 }

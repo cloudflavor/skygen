@@ -19,6 +19,6 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct TlsCertificatesAndHostnamesHostnameAssociation {
-    pub hostnames: Option<serde_json::Value>,
+    pub hostnames: Option<crate::models::tls_certificates_and_hostnames_schemas_hostnames::TlsCertificatesAndHostnamesSchemasHostnames>,
     pub mtls_certificate_id: Option<String>,
 }

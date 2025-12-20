@@ -21,6 +21,6 @@ use serde::{Deserialize, Serialize};
 pub struct HyperdriveHyperdriveDatabase {
     pub database: Option<String>,
     pub password: Option<String>,
-    pub scheme: Option<serde_json::Value>,
+    pub scheme: Option<crate::models::hyperdrive_hyperdrive_scheme::HyperdriveHyperdriveScheme>,
     pub user: Option<String>,
 }

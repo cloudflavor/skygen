@@ -15,12 +15,19 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::magic_create_route_response::MagicCreateRouteResponse;
+use crate::models::magic_multiple_route_delete_response::MagicMultipleRouteDeleteResponse;
+use crate::models::magic_multiple_route_modified_response::MagicMultipleRouteModifiedResponse;
+use crate::models::magic_route_deleted_response::MagicRouteDeletedResponse;
+use crate::models::magic_route_modified_response::MagicRouteModifiedResponse;
+use crate::models::magic_route_single_response::MagicRouteSingleResponse;
+use crate::models::magic_routes_collection_response::MagicRoutesCollectionResponse;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct ListRoutesRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, MagicRoutesCollectionResponse>,
 }
 
 impl<'a> ListRoutesRequest<'a> {
@@ -35,18 +42,26 @@ impl<'a> ListRoutesRequest<'a> {
         self.builder = self.builder.path_param("account_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<MagicRoutesCollectionResponse> {
         self.builder.send().await
     }
 }
-
 /// List Routes
+///
+/// List all Magic static routes.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/magic/routes`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::magic_static_routes };
+/// use cloudflare::{ ApiClient, apis::magic_static_routes };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_routes(&api)
-///     .with_account_id("value")
+/// let response = list_routes(&api)
+///     .with_account_id("account_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -56,7 +71,7 @@ pub fn list_routes(api: &ApiClient) -> ListRoutesRequest<'_> {
 
 #[derive(Debug)]
 pub struct CreateRoutesRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, MagicCreateRouteResponse>,
 }
 
 impl<'a> CreateRoutesRequest<'a> {
@@ -79,18 +94,28 @@ impl<'a> CreateRoutesRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<MagicCreateRouteResponse> {
         self.builder.send().await
     }
 }
-
 /// Create a Route
+///
+/// Creates a new Magic static route. Use `?validate_only=true` as an optional query parameter to run validation only without persisting changes.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/magic/routes`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::magic_static_routes };
+/// use cloudflare::{ ApiClient, apis::magic_static_routes };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = create_routes(&api)
-///     .with_account_id("value")
+/// # let body: crate::models::magic_create_route_request::MagicCreateRouteRequest = todo!();
+/// let response = create_routes(&api)
+///     .with_account_id("account_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -100,7 +125,7 @@ pub fn create_routes(api: &ApiClient) -> CreateRoutesRequest<'_> {
 
 #[derive(Debug)]
 pub struct UpdateManyRoutesRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, MagicMultipleRouteModifiedResponse>,
 }
 
 impl<'a> UpdateManyRoutesRequest<'a> {
@@ -123,18 +148,28 @@ impl<'a> UpdateManyRoutesRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<MagicMultipleRouteModifiedResponse> {
         self.builder.send().await
     }
 }
-
 /// Update Many Routes
+///
+/// Update multiple Magic static routes. Use `?validate_only=true` as an optional query parameter to run validation only without persisting changes. Only fields for a route that need to be changed need be provided.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/accounts/{account_id}/magic/routes`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::magic_static_routes };
+/// use cloudflare::{ ApiClient, apis::magic_static_routes };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = update_many_routes(&api)
-///     .with_account_id("value")
+/// # let body: crate::models::magic_route_update_many_request::MagicRouteUpdateManyRequest = todo!();
+/// let response = update_many_routes(&api)
+///     .with_account_id("account_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -144,7 +179,7 @@ pub fn update_many_routes(api: &ApiClient) -> UpdateManyRoutesRequest<'_> {
 
 #[derive(Debug)]
 pub struct DeleteManyRoutesRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, MagicMultipleRouteDeleteResponse>,
 }
 
 impl<'a> DeleteManyRoutesRequest<'a> {
@@ -167,18 +202,28 @@ impl<'a> DeleteManyRoutesRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<MagicMultipleRouteDeleteResponse> {
         self.builder.send().await
     }
 }
-
 /// Delete Many Routes
+///
+/// Delete multiple Magic static routes.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/accounts/{account_id}/magic/routes`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::magic_static_routes };
+/// use cloudflare::{ ApiClient, apis::magic_static_routes };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete_many_routes(&api)
-///     .with_account_id("value")
+/// # let body: crate::models::magic_route_delete_many_request::MagicRouteDeleteManyRequest = todo!();
+/// let response = delete_many_routes(&api)
+///     .with_account_id("account_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -188,7 +233,7 @@ pub fn delete_many_routes(api: &ApiClient) -> DeleteManyRoutesRequest<'_> {
 
 #[derive(Debug)]
 pub struct RouteDetailsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, MagicRouteSingleResponse>,
 }
 
 impl<'a> RouteDetailsRequest<'a> {
@@ -211,19 +256,28 @@ impl<'a> RouteDetailsRequest<'a> {
         self.builder = self.builder.path_param("route_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<MagicRouteSingleResponse> {
         self.builder.send().await
     }
 }
-
 /// Route Details
+///
+/// Get a specific Magic static route.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/magic/routes/{route_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `route_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::magic_static_routes };
+/// use cloudflare::{ ApiClient, apis::magic_static_routes };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = route_details(&api)
-///     .with_account_id("value")
-///     .with_route_id("value")
+/// let response = route_details(&api)
+///     .with_account_id("account_id")
+///     .with_route_id("route_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -233,7 +287,7 @@ pub fn route_details(api: &ApiClient) -> RouteDetailsRequest<'_> {
 
 #[derive(Debug)]
 pub struct UpdateRouteRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, MagicRouteModifiedResponse>,
 }
 
 impl<'a> UpdateRouteRequest<'a> {
@@ -257,23 +311,37 @@ impl<'a> UpdateRouteRequest<'a> {
         self.builder = self.builder.path_param("route_id", value);
         self
     }
-    pub fn with_body(mut self, body: serde_json::Value) -> Self {
+    pub fn with_body(
+        mut self,
+        body: crate::models::magic_route_update_request::MagicRouteUpdateRequest,
+    ) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<MagicRouteModifiedResponse> {
         self.builder.send().await
     }
 }
-
 /// Update Route
+///
+/// Update a specific Magic static route. Use `?validate_only=true` as an optional query parameter to run validation only without persisting changes.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/accounts/{account_id}/magic/routes/{route_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `route_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::magic_static_routes };
+/// use cloudflare::{ ApiClient, apis::magic_static_routes };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = update_route(&api)
-///     .with_account_id("value")
-///     .with_route_id("value")
+/// # let body: crate::models::magic_route_update_request::MagicRouteUpdateRequest = todo!();
+/// let response = update_route(&api)
+///     .with_account_id("account_id")
+///     .with_route_id("route_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -283,7 +351,7 @@ pub fn update_route(api: &ApiClient) -> UpdateRouteRequest<'_> {
 
 #[derive(Debug)]
 pub struct DeleteRouteRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, MagicRouteDeletedResponse>,
 }
 
 impl<'a> DeleteRouteRequest<'a> {
@@ -306,19 +374,28 @@ impl<'a> DeleteRouteRequest<'a> {
         self.builder = self.builder.path_param("route_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<MagicRouteDeletedResponse> {
         self.builder.send().await
     }
 }
-
 /// Delete Route
+///
+/// Disable and remove a specific Magic static route.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/accounts/{account_id}/magic/routes/{route_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `route_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::magic_static_routes };
+/// use cloudflare::{ ApiClient, apis::magic_static_routes };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete_route(&api)
-///     .with_account_id("value")
-///     .with_route_id("value")
+/// let response = delete_route(&api)
+///     .with_account_id("account_id")
+///     .with_route_id("route_id")
 ///     .send()
 ///     .await?;
 /// ```

@@ -19,12 +19,16 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct MagicIpsecTunnelAddSingleRequest {
-    pub cloudflare_endpoint: serde_json::Value,
-    pub customer_endpoint: Option<serde_json::Value>,
-    pub description: Option<serde_json::Value>,
-    pub health_check: Option<serde_json::Value>,
-    pub interface_address: serde_json::Value,
-    pub name: serde_json::Value,
-    pub psk: Option<serde_json::Value>,
-    pub replay_protection: Option<serde_json::Value>,
+    pub cloudflare_endpoint:
+        crate::models::magic_cloudflare_ipsec_endpoint::MagicCloudflareIpsecEndpoint,
+    pub customer_endpoint:
+        Option<crate::models::magic_customer_ipsec_endpoint::MagicCustomerIpsecEndpoint>,
+    pub description: Option<
+        crate::models::magic_components_schemas_description::MagicComponentsSchemasDescription,
+    >,
+    pub health_check: Option<crate::models::magic_tunnel_health_check::MagicTunnelHealthCheck>,
+    pub interface_address: crate::models::magic_interface_address::MagicInterfaceAddress,
+    pub name: crate::models::magic_ipsec_tunnel_name::MagicIpsecTunnelName,
+    pub psk: Option<crate::models::magic_psk::MagicPsk>,
+    pub replay_protection: Option<crate::models::magic_replay_protection::MagicReplayProtection>,
 }

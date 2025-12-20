@@ -15,12 +15,17 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::secrets_store_quota_response::SecretsStoreQuotaResponse;
+use crate::models::secrets_store_secret_response::SecretsStoreSecretResponse;
+use crate::models::secrets_store_secrets_response_collection::SecretsStoreSecretsResponseCollection;
+use crate::models::secrets_store_store_response::SecretsStoreStoreResponse;
+use crate::models::secrets_store_stores_response_collection::SecretsStoreStoresResponseCollection;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct QuotaRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, SecretsStoreQuotaResponse>,
 }
 
 impl<'a> QuotaRequest<'a> {
@@ -38,18 +43,26 @@ impl<'a> QuotaRequest<'a> {
         self.builder = self.builder.path_param("account_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<SecretsStoreQuotaResponse> {
         self.builder.send().await
     }
 }
-
 /// View secret usage
+///
+/// Lists the number of secrets used in the account.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/secrets_store/quota`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::secrets_store };
+/// use cloudflare::{ ApiClient, apis::secrets_store };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = quota(&api)
-///     .with_account_id("value")
+/// let response = quota(&api)
+///     .with_account_id("account_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -59,7 +72,7 @@ pub fn quota(api: &ApiClient) -> QuotaRequest<'_> {
 
 #[derive(Debug)]
 pub struct ListRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, SecretsStoreStoresResponseCollection>,
 }
 
 impl<'a> ListRequest<'a> {
@@ -77,18 +90,26 @@ impl<'a> ListRequest<'a> {
         self.builder = self.builder.path_param("account_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<SecretsStoreStoresResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// List account stores
+///
+/// Lists all the stores in an account
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/secrets_store/stores`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::secrets_store };
+/// use cloudflare::{ ApiClient, apis::secrets_store };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list(&api)
-///     .with_account_id("value")
+/// let response = list(&api)
+///     .with_account_id("account_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -98,7 +119,7 @@ pub fn list(api: &ApiClient) -> ListRequest<'_> {
 
 #[derive(Debug)]
 pub struct CreateRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, SecretsStoreStoresResponseCollection>,
 }
 
 impl<'a> CreateRequest<'a> {
@@ -117,22 +138,35 @@ impl<'a> CreateRequest<'a> {
         self.builder = self.builder.path_param("account_id", value);
         self
     }
-    pub fn with_body(mut self, body: Vec<serde_json::Value>) -> Self {
+    pub fn with_body(
+        mut self,
+        body: Vec<crate::models::secrets_store_create_store_object::SecretsStoreCreateStoreObject>,
+    ) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<SecretsStoreStoresResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// Create a store
+///
+/// Creates a store in the account
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/secrets_store/stores`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::secrets_store };
+/// use cloudflare::{ ApiClient, apis::secrets_store };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = create(&api)
-///     .with_account_id("value")
+/// # let body: Vec<crate::models::secrets_store_create_store_object::SecretsStoreCreateStoreObject> = todo!();
+/// let response = create(&api)
+///     .with_account_id("account_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -142,7 +176,7 @@ pub fn create(api: &ApiClient) -> CreateRequest<'_> {
 
 #[derive(Debug)]
 pub struct DeleteRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, SecretsStoreStoreResponse>,
 }
 
 impl<'a> DeleteRequest<'a> {
@@ -165,19 +199,28 @@ impl<'a> DeleteRequest<'a> {
         self.builder = self.builder.path_param("store_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<SecretsStoreStoreResponse> {
         self.builder.send().await
     }
 }
-
 /// Delete a store
+///
+/// Deletes a single store
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/accounts/{account_id}/secrets_store/stores/{store_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `store_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::secrets_store };
+/// use cloudflare::{ ApiClient, apis::secrets_store };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete(&api)
-///     .with_account_id("value")
-///     .with_store_id("value")
+/// let response = delete(&api)
+///     .with_account_id("account_id")
+///     .with_store_id("store_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -187,7 +230,7 @@ pub fn delete(api: &ApiClient) -> DeleteRequest<'_> {
 
 #[derive(Debug)]
 pub struct ListGetRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, SecretsStoreSecretsResponseCollection>,
 }
 
 impl<'a> ListGetRequest<'a> {
@@ -210,19 +253,28 @@ impl<'a> ListGetRequest<'a> {
         self.builder = self.builder.path_param("store_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<SecretsStoreSecretsResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// List store secrets
+///
+/// Lists all store secrets
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/secrets_store/stores/{store_id}/secrets`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `store_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::secrets_store };
+/// use cloudflare::{ ApiClient, apis::secrets_store };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_get(&api)
-///     .with_account_id("value")
-///     .with_store_id("value")
+/// let response = list_get(&api)
+///     .with_account_id("account_id")
+///     .with_store_id("store_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -232,7 +284,7 @@ pub fn list_get(api: &ApiClient) -> ListGetRequest<'_> {
 
 #[derive(Debug)]
 pub struct SecretCreateRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, SecretsStoreSecretsResponseCollection>,
 }
 
 impl<'a> SecretCreateRequest<'a> {
@@ -256,23 +308,39 @@ impl<'a> SecretCreateRequest<'a> {
         self.builder = self.builder.path_param("store_id", value);
         self
     }
-    pub fn with_body(mut self, body: Vec<serde_json::Value>) -> Self {
+    pub fn with_body(
+        mut self,
+        body: Vec<
+            crate::models::secrets_store_create_secret_object::SecretsStoreCreateSecretObject,
+        >,
+    ) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<SecretsStoreSecretsResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// Create a secret
+///
+/// Creates a secret in the account
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/secrets_store/stores/{store_id}/secrets`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `store_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::secrets_store };
+/// use cloudflare::{ ApiClient, apis::secrets_store };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = secret_create(&api)
-///     .with_account_id("value")
-///     .with_store_id("value")
+/// # let body: Vec<crate::models::secrets_store_create_secret_object::SecretsStoreCreateSecretObject> = todo!();
+/// let response = secret_create(&api)
+///     .with_account_id("account_id")
+///     .with_store_id("store_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -282,7 +350,7 @@ pub fn secret_create(api: &ApiClient) -> SecretCreateRequest<'_> {
 
 #[derive(Debug)]
 pub struct DeleteBulkRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, SecretsStoreSecretsResponseCollection>,
 }
 
 impl<'a> DeleteBulkRequest<'a> {
@@ -306,23 +374,39 @@ impl<'a> DeleteBulkRequest<'a> {
         self.builder = self.builder.path_param("store_id", value);
         self
     }
-    pub fn with_body(mut self, body: Vec<serde_json::Value>) -> Self {
+    pub fn with_body(
+        mut self,
+        body: Vec<
+            crate::models::secrets_store_delete_secret_object::SecretsStoreDeleteSecretObject,
+        >,
+    ) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<SecretsStoreSecretsResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// Delete secrets
+///
+/// Deletes one or more secrets
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/accounts/{account_id}/secrets_store/stores/{store_id}/secrets`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `store_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::secrets_store };
+/// use cloudflare::{ ApiClient, apis::secrets_store };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete_bulk(&api)
-///     .with_account_id("value")
-///     .with_store_id("value")
+/// # let body: Vec<crate::models::secrets_store_delete_secret_object::SecretsStoreDeleteSecretObject> = todo!();
+/// let response = delete_bulk(&api)
+///     .with_account_id("account_id")
+///     .with_store_id("store_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -332,7 +416,7 @@ pub fn delete_bulk(api: &ApiClient) -> DeleteBulkRequest<'_> {
 
 #[derive(Debug)]
 pub struct GetRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, SecretsStoreSecretResponse>,
 }
 
 impl<'a> GetRequest<'a> {
@@ -360,20 +444,30 @@ impl<'a> GetRequest<'a> {
         self.builder = self.builder.path_param("secret_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<SecretsStoreSecretResponse> {
         self.builder.send().await
     }
 }
-
 /// Get a secret by ID
+///
+/// Returns details of a single secret
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/secrets_store/stores/{store_id}/secrets/{secret_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `store_id` (path, required)
+/// - `secret_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::secrets_store };
+/// use cloudflare::{ ApiClient, apis::secrets_store };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get(&api)
-///     .with_account_id("value")
-///     .with_store_id("value")
-///     .with_secret_id("value")
+/// let response = get(&api)
+///     .with_account_id("account_id")
+///     .with_store_id("store_id")
+///     .with_secret_id("secret_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -383,7 +477,7 @@ pub fn get(api: &ApiClient) -> GetRequest<'_> {
 
 #[derive(Debug)]
 pub struct SecretDeleteRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, SecretsStoreSecretResponse>,
 }
 
 impl<'a> SecretDeleteRequest<'a> {
@@ -411,20 +505,30 @@ impl<'a> SecretDeleteRequest<'a> {
         self.builder = self.builder.path_param("secret_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<SecretsStoreSecretResponse> {
         self.builder.send().await
     }
 }
-
 /// Delete a secret
+///
+/// Deletes a single secret
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/accounts/{account_id}/secrets_store/stores/{store_id}/secrets/{secret_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `store_id` (path, required)
+/// - `secret_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::secrets_store };
+/// use cloudflare::{ ApiClient, apis::secrets_store };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = secret_delete(&api)
-///     .with_account_id("value")
-///     .with_store_id("value")
-///     .with_secret_id("value")
+/// let response = secret_delete(&api)
+///     .with_account_id("account_id")
+///     .with_store_id("store_id")
+///     .with_secret_id("secret_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -434,7 +538,7 @@ pub fn secret_delete(api: &ApiClient) -> SecretDeleteRequest<'_> {
 
 #[derive(Debug)]
 pub struct PatchRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, SecretsStoreSecretResponse>,
 }
 
 impl<'a> PatchRequest<'a> {
@@ -463,24 +567,39 @@ impl<'a> PatchRequest<'a> {
         self.builder = self.builder.path_param("secret_id", value);
         self
     }
-    pub fn with_body(mut self, body: serde_json::Value) -> Self {
+    pub fn with_body(
+        mut self,
+        body: crate::models::secrets_store_patch_secret_object::SecretsStorePatchSecretObject,
+    ) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<SecretsStoreSecretResponse> {
         self.builder.send().await
     }
 }
-
 /// Patch a secret
+///
+/// Updates a single secret
+///
+/// **HTTP Method:** `PATCH`
+/// **Path:** `/accounts/{account_id}/secrets_store/stores/{store_id}/secrets/{secret_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `store_id` (path, required)
+/// - `secret_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::secrets_store };
+/// use cloudflare::{ ApiClient, apis::secrets_store };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = patch(&api)
-///     .with_account_id("value")
-///     .with_store_id("value")
-///     .with_secret_id("value")
+/// # let body: crate::models::secrets_store_patch_secret_object::SecretsStorePatchSecretObject = todo!();
+/// let response = patch(&api)
+///     .with_account_id("account_id")
+///     .with_store_id("store_id")
+///     .with_secret_id("secret_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -490,7 +609,7 @@ pub fn patch(api: &ApiClient) -> PatchRequest<'_> {
 
 #[derive(Debug)]
 pub struct DuplicateRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, SecretsStoreSecretResponse>,
 }
 
 impl<'a> DuplicateRequest<'a> {
@@ -519,24 +638,39 @@ impl<'a> DuplicateRequest<'a> {
         self.builder = self.builder.path_param("secret_id", value);
         self
     }
-    pub fn with_body(mut self, body: serde_json::Value) -> Self {
+    pub fn with_body(
+        mut self,
+        body: crate::models::secrets_store_duplicate_secret_object::SecretsStoreDuplicateSecretObject,
+    ) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<SecretsStoreSecretResponse> {
         self.builder.send().await
     }
 }
-
 /// Duplicate Secret
+///
+/// Duplicates the secret, keeping the value
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/secrets_store/stores/{store_id}/secrets/{secret_id}/duplicate`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `store_id` (path, required)
+/// - `secret_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::secrets_store };
+/// use cloudflare::{ ApiClient, apis::secrets_store };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = duplicate(&api)
-///     .with_account_id("value")
-///     .with_store_id("value")
-///     .with_secret_id("value")
+/// # let body: crate::models::secrets_store_duplicate_secret_object::SecretsStoreDuplicateSecretObject = todo!();
+/// let response = duplicate(&api)
+///     .with_account_id("account_id")
+///     .with_store_id("store_id")
+///     .with_secret_id("secret_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```

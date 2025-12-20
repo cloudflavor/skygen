@@ -42,14 +42,22 @@ impl<'a> ListNamespacesRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// List Namespaces
+///
+/// Returns the Durable Object namespaces owned by an account.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/workers/durable_objects/namespaces`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::durable_objects_namespace };
+/// use cloudflare::{ ApiClient, apis::durable_objects_namespace };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_namespaces(&api)
-///     .with_account_id("value")
+/// let response = list_namespaces(&api)
+///     .with_account_id("account_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -94,15 +102,28 @@ impl<'a> ListObjectsRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// List Objects
+///
+/// Returns the Durable Objects in a given namespace.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/workers/durable_objects/namespaces/{id}/objects`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `id` (path, required)
+/// - `limit` (query,optional)
+/// - `cursor` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::durable_objects_namespace };
+/// use cloudflare::{ ApiClient, apis::durable_objects_namespace };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_objects(&api)
-///     .with_account_id("value")
-///     .with_id("value")
+/// let response = list_objects(&api)
+///     .with_account_id("account_id")
+///     .with_id("id")
+///     .with_limit("limit")
+///     .with_cursor("cursor")
 ///     .send()
 ///     .await?;
 /// ```

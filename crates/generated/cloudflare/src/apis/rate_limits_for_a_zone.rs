@@ -15,12 +15,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::firewall_ratelimit_response_collection::FirewallRatelimitResponseCollection;
+use crate::models::firewall_ratelimit_response_single::FirewallRatelimitResponseSingle;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct ListRateLimitsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, FirewallRatelimitResponseCollection>,
 }
 
 impl<'a> ListRateLimitsRequest<'a> {
@@ -42,18 +44,30 @@ impl<'a> ListRateLimitsRequest<'a> {
         self.builder = self.builder.header_param("per_page", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<FirewallRatelimitResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// List rate limits
+///
+/// Fetches the rate limits for a zone.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/rate_limits`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `page` (query,optional)
+/// - `per_page` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::rate_limits_for_a_zone };
+/// use cloudflare::{ ApiClient, apis::rate_limits_for_a_zone };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_rate_limits(&api)
-///     .with_zone_id("value")
+/// let response = list_rate_limits(&api)
+///     .with_zone_id("zone_id")
+///     .with_page("page")
+///     .with_per_page("per_page")
 ///     .send()
 ///     .await?;
 /// ```
@@ -63,7 +77,7 @@ pub fn list_rate_limits(api: &ApiClient) -> ListRateLimitsRequest<'_> {
 
 #[derive(Debug)]
 pub struct CreateRateLimitRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, FirewallRatelimitResponseSingle>,
 }
 
 impl<'a> CreateRateLimitRequest<'a> {
@@ -85,18 +99,28 @@ impl<'a> CreateRateLimitRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<FirewallRatelimitResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Create a rate limit
+///
+/// Creates a new rate limit for a zone. Refer to the object definition for a list of required attributes.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/zones/{zone_id}/rate_limits`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::rate_limits_for_a_zone };
+/// use cloudflare::{ ApiClient, apis::rate_limits_for_a_zone };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = create_rate_limit(&api)
-///     .with_zone_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = create_rate_limit(&api)
+///     .with_zone_id("zone_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -106,7 +130,7 @@ pub fn create_rate_limit(api: &ApiClient) -> CreateRateLimitRequest<'_> {
 
 #[derive(Debug)]
 pub struct GetRateLimitRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, FirewallRatelimitResponseSingle>,
 }
 
 impl<'a> GetRateLimitRequest<'a> {
@@ -129,19 +153,28 @@ impl<'a> GetRateLimitRequest<'a> {
         self.builder = self.builder.path_param("rate_limit_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<FirewallRatelimitResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Get a rate limit
+///
+/// Fetches the details of a rate limit.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/zones/{zone_id}/rate_limits/{rate_limit_id}`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `rate_limit_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::rate_limits_for_a_zone };
+/// use cloudflare::{ ApiClient, apis::rate_limits_for_a_zone };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_rate_limit(&api)
-///     .with_zone_id("value")
-///     .with_rate_limit_id("value")
+/// let response = get_rate_limit(&api)
+///     .with_zone_id("zone_id")
+///     .with_rate_limit_id("rate_limit_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -151,7 +184,7 @@ pub fn get_rate_limit(api: &ApiClient) -> GetRateLimitRequest<'_> {
 
 #[derive(Debug)]
 pub struct UpdateRateLimitRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, FirewallRatelimitResponseSingle>,
 }
 
 impl<'a> UpdateRateLimitRequest<'a> {
@@ -182,19 +215,30 @@ impl<'a> UpdateRateLimitRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<FirewallRatelimitResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Update a rate limit
+///
+/// Updates an existing rate limit.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/zones/{zone_id}/rate_limits/{rate_limit_id}`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `rate_limit_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::rate_limits_for_a_zone };
+/// use cloudflare::{ ApiClient, apis::rate_limits_for_a_zone };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = update_rate_limit(&api)
-///     .with_zone_id("value")
-///     .with_rate_limit_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = update_rate_limit(&api)
+///     .with_zone_id("zone_id")
+///     .with_rate_limit_id("rate_limit_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -231,15 +275,24 @@ impl<'a> DeleteRateLimitRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Delete a rate limit
+///
+/// Deletes an existing rate limit.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/zones/{zone_id}/rate_limits/{rate_limit_id}`
+///
+/// **Parameters**
+/// - `zone_id` (path, required)
+/// - `rate_limit_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::rate_limits_for_a_zone };
+/// use cloudflare::{ ApiClient, apis::rate_limits_for_a_zone };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete_rate_limit(&api)
-///     .with_zone_id("value")
-///     .with_rate_limit_id("value")
+/// let response = delete_rate_limit(&api)
+///     .with_zone_id("zone_id")
+///     .with_rate_limit_id("rate_limit_id")
 ///     .send()
 ///     .await?;
 /// ```

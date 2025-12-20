@@ -25,7 +25,7 @@ pub struct DlpCustomProfile {
     pub context_awareness: crate::models::dlp_context_awareness::DlpContextAwareness,
     pub created_at: String,
     pub description: Option<String>,
-    pub entries: Vec<serde_json::Value>,
+    pub entries: Vec<crate::models::dlp_entry::DlpEntry>,
     pub id: String,
     pub name: String,
     pub ocr_enabled: bool,

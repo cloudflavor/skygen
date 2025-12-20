@@ -19,15 +19,15 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct IamUserInvite {
-    pub expires_on: Option<serde_json::Value>,
-    pub id: Option<serde_json::Value>,
-    pub invited_by: Option<serde_json::Value>,
-    pub invited_member_email: Option<serde_json::Value>,
+    pub expires_on: Option<crate::models::iam_schemas_expires_on::IamSchemasExpiresOn>,
+    pub id: Option<crate::models::iam_invite_components_schemas_identifier::IamInviteComponentsSchemasIdentifier>,
+    pub invited_by: Option<crate::models::iam_invited_by::IamInvitedBy>,
+    pub invited_member_email: Option<crate::models::iam_invited_member_email::IamInvitedMemberEmail>,
     pub invited_member_id: String,
-    pub invited_on: Option<serde_json::Value>,
+    pub invited_on: Option<crate::models::iam_invited_on::IamInvitedOn>,
     pub organization_id: String,
     pub organization_is_enforcing_twofactor: Option<bool>,
     pub organization_name: Option<String>,
-    pub roles: Option<serde_json::Value>,
+    pub roles: Option<crate::models::iam_role_names::IamRoleNames>,
     pub status: Option<serde_json::Value>,
 }

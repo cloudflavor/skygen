@@ -47,15 +47,24 @@ impl<'a> RegistrationOverrideCodesRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get override codes
+///
+/// Fetches one-time use admin override codes for a registration. This relies on the **Admin Override** setting being enabled in your device configuration.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/devices/registrations/{registration_id}/override_codes`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `registration_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::warp_teams_device_api_other };
+/// use cloudflare::{ ApiClient, apis::warp_teams_device_api_other };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = registration_override_codes(&api)
-///     .with_account_id("value")
-///     .with_registration_id("value")
+/// let response = registration_override_codes(&api)
+///     .with_account_id("account_id")
+///     .with_registration_id("registration_id")
 ///     .send()
 ///     .await?;
 /// ```

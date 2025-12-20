@@ -102,14 +102,52 @@ impl<'a> InvestigateRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Search email messages
+///
+/// Returns information for each email that matches the search parameter(s).
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/email-security/investigate`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `start` (query,optional)
+/// - `end` (query,optional)
+/// - `query` (query,optional)
+/// - `detections_only` (query,optional)
+/// - `action_log` (query,optional)
+/// - `final_disposition` (query,optional)
+/// - `metric` (query,optional)
+/// - `message_action` (query,optional)
+/// - `recipient` (query,optional)
+/// - `sender` (query,optional)
+/// - `alert_id` (query,optional)
+/// - `domain` (query,optional)
+/// - `message_id` (query,optional)
+/// - `page` (query,optional)
+/// - `per_page` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::email_security };
+/// use cloudflare::{ ApiClient, apis::email_security };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = investigate(&api)
-///     .with_account_id("value")
+/// let response = investigate(&api)
+///     .with_account_id("account_id")
+///     .with_start("start")
+///     .with_end("end")
+///     .with_query("query")
+///     .with_detections_only("detections_only")
+///     .with_action_log("action_log")
+///     .with_final_disposition("final_disposition")
+///     .with_metric("metric")
+///     .with_message_action("message_action")
+///     .with_recipient("recipient")
+///     .with_sender("sender")
+///     .with_alert_id("alert_id")
+///     .with_domain("domain")
+///     .with_message_id("message_id")
+///     .with_page("page")
+///     .with_per_page("per_page")
 ///     .send()
 ///     .await?;
 /// ```
@@ -149,14 +187,22 @@ impl<'a> PostBulkMessageMoveRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Move multiple messages
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/email-security/investigate/move`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::email_security };
+/// use cloudflare::{ ApiClient, apis::email_security };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = post_bulk_message_move(&api)
-///     .with_account_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = post_bulk_message_move(&api)
+///     .with_account_id("account_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -196,14 +242,22 @@ impl<'a> PostPreviewRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Preview for non-detection messages
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/email-security/investigate/preview`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::email_security };
+/// use cloudflare::{ ApiClient, apis::email_security };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = post_preview(&api)
-///     .with_account_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = post_preview(&api)
+///     .with_account_id("account_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -232,7 +286,10 @@ impl<'a> PostReleaseRequest<'a> {
         self.builder = self.builder.path_param("account_id", value);
         self
     }
-    pub fn with_body(mut self, body: Vec<serde_json::Value>) -> Self {
+    pub fn with_body(
+        mut self,
+        body: Vec<crate::models::email_security_postfix_id::EmailSecurityPostfixId>,
+    ) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
@@ -240,14 +297,22 @@ impl<'a> PostReleaseRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Release messages from quarantine
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/email-security/investigate/release`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::email_security };
+/// use cloudflare::{ ApiClient, apis::email_security };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = post_release(&api)
-///     .with_account_id("value")
+/// # let body: Vec<crate::models::email_security_postfix_id::EmailSecurityPostfixId> = todo!();
+/// let response = post_release(&api)
+///     .with_account_id("account_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -284,15 +349,22 @@ impl<'a> GetMessageRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get message details
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/email-security/investigate/{postfix_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `postfix_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::email_security };
+/// use cloudflare::{ ApiClient, apis::email_security };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_message(&api)
-///     .with_account_id("value")
-///     .with_postfix_id("value")
+/// let response = get_message(&api)
+///     .with_account_id("account_id")
+///     .with_postfix_id("postfix_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -329,15 +401,24 @@ impl<'a> GetMessageDetectionsRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get message detection details
+///
+/// Returns detection details such as threat categories and sender information for non-benign messages.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/email-security/investigate/{postfix_id}/detections`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `postfix_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::email_security };
+/// use cloudflare::{ ApiClient, apis::email_security };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_message_detections(&api)
-///     .with_account_id("value")
-///     .with_postfix_id("value")
+/// let response = get_message_detections(&api)
+///     .with_account_id("account_id")
+///     .with_postfix_id("postfix_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -382,15 +463,24 @@ impl<'a> PostMessageMoveRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Move a message
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/email-security/investigate/{postfix_id}/move`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `postfix_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::email_security };
+/// use cloudflare::{ ApiClient, apis::email_security };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = post_message_move(&api)
-///     .with_account_id("value")
-///     .with_postfix_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = post_message_move(&api)
+///     .with_account_id("account_id")
+///     .with_postfix_id("postfix_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -427,15 +517,24 @@ impl<'a> GetMessagePreviewRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get email preview
+///
+/// Returns a preview of the message body as a base64 encoded PNG image for non-benign messages.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/email-security/investigate/{postfix_id}/preview`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `postfix_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::email_security };
+/// use cloudflare::{ ApiClient, apis::email_security };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_message_preview(&api)
-///     .with_account_id("value")
-///     .with_postfix_id("value")
+/// let response = get_message_preview(&api)
+///     .with_account_id("account_id")
+///     .with_postfix_id("postfix_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -472,15 +571,24 @@ impl<'a> GetMessageRawRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get raw email content
+///
+/// Returns the raw eml of any non-benign message.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/email-security/investigate/{postfix_id}/raw`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `postfix_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::email_security };
+/// use cloudflare::{ ApiClient, apis::email_security };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_message_raw(&api)
-///     .with_account_id("value")
-///     .with_postfix_id("value")
+/// let response = get_message_raw(&api)
+///     .with_account_id("account_id")
+///     .with_postfix_id("postfix_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -525,15 +633,24 @@ impl<'a> PostReclassifyRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Change email classfication
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/email-security/investigate/{postfix_id}/reclassify`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `postfix_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::email_security };
+/// use cloudflare::{ ApiClient, apis::email_security };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = post_reclassify(&api)
-///     .with_account_id("value")
-///     .with_postfix_id("value")
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
+/// let response = post_reclassify(&api)
+///     .with_account_id("account_id")
+///     .with_postfix_id("postfix_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -570,15 +687,22 @@ impl<'a> GetMessageTraceRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get email trace
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/email-security/investigate/{postfix_id}/trace`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `postfix_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::email_security };
+/// use cloudflare::{ ApiClient, apis::email_security };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_message_trace(&api)
-///     .with_account_id("value")
-///     .with_postfix_id("value")
+/// let response = get_message_trace(&api)
+///     .with_account_id("account_id")
+///     .with_postfix_id("postfix_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -650,14 +774,42 @@ impl<'a> SubmissionsRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Get reclassify submissions
+///
+/// This endpoint returns information for submissions to made to reclassify emails.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/email-security/submissions`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `start` (query,optional)
+/// - `end` (query,optional)
+/// - `type` (query,optional)
+/// - `submission_id` (query,optional)
+/// - `original_disposition` (query,optional)
+/// - `requested_disposition` (query,optional)
+/// - `outcome_disposition` (query,optional)
+/// - `query` (query,optional)
+/// - `page` (query,optional)
+/// - `per_page` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::email_security };
+/// use cloudflare::{ ApiClient, apis::email_security };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = submissions(&api)
-///     .with_account_id("value")
+/// let response = submissions(&api)
+///     .with_account_id("account_id")
+///     .with_start("start")
+///     .with_end("end")
+///     .with_type_param("type")
+///     .with_submission_id("submission_id")
+///     .with_original_disposition("original_disposition")
+///     .with_requested_disposition("requested_disposition")
+///     .with_outcome_disposition("outcome_disposition")
+///     .with_query("query")
+///     .with_page("page")
+///     .with_per_page("per_page")
 ///     .send()
 ///     .await?;
 /// ```

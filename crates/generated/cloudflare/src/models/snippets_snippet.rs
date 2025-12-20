@@ -21,5 +21,5 @@ use serde::{Deserialize, Serialize};
 pub struct SnippetsSnippet {
     pub created_on: Option<String>,
     pub modified_on: Option<String>,
-    pub snippet_name: Option<serde_json::Value>,
+    pub snippet_name: Option<crate::models::snippets_snippet_name::SnippetsSnippetName>,
 }

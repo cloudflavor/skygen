@@ -21,5 +21,5 @@ use serde::{Deserialize, Serialize};
 pub struct VpcBase {
     pub created_at: Option<String>,
     pub id: Option<String>,
-    pub urn: Option<serde_json::Value>,
+    pub urn: Option<crate::models::urn::Urn>,
 }

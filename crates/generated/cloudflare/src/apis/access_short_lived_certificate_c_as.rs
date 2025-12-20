@@ -15,12 +15,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::access_ca_components_schemas_response_collection::AccessCaComponentsSchemasResponseCollection;
+use crate::models::access_ca_components_schemas_single_response::AccessCaComponentsSchemasSingleResponse;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct ListShortLivedCertificateRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, AccessCaComponentsSchemasResponseCollection>,
 }
 
 impl<'a> ListShortLivedCertificateRequest<'a> {
@@ -35,18 +37,26 @@ impl<'a> ListShortLivedCertificateRequest<'a> {
         self.builder = self.builder.path_param("account_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<AccessCaComponentsSchemasResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// List short-lived certificate CAs
+///
+/// Lists short-lived certificate CAs and their public keys.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/access/apps/ca`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::access_short_lived_certificate_c_as };
+/// use cloudflare::{ ApiClient, apis::access_short_lived_certificate_c_as };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_short_lived_certificate(&api)
-///     .with_account_id("value")
+/// let response = list_short_lived_certificate(&api)
+///     .with_account_id("account_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -56,7 +66,7 @@ pub fn list_short_lived_certificate(api: &ApiClient) -> ListShortLivedCertificat
 
 #[derive(Debug)]
 pub struct GetShortLivedCertificateRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, AccessCaComponentsSchemasSingleResponse>,
 }
 
 impl<'a> GetShortLivedCertificateRequest<'a> {
@@ -79,19 +89,28 @@ impl<'a> GetShortLivedCertificateRequest<'a> {
         self.builder = self.builder.path_param("app_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<AccessCaComponentsSchemasSingleResponse> {
         self.builder.send().await
     }
 }
-
 /// Get a short-lived certificate CA
+///
+/// Fetches a short-lived certificate CA and its public key.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/access/apps/{app_id}/ca`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `app_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::access_short_lived_certificate_c_as };
+/// use cloudflare::{ ApiClient, apis::access_short_lived_certificate_c_as };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_short_lived_certificate(&api)
-///     .with_account_id("value")
-///     .with_app_id("value")
+/// let response = get_short_lived_certificate(&api)
+///     .with_account_id("account_id")
+///     .with_app_id("app_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -101,7 +120,7 @@ pub fn get_short_lived_certificate(api: &ApiClient) -> GetShortLivedCertificateR
 
 #[derive(Debug)]
 pub struct CreateShortLivedCertificateRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, AccessCaComponentsSchemasSingleResponse>,
 }
 
 impl<'a> CreateShortLivedCertificateRequest<'a> {
@@ -124,19 +143,28 @@ impl<'a> CreateShortLivedCertificateRequest<'a> {
         self.builder = self.builder.path_param("app_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<AccessCaComponentsSchemasSingleResponse> {
         self.builder.send().await
     }
 }
-
 /// Create a short-lived certificate CA
+///
+/// Generates a new short-lived certificate CA and public key.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/access/apps/{app_id}/ca`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `app_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::access_short_lived_certificate_c_as };
+/// use cloudflare::{ ApiClient, apis::access_short_lived_certificate_c_as };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = create_short_lived_certificate(&api)
-///     .with_account_id("value")
-///     .with_app_id("value")
+/// let response = create_short_lived_certificate(&api)
+///     .with_account_id("account_id")
+///     .with_app_id("app_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -173,15 +201,24 @@ impl<'a> DeleteShortLivedCertificateRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Delete a short-lived certificate CA
+///
+/// Deletes a short-lived certificate CA.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/accounts/{account_id}/access/apps/{app_id}/ca`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `app_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::access_short_lived_certificate_c_as };
+/// use cloudflare::{ ApiClient, apis::access_short_lived_certificate_c_as };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete_short_lived_certificate(&api)
-///     .with_account_id("value")
-///     .with_app_id("value")
+/// let response = delete_short_lived_certificate(&api)
+///     .with_account_id("account_id")
+///     .with_app_id("app_id")
 ///     .send()
 ///     .await?;
 /// ```

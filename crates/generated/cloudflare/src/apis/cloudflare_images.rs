@@ -15,12 +15,18 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::images_deleted_response::ImagesDeletedResponse;
+use crate::models::images_image_direct_upload_response_v2::ImagesImageDirectUploadResponseV2;
+use crate::models::images_image_response_single::ImagesImageResponseSingle;
+use crate::models::images_images_list_response::ImagesImagesListResponse;
+use crate::models::images_images_list_response_v2::ImagesImagesListResponseV2;
+use crate::models::images_images_stats_response::ImagesImagesStatsResponse;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct ListImagesRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, ImagesImagesListResponse>,
 }
 
 impl<'a> ListImagesRequest<'a> {
@@ -42,18 +48,30 @@ impl<'a> ListImagesRequest<'a> {
         self.builder = self.builder.header_param("per_page", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<ImagesImagesListResponse> {
         self.builder.send().await
     }
 }
-
 /// List images
+///
+/// List up to 100 images with one request. Use the optional parameters below to get a specific range of images.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/images/v1`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `page` (query,optional)
+/// - `per_page` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::cloudflare_images };
+/// use cloudflare::{ ApiClient, apis::cloudflare_images };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_images(&api)
-///     .with_account_id("value")
+/// let response = list_images(&api)
+///     .with_account_id("account_id")
+///     .with_page("page")
+///     .with_per_page("per_page")
 ///     .send()
 ///     .await?;
 /// ```
@@ -63,7 +81,7 @@ pub fn list_images(api: &ApiClient) -> ListImagesRequest<'_> {
 
 #[derive(Debug)]
 pub struct UploadImageUrlRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, ImagesImageResponseSingle>,
 }
 
 impl<'a> UploadImageUrlRequest<'a> {
@@ -77,18 +95,27 @@ impl<'a> UploadImageUrlRequest<'a> {
         self.builder = self.builder.path_param("account_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<ImagesImageResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Upload an image
+///
+/// Upload an image with up to 10 Megabytes using a single HTTP POST (multipart/form-data) request.
+/// An image can be uploaded by sending an image file or passing an accessible to an API url.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/images/v1`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::cloudflare_images };
+/// use cloudflare::{ ApiClient, apis::cloudflare_images };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = upload_image_url(&api)
-///     .with_account_id("value")
+/// let response = upload_image_url(&api)
+///     .with_account_id("account_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -98,7 +125,7 @@ pub fn upload_image_url(api: &ApiClient) -> UploadImageUrlRequest<'_> {
 
 #[derive(Debug)]
 pub struct UsageStatisticsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, ImagesImagesStatsResponse>,
 }
 
 impl<'a> UsageStatisticsRequest<'a> {
@@ -113,18 +140,26 @@ impl<'a> UsageStatisticsRequest<'a> {
         self.builder = self.builder.path_param("account_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<ImagesImagesStatsResponse> {
         self.builder.send().await
     }
 }
-
 /// Images usage statistics
+///
+/// Fetch usage statistics details for Cloudflare Images.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/images/v1/stats`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::cloudflare_images };
+/// use cloudflare::{ ApiClient, apis::cloudflare_images };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = usage_statistics(&api)
-///     .with_account_id("value")
+/// let response = usage_statistics(&api)
+///     .with_account_id("account_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -134,7 +169,7 @@ pub fn usage_statistics(api: &ApiClient) -> UsageStatisticsRequest<'_> {
 
 #[derive(Debug)]
 pub struct ImageDetailsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, ImagesImageResponseSingle>,
 }
 
 impl<'a> ImageDetailsRequest<'a> {
@@ -157,19 +192,28 @@ impl<'a> ImageDetailsRequest<'a> {
         self.builder = self.builder.path_param("image_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<ImagesImageResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Image details
+///
+/// Fetch details for a single image.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/images/v1/{image_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `image_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::cloudflare_images };
+/// use cloudflare::{ ApiClient, apis::cloudflare_images };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = image_details(&api)
-///     .with_account_id("value")
-///     .with_image_id("value")
+/// let response = image_details(&api)
+///     .with_account_id("account_id")
+///     .with_image_id("image_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -179,7 +223,7 @@ pub fn image_details(api: &ApiClient) -> ImageDetailsRequest<'_> {
 
 #[derive(Debug)]
 pub struct DeleteImageRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, ImagesDeletedResponse>,
 }
 
 impl<'a> DeleteImageRequest<'a> {
@@ -202,19 +246,28 @@ impl<'a> DeleteImageRequest<'a> {
         self.builder = self.builder.path_param("image_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<ImagesDeletedResponse> {
         self.builder.send().await
     }
 }
-
 /// Delete image
+///
+/// Delete an image on Cloudflare Images. On success, all copies of the image are deleted and purged from cache.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/accounts/{account_id}/images/v1/{image_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `image_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::cloudflare_images };
+/// use cloudflare::{ ApiClient, apis::cloudflare_images };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete_image(&api)
-///     .with_account_id("value")
-///     .with_image_id("value")
+/// let response = delete_image(&api)
+///     .with_account_id("account_id")
+///     .with_image_id("image_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -224,7 +277,7 @@ pub fn delete_image(api: &ApiClient) -> DeleteImageRequest<'_> {
 
 #[derive(Debug)]
 pub struct UpdateImageRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, ImagesImageResponseSingle>,
 }
 
 impl<'a> UpdateImageRequest<'a> {
@@ -255,19 +308,30 @@ impl<'a> UpdateImageRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<ImagesImageResponseSingle> {
         self.builder.send().await
     }
 }
-
 /// Update image
+///
+/// Update image access control. On access control change, all copies of the image are purged from cache.
+///
+/// **HTTP Method:** `PATCH`
+/// **Path:** `/accounts/{account_id}/images/v1/{image_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `image_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::cloudflare_images };
+/// use cloudflare::{ ApiClient, apis::cloudflare_images };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = update_image(&api)
-///     .with_account_id("value")
-///     .with_image_id("value")
+/// # let body: crate::models::images_image_patch_request::ImagesImagePatchRequest = todo!();
+/// let response = update_image(&api)
+///     .with_account_id("account_id")
+///     .with_image_id("image_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -304,15 +368,24 @@ impl<'a> BaseImageRequest<'a> {
         self.builder.send().await
     }
 }
-
 /// Base image
+///
+/// Fetch base image. For most images this will be the originally uploaded file. For larger images it can be a near-lossless version of the original.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/images/v1/{image_id}/blob`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `image_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::cloudflare_images };
+/// use cloudflare::{ ApiClient, apis::cloudflare_images };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = base_image(&api)
-///     .with_account_id("value")
-///     .with_image_id("value")
+/// let response = base_image(&api)
+///     .with_account_id("account_id")
+///     .with_image_id("image_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -322,7 +395,7 @@ pub fn base_image(api: &ApiClient) -> BaseImageRequest<'_> {
 
 #[derive(Debug)]
 pub struct ListImagesV2Request<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, ImagesImagesListResponseV2>,
 }
 
 impl<'a> ListImagesV2Request<'a> {
@@ -348,18 +421,33 @@ impl<'a> ListImagesV2Request<'a> {
         self.builder = self.builder.header_param("sort_order", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<ImagesImagesListResponseV2> {
         self.builder.send().await
     }
 }
-
 /// List images V2
+///
+/// List up to 10000 images with one request. Use the optional parameters below to get a specific range of images.
+/// Endpoint returns continuation_token if more images are present.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/images/v2`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `continuation_token` (query,optional)
+/// - `per_page` (query,optional)
+/// - `sort_order` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::cloudflare_images };
+/// use cloudflare::{ ApiClient, apis::cloudflare_images };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_images_v2(&api)
-///     .with_account_id("value")
+/// let response = list_images_v2(&api)
+///     .with_account_id("account_id")
+///     .with_continuation_token("continuation_token")
+///     .with_per_page("per_page")
+///     .with_sort_order("sort_order")
 ///     .send()
 ///     .await?;
 /// ```
@@ -369,7 +457,7 @@ pub fn list_images_v2(api: &ApiClient) -> ListImagesV2Request<'_> {
 
 #[derive(Debug)]
 pub struct CreateAuthenticatedDirectUploadRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, ImagesImageDirectUploadResponseV2>,
 }
 
 impl<'a> CreateAuthenticatedDirectUploadRequest<'a> {
@@ -387,18 +475,26 @@ impl<'a> CreateAuthenticatedDirectUploadRequest<'a> {
         self.builder = self.builder.path_param("account_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<ImagesImageDirectUploadResponseV2> {
         self.builder.send().await
     }
 }
-
 /// Create authenticated direct upload URL V2
+///
+/// Direct uploads allow users to upload images without API keys. A common use case are web apps, client-side applications, or mobile devices where users upload content directly to Cloudflare Images. This method creates a draft record for a future image. It returns an upload URL and an image identifier. To verify if the image itself has been uploaded, send an image details request (accounts/:account_identifier/images/v1/:identifier), and check that the `draft: true` property is not present.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/images/v2/direct_upload`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::cloudflare_images };
+/// use cloudflare::{ ApiClient, apis::cloudflare_images };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = create_authenticated_direct_upload(&api)
-///     .with_account_id("value")
+/// let response = create_authenticated_direct_upload(&api)
+///     .with_account_id("account_id")
 ///     .send()
 ///     .await?;
 /// ```

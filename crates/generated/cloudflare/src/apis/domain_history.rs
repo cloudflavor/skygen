@@ -15,12 +15,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::intel_response::IntelResponse;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct GetDomainHistoryRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, IntelResponse>,
 }
 
 impl<'a> GetDomainHistoryRequest<'a> {
@@ -42,18 +43,28 @@ impl<'a> GetDomainHistoryRequest<'a> {
         self.builder = self.builder.header_param("domain", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<IntelResponse> {
         self.builder.send().await
     }
 }
-
 /// Get Domain History
+///
+/// Gets historical security threat and content categories currently and previously assigned to a domain.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/intel/domain-history`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `domain` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::domain_history };
+/// use cloudflare::{ ApiClient, apis::domain_history };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_domain_history(&api)
-///     .with_account_id("value")
+/// let response = get_domain_history(&api)
+///     .with_account_id("account_id")
+///     .with_domain("domain")
 ///     .send()
 ///     .await?;
 /// ```

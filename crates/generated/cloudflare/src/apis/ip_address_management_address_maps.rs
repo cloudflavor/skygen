@@ -15,12 +15,16 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::addressing_api_response_collection::AddressingApiResponseCollection;
+use crate::models::addressing_components_schemas_response_collection::AddressingComponentsSchemasResponseCollection;
+use crate::models::addressing_components_schemas_single_response::AddressingComponentsSchemasSingleResponse;
+use crate::models::addressing_full_response::AddressingFullResponse;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct ListAddressMapsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, AddressingComponentsSchemasResponseCollection>,
 }
 
 impl<'a> ListAddressMapsRequest<'a> {
@@ -38,18 +42,26 @@ impl<'a> ListAddressMapsRequest<'a> {
         self.builder = self.builder.path_param("account_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<AddressingComponentsSchemasResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// List Address Maps
+///
+/// List all address maps owned by the account.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/addressing/address_maps`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::ip_address_management_address_maps };
+/// use cloudflare::{ ApiClient, apis::ip_address_management_address_maps };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = list_address_maps(&api)
-///     .with_account_id("value")
+/// let response = list_address_maps(&api)
+///     .with_account_id("account_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -59,7 +71,7 @@ pub fn list_address_maps(api: &ApiClient) -> ListAddressMapsRequest<'_> {
 
 #[derive(Debug)]
 pub struct CreateAddressMapRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, AddressingFullResponse>,
 }
 
 impl<'a> CreateAddressMapRequest<'a> {
@@ -82,18 +94,28 @@ impl<'a> CreateAddressMapRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<AddressingFullResponse> {
         self.builder.send().await
     }
 }
-
 /// Create Address Map
+///
+/// Create a new address map under the account.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/addressing/address_maps`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::ip_address_management_address_maps };
+/// use cloudflare::{ ApiClient, apis::ip_address_management_address_maps };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = create_address_map(&api)
-///     .with_account_id("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = create_address_map(&api)
+///     .with_account_id("account_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -103,7 +125,7 @@ pub fn create_address_map(api: &ApiClient) -> CreateAddressMapRequest<'_> {
 
 #[derive(Debug)]
 pub struct MapDetailsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, AddressingFullResponse>,
 }
 
 impl<'a> MapDetailsRequest<'a> {
@@ -126,19 +148,28 @@ impl<'a> MapDetailsRequest<'a> {
         self.builder = self.builder.path_param("address_map_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<AddressingFullResponse> {
         self.builder.send().await
     }
 }
-
 /// Address Map Details
+///
+/// Show a particular address map owned by the account.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/addressing/address_maps/{address_map_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `address_map_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::ip_address_management_address_maps };
+/// use cloudflare::{ ApiClient, apis::ip_address_management_address_maps };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = map_details(&api)
-///     .with_account_id("value")
-///     .with_address_map_id("value")
+/// let response = map_details(&api)
+///     .with_account_id("account_id")
+///     .with_address_map_id("address_map_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -148,7 +179,7 @@ pub fn map_details(api: &ApiClient) -> MapDetailsRequest<'_> {
 
 #[derive(Debug)]
 pub struct DeleteAddressMapRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, AddressingApiResponseCollection>,
 }
 
 impl<'a> DeleteAddressMapRequest<'a> {
@@ -171,19 +202,28 @@ impl<'a> DeleteAddressMapRequest<'a> {
         self.builder = self.builder.path_param("address_map_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<AddressingApiResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// Delete Address Map
+///
+/// Delete a particular address map owned by the account. An Address Map must be disabled before it can be deleted.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/accounts/{account_id}/addressing/address_maps/{address_map_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `address_map_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::ip_address_management_address_maps };
+/// use cloudflare::{ ApiClient, apis::ip_address_management_address_maps };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = delete_address_map(&api)
-///     .with_account_id("value")
-///     .with_address_map_id("value")
+/// let response = delete_address_map(&api)
+///     .with_account_id("account_id")
+///     .with_address_map_id("address_map_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -193,7 +233,7 @@ pub fn delete_address_map(api: &ApiClient) -> DeleteAddressMapRequest<'_> {
 
 #[derive(Debug)]
 pub struct UpdateAddressMapRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, AddressingComponentsSchemasSingleResponse>,
 }
 
 impl<'a> UpdateAddressMapRequest<'a> {
@@ -221,19 +261,30 @@ impl<'a> UpdateAddressMapRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<AddressingComponentsSchemasSingleResponse> {
         self.builder.send().await
     }
 }
-
 /// Update Address Map
+///
+/// Modify properties of an address map owned by the account.
+///
+/// **HTTP Method:** `PATCH`
+/// **Path:** `/accounts/{account_id}/addressing/address_maps/{address_map_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `address_map_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::ip_address_management_address_maps };
+/// use cloudflare::{ ApiClient, apis::ip_address_management_address_maps };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = update_address_map(&api)
-///     .with_account_id("value")
-///     .with_address_map_id("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = update_address_map(&api)
+///     .with_account_id("account_id")
+///     .with_address_map_id("address_map_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```
@@ -243,7 +294,7 @@ pub fn update_address_map(api: &ApiClient) -> UpdateAddressMapRequest<'_> {
 
 #[derive(Debug)]
 pub struct AddMembershipAddressMapRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, AddressingApiResponseCollection>,
 }
 
 impl<'a> AddMembershipAddressMapRequest<'a> {
@@ -266,19 +317,28 @@ impl<'a> AddMembershipAddressMapRequest<'a> {
         self.builder = self.builder.path_param("address_map_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<AddressingApiResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// Add an account membership to an Address Map
+///
+/// Add an account as a member of a particular address map.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/accounts/{account_id}/addressing/address_maps/{address_map_id}/accounts/{account_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `address_map_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::ip_address_management_address_maps };
+/// use cloudflare::{ ApiClient, apis::ip_address_management_address_maps };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = add_membership_address_map(&api)
-///     .with_account_id("value")
-///     .with_address_map_id("value")
+/// let response = add_membership_address_map(&api)
+///     .with_account_id("account_id")
+///     .with_address_map_id("address_map_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -288,7 +348,7 @@ pub fn add_membership_address_map(api: &ApiClient) -> AddMembershipAddressMapReq
 
 #[derive(Debug)]
 pub struct RemoveMembershipAddressMapRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, AddressingApiResponseCollection>,
 }
 
 impl<'a> RemoveMembershipAddressMapRequest<'a> {
@@ -311,19 +371,28 @@ impl<'a> RemoveMembershipAddressMapRequest<'a> {
         self.builder = self.builder.path_param("address_map_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<AddressingApiResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// Remove an account membership from an Address Map
+///
+/// Remove an account as a member of a particular address map.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/accounts/{account_id}/addressing/address_maps/{address_map_id}/accounts/{account_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `address_map_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::ip_address_management_address_maps };
+/// use cloudflare::{ ApiClient, apis::ip_address_management_address_maps };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = remove_membership_address_map(&api)
-///     .with_account_id("value")
-///     .with_address_map_id("value")
+/// let response = remove_membership_address_map(&api)
+///     .with_account_id("account_id")
+///     .with_address_map_id("address_map_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -333,7 +402,7 @@ pub fn remove_membership_address_map(api: &ApiClient) -> RemoveMembershipAddress
 
 #[derive(Debug)]
 pub struct AddIpAddressMapRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, AddressingApiResponseCollection>,
 }
 
 impl<'a> AddIpAddressMapRequest<'a> {
@@ -361,20 +430,30 @@ impl<'a> AddIpAddressMapRequest<'a> {
         self.builder = self.builder.path_param("ip_address", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<AddressingApiResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// Add an IP to an Address Map
+///
+/// Add an IP from a prefix owned by the account to a particular address map.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/accounts/{account_id}/addressing/address_maps/{address_map_id}/ips/{ip_address}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `address_map_id` (path, required)
+/// - `ip_address` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::ip_address_management_address_maps };
+/// use cloudflare::{ ApiClient, apis::ip_address_management_address_maps };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = add_ip_address_map(&api)
-///     .with_account_id("value")
-///     .with_address_map_id("value")
-///     .with_ip_address("value")
+/// let response = add_ip_address_map(&api)
+///     .with_account_id("account_id")
+///     .with_address_map_id("address_map_id")
+///     .with_ip_address("ip_address")
 ///     .send()
 ///     .await?;
 /// ```
@@ -384,7 +463,7 @@ pub fn add_ip_address_map(api: &ApiClient) -> AddIpAddressMapRequest<'_> {
 
 #[derive(Debug)]
 pub struct RemoveIpAddressMapRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, AddressingApiResponseCollection>,
 }
 
 impl<'a> RemoveIpAddressMapRequest<'a> {
@@ -412,20 +491,30 @@ impl<'a> RemoveIpAddressMapRequest<'a> {
         self.builder = self.builder.path_param("ip_address", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<AddressingApiResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// Remove an IP from an Address Map
+///
+/// Remove an IP from a particular address map.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/accounts/{account_id}/addressing/address_maps/{address_map_id}/ips/{ip_address}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `address_map_id` (path, required)
+/// - `ip_address` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::ip_address_management_address_maps };
+/// use cloudflare::{ ApiClient, apis::ip_address_management_address_maps };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = remove_ip_address_map(&api)
-///     .with_account_id("value")
-///     .with_address_map_id("value")
-///     .with_ip_address("value")
+/// let response = remove_ip_address_map(&api)
+///     .with_account_id("account_id")
+///     .with_address_map_id("address_map_id")
+///     .with_ip_address("ip_address")
 ///     .send()
 ///     .await?;
 /// ```
@@ -435,7 +524,7 @@ pub fn remove_ip_address_map(api: &ApiClient) -> RemoveIpAddressMapRequest<'_> {
 
 #[derive(Debug)]
 pub struct AddMembershipAddressMapPutRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, AddressingApiResponseCollection>,
 }
 
 impl<'a> AddMembershipAddressMapPutRequest<'a> {
@@ -463,20 +552,30 @@ impl<'a> AddMembershipAddressMapPutRequest<'a> {
         self.builder = self.builder.path_param("zone_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<AddressingApiResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// Add a zone membership to an Address Map
+///
+/// Add a zone as a member of a particular address map.
+///
+/// **HTTP Method:** `PUT`
+/// **Path:** `/accounts/{account_id}/addressing/address_maps/{address_map_id}/zones/{zone_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `address_map_id` (path, required)
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::ip_address_management_address_maps };
+/// use cloudflare::{ ApiClient, apis::ip_address_management_address_maps };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = add_membership_address_map_put(&api)
-///     .with_account_id("value")
-///     .with_address_map_id("value")
-///     .with_zone_id("value")
+/// let response = add_membership_address_map_put(&api)
+///     .with_account_id("account_id")
+///     .with_address_map_id("address_map_id")
+///     .with_zone_id("zone_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -486,7 +585,7 @@ pub fn add_membership_address_map_put(api: &ApiClient) -> AddMembershipAddressMa
 
 #[derive(Debug)]
 pub struct RemoveMembershipAddressMapDeleteRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, AddressingApiResponseCollection>,
 }
 
 impl<'a> RemoveMembershipAddressMapDeleteRequest<'a> {
@@ -514,20 +613,30 @@ impl<'a> RemoveMembershipAddressMapDeleteRequest<'a> {
         self.builder = self.builder.path_param("zone_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<AddressingApiResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// Remove a zone membership from an Address Map
+///
+/// Remove a zone as a member of a particular address map.
+///
+/// **HTTP Method:** `DELETE`
+/// **Path:** `/accounts/{account_id}/addressing/address_maps/{address_map_id}/zones/{zone_id}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `address_map_id` (path, required)
+/// - `zone_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::ip_address_management_address_maps };
+/// use cloudflare::{ ApiClient, apis::ip_address_management_address_maps };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = remove_membership_address_map_delete(&api)
-///     .with_account_id("value")
-///     .with_address_map_id("value")
-///     .with_zone_id("value")
+/// let response = remove_membership_address_map_delete(&api)
+///     .with_account_id("account_id")
+///     .with_address_map_id("address_map_id")
+///     .with_zone_id("zone_id")
 ///     .send()
 ///     .await?;
 /// ```

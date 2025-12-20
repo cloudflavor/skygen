@@ -15,12 +15,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::intel_sinkholes_get_sinkholes_response::IntelSinkholesGetSinkholesResponse;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct GetSinkholesRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, IntelSinkholesGetSinkholesResponse>,
 }
 
 impl<'a> GetSinkholesRequest<'a> {
@@ -35,18 +36,24 @@ impl<'a> GetSinkholesRequest<'a> {
         self.builder = self.builder.path_param("account_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<IntelSinkholesGetSinkholesResponse> {
         self.builder.send().await
     }
 }
-
 /// List sinkholes owned by this account
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/intel/sinkholes`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::sinkhole_config };
+/// use cloudflare::{ ApiClient, apis::sinkhole_config };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_sinkholes(&api)
-///     .with_account_id("value")
+/// let response = get_sinkholes(&api)
+///     .with_account_id("account_id")
 ///     .send()
 ///     .await?;
 /// ```

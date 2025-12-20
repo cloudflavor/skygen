@@ -15,12 +15,17 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::access_active_session_response::AccessActiveSessionResponse;
+use crate::models::access_active_sessions_response::AccessActiveSessionsResponse;
+use crate::models::access_failed_login_response::AccessFailedLoginResponse;
+use crate::models::access_last_seen_identity_response::AccessLastSeenIdentityResponse;
+use crate::models::access_users_components_schemas_response_collection::AccessUsersComponentsSchemasResponseCollection;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct GetRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, AccessUsersComponentsSchemasResponseCollection>,
 }
 
 impl<'a> GetRequest<'a> {
@@ -47,18 +52,32 @@ impl<'a> GetRequest<'a> {
         self.builder = self.builder.header_param("search", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<AccessUsersComponentsSchemasResponseCollection> {
         self.builder.send().await
     }
 }
-
 /// Get users
+///
+/// Gets a list of users for an account.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/access/users`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `name` (query,optional)
+/// - `email` (query,optional)
+/// - `search` (query,optional)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zero_trust_users };
+/// use cloudflare::{ ApiClient, apis::zero_trust_users };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get(&api)
-///     .with_account_id("value")
+/// let response = get(&api)
+///     .with_account_id("account_id")
+///     .with_name("name")
+///     .with_email("email")
+///     .with_search("search")
 ///     .send()
 ///     .await?;
 /// ```
@@ -68,7 +87,7 @@ pub fn get(api: &ApiClient) -> GetRequest<'_> {
 
 #[derive(Debug)]
 pub struct GetActiveSessionsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, AccessActiveSessionsResponse>,
 }
 
 impl<'a> GetActiveSessionsRequest<'a> {
@@ -91,19 +110,28 @@ impl<'a> GetActiveSessionsRequest<'a> {
         self.builder = self.builder.path_param("user_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<AccessActiveSessionsResponse> {
         self.builder.send().await
     }
 }
-
 /// Get active sessions
+///
+/// Get active sessions for a single user.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/access/users/{user_id}/active_sessions`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `user_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zero_trust_users };
+/// use cloudflare::{ ApiClient, apis::zero_trust_users };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_active_sessions(&api)
-///     .with_account_id("value")
-///     .with_user_id("value")
+/// let response = get_active_sessions(&api)
+///     .with_account_id("account_id")
+///     .with_user_id("user_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -113,7 +141,7 @@ pub fn get_active_sessions(api: &ApiClient) -> GetActiveSessionsRequest<'_> {
 
 #[derive(Debug)]
 pub struct GetActiveSessionRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, AccessActiveSessionResponse>,
 }
 
 impl<'a> GetActiveSessionRequest<'a> {
@@ -141,20 +169,30 @@ impl<'a> GetActiveSessionRequest<'a> {
         self.builder = self.builder.path_param("nonce", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<AccessActiveSessionResponse> {
         self.builder.send().await
     }
 }
-
 /// Get single active session
+///
+/// Get an active session for a single user.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/access/users/{user_id}/active_sessions/{nonce}`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `user_id` (path, required)
+/// - `nonce` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zero_trust_users };
+/// use cloudflare::{ ApiClient, apis::zero_trust_users };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_active_session(&api)
-///     .with_account_id("value")
-///     .with_user_id("value")
-///     .with_nonce("value")
+/// let response = get_active_session(&api)
+///     .with_account_id("account_id")
+///     .with_user_id("user_id")
+///     .with_nonce("nonce")
 ///     .send()
 ///     .await?;
 /// ```
@@ -164,7 +202,7 @@ pub fn get_active_session(api: &ApiClient) -> GetActiveSessionRequest<'_> {
 
 #[derive(Debug)]
 pub struct GetFailedLoginsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, AccessFailedLoginResponse>,
 }
 
 impl<'a> GetFailedLoginsRequest<'a> {
@@ -187,19 +225,28 @@ impl<'a> GetFailedLoginsRequest<'a> {
         self.builder = self.builder.path_param("user_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<AccessFailedLoginResponse> {
         self.builder.send().await
     }
 }
-
 /// Get failed logins
+///
+/// Get all failed login attempts for a single user.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/access/users/{user_id}/failed_logins`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `user_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zero_trust_users };
+/// use cloudflare::{ ApiClient, apis::zero_trust_users };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_failed_logins(&api)
-///     .with_account_id("value")
-///     .with_user_id("value")
+/// let response = get_failed_logins(&api)
+///     .with_account_id("account_id")
+///     .with_user_id("user_id")
 ///     .send()
 ///     .await?;
 /// ```
@@ -209,7 +256,7 @@ pub fn get_failed_logins(api: &ApiClient) -> GetFailedLoginsRequest<'_> {
 
 #[derive(Debug)]
 pub struct GetLastSeenIdentityRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, AccessLastSeenIdentityResponse>,
 }
 
 impl<'a> GetLastSeenIdentityRequest<'a> {
@@ -232,19 +279,28 @@ impl<'a> GetLastSeenIdentityRequest<'a> {
         self.builder = self.builder.path_param("user_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<AccessLastSeenIdentityResponse> {
         self.builder.send().await
     }
 }
-
 /// Get last seen identity
+///
+/// Get last seen identity for a single user.
+///
+/// **HTTP Method:** `GET`
+/// **Path:** `/accounts/{account_id}/access/users/{user_id}/last_seen_identity`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+/// - `user_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::zero_trust_users };
+/// use cloudflare::{ ApiClient, apis::zero_trust_users };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = get_last_seen_identity(&api)
-///     .with_account_id("value")
-///     .with_user_id("value")
+/// let response = get_last_seen_identity(&api)
+///     .with_account_id("account_id")
+///     .with_user_id("user_id")
 ///     .send()
 ///     .await?;
 /// ```

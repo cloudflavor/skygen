@@ -15,12 +15,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::intel_phishing_url_submit_components_schemas_single_response::IntelPhishingUrlSubmitComponentsSchemasSingleResponse;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct SubmitSuspiciousUrlScanningRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, IntelPhishingUrlSubmitComponentsSchemasSingleResponse>,
 }
 
 impl<'a> SubmitSuspiciousUrlScanningRequest<'a> {
@@ -43,18 +44,28 @@ impl<'a> SubmitSuspiciousUrlScanningRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<IntelPhishingUrlSubmitComponentsSchemasSingleResponse> {
         self.builder.send().await
     }
 }
-
 /// Submit suspicious URL for scanning
+///
+/// Submit suspicious URL for scanning.
+///
+/// **HTTP Method:** `POST`
+/// **Path:** `/accounts/{account_id}/brand-protection/submit`
+///
+/// **Parameters**
+/// - `account_id` (path, required)
+///
 /// # Example
 /// ```no_run
-/// use cloudflare_api::{ ApiClient, apis::phishing_url_scanner };
+/// use cloudflare::{ ApiClient, apis::phishing_url_scanner };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// let _ = submit_suspicious_url_scanning(&api)
-///     .with_account_id("value")
+/// # let body: serde_json::Value = todo!();
+/// let response = submit_suspicious_url_scanning(&api)
+///     .with_account_id("account_id")
+///     .with_body(body)
 ///     .send()
 ///     .await?;
 /// ```

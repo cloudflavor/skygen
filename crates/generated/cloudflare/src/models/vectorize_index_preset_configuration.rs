@@ -19,5 +19,5 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct VectorizeIndexPresetConfiguration {
-    pub preset: serde_json::Value,
+    pub preset: crate::models::vectorize_index_preset::VectorizeIndexPreset,
 }

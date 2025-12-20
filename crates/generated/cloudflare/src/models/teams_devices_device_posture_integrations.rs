@@ -19,9 +19,11 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct TeamsDevicesDevicePostureIntegrations {
-    pub config: Option<serde_json::Value>,
-    pub id: Option<serde_json::Value>,
-    pub interval: Option<serde_json::Value>,
-    pub name: Option<serde_json::Value>,
-    pub r#type: Option<serde_json::Value>,
+    pub config: Option<crate::models::teams_devices_config_response::TeamsDevicesConfigResponse>,
+    pub id: Option<crate::models::teams_devices_uuid::TeamsDevicesUuid>,
+    pub interval: Option<crate::models::teams_devices_interval::TeamsDevicesInterval>,
+    pub name: Option<
+        crate::models::teams_devices_components_schemas_name::TeamsDevicesComponentsSchemasName,
+    >,
+    pub r#type: Option<crate::models::teams_devices_schemas_type::TeamsDevicesSchemasType>,
 }

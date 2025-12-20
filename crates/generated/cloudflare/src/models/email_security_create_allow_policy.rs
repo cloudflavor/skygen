@@ -28,6 +28,6 @@ pub struct EmailSecurityCreateAllowPolicy {
     pub is_spoof: Option<bool>,
     pub is_trusted_sender: bool,
     pub pattern: String,
-    pub pattern_type: serde_json::Value,
+    pub pattern_type: crate::models::email_security_pattern_type::EmailSecurityPatternType,
     pub verify_sender: bool,
 }

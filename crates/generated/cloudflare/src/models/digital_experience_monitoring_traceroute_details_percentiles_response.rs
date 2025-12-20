@@ -19,7 +19,6 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct DigitalExperienceMonitoringTracerouteDetailsPercentilesResponse {
-
     pub hops_count: Option<crate::models::digital_experience_monitoring_percentiles::DigitalExperienceMonitoringPercentiles>,
     pub packet_loss_pct: Option<crate::models::digital_experience_monitoring_percentiles::DigitalExperienceMonitoringPercentiles>,
     pub round_trip_time_ms: Option<crate::models::digital_experience_monitoring_percentiles::DigitalExperienceMonitoringPercentiles>,

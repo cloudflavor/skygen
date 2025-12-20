@@ -19,18 +19,19 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct DnssecDnssec {
-    pub algorithm: Option<serde_json::Value>,
-    pub digest: Option<serde_json::Value>,
-    pub digest_algorithm: Option<serde_json::Value>,
-    pub digest_type: Option<serde_json::Value>,
-    pub dnssec_multi_signer: Option<serde_json::Value>,
-    pub dnssec_presigned: Option<serde_json::Value>,
-    pub dnssec_use_nsec3: Option<serde_json::Value>,
-    pub ds: Option<serde_json::Value>,
-    pub flags: Option<serde_json::Value>,
-    pub key_tag: Option<serde_json::Value>,
-    pub key_type: Option<serde_json::Value>,
-    pub modified_on: Option<serde_json::Value>,
-    pub public_key: Option<serde_json::Value>,
-    pub status: Option<serde_json::Value>,
+    pub algorithm: Option<crate::models::dnssec_algorithm::DnssecAlgorithm>,
+    pub digest: Option<crate::models::dnssec_digest::DnssecDigest>,
+    pub digest_algorithm: Option<crate::models::dnssec_digest_algorithm::DnssecDigestAlgorithm>,
+    pub digest_type: Option<crate::models::dnssec_digest_type::DnssecDigestType>,
+    pub dnssec_multi_signer:
+        Option<crate::models::dnssec_dnssec_multi_signer::DnssecDnssecMultiSigner>,
+    pub dnssec_presigned: Option<crate::models::dnssec_dnssec_presigned::DnssecDnssecPresigned>,
+    pub dnssec_use_nsec3: Option<crate::models::dnssec_dnssec_use_nsec3::DnssecDnssecUseNsec3>,
+    pub ds: Option<crate::models::dnssec_ds::DnssecDs>,
+    pub flags: Option<crate::models::dnssec_flags::DnssecFlags>,
+    pub key_tag: Option<crate::models::dnssec_key_tag::DnssecKeyTag>,
+    pub key_type: Option<crate::models::dnssec_key_type::DnssecKeyType>,
+    pub modified_on: Option<crate::models::dnssec_modified_on::DnssecModifiedOn>,
+    pub public_key: Option<crate::models::dnssec_public_key::DnssecPublicKey>,
+    pub status: Option<crate::models::dnssec_status::DnssecStatus>,
 }
