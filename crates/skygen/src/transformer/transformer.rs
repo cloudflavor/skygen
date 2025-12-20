@@ -20,6 +20,19 @@ use openapiv3::{
 use serde_json::{Number, Value as JsonVal};
 use serde_yaml::Value as YamlVal;
 
+#[derive(Clone, Copy, Debug)]
+enum NumericHint {
+    Integer,
+    Number,
+}
+
+#[derive(Clone, Copy, Debug)]
+enum NumericValueKind {
+    Signed,
+    Unsigned,
+    Float,
+}
+
 pub fn fallback_operation_id(method: &str, path: &str) -> String {
     let normalized_path = path
         .trim_matches('/')
@@ -169,58 +182,205 @@ pub fn infer_param_type_from_schema(schema_or_ref: &ReferenceOr<OApiSchema>) -> 
     }
 }
 
-pub fn fix_json_large_numbers(val: JsonVal) -> JsonVal {
-    match val {
-        JsonVal::Number(n) => {
-            let n_str = n.to_string();
-            match n_str.parse::<u128>() {
-                Ok(parsed) if parsed > u64::MAX as u128 => JsonVal::Number(Number::from(u64::MAX)),
-                Ok(parsed) => JsonVal::Number(Number::from(parsed as u64)),
-                Err(_) => JsonVal::Number(Number::from(u64::MAX)), // fallback
+pub fn fix_json_large_numbers(mut val: JsonVal) -> JsonVal {
+    normalize_json_value(&mut val, None, None);
+    val
+}
+
+fn normalize_json_value(
+    value: &mut JsonVal,
+    parent_key: Option<&str>,
+    numeric_hint: Option<NumericHint>,
+) {
+    match value {
+        JsonVal::Number(num) => {
+            if let Some(kind) = numeric_kind_for_key(parent_key, numeric_hint) {
+                clamp_json_number_in_place(num, kind);
             }
         }
-        JsonVal::String(s) => JsonVal::String(s),
-        JsonVal::Array(arr) => {
-            JsonVal::Array(arr.into_iter().map(fix_json_large_numbers).collect())
+        JsonVal::String(s) => {
+            if let Some(kind) = numeric_kind_for_key(parent_key, numeric_hint) {
+                if let Some(new_val) = parse_string_into_json_number(s, kind) {
+                    *value = new_val;
+                }
+            }
         }
-        JsonVal::Object(obj) => {
-            let fixed = obj
+        JsonVal::Array(items) => {
+            for item in items.iter_mut() {
+                normalize_json_value(item, parent_key, numeric_hint);
+            }
+        }
+        JsonVal::Object(map) => {
+            let (has_type_field, local_hint) = infer_numeric_hint_from_map(map);
+            let next_hint = local_hint.or_else(|| if has_type_field { None } else { numeric_hint });
+
+            for (key, val) in map.iter_mut() {
+                normalize_json_value(val, Some(key.as_str()), next_hint);
+            }
+        }
+        _ => {}
+    }
+}
+
+fn clamp_json_number_in_place(num: &mut Number, kind: NumericValueKind) {
+    match kind {
+        NumericValueKind::Signed => {
+            if let Some(value) = num.as_i64() {
+                *num = Number::from(value);
+            } else if let Some(value) = num.as_u64() {
+                let clamped = value.min(i64::MAX as u64) as i64;
+                *num = Number::from(clamped);
+            } else if let Some(value) = num.as_f64() {
+                let clamped = value.clamp(i64::MIN as f64, i64::MAX as f64);
+                if let Some(new_num) = Number::from_f64(clamped) {
+                    *num = new_num;
+                }
+            }
+        }
+        NumericValueKind::Unsigned => {
+            if let Some(value) = num.as_u64() {
+                let upper = usize::MAX as u64;
+                *num = Number::from(value.min(upper));
+            } else if let Some(value) = num.as_i64() {
+                if value.is_negative() {
+                    *num = Number::from(0u64);
+                } else {
+                    let upper = usize::MAX as i64;
+                    *num = Number::from(value.min(upper) as u64);
+                }
+            } else if let Some(value) = num.as_f64() {
+                let clamped = value.clamp(0.0, usize::MAX as f64);
+                if let Some(new_num) = Number::from_f64(clamped) {
+                    *num = new_num;
+                }
+            }
+        }
+        NumericValueKind::Float => {
+            if let Some(value) = num.as_f64() {
+                let clamped = value.clamp(f64::MIN, f64::MAX);
+                if let Some(new_num) = Number::from_f64(clamped) {
+                    *num = new_num;
+                }
+            } else if let Some(value) = num.as_i64() {
+                if let Some(new_num) = Number::from_f64(value as f64) {
+                    *num = new_num;
+                }
+            } else if let Some(value) = num.as_u64() {
+                if let Some(new_num) = Number::from_f64(value as f64) {
+                    *num = new_num;
+                }
+            }
+        }
+    }
+}
+
+fn parse_string_into_json_number(input: &str, kind: NumericValueKind) -> Option<JsonVal> {
+    match kind {
+        NumericValueKind::Signed => {
+            parse_string_to_i64(input).map(|v| JsonVal::Number(Number::from(v)))
+        }
+        NumericValueKind::Unsigned => parse_string_to_unsigned(input)
+            .map(|v| JsonVal::Number(Number::from(v.min(usize::MAX as u128) as u64))),
+        NumericValueKind::Float => parse_string_to_f64(input)
+            .and_then(Number::from_f64)
+            .map(JsonVal::Number),
+    }
+}
+
+fn parse_string_to_i64(input: &str) -> Option<i64> {
+    let value = input.trim().parse::<i128>().ok()?;
+    let clamped = value.clamp(i64::MIN as i128, i64::MAX as i128);
+    Some(clamped as i64)
+}
+
+fn parse_string_to_unsigned(input: &str) -> Option<u128> {
+    let value = input.trim().parse::<i128>().ok()?;
+    if value.is_negative() {
+        return Some(0);
+    }
+    Some(value as u128)
+}
+
+fn parse_string_to_f64(input: &str) -> Option<f64> {
+    let value = input.trim().parse::<f64>().ok()?;
+    if value.is_finite() {
+        Some(value)
+    } else {
+        None
+    }
+}
+
+fn numeric_kind_for_key(key: Option<&str>, hint: Option<NumericHint>) -> Option<NumericValueKind> {
+    match key {
+        Some("maximum") | Some("minimum") | Some("multipleOf") | Some("enum") | Some("default")
+        | Some("example") => match hint {
+            Some(NumericHint::Integer) => {
+                if key == Some("enum") {
+                    Some(NumericValueKind::Signed)
+                } else {
+                    Some(NumericValueKind::Signed)
+                }
+            }
+            Some(NumericHint::Number) => Some(NumericValueKind::Float),
+            None => None,
+        },
+        Some("maxLength")
+        | Some("minLength")
+        | Some("maxItems")
+        | Some("minItems")
+        | Some("maxProperties")
+        | Some("minProperties") => Some(NumericValueKind::Unsigned),
+        _ => None,
+    }
+}
+
+fn infer_numeric_hint_from_map(
+    map: &serde_json::Map<String, JsonVal>,
+) -> (bool, Option<NumericHint>) {
+    if let Some(ty) = map.get("type") {
+        if let Some(type_str) = ty.as_str() {
+            return match type_str {
+                "integer" => (true, Some(NumericHint::Integer)),
+                "number" => (true, Some(NumericHint::Number)),
+                _ => (true, None),
+            };
+        }
+        return (true, None);
+    }
+    (false, None)
+}
+
+pub fn fix_yaml_large_numbers(val: YamlVal) -> YamlVal {
+    match val {
+        YamlVal::Number(num) => YamlVal::Number(normalize_yaml_number(num)),
+        YamlVal::Sequence(seq) => {
+            YamlVal::Sequence(seq.into_iter().map(fix_yaml_large_numbers).collect())
+        }
+        YamlVal::Mapping(map) => {
+            let normalized = map
                 .into_iter()
-                .map(|(k, v)| (k, fix_json_large_numbers(v)))
+                .map(|(k, v)| (k, fix_yaml_large_numbers(v)))
                 .collect();
-            JsonVal::Object(fixed)
+            YamlVal::Mapping(normalized)
         }
         other => other,
     }
 }
 
-pub fn fix_yaml_large_numbers(val: YamlVal) -> YamlVal {
-    match val {
-        serde_yaml::Value::Number(n) => {
-            let n_str = n.to_string();
-            match n_str.parse::<u128>() {
-                Ok(parsed) if parsed > u64::MAX as u128 => {
-                    serde_yaml::Value::Number(serde_yaml::Number::from(u64::MAX))
-                }
-                Ok(parsed) => serde_yaml::Value::Number(serde_yaml::Number::from(parsed as u64)),
-                Err(_) => {
-                    // Fallback: something weird, just replace with u64::MAX
-                    serde_yaml::Value::Number(serde_yaml::Number::from(u64::MAX))
-                }
-            }
+fn normalize_yaml_number(num: serde_yaml::Number) -> serde_yaml::Number {
+    if let Some(value) = num.as_i64() {
+        serde_yaml::Number::from(value)
+    } else if let Some(value) = num.as_u64() {
+        serde_yaml::Number::from(value)
+    } else if let Some(value) = num.as_f64() {
+        serde_yaml::Number::from(value)
+    } else {
+        let as_str = num.to_string();
+        if let Some(parsed) = parse_string_to_f64(&as_str) {
+            serde_yaml::Number::from(parsed)
+        } else {
+            serde_yaml::Number::from(0)
         }
-        serde_yaml::Value::String(s) => serde_yaml::Value::String(s),
-        serde_yaml::Value::Sequence(seq) => {
-            serde_yaml::Value::Sequence(seq.into_iter().map(fix_yaml_large_numbers).collect())
-        }
-        serde_yaml::Value::Mapping(map) => {
-            let fixed = map
-                .into_iter()
-                .map(|(k, v)| (k, fix_yaml_large_numbers(v)))
-                .collect();
-            serde_yaml::Value::Mapping(fixed)
-        }
-        other => other,
     }
 }
 

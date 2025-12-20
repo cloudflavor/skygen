@@ -82,8 +82,9 @@ pub(crate) async fn deserialize_data(data: &str) -> Result<OpenAPI> {
     let fixed_yaml = fix_yaml_large_numbers(normalized_yaml);
     let json_val: serde_json::Value =
         serde_json::to_value(fixed_yaml).with_context(|| "failed to convert YAML to JSON value")?;
+    let fixed_json = fix_json_large_numbers(json_val);
 
-    from_json_value(json_val).with_context(|| "failed to deserialize OpenAPI from YAML->JSON")
+    from_json_value(fixed_json).with_context(|| "failed to deserialize OpenAPI from YAML->JSON")
 }
 
 fn normalize_yaml_keys(value: YamlValue) -> YamlValue {

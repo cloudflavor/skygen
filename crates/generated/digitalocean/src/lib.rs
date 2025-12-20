@@ -15,22 +15,21 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use reqwest::header::{HeaderMap, HeaderName, HeaderValue};
 /// # Usage
 /// ```no_run
 /// use digital_ocean_api::{ApiClient, apis};
 /// let api = ApiClient::builder("https://api.example.com")
 ///     .build()
 ///     .expect("client");
-/// let _ = apis::1_click_applications::one_clicks_list(&api)
+/// let _ = apis::model_1_click_applications::one_clicks_list(&api)
 ///     .path_param("id", "example")
 ///     .send()
 ///     .await;
 /// ```
-
 use reqwest::Client;
 use reqwest::ClientBuilder;
 use reqwest::Method;
-use reqwest::header::{HeaderMap, HeaderName, HeaderValue};
 use serde::de::DeserializeOwned;
 use serde::Serialize;
 use std::collections::{BTreeMap, BTreeSet};
@@ -164,7 +163,11 @@ impl ApiClientBuilder {
         self
     }
 
-    pub fn default_query_param(mut self, name: impl Into<String>, value: impl Into<String>) -> Self {
+    pub fn default_query_param(
+        mut self,
+        name: impl Into<String>,
+        value: impl Into<String>,
+    ) -> Self {
         self.default_query.push((name.into(), value.into()));
         self
     }
@@ -305,13 +308,10 @@ impl<'a, Resp> ApiRequestBuilder<'a, Resp> {
             return Err(ApiError::MissingPathParam(path));
         }
 
-        let mut req = self
-            .api
-            .client()
-            .request(
-                self.method.clone(),
-                format!("{}/{}", self.api.base_url().trim_end_matches('/'), path),
-            );
+        let mut req = self.api.client().request(
+            self.method.clone(),
+            format!("{}/{}", self.api.base_url().trim_end_matches('/'), path),
+        );
 
         for (name, value) in self.api.default_headers().iter() {
             req = req.header(name, value);
@@ -321,12 +321,8 @@ impl<'a, Resp> ApiRequestBuilder<'a, Resp> {
             req = req.header(name, value);
         }
 
-        let mut query_pairs: Vec<(String, String)> = self
-            .api
-            .default_query_params()
-            .iter()
-            .cloned()
-            .collect();
+        let mut query_pairs: Vec<(String, String)> =
+            self.api.default_query_params().iter().cloned().collect();
         query_pairs.extend(self.query_params.into_iter());
 
         if !query_pairs.is_empty() {
@@ -372,9 +368,6 @@ impl<'a, Resp> ApiRequestBuilder<'a, Resp> {
     }
 }
 
-
-
 pub mod apis;
 
 pub mod models;
-

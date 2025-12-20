@@ -25,6 +25,7 @@ use crate::TEMPLATES;
 use anyhow::{ensure, Context, Result};
 use heck::{ToSnakeCase, ToUpperCamelCase};
 use openapiv3::{Components, Info as OApiInfo, OpenAPI, Paths, ReferenceOr, SchemaKind};
+use semver::Version;
 use serde::Serialize;
 use std::collections::{BTreeMap, BTreeSet, HashMap, HashSet};
 use std::path::Path;
@@ -286,6 +287,7 @@ async fn generate_lib(
         version,
         ..
     } = api_info;
+    let crate_version = sanitize_crate_version(&version);
     let sample_metadata = reqs.iter().next().map(|(tag, ops)| {
         let module_tokens: Vec<String> = tag
             .to_lowercase()
@@ -313,7 +315,7 @@ async fn generate_lib(
         .unwrap_or_else(|| "health_check".to_string());
 
     for (tag, ops) in reqs.into_iter() {
-        let module_name = tag.to_lowercase().to_snake_case();
+        let module_name = sanitize_module_name(&tag);
         let mut module_functions: Vec<Function> = Vec::new();
         let mut model_usage: BTreeSet<ModelUsage> = BTreeSet::new();
         let mut name_tracker: HashMap<String, usize> = HashMap::new();
@@ -467,7 +469,7 @@ async fn generate_lib(
         .await
         .with_context(|| "failed to write lib.rs")?;
 
-    create_rust_project(title, version.clone(), &output_root).await?;
+    create_rust_project(title, crate_version, &output_root).await?;
     if let Err(err) = run_cargo_tasks(&output_root).await {
         tracing::warn!("cargo post-processing failed: {err}");
     }
@@ -836,6 +838,90 @@ fn sanitize_method_suffix(value: &str) -> String {
         ident.push_str("_param");
     }
     ident
+}
+
+fn sanitize_crate_version(raw: &str) -> String {
+    let trimmed = raw.trim();
+    let stripped = trimmed.trim_start_matches(|c| c == 'v' || c == 'V');
+    let candidate = if stripped.is_empty() {
+        trimmed
+    } else {
+        stripped
+    };
+
+    if candidate.is_empty() {
+        tracing::warn!("OpenAPI info.version missing; defaulting to 0.1.0");
+        return "0.1.0".to_string();
+    }
+
+    if Version::parse(candidate).is_ok() {
+        return candidate.to_string();
+    }
+
+    if let Some(padded) = pad_semver_components(candidate) {
+        if Version::parse(&padded).is_ok() {
+            tracing::warn!("normalized OpenAPI version '{}' to '{}'", raw, padded);
+            return padded;
+        }
+    }
+
+    tracing::warn!(
+        "unable to parse OpenAPI version '{}' - falling back to 0.1.0",
+        raw
+    );
+    "0.1.0".to_string()
+}
+
+fn pad_semver_components(value: &str) -> Option<String> {
+    let mut core = value;
+    let mut build = "";
+    if let Some(idx) = core.find('+') {
+        build = &core[idx + 1..];
+        core = &core[..idx];
+    }
+
+    let mut pre_release = "";
+    if let Some(idx) = core.find('-') {
+        pre_release = &core[idx + 1..];
+        core = &core[..idx];
+    }
+
+    if core.is_empty() {
+        return None;
+    }
+
+    let mut numbers: Vec<u64> = Vec::new();
+    for (idx, part) in core
+        .split('.')
+        .filter(|segment| !segment.is_empty())
+        .enumerate()
+    {
+        let parsed = part.parse::<u64>().ok()?;
+        numbers.push(parsed);
+        if idx == 2 {
+            break;
+        }
+    }
+
+    if numbers.is_empty() {
+        return None;
+    }
+
+    while numbers.len() < 3 {
+        numbers.push(0);
+    }
+
+    let mut version = format!("{}.{}.{}", numbers[0], numbers[1], numbers[2]);
+    if !pre_release.is_empty() {
+        version.push('-');
+        version.push_str(pre_release);
+    }
+    if !build.is_empty() {
+        version.push('+');
+        version.push_str(build);
+    }
+
+    Some(version)
 }
 
 async fn create_rust_project(title: String, version: String, path: impl AsRef<Path>) -> Result<()> {
