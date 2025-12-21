@@ -74,7 +74,7 @@ impl<'a> ListVolumesRequest<'a> {
 ///
 /// # Example
 /// ```no_run
-/// use hetzner_cloud::{ ApiClient, apis::volumes };
+/// use hetznercloud::{ ApiClient, apis::volumes };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
 /// let response = list_volumes(&api)
 ///     .with_status("status")
@@ -130,7 +130,7 @@ impl<'a> CreateVolumeRequest<'a> {
 ///
 /// # Example
 /// ```no_run
-/// use hetzner_cloud::{ ApiClient, apis::volumes };
+/// use hetznercloud::{ ApiClient, apis::volumes };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = create_volume(&api)
@@ -173,7 +173,7 @@ impl<'a> VolumeRequest<'a> {
 ///
 /// # Example
 /// ```no_run
-/// use hetzner_cloud::{ ApiClient, apis::volumes };
+/// use hetznercloud::{ ApiClient, apis::volumes };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
 /// let response = volume(&api)
 ///     .with_id("id")
@@ -219,7 +219,7 @@ impl<'a> UpdateVolumeRequest<'a> {
 ///
 /// # Example
 /// ```no_run
-/// use hetzner_cloud::{ ApiClient, apis::volumes };
+/// use hetznercloud::{ ApiClient, apis::volumes };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = update_volume(&api)
@@ -264,7 +264,7 @@ impl<'a> VolumeDeleteRequest<'a> {
 ///
 /// # Example
 /// ```no_run
-/// use hetzner_cloud::{ ApiClient, apis::volumes };
+/// use hetznercloud::{ ApiClient, apis::volumes };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
 /// let response = volume_delete(&api)
 ///     .with_id("id")

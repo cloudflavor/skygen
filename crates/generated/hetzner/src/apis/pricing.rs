@@ -44,7 +44,7 @@ impl<'a> GetRequest<'a> {
 ///
 /// # Example
 /// ```no_run
-/// use hetzner_cloud::{ ApiClient, apis::pricing };
+/// use hetznercloud::{ ApiClient, apis::pricing };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
 /// let response = get(&api)
 ///     .send()

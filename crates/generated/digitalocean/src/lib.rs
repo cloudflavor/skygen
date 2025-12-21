@@ -20,7 +20,7 @@
 //!
 //! # Usage
 //! ```no_run
-//! use digital_ocean_api::{ApiClient, apis};
+//! use digitalocean::{ApiClient, apis};
 //! let api = ApiClient::builder("https://api.example.com")
 //!     .build()
 //!     .expect("client");

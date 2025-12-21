@@ -74,7 +74,7 @@ impl<'a> ListCertificatesRequest<'a> {
 ///
 /// # Example
 /// ```no_run
-/// use hetzner_cloud::{ ApiClient, apis::certificates };
+/// use hetznercloud::{ ApiClient, apis::certificates };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
 /// let response = list_certificates(&api)
 ///     .with_sort("sort")
@@ -124,7 +124,7 @@ impl<'a> CreateCertificateRequest<'a> {
 ///
 /// # Example
 /// ```no_run
-/// use hetzner_cloud::{ ApiClient, apis::certificates };
+/// use hetznercloud::{ ApiClient, apis::certificates };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = create_certificate(&api)
@@ -168,7 +168,7 @@ impl<'a> CertificateRequest<'a> {
 ///
 /// # Example
 /// ```no_run
-/// use hetzner_cloud::{ ApiClient, apis::certificates };
+/// use hetznercloud::{ ApiClient, apis::certificates };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
 /// let response = certificate(&api)
 ///     .with_id("id")
@@ -217,7 +217,7 @@ impl<'a> UpdateCertificateRequest<'a> {
 ///
 /// # Example
 /// ```no_run
-/// use hetzner_cloud::{ ApiClient, apis::certificates };
+/// use hetznercloud::{ ApiClient, apis::certificates };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = update_certificate(&api)
@@ -262,7 +262,7 @@ impl<'a> CertificateDeleteRequest<'a> {
 ///
 /// # Example
 /// ```no_run
-/// use hetzner_cloud::{ ApiClient, apis::certificates };
+/// use hetznercloud::{ ApiClient, apis::certificates };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
 /// let response = certificate_delete(&api)
 ///     .with_id("id")

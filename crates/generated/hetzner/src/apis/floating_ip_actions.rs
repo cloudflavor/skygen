@@ -71,7 +71,7 @@ impl<'a> ListFloatingIpsActionsRequest<'a> {
 ///
 /// # Example
 /// ```no_run
-/// use hetzner_cloud::{ ApiClient, apis::floating_ip_actions };
+/// use hetznercloud::{ ApiClient, apis::floating_ip_actions };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
 /// let response = list_floating_ips_actions(&api)
 ///     .with_id("id")
@@ -118,7 +118,7 @@ impl<'a> IpsActionRequest<'a> {
 ///
 /// # Example
 /// ```no_run
-/// use hetzner_cloud::{ ApiClient, apis::floating_ip_actions };
+/// use hetznercloud::{ ApiClient, apis::floating_ip_actions };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
 /// let response = ips_action(&api)
 ///     .with_id("id")
@@ -183,7 +183,7 @@ impl<'a> ListFloatingIpActionsRequest<'a> {
 ///
 /// # Example
 /// ```no_run
-/// use hetzner_cloud::{ ApiClient, apis::floating_ip_actions };
+/// use hetznercloud::{ ApiClient, apis::floating_ip_actions };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
 /// let response = list_floating_ip_actions(&api)
 ///     .with_id("id")
@@ -234,7 +234,7 @@ impl<'a> AssignFloatingIpRequest<'a> {
 ///
 /// # Example
 /// ```no_run
-/// use hetzner_cloud::{ ApiClient, apis::floating_ip_actions };
+/// use hetznercloud::{ ApiClient, apis::floating_ip_actions };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = assign_floating_ip(&api)
@@ -292,7 +292,7 @@ impl<'a> ChangeFloatingIpDnsRequest<'a> {
 ///
 /// # Example
 /// ```no_run
-/// use hetzner_cloud::{ ApiClient, apis::floating_ip_actions };
+/// use hetznercloud::{ ApiClient, apis::floating_ip_actions };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = change_floating_ip_dns(&api)
@@ -348,7 +348,7 @@ impl<'a> ChangeFloatingIpProtectionRequest<'a> {
 ///
 /// # Example
 /// ```no_run
-/// use hetzner_cloud::{ ApiClient, apis::floating_ip_actions };
+/// use hetznercloud::{ ApiClient, apis::floating_ip_actions };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = change_floating_ip_protection(&api)
@@ -396,7 +396,7 @@ impl<'a> UnassignFloatingIpRequest<'a> {
 ///
 /// # Example
 /// ```no_run
-/// use hetzner_cloud::{ ApiClient, apis::floating_ip_actions };
+/// use hetznercloud::{ ApiClient, apis::floating_ip_actions };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
 /// let response = unassign_floating_ip(&api)
 ///     .with_id("id")
@@ -446,7 +446,7 @@ impl<'a> ActionRequest<'a> {
 ///
 /// # Example
 /// ```no_run
-/// use hetzner_cloud::{ ApiClient, apis::floating_ip_actions };
+/// use hetznercloud::{ ApiClient, apis::floating_ip_actions };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
 /// let response = action(&api)
 ///     .with_id("id")

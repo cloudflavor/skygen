@@ -74,7 +74,7 @@ impl<'a> ListPlacementGroupsRequest<'a> {
 ///
 /// # Example
 /// ```no_run
-/// use hetzner_cloud::{ ApiClient, apis::placement_groups };
+/// use hetznercloud::{ ApiClient, apis::placement_groups };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
 /// let response = list_placement_groups(&api)
 ///     .with_sort("sort")
@@ -118,7 +118,7 @@ impl<'a> CreatePlacementGroupRequest<'a> {
 ///
 /// # Example
 /// ```no_run
-/// use hetzner_cloud::{ ApiClient, apis::placement_groups };
+/// use hetznercloud::{ ApiClient, apis::placement_groups };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = create_placement_group(&api)
@@ -162,7 +162,7 @@ impl<'a> GroupRequest<'a> {
 ///
 /// # Example
 /// ```no_run
-/// use hetzner_cloud::{ ApiClient, apis::placement_groups };
+/// use hetznercloud::{ ApiClient, apis::placement_groups };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
 /// let response = group(&api)
 ///     .with_id("id")
@@ -211,7 +211,7 @@ impl<'a> UpdatePlacementGroupRequest<'a> {
 ///
 /// # Example
 /// ```no_run
-/// use hetzner_cloud::{ ApiClient, apis::placement_groups };
+/// use hetznercloud::{ ApiClient, apis::placement_groups };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = update_placement_group(&api)
@@ -256,7 +256,7 @@ impl<'a> GroupDeleteRequest<'a> {
 ///
 /// # Example
 /// ```no_run
-/// use hetzner_cloud::{ ApiClient, apis::placement_groups };
+/// use hetznercloud::{ ApiClient, apis::placement_groups };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
 /// let response = group_delete(&api)
 ///     .with_id("id")

@@ -71,7 +71,7 @@ impl<'a> ListFirewallsRequest<'a> {
 ///
 /// # Example
 /// ```no_run
-/// use hetzner_cloud::{ ApiClient, apis::firewalls };
+/// use hetznercloud::{ ApiClient, apis::firewalls };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
 /// let response = list_firewalls(&api)
 ///     .with_sort("sort")
@@ -122,7 +122,7 @@ impl<'a> CreateFirewallRequest<'a> {
 ///
 /// # Example
 /// ```no_run
-/// use hetzner_cloud::{ ApiClient, apis::firewalls };
+/// use hetznercloud::{ ApiClient, apis::firewalls };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = create_firewall(&api)
@@ -165,7 +165,7 @@ impl<'a> FirewallRequest<'a> {
 ///
 /// # Example
 /// ```no_run
-/// use hetzner_cloud::{ ApiClient, apis::firewalls };
+/// use hetznercloud::{ ApiClient, apis::firewalls };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
 /// let response = firewall(&api)
 ///     .with_id("id")
@@ -213,7 +213,7 @@ impl<'a> UpdateFirewallRequest<'a> {
 ///
 /// # Example
 /// ```no_run
-/// use hetzner_cloud::{ ApiClient, apis::firewalls };
+/// use hetznercloud::{ ApiClient, apis::firewalls };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = update_firewall(&api)
@@ -264,7 +264,7 @@ impl<'a> FirewallDeleteRequest<'a> {
 ///
 /// # Example
 /// ```no_run
-/// use hetzner_cloud::{ ApiClient, apis::firewalls };
+/// use hetznercloud::{ ApiClient, apis::firewalls };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
 /// let response = firewall_delete(&api)
 ///     .with_id("id")

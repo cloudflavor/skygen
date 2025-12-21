@@ -71,7 +71,7 @@ impl<'a> ListNetworksActionsRequest<'a> {
 ///
 /// # Example
 /// ```no_run
-/// use hetzner_cloud::{ ApiClient, apis::network_actions };
+/// use hetznercloud::{ ApiClient, apis::network_actions };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
 /// let response = list_networks_actions(&api)
 ///     .with_id("id")
@@ -118,7 +118,7 @@ impl<'a> NetworksActionRequest<'a> {
 ///
 /// # Example
 /// ```no_run
-/// use hetzner_cloud::{ ApiClient, apis::network_actions };
+/// use hetznercloud::{ ApiClient, apis::network_actions };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
 /// let response = networks_action(&api)
 ///     .with_id("id")
@@ -183,7 +183,7 @@ impl<'a> ListNetworkActionsRequest<'a> {
 ///
 /// # Example
 /// ```no_run
-/// use hetzner_cloud::{ ApiClient, apis::network_actions };
+/// use hetznercloud::{ ApiClient, apis::network_actions };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
 /// let response = list_network_actions(&api)
 ///     .with_id("id")
@@ -236,7 +236,7 @@ impl<'a> AddNetworkRouteRequest<'a> {
 ///
 /// # Example
 /// ```no_run
-/// use hetzner_cloud::{ ApiClient, apis::network_actions };
+/// use hetznercloud::{ ApiClient, apis::network_actions };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = add_network_route(&api)
@@ -289,7 +289,7 @@ impl<'a> AddNetworkSubnetRequest<'a> {
 ///
 /// # Example
 /// ```no_run
-/// use hetzner_cloud::{ ApiClient, apis::network_actions };
+/// use hetznercloud::{ ApiClient, apis::network_actions };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = add_network_subnet(&api)
@@ -349,7 +349,7 @@ impl<'a> ChangeNetworkIpRangeRequest<'a> {
 ///
 /// # Example
 /// ```no_run
-/// use hetzner_cloud::{ ApiClient, apis::network_actions };
+/// use hetznercloud::{ ApiClient, apis::network_actions };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = change_network_ip_range(&api)
@@ -401,7 +401,7 @@ impl<'a> ChangeNetworkProtectionRequest<'a> {
 ///
 /// # Example
 /// ```no_run
-/// use hetzner_cloud::{ ApiClient, apis::network_actions };
+/// use hetznercloud::{ ApiClient, apis::network_actions };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = change_network_protection(&api)
@@ -453,7 +453,7 @@ impl<'a> DeleteNetworkRouteRequest<'a> {
 ///
 /// # Example
 /// ```no_run
-/// use hetzner_cloud::{ ApiClient, apis::network_actions };
+/// use hetznercloud::{ ApiClient, apis::network_actions };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = delete_network_route(&api)
@@ -507,7 +507,7 @@ impl<'a> DeleteNetworkSubnetRequest<'a> {
 ///
 /// # Example
 /// ```no_run
-/// use hetzner_cloud::{ ApiClient, apis::network_actions };
+/// use hetznercloud::{ ApiClient, apis::network_actions };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = delete_network_subnet(&api)
@@ -558,7 +558,7 @@ impl<'a> ActionRequest<'a> {
 ///
 /// # Example
 /// ```no_run
-/// use hetzner_cloud::{ ApiClient, apis::network_actions };
+/// use hetznercloud::{ ApiClient, apis::network_actions };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
 /// let response = action(&api)
 ///     .with_id("id")

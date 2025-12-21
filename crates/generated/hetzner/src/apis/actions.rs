@@ -54,7 +54,7 @@ impl<'a> GetRequest<'a> {
 ///
 /// # Example
 /// ```no_run
-/// use hetzner_cloud::{ ApiClient, apis::actions };
+/// use hetznercloud::{ ApiClient, apis::actions };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
 /// let response = get(&api)
 ///     .with_id("id")
@@ -96,7 +96,7 @@ impl<'a> ActionRequest<'a> {
 ///
 /// # Example
 /// ```no_run
-/// use hetzner_cloud::{ ApiClient, apis::actions };
+/// use hetznercloud::{ ApiClient, apis::actions };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
 /// let response = action(&api)
 ///     .with_id("id")

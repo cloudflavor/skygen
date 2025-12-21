@@ -71,7 +71,7 @@ impl<'a> ListNetworksRequest<'a> {
 ///
 /// # Example
 /// ```no_run
-/// use hetzner_cloud::{ ApiClient, apis::networks };
+/// use hetznercloud::{ ApiClient, apis::networks };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
 /// let response = list_networks(&api)
 ///     .with_sort("sort")
@@ -120,7 +120,7 @@ impl<'a> CreateNetworkRequest<'a> {
 ///
 /// # Example
 /// ```no_run
-/// use hetzner_cloud::{ ApiClient, apis::networks };
+/// use hetznercloud::{ ApiClient, apis::networks };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = create_network(&api)
@@ -163,7 +163,7 @@ impl<'a> NetworkRequest<'a> {
 ///
 /// # Example
 /// ```no_run
-/// use hetzner_cloud::{ ApiClient, apis::networks };
+/// use hetznercloud::{ ApiClient, apis::networks };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
 /// let response = network(&api)
 ///     .with_id("id")
@@ -211,7 +211,7 @@ impl<'a> UpdateNetworkRequest<'a> {
 ///
 /// # Example
 /// ```no_run
-/// use hetzner_cloud::{ ApiClient, apis::networks };
+/// use hetznercloud::{ ApiClient, apis::networks };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = update_network(&api)
@@ -258,7 +258,7 @@ impl<'a> NetworkDeleteRequest<'a> {
 ///
 /// # Example
 /// ```no_run
-/// use hetzner_cloud::{ ApiClient, apis::networks };
+/// use hetznercloud::{ ApiClient, apis::networks };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
 /// let response = network_delete(&api)
 ///     .with_id("id")

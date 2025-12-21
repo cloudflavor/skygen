@@ -479,7 +479,7 @@ async fn generate_lib(
         .cloned()
         .unwrap_or_else(|| "apis".to_string());
     let sample_function = sample_function_name;
-    context.insert("crate_name", &title.to_snake_case());
+    context.insert("crate_name", &crate_name_slug);
     context.insert("sample_module", &sample_module);
     context.insert("sample_function", &sample_function);
     context.insert("docs", &docs_block);
@@ -1359,20 +1359,28 @@ fn append_alpha(version: &str) -> String {
 }
 
 fn sanitize_crate_name(raw: &str) -> String {
-    let mut slug = raw.to_lowercase().replace(' ', "_").replace('-', "_");
+    let mut slug = raw
+        .to_lowercase()
+        .replace("public_api", "")
+        .replace("api", "")
+        .replace("swgger", "")
+        .replace('_', "")
+        .replace(' ', "")
+        .replace("-", "");
+
     slug = slug.trim_matches('_').to_string();
     if slug.is_empty() {
-        slug = "api".to_string();
+        panic!("empty name");
     }
-    for pattern in ["public_api", "api", "swagger"] {
-        if let Some(stripped) = slug.strip_suffix(pattern) {
-            slug = stripped.trim_end_matches('_').to_string();
-        }
-    }
-    slug = slug.trim_matches('_').to_string();
-    if slug.is_empty() {
-        slug = "api".to_string();
-    }
+    // for pattern in ["public_api", "api", "swagger"] {
+    //     if let Some(stripped) = slug.strip_suffix(pattern) {
+    //         slug = stripped.trim_end_matches('_').to_string();
+    //     }
+    // }
+    // slug = slug.trim_matches('_').to_string();
+    // if slug.is_empty() {
+    //     panic!("empty name");
+    // }
     slug
 }
 
@@ -1382,7 +1390,10 @@ async fn create_rust_project(title: String, version: String, path: impl AsRef<Pa
         .with_context(|| "failed to retrieve cargo tera template")?;
     let mut tera = tera::Tera::default();
     let mut context = tera::Context::new();
-    context.insert("crate_name", &title.to_snake_case());
+    let crate_name = sanitize_crate_name(&title.to_snake_case());
+    let skygen_name = format!("{}_skygen", &crate_name);
+    context.insert("crate_name", &skygen_name);
+    context.insert("normalized_name", &crate_name);
     context.insert("version", &version);
     let contents = cargo_template
         .contents_utf8()

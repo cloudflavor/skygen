@@ -74,7 +74,7 @@ impl<'a> ListSshKeysRequest<'a> {
 ///
 /// # Example
 /// ```no_run
-/// use hetzner_cloud::{ ApiClient, apis::ssh_keys };
+/// use hetznercloud::{ ApiClient, apis::ssh_keys };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
 /// let response = list_ssh_keys(&api)
 ///     .with_sort("sort")
@@ -121,7 +121,7 @@ impl<'a> CreateSshKeyRequest<'a> {
 ///
 /// # Example
 /// ```no_run
-/// use hetzner_cloud::{ ApiClient, apis::ssh_keys };
+/// use hetznercloud::{ ApiClient, apis::ssh_keys };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = create_ssh_key(&api)
@@ -164,7 +164,7 @@ impl<'a> KeyRequest<'a> {
 ///
 /// # Example
 /// ```no_run
-/// use hetzner_cloud::{ ApiClient, apis::ssh_keys };
+/// use hetznercloud::{ ApiClient, apis::ssh_keys };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
 /// let response = key(&api)
 ///     .with_id("id")
@@ -213,7 +213,7 @@ impl<'a> UpdateSshKeyRequest<'a> {
 ///
 /// # Example
 /// ```no_run
-/// use hetzner_cloud::{ ApiClient, apis::ssh_keys };
+/// use hetznercloud::{ ApiClient, apis::ssh_keys };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = update_ssh_key(&api)
@@ -258,7 +258,7 @@ impl<'a> KeyDeleteRequest<'a> {
 ///
 /// # Example
 /// ```no_run
-/// use hetzner_cloud::{ ApiClient, apis::ssh_keys };
+/// use hetznercloud::{ ApiClient, apis::ssh_keys };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
 /// let response = key_delete(&api)
 ///     .with_id("id")

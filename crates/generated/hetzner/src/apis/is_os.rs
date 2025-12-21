@@ -71,7 +71,7 @@ impl<'a> ListIsosRequest<'a> {
 ///
 /// # Example
 /// ```no_run
-/// use hetzner_cloud::{ ApiClient, apis::is_os };
+/// use hetznercloud::{ ApiClient, apis::is_os };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
 /// let response = list_isos(&api)
 ///     .with_name("name")
@@ -117,7 +117,7 @@ impl<'a> IsoRequest<'a> {
 ///
 /// # Example
 /// ```no_run
-/// use hetzner_cloud::{ ApiClient, apis::is_os };
+/// use hetznercloud::{ ApiClient, apis::is_os };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
 /// let response = iso(&api)
 ///     .with_id("id")

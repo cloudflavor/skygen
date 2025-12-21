@@ -59,7 +59,7 @@ impl<'a> ListServerTypesRequest<'a> {
 ///
 /// # Example
 /// ```no_run
-/// use hetzner_cloud::{ ApiClient, apis::server_types };
+/// use hetznercloud::{ ApiClient, apis::server_types };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
 /// let response = list_server_types(&api)
 ///     .with_name("name")
@@ -104,7 +104,7 @@ impl<'a> TypeStructRequest<'a> {
 ///
 /// # Example
 /// ```no_run
-/// use hetzner_cloud::{ ApiClient, apis::server_types };
+/// use hetznercloud::{ ApiClient, apis::server_types };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
 /// let response = r#type(&api)
 ///     .with_id("id")

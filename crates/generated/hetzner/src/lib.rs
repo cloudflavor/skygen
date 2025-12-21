@@ -20,7 +20,7 @@
 //!
 //! # Usage
 //! ```no_run
-//! use hetzner_cloud_api::{ApiClient, apis};
+//! use hetznercloud::{ApiClient, apis};
 //! let api = ApiClient::builder("https://api.example.com")
 //!     .build()
 //!     .expect("client");

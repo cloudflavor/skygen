@@ -69,7 +69,7 @@ impl<'a> ListServersActionsRequest<'a> {
 ///
 /// # Example
 /// ```no_run
-/// use hetzner_cloud::{ ApiClient, apis::server_actions };
+/// use hetznercloud::{ ApiClient, apis::server_actions };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
 /// let response = list_servers_actions(&api)
 ///     .with_id("id")
@@ -116,7 +116,7 @@ impl<'a> ServersActionRequest<'a> {
 ///
 /// # Example
 /// ```no_run
-/// use hetzner_cloud::{ ApiClient, apis::server_actions };
+/// use hetznercloud::{ ApiClient, apis::server_actions };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
 /// let response = servers_action(&api)
 ///     .with_id("id")
@@ -179,7 +179,7 @@ impl<'a> ListServerActionsRequest<'a> {
 ///
 /// # Example
 /// ```no_run
-/// use hetzner_cloud::{ ApiClient, apis::server_actions };
+/// use hetznercloud::{ ApiClient, apis::server_actions };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
 /// let response = list_server_actions(&api)
 ///     .with_id("id")
@@ -242,7 +242,7 @@ impl<'a> AddServerPlacementGroupRequest<'a> {
 ///
 /// # Example
 /// ```no_run
-/// use hetzner_cloud::{ ApiClient, apis::server_actions };
+/// use hetznercloud::{ ApiClient, apis::server_actions };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = add_server_placement_group(&api)
@@ -296,7 +296,7 @@ impl<'a> AttachServerIsoRequest<'a> {
 ///
 /// # Example
 /// ```no_run
-/// use hetzner_cloud::{ ApiClient, apis::server_actions };
+/// use hetznercloud::{ ApiClient, apis::server_actions };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = attach_server_iso(&api)
@@ -359,7 +359,7 @@ impl<'a> AttachServerNetworkRequest<'a> {
 ///
 /// # Example
 /// ```no_run
-/// use hetzner_cloud::{ ApiClient, apis::server_actions };
+/// use hetznercloud::{ ApiClient, apis::server_actions };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = attach_server_network(&api)
@@ -412,7 +412,7 @@ impl<'a> ChangeServerAliasIpsRequest<'a> {
 ///
 /// # Example
 /// ```no_run
-/// use hetzner_cloud::{ ApiClient, apis::server_actions };
+/// use hetznercloud::{ ApiClient, apis::server_actions };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = change_server_alias_ips(&api)
@@ -467,7 +467,7 @@ impl<'a> ChangeServerDnsPtrRequest<'a> {
 ///
 /// # Example
 /// ```no_run
-/// use hetzner_cloud::{ ApiClient, apis::server_actions };
+/// use hetznercloud::{ ApiClient, apis::server_actions };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = change_server_dns_ptr(&api)
@@ -520,7 +520,7 @@ impl<'a> ChangeServerProtectionRequest<'a> {
 ///
 /// # Example
 /// ```no_run
-/// use hetzner_cloud::{ ApiClient, apis::server_actions };
+/// use hetznercloud::{ ApiClient, apis::server_actions };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = change_server_protection(&api)
@@ -587,7 +587,7 @@ impl<'a> ChangeServerTypeRequest<'a> {
 ///
 /// # Example
 /// ```no_run
-/// use hetzner_cloud::{ ApiClient, apis::server_actions };
+/// use hetznercloud::{ ApiClient, apis::server_actions };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = change_server_type(&api)
@@ -641,7 +641,7 @@ impl<'a> CreateServerImageRequest<'a> {
 ///
 /// # Example
 /// ```no_run
-/// use hetzner_cloud::{ ApiClient, apis::server_actions };
+/// use hetznercloud::{ ApiClient, apis::server_actions };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = create_server_image(&api)
@@ -694,7 +694,7 @@ impl<'a> DetachServerNetworkRequest<'a> {
 ///
 /// # Example
 /// ```no_run
-/// use hetzner_cloud::{ ApiClient, apis::server_actions };
+/// use hetznercloud::{ ApiClient, apis::server_actions };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = detach_server_network(&api)
@@ -739,7 +739,7 @@ impl<'a> DetachServerIsoRequest<'a> {
 ///
 /// # Example
 /// ```no_run
-/// use hetzner_cloud::{ ApiClient, apis::server_actions };
+/// use hetznercloud::{ ApiClient, apis::server_actions };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
 /// let response = detach_server_iso(&api)
 ///     .with_id("id")
@@ -785,7 +785,7 @@ impl<'a> DisableServerBackupRequest<'a> {
 ///
 /// # Example
 /// ```no_run
-/// use hetzner_cloud::{ ApiClient, apis::server_actions };
+/// use hetznercloud::{ ApiClient, apis::server_actions };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
 /// let response = disable_server_backup(&api)
 ///     .with_id("id")
@@ -833,7 +833,7 @@ impl<'a> DisableServerRescueRequest<'a> {
 ///
 /// # Example
 /// ```no_run
-/// use hetzner_cloud::{ ApiClient, apis::server_actions };
+/// use hetznercloud::{ ApiClient, apis::server_actions };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
 /// let response = disable_server_rescue(&api)
 ///     .with_id("id")
@@ -879,7 +879,7 @@ impl<'a> EnableServerBackupRequest<'a> {
 ///
 /// # Example
 /// ```no_run
-/// use hetzner_cloud::{ ApiClient, apis::server_actions };
+/// use hetznercloud::{ ApiClient, apis::server_actions };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
 /// let response = enable_server_backup(&api)
 ///     .with_id("id")
@@ -936,7 +936,7 @@ impl<'a> EnableServerRescueRequest<'a> {
 ///
 /// # Example
 /// ```no_run
-/// use hetzner_cloud::{ ApiClient, apis::server_actions };
+/// use hetznercloud::{ ApiClient, apis::server_actions };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = enable_server_rescue(&api)
@@ -981,7 +981,7 @@ impl<'a> PoweroffServerRequest<'a> {
 ///
 /// # Example
 /// ```no_run
-/// use hetzner_cloud::{ ApiClient, apis::server_actions };
+/// use hetznercloud::{ ApiClient, apis::server_actions };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
 /// let response = poweroff_server(&api)
 ///     .with_id("id")
@@ -1024,7 +1024,7 @@ impl<'a> PoweronServerRequest<'a> {
 ///
 /// # Example
 /// ```no_run
-/// use hetzner_cloud::{ ApiClient, apis::server_actions };
+/// use hetznercloud::{ ApiClient, apis::server_actions };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
 /// let response = poweron_server(&api)
 ///     .with_id("id")
@@ -1067,7 +1067,7 @@ impl<'a> RebootServerRequest<'a> {
 ///
 /// # Example
 /// ```no_run
-/// use hetzner_cloud::{ ApiClient, apis::server_actions };
+/// use hetznercloud::{ ApiClient, apis::server_actions };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
 /// let response = reboot_server(&api)
 ///     .with_id("id")
@@ -1118,7 +1118,7 @@ impl<'a> RebuildServerRequest<'a> {
 ///
 /// # Example
 /// ```no_run
-/// use hetzner_cloud::{ ApiClient, apis::server_actions };
+/// use hetznercloud::{ ApiClient, apis::server_actions };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = rebuild_server(&api)
@@ -1167,7 +1167,7 @@ impl<'a> RemoveServerPlacementGroupRequest<'a> {
 ///
 /// # Example
 /// ```no_run
-/// use hetzner_cloud::{ ApiClient, apis::server_actions };
+/// use hetznercloud::{ ApiClient, apis::server_actions };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
 /// let response = remove_server_placement_group(&api)
 ///     .with_id("id")
@@ -1211,7 +1211,7 @@ impl<'a> RequestServerConsoleRequest<'a> {
 ///
 /// # Example
 /// ```no_run
-/// use hetzner_cloud::{ ApiClient, apis::server_actions };
+/// use hetznercloud::{ ApiClient, apis::server_actions };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
 /// let response = request_server_console(&api)
 ///     .with_id("id")
@@ -1254,7 +1254,7 @@ impl<'a> ResetServerRequest<'a> {
 ///
 /// # Example
 /// ```no_run
-/// use hetzner_cloud::{ ApiClient, apis::server_actions };
+/// use hetznercloud::{ ApiClient, apis::server_actions };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
 /// let response = reset_server(&api)
 ///     .with_id("id")
@@ -1302,7 +1302,7 @@ impl<'a> ResetServerPasswordRequest<'a> {
 ///
 /// # Example
 /// ```no_run
-/// use hetzner_cloud::{ ApiClient, apis::server_actions };
+/// use hetznercloud::{ ApiClient, apis::server_actions };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
 /// let response = reset_server_password(&api)
 ///     .with_id("id")
@@ -1348,7 +1348,7 @@ impl<'a> ShutdownServerRequest<'a> {
 ///
 /// # Example
 /// ```no_run
-/// use hetzner_cloud::{ ApiClient, apis::server_actions };
+/// use hetznercloud::{ ApiClient, apis::server_actions };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
 /// let response = shutdown_server(&api)
 ///     .with_id("id")
@@ -1397,7 +1397,7 @@ impl<'a> ActionRequest<'a> {
 ///
 /// # Example
 /// ```no_run
-/// use hetzner_cloud::{ ApiClient, apis::server_actions };
+/// use hetznercloud::{ ApiClient, apis::server_actions };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
 /// let response = action(&api)
 ///     .with_id("id")

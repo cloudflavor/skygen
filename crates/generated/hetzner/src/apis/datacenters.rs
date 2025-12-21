@@ -64,7 +64,7 @@ impl<'a> ListDatacentersRequest<'a> {
 ///
 /// # Example
 /// ```no_run
-/// use hetzner_cloud::{ ApiClient, apis::datacenters };
+/// use hetznercloud::{ ApiClient, apis::datacenters };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
 /// let response = list_datacenters(&api)
 ///     .with_name("name")
@@ -110,7 +110,7 @@ impl<'a> DatacenterRequest<'a> {
 ///
 /// # Example
 /// ```no_run
-/// use hetzner_cloud::{ ApiClient, apis::datacenters };
+/// use hetznercloud::{ ApiClient, apis::datacenters };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
 /// let response = datacenter(&api)
 ///     .with_id("id")

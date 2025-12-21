@@ -69,7 +69,7 @@ impl<'a> ListVolumesActionsRequest<'a> {
 ///
 /// # Example
 /// ```no_run
-/// use hetzner_cloud::{ ApiClient, apis::volume_actions };
+/// use hetznercloud::{ ApiClient, apis::volume_actions };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
 /// let response = list_volumes_actions(&api)
 ///     .with_id("id")
@@ -116,7 +116,7 @@ impl<'a> VolumesActionRequest<'a> {
 ///
 /// # Example
 /// ```no_run
-/// use hetzner_cloud::{ ApiClient, apis::volume_actions };
+/// use hetznercloud::{ ApiClient, apis::volume_actions };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
 /// let response = volumes_action(&api)
 ///     .with_id("id")
@@ -179,7 +179,7 @@ impl<'a> ListVolumeActionsRequest<'a> {
 ///
 /// # Example
 /// ```no_run
-/// use hetzner_cloud::{ ApiClient, apis::volume_actions };
+/// use hetznercloud::{ ApiClient, apis::volume_actions };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
 /// let response = list_volume_actions(&api)
 ///     .with_id("id")
@@ -230,7 +230,7 @@ impl<'a> AttachVolumeRequest<'a> {
 ///
 /// # Example
 /// ```no_run
-/// use hetzner_cloud::{ ApiClient, apis::volume_actions };
+/// use hetznercloud::{ ApiClient, apis::volume_actions };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = attach_volume(&api)
@@ -283,7 +283,7 @@ impl<'a> ChangeVolumeProtectionRequest<'a> {
 ///
 /// # Example
 /// ```no_run
-/// use hetzner_cloud::{ ApiClient, apis::volume_actions };
+/// use hetznercloud::{ ApiClient, apis::volume_actions };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = change_volume_protection(&api)
@@ -328,7 +328,7 @@ impl<'a> DetachVolumeRequest<'a> {
 ///
 /// # Example
 /// ```no_run
-/// use hetzner_cloud::{ ApiClient, apis::volume_actions };
+/// use hetznercloud::{ ApiClient, apis::volume_actions };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
 /// let response = detach_volume(&api)
 ///     .with_id("id")
@@ -378,7 +378,7 @@ impl<'a> ResizeVolumeRequest<'a> {
 ///
 /// # Example
 /// ```no_run
-/// use hetzner_cloud::{ ApiClient, apis::volume_actions };
+/// use hetznercloud::{ ApiClient, apis::volume_actions };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = resize_volume(&api)
@@ -429,7 +429,7 @@ impl<'a> ActionRequest<'a> {
 ///
 /// # Example
 /// ```no_run
-/// use hetzner_cloud::{ ApiClient, apis::volume_actions };
+/// use hetznercloud::{ ApiClient, apis::volume_actions };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
 /// let response = action(&api)
 ///     .with_id("id")

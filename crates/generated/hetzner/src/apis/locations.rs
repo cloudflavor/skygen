@@ -66,7 +66,7 @@ impl<'a> ListLocationsRequest<'a> {
 ///
 /// # Example
 /// ```no_run
-/// use hetzner_cloud::{ ApiClient, apis::locations };
+/// use hetznercloud::{ ApiClient, apis::locations };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
 /// let response = list_locations(&api)
 ///     .with_name("name")
@@ -111,7 +111,7 @@ impl<'a> LocationRequest<'a> {
 ///
 /// # Example
 /// ```no_run
-/// use hetzner_cloud::{ ApiClient, apis::locations };
+/// use hetznercloud::{ ApiClient, apis::locations };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
 /// let response = location(&api)
 ///     .with_id("id")

@@ -74,7 +74,7 @@ impl<'a> ListServersRequest<'a> {
 ///
 /// # Example
 /// ```no_run
-/// use hetzner_cloud::{ ApiClient, apis::servers };
+/// use hetznercloud::{ ApiClient, apis::servers };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
 /// let response = list_servers(&api)
 ///     .with_name("name")
@@ -118,7 +118,7 @@ impl<'a> CreateServerRequest<'a> {
 ///
 /// # Example
 /// ```no_run
-/// use hetzner_cloud::{ ApiClient, apis::servers };
+/// use hetznercloud::{ ApiClient, apis::servers };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = create_server(&api)
@@ -161,7 +161,7 @@ impl<'a> ServerRequest<'a> {
 ///
 /// # Example
 /// ```no_run
-/// use hetzner_cloud::{ ApiClient, apis::servers };
+/// use hetznercloud::{ ApiClient, apis::servers };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
 /// let response = server(&api)
 ///     .with_id("id")
@@ -209,7 +209,7 @@ impl<'a> UpdateServerRequest<'a> {
 ///
 /// # Example
 /// ```no_run
-/// use hetzner_cloud::{ ApiClient, apis::servers };
+/// use hetznercloud::{ ApiClient, apis::servers };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = update_server(&api)
@@ -258,7 +258,7 @@ impl<'a> ServerDeleteRequest<'a> {
 ///
 /// # Example
 /// ```no_run
-/// use hetzner_cloud::{ ApiClient, apis::servers };
+/// use hetznercloud::{ ApiClient, apis::servers };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
 /// let response = server_delete(&api)
 ///     .with_id("id")
@@ -343,7 +343,7 @@ impl<'a> ServerMetricsRequest<'a> {
 ///
 /// # Example
 /// ```no_run
-/// use hetzner_cloud::{ ApiClient, apis::servers };
+/// use hetznercloud::{ ApiClient, apis::servers };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
 /// let response = server_metrics(&api)
 ///     .with_id("id")

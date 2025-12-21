@@ -20,7 +20,7 @@
 //!
 //! # Usage
 //! ```no_run
-//! use cloudflare_api::{ApiClient, apis};
+//! use cloudflare::{ApiClient, apis};
 //! let api = ApiClient::builder("https://api.example.com")
 //!     .build()
 //!     .expect("client");

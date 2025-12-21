@@ -69,7 +69,7 @@ impl<'a> ListImagesActionsRequest<'a> {
 ///
 /// # Example
 /// ```no_run
-/// use hetzner_cloud::{ ApiClient, apis::image_actions };
+/// use hetznercloud::{ ApiClient, apis::image_actions };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
 /// let response = list_images_actions(&api)
 ///     .with_id("id")
@@ -116,7 +116,7 @@ impl<'a> ImagesActionRequest<'a> {
 ///
 /// # Example
 /// ```no_run
-/// use hetzner_cloud::{ ApiClient, apis::image_actions };
+/// use hetznercloud::{ ApiClient, apis::image_actions };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
 /// let response = images_action(&api)
 ///     .with_id("id")
@@ -179,7 +179,7 @@ impl<'a> ListImageActionsRequest<'a> {
 ///
 /// # Example
 /// ```no_run
-/// use hetzner_cloud::{ ApiClient, apis::image_actions };
+/// use hetznercloud::{ ApiClient, apis::image_actions };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
 /// let response = list_image_actions(&api)
 ///     .with_id("id")
@@ -234,7 +234,7 @@ impl<'a> ChangeImageProtectionRequest<'a> {
 ///
 /// # Example
 /// ```no_run
-/// use hetzner_cloud::{ ApiClient, apis::image_actions };
+/// use hetznercloud::{ ApiClient, apis::image_actions };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = change_image_protection(&api)
@@ -285,7 +285,7 @@ impl<'a> ActionRequest<'a> {
 ///
 /// # Example
 /// ```no_run
-/// use hetzner_cloud::{ ApiClient, apis::image_actions };
+/// use hetznercloud::{ ApiClient, apis::image_actions };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
 /// let response = action(&api)
 ///     .with_id("id")

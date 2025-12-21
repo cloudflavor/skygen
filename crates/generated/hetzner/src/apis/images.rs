@@ -94,7 +94,7 @@ impl<'a> ListImagesRequest<'a> {
 ///
 /// # Example
 /// ```no_run
-/// use hetzner_cloud::{ ApiClient, apis::images };
+/// use hetznercloud::{ ApiClient, apis::images };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
 /// let response = list_images(&api)
 ///     .with_sort("sort")
@@ -145,7 +145,7 @@ impl<'a> ImageRequest<'a> {
 ///
 /// # Example
 /// ```no_run
-/// use hetzner_cloud::{ ApiClient, apis::images };
+/// use hetznercloud::{ ApiClient, apis::images };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
 /// let response = image(&api)
 ///     .with_id("id")
@@ -191,7 +191,7 @@ impl<'a> UpdateImageRequest<'a> {
 ///
 /// # Example
 /// ```no_run
-/// use hetzner_cloud::{ ApiClient, apis::images };
+/// use hetznercloud::{ ApiClient, apis::images };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = update_image(&api)
@@ -235,7 +235,7 @@ impl<'a> ImageDeleteRequest<'a> {
 ///
 /// # Example
 /// ```no_run
-/// use hetzner_cloud::{ ApiClient, apis::images };
+/// use hetznercloud::{ ApiClient, apis::images };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
 /// let response = image_delete(&api)
 ///     .with_id("id")

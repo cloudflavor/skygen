@@ -71,7 +71,7 @@ impl<'a> ListFirewallsActionsRequest<'a> {
 ///
 /// # Example
 /// ```no_run
-/// use hetzner_cloud::{ ApiClient, apis::firewall_actions };
+/// use hetznercloud::{ ApiClient, apis::firewall_actions };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
 /// let response = list_firewalls_actions(&api)
 ///     .with_id("id")
@@ -118,7 +118,7 @@ impl<'a> FirewallsActionRequest<'a> {
 ///
 /// # Example
 /// ```no_run
-/// use hetzner_cloud::{ ApiClient, apis::firewall_actions };
+/// use hetznercloud::{ ApiClient, apis::firewall_actions };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
 /// let response = firewalls_action(&api)
 ///     .with_id("id")
@@ -183,7 +183,7 @@ impl<'a> ListFirewallActionsRequest<'a> {
 ///
 /// # Example
 /// ```no_run
-/// use hetzner_cloud::{ ApiClient, apis::firewall_actions };
+/// use hetznercloud::{ ApiClient, apis::firewall_actions };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
 /// let response = list_firewall_actions(&api)
 ///     .with_id("id")
@@ -253,7 +253,7 @@ impl<'a> ApplyFirewallResourcesRequest<'a> {
 ///
 /// # Example
 /// ```no_run
-/// use hetzner_cloud::{ ApiClient, apis::firewall_actions };
+/// use hetznercloud::{ ApiClient, apis::firewall_actions };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = apply_firewall_resources(&api)
@@ -317,7 +317,7 @@ impl<'a> RemoveFirewallResourcesRequest<'a> {
 ///
 /// # Example
 /// ```no_run
-/// use hetzner_cloud::{ ApiClient, apis::firewall_actions };
+/// use hetznercloud::{ ApiClient, apis::firewall_actions };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = remove_firewall_resources(&api)
@@ -370,7 +370,7 @@ impl<'a> SetFirewallRulesRequest<'a> {
 ///
 /// # Example
 /// ```no_run
-/// use hetzner_cloud::{ ApiClient, apis::firewall_actions };
+/// use hetznercloud::{ ApiClient, apis::firewall_actions };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = set_firewall_rules(&api)
@@ -422,7 +422,7 @@ impl<'a> ActionRequest<'a> {
 ///
 /// # Example
 /// ```no_run
-/// use hetzner_cloud::{ ApiClient, apis::firewall_actions };
+/// use hetznercloud::{ ApiClient, apis::firewall_actions };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
 /// let response = action(&api)
 ///     .with_id("id")

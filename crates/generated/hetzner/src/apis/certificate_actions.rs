@@ -69,7 +69,7 @@ impl<'a> ListCertificatesActionsRequest<'a> {
 ///
 /// # Example
 /// ```no_run
-/// use hetzner_cloud::{ ApiClient, apis::certificate_actions };
+/// use hetznercloud::{ ApiClient, apis::certificate_actions };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
 /// let response = list_certificates_actions(&api)
 ///     .with_id("id")
@@ -116,7 +116,7 @@ impl<'a> CertificatesActionRequest<'a> {
 ///
 /// # Example
 /// ```no_run
-/// use hetzner_cloud::{ ApiClient, apis::certificate_actions };
+/// use hetznercloud::{ ApiClient, apis::certificate_actions };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
 /// let response = certificates_action(&api)
 ///     .with_id("id")
@@ -181,7 +181,7 @@ impl<'a> ListCertificateActionsRequest<'a> {
 ///
 /// # Example
 /// ```no_run
-/// use hetzner_cloud::{ ApiClient, apis::certificate_actions };
+/// use hetznercloud::{ ApiClient, apis::certificate_actions };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
 /// let response = list_certificate_actions(&api)
 ///     .with_id("id")
@@ -243,7 +243,7 @@ impl<'a> RetryCertificateRequest<'a> {
 ///
 /// # Example
 /// ```no_run
-/// use hetzner_cloud::{ ApiClient, apis::certificate_actions };
+/// use hetznercloud::{ ApiClient, apis::certificate_actions };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
 /// let response = retry_certificate(&api)
 ///     .with_id("id")
@@ -293,7 +293,7 @@ impl<'a> ActionRequest<'a> {
 ///
 /// # Example
 /// ```no_run
-/// use hetzner_cloud::{ ApiClient, apis::certificate_actions };
+/// use hetznercloud::{ ApiClient, apis::certificate_actions };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
 /// let response = action(&api)
 ///     .with_id("id")

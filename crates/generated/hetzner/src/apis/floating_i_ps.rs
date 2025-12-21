@@ -71,7 +71,7 @@ impl<'a> ListFloatingIpsRequest<'a> {
 ///
 /// # Example
 /// ```no_run
-/// use hetzner_cloud::{ ApiClient, apis::floating_i_ps };
+/// use hetznercloud::{ ApiClient, apis::floating_i_ps };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
 /// let response = list_floating_ips(&api)
 ///     .with_name("name")
@@ -116,7 +116,7 @@ impl<'a> CreateFloatingIpRequest<'a> {
 ///
 /// # Example
 /// ```no_run
-/// use hetzner_cloud::{ ApiClient, apis::floating_i_ps };
+/// use hetznercloud::{ ApiClient, apis::floating_i_ps };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = create_floating_ip(&api)
@@ -160,7 +160,7 @@ impl<'a> IpRequest<'a> {
 ///
 /// # Example
 /// ```no_run
-/// use hetzner_cloud::{ ApiClient, apis::floating_i_ps };
+/// use hetznercloud::{ ApiClient, apis::floating_i_ps };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
 /// let response = ip(&api)
 ///     .with_id("id")
@@ -207,7 +207,7 @@ impl<'a> UpdateFloatingIpRequest<'a> {
 ///
 /// # Example
 /// ```no_run
-/// use hetzner_cloud::{ ApiClient, apis::floating_i_ps };
+/// use hetznercloud::{ ApiClient, apis::floating_i_ps };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = update_floating_ip(&api)
@@ -254,7 +254,7 @@ impl<'a> IpDeleteRequest<'a> {
 ///
 /// # Example
 /// ```no_run
-/// use hetzner_cloud::{ ApiClient, apis::floating_i_ps };
+/// use hetznercloud::{ ApiClient, apis::floating_i_ps };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
 /// let response = ip_delete(&api)
 ///     .with_id("id")

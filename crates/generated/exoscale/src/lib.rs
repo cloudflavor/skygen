@@ -20,7 +20,7 @@
 //!
 //! # Usage
 //! ```no_run
-//! use exoscale_public_api::{ApiClient, apis};
+//! use exoscale::{ApiClient, apis};
 //! let api = ApiClient::builder("https://api.example.com")
 //!     .build()
 //!     .expect("client");

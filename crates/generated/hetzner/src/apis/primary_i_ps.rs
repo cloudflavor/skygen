@@ -76,7 +76,7 @@ impl<'a> ListPrimaryIpsRequest<'a> {
 ///
 /// # Example
 /// ```no_run
-/// use hetzner_cloud::{ ApiClient, apis::primary_i_ps };
+/// use hetznercloud::{ ApiClient, apis::primary_i_ps };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
 /// let response = list_primary_ips(&api)
 ///     .with_name("name")
@@ -134,7 +134,7 @@ impl<'a> CreatePrimaryIpRequest<'a> {
 ///
 /// # Example
 /// ```no_run
-/// use hetzner_cloud::{ ApiClient, apis::primary_i_ps };
+/// use hetznercloud::{ ApiClient, apis::primary_i_ps };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = create_primary_ip(&api)
@@ -178,7 +178,7 @@ impl<'a> IpRequest<'a> {
 ///
 /// # Example
 /// ```no_run
-/// use hetzner_cloud::{ ApiClient, apis::primary_i_ps };
+/// use hetznercloud::{ ApiClient, apis::primary_i_ps };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
 /// let response = ip(&api)
 ///     .with_id("id")
@@ -227,7 +227,7 @@ impl<'a> UpdatePrimaryIpRequest<'a> {
 ///
 /// # Example
 /// ```no_run
-/// use hetzner_cloud::{ ApiClient, apis::primary_i_ps };
+/// use hetznercloud::{ ApiClient, apis::primary_i_ps };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = update_primary_ip(&api)
@@ -274,7 +274,7 @@ impl<'a> IpDeleteRequest<'a> {
 ///
 /// # Example
 /// ```no_run
-/// use hetzner_cloud::{ ApiClient, apis::primary_i_ps };
+/// use hetznercloud::{ ApiClient, apis::primary_i_ps };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
 /// let response = ip_delete(&api)
 ///     .with_id("id")

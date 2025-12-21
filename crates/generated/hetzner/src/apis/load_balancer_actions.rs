@@ -69,7 +69,7 @@ impl<'a> ListLoadBalancersActionsRequest<'a> {
 ///
 /// # Example
 /// ```no_run
-/// use hetzner_cloud::{ ApiClient, apis::load_balancer_actions };
+/// use hetznercloud::{ ApiClient, apis::load_balancer_actions };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
 /// let response = list_load_balancers_actions(&api)
 ///     .with_id("id")
@@ -116,7 +116,7 @@ impl<'a> BalancersActionRequest<'a> {
 ///
 /// # Example
 /// ```no_run
-/// use hetzner_cloud::{ ApiClient, apis::load_balancer_actions };
+/// use hetznercloud::{ ApiClient, apis::load_balancer_actions };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
 /// let response = balancers_action(&api)
 ///     .with_id("id")
@@ -179,7 +179,7 @@ impl<'a> ListLoadBalancerActionsRequest<'a> {
 ///
 /// # Example
 /// ```no_run
-/// use hetzner_cloud::{ ApiClient, apis::load_balancer_actions };
+/// use hetznercloud::{ ApiClient, apis::load_balancer_actions };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
 /// let response = list_load_balancer_actions(&api)
 ///     .with_id("id")
@@ -237,7 +237,7 @@ impl<'a> AddLoadBalancerServiceRequest<'a> {
 ///
 /// # Example
 /// ```no_run
-/// use hetzner_cloud::{ ApiClient, apis::load_balancer_actions };
+/// use hetznercloud::{ ApiClient, apis::load_balancer_actions };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = add_load_balancer_service(&api)
@@ -299,7 +299,7 @@ impl<'a> AddLoadBalancerTargetRequest<'a> {
 ///
 /// # Example
 /// ```no_run
-/// use hetzner_cloud::{ ApiClient, apis::load_balancer_actions };
+/// use hetznercloud::{ ApiClient, apis::load_balancer_actions };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = add_load_balancer_target(&api)
@@ -363,7 +363,7 @@ impl<'a> AttachLoadBalancerNetworkRequest<'a> {
 ///
 /// # Example
 /// ```no_run
-/// use hetzner_cloud::{ ApiClient, apis::load_balancer_actions };
+/// use hetznercloud::{ ApiClient, apis::load_balancer_actions };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = attach_load_balancer_network(&api)
@@ -419,7 +419,7 @@ impl<'a> ChangeLoadBalancerAlgorithmRequest<'a> {
 ///
 /// # Example
 /// ```no_run
-/// use hetzner_cloud::{ ApiClient, apis::load_balancer_actions };
+/// use hetznercloud::{ ApiClient, apis::load_balancer_actions };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = change_load_balancer_algorithm(&api)
@@ -474,7 +474,7 @@ impl<'a> ChangeLoadBalancerDnsRequest<'a> {
 ///
 /// # Example
 /// ```no_run
-/// use hetzner_cloud::{ ApiClient, apis::load_balancer_actions };
+/// use hetznercloud::{ ApiClient, apis::load_balancer_actions };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = change_load_balancer_dns(&api)
@@ -530,7 +530,7 @@ impl<'a> ChangeLoadBalancerProtectionRequest<'a> {
 ///
 /// # Example
 /// ```no_run
-/// use hetzner_cloud::{ ApiClient, apis::load_balancer_actions };
+/// use hetznercloud::{ ApiClient, apis::load_balancer_actions };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = change_load_balancer_protection(&api)
@@ -586,7 +586,7 @@ impl<'a> ChangeLoadBalancerTypeRequest<'a> {
 ///
 /// # Example
 /// ```no_run
-/// use hetzner_cloud::{ ApiClient, apis::load_balancer_actions };
+/// use hetznercloud::{ ApiClient, apis::load_balancer_actions };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = change_load_balancer_type(&api)
@@ -642,7 +642,7 @@ impl<'a> DeleteLoadBalancerServiceRequest<'a> {
 ///
 /// # Example
 /// ```no_run
-/// use hetzner_cloud::{ ApiClient, apis::load_balancer_actions };
+/// use hetznercloud::{ ApiClient, apis::load_balancer_actions };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = delete_load_balancer_service(&api)
@@ -698,7 +698,7 @@ impl<'a> DetachLoadBalancerNetworkRequest<'a> {
 ///
 /// # Example
 /// ```no_run
-/// use hetzner_cloud::{ ApiClient, apis::load_balancer_actions };
+/// use hetznercloud::{ ApiClient, apis::load_balancer_actions };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = detach_load_balancer_network(&api)
@@ -754,7 +754,7 @@ impl<'a> DisableLoadBalancerPublicRequest<'a> {
 ///
 /// # Example
 /// ```no_run
-/// use hetzner_cloud::{ ApiClient, apis::load_balancer_actions };
+/// use hetznercloud::{ ApiClient, apis::load_balancer_actions };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
 /// let response = disable_load_balancer_public(&api)
 ///     .with_id("id")
@@ -801,7 +801,7 @@ impl<'a> EnableLoadBalancerPublicRequest<'a> {
 ///
 /// # Example
 /// ```no_run
-/// use hetzner_cloud::{ ApiClient, apis::load_balancer_actions };
+/// use hetznercloud::{ ApiClient, apis::load_balancer_actions };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
 /// let response = enable_load_balancer_public(&api)
 ///     .with_id("id")
@@ -852,7 +852,7 @@ impl<'a> RemoveLoadBalancerTargetRequest<'a> {
 ///
 /// # Example
 /// ```no_run
-/// use hetzner_cloud::{ ApiClient, apis::load_balancer_actions };
+/// use hetznercloud::{ ApiClient, apis::load_balancer_actions };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = remove_load_balancer_target(&api)
@@ -911,7 +911,7 @@ impl<'a> UpdateLoadBalancerServiceRequest<'a> {
 ///
 /// # Example
 /// ```no_run
-/// use hetzner_cloud::{ ApiClient, apis::load_balancer_actions };
+/// use hetznercloud::{ ApiClient, apis::load_balancer_actions };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = update_load_balancer_service(&api)
@@ -963,7 +963,7 @@ impl<'a> ActionRequest<'a> {
 ///
 /// # Example
 /// ```no_run
-/// use hetzner_cloud::{ ApiClient, apis::load_balancer_actions };
+/// use hetznercloud::{ ApiClient, apis::load_balancer_actions };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
 /// let response = action(&api)
 ///     .with_id("id")

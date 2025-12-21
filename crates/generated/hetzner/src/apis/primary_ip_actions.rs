@@ -71,7 +71,7 @@ impl<'a> ListPrimaryIpsActionsRequest<'a> {
 ///
 /// # Example
 /// ```no_run
-/// use hetzner_cloud::{ ApiClient, apis::primary_ip_actions };
+/// use hetznercloud::{ ApiClient, apis::primary_ip_actions };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
 /// let response = list_primary_ips_actions(&api)
 ///     .with_id("id")
@@ -118,7 +118,7 @@ impl<'a> IpsActionRequest<'a> {
 ///
 /// # Example
 /// ```no_run
-/// use hetzner_cloud::{ ApiClient, apis::primary_ip_actions };
+/// use hetznercloud::{ ApiClient, apis::primary_ip_actions };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
 /// let response = ips_action(&api)
 ///     .with_id("id")
@@ -178,7 +178,7 @@ impl<'a> AssignPrimaryIpRequest<'a> {
 ///
 /// # Example
 /// ```no_run
-/// use hetzner_cloud::{ ApiClient, apis::primary_ip_actions };
+/// use hetznercloud::{ ApiClient, apis::primary_ip_actions };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = assign_primary_ip(&api)
@@ -233,7 +233,7 @@ impl<'a> ChangePrimaryIpDnsRequest<'a> {
 ///
 /// # Example
 /// ```no_run
-/// use hetzner_cloud::{ ApiClient, apis::primary_ip_actions };
+/// use hetznercloud::{ ApiClient, apis::primary_ip_actions };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = change_primary_ip_dns(&api)
@@ -291,7 +291,7 @@ impl<'a> ChangePrimaryIpProtectionRequest<'a> {
 ///
 /// # Example
 /// ```no_run
-/// use hetzner_cloud::{ ApiClient, apis::primary_ip_actions };
+/// use hetznercloud::{ ApiClient, apis::primary_ip_actions };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = change_primary_ip_protection(&api)
@@ -348,7 +348,7 @@ impl<'a> UnassignPrimaryIpRequest<'a> {
 ///
 /// # Example
 /// ```no_run
-/// use hetzner_cloud::{ ApiClient, apis::primary_ip_actions };
+/// use hetznercloud::{ ApiClient, apis::primary_ip_actions };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
 /// let response = unassign_primary_ip(&api)
 ///     .with_id("id")
