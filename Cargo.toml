@@ -15,4 +15,4 @@
 [workspace]
 resolver = "2"
 members = ["crates/skygen"]
-exclude = ["crates/generated/*"]
+exclude = ["crates/generated/*", "crates/examples"]
