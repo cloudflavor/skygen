@@ -192,9 +192,54 @@ pub fn infer_param_type_from_schema(schema_or_ref: &ReferenceOr<OApiSchema>) -> 
                     ParamType::Map(Box::new(ParamType::Unknown))
                 }
             }
+            SchemaKind::AllOf { all_of } => infer_from_composed(all_of),
+            SchemaKind::AnyOf { any_of } => infer_from_composed(any_of),
+            SchemaKind::OneOf { one_of } => infer_from_composed(one_of),
+            SchemaKind::Any(any_schema) => {
+                if !any_schema.all_of.is_empty() {
+                    let ty = infer_from_composed(&any_schema.all_of);
+                    if !matches!(ty, ParamType::Unknown) {
+                        return ty;
+                    }
+                }
+                if !any_schema.one_of.is_empty() {
+                    let ty = infer_from_composed(&any_schema.one_of);
+                    if !matches!(ty, ParamType::Unknown) {
+                        return ty;
+                    }
+                }
+                if !any_schema.any_of.is_empty() {
+                    let ty = infer_from_composed(&any_schema.any_of);
+                    if !matches!(ty, ParamType::Unknown) {
+                        return ty;
+                    }
+                }
+                if let Some(title) = &schema.schema_data.title {
+                    return ParamType::Object(title.clone());
+                }
+                if matches!(any_schema.typ.as_deref(), Some("object")) {
+                    ParamType::Map(Box::new(ParamType::Unknown))
+                } else {
+                    ParamType::Unknown
+                }
+            }
             _ => ParamType::Unknown,
         },
     }
+}
+
+fn infer_from_composed(parts: &[ReferenceOr<OApiSchema>]) -> ParamType {
+    parts
+        .iter()
+        .filter_map(|part| {
+            let ty = infer_param_type_from_schema(part);
+            match ty {
+                ParamType::Unknown => None,
+                other => Some(other),
+            }
+        })
+        .next()
+        .unwrap_or(ParamType::Unknown)
 }
 
 fn reference_name(reference: &str) -> &str {
@@ -399,6 +444,112 @@ fn normalize_yaml_number(num: serde_yaml::Number) -> serde_yaml::Number {
             serde_yaml::Number::from(parsed)
         } else {
             serde_yaml::Number::from(0)
+        }
+    }
+}
+
+pub fn clamp_overflowing_numeric_literals(input: &str) -> Option<String> {
+    let bytes = input.as_bytes();
+    let mut cursor = 0usize;
+    let mut last_emit = 0usize;
+    let mut changed = false;
+    let len = bytes.len();
+    let mut sanitized = String::with_capacity(input.len());
+
+    while cursor < len {
+        let byte = bytes[cursor];
+        if is_number_lead(byte) {
+            let start = cursor;
+            let mut idx = cursor;
+            if matches!(byte, b'+' | b'-') {
+                idx += 1;
+                if idx >= len || !bytes[idx].is_ascii_digit() {
+                    cursor += 1;
+                    continue;
+                }
+            }
+            let digits_start = idx;
+            while idx < len && bytes[idx].is_ascii_digit() {
+                idx += 1;
+            }
+            if digits_start == idx {
+                cursor += 1;
+                continue;
+            }
+            if matches!(bytes.get(idx), Some(b'.' | b'e' | b'E')) {
+                cursor += 1;
+                continue;
+            }
+            if let Some(prev) = previous_non_space(bytes, start) {
+                if !matches!(prev, b':' | b',' | b'[' | b'{' | b'-') {
+                    cursor += 1;
+                    continue;
+                }
+            }
+            let token = &input[start..idx];
+            if let Some(clamped) = clamp_numeric_literal(token) {
+                sanitized.push_str(&input[last_emit..start]);
+                sanitized.push_str(&clamped);
+                last_emit = idx;
+                changed = true;
+            }
+            cursor = idx;
+            continue;
+        }
+        cursor += 1;
+    }
+
+    if changed {
+        sanitized.push_str(&input[last_emit..]);
+        Some(sanitized)
+    } else {
+        None
+    }
+}
+
+fn previous_non_space(bytes: &[u8], start: usize) -> Option<u8> {
+    if start == 0 {
+        return None;
+    }
+    let mut idx = start;
+    while idx > 0 {
+        idx -= 1;
+        let ch = bytes[idx];
+        if ch.is_ascii_whitespace() {
+            continue;
+        }
+        return Some(ch);
+    }
+    None
+}
+
+fn is_number_lead(byte: u8) -> bool {
+    byte.is_ascii_digit() || matches!(byte, b'+' | b'-')
+}
+
+fn clamp_numeric_literal(token: &str) -> Option<String> {
+    let mut cleaned = String::with_capacity(token.len());
+    for ch in token.chars() {
+        if ch != '_' {
+            cleaned.push(ch);
+        }
+    }
+    if cleaned.is_empty() {
+        return None;
+    }
+    let value = cleaned.parse::<i128>().ok();
+    let min = i64::MIN as i128;
+    let max = i64::MAX as i128;
+    match value {
+        Some(val) if val < min => Some(i64::MIN.to_string()),
+        Some(val) if val > max => Some(i64::MAX.to_string()),
+        Some(_) => None,
+        None => {
+            if cleaned.starts_with('-') {
+                Some(i64::MIN.to_string())
+            } else {
+                Some(i64::MAX.to_string())
+            }
         }
     }
 }

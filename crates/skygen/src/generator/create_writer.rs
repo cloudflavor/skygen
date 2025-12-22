@@ -27,6 +27,7 @@ use heck::{ToSnakeCase, ToUpperCamelCase};
 use openapiv3::{Components, Info as OApiInfo, OpenAPI, Paths, ReferenceOr, SchemaKind};
 use semver::Version;
 use serde::Serialize;
+use std::collections::btree_map::Entry;
 use std::collections::{BTreeMap, BTreeSet, HashMap, HashSet};
 use std::path::Path;
 use tokio::process::Command;
@@ -346,6 +347,7 @@ async fn generate_lib(
                 path_placeholders.iter().map(|p| p.setter.clone()).collect();
             let description_lines = format_description_lines(op.description.as_deref());
 
+            let mut setter_tracker: HashMap<String, usize> = HashMap::new();
             let params: Vec<FunctionParam> = op
                 .params
                 .into_iter()
@@ -364,6 +366,12 @@ async fn generate_lib(
                             }
                         );
                     }
+                    let base = setter.clone();
+                    let count = setter_tracker.entry(base.clone()).or_insert(0);
+                    if *count > 0 {
+                        setter = format!("{}_{}", base, *count + 1);
+                    }
+                    *count += 1;
                     FunctionParam {
                         name: param_name,
                         setter,
@@ -732,6 +740,13 @@ fn schema_supports_struct_item(
         SchemaKind::AllOf { all_of } => all_of
             .iter()
             .any(|inner| schema_supports_struct(inner, resolver, visited)),
+        SchemaKind::Any(any_schema) => {
+            !any_schema.properties.is_empty()
+                || any_schema
+                    .all_of
+                    .iter()
+                    .any(|inner| schema_supports_struct(inner, resolver, visited))
+        }
         _ => false,
     }
 }
@@ -816,60 +831,136 @@ fn collect_fields_from_schema(
                     flatten: false,
                 });
             }
-            Some(fields)
+            Some(merge_model_fields(fields))
         }
         SchemaKind::AllOf { all_of } => {
             let mut fields = Vec::new();
-            for part in all_of {
-                match part {
-                    ReferenceOr::Reference { reference } => {
-                        if let Some(name) = component_name_from_reference(reference) {
-                            let module = module_name_map
-                                .get(name)
-                                .cloned()
-                                .unwrap_or_else(|| sanitize_module_name(name));
-                            if struct_modules.contains(&module) {
-                                let ty = format!(
-                                    "crate::models::{module}::{}",
-                                    name.to_upper_camel_case()
-                                );
-                                let ident = sanitize_identifier(&name.to_snake_case());
-                                fields.push(ModelField {
-                                    name: ident,
-                                    ty,
-                                    required: true,
-                                    flatten: true,
-                                });
-                                continue;
-                            }
-                            let ty =
-                                format!("crate::models::{module}::{}", name.to_upper_camel_case());
-                            let ident = sanitize_identifier(&name.to_snake_case());
-                            fields.push(ModelField {
-                                name: ident,
-                                ty,
-                                required: true,
-                                flatten: false,
-                            });
-                        }
-                    }
-                    ReferenceOr::Item(inline_schema) => {
-                        if let Some(mut nested) = collect_fields_from_schema(
-                            inline_schema,
-                            resolver,
-                            module_name_map,
-                            struct_modules,
-                            available_modules,
-                            visited,
-                        ) {
-                            fields.append(&mut nested);
-                        }
-                    }
+            append_all_of_fields(
+                &mut fields,
+                all_of,
+                resolver,
+                module_name_map,
+                struct_modules,
+                available_modules,
+                visited,
+            );
+            Some(merge_model_fields(fields))
+        }
+        SchemaKind::Any(any_schema) => {
+            let mut fields = Vec::new();
+            if !any_schema.properties.is_empty() {
+                let required: BTreeSet<String> = any_schema.required.iter().cloned().collect();
+                for (prop_name, prop_schema) in any_schema.properties.iter() {
+                    let normalized = clone_schema_reference(prop_schema);
+                    let param_type = infer_param_type_from_schema(&normalized);
+                    let rust_type = param_type_to_rust(
+                        &param_type,
+                        Some(module_name_map),
+                        Some(available_modules),
+                    );
+                    let field_name = sanitize_field_name(prop_name);
+                    fields.push(ModelField {
+                        name: field_name,
+                        ty: rust_type,
+                        required: required.contains(prop_name),
+                        flatten: false,
+                    });
                 }
             }
-            Some(fields)
+
+            if !any_schema.all_of.is_empty() {
+                append_all_of_fields(
+                    &mut fields,
+                    &any_schema.all_of,
+                    resolver,
+                    module_name_map,
+                    struct_modules,
+                    available_modules,
+                    visited,
+                );
+            }
+
+            Some(merge_model_fields(fields))
         }
         _ => None,
+    }
+}
+
+fn append_all_of_fields(
+    fields: &mut Vec<ModelField>,
+    all_of: &[ReferenceOr<openapiv3::Schema>],
+    resolver: &RefResolver<'_>,
+    module_name_map: &HashMap<String, String>,
+    struct_modules: &HashSet<String>,
+    available_modules: &HashSet<String>,
+    visited: &mut BTreeSet<String>,
+) {
+    for part in all_of {
+        match part {
+            ReferenceOr::Reference { reference } => {
+                if let Some(name) = component_name_from_reference(reference) {
+                    let module = module_name_map
+                        .get(name)
+                        .cloned()
+                        .unwrap_or_else(|| sanitize_module_name(name));
+                    if struct_modules.contains(&module) {
+                        let ty = format!("crate::models::{module}::{}", name.to_upper_camel_case());
+                        let ident = sanitize_identifier(&name.to_snake_case());
+                        fields.push(ModelField {
+                            name: ident,
+                            ty,
+                            required: true,
+                            flatten: true,
+                        });
+                        continue;
+                    }
+                    let ty = format!("crate::models::{module}::{}", name.to_upper_camel_case());
+                    let ident = sanitize_identifier(&name.to_snake_case());
+                    fields.push(ModelField {
+                        name: ident,
+                        ty,
+                        required: true,
+                        flatten: false,
+                    });
+                }
+            }
+            ReferenceOr::Item(inline_schema) => {
+                if let Some(mut nested) = collect_fields_from_schema(
+                    inline_schema,
+                    resolver,
+                    module_name_map,
+                    struct_modules,
+                    available_modules,
+                    visited,
+                ) {
+                    fields.append(&mut nested);
+                }
+            }
+        }
+    }
+}
+
+fn merge_model_fields(fields: Vec<ModelField>) -> Vec<ModelField> {
+    let mut map: BTreeMap<String, ModelField> = BTreeMap::new();
+    for field in fields {
+        merge_field_entry(&mut map, field);
+    }
+    map.into_values().collect()
+}
+
+fn merge_field_entry(map: &mut BTreeMap<String, ModelField>, field: ModelField) {
+    match map.entry(field.name.clone()) {
+        Entry::Vacant(slot) => {
+            slot.insert(field);
+        }
+        Entry::Occupied(mut entry) => {
+            let existing = entry.get_mut();
+            existing.required = existing.required && field.required;
+            existing.flatten = existing.flatten || field.flatten;
+            if existing.ty != field.ty {
+                existing.ty = "serde_json::Value".into();
+            }
+        }
     }
 }
 
