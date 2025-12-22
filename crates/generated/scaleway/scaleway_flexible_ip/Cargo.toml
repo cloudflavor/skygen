@@ -30,7 +30,7 @@ categories = [
     "web-programming::http-client", 
     "api-bindings"
 ]
-keywords = ["openapi", "sdk", "skygen", "cloudflavor", "elasticmetalflexibleip_skygen"]
+keywords = ["openapi", "sdk", "skygen", "cloudflavor", "elasticmetalflexibleip"]
 
 [badges]
 codecov = { repository = "cloudflavor/skygen" }
