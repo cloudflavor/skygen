@@ -24,7 +24,7 @@ pub struct AppServiceSpec {
     #[serde(flatten)]
     pub app_component_instance_base:
         crate::models::app_component_instance_base::AppComponentInstanceBase,
-    pub cors: Option<serde_json::Value>,
+    pub cors: Option<crate::models::apps_cors_policy::AppsCorsPolicy>,
     pub health_check:
         Option<crate::models::app_service_spec_health_check::AppServiceSpecHealthCheck>,
     pub http_port: Option<i64>,

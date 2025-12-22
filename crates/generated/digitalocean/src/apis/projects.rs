@@ -21,7 +21,7 @@ use reqwest::Method;
 
 #[derive(Debug)]
 pub struct ListRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, std::collections::BTreeMap<String, serde_json::Value>>,
 }
 
 impl<'a> ListRequest<'a> {
@@ -30,7 +30,7 @@ impl<'a> ListRequest<'a> {
 
         Self { builder }
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<std::collections::BTreeMap<String, serde_json::Value>> {
         self.builder.send().await
     }
 }
@@ -64,7 +64,7 @@ impl<'a> CreateRequest<'a> {
 
         Self { builder }
     }
-    pub fn with_body(mut self, body: serde_json::Value) -> Self {
+    pub fn with_body(mut self, body: crate::models::project_base::ProjectBase) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
@@ -83,7 +83,7 @@ impl<'a> CreateRequest<'a> {
 /// ```no_run
 /// use digitalocean::{ ApiClient, apis::projects };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// # let body: serde_json::Value = todo!();
+/// # let body: crate::models::project_base::ProjectBase = todo!();
 /// let response = create(&api)
 ///     .with_body(body)
 ///     .send()
@@ -139,7 +139,7 @@ impl<'a> UpdateDefaultRequest<'a> {
 
         Self { builder }
     }
-    pub fn with_body(mut self, body: serde_json::Value) -> Self {
+    pub fn with_body(mut self, body: crate::models::project::Project) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
@@ -158,7 +158,7 @@ impl<'a> UpdateDefaultRequest<'a> {
 /// ```no_run
 /// use digitalocean::{ ApiClient, apis::projects };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// # let body: serde_json::Value = todo!();
+/// # let body: crate::models::project::Project = todo!();
 /// let response = update_default(&api)
 ///     .with_body(body)
 ///     .send()
@@ -269,7 +269,7 @@ impl<'a> UpdateRequest<'a> {
         self.builder = self.builder.path_param("project_id", value);
         self
     }
-    pub fn with_body(mut self, body: serde_json::Value) -> Self {
+    pub fn with_body(mut self, body: crate::models::project::Project) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
@@ -291,7 +291,7 @@ impl<'a> UpdateRequest<'a> {
 /// ```no_run
 /// use digitalocean::{ ApiClient, apis::projects };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// # let body: serde_json::Value = todo!();
+/// # let body: crate::models::project::Project = todo!();
 /// let response = update(&api)
 ///     .with_project_id("project_id")
 ///     .with_body(body)

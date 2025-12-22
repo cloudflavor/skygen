@@ -29,7 +29,7 @@ impl<'a> PostRequest<'a> {
 
         Self { builder }
     }
-    pub fn with_body(mut self, body: serde_json::Value) -> Self {
+    pub fn with_body(mut self, body: crate::models::droplet_action::DropletAction) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
@@ -61,7 +61,7 @@ impl<'a> PostRequest<'a> {
 /// ```no_run
 /// use digitalocean::{ ApiClient, apis::droplet_actions };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// # let body: serde_json::Value = todo!();
+/// # let body: crate::models::droplet_action::DropletAction = todo!();
 /// let response = post(&api)
 ///     .with_body(body)
 ///     .send()
@@ -73,7 +73,7 @@ pub fn post(api: &ApiClient) -> PostRequest<'_> {
 
 #[derive(Debug)]
 pub struct ListRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, std::collections::BTreeMap<String, serde_json::Value>>,
 }
 
 impl<'a> ListRequest<'a> {
@@ -87,7 +87,7 @@ impl<'a> ListRequest<'a> {
         self.builder = self.builder.path_param("droplet_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<std::collections::BTreeMap<String, serde_json::Value>> {
         self.builder.send().await
     }
 }
@@ -135,7 +135,7 @@ impl<'a> PostPostRequest<'a> {
         self.builder = self.builder.path_param("droplet_id", value);
         self
     }
-    pub fn with_body(mut self, body: serde_json::Value) -> Self {
+    pub fn with_body(mut self, body: crate::models::droplet_action::DropletAction) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
@@ -178,7 +178,7 @@ impl<'a> PostPostRequest<'a> {
 /// ```no_run
 /// use digitalocean::{ ApiClient, apis::droplet_actions };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// # let body: serde_json::Value = todo!();
+/// # let body: crate::models::droplet_action::DropletAction = todo!();
 /// let response = post_post(&api)
 ///     .with_droplet_id("droplet_id")
 ///     .with_body(body)

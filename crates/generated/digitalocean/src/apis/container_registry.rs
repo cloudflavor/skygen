@@ -579,7 +579,7 @@ pub fn list_garbage_collections(api: &ApiClient) -> ListGarbageCollectionsReques
 
 #[derive(Debug)]
 pub struct ListRepositoriesRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, std::collections::BTreeMap<String, serde_json::Value>>,
 }
 
 impl<'a> ListRepositoriesRequest<'a> {
@@ -594,7 +594,7 @@ impl<'a> ListRepositoriesRequest<'a> {
         self.builder = self.builder.path_param("registry_name", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<std::collections::BTreeMap<String, serde_json::Value>> {
         self.builder.send().await
     }
 }
@@ -626,7 +626,7 @@ pub fn list_repositories(api: &ApiClient) -> ListRepositoriesRequest<'_> {
 
 #[derive(Debug)]
 pub struct ListRepositoryManifestsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, std::collections::BTreeMap<String, serde_json::Value>>,
 }
 
 impl<'a> ListRepositoryManifestsRequest<'a> {
@@ -649,7 +649,7 @@ impl<'a> ListRepositoryManifestsRequest<'a> {
         self.builder = self.builder.path_param("repository_name", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<std::collections::BTreeMap<String, serde_json::Value>> {
         self.builder.send().await
     }
 }
@@ -756,7 +756,7 @@ pub fn delete_repository_manifest(api: &ApiClient) -> DeleteRepositoryManifestRe
 
 #[derive(Debug)]
 pub struct ListRepositoryTagsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, std::collections::BTreeMap<String, serde_json::Value>>,
 }
 
 impl<'a> ListRepositoryTagsRequest<'a> {
@@ -779,7 +779,7 @@ impl<'a> ListRepositoryTagsRequest<'a> {
         self.builder = self.builder.path_param("repository_name", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<std::collections::BTreeMap<String, serde_json::Value>> {
         self.builder.send().await
     }
 }
@@ -886,7 +886,7 @@ pub fn delete_repository_tag(api: &ApiClient) -> DeleteRepositoryTagRequest<'_> 
 
 #[derive(Debug)]
 pub struct ListRepositoriesV2Request<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, std::collections::BTreeMap<String, serde_json::Value>>,
 }
 
 impl<'a> ListRepositoriesV2Request<'a> {
@@ -904,7 +904,7 @@ impl<'a> ListRepositoriesV2Request<'a> {
         self.builder = self.builder.path_param("registry_name", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<std::collections::BTreeMap<String, serde_json::Value>> {
         self.builder.send().await
     }
 }

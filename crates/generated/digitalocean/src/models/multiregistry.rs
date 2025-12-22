@@ -15,4 +15,10 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type Multiregistry = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct Multiregistry {
+    #[serde(flatten)]
+    pub registry_base: crate::models::registry_base::RegistryBase,
+}

@@ -22,6 +22,6 @@ pub struct LoadBalancer {
     pub droplet_ids: Option<Vec<i64>>,
     #[serde(flatten)]
     pub load_balancer_base: crate::models::load_balancer_base::LoadBalancerBase,
-    pub region: Option<serde_json::Value>,
+    pub region: Option<crate::models::region::Region>,
     pub tag: Option<String>,
 }

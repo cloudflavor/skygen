@@ -23,7 +23,7 @@ use reqwest::Method;
 
 #[derive(Debug)]
 pub struct ListRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, std::collections::BTreeMap<String, serde_json::Value>>,
 }
 
 impl<'a> ListRequest<'a> {
@@ -32,7 +32,7 @@ impl<'a> ListRequest<'a> {
 
         Self { builder }
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<std::collections::BTreeMap<String, serde_json::Value>> {
         self.builder.send().await
     }
 }
@@ -82,7 +82,10 @@ impl<'a> CreateRequest<'a> {
 
         Self { builder }
     }
-    pub fn with_body(mut self, body: serde_json::Value) -> Self {
+    pub fn with_body(
+        mut self,
+        body: crate::models::droplet_single_create::DropletSingleCreate,
+    ) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
@@ -125,7 +128,7 @@ impl<'a> CreateRequest<'a> {
 /// ```no_run
 /// use digitalocean::{ ApiClient, apis::droplets };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// # let body: serde_json::Value = todo!();
+/// # let body: crate::models::droplet_single_create::DropletSingleCreate = todo!();
 /// let response = create(&api)
 ///     .with_body(body)
 ///     .send()
@@ -176,7 +179,7 @@ pub fn destroy(api: &ApiClient) -> DestroyRequest<'_> {
 
 #[derive(Debug)]
 pub struct ListBackupPoliciesRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, std::collections::BTreeMap<String, serde_json::Value>>,
 }
 
 impl<'a> ListBackupPoliciesRequest<'a> {
@@ -185,7 +188,7 @@ impl<'a> ListBackupPoliciesRequest<'a> {
 
         Self { builder }
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<std::collections::BTreeMap<String, serde_json::Value>> {
         self.builder.send().await
     }
 }
@@ -337,7 +340,7 @@ pub fn destroy_delete(api: &ApiClient) -> DestroyDeleteRequest<'_> {
 
 #[derive(Debug)]
 pub struct ListBackupsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, std::collections::BTreeMap<String, serde_json::Value>>,
 }
 
 impl<'a> ListBackupsRequest<'a> {
@@ -351,7 +354,7 @@ impl<'a> ListBackupsRequest<'a> {
         self.builder = self.builder.path_param("droplet_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<std::collections::BTreeMap<String, serde_json::Value>> {
         self.builder.send().await
     }
 }
@@ -430,7 +433,7 @@ pub fn get_backup_policy(api: &ApiClient) -> GetBackupPolicyRequest<'_> {
 
 #[derive(Debug)]
 pub struct ListAssociatedResourcesRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, std::collections::BTreeMap<String, serde_json::Value>>,
 }
 
 impl<'a> ListAssociatedResourcesRequest<'a> {
@@ -448,7 +451,7 @@ impl<'a> ListAssociatedResourcesRequest<'a> {
         self.builder = self.builder.path_param("droplet_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<std::collections::BTreeMap<String, serde_json::Value>> {
         self.builder.send().await
     }
 }
@@ -716,7 +719,7 @@ pub fn get_destroy_associated_resources(
 
 #[derive(Debug)]
 pub struct ListFirewallsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, std::collections::BTreeMap<String, serde_json::Value>>,
 }
 
 impl<'a> ListFirewallsRequest<'a> {
@@ -731,7 +734,7 @@ impl<'a> ListFirewallsRequest<'a> {
         self.builder = self.builder.path_param("droplet_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<std::collections::BTreeMap<String, serde_json::Value>> {
         self.builder.send().await
     }
 }
@@ -765,7 +768,7 @@ pub fn list_firewalls(api: &ApiClient) -> ListFirewallsRequest<'_> {
 
 #[derive(Debug)]
 pub struct ListKernelsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, std::collections::BTreeMap<String, serde_json::Value>>,
 }
 
 impl<'a> ListKernelsRequest<'a> {
@@ -779,7 +782,7 @@ impl<'a> ListKernelsRequest<'a> {
         self.builder = self.builder.path_param("droplet_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<std::collections::BTreeMap<String, serde_json::Value>> {
         self.builder.send().await
     }
 }
@@ -813,7 +816,7 @@ pub fn list_kernels(api: &ApiClient) -> ListKernelsRequest<'_> {
 
 #[derive(Debug)]
 pub struct ListNeighborsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, std::collections::BTreeMap<String, serde_json::Value>>,
 }
 
 impl<'a> ListNeighborsRequest<'a> {
@@ -828,7 +831,7 @@ impl<'a> ListNeighborsRequest<'a> {
         self.builder = self.builder.path_param("droplet_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<std::collections::BTreeMap<String, serde_json::Value>> {
         self.builder.send().await
     }
 }
@@ -864,7 +867,7 @@ pub fn list_neighbors(api: &ApiClient) -> ListNeighborsRequest<'_> {
 
 #[derive(Debug)]
 pub struct ListSnapshotsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, std::collections::BTreeMap<String, serde_json::Value>>,
 }
 
 impl<'a> ListSnapshotsRequest<'a> {
@@ -879,7 +882,7 @@ impl<'a> ListSnapshotsRequest<'a> {
         self.builder = self.builder.path_param("droplet_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<std::collections::BTreeMap<String, serde_json::Value>> {
         self.builder.send().await
     }
 }

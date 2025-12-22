@@ -20,7 +20,7 @@ use serde::{Deserialize, Serialize};
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct AutoscalePool {
     pub active_resources_count: i64,
-    pub config: serde_json::Value,
+    pub config: crate::models::autoscale_pool_static_config::AutoscalePoolStaticConfig,
     pub created_at: String,
     pub current_utilization: Option<crate::models::current_utilization::CurrentUtilization>,
     pub droplet_template:

@@ -21,5 +21,5 @@ use serde::{Deserialize, Serialize};
 pub struct AppComponentInstanceBase {
     pub autoscaling: Option<std::collections::BTreeMap<String, serde_json::Value>>,
     pub instance_count: Option<i64>,
-    pub instance_size_slug: Option<serde_json::Value>,
+    pub instance_size_slug: Option<String>,
 }

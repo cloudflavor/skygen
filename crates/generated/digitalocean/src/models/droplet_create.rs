@@ -19,15 +19,15 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct DropletCreate {
-    pub backup_policy: Option<serde_json::Value>,
+    pub backup_policy: Option<crate::models::droplet_backup_policy::DropletBackupPolicy>,
     pub backups: Option<bool>,
-    pub image: serde_json::Value,
+    pub image: String,
     pub ipv6: Option<bool>,
     pub monitoring: Option<bool>,
     pub private_networking: Option<bool>,
     pub region: Option<String>,
     pub size: String,
-    pub ssh_keys: Option<Vec<serde_json::Value>>,
+    pub ssh_keys: Option<Vec<String>>,
     pub tags: Option<Vec<String>>,
     pub user_data: Option<String>,
     pub volumes: Option<Vec<String>>,

@@ -19,13 +19,13 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct ConnectionPool {
-    pub connection: Option<serde_json::Value>,
+    pub connection: Option<crate::models::database_connection::DatabaseConnection>,
     pub db: String,
     pub mode: String,
     pub name: String,
-    pub private_connection: Option<serde_json::Value>,
+    pub private_connection: Option<crate::models::database_connection::DatabaseConnection>,
     pub size: i64,
-    pub standby_connection: Option<serde_json::Value>,
-    pub standby_private_connection: Option<serde_json::Value>,
+    pub standby_connection: Option<crate::models::database_connection::DatabaseConnection>,
+    pub standby_private_connection: Option<crate::models::database_connection::DatabaseConnection>,
     pub user: Option<String>,
 }

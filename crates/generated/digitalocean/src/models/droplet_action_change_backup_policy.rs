@@ -15,4 +15,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type DropletActionChangeBackupPolicy = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct DropletActionChangeBackupPolicy {
+    pub backup_policy: Option<crate::models::droplet_backup_policy::DropletBackupPolicy>,
+    #[serde(flatten)]
+    pub droplet_action: crate::models::droplet_action::DropletAction,
+}

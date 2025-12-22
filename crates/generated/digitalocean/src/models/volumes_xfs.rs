@@ -15,4 +15,18 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type VolumesXfs = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct VolumesXfs {
+    pub filesystem_label:
+        Option<crate::models::volume_write_file_system_label::VolumeWriteFileSystemLabel>,
+    pub region: crate::models::region_slug::RegionSlug,
+    #[serde(flatten)]
+    pub volume_base: crate::models::volume_base::VolumeBase,
+    #[serde(flatten)]
+    pub volume_snapshot_id: crate::models::volume_snapshot_id::VolumeSnapshotId,
+    #[serde(flatten)]
+    pub volume_write_file_system_type:
+        crate::models::volume_write_file_system_type::VolumeWriteFileSystemType,
+}

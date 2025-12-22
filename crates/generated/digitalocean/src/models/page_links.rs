@@ -19,5 +19,5 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct PageLinks {
-    pub pages: Option<serde_json::Value>,
+    pub pages: Option<crate::models::forward_links::ForwardLinks>,
 }

@@ -16,12 +16,13 @@
 // limitations under the License.
 
 use crate::models::error::Error;
+use crate::models::reserved_ipv6_list::ReservedIpv6List;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct ListRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, ReservedIpv6List>,
 }
 
 impl<'a> ListRequest<'a> {
@@ -30,7 +31,7 @@ impl<'a> ListRequest<'a> {
 
         Self { builder }
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<ReservedIpv6List> {
         self.builder.send().await
     }
 }

@@ -21,7 +21,7 @@ use reqwest::Method;
 
 #[derive(Debug)]
 pub struct KeyListRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, std::collections::BTreeMap<String, serde_json::Value>>,
 }
 
 impl<'a> KeyListRequest<'a> {
@@ -30,7 +30,7 @@ impl<'a> KeyListRequest<'a> {
 
         Self { builder }
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<std::collections::BTreeMap<String, serde_json::Value>> {
         self.builder.send().await
     }
 }
@@ -97,7 +97,7 @@ pub fn key_create(api: &ApiClient) -> KeyCreateRequest<'_> {
 
 #[derive(Debug)]
 pub struct KeyGetRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, std::collections::BTreeMap<String, serde_json::Value>>,
 }
 
 impl<'a> KeyGetRequest<'a> {
@@ -111,7 +111,7 @@ impl<'a> KeyGetRequest<'a> {
         self.builder = self.builder.path_param("access_key", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<std::collections::BTreeMap<String, serde_json::Value>> {
         self.builder.send().await
     }
 }

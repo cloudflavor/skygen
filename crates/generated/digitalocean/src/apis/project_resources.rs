@@ -20,7 +20,7 @@ use reqwest::Method;
 
 #[derive(Debug)]
 pub struct ProjectsListResourcesDefaultRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, std::collections::BTreeMap<String, serde_json::Value>>,
 }
 
 impl<'a> ProjectsListResourcesDefaultRequest<'a> {
@@ -29,7 +29,7 @@ impl<'a> ProjectsListResourcesDefaultRequest<'a> {
 
         Self { builder }
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<std::collections::BTreeMap<String, serde_json::Value>> {
         self.builder.send().await
     }
 }
@@ -97,7 +97,7 @@ pub fn projects_assign_resources_default(
 
 #[derive(Debug)]
 pub struct ProjectsListResourcesRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, std::collections::BTreeMap<String, serde_json::Value>>,
 }
 
 impl<'a> ProjectsListResourcesRequest<'a> {
@@ -112,7 +112,7 @@ impl<'a> ProjectsListResourcesRequest<'a> {
         self.builder = self.builder.path_param("project_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<std::collections::BTreeMap<String, serde_json::Value>> {
         self.builder.send().await
     }
 }

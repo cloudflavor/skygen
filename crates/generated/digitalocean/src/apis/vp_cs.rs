@@ -21,7 +21,7 @@ use reqwest::Method;
 
 #[derive(Debug)]
 pub struct VpcsListRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, std::collections::BTreeMap<String, serde_json::Value>>,
 }
 
 impl<'a> VpcsListRequest<'a> {
@@ -30,7 +30,7 @@ impl<'a> VpcsListRequest<'a> {
 
         Self { builder }
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<std::collections::BTreeMap<String, serde_json::Value>> {
         self.builder.send().await
     }
 }
@@ -64,7 +64,7 @@ impl<'a> VpcsCreateRequest<'a> {
 
         Self { builder }
     }
-    pub fn with_body(mut self, body: serde_json::Value) -> Self {
+    pub fn with_body(mut self, body: crate::models::vpc_updatable::VpcUpdatable) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
@@ -88,7 +88,7 @@ impl<'a> VpcsCreateRequest<'a> {
 /// ```no_run
 /// use digitalocean::{ ApiClient, apis::vp_cs };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// # let body: serde_json::Value = todo!();
+/// # let body: crate::models::vpc_updatable::VpcUpdatable = todo!();
 /// let response = vpcs_create(&api)
 ///     .with_body(body)
 ///     .send()
@@ -158,7 +158,7 @@ impl<'a> VpcsUpdateRequest<'a> {
         self.builder = self.builder.path_param("vpc_id", value);
         self
     }
-    pub fn with_body(mut self, body: serde_json::Value) -> Self {
+    pub fn with_body(mut self, body: crate::models::vpc_updatable::VpcUpdatable) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
@@ -180,7 +180,7 @@ impl<'a> VpcsUpdateRequest<'a> {
 /// ```no_run
 /// use digitalocean::{ ApiClient, apis::vp_cs };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// # let body: serde_json::Value = todo!();
+/// # let body: crate::models::vpc_updatable::VpcUpdatable = todo!();
 /// let response = vpcs_update(&api)
 ///     .with_vpc_id("vpc_id")
 ///     .with_body(body)
@@ -257,7 +257,7 @@ impl<'a> VpcsPatchRequest<'a> {
         self.builder = self.builder.path_param("vpc_id", value);
         self
     }
-    pub fn with_body(mut self, body: serde_json::Value) -> Self {
+    pub fn with_body(mut self, body: crate::models::vpc_updatable::VpcUpdatable) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
@@ -280,7 +280,7 @@ impl<'a> VpcsPatchRequest<'a> {
 /// ```no_run
 /// use digitalocean::{ ApiClient, apis::vp_cs };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// # let body: serde_json::Value = todo!();
+/// # let body: crate::models::vpc_updatable::VpcUpdatable = todo!();
 /// let response = vpcs_patch(&api)
 ///     .with_vpc_id("vpc_id")
 ///     .with_body(body)
@@ -293,7 +293,7 @@ pub fn vpcs_patch(api: &ApiClient) -> VpcsPatchRequest<'_> {
 
 #[derive(Debug)]
 pub struct VpcsListMembersRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, std::collections::BTreeMap<String, serde_json::Value>>,
 }
 
 impl<'a> VpcsListMembersRequest<'a> {
@@ -307,7 +307,7 @@ impl<'a> VpcsListMembersRequest<'a> {
         self.builder = self.builder.path_param("vpc_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<std::collections::BTreeMap<String, serde_json::Value>> {
         self.builder.send().await
     }
 }
@@ -341,7 +341,7 @@ pub fn vpcs_list_members(api: &ApiClient) -> VpcsListMembersRequest<'_> {
 
 #[derive(Debug)]
 pub struct VpcsListPeeringsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, std::collections::BTreeMap<String, serde_json::Value>>,
 }
 
 impl<'a> VpcsListPeeringsRequest<'a> {
@@ -355,7 +355,7 @@ impl<'a> VpcsListPeeringsRequest<'a> {
         self.builder = self.builder.path_param("vpc_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<std::collections::BTreeMap<String, serde_json::Value>> {
         self.builder.send().await
     }
 }
@@ -463,7 +463,10 @@ impl<'a> VpcsPatchPeeringsRequest<'a> {
         self.builder = self.builder.path_param("vpc_peering_id", value);
         self
     }
-    pub fn with_body(mut self, body: serde_json::Value) -> Self {
+    pub fn with_body(
+        mut self,
+        body: crate::models::vpc_peering_updatable::VpcPeeringUpdatable,
+    ) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
@@ -488,7 +491,7 @@ impl<'a> VpcsPatchPeeringsRequest<'a> {
 /// ```no_run
 /// use digitalocean::{ ApiClient, apis::vp_cs };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// # let body: serde_json::Value = todo!();
+/// # let body: crate::models::vpc_peering_updatable::VpcPeeringUpdatable = todo!();
 /// let response = vpcs_patch_peerings(&api)
 ///     .with_vpc_id("vpc_id")
 ///     .with_vpc_peering_id("vpc_peering_id")

@@ -38,7 +38,10 @@ impl<'a> PostRequest<'a> {
         self.builder = self.builder.path_param("reserved_ipv6", value);
         self
     }
-    pub fn with_body(mut self, body: serde_json::Value) -> Self {
+    pub fn with_body(
+        mut self,
+        body: crate::models::reserved_ipv6_action_unassign::ReservedIpv6ActionUnassign,
+    ) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
@@ -67,7 +70,7 @@ impl<'a> PostRequest<'a> {
 /// ```no_run
 /// use digitalocean::{ ApiClient, apis::public_preview_reserved_i_pv6_actions };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// # let body: serde_json::Value = todo!();
+/// # let body: crate::models::reserved_ipv6_action_unassign::ReservedIpv6ActionUnassign = todo!();
 /// let response = post(&api)
 ///     .with_reserved_ipv6("reserved_ipv6")
 ///     .with_body(body)

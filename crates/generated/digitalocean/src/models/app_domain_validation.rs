@@ -15,4 +15,10 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type AppDomainValidation = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct AppDomainValidation {
+    pub txt_name: Option<String>,
+    pub txt_value: Option<String>,
+}

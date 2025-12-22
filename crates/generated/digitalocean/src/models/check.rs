@@ -15,4 +15,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type Check = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct Check {
+    #[serde(flatten)]
+    pub check_base: crate::models::check_base::CheckBase,
+    #[serde(flatten)]
+    pub check_updatable: crate::models::check_updatable::CheckUpdatable,
+}

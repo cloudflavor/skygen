@@ -20,5 +20,5 @@ use serde::{Deserialize, Serialize};
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct Tags {
     pub name: Option<String>,
-    pub resources: Option<serde_json::Value>,
+    pub resources: Option<crate::models::tags_metadata::TagsMetadata>,
 }

@@ -15,4 +15,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type VolumeActionPostAttach = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct VolumeActionPostAttach {
+    pub droplet_id: crate::models::volume_action_droplet_id::VolumeActionDropletId,
+    pub tags: Option<crate::models::tags_array::TagsArray>,
+    #[serde(flatten)]
+    pub volume_action_post_base: crate::models::volume_action_post_base::VolumeActionPostBase,
+}

@@ -32,7 +32,7 @@ pub struct Droplet {
     pub memory: i64,
     pub name: String,
     pub networks: std::collections::BTreeMap<String, serde_json::Value>,
-    pub next_backup_window: serde_json::Value,
+    pub next_backup_window: crate::models::droplet_next_backup_window::DropletNextBackupWindow,
     pub region: crate::models::region::Region,
     pub size: crate::models::size::Size,
     pub size_slug: String,

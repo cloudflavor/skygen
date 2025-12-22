@@ -23,5 +23,5 @@ pub struct ReservedIp {
     pub ip: Option<String>,
     pub locked: Option<bool>,
     pub project_id: Option<String>,
-    pub region: Option<serde_json::Value>,
+    pub region: Option<crate::models::region::Region>,
 }

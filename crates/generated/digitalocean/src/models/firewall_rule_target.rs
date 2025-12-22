@@ -23,5 +23,5 @@ pub struct FirewallRuleTarget {
     pub droplet_ids: Option<Vec<i64>>,
     pub kubernetes_ids: Option<Vec<String>>,
     pub load_balancer_uids: Option<Vec<String>>,
-    pub tags: Option<serde_json::Value>,
+    pub tags: Option<crate::models::existing_tags_array::ExistingTagsArray>,
 }

@@ -15,4 +15,16 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type AppStaticSiteSpec = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct AppStaticSiteSpec {
+    #[serde(flatten)]
+    pub app_component_base: crate::models::app_component_base::AppComponentBase,
+    pub catchall_document: Option<String>,
+    pub cors: Option<crate::models::apps_cors_policy::AppsCorsPolicy>,
+    pub error_document: Option<String>,
+    pub index_document: Option<String>,
+    pub output_dir: Option<String>,
+    pub routes: Option<Vec<crate::models::app_route_spec::AppRouteSpec>>,
+}

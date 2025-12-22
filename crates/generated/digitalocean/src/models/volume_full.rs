@@ -15,4 +15,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type VolumeFull = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct VolumeFull {
+    pub filesystem_label: Option<String>,
+    pub filesystem_type: Option<String>,
+    pub region: Option<crate::models::region::Region>,
+    #[serde(flatten)]
+    pub volume_base: crate::models::volume_base::VolumeBase,
+}

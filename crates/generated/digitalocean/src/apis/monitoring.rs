@@ -16,13 +16,14 @@
 // limitations under the License.
 
 use crate::models::error::Error;
+use crate::models::list_alert_policy::ListAlertPolicy;
 use crate::models::metrics::Metrics;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct ListAlertPolicyRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, ListAlertPolicy>,
 }
 
 impl<'a> ListAlertPolicyRequest<'a> {
@@ -31,7 +32,7 @@ impl<'a> ListAlertPolicyRequest<'a> {
 
         Self { builder }
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<ListAlertPolicy> {
         self.builder.send().await
     }
 }

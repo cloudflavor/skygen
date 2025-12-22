@@ -15,4 +15,15 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type AppWorkerSpec = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct AppWorkerSpec {
+    #[serde(flatten)]
+    pub app_component_base: crate::models::app_component_base::AppComponentBase,
+    #[serde(flatten)]
+    pub app_component_instance_base:
+        crate::models::app_component_instance_base::AppComponentInstanceBase,
+    pub liveness_health_check: Option<crate::models::app_health_check_spec::AppHealthCheckSpec>,
+    pub termination: Option<crate::models::app_worker_spec_termination::AppWorkerSpecTermination>,
+}

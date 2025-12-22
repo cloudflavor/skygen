@@ -19,11 +19,11 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct DatabaseReplica {
-    pub connection: Option<serde_json::Value>,
+    pub connection: Option<crate::models::database_connection::DatabaseConnection>,
     pub created_at: Option<String>,
     pub id: Option<String>,
     pub name: String,
-    pub private_connection: Option<serde_json::Value>,
+    pub private_connection: Option<crate::models::database_connection::DatabaseConnection>,
     pub private_network_uuid: Option<String>,
     pub region: Option<String>,
     pub size: Option<String>,

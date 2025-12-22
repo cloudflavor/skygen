@@ -21,7 +21,7 @@ use reqwest::Method;
 
 #[derive(Debug)]
 pub struct ListChecksRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, std::collections::BTreeMap<String, serde_json::Value>>,
 }
 
 impl<'a> ListChecksRequest<'a> {
@@ -30,7 +30,7 @@ impl<'a> ListChecksRequest<'a> {
 
         Self { builder }
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<std::collections::BTreeMap<String, serde_json::Value>> {
         self.builder.send().await
     }
 }
@@ -64,7 +64,7 @@ impl<'a> CreateCheckRequest<'a> {
 
         Self { builder }
     }
-    pub fn with_body(mut self, body: serde_json::Value) -> Self {
+    pub fn with_body(mut self, body: crate::models::check_updatable::CheckUpdatable) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
@@ -84,7 +84,7 @@ impl<'a> CreateCheckRequest<'a> {
 /// ```no_run
 /// use digitalocean::{ ApiClient, apis::uptime };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// # let body: serde_json::Value = todo!();
+/// # let body: crate::models::check_updatable::CheckUpdatable = todo!();
 /// let response = create_check(&api)
 ///     .with_body(body)
 ///     .send()
@@ -154,7 +154,7 @@ impl<'a> UpdateCheckRequest<'a> {
         self.builder = self.builder.path_param("check_id", value);
         self
     }
-    pub fn with_body(mut self, body: serde_json::Value) -> Self {
+    pub fn with_body(mut self, body: crate::models::check_updatable::CheckUpdatable) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
@@ -176,7 +176,7 @@ impl<'a> UpdateCheckRequest<'a> {
 /// ```no_run
 /// use digitalocean::{ ApiClient, apis::uptime };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// # let body: serde_json::Value = todo!();
+/// # let body: crate::models::check_updatable::CheckUpdatable = todo!();
 /// let response = update_check(&api)
 ///     .with_check_id("check_id")
 ///     .with_body(body)
@@ -236,7 +236,7 @@ pub fn delete_check(api: &ApiClient) -> DeleteCheckRequest<'_> {
 
 #[derive(Debug)]
 pub struct ListAlertsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, std::collections::BTreeMap<String, serde_json::Value>>,
 }
 
 impl<'a> ListAlertsRequest<'a> {
@@ -251,7 +251,7 @@ impl<'a> ListAlertsRequest<'a> {
         self.builder = self.builder.path_param("check_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<std::collections::BTreeMap<String, serde_json::Value>> {
         self.builder.send().await
     }
 }
@@ -296,7 +296,7 @@ impl<'a> CreateAlertRequest<'a> {
         self.builder = self.builder.path_param("check_id", value);
         self
     }
-    pub fn with_body(mut self, body: serde_json::Value) -> Self {
+    pub fn with_body(mut self, body: crate::models::alert::Alert) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
@@ -319,7 +319,7 @@ impl<'a> CreateAlertRequest<'a> {
 /// ```no_run
 /// use digitalocean::{ ApiClient, apis::uptime };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// # let body: serde_json::Value = todo!();
+/// # let body: crate::models::alert::Alert = todo!();
 /// let response = create_alert(&api)
 ///     .with_check_id("check_id")
 ///     .with_body(body)
@@ -410,7 +410,7 @@ impl<'a> UpdateAlertRequest<'a> {
         self.builder = self.builder.path_param("alert_id", value);
         self
     }
-    pub fn with_body(mut self, body: serde_json::Value) -> Self {
+    pub fn with_body(mut self, body: crate::models::alert_updatable::AlertUpdatable) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
@@ -433,7 +433,7 @@ impl<'a> UpdateAlertRequest<'a> {
 /// ```no_run
 /// use digitalocean::{ ApiClient, apis::uptime };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// # let body: serde_json::Value = todo!();
+/// # let body: crate::models::alert_updatable::AlertUpdatable = todo!();
 /// let response = update_alert(&api)
 ///     .with_check_id("check_id")
 ///     .with_alert_id("alert_id")

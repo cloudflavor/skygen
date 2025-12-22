@@ -74,7 +74,7 @@ impl<'a> CreateClusterRequest<'a> {
 
         Self { builder }
     }
-    pub fn with_body(mut self, body: serde_json::Value) -> Self {
+    pub fn with_body(mut self, body: crate::models::database_cluster::DatabaseCluster) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
@@ -100,7 +100,7 @@ impl<'a> CreateClusterRequest<'a> {
 /// ```no_run
 /// use digitalocean::{ ApiClient, apis::databases };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// # let body: serde_json::Value = todo!();
+/// # let body: crate::models::database_cluster::DatabaseCluster = todo!();
 /// let response = create_cluster(&api)
 ///     .with_body(body)
 ///     .send()
@@ -155,7 +155,10 @@ impl<'a> UpdateClusterMetricsCredentialsRequest<'a> {
 
         Self { builder }
     }
-    pub fn with_body(mut self, body: serde_json::Value) -> Self {
+    pub fn with_body(
+        mut self,
+        body: crate::models::database_metrics_credentials::DatabaseMetricsCredentials,
+    ) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
@@ -174,7 +177,7 @@ impl<'a> UpdateClusterMetricsCredentialsRequest<'a> {
 /// ```no_run
 /// use digitalocean::{ ApiClient, apis::databases };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// # let body: serde_json::Value = todo!();
+/// # let body: crate::models::database_metrics_credentials::DatabaseMetricsCredentials = todo!();
 /// let response = update_cluster_metrics_credentials(&api)
 ///     .with_body(body)
 ///     .send()
@@ -1235,7 +1238,7 @@ impl<'a> CreateLogsinkRequest<'a> {
         self.builder = self.builder.path_param("database_cluster_uuid", value);
         self
     }
-    pub fn with_body(mut self, body: serde_json::Value) -> Self {
+    pub fn with_body(mut self, body: crate::models::logsink_create::LogsinkCreate) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
@@ -1259,7 +1262,7 @@ impl<'a> CreateLogsinkRequest<'a> {
 /// ```no_run
 /// use digitalocean::{ ApiClient, apis::databases };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// # let body: serde_json::Value = todo!();
+/// # let body: crate::models::logsink_create::LogsinkCreate = todo!();
 /// let response = create_logsink(&api)
 ///     .with_database_cluster_uuid("database_cluster_uuid")
 ///     .with_body(body)
@@ -2084,7 +2087,7 @@ impl<'a> CreateReplicaRequest<'a> {
         self.builder = self.builder.path_param("database_cluster_uuid", value);
         self
     }
-    pub fn with_body(mut self, body: serde_json::Value) -> Self {
+    pub fn with_body(mut self, body: crate::models::database_replica::DatabaseReplica) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
@@ -2110,7 +2113,7 @@ impl<'a> CreateReplicaRequest<'a> {
 /// ```no_run
 /// use digitalocean::{ ApiClient, apis::databases };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// # let body: serde_json::Value = todo!();
+/// # let body: crate::models::database_replica::DatabaseReplica = todo!();
 /// let response = create_replica(&api)
 ///     .with_database_cluster_uuid("database_cluster_uuid")
 ///     .with_body(body)
@@ -2526,7 +2529,7 @@ impl<'a> CreateKafkaTopicRequest<'a> {
         self.builder = self.builder.path_param("database_cluster_uuid", value);
         self
     }
-    pub fn with_body(mut self, body: serde_json::Value) -> Self {
+    pub fn with_body(mut self, body: crate::models::kafka_topic_create::KafkaTopicCreate) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
@@ -2551,7 +2554,7 @@ impl<'a> CreateKafkaTopicRequest<'a> {
 /// ```no_run
 /// use digitalocean::{ ApiClient, apis::databases };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// # let body: serde_json::Value = todo!();
+/// # let body: crate::models::kafka_topic_create::KafkaTopicCreate = todo!();
 /// let response = create_kafka_topic(&api)
 ///     .with_database_cluster_uuid("database_cluster_uuid")
 ///     .with_body(body)
@@ -2644,7 +2647,7 @@ impl<'a> UpdateKafkaTopicRequest<'a> {
         self.builder = self.builder.path_param("topic_name", value);
         self
     }
-    pub fn with_body(mut self, body: serde_json::Value) -> Self {
+    pub fn with_body(mut self, body: crate::models::kafka_topic_update::KafkaTopicUpdate) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
@@ -2670,7 +2673,7 @@ impl<'a> UpdateKafkaTopicRequest<'a> {
 /// ```no_run
 /// use digitalocean::{ ApiClient, apis::databases };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// # let body: serde_json::Value = todo!();
+/// # let body: crate::models::kafka_topic_update::KafkaTopicUpdate = todo!();
 /// let response = update_kafka_topic(&api)
 ///     .with_database_cluster_uuid("database_cluster_uuid")
 ///     .with_topic_name("topic_name")
@@ -2873,7 +2876,7 @@ impl<'a> AddPostRequest<'a> {
         self.builder = self.builder.path_param("database_cluster_uuid", value);
         self
     }
-    pub fn with_body(mut self, body: serde_json::Value) -> Self {
+    pub fn with_body(mut self, body: crate::models::database_user::DatabaseUser) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
@@ -2911,7 +2914,7 @@ impl<'a> AddPostRequest<'a> {
 /// ```no_run
 /// use digitalocean::{ ApiClient, apis::databases };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// # let body: serde_json::Value = todo!();
+/// # let body: crate::models::database_user::DatabaseUser = todo!();
 /// let response = add_post(&api)
 ///     .with_database_cluster_uuid("database_cluster_uuid")
 ///     .with_body(body)
@@ -3015,7 +3018,10 @@ impl<'a> UpdateRequest<'a> {
         self.builder = self.builder.path_param("username", value);
         self
     }
-    pub fn with_body(mut self, body: serde_json::Value) -> Self {
+    pub fn with_body(
+        mut self,
+        body: std::collections::BTreeMap<String, serde_json::Value>,
+    ) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
@@ -3046,7 +3052,7 @@ impl<'a> UpdateRequest<'a> {
 /// ```no_run
 /// use digitalocean::{ ApiClient, apis::databases };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// # let body: serde_json::Value = todo!();
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = update(&api)
 ///     .with_database_cluster_uuid("database_cluster_uuid")
 ///     .with_username("username")

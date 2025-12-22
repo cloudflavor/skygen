@@ -15,4 +15,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type OpensearchIndex = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct OpensearchIndex {
+    pub health: Option<String>,
+    #[serde(flatten)]
+    pub opensearch_index_base: crate::models::opensearch_index_base::OpensearchIndexBase,
+    pub status: Option<String>,
+}

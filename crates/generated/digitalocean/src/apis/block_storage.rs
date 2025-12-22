@@ -21,7 +21,7 @@ use reqwest::Method;
 
 #[derive(Debug)]
 pub struct VolumesListRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, std::collections::BTreeMap<String, serde_json::Value>>,
 }
 
 impl<'a> VolumesListRequest<'a> {
@@ -30,7 +30,7 @@ impl<'a> VolumesListRequest<'a> {
 
         Self { builder }
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<std::collections::BTreeMap<String, serde_json::Value>> {
         self.builder.send().await
     }
 }
@@ -74,7 +74,7 @@ impl<'a> VolumesCreateRequest<'a> {
 
         Self { builder }
     }
-    pub fn with_body(mut self, body: serde_json::Value) -> Self {
+    pub fn with_body(mut self, body: crate::models::volumes_ext4::VolumesExt4) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
@@ -93,7 +93,7 @@ impl<'a> VolumesCreateRequest<'a> {
 /// ```no_run
 /// use digitalocean::{ ApiClient, apis::block_storage };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// # let body: serde_json::Value = todo!();
+/// # let body: crate::models::volumes_ext4::VolumesExt4 = todo!();
 /// let response = volumes_create(&api)
 ///     .with_body(body)
 ///     .send()
@@ -323,7 +323,7 @@ pub fn volumes_delete_delete(api: &ApiClient) -> VolumesDeleteDeleteRequest<'_> 
 
 #[derive(Debug)]
 pub struct VolumeSnapshotsListRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, std::collections::BTreeMap<String, serde_json::Value>>,
 }
 
 impl<'a> VolumeSnapshotsListRequest<'a> {
@@ -337,7 +337,7 @@ impl<'a> VolumeSnapshotsListRequest<'a> {
         self.builder = self.builder.path_param("volume_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<std::collections::BTreeMap<String, serde_json::Value>> {
         self.builder.send().await
     }
 }

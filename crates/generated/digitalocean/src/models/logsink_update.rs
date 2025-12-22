@@ -19,5 +19,5 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct LogsinkUpdate {
-    pub config: serde_json::Value,
+    pub config: crate::models::rsyslog_logsink::RsyslogLogsink,
 }

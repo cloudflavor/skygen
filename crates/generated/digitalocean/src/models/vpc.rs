@@ -15,4 +15,16 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type Vpc = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct Vpc {
+    #[serde(flatten)]
+    pub vpc_base: crate::models::vpc_base::VpcBase,
+    #[serde(flatten)]
+    pub vpc_create: crate::models::vpc_create::VpcCreate,
+    #[serde(flatten)]
+    pub vpc_default: crate::models::vpc_default::VpcDefault,
+    #[serde(flatten)]
+    pub vpc_updatable: crate::models::vpc_updatable::VpcUpdatable,
+}

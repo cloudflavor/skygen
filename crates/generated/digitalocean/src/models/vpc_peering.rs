@@ -15,4 +15,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type VpcPeering = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct VpcPeering {
+    #[serde(flatten)]
+    pub vpc_peering_base: crate::models::vpc_peering_base::VpcPeeringBase,
+    #[serde(flatten)]
+    pub vpc_peering_create: crate::models::vpc_peering_create::VpcPeeringCreate,
+    #[serde(flatten)]
+    pub vpc_peering_updatable: crate::models::vpc_peering_updatable::VpcPeeringUpdatable,
+}

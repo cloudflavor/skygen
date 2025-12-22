@@ -15,4 +15,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type VolumeActionPostDetach = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct VolumeActionPostDetach {
+    pub droplet_id: crate::models::volume_action_droplet_id::VolumeActionDropletId,
+    #[serde(flatten)]
+    pub volume_action_post_base: crate::models::volume_action_post_base::VolumeActionPostBase,
+}

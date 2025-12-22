@@ -21,7 +21,7 @@ use serde::{Deserialize, Serialize};
 pub struct AppFunctionsSpec {
     pub alerts: Option<Vec<crate::models::app_alert_spec::AppAlertSpec>>,
     pub bitbucket: Option<crate::models::apps_bitbucket_source_spec::AppsBitbucketSourceSpec>,
-    pub cors: Option<serde_json::Value>,
+    pub cors: Option<crate::models::apps_cors_policy::AppsCorsPolicy>,
     pub envs: Option<Vec<crate::models::app_variable_definition::AppVariableDefinition>>,
     pub git: Option<crate::models::apps_git_source_spec::AppsGitSourceSpec>,
     pub github: Option<crate::models::apps_github_source_spec::AppsGithubSourceSpec>,

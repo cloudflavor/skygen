@@ -19,5 +19,5 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct DatabaseConfig {
-    pub config: Option<serde_json::Value>,
+    pub config: Option<crate::models::mysql_advanced_config::MysqlAdvancedConfig>,
 }

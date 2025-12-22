@@ -21,7 +21,7 @@ use reqwest::Method;
 
 #[derive(Debug)]
 pub struct AutoscalepoolsListRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, std::collections::BTreeMap<String, serde_json::Value>>,
 }
 
 impl<'a> AutoscalepoolsListRequest<'a> {
@@ -30,7 +30,7 @@ impl<'a> AutoscalepoolsListRequest<'a> {
 
         Self { builder }
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<std::collections::BTreeMap<String, serde_json::Value>> {
         self.builder.send().await
     }
 }
@@ -307,7 +307,7 @@ pub fn autoscalepools_delete_dangerous(
 
 #[derive(Debug)]
 pub struct AutoscalepoolsListHistoryRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, std::collections::BTreeMap<String, serde_json::Value>>,
 }
 
 impl<'a> AutoscalepoolsListHistoryRequest<'a> {
@@ -325,7 +325,7 @@ impl<'a> AutoscalepoolsListHistoryRequest<'a> {
         self.builder = self.builder.path_param("autoscale_pool_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<std::collections::BTreeMap<String, serde_json::Value>> {
         self.builder.send().await
     }
 }
@@ -357,7 +357,7 @@ pub fn autoscalepools_list_history(api: &ApiClient) -> AutoscalepoolsListHistory
 
 #[derive(Debug)]
 pub struct AutoscalepoolsListMembersRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, std::collections::BTreeMap<String, serde_json::Value>>,
 }
 
 impl<'a> AutoscalepoolsListMembersRequest<'a> {
@@ -375,7 +375,7 @@ impl<'a> AutoscalepoolsListMembersRequest<'a> {
         self.builder = self.builder.path_param("autoscale_pool_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<std::collections::BTreeMap<String, serde_json::Value>> {
         self.builder.send().await
     }
 }

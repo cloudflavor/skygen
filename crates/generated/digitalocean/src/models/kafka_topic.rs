@@ -15,4 +15,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type KafkaTopic = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct KafkaTopic {
+    #[serde(flatten)]
+    pub kafka_topic_base: crate::models::kafka_topic_base::KafkaTopicBase,
+    pub state: Option<String>,
+}

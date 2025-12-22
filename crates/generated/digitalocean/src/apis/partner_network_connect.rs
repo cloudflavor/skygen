@@ -21,7 +21,7 @@ use reqwest::Method;
 
 #[derive(Debug)]
 pub struct AttachmentsListRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, std::collections::BTreeMap<String, serde_json::Value>>,
 }
 
 impl<'a> AttachmentsListRequest<'a> {
@@ -31,7 +31,7 @@ impl<'a> AttachmentsListRequest<'a> {
 
         Self { builder }
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<std::collections::BTreeMap<String, serde_json::Value>> {
         self.builder.send().await
     }
 }
@@ -102,7 +102,7 @@ pub fn attachments_create(api: &ApiClient) -> AttachmentsCreateRequest<'_> {
 
 #[derive(Debug)]
 pub struct AttachmentsGetRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, std::collections::BTreeMap<String, serde_json::Value>>,
 }
 
 impl<'a> AttachmentsGetRequest<'a> {
@@ -120,7 +120,7 @@ impl<'a> AttachmentsGetRequest<'a> {
         self.builder = self.builder.path_param("pa_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<std::collections::BTreeMap<String, serde_json::Value>> {
         self.builder.send().await
     }
 }
@@ -256,7 +256,7 @@ pub fn attachments_patch(api: &ApiClient) -> AttachmentsPatchRequest<'_> {
 
 #[derive(Debug)]
 pub struct AttachmentsGetBgpAuthRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, std::collections::BTreeMap<String, serde_json::Value>>,
 }
 
 impl<'a> AttachmentsGetBgpAuthRequest<'a> {
@@ -274,7 +274,7 @@ impl<'a> AttachmentsGetBgpAuthRequest<'a> {
         self.builder = self.builder.path_param("pa_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<std::collections::BTreeMap<String, serde_json::Value>> {
         self.builder.send().await
     }
 }
@@ -304,7 +304,7 @@ pub fn attachments_get_bgp_auth(api: &ApiClient) -> AttachmentsGetBgpAuthRequest
 
 #[derive(Debug)]
 pub struct AttachmentsListRemoteRoutesRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, std::collections::BTreeMap<String, serde_json::Value>>,
 }
 
 impl<'a> AttachmentsListRemoteRoutesRequest<'a> {
@@ -322,7 +322,7 @@ impl<'a> AttachmentsListRemoteRoutesRequest<'a> {
         self.builder = self.builder.path_param("pa_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<std::collections::BTreeMap<String, serde_json::Value>> {
         self.builder.send().await
     }
 }
@@ -352,7 +352,7 @@ pub fn attachments_list_remote_routes(api: &ApiClient) -> AttachmentsListRemoteR
 
 #[derive(Debug)]
 pub struct AttachmentsUpdateRemoteRoutesRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, std::collections::BTreeMap<String, serde_json::Value>>,
 }
 
 impl<'a> AttachmentsUpdateRemoteRoutesRequest<'a> {
@@ -378,7 +378,7 @@ impl<'a> AttachmentsUpdateRemoteRoutesRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<std::collections::BTreeMap<String, serde_json::Value>> {
         self.builder.send().await
     }
 }
@@ -413,7 +413,7 @@ pub fn attachments_update_remote_routes(
 
 #[derive(Debug)]
 pub struct AttachmentsGetServiceKeyRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, std::collections::BTreeMap<String, serde_json::Value>>,
 }
 
 impl<'a> AttachmentsGetServiceKeyRequest<'a> {
@@ -431,7 +431,7 @@ impl<'a> AttachmentsGetServiceKeyRequest<'a> {
         self.builder = self.builder.path_param("pa_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<std::collections::BTreeMap<String, serde_json::Value>> {
         self.builder.send().await
     }
 }

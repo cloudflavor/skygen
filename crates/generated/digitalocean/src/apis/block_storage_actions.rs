@@ -31,7 +31,10 @@ impl<'a> VolumeActionsPostRequest<'a> {
 
         Self { builder }
     }
-    pub fn with_body(mut self, body: serde_json::Value) -> Self {
+    pub fn with_body(
+        mut self,
+        body: crate::models::volume_action_post_attach::VolumeActionPostAttach,
+    ) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
@@ -77,7 +80,7 @@ impl<'a> VolumeActionsPostRequest<'a> {
 /// ```no_run
 /// use digitalocean::{ ApiClient, apis::block_storage_actions };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// # let body: serde_json::Value = todo!();
+/// # let body: crate::models::volume_action_post_attach::VolumeActionPostAttach = todo!();
 /// let response = volume_actions_post(&api)
 ///     .with_body(body)
 ///     .send()
@@ -89,7 +92,7 @@ pub fn volume_actions_post(api: &ApiClient) -> VolumeActionsPostRequest<'_> {
 
 #[derive(Debug)]
 pub struct VolumeActionsListRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, std::collections::BTreeMap<String, serde_json::Value>>,
 }
 
 impl<'a> VolumeActionsListRequest<'a> {
@@ -103,7 +106,7 @@ impl<'a> VolumeActionsListRequest<'a> {
         self.builder = self.builder.path_param("volume_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<std::collections::BTreeMap<String, serde_json::Value>> {
         self.builder.send().await
     }
 }
@@ -148,7 +151,10 @@ impl<'a> VolumeActionsPostPostRequest<'a> {
         self.builder = self.builder.path_param("volume_id", value);
         self
     }
-    pub fn with_body(mut self, body: serde_json::Value) -> Self {
+    pub fn with_body(
+        mut self,
+        body: crate::models::volume_action_post_attach::VolumeActionPostAttach,
+    ) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
@@ -205,7 +211,7 @@ impl<'a> VolumeActionsPostPostRequest<'a> {
 /// ```no_run
 /// use digitalocean::{ ApiClient, apis::block_storage_actions };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// # let body: serde_json::Value = todo!();
+/// # let body: crate::models::volume_action_post_attach::VolumeActionPostAttach = todo!();
 /// let response = volume_actions_post_post(&api)
 ///     .with_volume_id("volume_id")
 ///     .with_body(body)

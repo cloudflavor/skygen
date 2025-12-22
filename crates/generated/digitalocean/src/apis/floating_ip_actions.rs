@@ -20,7 +20,7 @@ use reqwest::Method;
 
 #[derive(Debug)]
 pub struct IPsActionListRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, std::collections::BTreeMap<String, serde_json::Value>>,
 }
 
 impl<'a> IPsActionListRequest<'a> {
@@ -35,7 +35,7 @@ impl<'a> IPsActionListRequest<'a> {
         self.builder = self.builder.path_param("floating_ip", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<std::collections::BTreeMap<String, serde_json::Value>> {
         self.builder.send().await
     }
 }
@@ -79,7 +79,10 @@ impl<'a> IPsActionPostRequest<'a> {
         self.builder = self.builder.path_param("floating_ip", value);
         self
     }
-    pub fn with_body(mut self, body: serde_json::Value) -> Self {
+    pub fn with_body(
+        mut self,
+        body: crate::models::floating_ip_action_unassign::FloatingIpActionUnassign,
+    ) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
@@ -108,7 +111,7 @@ impl<'a> IPsActionPostRequest<'a> {
 /// ```no_run
 /// use digitalocean::{ ApiClient, apis::floating_ip_actions };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// # let body: serde_json::Value = todo!();
+/// # let body: crate::models::floating_ip_action_unassign::FloatingIpActionUnassign = todo!();
 /// let response = i_ps_action_post(&api)
 ///     .with_floating_ip("floating_ip")
 ///     .with_body(body)

@@ -21,5 +21,5 @@ use serde::{Deserialize, Serialize};
 pub struct DropletActionRebuild {
     #[serde(flatten)]
     pub droplet_action: crate::models::droplet_action::DropletAction,
-    pub image: Option<serde_json::Value>,
+    pub image: Option<String>,
 }

@@ -20,5 +20,5 @@ use serde::{Deserialize, Serialize};
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct MetricsResult {
     pub metric: std::collections::BTreeMap<String, serde_json::Value>,
-    pub values: Vec<Vec<serde_json::Value>>,
+    pub values: Vec<Vec<i64>>,
 }

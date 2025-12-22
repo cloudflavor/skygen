@@ -21,7 +21,7 @@ use reqwest::Method;
 
 #[derive(Debug)]
 pub struct ListRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, std::collections::BTreeMap<String, serde_json::Value>>,
 }
 
 impl<'a> ListRequest<'a> {
@@ -30,7 +30,7 @@ impl<'a> ListRequest<'a> {
 
         Self { builder }
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<std::collections::BTreeMap<String, serde_json::Value>> {
         self.builder.send().await
     }
 }
@@ -64,7 +64,7 @@ impl<'a> CreateRequest<'a> {
 
         Self { builder }
     }
-    pub fn with_body(mut self, body: serde_json::Value) -> Self {
+    pub fn with_body(mut self, body: crate::models::firewall::Firewall) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
@@ -84,7 +84,7 @@ impl<'a> CreateRequest<'a> {
 /// ```no_run
 /// use digitalocean::{ ApiClient, apis::firewalls };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// # let body: serde_json::Value = todo!();
+/// # let body: crate::models::firewall::Firewall = todo!();
 /// let response = create(&api)
 ///     .with_body(body)
 ///     .send()
@@ -153,7 +153,7 @@ impl<'a> UpdateRequest<'a> {
         self.builder = self.builder.path_param("firewall_id", value);
         self
     }
-    pub fn with_body(mut self, body: serde_json::Value) -> Self {
+    pub fn with_body(mut self, body: crate::models::firewall::Firewall) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
@@ -178,7 +178,7 @@ impl<'a> UpdateRequest<'a> {
 /// ```no_run
 /// use digitalocean::{ ApiClient, apis::firewalls };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// # let body: serde_json::Value = todo!();
+/// # let body: crate::models::firewall::Firewall = todo!();
 /// let response = update(&api)
 ///     .with_firewall_id("firewall_id")
 ///     .with_body(body)
@@ -364,7 +364,7 @@ impl<'a> AddRulesRequest<'a> {
         self.builder = self.builder.path_param("firewall_id", value);
         self
     }
-    pub fn with_body(mut self, body: serde_json::Value) -> Self {
+    pub fn with_body(mut self, body: crate::models::firewall_rules::FirewallRules) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
@@ -393,7 +393,7 @@ impl<'a> AddRulesRequest<'a> {
 /// ```no_run
 /// use digitalocean::{ ApiClient, apis::firewalls };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// # let body: serde_json::Value = todo!();
+/// # let body: crate::models::firewall_rules::FirewallRules = todo!();
 /// let response = add_rules(&api)
 ///     .with_firewall_id("firewall_id")
 ///     .with_body(body)
@@ -421,7 +421,7 @@ impl<'a> DeleteRulesRequest<'a> {
         self.builder = self.builder.path_param("firewall_id", value);
         self
     }
-    pub fn with_body(mut self, body: serde_json::Value) -> Self {
+    pub fn with_body(mut self, body: crate::models::firewall_rules::FirewallRules) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
@@ -450,7 +450,7 @@ impl<'a> DeleteRulesRequest<'a> {
 /// ```no_run
 /// use digitalocean::{ ApiClient, apis::firewalls };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// # let body: serde_json::Value = todo!();
+/// # let body: crate::models::firewall_rules::FirewallRules = todo!();
 /// let response = delete_rules(&api)
 ///     .with_firewall_id("firewall_id")
 ///     .with_body(body)

@@ -15,4 +15,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type LogsinkCreate = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct LogsinkCreate {
+    pub config: Option<crate::models::rsyslog_logsink::RsyslogLogsink>,
+    #[serde(flatten)]
+    pub logsink_base: crate::models::logsink_base::LogsinkBase,
+}

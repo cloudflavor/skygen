@@ -56,7 +56,7 @@ pub fn balance_get(api: &ApiClient) -> BalanceGetRequest<'_> {
 
 #[derive(Debug)]
 pub struct HistoryListRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, std::collections::BTreeMap<String, serde_json::Value>>,
 }
 
 impl<'a> HistoryListRequest<'a> {
@@ -65,7 +65,7 @@ impl<'a> HistoryListRequest<'a> {
 
         Self { builder }
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<std::collections::BTreeMap<String, serde_json::Value>> {
         self.builder.send().await
     }
 }
@@ -90,7 +90,7 @@ pub fn history_list(api: &ApiClient) -> HistoryListRequest<'_> {
 
 #[derive(Debug)]
 pub struct InvoicesListRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, std::collections::BTreeMap<String, serde_json::Value>>,
 }
 
 impl<'a> InvoicesListRequest<'a> {
@@ -99,7 +99,7 @@ impl<'a> InvoicesListRequest<'a> {
 
         Self { builder }
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<std::collections::BTreeMap<String, serde_json::Value>> {
         self.builder.send().await
     }
 }
@@ -124,7 +124,7 @@ pub fn invoices_list(api: &ApiClient) -> InvoicesListRequest<'_> {
 
 #[derive(Debug)]
 pub struct InvoicesGetRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, std::collections::BTreeMap<String, serde_json::Value>>,
 }
 
 impl<'a> InvoicesGetRequest<'a> {
@@ -139,7 +139,7 @@ impl<'a> InvoicesGetRequest<'a> {
         self.builder = self.builder.path_param("invoice_uuid", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<std::collections::BTreeMap<String, serde_json::Value>> {
         self.builder.send().await
     }
 }

@@ -15,4 +15,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type Alert = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct Alert {
+    #[serde(flatten)]
+    pub alert_base: crate::models::alert_base::AlertBase,
+    #[serde(flatten)]
+    pub alert_updatable: crate::models::alert_updatable::AlertUpdatable,
+}

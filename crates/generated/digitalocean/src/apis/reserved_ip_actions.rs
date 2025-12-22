@@ -20,7 +20,7 @@ use reqwest::Method;
 
 #[derive(Debug)]
 pub struct IPsActionsListRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, std::collections::BTreeMap<String, serde_json::Value>>,
 }
 
 impl<'a> IPsActionsListRequest<'a> {
@@ -35,7 +35,7 @@ impl<'a> IPsActionsListRequest<'a> {
         self.builder = self.builder.path_param("reserved_ip", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<std::collections::BTreeMap<String, serde_json::Value>> {
         self.builder.send().await
     }
 }
@@ -79,7 +79,10 @@ impl<'a> IPsActionsPostRequest<'a> {
         self.builder = self.builder.path_param("reserved_ip", value);
         self
     }
-    pub fn with_body(mut self, body: serde_json::Value) -> Self {
+    pub fn with_body(
+        mut self,
+        body: crate::models::reserved_ip_action_unassign::ReservedIpActionUnassign,
+    ) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
@@ -108,7 +111,7 @@ impl<'a> IPsActionsPostRequest<'a> {
 /// ```no_run
 /// use digitalocean::{ ApiClient, apis::reserved_ip_actions };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// # let body: serde_json::Value = todo!();
+/// # let body: crate::models::reserved_ip_action_unassign::ReservedIpActionUnassign = todo!();
 /// let response = i_ps_actions_post(&api)
 ///     .with_reserved_ip("reserved_ip")
 ///     .with_body(body)

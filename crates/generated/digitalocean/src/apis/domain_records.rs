@@ -21,7 +21,7 @@ use reqwest::Method;
 
 #[derive(Debug)]
 pub struct DomainsListRecordsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, std::collections::BTreeMap<String, serde_json::Value>>,
 }
 
 impl<'a> DomainsListRecordsRequest<'a> {
@@ -35,7 +35,7 @@ impl<'a> DomainsListRecordsRequest<'a> {
         self.builder = self.builder.path_param("domain_name", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<std::collections::BTreeMap<String, serde_json::Value>> {
         self.builder.send().await
     }
 }
@@ -80,7 +80,7 @@ impl<'a> DomainsCreateRecordRequest<'a> {
         self.builder = self.builder.path_param("domain_name", value);
         self
     }
-    pub fn with_body(mut self, body: serde_json::Value) -> Self {
+    pub fn with_body(mut self, body: crate::models::domain_record_a::DomainRecordA) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
@@ -109,7 +109,7 @@ impl<'a> DomainsCreateRecordRequest<'a> {
 /// ```no_run
 /// use digitalocean::{ ApiClient, apis::domain_records };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// # let body: serde_json::Value = todo!();
+/// # let body: crate::models::domain_record_a::DomainRecordA = todo!();
 /// let response = domains_create_record(&api)
 ///     .with_domain_name("domain_name")
 ///     .with_body(body)

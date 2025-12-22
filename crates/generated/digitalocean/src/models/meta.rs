@@ -19,5 +19,5 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct Meta {
-    pub meta: serde_json::Value,
+    pub meta: crate::models::meta_properties::MetaProperties,
 }

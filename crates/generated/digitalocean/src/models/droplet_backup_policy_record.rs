@@ -20,7 +20,8 @@ use serde::{Deserialize, Serialize};
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct DropletBackupPolicyRecord {
     pub backup_enabled: Option<bool>,
-    pub backup_policy: Option<serde_json::Value>,
+    pub backup_policy: Option<crate::models::droplet_backup_policy::DropletBackupPolicy>,
     pub droplet_id: Option<i64>,
-    pub next_backup_window: Option<serde_json::Value>,
+    pub next_backup_window:
+        Option<crate::models::droplet_next_backup_window::DropletNextBackupWindow>,
 }

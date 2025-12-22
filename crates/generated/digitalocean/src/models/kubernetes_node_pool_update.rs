@@ -15,4 +15,10 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type KubernetesNodePoolUpdate = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct KubernetesNodePoolUpdate {
+    #[serde(flatten)]
+    pub kubernetes_node_pool_base: crate::models::kubernetes_node_pool_base::KubernetesNodePoolBase,
+}

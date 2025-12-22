@@ -15,4 +15,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type VolumeActionPostResize = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct VolumeActionPostResize {
+    pub size_gigabytes: i64,
+    #[serde(flatten)]
+    pub volume_action_post_base: crate::models::volume_action_post_base::VolumeActionPostBase,
+}

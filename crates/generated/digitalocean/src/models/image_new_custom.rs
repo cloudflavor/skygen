@@ -15,4 +15,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type ImageNewCustom = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct ImageNewCustom {
+    #[serde(flatten)]
+    pub image_update: crate::models::image_update::ImageUpdate,
+    pub region: Option<crate::models::region_slug::RegionSlug>,
+    pub tags: Option<crate::models::tags_array::TagsArray>,
+    pub url: Option<String>,
+}

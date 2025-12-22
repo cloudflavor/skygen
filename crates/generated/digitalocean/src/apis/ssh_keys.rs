@@ -16,12 +16,13 @@
 // limitations under the License.
 
 use crate::models::error::Error;
+use crate::models::pagination::Pagination;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct ListRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, Pagination>,
 }
 
 impl<'a> ListRequest<'a> {
@@ -30,7 +31,7 @@ impl<'a> ListRequest<'a> {
 
         Self { builder }
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<Pagination> {
         self.builder.send().await
     }
 }
