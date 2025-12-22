@@ -42,7 +42,10 @@ impl<'a> PostRunCfMetaRequest<'a> {
         self.builder = self.builder.header_param("queueRequest", value);
         self
     }
-    pub fn with_body(mut self, body: serde_json::Value) -> Self {
+    pub fn with_body(
+        mut self,
+        body: std::collections::BTreeMap<String, serde_json::Value>,
+    ) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
@@ -63,7 +66,7 @@ impl<'a> PostRunCfMetaRequest<'a> {
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_ai_translation };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// # let body: serde_json::Value = todo!();
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = post_run_cf_meta(&api)
 ///     .with_account_id("account_id")
 ///     .with_queue_request("queueRequest")

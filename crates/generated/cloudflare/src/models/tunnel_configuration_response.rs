@@ -15,5 +15,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type TunnelConfigurationResponse =
-    crate::models::tunnel_schemas_api_response_single::TunnelSchemasApiResponseSingle;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct TunnelConfigurationResponse {
+    pub result: Option<crate::models::tunnel_configuration::TunnelConfiguration>,
+    #[serde(flatten)]
+    pub tunnel_schemas_api_response_single:
+        crate::models::tunnel_schemas_api_response_single::TunnelSchemasApiResponseSingle,
+}

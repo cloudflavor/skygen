@@ -15,12 +15,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::workers_api_response_common::WorkersApiResponseCommon;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct GetCronTriggersRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, WorkersApiResponseCommon>,
 }
 
 impl<'a> GetCronTriggersRequest<'a> {
@@ -43,7 +44,7 @@ impl<'a> GetCronTriggersRequest<'a> {
         self.builder = self.builder.path_param("script_name", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<WorkersApiResponseCommon> {
         self.builder.send().await
     }
 }
@@ -74,7 +75,7 @@ pub fn get_cron_triggers(api: &ApiClient) -> GetCronTriggersRequest<'_> {
 
 #[derive(Debug)]
 pub struct UpdateCronTriggersRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, WorkersApiResponseCommon>,
 }
 
 impl<'a> UpdateCronTriggersRequest<'a> {
@@ -105,7 +106,7 @@ impl<'a> UpdateCronTriggersRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<WorkersApiResponseCommon> {
         self.builder.send().await
     }
 }

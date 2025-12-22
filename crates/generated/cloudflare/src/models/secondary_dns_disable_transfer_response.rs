@@ -15,5 +15,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type SecondaryDnsDisableTransferResponse =
-    crate::models::secondary_dns_api_response_single::SecondaryDnsApiResponseSingle;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct SecondaryDnsDisableTransferResponse {
+    pub result: Option<
+        crate::models::secondary_dns_disable_transfer_result::SecondaryDnsDisableTransferResult,
+    >,
+    #[serde(flatten)]
+    pub secondary_dns_api_response_single:
+        crate::models::secondary_dns_api_response_single::SecondaryDnsApiResponseSingle,
+}

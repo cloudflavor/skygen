@@ -15,4 +15,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type MconnCustomerSnapshotsGetLatestSuccess = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct MconnCustomerSnapshotsGetLatestSuccess {
+    #[serde(flatten)]
+    pub mconn_envelope: crate::models::mconn_envelope::MconnEnvelope,
+    pub result: crate::models::mconn_customer_snapshots_get_latest_result::MconnCustomerSnapshotsGetLatestResult,
+}

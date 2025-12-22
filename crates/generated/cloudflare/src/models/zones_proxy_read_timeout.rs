@@ -15,4 +15,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type ZonesProxyReadTimeout = crate::models::zones_base::ZonesBase;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct ZonesProxyReadTimeout {
+    pub id: Option<serde_json::Value>,
+    pub value: Option<crate::models::zones_proxy_read_timeout_value::ZonesProxyReadTimeoutValue>,
+    #[serde(flatten)]
+    pub zones_base: crate::models::zones_base::ZonesBase,
+}

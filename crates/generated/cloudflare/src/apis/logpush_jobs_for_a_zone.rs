@@ -15,6 +15,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::logpush_api_response_common::LogpushApiResponseCommon;
 use crate::models::logpush_destination_exists_response::LogpushDestinationExistsResponse;
 use crate::models::logpush_get_ownership_response::LogpushGetOwnershipResponse;
 use crate::models::logpush_logpush_field_response_collection::LogpushLogpushFieldResponseCollection;
@@ -339,7 +340,7 @@ pub fn zones_logpush_jobs_job_put(api: &ApiClient) -> ZonesLogpushJobsJobPutRequ
 
 #[derive(Debug)]
 pub struct ZonesLogpushJobsJobDeleteRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, LogpushApiResponseCommon>,
 }
 
 impl<'a> ZonesLogpushJobsJobDeleteRequest<'a> {
@@ -359,7 +360,7 @@ impl<'a> ZonesLogpushJobsJobDeleteRequest<'a> {
         self.builder = self.builder.path_param("job_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<LogpushApiResponseCommon> {
         self.builder.send().await
     }
 }

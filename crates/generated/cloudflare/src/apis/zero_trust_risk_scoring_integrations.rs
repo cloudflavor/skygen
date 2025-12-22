@@ -15,12 +15,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::dlp_api_response_single::DlpApiResponseSingle;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct DlpZtRiskScoreRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, DlpApiResponseSingle>,
 }
 
 impl<'a> DlpZtRiskScoreRequest<'a> {
@@ -38,7 +39,7 @@ impl<'a> DlpZtRiskScoreRequest<'a> {
         self.builder = self.builder.path_param("account_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<DlpApiResponseSingle> {
         self.builder.send().await
     }
 }
@@ -65,7 +66,7 @@ pub fn dlp_zt_risk_score(api: &ApiClient) -> DlpZtRiskScoreRequest<'_> {
 
 #[derive(Debug)]
 pub struct DlpZtRiskScorePostRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, DlpApiResponseSingle>,
 }
 
 impl<'a> DlpZtRiskScorePostRequest<'a> {
@@ -91,7 +92,7 @@ impl<'a> DlpZtRiskScorePostRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<DlpApiResponseSingle> {
         self.builder.send().await
     }
 }
@@ -120,7 +121,7 @@ pub fn dlp_zt_risk_score_post(api: &ApiClient) -> DlpZtRiskScorePostRequest<'_> 
 
 #[derive(Debug)]
 pub struct DlpZtRiskScoreGetRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, DlpApiResponseSingle>,
 }
 
 impl<'a> DlpZtRiskScoreGetRequest<'a> {
@@ -143,7 +144,7 @@ impl<'a> DlpZtRiskScoreGetRequest<'a> {
         self.builder = self.builder.path_param("reference_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<DlpApiResponseSingle> {
         self.builder.send().await
     }
 }
@@ -172,7 +173,7 @@ pub fn dlp_zt_risk_score_get(api: &ApiClient) -> DlpZtRiskScoreGetRequest<'_> {
 
 #[derive(Debug)]
 pub struct DlpZtRiskScoreGet3Request<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, DlpApiResponseSingle>,
 }
 
 impl<'a> DlpZtRiskScoreGet3Request<'a> {
@@ -195,7 +196,7 @@ impl<'a> DlpZtRiskScoreGet3Request<'a> {
         self.builder = self.builder.path_param("integration_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<DlpApiResponseSingle> {
         self.builder.send().await
     }
 }
@@ -224,7 +225,7 @@ pub fn dlp_zt_risk_score_get_3(api: &ApiClient) -> DlpZtRiskScoreGet3Request<'_>
 
 #[derive(Debug)]
 pub struct DlpZtRiskScorePutRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, DlpApiResponseSingle>,
 }
 
 impl<'a> DlpZtRiskScorePutRequest<'a> {
@@ -255,7 +256,7 @@ impl<'a> DlpZtRiskScorePutRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<DlpApiResponseSingle> {
         self.builder.send().await
     }
 }
@@ -288,7 +289,7 @@ pub fn dlp_zt_risk_score_put(api: &ApiClient) -> DlpZtRiskScorePutRequest<'_> {
 
 #[derive(Debug)]
 pub struct DlpZtRiskScoreDeleteRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, DlpApiResponseSingle>,
 }
 
 impl<'a> DlpZtRiskScoreDeleteRequest<'a> {
@@ -311,7 +312,7 @@ impl<'a> DlpZtRiskScoreDeleteRequest<'a> {
         self.builder = self.builder.path_param("integration_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<DlpApiResponseSingle> {
         self.builder.send().await
     }
 }

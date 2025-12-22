@@ -495,7 +495,10 @@ impl<'a> PreviewPoolRequest<'a> {
         self.builder = self.builder.path_param("pool_id", value);
         self
     }
-    pub fn with_body(mut self, body: serde_json::Value) -> Self {
+    pub fn with_body(
+        mut self,
+        body: crate::models::load_balancing_monitor_editable::LoadBalancingMonitorEditable,
+    ) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
@@ -518,7 +521,7 @@ impl<'a> PreviewPoolRequest<'a> {
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::account_load_balancer_pools };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// # let body: serde_json::Value = todo!();
+/// # let body: crate::models::load_balancing_monitor_editable::LoadBalancingMonitorEditable = todo!();
 /// let response = preview_pool(&api)
 ///     .with_account_id("account_id")
 ///     .with_pool_id("pool_id")

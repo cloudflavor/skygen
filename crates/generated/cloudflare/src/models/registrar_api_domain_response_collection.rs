@@ -15,5 +15,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type RegistrarApiDomainResponseCollection =
-    crate::models::registrar_api_api_response_collection::RegistrarApiApiResponseCollection;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct RegistrarApiDomainResponseCollection {
+    #[serde(flatten)]
+    pub registrar_api_api_response_collection:
+        crate::models::registrar_api_api_response_collection::RegistrarApiApiResponseCollection,
+    pub result: Option<Vec<crate::models::registrar_api_domains::RegistrarApiDomains>>,
+}

@@ -21,7 +21,7 @@ use serde::{Deserialize, Serialize};
 pub struct WorkersObservabilityTelemetryEvent {
     pub dataset: String,
     pub metadata: std::collections::BTreeMap<String, serde_json::Value>,
-    pub source: serde_json::Value,
+    pub source: String,
     pub timestamp: i64,
-    pub workers: Option<serde_json::Value>,
+    pub workers: Option<std::collections::BTreeMap<String, serde_json::Value>>,
 }

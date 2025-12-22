@@ -21,6 +21,6 @@ use serde::{Deserialize, Serialize};
 pub struct MagicTransitApiResponseCommon {
     pub errors: crate::models::magic_transit_messages::MagicTransitMessages,
     pub messages: crate::models::magic_transit_messages::MagicTransitMessages,
-    pub result: serde_json::Value,
+    pub result: std::collections::BTreeMap<String, serde_json::Value>,
     pub success: bool,
 }

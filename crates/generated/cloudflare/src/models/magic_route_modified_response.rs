@@ -15,5 +15,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type MagicRouteModifiedResponse =
-    crate::models::magic_api_response_single::MagicApiResponseSingle;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct MagicRouteModifiedResponse {
+    #[serde(flatten)]
+    pub magic_api_response_single: crate::models::magic_api_response_single::MagicApiResponseSingle,
+    pub result: Option<std::collections::BTreeMap<String, serde_json::Value>>,
+}

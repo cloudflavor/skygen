@@ -22,7 +22,7 @@ pub struct WorkersDeploymentsBase {
     pub annotations: Option<std::collections::BTreeMap<String, serde_json::Value>>,
     pub author_email: Option<String>,
     pub created_on: Option<String>,
-    pub id: Option<serde_json::Value>,
+    pub id: Option<crate::models::workers_deployment_identifier::WorkersDeploymentIdentifier>,
     pub source: Option<String>,
     pub strategy: Option<String>,
 }

@@ -15,4 +15,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type IntelApiResponseSingle = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct IntelApiResponseSingle {
+    #[serde(flatten)]
+    pub intel_schemas_api_response_common:
+        crate::models::intel_schemas_api_response_common::IntelSchemasApiResponseCommon,
+}

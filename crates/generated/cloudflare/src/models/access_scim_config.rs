@@ -19,7 +19,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct AccessScimConfig {
-    pub authentication: Option<serde_json::Value>,
+    pub authentication: Option<crate::models::access_scim_config_single_authentication::AccessScimConfigSingleAuthentication>,
     pub deactivate_on_delete: Option<bool>,
     pub enabled: Option<bool>,
     pub idp_uid: String,

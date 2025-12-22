@@ -21,4 +21,5 @@ use serde::{Deserialize, Serialize};
 pub struct AccessVncProps {
     #[serde(flatten)]
     pub access_self_hosted_props: crate::models::access_self_hosted_props::AccessSelfHostedProps,
+    pub r#type: Option<crate::models::access_type::AccessType>,
 }

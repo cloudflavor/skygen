@@ -15,5 +15,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type EmailDestinationAddressesResponseCollection =
-    crate::models::email_api_response_collection::EmailApiResponseCollection;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct EmailDestinationAddressesResponseCollection {
+    #[serde(flatten)]
+    pub email_api_response_collection:
+        crate::models::email_api_response_collection::EmailApiResponseCollection,
+    pub result: Option<Vec<crate::models::email_addresses::EmailAddresses>>,
+    pub result_info: Option<std::collections::BTreeMap<String, serde_json::Value>>,
+}

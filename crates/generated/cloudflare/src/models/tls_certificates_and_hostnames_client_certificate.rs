@@ -15,4 +15,26 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type TlsCertificatesAndHostnamesClientCertificate = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct TlsCertificatesAndHostnamesClientCertificate {
+    pub certificate: Option<crate::models::tls_certificates_and_hostnames_client_certificates_components_schemas_certificate::TlsCertificatesAndHostnamesClientCertificatesComponentsSchemasCertificate>,
+    pub certificate_authority: Option<crate::models::tls_certificates_and_hostnames_client_certificates_components_schemas_certificate_authority::TlsCertificatesAndHostnamesClientCertificatesComponentsSchemasCertificateAuthority>,
+    pub common_name: Option<crate::models::tls_certificates_and_hostnames_common_name::TlsCertificatesAndHostnamesCommonName>,
+    pub country: Option<crate::models::tls_certificates_and_hostnames_country::TlsCertificatesAndHostnamesCountry>,
+    pub csr: Option<crate::models::tls_certificates_and_hostnames_schemas_csr::TlsCertificatesAndHostnamesSchemasCsr>,
+    pub expires_on: Option<crate::models::tls_certificates_and_hostnames_expired_on::TlsCertificatesAndHostnamesExpiredOn>,
+    pub fingerprint_sha256: Option<crate::models::tls_certificates_and_hostnames_fingerprint_sha256::TlsCertificatesAndHostnamesFingerprintSha256>,
+    pub id: Option<crate::models::tls_certificates_and_hostnames_identifier::TlsCertificatesAndHostnamesIdentifier>,
+    pub issued_on: Option<crate::models::tls_certificates_and_hostnames_issued_on::TlsCertificatesAndHostnamesIssuedOn>,
+    pub location: Option<crate::models::tls_certificates_and_hostnames_location::TlsCertificatesAndHostnamesLocation>,
+    pub organization: Option<crate::models::tls_certificates_and_hostnames_organization::TlsCertificatesAndHostnamesOrganization>,
+    pub organizational_unit: Option<crate::models::tls_certificates_and_hostnames_organizational_unit::TlsCertificatesAndHostnamesOrganizationalUnit>,
+    pub serial_number: Option<crate::models::tls_certificates_and_hostnames_components_schemas_serial_number::TlsCertificatesAndHostnamesComponentsSchemasSerialNumber>,
+    pub signature: Option<crate::models::tls_certificates_and_hostnames_components_schemas_signature::TlsCertificatesAndHostnamesComponentsSchemasSignature>,
+    pub ski: Option<crate::models::tls_certificates_and_hostnames_ski::TlsCertificatesAndHostnamesSki>,
+    pub state: Option<crate::models::tls_certificates_and_hostnames_state::TlsCertificatesAndHostnamesState>,
+    pub status: Option<crate::models::tls_certificates_and_hostnames_client_certificates_components_schemas_status::TlsCertificatesAndHostnamesClientCertificatesComponentsSchemasStatus>,
+    pub validity_days: Option<crate::models::tls_certificates_and_hostnames_schemas_validity_days::TlsCertificatesAndHostnamesSchemasValidityDays>,
+}

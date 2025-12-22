@@ -20,6 +20,7 @@ use serde::{Deserialize, Serialize};
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct StreamLiveInputResponseSingle {
     pub result: Option<crate::models::stream_live_input_1::StreamLiveInput>,
+    #[serde(flatten)]
     pub stream_api_response_single:
         crate::models::stream_api_response_single::StreamApiResponseSingle,
 }

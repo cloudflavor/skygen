@@ -22,5 +22,5 @@ pub struct ApiShieldSingleOperationResponse {
     #[serde(flatten)]
     pub api_shield_api_response_common:
         crate::models::api_shield_api_response_common::ApiShieldApiResponseCommon,
-    pub result: serde_json::Value,
+    pub result: crate::models::api_shield_operation::ApiShieldOperation,
 }

@@ -15,12 +15,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::public_ip_api_response_single::PublicIpApiResponseSingle;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct IpsCloudflareIpDetailsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, PublicIpApiResponseSingle>,
 }
 
 impl<'a> IpsCloudflareIpDetailsRequest<'a> {
@@ -33,7 +34,7 @@ impl<'a> IpsCloudflareIpDetailsRequest<'a> {
         self.builder = self.builder.header_param("networks", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<PublicIpApiResponseSingle> {
         self.builder.send().await
     }
 }

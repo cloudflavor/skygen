@@ -15,5 +15,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type Web3ContentListEntrySingleResponse =
-    crate::models::web3_api_response_single::Web3ApiResponseSingle;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct Web3ContentListEntrySingleResponse {
+    pub result: Option<crate::models::web3_content_list_entry::Web3ContentListEntry>,
+    #[serde(flatten)]
+    pub web3_api_response_single: crate::models::web3_api_response_single::Web3ApiResponseSingle,
+}

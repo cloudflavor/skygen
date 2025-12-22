@@ -248,7 +248,7 @@ pub fn update_rate_limit(api: &ApiClient) -> UpdateRateLimitRequest<'_> {
 
 #[derive(Debug)]
 pub struct DeleteRateLimitRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, FirewallRatelimitResponseSingle>,
 }
 
 impl<'a> DeleteRateLimitRequest<'a> {
@@ -271,7 +271,7 @@ impl<'a> DeleteRateLimitRequest<'a> {
         self.builder = self.builder.path_param("rate_limit_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<FirewallRatelimitResponseSingle> {
         self.builder.send().await
     }
 }

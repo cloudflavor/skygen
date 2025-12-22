@@ -15,12 +15,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::load_balancing_api_paginated_response_collection::LoadBalancingApiPaginatedResponseCollection;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct ResourcesRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, LoadBalancingApiPaginatedResponseCollection>,
 }
 
 impl<'a> ResourcesRequest<'a> {
@@ -54,7 +55,7 @@ impl<'a> ResourcesRequest<'a> {
         self.builder = self.builder.header_param("per_page", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<LoadBalancingApiPaginatedResponseCollection> {
         self.builder.send().await
     }
 }

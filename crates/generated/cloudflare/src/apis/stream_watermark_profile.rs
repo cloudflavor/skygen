@@ -15,6 +15,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::stream_api_response_single::StreamApiResponseSingle;
 use crate::models::stream_watermark_response_collection::StreamWatermarkResponseCollection;
 use crate::models::stream_watermark_response_single::StreamWatermarkResponseSingle;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
@@ -164,7 +165,7 @@ pub fn details(api: &ApiClient) -> DetailsRequest<'_> {
 
 #[derive(Debug)]
 pub struct DeleteWatermarkProfilesRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, StreamApiResponseSingle>,
 }
 
 impl<'a> DeleteWatermarkProfilesRequest<'a> {
@@ -187,7 +188,7 @@ impl<'a> DeleteWatermarkProfilesRequest<'a> {
         self.builder = self.builder.path_param("identifier", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<StreamApiResponseSingle> {
         self.builder.send().await
     }
 }

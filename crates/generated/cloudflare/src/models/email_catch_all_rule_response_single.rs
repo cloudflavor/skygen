@@ -15,5 +15,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type EmailCatchAllRuleResponseSingle =
-    crate::models::email_api_response_single::EmailApiResponseSingle;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct EmailCatchAllRuleResponseSingle {
+    #[serde(flatten)]
+    pub email_api_response_single: crate::models::email_api_response_single::EmailApiResponseSingle,
+    pub result: Option<crate::models::email_catch_all_rule::EmailCatchAllRule>,
+}

@@ -15,4 +15,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type LogpushApiResponseSingle = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct LogpushApiResponseSingle {
+    #[serde(flatten)]
+    pub logpush_api_response_common:
+        crate::models::logpush_api_response_common::LogpushApiResponseCommon,
+}

@@ -15,4 +15,5 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type FirewallCreateUpdateRules = Vec<serde_json::Value>;
+pub type FirewallCreateUpdateRules =
+    Vec<crate::models::firewall_create_update_rule::FirewallCreateUpdateRule>;

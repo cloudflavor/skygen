@@ -20,5 +20,6 @@ use serde::{Deserialize, Serialize};
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct TlsCertificatesAndHostnamesDeleteAdvancedCertificatePackResponseSingle {
     pub result: Option<std::collections::BTreeMap<String, serde_json::Value>>,
+    #[serde(flatten)]
     pub tls_certificates_and_hostnames_api_response_single: crate::models::tls_certificates_and_hostnames_api_response_single::TlsCertificatesAndHostnamesApiResponseSingle,
 }

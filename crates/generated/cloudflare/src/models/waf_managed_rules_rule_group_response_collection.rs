@@ -20,5 +20,6 @@ use serde::{Deserialize, Serialize};
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct WafManagedRulesRuleGroupResponseCollection {
     pub result: Option<Vec<crate::models::waf_managed_rules_schemas_group::WafManagedRulesSchemasGroup>>,
+    #[serde(flatten)]
     pub waf_managed_rules_api_response_collection: crate::models::waf_managed_rules_api_response_collection::WafManagedRulesApiResponseCollection,
 }

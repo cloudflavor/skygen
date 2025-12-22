@@ -15,4 +15,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type MagicApiResponseSingle = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct MagicApiResponseSingle {
+    #[serde(flatten)]
+    pub magic_api_response_common: crate::models::magic_api_response_common::MagicApiResponseCommon,
+    pub result: Option<std::collections::BTreeMap<String, serde_json::Value>>,
+}

@@ -15,4 +15,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type IamUserGroupPolicyWriteBody = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct IamUserGroupPolicyWriteBody {
+    pub access: crate::models::iam_access::IamAccess,
+    pub permission_groups: crate::models::iam_permission_group_ids::IamPermissionGroupIds,
+    pub resource_groups: crate::models::iam_resource_group_ids::IamResourceGroupIds,
+}

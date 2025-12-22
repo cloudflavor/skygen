@@ -15,12 +15,15 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::cache_rules_api_response_common::CacheRulesApiResponseCommon;
+use crate::models::cache_rules_zone_cache_settings_delete_response_single::CacheRulesZoneCacheSettingsDeleteResponseSingle;
+use crate::models::cache_rules_zone_cache_settings_response_single::CacheRulesZoneCacheSettingsResponseSingle;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct GetCacheReserveSettingRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, CacheRulesZoneCacheSettingsResponseSingle>,
 }
 
 impl<'a> GetCacheReserveSettingRequest<'a> {
@@ -35,7 +38,7 @@ impl<'a> GetCacheReserveSettingRequest<'a> {
         self.builder = self.builder.path_param("zone_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<CacheRulesZoneCacheSettingsResponseSingle> {
         self.builder.send().await
     }
 }
@@ -64,7 +67,7 @@ pub fn get_cache_reserve_setting(api: &ApiClient) -> GetCacheReserveSettingReque
 
 #[derive(Debug)]
 pub struct ChangeCacheReserveSettingRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, CacheRulesZoneCacheSettingsResponseSingle>,
 }
 
 impl<'a> ChangeCacheReserveSettingRequest<'a> {
@@ -87,7 +90,7 @@ impl<'a> ChangeCacheReserveSettingRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<CacheRulesZoneCacheSettingsResponseSingle> {
         self.builder.send().await
     }
 }
@@ -118,7 +121,7 @@ pub fn change_cache_reserve_setting(api: &ApiClient) -> ChangeCacheReserveSettin
 
 #[derive(Debug)]
 pub struct GetCacheReserveClearRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, CacheRulesApiResponseCommon>,
 }
 
 impl<'a> GetCacheReserveClearRequest<'a> {
@@ -136,7 +139,7 @@ impl<'a> GetCacheReserveClearRequest<'a> {
         self.builder = self.builder.path_param("zone_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<CacheRulesApiResponseCommon> {
         self.builder.send().await
     }
 }
@@ -165,7 +168,7 @@ pub fn get_cache_reserve_clear(api: &ApiClient) -> GetCacheReserveClearRequest<'
 
 #[derive(Debug)]
 pub struct StartCacheReserveClearRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, CacheRulesApiResponseCommon>,
 }
 
 impl<'a> StartCacheReserveClearRequest<'a> {
@@ -183,7 +186,7 @@ impl<'a> StartCacheReserveClearRequest<'a> {
         self.builder = self.builder.path_param("zone_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<CacheRulesApiResponseCommon> {
         self.builder.send().await
     }
 }
@@ -212,7 +215,7 @@ pub fn start_cache_reserve_clear(api: &ApiClient) -> StartCacheReserveClearReque
 
 #[derive(Debug)]
 pub struct GetRegionalTieredCacheRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, CacheRulesZoneCacheSettingsResponseSingle>,
 }
 
 impl<'a> GetRegionalTieredCacheRequest<'a> {
@@ -230,7 +233,7 @@ impl<'a> GetRegionalTieredCacheRequest<'a> {
         self.builder = self.builder.path_param("zone_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<CacheRulesZoneCacheSettingsResponseSingle> {
         self.builder.send().await
     }
 }
@@ -259,7 +262,7 @@ pub fn get_regional_tiered_cache(api: &ApiClient) -> GetRegionalTieredCacheReque
 
 #[derive(Debug)]
 pub struct ChangeRegionalTieredCacheRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, CacheRulesZoneCacheSettingsResponseSingle>,
 }
 
 impl<'a> ChangeRegionalTieredCacheRequest<'a> {
@@ -285,7 +288,7 @@ impl<'a> ChangeRegionalTieredCacheRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<CacheRulesZoneCacheSettingsResponseSingle> {
         self.builder.send().await
     }
 }
@@ -316,7 +319,7 @@ pub fn change_regional_tiered_cache(api: &ApiClient) -> ChangeRegionalTieredCach
 
 #[derive(Debug)]
 pub struct GetVariantsSettingRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, CacheRulesZoneCacheSettingsResponseSingle>,
 }
 
 impl<'a> GetVariantsSettingRequest<'a> {
@@ -330,7 +333,7 @@ impl<'a> GetVariantsSettingRequest<'a> {
         self.builder = self.builder.path_param("zone_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<CacheRulesZoneCacheSettingsResponseSingle> {
         self.builder.send().await
     }
 }
@@ -359,7 +362,7 @@ pub fn get_variants_setting(api: &ApiClient) -> GetVariantsSettingRequest<'_> {
 
 #[derive(Debug)]
 pub struct DeleteVariantsSettingRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, CacheRulesZoneCacheSettingsDeleteResponseSingle>,
 }
 
 impl<'a> DeleteVariantsSettingRequest<'a> {
@@ -373,7 +376,7 @@ impl<'a> DeleteVariantsSettingRequest<'a> {
         self.builder = self.builder.path_param("zone_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<CacheRulesZoneCacheSettingsDeleteResponseSingle> {
         self.builder.send().await
     }
 }
@@ -402,7 +405,7 @@ pub fn delete_variants_setting(api: &ApiClient) -> DeleteVariantsSettingRequest<
 
 #[derive(Debug)]
 pub struct ChangeVariantsSettingRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, CacheRulesZoneCacheSettingsResponseSingle>,
 }
 
 impl<'a> ChangeVariantsSettingRequest<'a> {
@@ -424,7 +427,7 @@ impl<'a> ChangeVariantsSettingRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<CacheRulesZoneCacheSettingsResponseSingle> {
         self.builder.send().await
     }
 }

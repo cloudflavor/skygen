@@ -15,4 +15,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type AccessInfraProps = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct AccessInfraProps {
+    #[serde(flatten)]
+    pub access_app_resp_embedded_target_criteria: crate::models::access_app_resp_embedded_target_criteria::AccessAppRespEmbeddedTargetCriteria,
+    pub name: Option<crate::models::access_apps_components_schemas_name::AccessAppsComponentsSchemasName>,
+    pub r#type: Option<crate::models::access_type::AccessType>,
+}

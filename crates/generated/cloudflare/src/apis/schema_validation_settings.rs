@@ -15,12 +15,15 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::api_shield_api_response_collection::ApiShieldApiResponseCollection;
+use crate::models::api_shield_api_response_common::ApiShieldApiResponseCommon;
+use crate::models::api_shield_api_response_single::ApiShieldApiResponseSingle;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct GetSettingsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, ApiShieldApiResponseSingle>,
 }
 
 impl<'a> GetSettingsRequest<'a> {
@@ -38,7 +41,7 @@ impl<'a> GetSettingsRequest<'a> {
         self.builder = self.builder.path_param("zone_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<ApiShieldApiResponseSingle> {
         self.builder.send().await
     }
 }
@@ -65,7 +68,7 @@ pub fn get_settings(api: &ApiClient) -> GetSettingsRequest<'_> {
 
 #[derive(Debug)]
 pub struct UpdateSettingsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, ApiShieldApiResponseSingle>,
 }
 
 impl<'a> UpdateSettingsRequest<'a> {
@@ -84,11 +87,14 @@ impl<'a> UpdateSettingsRequest<'a> {
         self.builder = self.builder.path_param("zone_id", value);
         self
     }
-    pub fn with_body(mut self, body: serde_json::Value) -> Self {
+    pub fn with_body(
+        mut self,
+        body: crate::models::api_shield_global_setting_change_base::ApiShieldGlobalSettingChangeBase,
+    ) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<ApiShieldApiResponseSingle> {
         self.builder.send().await
     }
 }
@@ -104,7 +110,7 @@ impl<'a> UpdateSettingsRequest<'a> {
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::schema_validation_settings };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// # let body: serde_json::Value = todo!();
+/// # let body: crate::models::api_shield_global_setting_change_base::ApiShieldGlobalSettingChangeBase = todo!();
 /// let response = update_settings(&api)
 ///     .with_zone_id("zone_id")
 ///     .with_body(body)
@@ -117,7 +123,7 @@ pub fn update_settings(api: &ApiClient) -> UpdateSettingsRequest<'_> {
 
 #[derive(Debug)]
 pub struct EditSettingsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, ApiShieldApiResponseSingle>,
 }
 
 impl<'a> EditSettingsRequest<'a> {
@@ -143,7 +149,7 @@ impl<'a> EditSettingsRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<ApiShieldApiResponseSingle> {
         self.builder.send().await
     }
 }
@@ -172,7 +178,7 @@ pub fn edit_settings(api: &ApiClient) -> EditSettingsRequest<'_> {
 
 #[derive(Debug)]
 pub struct ListPerOperationSettingsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, ApiShieldApiResponseCollection>,
 }
 
 impl<'a> ListPerOperationSettingsRequest<'a> {
@@ -190,7 +196,7 @@ impl<'a> ListPerOperationSettingsRequest<'a> {
         self.builder = self.builder.path_param("zone_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<ApiShieldApiResponseCollection> {
         self.builder.send().await
     }
 }
@@ -217,7 +223,7 @@ pub fn list_per_operation_settings(api: &ApiClient) -> ListPerOperationSettingsR
 
 #[derive(Debug)]
 pub struct BulkEditPerOperationRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, ApiShieldApiResponseCommon>,
 }
 
 impl<'a> BulkEditPerOperationRequest<'a> {
@@ -243,7 +249,7 @@ impl<'a> BulkEditPerOperationRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<ApiShieldApiResponseCommon> {
         self.builder.send().await
     }
 }
@@ -272,7 +278,7 @@ pub fn bulk_edit_per_operation(api: &ApiClient) -> BulkEditPerOperationRequest<'
 
 #[derive(Debug)]
 pub struct GetPerOperationSettingRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, ApiShieldApiResponseCommon>,
 }
 
 impl<'a> GetPerOperationSettingRequest<'a> {
@@ -295,7 +301,7 @@ impl<'a> GetPerOperationSettingRequest<'a> {
         self.builder = self.builder.path_param("operation_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<ApiShieldApiResponseCommon> {
         self.builder.send().await
     }
 }
@@ -324,7 +330,7 @@ pub fn get_per_operation_setting(api: &ApiClient) -> GetPerOperationSettingReque
 
 #[derive(Debug)]
 pub struct UpdatePerOperationSettingRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, ApiShieldApiResponseCommon>,
 }
 
 impl<'a> UpdatePerOperationSettingRequest<'a> {
@@ -348,11 +354,14 @@ impl<'a> UpdatePerOperationSettingRequest<'a> {
         self.builder = self.builder.path_param("operation_id", value);
         self
     }
-    pub fn with_body(mut self, body: serde_json::Value) -> Self {
+    pub fn with_body(
+        mut self,
+        body: crate::models::api_shield_per_operation_setting_change_base::ApiShieldPerOperationSettingChangeBase,
+    ) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<ApiShieldApiResponseCommon> {
         self.builder.send().await
     }
 }
@@ -369,7 +378,7 @@ impl<'a> UpdatePerOperationSettingRequest<'a> {
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::schema_validation_settings };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// # let body: serde_json::Value = todo!();
+/// # let body: crate::models::api_shield_per_operation_setting_change_base::ApiShieldPerOperationSettingChangeBase = todo!();
 /// let response = update_per_operation_setting(&api)
 ///     .with_zone_id("zone_id")
 ///     .with_operation_id("operation_id")
@@ -383,7 +392,7 @@ pub fn update_per_operation_setting(api: &ApiClient) -> UpdatePerOperationSettin
 
 #[derive(Debug)]
 pub struct DeletePerOperationSettingRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, ApiShieldApiResponseCommon>,
 }
 
 impl<'a> DeletePerOperationSettingRequest<'a> {
@@ -406,7 +415,7 @@ impl<'a> DeletePerOperationSettingRequest<'a> {
         self.builder = self.builder.path_param("operation_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<ApiShieldApiResponseCommon> {
         self.builder.send().await
     }
 }

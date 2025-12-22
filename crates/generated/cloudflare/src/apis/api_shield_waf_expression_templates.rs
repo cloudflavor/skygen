@@ -15,12 +15,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::api_shield_api_response_common::ApiShieldApiResponseCommon;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct FallthroughRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, ApiShieldApiResponseCommon>,
 }
 
 impl<'a> FallthroughRequest<'a> {
@@ -46,7 +47,7 @@ impl<'a> FallthroughRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<ApiShieldApiResponseCommon> {
         self.builder.send().await
     }
 }

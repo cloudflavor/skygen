@@ -21,6 +21,6 @@ use serde::{Deserialize, Serialize};
 pub struct CustomPagesApiResponseCommon {
     pub errors: crate::models::custom_pages_messages::CustomPagesMessages,
     pub messages: crate::models::custom_pages_messages::CustomPagesMessages,
-    pub result: serde_json::Value,
+    pub result: std::collections::BTreeMap<String, serde_json::Value>,
     pub success: bool,
 }

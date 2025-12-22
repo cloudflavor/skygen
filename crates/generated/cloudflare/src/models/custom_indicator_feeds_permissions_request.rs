@@ -15,4 +15,10 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type CustomIndicatorFeedsPermissionsRequest = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct CustomIndicatorFeedsPermissionsRequest {
+    pub account_tag: Option<String>,
+    pub feed_id: Option<i64>,
+}

@@ -21,4 +21,5 @@ use serde::{Deserialize, Serialize};
 pub struct IamTokenWithValue {
     #[serde(flatten)]
     pub iam_token_base: crate::models::iam_token_base::IamTokenBase,
+    pub value: Option<crate::models::iam_value::IamValue>,
 }

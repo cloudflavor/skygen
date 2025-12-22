@@ -15,4 +15,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type ZonesTls13 = crate::models::zones_base::ZonesBase;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct ZonesTls13 {
+    pub id: Option<serde_json::Value>,
+    pub value: Option<crate::models::zones_tls_1_3_value::ZonesTls13Value>,
+    #[serde(flatten)]
+    pub zones_base: crate::models::zones_base::ZonesBase,
+}

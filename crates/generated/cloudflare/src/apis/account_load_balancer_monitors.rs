@@ -92,7 +92,10 @@ impl<'a> CreateMonitorRequest<'a> {
         self.builder = self.builder.path_param("account_id", value);
         self
     }
-    pub fn with_body(mut self, body: serde_json::Value) -> Self {
+    pub fn with_body(
+        mut self,
+        body: crate::models::load_balancing_monitor_editable::LoadBalancingMonitorEditable,
+    ) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
@@ -114,7 +117,7 @@ impl<'a> CreateMonitorRequest<'a> {
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::account_load_balancer_monitors };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// # let body: serde_json::Value = todo!();
+/// # let body: crate::models::load_balancing_monitor_editable::LoadBalancingMonitorEditable = todo!();
 /// let response = create_monitor(&api)
 ///     .with_account_id("account_id")
 ///     .with_body(body)
@@ -205,7 +208,10 @@ impl<'a> UpdateMonitorRequest<'a> {
         self.builder = self.builder.path_param("monitor_id", value);
         self
     }
-    pub fn with_body(mut self, body: serde_json::Value) -> Self {
+    pub fn with_body(
+        mut self,
+        body: crate::models::load_balancing_monitor_editable::LoadBalancingMonitorEditable,
+    ) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
@@ -228,7 +234,7 @@ impl<'a> UpdateMonitorRequest<'a> {
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::account_load_balancer_monitors };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// # let body: serde_json::Value = todo!();
+/// # let body: crate::models::load_balancing_monitor_editable::LoadBalancingMonitorEditable = todo!();
 /// let response = update_monitor(&api)
 ///     .with_account_id("account_id")
 ///     .with_monitor_id("monitor_id")
@@ -320,7 +326,10 @@ impl<'a> PatchMonitorRequest<'a> {
         self.builder = self.builder.path_param("monitor_id", value);
         self
     }
-    pub fn with_body(mut self, body: serde_json::Value) -> Self {
+    pub fn with_body(
+        mut self,
+        body: crate::models::load_balancing_monitor_editable::LoadBalancingMonitorEditable,
+    ) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
@@ -343,7 +352,7 @@ impl<'a> PatchMonitorRequest<'a> {
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::account_load_balancer_monitors };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// # let body: serde_json::Value = todo!();
+/// # let body: crate::models::load_balancing_monitor_editable::LoadBalancingMonitorEditable = todo!();
 /// let response = patch_monitor(&api)
 ///     .with_account_id("account_id")
 ///     .with_monitor_id("monitor_id")
@@ -381,7 +390,10 @@ impl<'a> PreviewMonitorRequest<'a> {
         self.builder = self.builder.path_param("monitor_id", value);
         self
     }
-    pub fn with_body(mut self, body: serde_json::Value) -> Self {
+    pub fn with_body(
+        mut self,
+        body: crate::models::load_balancing_monitor_editable::LoadBalancingMonitorEditable,
+    ) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
@@ -404,7 +416,7 @@ impl<'a> PreviewMonitorRequest<'a> {
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::account_load_balancer_monitors };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// # let body: serde_json::Value = todo!();
+/// # let body: crate::models::load_balancing_monitor_editable::LoadBalancingMonitorEditable = todo!();
 /// let response = preview_monitor(&api)
 ///     .with_account_id("account_id")
 ///     .with_monitor_id("monitor_id")

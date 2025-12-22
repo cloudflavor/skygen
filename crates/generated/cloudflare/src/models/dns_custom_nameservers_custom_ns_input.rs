@@ -15,4 +15,10 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type DnsCustomNameserversCustomNsInput = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct DnsCustomNameserversCustomNsInput {
+    pub ns_name: crate::models::dns_custom_nameservers_ns_name::DnsCustomNameserversNsName,
+    pub ns_set: Option<crate::models::dns_custom_nameservers_ns_set::DnsCustomNameserversNsSet>,
+}

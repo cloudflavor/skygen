@@ -21,4 +21,5 @@ use serde::{Deserialize, Serialize};
 pub struct MagicVisibilityPcapsPcapsOwnershipSingleResponse {
     #[serde(flatten)]
     pub magic_visibility_pcaps_api_response_common: crate::models::magic_visibility_pcaps_api_response_common::MagicVisibilityPcapsApiResponseCommon,
+    pub result: Option<crate::models::magic_visibility_pcaps_pcaps_ownership_response::MagicVisibilityPcapsPcapsOwnershipResponse>,
 }

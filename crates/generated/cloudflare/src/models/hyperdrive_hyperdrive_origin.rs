@@ -15,4 +15,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type HyperdriveHyperdriveOrigin = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct HyperdriveHyperdriveOrigin {
+    #[serde(flatten)]
+    pub hyperdrive_hyperdrive_database:
+        crate::models::hyperdrive_hyperdrive_database::HyperdriveHyperdriveDatabase,
+}

@@ -15,4 +15,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type ZeroTrustGatewayCategoriesComponentsSchemasResponseCollection = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct ZeroTrustGatewayCategoriesComponentsSchemasResponseCollection {
+    pub result: Option<Vec<crate::models::zero_trust_gateway_categories::ZeroTrustGatewayCategories>>,
+    #[serde(flatten)]
+    pub zero_trust_gateway_api_response_collection: crate::models::zero_trust_gateway_api_response_collection::ZeroTrustGatewayApiResponseCollection,
+}

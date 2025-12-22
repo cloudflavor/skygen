@@ -19,7 +19,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct CloudforceOneRequestsRequestAssetItem {
-    pub created: Option<serde_json::Value>,
+    pub created: Option<crate::models::cloudforce_one_requests_time::CloudforceOneRequestsTime>,
     pub description: Option<String>,
     pub file_type: Option<String>,
     pub id: i64,

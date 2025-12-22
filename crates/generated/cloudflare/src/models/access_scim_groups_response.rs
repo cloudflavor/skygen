@@ -19,6 +19,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct AccessScimGroupsResponse {
+    #[serde(flatten)]
     pub access_api_response_collection:
         crate::models::access_api_response_collection::AccessApiResponseCollection,
     pub result: Option<Vec<crate::models::access_groups::AccessGroups>>,

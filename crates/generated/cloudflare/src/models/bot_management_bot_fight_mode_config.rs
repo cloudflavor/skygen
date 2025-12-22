@@ -15,5 +15,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type BotManagementBotFightModeConfig =
-    crate::models::bot_management_base_config::BotManagementBaseConfig;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct BotManagementBotFightModeConfig {
+    #[serde(flatten)]
+    pub bot_management_base_config:
+        crate::models::bot_management_base_config::BotManagementBaseConfig,
+    pub fight_mode: Option<crate::models::bot_management_fight_mode::BotManagementFightMode>,
+    pub stale_zone_configuration: Option<serde_json::Value>,
+}

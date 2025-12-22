@@ -16,13 +16,15 @@
 // limitations under the License.
 
 use crate::models::cache_purge_api_response_single_id::CachePurgeApiResponseSingleId;
+use crate::models::zone_activation_api_response_single::ZoneActivationApiResponseSingle;
+use crate::models::zones_api_response_common::ZonesApiResponseCommon;
 use crate::models::zones_api_response_single_id::ZonesApiResponseSingleId;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct ZonesGetRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, ZonesApiResponseCommon>,
 }
 
 impl<'a> ZonesGetRequest<'a> {
@@ -67,7 +69,7 @@ impl<'a> ZonesGetRequest<'a> {
         self.builder = self.builder.header_param("match", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<ZonesApiResponseCommon> {
         self.builder.send().await
     }
 }
@@ -113,7 +115,7 @@ pub fn zones_get(api: &ApiClient) -> ZonesGetRequest<'_> {
 
 #[derive(Debug)]
 pub struct ZonesPostRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, ZonesApiResponseCommon>,
 }
 
 impl<'a> ZonesPostRequest<'a> {
@@ -129,7 +131,7 @@ impl<'a> ZonesPostRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<ZonesApiResponseCommon> {
         self.builder.send().await
     }
 }
@@ -154,7 +156,7 @@ pub fn zones_post(api: &ApiClient) -> ZonesPostRequest<'_> {
 
 #[derive(Debug)]
 pub struct ZonesGetGetRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, ZonesApiResponseCommon>,
 }
 
 impl<'a> ZonesGetGetRequest<'a> {
@@ -168,7 +170,7 @@ impl<'a> ZonesGetGetRequest<'a> {
         self.builder = self.builder.path_param("zone_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<ZonesApiResponseCommon> {
         self.builder.send().await
     }
 }
@@ -238,7 +240,7 @@ pub fn zones_delete(api: &ApiClient) -> ZonesDeleteRequest<'_> {
 
 #[derive(Debug)]
 pub struct ZonesPatchRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, ZonesApiResponseCommon>,
 }
 
 impl<'a> ZonesPatchRequest<'a> {
@@ -260,7 +262,7 @@ impl<'a> ZonesPatchRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<ZonesApiResponseCommon> {
         self.builder.send().await
     }
 }
@@ -291,7 +293,7 @@ pub fn zones_patch(api: &ApiClient) -> ZonesPatchRequest<'_> {
 
 #[derive(Debug)]
 pub struct ZonesActivationCheckRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, ZoneActivationApiResponseSingle>,
 }
 
 impl<'a> ZonesActivationCheckRequest<'a> {
@@ -305,7 +307,7 @@ impl<'a> ZonesActivationCheckRequest<'a> {
         self.builder = self.builder.path_param("zone_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<ZoneActivationApiResponseSingle> {
         self.builder.send().await
     }
 }
@@ -351,7 +353,10 @@ impl<'a> PurgeRequest<'a> {
         self.builder = self.builder.path_param("zone_id", value);
         self
     }
-    pub fn with_body(mut self, body: serde_json::Value) -> Self {
+    pub fn with_body(
+        mut self,
+        body: crate::models::cache_purge_flex_purge_by_tags::CachePurgeFlexPurgeByTags,
+    ) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
@@ -412,7 +417,7 @@ impl<'a> PurgeRequest<'a> {
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zone };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// # let body: serde_json::Value = todo!();
+/// # let body: crate::models::cache_purge_flex_purge_by_tags::CachePurgeFlexPurgeByTags = todo!();
 /// let response = purge(&api)
 ///     .with_zone_id("zone_id")
 ///     .with_body(body)

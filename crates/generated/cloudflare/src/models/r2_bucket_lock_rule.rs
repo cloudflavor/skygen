@@ -19,7 +19,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct R2BucketLockRule {
-    pub condition: serde_json::Value,
+    pub condition: crate::models::r2_lock_rule_age_condition::R2LockRuleAgeCondition,
     pub enabled: bool,
     pub id: String,
     pub prefix: Option<String>,

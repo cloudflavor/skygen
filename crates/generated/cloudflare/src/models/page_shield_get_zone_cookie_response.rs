@@ -15,5 +15,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type PageShieldGetZoneCookieResponse =
-    crate::models::page_shield_api_get_response_collection::PageShieldApiGetResponseCollection;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct PageShieldGetZoneCookieResponse {
+    #[serde(flatten)]
+    pub page_shield_api_get_response_collection:
+        crate::models::page_shield_api_get_response_collection::PageShieldApiGetResponseCollection,
+    pub result: crate::models::page_shield_cookie::PageShieldCookie,
+}

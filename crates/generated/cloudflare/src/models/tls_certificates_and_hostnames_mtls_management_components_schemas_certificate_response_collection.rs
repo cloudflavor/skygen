@@ -15,4 +15,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type TlsCertificatesAndHostnamesMtlsManagementComponentsSchemasCertificateResponseCollection = crate::models::tls_certificates_and_hostnames_api_response_collection::TlsCertificatesAndHostnamesApiResponseCollection;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct TlsCertificatesAndHostnamesMtlsManagementComponentsSchemasCertificateResponseCollection {
+    pub result: Option<Vec<crate::models::tls_certificates_and_hostnames_components_schemas_certificate_object::TlsCertificatesAndHostnamesComponentsSchemasCertificateObject>>,
+    pub result_info: Option<std::collections::BTreeMap<String, serde_json::Value>>,
+    #[serde(flatten)]
+    pub tls_certificates_and_hostnames_api_response_collection: crate::models::tls_certificates_and_hostnames_api_response_collection::TlsCertificatesAndHostnamesApiResponseCollection,
+}

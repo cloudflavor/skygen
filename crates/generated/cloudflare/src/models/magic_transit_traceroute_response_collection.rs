@@ -15,5 +15,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type MagicTransitTracerouteResponseCollection =
-    crate::models::magic_transit_api_response_collection::MagicTransitApiResponseCollection;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct MagicTransitTracerouteResponseCollection {
+    #[serde(flatten)]
+    pub magic_transit_api_response_collection:
+        crate::models::magic_transit_api_response_collection::MagicTransitApiResponseCollection,
+    pub result: Option<Vec<crate::models::magic_transit_target_result::MagicTransitTargetResult>>,
+}

@@ -20,5 +20,6 @@ use serde::{Deserialize, Serialize};
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct TeamsDevicesDefaultDeviceSettingsResponse {
     pub result: Option<crate::models::teams_devices_default_device_settings_policy::TeamsDevicesDefaultDeviceSettingsPolicy>,
+    #[serde(flatten)]
     pub teams_devices_api_response_single: crate::models::teams_devices_api_response_single::TeamsDevicesApiResponseSingle,
 }

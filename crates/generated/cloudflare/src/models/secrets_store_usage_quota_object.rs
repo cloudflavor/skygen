@@ -15,4 +15,10 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type SecretsStoreUsageQuotaObject = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct SecretsStoreUsageQuotaObject {
+    pub quota: crate::models::secrets_store_quota::SecretsStoreQuota,
+    pub usage: crate::models::secrets_store_usage::SecretsStoreUsage,
+}

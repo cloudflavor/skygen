@@ -19,8 +19,8 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct AccessApiResponseCommonFailure {
-    pub errors: serde_json::Value,
-    pub messages: serde_json::Value,
-    pub result: serde_json::Value,
+    pub errors: crate::models::access_messages::AccessMessages,
+    pub messages: crate::models::access_messages::AccessMessages,
+    pub result: std::collections::BTreeMap<String, serde_json::Value>,
     pub success: bool,
 }

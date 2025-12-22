@@ -23,6 +23,6 @@ pub struct CloudflarePipelinesWorkersPipelinesPipeline {
     pub endpoint: String,
     pub id: String,
     pub name: String,
-    pub source: Vec<serde_json::Value>,
+    pub source: Vec<crate::models::cloudflare_pipelines_workers_pipelines_http_source::CloudflarePipelinesWorkersPipelinesHttpSource>,
     pub version: f64,
 }

@@ -20,5 +20,6 @@ use serde::{Deserialize, Serialize};
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct WafProductApiBundleResponseCustomScanCollection {
     pub result: Option<Vec<crate::models::waf_product_api_bundle_custom_scan::WafProductApiBundleCustomScan>>,
+    #[serde(flatten)]
     pub waf_product_api_bundle_schemas_api_response_collection: crate::models::waf_product_api_bundle_schemas_api_response_collection::WafProductApiBundleSchemasApiResponseCollection,
 }

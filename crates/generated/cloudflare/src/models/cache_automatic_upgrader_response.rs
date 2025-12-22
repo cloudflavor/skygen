@@ -15,5 +15,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type CacheAutomaticUpgraderResponse =
-    crate::models::cache_api_response_single::CacheApiResponseSingle;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct CacheAutomaticUpgraderResponse {
+    #[serde(flatten)]
+    pub cache_api_response_single: crate::models::cache_api_response_single::CacheApiResponseSingle,
+    pub result: Option<crate::models::cache_response_base::CacheResponseBase>,
+}

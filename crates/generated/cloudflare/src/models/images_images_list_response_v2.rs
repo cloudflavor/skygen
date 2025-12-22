@@ -15,5 +15,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type ImagesImagesListResponseV2 =
-    crate::models::images_api_response_collection_v2::ImagesApiResponseCollectionV2;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct ImagesImagesListResponseV2 {
+    #[serde(flatten)]
+    pub images_api_response_collection_v2:
+        crate::models::images_api_response_collection_v2::ImagesApiResponseCollectionV2,
+    pub result: Option<std::collections::BTreeMap<String, serde_json::Value>>,
+}

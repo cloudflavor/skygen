@@ -24,6 +24,7 @@ pub struct TeamsDevicesComponentsSchemasResponseCollection {
             crate::models::teams_devices_device_managed_networks::TeamsDevicesDeviceManagedNetworks,
         >,
     >,
+    #[serde(flatten)]
     pub teams_devices_api_response_collection:
         crate::models::teams_devices_api_response_collection::TeamsDevicesApiResponseCollection,
 }

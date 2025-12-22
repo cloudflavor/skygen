@@ -19,8 +19,8 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct SecondaryDnsApiResponseCommonFailure {
-    pub errors: serde_json::Value,
-    pub messages: serde_json::Value,
-    pub result: serde_json::Value,
+    pub errors: crate::models::secondary_dns_messages::SecondaryDnsMessages,
+    pub messages: crate::models::secondary_dns_messages::SecondaryDnsMessages,
+    pub result: std::collections::BTreeMap<String, serde_json::Value>,
     pub success: bool,
 }

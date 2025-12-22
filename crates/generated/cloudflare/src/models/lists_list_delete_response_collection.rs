@@ -15,4 +15,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type ListsListDeleteResponseCollection = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct ListsListDeleteResponseCollection {
+    #[serde(flatten)]
+    pub lists_api_response_common: crate::models::lists_api_response_common::ListsApiResponseCommon,
+    pub result: Option<std::collections::BTreeMap<String, serde_json::Value>>,
+}

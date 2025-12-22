@@ -22,6 +22,7 @@ pub struct TeamsDevicesComponentsSchemasSingleResponse {
     pub result: Option<
         crate::models::teams_devices_device_managed_networks::TeamsDevicesDeviceManagedNetworks,
     >,
+    #[serde(flatten)]
     pub teams_devices_api_response_single:
         crate::models::teams_devices_api_response_single::TeamsDevicesApiResponseSingle,
 }

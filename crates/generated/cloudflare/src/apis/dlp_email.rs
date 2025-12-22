@@ -15,12 +15,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::dlp_api_response_single::DlpApiResponseSingle;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct ScannerGetMappingRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, DlpApiResponseSingle>,
 }
 
 impl<'a> ScannerGetMappingRequest<'a> {
@@ -38,7 +39,7 @@ impl<'a> ScannerGetMappingRequest<'a> {
         self.builder = self.builder.path_param("account_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<DlpApiResponseSingle> {
         self.builder.send().await
     }
 }
@@ -65,7 +66,7 @@ pub fn scanner_get_mapping(api: &ApiClient) -> ScannerGetMappingRequest<'_> {
 
 #[derive(Debug)]
 pub struct ScannerCreateMappingRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, DlpApiResponseSingle>,
 }
 
 impl<'a> ScannerCreateMappingRequest<'a> {
@@ -91,7 +92,7 @@ impl<'a> ScannerCreateMappingRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<DlpApiResponseSingle> {
         self.builder.send().await
     }
 }
@@ -120,7 +121,7 @@ pub fn scanner_create_mapping(api: &ApiClient) -> ScannerCreateMappingRequest<'_
 
 #[derive(Debug)]
 pub struct ScannerListAllRulesRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, DlpApiResponseSingle>,
 }
 
 impl<'a> ScannerListAllRulesRequest<'a> {
@@ -135,7 +136,7 @@ impl<'a> ScannerListAllRulesRequest<'a> {
         self.builder = self.builder.path_param("account_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<DlpApiResponseSingle> {
         self.builder.send().await
     }
 }
@@ -164,7 +165,7 @@ pub fn scanner_list_all_rules(api: &ApiClient) -> ScannerListAllRulesRequest<'_>
 
 #[derive(Debug)]
 pub struct ScannerCreateRuleRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, DlpApiResponseSingle>,
 }
 
 impl<'a> ScannerCreateRuleRequest<'a> {
@@ -187,7 +188,7 @@ impl<'a> ScannerCreateRuleRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<DlpApiResponseSingle> {
         self.builder.send().await
     }
 }
@@ -216,7 +217,7 @@ pub fn scanner_create_rule(api: &ApiClient) -> ScannerCreateRuleRequest<'_> {
 
 #[derive(Debug)]
 pub struct ScannerUpdateRulePrioritiesRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, DlpApiResponseSingle>,
 }
 
 impl<'a> ScannerUpdateRulePrioritiesRequest<'a> {
@@ -239,7 +240,7 @@ impl<'a> ScannerUpdateRulePrioritiesRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<DlpApiResponseSingle> {
         self.builder.send().await
     }
 }
@@ -268,7 +269,7 @@ pub fn scanner_update_rule_priorities(api: &ApiClient) -> ScannerUpdateRulePrior
 
 #[derive(Debug)]
 pub struct ScannerGetRuleRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, DlpApiResponseSingle>,
 }
 
 impl<'a> ScannerGetRuleRequest<'a> {
@@ -291,7 +292,7 @@ impl<'a> ScannerGetRuleRequest<'a> {
         self.builder = self.builder.path_param("rule_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<DlpApiResponseSingle> {
         self.builder.send().await
     }
 }
@@ -320,7 +321,7 @@ pub fn scanner_get_rule(api: &ApiClient) -> ScannerGetRuleRequest<'_> {
 
 #[derive(Debug)]
 pub struct ScannerUpdateRuleRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, DlpApiResponseSingle>,
 }
 
 impl<'a> ScannerUpdateRuleRequest<'a> {
@@ -351,7 +352,7 @@ impl<'a> ScannerUpdateRuleRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<DlpApiResponseSingle> {
         self.builder.send().await
     }
 }
@@ -382,7 +383,7 @@ pub fn scanner_update_rule(api: &ApiClient) -> ScannerUpdateRuleRequest<'_> {
 
 #[derive(Debug)]
 pub struct ScannerDeleteRuleRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, DlpApiResponseSingle>,
 }
 
 impl<'a> ScannerDeleteRuleRequest<'a> {
@@ -405,7 +406,7 @@ impl<'a> ScannerDeleteRuleRequest<'a> {
         self.builder = self.builder.path_param("rule_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<DlpApiResponseSingle> {
         self.builder.send().await
     }
 }

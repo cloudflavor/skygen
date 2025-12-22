@@ -15,12 +15,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::digital_experience_monitoring_api_response_collection::DigitalExperienceMonitoringApiResponseCollection;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct ListWarpChangeEventsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, DigitalExperienceMonitoringApiResponseCollection>,
 }
 
 impl<'a> ListWarpChangeEventsRequest<'a> {
@@ -74,7 +75,7 @@ impl<'a> ListWarpChangeEventsRequest<'a> {
         self.builder = self.builder.header_param("sort_order", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<DigitalExperienceMonitoringApiResponseCollection> {
         self.builder.send().await
     }
 }

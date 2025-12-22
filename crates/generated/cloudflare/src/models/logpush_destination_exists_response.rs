@@ -22,4 +22,5 @@ pub struct LogpushDestinationExistsResponse {
     #[serde(flatten)]
     pub logpush_api_response_common:
         crate::models::logpush_api_response_common::LogpushApiResponseCommon,
+    pub result: Option<std::collections::BTreeMap<String, serde_json::Value>>,
 }

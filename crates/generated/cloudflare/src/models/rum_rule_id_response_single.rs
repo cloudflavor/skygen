@@ -19,6 +19,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct RumRuleIdResponseSingle {
+    pub result: Option<std::collections::BTreeMap<String, serde_json::Value>>,
     #[serde(flatten)]
     pub rum_api_response_common: crate::models::rum_api_response_common::RumApiResponseCommon,
 }

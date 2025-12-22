@@ -15,4 +15,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type TlsCertificatesAndHostnamesKeylessCertificate = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct TlsCertificatesAndHostnamesKeylessCertificate {
+    #[serde(flatten)]
+    pub tls_certificates_and_hostnames_base:
+        crate::models::tls_certificates_and_hostnames_base::TlsCertificatesAndHostnamesBase,
+}

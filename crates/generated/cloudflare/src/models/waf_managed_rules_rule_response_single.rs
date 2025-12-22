@@ -20,6 +20,7 @@ use serde::{Deserialize, Serialize};
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct WafManagedRulesRuleResponseSingle {
     pub result: Option<std::collections::BTreeMap<String, serde_json::Value>>,
+    #[serde(flatten)]
     pub waf_managed_rules_api_response_single:
         crate::models::waf_managed_rules_api_response_single::WafManagedRulesApiResponseSingle,
 }

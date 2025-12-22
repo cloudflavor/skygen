@@ -15,4 +15,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type WaitingroomSingleResponse = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct WaitingroomSingleResponse {
+    pub result: Option<crate::models::waitingroom_waitingroom::WaitingroomWaitingroom>,
+    #[serde(flatten)]
+    pub waitingroom_api_response_single:
+        crate::models::waitingroom_api_response_single::WaitingroomApiResponseSingle,
+}

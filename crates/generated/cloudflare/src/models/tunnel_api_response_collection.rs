@@ -15,4 +15,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type TunnelApiResponseCollection = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct TunnelApiResponseCollection {
+    pub result: Option<Vec<serde_json::Value>>,
+    pub result_info: Option<crate::models::tunnel_result_info::TunnelResultInfo>,
+    #[serde(flatten)]
+    pub tunnel_api_response_common:
+        crate::models::tunnel_api_response_common::TunnelApiResponseCommon,
+}

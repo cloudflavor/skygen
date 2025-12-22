@@ -22,8 +22,8 @@ pub struct CloudforceOneRequestsRequestMessageItem {
     pub author: String,
     pub content:
         crate::models::cloudforce_one_requests_message_content::CloudforceOneRequestsMessageContent,
-    pub created: Option<serde_json::Value>,
+    pub created: Option<crate::models::cloudforce_one_requests_time::CloudforceOneRequestsTime>,
     pub id: i64,
     pub is_follow_on_request: bool,
-    pub updated: serde_json::Value,
+    pub updated: crate::models::cloudforce_one_requests_time::CloudforceOneRequestsTime,
 }

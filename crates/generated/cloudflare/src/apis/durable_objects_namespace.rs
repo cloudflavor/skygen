@@ -15,12 +15,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::workers_api_response_collection::WorkersApiResponseCollection;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct ListNamespacesRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, WorkersApiResponseCollection>,
 }
 
 impl<'a> ListNamespacesRequest<'a> {
@@ -38,7 +39,7 @@ impl<'a> ListNamespacesRequest<'a> {
         self.builder = self.builder.path_param("account_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<WorkersApiResponseCollection> {
         self.builder.send().await
     }
 }
@@ -67,7 +68,7 @@ pub fn list_namespaces(api: &ApiClient) -> ListNamespacesRequest<'_> {
 
 #[derive(Debug)]
 pub struct ListObjectsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, WorkersApiResponseCollection>,
 }
 
 impl<'a> ListObjectsRequest<'a> {
@@ -98,7 +99,7 @@ impl<'a> ListObjectsRequest<'a> {
         self.builder = self.builder.header_param("cursor", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<WorkersApiResponseCollection> {
         self.builder.send().await
     }
 }

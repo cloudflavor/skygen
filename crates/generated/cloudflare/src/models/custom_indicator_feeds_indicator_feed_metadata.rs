@@ -15,4 +15,28 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type CustomIndicatorFeedsIndicatorFeedMetadata = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct CustomIndicatorFeedsIndicatorFeedMetadata {
+    pub created_on: Option<String>,
+    pub description:
+        Option<crate::models::custom_indicator_feeds_description::CustomIndicatorFeedsDescription>,
+    pub id: Option<crate::models::custom_indicator_feeds_id::CustomIndicatorFeedsId>,
+    pub is_attributable: Option<
+        crate::models::custom_indicator_feeds_is_attributable::CustomIndicatorFeedsIsAttributable,
+    >,
+    pub is_downloadable: Option<
+        crate::models::custom_indicator_feeds_is_downloadable::CustomIndicatorFeedsIsDownloadable,
+    >,
+    pub is_public:
+        Option<crate::models::custom_indicator_feeds_is_public::CustomIndicatorFeedsIsPublic>,
+    pub latest_upload_status: Option<String>,
+    pub modified_on: Option<String>,
+    pub name: Option<crate::models::custom_indicator_feeds_name::CustomIndicatorFeedsName>,
+    pub provider_id:
+        Option<crate::models::custom_indicator_feeds_provider_id::CustomIndicatorFeedsProviderId>,
+    pub provider_name: Option<
+        crate::models::custom_indicator_feeds_provider_name::CustomIndicatorFeedsProviderName,
+    >,
+}

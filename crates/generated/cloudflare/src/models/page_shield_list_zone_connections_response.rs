@@ -19,6 +19,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct PageShieldListZoneConnectionsResponse {
+    #[serde(flatten)]
     pub page_shield_api_list_response_collection: crate::models::page_shield_api_list_response_collection::PageShieldApiListResponseCollection,
     pub result: Option<Vec<crate::models::page_shield_connection::PageShieldConnection>>,
 }

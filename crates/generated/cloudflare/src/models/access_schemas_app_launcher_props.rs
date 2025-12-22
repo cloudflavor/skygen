@@ -22,4 +22,7 @@ pub struct AccessSchemasAppLauncherProps {
     #[serde(flatten)]
     pub access_schemas_feature_app_props:
         crate::models::access_schemas_feature_app_props::AccessSchemasFeatureAppProps,
+    pub domain: Option<serde_json::Value>,
+    pub name: Option<serde_json::Value>,
+    pub r#type: Option<String>,
 }

@@ -20,6 +20,7 @@ use serde::{Deserialize, Serialize};
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct TeamsDevicesOverrideCodesResponse {
     pub result: Option<std::collections::BTreeMap<String, serde_json::Value>>,
+    #[serde(flatten)]
     pub teams_devices_api_response_collection:
         crate::models::teams_devices_api_response_collection::TeamsDevicesApiResponseCollection,
 }

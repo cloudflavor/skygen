@@ -15,4 +15,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type IamCreateMemberPolicy = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct IamCreateMemberPolicy {
+    pub access: crate::models::iam_access::IamAccess,
+    pub id: crate::models::iam_identifier::IamIdentifier,
+    pub permission_groups: crate::models::iam_member_permission_groups::IamMemberPermissionGroups,
+    pub resource_groups: crate::models::iam_member_resource_groups::IamMemberResourceGroups,
+}

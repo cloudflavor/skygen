@@ -21,6 +21,6 @@ use serde::{Deserialize, Serialize};
 pub struct VectorizeApiResponseCommon {
     pub errors: crate::models::vectorize_messages::VectorizeMessages,
     pub messages: crate::models::vectorize_messages::VectorizeMessages,
-    pub result: serde_json::Value,
+    pub result: std::collections::BTreeMap<String, serde_json::Value>,
     pub success: bool,
 }

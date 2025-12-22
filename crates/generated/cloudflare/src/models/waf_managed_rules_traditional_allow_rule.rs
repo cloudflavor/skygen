@@ -15,4 +15,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type WafManagedRulesTraditionalAllowRule = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct WafManagedRulesTraditionalAllowRule {
+    pub allowed_modes: Option<crate::models::waf_managed_rules_allowed_modes_allow_traditional::WafManagedRulesAllowedModesAllowTraditional>,
+    pub mode: Option<crate::models::waf_managed_rules_mode_allow_traditional::WafManagedRulesModeAllowTraditional>,
+    #[serde(flatten)]
+    pub waf_managed_rules_base: crate::models::waf_managed_rules_base::WafManagedRulesBase,
+}

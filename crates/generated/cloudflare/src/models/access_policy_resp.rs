@@ -15,4 +15,16 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type AccessPolicyResp = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct AccessPolicyResp {
+    #[serde(flatten)]
+    pub access_base_policy_resp: crate::models::access_base_policy_resp::AccessBasePolicyResp,
+    pub approval_groups: Option<crate::models::access_approval_groups::AccessApprovalGroups>,
+    pub approval_required: Option<crate::models::access_approval_required::AccessApprovalRequired>,
+    pub isolation_required: Option<crate::models::access_isolation_required::AccessIsolationRequired>,
+    pub purpose_justification_prompt: Option<crate::models::access_purpose_justification_prompt::AccessPurposeJustificationPrompt>,
+    pub purpose_justification_required: Option<crate::models::access_purpose_justification_required::AccessPurposeJustificationRequired>,
+    pub session_duration: Option<crate::models::access_components_schemas_session_duration::AccessComponentsSchemasSessionDuration>,
+}

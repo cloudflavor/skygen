@@ -19,8 +19,8 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct DosApiResponseCommonFailure {
-    pub errors: serde_json::Value,
-    pub messages: serde_json::Value,
-    pub result: serde_json::Value,
+    pub errors: crate::models::dos_messages::DosMessages,
+    pub messages: crate::models::dos_messages::DosMessages,
+    pub result: std::collections::BTreeMap<String, serde_json::Value>,
     pub success: bool,
 }

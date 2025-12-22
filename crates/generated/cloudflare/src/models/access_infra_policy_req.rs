@@ -15,4 +15,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type AccessInfraPolicyReq = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct AccessInfraPolicyReq {
+    #[serde(flatten)]
+    pub access_base_policy_req: crate::models::access_base_policy_req::AccessBasePolicyReq,
+    pub connection_rules: Option<crate::models::access_connection_rules::AccessConnectionRules>,
+}

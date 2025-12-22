@@ -15,4 +15,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type FirewallSchemasRule = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct FirewallSchemasRule {
+    #[serde(flatten)]
+    pub firewall_rule: crate::models::firewall_rule::FirewallRule,
+    pub scope: Option<std::collections::BTreeMap<String, serde_json::Value>>,
+}

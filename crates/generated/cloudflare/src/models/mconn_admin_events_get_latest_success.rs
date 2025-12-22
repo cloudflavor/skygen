@@ -15,4 +15,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type MconnAdminEventsGetLatestSuccess = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct MconnAdminEventsGetLatestSuccess {
+    #[serde(flatten)]
+    pub mconn_envelope: crate::models::mconn_envelope::MconnEnvelope,
+    pub result:
+        crate::models::mconn_admin_events_get_latest_result::MconnAdminEventsGetLatestResult,
+}

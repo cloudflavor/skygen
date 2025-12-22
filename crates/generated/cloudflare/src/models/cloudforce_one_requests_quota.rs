@@ -19,8 +19,10 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct CloudforceOneRequestsQuota {
-    pub anniversary_date: Option<serde_json::Value>,
-    pub quarter_anniversary_date: Option<serde_json::Value>,
+    pub anniversary_date:
+        Option<crate::models::cloudforce_one_requests_time::CloudforceOneRequestsTime>,
+    pub quarter_anniversary_date:
+        Option<crate::models::cloudforce_one_requests_time::CloudforceOneRequestsTime>,
     pub quota: Option<i64>,
     pub remaining: Option<i64>,
 }

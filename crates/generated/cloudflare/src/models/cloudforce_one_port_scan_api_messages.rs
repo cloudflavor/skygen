@@ -15,4 +15,5 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type CloudforceOnePortScanApiMessages = Vec<serde_json::Value>;
+pub type CloudforceOnePortScanApiMessages =
+    Vec<std::collections::BTreeMap<String, serde_json::Value>>;

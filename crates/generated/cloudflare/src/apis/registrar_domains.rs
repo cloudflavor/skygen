@@ -144,7 +144,10 @@ impl<'a> UpdateDomainRequest<'a> {
         self.builder = self.builder.path_param("domain_name", value);
         self
     }
-    pub fn with_body(mut self, body: serde_json::Value) -> Self {
+    pub fn with_body(
+        mut self,
+        body: crate::models::registrar_api_domain_update_properties::RegistrarApiDomainUpdateProperties,
+    ) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
@@ -167,7 +170,7 @@ impl<'a> UpdateDomainRequest<'a> {
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::registrar_domains };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// # let body: serde_json::Value = todo!();
+/// # let body: crate::models::registrar_api_domain_update_properties::RegistrarApiDomainUpdateProperties = todo!();
 /// let response = update_domain(&api)
 ///     .with_account_id("account_id")
 ///     .with_domain_name("domain_name")

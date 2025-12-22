@@ -15,12 +15,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::dlp_api_response_single::DlpApiResponseSingle;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct ListAllEntriesRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, DlpApiResponseSingle>,
 }
 
 impl<'a> ListAllEntriesRequest<'a> {
@@ -34,7 +35,7 @@ impl<'a> ListAllEntriesRequest<'a> {
         self.builder = self.builder.path_param("account_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<DlpApiResponseSingle> {
         self.builder.send().await
     }
 }
@@ -63,7 +64,7 @@ pub fn list_all_entries(api: &ApiClient) -> ListAllEntriesRequest<'_> {
 
 #[derive(Debug)]
 pub struct CreateEntryRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, DlpApiResponseSingle>,
 }
 
 impl<'a> CreateEntryRequest<'a> {
@@ -83,7 +84,7 @@ impl<'a> CreateEntryRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<DlpApiResponseSingle> {
         self.builder.send().await
     }
 }
@@ -114,7 +115,7 @@ pub fn create_entry(api: &ApiClient) -> CreateEntryRequest<'_> {
 
 #[derive(Debug)]
 pub struct GetDlpEntryRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, DlpApiResponseSingle>,
 }
 
 impl<'a> GetDlpEntryRequest<'a> {
@@ -137,7 +138,7 @@ impl<'a> GetDlpEntryRequest<'a> {
         self.builder = self.builder.path_param("entry_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<DlpApiResponseSingle> {
         self.builder.send().await
     }
 }
@@ -168,7 +169,7 @@ pub fn get_dlp_entry(api: &ApiClient) -> GetDlpEntryRequest<'_> {
 
 #[derive(Debug)]
 pub struct UpdateEntryRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, DlpApiResponseSingle>,
 }
 
 impl<'a> UpdateEntryRequest<'a> {
@@ -196,7 +197,7 @@ impl<'a> UpdateEntryRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<DlpApiResponseSingle> {
         self.builder.send().await
     }
 }
@@ -229,7 +230,7 @@ pub fn update_entry(api: &ApiClient) -> UpdateEntryRequest<'_> {
 
 #[derive(Debug)]
 pub struct DeleteEntryRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, DlpApiResponseSingle>,
 }
 
 impl<'a> DeleteEntryRequest<'a> {
@@ -252,7 +253,7 @@ impl<'a> DeleteEntryRequest<'a> {
         self.builder = self.builder.path_param("entry_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<DlpApiResponseSingle> {
         self.builder.send().await
     }
 }

@@ -19,6 +19,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct DnsCustomNameserversAcnsResponseCollection {
+    #[serde(flatten)]
     pub dns_custom_nameservers_api_response_collection: crate::models::dns_custom_nameservers_api_response_collection::DnsCustomNameserversApiResponseCollection,
     pub result: Option<Vec<crate::models::dns_custom_nameservers_custom_ns::DnsCustomNameserversCustomNs>>,
 }

@@ -19,6 +19,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct PageShieldListZonePoliciesResponse {
+    #[serde(flatten)]
     pub page_shield_api_list_response_collection: crate::models::page_shield_api_list_response_collection::PageShieldApiListResponseCollection,
     pub result: Vec<crate::models::page_shield_policy_with_id::PageShieldPolicyWithId>,
 }

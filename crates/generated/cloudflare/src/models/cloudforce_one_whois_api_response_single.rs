@@ -15,4 +15,10 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type CloudforceOneWhoisApiResponseSingle = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct CloudforceOneWhoisApiResponseSingle {
+    #[serde(flatten)]
+    pub cloudforce_one_whois_api_response_common: crate::models::cloudforce_one_whois_api_response_common::CloudforceOneWhoisApiResponseCommon,
+}

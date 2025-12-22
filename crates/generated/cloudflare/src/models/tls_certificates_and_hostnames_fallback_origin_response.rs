@@ -15,4 +15,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type TlsCertificatesAndHostnamesFallbackOriginResponse = crate::models::tls_certificates_and_hostnames_api_response_single::TlsCertificatesAndHostnamesApiResponseSingle;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct TlsCertificatesAndHostnamesFallbackOriginResponse {
+    pub result: Option<crate::models::tls_certificates_and_hostnames_fallbackorigin::TlsCertificatesAndHostnamesFallbackorigin>,
+    #[serde(flatten)]
+    pub tls_certificates_and_hostnames_api_response_single: crate::models::tls_certificates_and_hostnames_api_response_single::TlsCertificatesAndHostnamesApiResponseSingle,
+}

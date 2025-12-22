@@ -15,4 +15,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type PublicIpApiResponseSingle = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct PublicIpApiResponseSingle {
+    #[serde(flatten)]
+    pub public_ip_api_response_common:
+        crate::models::public_ip_api_response_common::PublicIpApiResponseCommon,
+}

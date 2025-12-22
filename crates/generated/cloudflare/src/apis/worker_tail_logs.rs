@@ -21,7 +21,7 @@ use reqwest::Method;
 
 #[derive(Debug)]
 pub struct AccountsWorkersScriptsScriptRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, WorkersApiResponseCommon>,
 }
 
 impl<'a> AccountsWorkersScriptsScriptRequest<'a> {
@@ -44,7 +44,7 @@ impl<'a> AccountsWorkersScriptsScriptRequest<'a> {
         self.builder = self.builder.path_param("script_name", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<WorkersApiResponseCommon> {
         self.builder.send().await
     }
 }
@@ -75,7 +75,7 @@ pub fn accounts_workers_scripts_script(api: &ApiClient) -> AccountsWorkersScript
 
 #[derive(Debug)]
 pub struct StartTailRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, WorkersApiResponseCommon>,
 }
 
 impl<'a> StartTailRequest<'a> {
@@ -98,7 +98,7 @@ impl<'a> StartTailRequest<'a> {
         self.builder = self.builder.path_param("script_name", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<WorkersApiResponseCommon> {
         self.builder.send().await
     }
 }

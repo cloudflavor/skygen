@@ -21,15 +21,16 @@ use serde::{Deserialize, Serialize};
 pub struct EmailSecurityDomain {
     pub allowed_delivery_modes:
         Vec<crate::models::email_security_delivery_mode::EmailSecurityDeliveryMode>,
-    pub authorization: Option<serde_json::Value>,
+    pub authorization: Option<std::collections::BTreeMap<String, serde_json::Value>>,
     pub created_at: String,
     pub domain: String,
     pub drop_dispositions:
         Vec<crate::models::email_security_disposition_label::EmailSecurityDispositionLabel>,
-    pub emails_processed: Option<serde_json::Value>,
-    pub folder: Option<serde_json::Value>,
+    pub emails_processed: Option<std::collections::BTreeMap<String, serde_json::Value>>,
+    pub folder:
+        Option<crate::models::email_security_scannable_folder::EmailSecurityScannableFolder>,
     pub id: i64,
-    pub inbox_provider: Option<serde_json::Value>,
+    pub inbox_provider: Option<String>,
     pub integration_id: Option<String>,
     pub ip_restrictions: Vec<String>,
     pub last_modified: String,

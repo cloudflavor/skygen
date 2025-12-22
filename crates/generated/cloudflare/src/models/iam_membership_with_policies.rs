@@ -22,7 +22,7 @@ pub struct IamMembershipWithPolicies {
     pub account: Option<crate::models::iam_schemas_account::IamSchemasAccount>,
     pub api_access_enabled: Option<crate::models::iam_api_access_enabled::IamApiAccessEnabled>,
     pub id: Option<crate::models::iam_membership_components_schemas_identifier::IamMembershipComponentsSchemasIdentifier>,
-    pub permissions: Option<serde_json::Value>,
+    pub permissions: Option<crate::models::iam_permissions::IamPermissions>,
     pub policies: Option<Vec<crate::models::iam_list_member_policy::IamListMemberPolicy>>,
     pub roles: Option<crate::models::iam_role_names::IamRoleNames>,
     pub status: Option<crate::models::iam_schemas_status::IamSchemasStatus>,

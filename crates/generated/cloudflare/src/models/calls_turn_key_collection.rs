@@ -21,4 +21,5 @@ use serde::{Deserialize, Serialize};
 pub struct CallsTurnKeyCollection {
     #[serde(flatten)]
     pub calls_api_response_common: crate::models::calls_api_response_common::CallsApiResponseCommon,
+    pub result: Option<Vec<crate::models::calls_turn_key_object::CallsTurnKeyObject>>,
 }

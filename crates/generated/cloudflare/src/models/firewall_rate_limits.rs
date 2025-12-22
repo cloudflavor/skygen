@@ -15,4 +15,10 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type FirewallRateLimits = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct FirewallRateLimits {
+    #[serde(flatten)]
+    pub firewall_ratelimit: crate::models::firewall_ratelimit::FirewallRatelimit,
+}

@@ -15,4 +15,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type SecondaryDnsSingleRequestOutgoing = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct SecondaryDnsSingleRequestOutgoing {
+    pub id: crate::models::secondary_dns_identifier::SecondaryDnsIdentifier,
+    pub name: crate::models::secondary_dns_name::SecondaryDnsName,
+    pub peers: crate::models::secondary_dns_peers::SecondaryDnsPeers,
+}

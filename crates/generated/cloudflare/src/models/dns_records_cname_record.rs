@@ -15,4 +15,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type DnsRecordsCnameRecord = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct DnsRecordsCnameRecord {
+    pub content: Option<String>,
+    #[serde(flatten)]
+    pub dns_records_dns_record_shared_fields:
+        crate::models::dns_records_dns_record_shared_fields::DnsRecordsDnsRecordSharedFields,
+    pub r#type: Option<String>,
+    pub settings: Option<serde_json::Value>,
+}

@@ -15,12 +15,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::d1_api_response_common::D1ApiResponseCommon;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct CloudflareD1ListDatabasesRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, D1ApiResponseCommon>,
 }
 
 impl<'a> CloudflareD1ListDatabasesRequest<'a> {
@@ -46,7 +47,7 @@ impl<'a> CloudflareD1ListDatabasesRequest<'a> {
         self.builder = self.builder.header_param("per_page", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<D1ApiResponseCommon> {
         self.builder.send().await
     }
 }
@@ -81,7 +82,7 @@ pub fn cloudflare_d1_list_databases(api: &ApiClient) -> CloudflareD1ListDatabase
 
 #[derive(Debug)]
 pub struct CloudflareD1CreateDatabaseRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, D1ApiResponseCommon>,
 }
 
 impl<'a> CloudflareD1CreateDatabaseRequest<'a> {
@@ -104,7 +105,7 @@ impl<'a> CloudflareD1CreateDatabaseRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<D1ApiResponseCommon> {
         self.builder.send().await
     }
 }
@@ -135,7 +136,7 @@ pub fn cloudflare_d1_create_database(api: &ApiClient) -> CloudflareD1CreateDatab
 
 #[derive(Debug)]
 pub struct CloudflareD1GetDatabaseRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, D1ApiResponseCommon>,
 }
 
 impl<'a> CloudflareD1GetDatabaseRequest<'a> {
@@ -158,7 +159,7 @@ impl<'a> CloudflareD1GetDatabaseRequest<'a> {
         self.builder = self.builder.path_param("database_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<D1ApiResponseCommon> {
         self.builder.send().await
     }
 }
@@ -189,7 +190,7 @@ pub fn cloudflare_d1_get_database(api: &ApiClient) -> CloudflareD1GetDatabaseReq
 
 #[derive(Debug)]
 pub struct CloudflareD1UpdateDatabaseRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, D1ApiResponseCommon>,
 }
 
 impl<'a> CloudflareD1UpdateDatabaseRequest<'a> {
@@ -220,7 +221,7 @@ impl<'a> CloudflareD1UpdateDatabaseRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<D1ApiResponseCommon> {
         self.builder.send().await
     }
 }
@@ -253,7 +254,7 @@ pub fn cloudflare_d1_update_database(api: &ApiClient) -> CloudflareD1UpdateDatab
 
 #[derive(Debug)]
 pub struct CloudflareD1DeleteDatabaseRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, D1ApiResponseCommon>,
 }
 
 impl<'a> CloudflareD1DeleteDatabaseRequest<'a> {
@@ -276,7 +277,7 @@ impl<'a> CloudflareD1DeleteDatabaseRequest<'a> {
         self.builder = self.builder.path_param("database_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<D1ApiResponseCommon> {
         self.builder.send().await
     }
 }
@@ -307,7 +308,7 @@ pub fn cloudflare_d1_delete_database(api: &ApiClient) -> CloudflareD1DeleteDatab
 
 #[derive(Debug)]
 pub struct CloudflareD1UpdatePartialRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, D1ApiResponseCommon>,
 }
 
 impl<'a> CloudflareD1UpdatePartialRequest<'a> {
@@ -338,7 +339,7 @@ impl<'a> CloudflareD1UpdatePartialRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<D1ApiResponseCommon> {
         self.builder.send().await
     }
 }
@@ -371,7 +372,7 @@ pub fn cloudflare_d1_update_partial(api: &ApiClient) -> CloudflareD1UpdatePartia
 
 #[derive(Debug)]
 pub struct CloudflareD1ExportDatabaseRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, D1ApiResponseCommon>,
 }
 
 impl<'a> CloudflareD1ExportDatabaseRequest<'a> {
@@ -402,7 +403,7 @@ impl<'a> CloudflareD1ExportDatabaseRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<D1ApiResponseCommon> {
         self.builder.send().await
     }
 }
@@ -437,7 +438,7 @@ pub fn cloudflare_d1_export_database(api: &ApiClient) -> CloudflareD1ExportDatab
 
 #[derive(Debug)]
 pub struct CloudflareD1ImportDatabaseRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, D1ApiResponseCommon>,
 }
 
 impl<'a> CloudflareD1ImportDatabaseRequest<'a> {
@@ -461,11 +462,14 @@ impl<'a> CloudflareD1ImportDatabaseRequest<'a> {
         self.builder = self.builder.path_param("database_id", value);
         self
     }
-    pub fn with_body(mut self, body: serde_json::Value) -> Self {
+    pub fn with_body(
+        mut self,
+        body: std::collections::BTreeMap<String, serde_json::Value>,
+    ) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<D1ApiResponseCommon> {
         self.builder.send().await
     }
 }
@@ -485,7 +489,7 @@ impl<'a> CloudflareD1ImportDatabaseRequest<'a> {
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::d1 };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// # let body: serde_json::Value = todo!();
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = cloudflare_d1_import_database(&api)
 ///     .with_account_id("account_id")
 ///     .with_database_id("database_id")
@@ -499,7 +503,7 @@ pub fn cloudflare_d1_import_database(api: &ApiClient) -> CloudflareD1ImportDatab
 
 #[derive(Debug)]
 pub struct CloudflareD1QueryDatabaseRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, D1ApiResponseCommon>,
 }
 
 impl<'a> CloudflareD1QueryDatabaseRequest<'a> {
@@ -530,7 +534,7 @@ impl<'a> CloudflareD1QueryDatabaseRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<D1ApiResponseCommon> {
         self.builder.send().await
     }
 }
@@ -563,7 +567,7 @@ pub fn cloudflare_d1_query_database(api: &ApiClient) -> CloudflareD1QueryDatabas
 
 #[derive(Debug)]
 pub struct CloudflareD1RawDatabaseRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, D1ApiResponseCommon>,
 }
 
 impl<'a> CloudflareD1RawDatabaseRequest<'a> {
@@ -594,7 +598,7 @@ impl<'a> CloudflareD1RawDatabaseRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<D1ApiResponseCommon> {
         self.builder.send().await
     }
 }

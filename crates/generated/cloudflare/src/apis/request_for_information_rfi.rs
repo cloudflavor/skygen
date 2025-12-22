@@ -21,7 +21,7 @@ use reqwest::Method;
 
 #[derive(Debug)]
 pub struct CloudforceOneRequestListRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, CloudforceOneRequestsApiResponseCommon>,
 }
 
 impl<'a> CloudforceOneRequestListRequest<'a> {
@@ -47,7 +47,7 @@ impl<'a> CloudforceOneRequestListRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<CloudforceOneRequestsApiResponseCommon> {
         self.builder.send().await
     }
 }
@@ -76,7 +76,7 @@ pub fn cloudforce_one_request_list(api: &ApiClient) -> CloudforceOneRequestListR
 
 #[derive(Debug)]
 pub struct CloudforceOneRequestConstantsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, CloudforceOneRequestsApiResponseCommon>,
 }
 
 impl<'a> CloudforceOneRequestConstantsRequest<'a> {
@@ -94,7 +94,7 @@ impl<'a> CloudforceOneRequestConstantsRequest<'a> {
         self.builder = self.builder.path_param("account_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<CloudforceOneRequestsApiResponseCommon> {
         self.builder.send().await
     }
 }
@@ -123,7 +123,7 @@ pub fn cloudforce_one_request_constants(
 
 #[derive(Debug)]
 pub struct CloudforceOneRequestNewRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, CloudforceOneRequestsApiResponseCommon>,
 }
 
 impl<'a> CloudforceOneRequestNewRequest<'a> {
@@ -149,7 +149,7 @@ impl<'a> CloudforceOneRequestNewRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<CloudforceOneRequestsApiResponseCommon> {
         self.builder.send().await
     }
 }
@@ -180,7 +180,7 @@ pub fn cloudforce_one_request_new(api: &ApiClient) -> CloudforceOneRequestNewReq
 
 #[derive(Debug)]
 pub struct CloudforceOneRequestQuotaRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, CloudforceOneRequestsApiResponseCommon>,
 }
 
 impl<'a> CloudforceOneRequestQuotaRequest<'a> {
@@ -198,7 +198,7 @@ impl<'a> CloudforceOneRequestQuotaRequest<'a> {
         self.builder = self.builder.path_param("account_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<CloudforceOneRequestsApiResponseCommon> {
         self.builder.send().await
     }
 }
@@ -225,7 +225,7 @@ pub fn cloudforce_one_request_quota(api: &ApiClient) -> CloudforceOneRequestQuot
 
 #[derive(Debug)]
 pub struct CloudforceOneRequestTypesRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, CloudforceOneRequestsApiResponseCommon>,
 }
 
 impl<'a> CloudforceOneRequestTypesRequest<'a> {
@@ -243,7 +243,7 @@ impl<'a> CloudforceOneRequestTypesRequest<'a> {
         self.builder = self.builder.path_param("account_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<CloudforceOneRequestsApiResponseCommon> {
         self.builder.send().await
     }
 }
@@ -270,7 +270,7 @@ pub fn cloudforce_one_request_types(api: &ApiClient) -> CloudforceOneRequestType
 
 #[derive(Debug)]
 pub struct CloudforceOneRequestGetRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, CloudforceOneRequestsApiResponseCommon>,
 }
 
 impl<'a> CloudforceOneRequestGetRequest<'a> {
@@ -293,7 +293,7 @@ impl<'a> CloudforceOneRequestGetRequest<'a> {
         self.builder = self.builder.path_param("request_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<CloudforceOneRequestsApiResponseCommon> {
         self.builder.send().await
     }
 }
@@ -322,7 +322,7 @@ pub fn cloudforce_one_request_get(api: &ApiClient) -> CloudforceOneRequestGetReq
 
 #[derive(Debug)]
 pub struct CloudforceOneRequestUpdateRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, CloudforceOneRequestsApiResponseCommon>,
 }
 
 impl<'a> CloudforceOneRequestUpdateRequest<'a> {
@@ -353,7 +353,7 @@ impl<'a> CloudforceOneRequestUpdateRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<CloudforceOneRequestsApiResponseCommon> {
         self.builder.send().await
     }
 }
@@ -438,7 +438,7 @@ pub fn cloudforce_one_request_delete(api: &ApiClient) -> CloudforceOneRequestDel
 
 #[derive(Debug)]
 pub struct CloudforceOneRequestAssetRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, CloudforceOneRequestsApiResponseCommon>,
 }
 
 impl<'a> CloudforceOneRequestAssetRequest<'a> {
@@ -469,7 +469,7 @@ impl<'a> CloudforceOneRequestAssetRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<CloudforceOneRequestsApiResponseCommon> {
         self.builder.send().await
     }
 }
@@ -500,7 +500,7 @@ pub fn cloudforce_one_request_asset(api: &ApiClient) -> CloudforceOneRequestAsse
 
 #[derive(Debug)]
 pub struct CloudforceOneRequestAssetPostRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, CloudforceOneRequestsApiResponseCommon>,
 }
 
 impl<'a> CloudforceOneRequestAssetPostRequest<'a> {
@@ -523,7 +523,7 @@ impl<'a> CloudforceOneRequestAssetPostRequest<'a> {
         self.builder = self.builder.path_param("request_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<CloudforceOneRequestsApiResponseCommon> {
         self.builder.send().await
     }
 }
@@ -554,7 +554,7 @@ pub fn cloudforce_one_request_asset_post(
 
 #[derive(Debug)]
 pub struct CloudforceOneRequestAssetGetRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, CloudforceOneRequestsApiResponseCommon>,
 }
 
 impl<'a> CloudforceOneRequestAssetGetRequest<'a> {
@@ -582,7 +582,7 @@ impl<'a> CloudforceOneRequestAssetGetRequest<'a> {
         self.builder = self.builder.path_param("asset_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<CloudforceOneRequestsApiResponseCommon> {
         self.builder.send().await
     }
 }
@@ -615,7 +615,7 @@ pub fn cloudforce_one_request_asset_get(
 
 #[derive(Debug)]
 pub struct CloudforceOneRequestAssetPutRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, CloudforceOneRequestsApiResponseCommon>,
 }
 
 impl<'a> CloudforceOneRequestAssetPutRequest<'a> {
@@ -651,7 +651,7 @@ impl<'a> CloudforceOneRequestAssetPutRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<CloudforceOneRequestsApiResponseCommon> {
         self.builder.send().await
     }
 }
@@ -747,7 +747,7 @@ pub fn cloudforce_one_request_asset_delete(
 
 #[derive(Debug)]
 pub struct CloudforceOneRequestMessageRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, CloudforceOneRequestsApiResponseCommon>,
 }
 
 impl<'a> CloudforceOneRequestMessageRequest<'a> {
@@ -778,7 +778,7 @@ impl<'a> CloudforceOneRequestMessageRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<CloudforceOneRequestsApiResponseCommon> {
         self.builder.send().await
     }
 }
@@ -809,7 +809,7 @@ pub fn cloudforce_one_request_message(api: &ApiClient) -> CloudforceOneRequestMe
 
 #[derive(Debug)]
 pub struct CloudforceOneRequestMessagePostRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, CloudforceOneRequestsApiResponseCommon>,
 }
 
 impl<'a> CloudforceOneRequestMessagePostRequest<'a> {
@@ -840,7 +840,7 @@ impl<'a> CloudforceOneRequestMessagePostRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<CloudforceOneRequestsApiResponseCommon> {
         self.builder.send().await
     }
 }
@@ -873,7 +873,7 @@ pub fn cloudforce_one_request_message_post(
 
 #[derive(Debug)]
 pub struct CloudforceOneRequestMessagePutRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, CloudforceOneRequestsApiResponseCommon>,
 }
 
 impl<'a> CloudforceOneRequestMessagePutRequest<'a> {
@@ -909,7 +909,7 @@ impl<'a> CloudforceOneRequestMessagePutRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<CloudforceOneRequestsApiResponseCommon> {
         self.builder.send().await
     }
 }

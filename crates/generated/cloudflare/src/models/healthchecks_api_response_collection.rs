@@ -15,4 +15,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type HealthchecksApiResponseCollection = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct HealthchecksApiResponseCollection {
+    #[serde(flatten)]
+    pub healthchecks_api_response_common:
+        crate::models::healthchecks_api_response_common::HealthchecksApiResponseCommon,
+    pub result: Option<Vec<serde_json::Value>>,
+    pub result_info: Option<crate::models::healthchecks_result_info::HealthchecksResultInfo>,
+}

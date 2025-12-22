@@ -15,4 +15,4 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type BillSubsApiMessages = Vec<serde_json::Value>;
+pub type BillSubsApiMessages = Vec<std::collections::BTreeMap<String, serde_json::Value>>;

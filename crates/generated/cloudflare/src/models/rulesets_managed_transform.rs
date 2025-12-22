@@ -19,7 +19,8 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct RulesetsManagedTransform {
-    pub conflicts_with: Option<Vec<serde_json::Value>>,
+    pub conflicts_with:
+        Option<Vec<crate::models::rulesets_managed_transform_id::RulesetsManagedTransformId>>,
     pub enabled: bool,
     pub has_conflict: bool,
     pub id: crate::models::rulesets_managed_transform_id::RulesetsManagedTransformId,

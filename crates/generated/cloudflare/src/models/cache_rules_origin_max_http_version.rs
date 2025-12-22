@@ -15,4 +15,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type CacheRulesOriginMaxHttpVersion = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct CacheRulesOriginMaxHttpVersion {
+    #[serde(flatten)]
+    pub cache_rules_base: crate::models::cache_rules_base::CacheRulesBase,
+    pub id: Option<String>,
+    pub value: Option<crate::models::cache_rules_origin_max_http_version_value::CacheRulesOriginMaxHttpVersionValue>,
+}

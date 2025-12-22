@@ -20,7 +20,8 @@ use serde::{Deserialize, Serialize};
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct EmailSecurityAttachment {
     pub content_type: Option<String>,
-    pub detection: Option<serde_json::Value>,
+    pub detection:
+        Option<crate::models::email_security_disposition_label::EmailSecurityDispositionLabel>,
     pub encrypted: Option<bool>,
     pub name: Option<String>,
     pub size: i64,

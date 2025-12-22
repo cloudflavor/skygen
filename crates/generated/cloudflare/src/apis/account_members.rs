@@ -111,7 +111,10 @@ impl<'a> AddMemberRequest<'a> {
         self.builder = self.builder.path_param("account_id", value);
         self
     }
-    pub fn with_body(mut self, body: serde_json::Value) -> Self {
+    pub fn with_body(
+        mut self,
+        body: crate::models::iam_create_member_with_roles::IamCreateMemberWithRoles,
+    ) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
@@ -133,7 +136,7 @@ impl<'a> AddMemberRequest<'a> {
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::account_members };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// # let body: serde_json::Value = todo!();
+/// # let body: crate::models::iam_create_member_with_roles::IamCreateMemberWithRoles = todo!();
 /// let response = add_member(&api)
 ///     .with_account_id("account_id")
 ///     .with_body(body)
@@ -224,7 +227,10 @@ impl<'a> UpdateMemberRequest<'a> {
         self.builder = self.builder.path_param("member_id", value);
         self
     }
-    pub fn with_body(mut self, body: serde_json::Value) -> Self {
+    pub fn with_body(
+        mut self,
+        body: crate::models::iam_update_member_with_roles::IamUpdateMemberWithRoles,
+    ) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
@@ -247,7 +253,7 @@ impl<'a> UpdateMemberRequest<'a> {
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::account_members };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// # let body: serde_json::Value = todo!();
+/// # let body: crate::models::iam_update_member_with_roles::IamUpdateMemberWithRoles = todo!();
 /// let response = update_member(&api)
 ///     .with_account_id("account_id")
 ///     .with_member_id("member_id")

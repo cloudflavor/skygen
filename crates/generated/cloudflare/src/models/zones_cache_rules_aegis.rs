@@ -15,4 +15,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type ZonesCacheRulesAegis = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct ZonesCacheRulesAegis {
+    pub id: Option<String>,
+    pub value: Option<crate::models::zones_cache_rules_aegis_value::ZonesCacheRulesAegisValue>,
+    #[serde(flatten)]
+    pub zones_cache_rules_base: crate::models::zones_cache_rules_base::ZonesCacheRulesBase,
+}

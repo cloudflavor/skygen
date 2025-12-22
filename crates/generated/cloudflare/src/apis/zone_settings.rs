@@ -15,6 +15,10 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::cache_rules_zone_cache_settings_response_single::CacheRulesZoneCacheSettingsResponseSingle;
+use crate::models::cache_rules_zone_complex_cache_settings_response_single::CacheRulesZoneComplexCacheSettingsResponseSingle;
+use crate::models::speed_api_response_common::SpeedApiResponseCommon;
+use crate::models::zones_settings_api_components_schemas_api_response_common::ZonesSettingsApiComponentsSchemasApiResponseCommon;
 use crate::models::zones_zone_settings_response_collection::ZonesZoneSettingsResponseCollection;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
@@ -117,7 +121,7 @@ pub fn edit_settings_info(api: &ApiClient) -> EditSettingsInfoRequest<'_> {
 
 #[derive(Debug)]
 pub struct CacheSettingsGetAegisRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, CacheRulesZoneComplexCacheSettingsResponseSingle>,
 }
 
 impl<'a> CacheSettingsGetAegisRequest<'a> {
@@ -131,7 +135,7 @@ impl<'a> CacheSettingsGetAegisRequest<'a> {
         self.builder = self.builder.path_param("zone_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<CacheRulesZoneComplexCacheSettingsResponseSingle> {
         self.builder.send().await
     }
 }
@@ -160,7 +164,7 @@ pub fn cache_settings_get_aegis(api: &ApiClient) -> CacheSettingsGetAegisRequest
 
 #[derive(Debug)]
 pub struct CacheSettingsChangeAegisRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, CacheRulesZoneComplexCacheSettingsResponseSingle>,
 }
 
 impl<'a> CacheSettingsChangeAegisRequest<'a> {
@@ -182,7 +186,7 @@ impl<'a> CacheSettingsChangeAegisRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<CacheRulesZoneComplexCacheSettingsResponseSingle> {
         self.builder.send().await
     }
 }
@@ -213,7 +217,7 @@ pub fn cache_settings_change_aegis(api: &ApiClient) -> CacheSettingsChangeAegisR
 
 #[derive(Debug)]
 pub struct GetFontsSettingRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, SpeedApiResponseCommon>,
 }
 
 impl<'a> GetFontsSettingRequest<'a> {
@@ -227,7 +231,7 @@ impl<'a> GetFontsSettingRequest<'a> {
         self.builder = self.builder.path_param("zone_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<SpeedApiResponseCommon> {
         self.builder.send().await
     }
 }
@@ -257,7 +261,7 @@ pub fn get_fonts_setting(api: &ApiClient) -> GetFontsSettingRequest<'_> {
 
 #[derive(Debug)]
 pub struct ChangeFontsSettingRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, SpeedApiResponseCommon>,
 }
 
 impl<'a> ChangeFontsSettingRequest<'a> {
@@ -276,7 +280,7 @@ impl<'a> ChangeFontsSettingRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<SpeedApiResponseCommon> {
         self.builder.send().await
     }
 }
@@ -308,7 +312,7 @@ pub fn change_fonts_setting(api: &ApiClient) -> ChangeFontsSettingRequest<'_> {
 
 #[derive(Debug)]
 pub struct CacheSettingsGetOriginRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, CacheRulesZoneCacheSettingsResponseSingle>,
 }
 
 impl<'a> CacheSettingsGetOriginRequest<'a> {
@@ -326,7 +330,7 @@ impl<'a> CacheSettingsGetOriginRequest<'a> {
         self.builder = self.builder.path_param("zone_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<CacheRulesZoneCacheSettingsResponseSingle> {
         self.builder.send().await
     }
 }
@@ -355,7 +359,7 @@ pub fn cache_settings_get_origin(api: &ApiClient) -> CacheSettingsGetOriginReque
 
 #[derive(Debug)]
 pub struct CacheSettingsChangeOriginRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, CacheRulesZoneCacheSettingsResponseSingle>,
 }
 
 impl<'a> CacheSettingsChangeOriginRequest<'a> {
@@ -381,7 +385,7 @@ impl<'a> CacheSettingsChangeOriginRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<CacheRulesZoneCacheSettingsResponseSingle> {
         self.builder.send().await
     }
 }
@@ -412,7 +416,7 @@ pub fn cache_settings_change_origin(api: &ApiClient) -> CacheSettingsChangeOrigi
 
 #[derive(Debug)]
 pub struct CacheSettingsGetOriginGetRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, CacheRulesZoneCacheSettingsResponseSingle>,
 }
 
 impl<'a> CacheSettingsGetOriginGetRequest<'a> {
@@ -430,7 +434,7 @@ impl<'a> CacheSettingsGetOriginGetRequest<'a> {
         self.builder = self.builder.path_param("zone_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<CacheRulesZoneCacheSettingsResponseSingle> {
         self.builder.send().await
     }
 }
@@ -459,7 +463,7 @@ pub fn cache_settings_get_origin_get(api: &ApiClient) -> CacheSettingsGetOriginG
 
 #[derive(Debug)]
 pub struct CacheSettingsChangeOriginPatchRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, CacheRulesZoneCacheSettingsResponseSingle>,
 }
 
 impl<'a> CacheSettingsChangeOriginPatchRequest<'a> {
@@ -485,7 +489,7 @@ impl<'a> CacheSettingsChangeOriginPatchRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<CacheRulesZoneCacheSettingsResponseSingle> {
         self.builder.send().await
     }
 }
@@ -518,7 +522,7 @@ pub fn cache_settings_change_origin_patch(
 
 #[derive(Debug)]
 pub struct GetSpeedBrainSettingRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, SpeedApiResponseCommon>,
 }
 
 impl<'a> GetSpeedBrainSettingRequest<'a> {
@@ -533,7 +537,7 @@ impl<'a> GetSpeedBrainSettingRequest<'a> {
         self.builder = self.builder.path_param("zone_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<SpeedApiResponseCommon> {
         self.builder.send().await
     }
 }
@@ -563,7 +567,7 @@ pub fn get_speed_brain_setting(api: &ApiClient) -> GetSpeedBrainSettingRequest<'
 
 #[derive(Debug)]
 pub struct ChangeSpeedBrainSettingRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, SpeedApiResponseCommon>,
 }
 
 impl<'a> ChangeSpeedBrainSettingRequest<'a> {
@@ -583,7 +587,7 @@ impl<'a> ChangeSpeedBrainSettingRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<SpeedApiResponseCommon> {
         self.builder.send().await
     }
 }
@@ -615,7 +619,7 @@ pub fn change_speed_brain_setting(api: &ApiClient) -> ChangeSpeedBrainSettingReq
 
 #[derive(Debug)]
 pub struct GetSingleSettingRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, ZonesSettingsApiComponentsSchemasApiResponseCommon>,
 }
 
 impl<'a> GetSingleSettingRequest<'a> {
@@ -635,7 +639,7 @@ impl<'a> GetSingleSettingRequest<'a> {
         self.builder = self.builder.path_param("setting_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<ZonesSettingsApiComponentsSchemasApiResponseCommon> {
         self.builder.send().await
     }
 }
@@ -666,7 +670,7 @@ pub fn get_single_setting(api: &ApiClient) -> GetSingleSettingRequest<'_> {
 
 #[derive(Debug)]
 pub struct EditSingleSettingRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, ZonesSettingsApiComponentsSchemasApiResponseCommon>,
 }
 
 impl<'a> EditSingleSettingRequest<'a> {
@@ -694,7 +698,7 @@ impl<'a> EditSingleSettingRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<ZonesSettingsApiComponentsSchemasApiResponseCommon> {
         self.builder.send().await
     }
 }

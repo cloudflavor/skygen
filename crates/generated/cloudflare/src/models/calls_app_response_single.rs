@@ -15,4 +15,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type CallsAppResponseSingle = crate::models::calls_api_response_single::CallsApiResponseSingle;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct CallsAppResponseSingle {
+    #[serde(flatten)]
+    pub calls_api_response_single: crate::models::calls_api_response_single::CallsApiResponseSingle,
+    pub result: Option<crate::models::calls_app::CallsApp>,
+}

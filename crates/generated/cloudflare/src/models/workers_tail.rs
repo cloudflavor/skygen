@@ -20,6 +20,6 @@ use serde::{Deserialize, Serialize};
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct WorkersTail {
     pub expires_at: String,
-    pub id: serde_json::Value,
+    pub id: crate::models::workers_identifier::WorkersIdentifier,
     pub url: String,
 }

@@ -15,12 +15,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::zones_schemas_api_response_single::ZonesSchemasApiResponseSingle;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct ZonesHoldGetRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, ZonesSchemasApiResponseSingle>,
 }
 
 impl<'a> ZonesHoldGetRequest<'a> {
@@ -34,7 +35,7 @@ impl<'a> ZonesHoldGetRequest<'a> {
         self.builder = self.builder.path_param("zone_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<ZonesSchemasApiResponseSingle> {
         self.builder.send().await
     }
 }
@@ -63,7 +64,7 @@ pub fn zones_hold_get(api: &ApiClient) -> ZonesHoldGetRequest<'_> {
 
 #[derive(Debug)]
 pub struct ZonesHoldPostRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, ZonesSchemasApiResponseSingle>,
 }
 
 impl<'a> ZonesHoldPostRequest<'a> {
@@ -81,7 +82,7 @@ impl<'a> ZonesHoldPostRequest<'a> {
         self.builder = self.builder.header_param("include_subdomains", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<ZonesSchemasApiResponseSingle> {
         self.builder.send().await
     }
 }
@@ -112,7 +113,7 @@ pub fn zones_hold_post(api: &ApiClient) -> ZonesHoldPostRequest<'_> {
 
 #[derive(Debug)]
 pub struct ZonesHoldDeleteRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, ZonesSchemasApiResponseSingle>,
 }
 
 impl<'a> ZonesHoldDeleteRequest<'a> {
@@ -130,7 +131,7 @@ impl<'a> ZonesHoldDeleteRequest<'a> {
         self.builder = self.builder.header_param("hold_after", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<ZonesSchemasApiResponseSingle> {
         self.builder.send().await
     }
 }
@@ -162,7 +163,7 @@ pub fn zones_hold_delete(api: &ApiClient) -> ZonesHoldDeleteRequest<'_> {
 
 #[derive(Debug)]
 pub struct ZonesHoldPatchRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, ZonesSchemasApiResponseSingle>,
 }
 
 impl<'a> ZonesHoldPatchRequest<'a> {
@@ -184,7 +185,7 @@ impl<'a> ZonesHoldPatchRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<ZonesSchemasApiResponseSingle> {
         self.builder.send().await
     }
 }

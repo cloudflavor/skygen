@@ -19,5 +19,5 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct ApiShieldObjectWithOperationId {
-    pub operation_id: serde_json::Value,
+    pub operation_id: String,
 }

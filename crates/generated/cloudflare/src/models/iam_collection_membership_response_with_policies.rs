@@ -19,6 +19,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct IamCollectionMembershipResponseWithPolicies {
+    #[serde(flatten)]
     pub iam_api_response_collection:
         crate::models::iam_api_response_collection::IamApiResponseCollection,
     pub result: Option<Vec<crate::models::iam_membership_with_policies::IamMembershipWithPolicies>>,

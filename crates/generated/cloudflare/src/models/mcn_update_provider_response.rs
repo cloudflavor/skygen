@@ -15,4 +15,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type McnUpdateProviderResponse = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct McnUpdateProviderResponse {
+    #[serde(flatten)]
+    pub mcn_good_response: crate::models::mcn_good_response::McnGoodResponse,
+    pub result: Option<crate::models::mcn_provider::McnProvider>,
+}

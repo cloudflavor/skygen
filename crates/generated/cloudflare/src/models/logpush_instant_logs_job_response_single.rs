@@ -15,5 +15,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type LogpushInstantLogsJobResponseSingle =
-    crate::models::logpush_api_response_single::LogpushApiResponseSingle;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct LogpushInstantLogsJobResponseSingle {
+    #[serde(flatten)]
+    pub logpush_api_response_single:
+        crate::models::logpush_api_response_single::LogpushApiResponseSingle,
+    pub result: Option<crate::models::logpush_instant_logs_job::LogpushInstantLogsJob>,
+}

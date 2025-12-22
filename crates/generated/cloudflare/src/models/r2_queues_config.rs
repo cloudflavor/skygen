@@ -21,5 +21,5 @@ use serde::{Deserialize, Serialize};
 pub struct R2QueuesConfig {
     pub queue_id: Option<String>,
     pub queue_name: Option<String>,
-    pub rules: Option<Vec<serde_json::Value>>,
+    pub rules: Option<Vec<crate::models::r2_rule::R2Rule>>,
 }

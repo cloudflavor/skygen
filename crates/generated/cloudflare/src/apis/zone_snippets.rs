@@ -15,12 +15,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::snippets_api_response_common::SnippetsApiResponseCommon;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct GetRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, SnippetsApiResponseCommon>,
 }
 
 impl<'a> GetRequest<'a> {
@@ -34,7 +35,7 @@ impl<'a> GetRequest<'a> {
         self.builder = self.builder.path_param("zone_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<SnippetsApiResponseCommon> {
         self.builder.send().await
     }
 }
@@ -61,7 +62,7 @@ pub fn get(api: &ApiClient) -> GetRequest<'_> {
 
 #[derive(Debug)]
 pub struct SnippetRulesRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, SnippetsApiResponseCommon>,
 }
 
 impl<'a> SnippetRulesRequest<'a> {
@@ -76,7 +77,7 @@ impl<'a> SnippetRulesRequest<'a> {
         self.builder = self.builder.path_param("zone_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<SnippetsApiResponseCommon> {
         self.builder.send().await
     }
 }
@@ -103,7 +104,7 @@ pub fn snippet_rules(api: &ApiClient) -> SnippetRulesRequest<'_> {
 
 #[derive(Debug)]
 pub struct SnippetRulesPutRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, SnippetsApiResponseCommon>,
 }
 
 impl<'a> SnippetRulesPutRequest<'a> {
@@ -125,7 +126,7 @@ impl<'a> SnippetRulesPutRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<SnippetsApiResponseCommon> {
         self.builder.send().await
     }
 }
@@ -154,7 +155,7 @@ pub fn snippet_rules_put(api: &ApiClient) -> SnippetRulesPutRequest<'_> {
 
 #[derive(Debug)]
 pub struct SnippetRulesDeleteRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, SnippetsApiResponseCommon>,
 }
 
 impl<'a> SnippetRulesDeleteRequest<'a> {
@@ -172,7 +173,7 @@ impl<'a> SnippetRulesDeleteRequest<'a> {
         self.builder = self.builder.path_param("zone_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<SnippetsApiResponseCommon> {
         self.builder.send().await
     }
 }
@@ -199,7 +200,7 @@ pub fn snippet_rules_delete(api: &ApiClient) -> SnippetRulesDeleteRequest<'_> {
 
 #[derive(Debug)]
 pub struct SnippetRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, SnippetsApiResponseCommon>,
 }
 
 impl<'a> SnippetRequest<'a> {
@@ -219,7 +220,7 @@ impl<'a> SnippetRequest<'a> {
         self.builder = self.builder.path_param("snippet_name", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<SnippetsApiResponseCommon> {
         self.builder.send().await
     }
 }
@@ -248,7 +249,7 @@ pub fn snippet(api: &ApiClient) -> SnippetRequest<'_> {
 
 #[derive(Debug)]
 pub struct SnippetPutRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, SnippetsApiResponseCommon>,
 }
 
 impl<'a> SnippetPutRequest<'a> {
@@ -268,7 +269,7 @@ impl<'a> SnippetPutRequest<'a> {
         self.builder = self.builder.path_param("snippet_name", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<SnippetsApiResponseCommon> {
         self.builder.send().await
     }
 }
@@ -297,7 +298,7 @@ pub fn snippet_put(api: &ApiClient) -> SnippetPutRequest<'_> {
 
 #[derive(Debug)]
 pub struct SnippetDeleteRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, SnippetsApiResponseCommon>,
 }
 
 impl<'a> SnippetDeleteRequest<'a> {
@@ -320,7 +321,7 @@ impl<'a> SnippetDeleteRequest<'a> {
         self.builder = self.builder.path_param("snippet_name", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<SnippetsApiResponseCommon> {
         self.builder.send().await
     }
 }

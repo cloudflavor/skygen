@@ -15,4 +15,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type TlsCertificatesAndHostnamesFallbackorigin = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct TlsCertificatesAndHostnamesFallbackorigin {
+    pub created_at: Option<crate::models::tls_certificates_and_hostnames_schemas_created_at::TlsCertificatesAndHostnamesSchemasCreatedAt>,
+    pub errors: Option<crate::models::tls_certificates_and_hostnames_errors::TlsCertificatesAndHostnamesErrors>,
+    pub origin: Option<crate::models::tls_certificates_and_hostnames_origin::TlsCertificatesAndHostnamesOrigin>,
+    pub status: Option<crate::models::tls_certificates_and_hostnames_custom_hostname_fallback_origin_components_schemas_status::TlsCertificatesAndHostnamesCustomHostnameFallbackOriginComponentsSchemasStatus>,
+    pub updated_at: Option<crate::models::tls_certificates_and_hostnames_updated_at::TlsCertificatesAndHostnamesUpdatedAt>,
+}

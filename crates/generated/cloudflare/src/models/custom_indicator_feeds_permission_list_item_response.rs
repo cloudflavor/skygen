@@ -21,4 +21,5 @@ use serde::{Deserialize, Serialize};
 pub struct CustomIndicatorFeedsPermissionListItemResponse {
     #[serde(flatten)]
     pub custom_indicator_feeds_api_response_common: crate::models::custom_indicator_feeds_api_response_common::CustomIndicatorFeedsApiResponseCommon,
+    pub result: Option<Vec<crate::models::custom_indicator_feeds_permission_list_item::CustomIndicatorFeedsPermissionListItem>>,
 }

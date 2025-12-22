@@ -15,4 +15,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type ZonesSchemasApiResponseSingle = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct ZonesSchemasApiResponseSingle {
+    pub result: Option<std::collections::BTreeMap<String, serde_json::Value>>,
+    #[serde(flatten)]
+    pub zones_components_schemas_api_response_common: crate::models::zones_components_schemas_api_response_common::ZonesComponentsSchemasApiResponseCommon,
+}

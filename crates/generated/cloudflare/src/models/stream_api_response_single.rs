@@ -15,4 +15,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type StreamApiResponseSingle = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct StreamApiResponseSingle {
+    #[serde(flatten)]
+    pub stream_api_response_common:
+        crate::models::stream_api_response_common::StreamApiResponseCommon,
+}

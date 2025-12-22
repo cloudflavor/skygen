@@ -19,6 +19,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct DigitalExperienceMonitoringFleetStatusDevicesResponse {
+    #[serde(flatten)]
     pub digital_experience_monitoring_api_response_collection: crate::models::digital_experience_monitoring_api_response_collection::DigitalExperienceMonitoringApiResponseCollection,
     pub result: Option<Vec<crate::models::digital_experience_monitoring_device::DigitalExperienceMonitoringDevice>>,
 }

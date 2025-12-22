@@ -21,7 +21,7 @@ use reqwest::Method;
 
 #[derive(Debug)]
 pub struct QueuesListRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, MqApiV4Success>,
 }
 
 impl<'a> QueuesListRequest<'a> {
@@ -35,7 +35,7 @@ impl<'a> QueuesListRequest<'a> {
         self.builder = self.builder.path_param("account_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<MqApiV4Success> {
         self.builder.send().await
     }
 }
@@ -64,7 +64,7 @@ pub fn queues_list(api: &ApiClient) -> QueuesListRequest<'_> {
 
 #[derive(Debug)]
 pub struct QueuesCreateRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, MqApiV4Success>,
 }
 
 impl<'a> QueuesCreateRequest<'a> {
@@ -85,7 +85,7 @@ impl<'a> QueuesCreateRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<MqApiV4Success> {
         self.builder.send().await
     }
 }
@@ -116,7 +116,7 @@ pub fn queues_create(api: &ApiClient) -> QueuesCreateRequest<'_> {
 
 #[derive(Debug)]
 pub struct QueuesGetRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, MqApiV4Success>,
 }
 
 impl<'a> QueuesGetRequest<'a> {
@@ -136,7 +136,7 @@ impl<'a> QueuesGetRequest<'a> {
         self.builder = self.builder.path_param("queue_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<MqApiV4Success> {
         self.builder.send().await
     }
 }
@@ -167,7 +167,7 @@ pub fn queues_get(api: &ApiClient) -> QueuesGetRequest<'_> {
 
 #[derive(Debug)]
 pub struct QueuesUpdateRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, MqApiV4Success>,
 }
 
 impl<'a> QueuesUpdateRequest<'a> {
@@ -191,7 +191,7 @@ impl<'a> QueuesUpdateRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<MqApiV4Success> {
         self.builder.send().await
     }
 }
@@ -278,7 +278,7 @@ pub fn queues_delete(api: &ApiClient) -> QueuesDeleteRequest<'_> {
 
 #[derive(Debug)]
 pub struct QueuesUpdatePartialRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, MqApiV4Success>,
 }
 
 impl<'a> QueuesUpdatePartialRequest<'a> {
@@ -305,7 +305,7 @@ impl<'a> QueuesUpdatePartialRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<MqApiV4Success> {
         self.builder.send().await
     }
 }
@@ -338,7 +338,7 @@ pub fn queues_update_partial(api: &ApiClient) -> QueuesUpdatePartialRequest<'_> 
 
 #[derive(Debug)]
 pub struct QueuesListConsumersRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, MqApiV4Success>,
 }
 
 impl<'a> QueuesListConsumersRequest<'a> {
@@ -361,7 +361,7 @@ impl<'a> QueuesListConsumersRequest<'a> {
         self.builder = self.builder.path_param("queue_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<MqApiV4Success> {
         self.builder.send().await
     }
 }
@@ -392,7 +392,7 @@ pub fn queues_list_consumers(api: &ApiClient) -> QueuesListConsumersRequest<'_> 
 
 #[derive(Debug)]
 pub struct QueuesCreateConsumerRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, MqApiV4Success>,
 }
 
 impl<'a> QueuesCreateConsumerRequest<'a> {
@@ -415,11 +415,11 @@ impl<'a> QueuesCreateConsumerRequest<'a> {
         self.builder = self.builder.path_param("queue_id", value);
         self
     }
-    pub fn with_body(mut self, body: serde_json::Value) -> Self {
+    pub fn with_body(mut self, body: crate::models::mq_consumer::MqConsumer) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<MqApiV4Success> {
         self.builder.send().await
     }
 }
@@ -438,7 +438,7 @@ impl<'a> QueuesCreateConsumerRequest<'a> {
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::queue };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// # let body: serde_json::Value = todo!();
+/// # let body: crate::models::mq_consumer::MqConsumer = todo!();
 /// let response = queues_create_consumer(&api)
 ///     .with_account_id("account_id")
 ///     .with_queue_id("queue_id")
@@ -452,7 +452,7 @@ pub fn queues_create_consumer(api: &ApiClient) -> QueuesCreateConsumerRequest<'_
 
 #[derive(Debug)]
 pub struct QueuesUpdateConsumerRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, MqApiV4Success>,
 }
 
 impl<'a> QueuesUpdateConsumerRequest<'a> {
@@ -481,11 +481,11 @@ impl<'a> QueuesUpdateConsumerRequest<'a> {
         self.builder = self.builder.path_param("consumer_id", value);
         self
     }
-    pub fn with_body(mut self, body: serde_json::Value) -> Self {
+    pub fn with_body(mut self, body: crate::models::mq_consumer::MqConsumer) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<MqApiV4Success> {
         self.builder.send().await
     }
 }
@@ -505,7 +505,7 @@ impl<'a> QueuesUpdateConsumerRequest<'a> {
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::queue };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// # let body: serde_json::Value = todo!();
+/// # let body: crate::models::mq_consumer::MqConsumer = todo!();
 /// let response = queues_update_consumer(&api)
 ///     .with_account_id("account_id")
 ///     .with_queue_id("queue_id")
@@ -641,7 +641,7 @@ pub fn queues_push_message(api: &ApiClient) -> QueuesPushMessageRequest<'_> {
 
 #[derive(Debug)]
 pub struct QueuesAckMessagesRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, MqApiV4Success>,
 }
 
 impl<'a> QueuesAckMessagesRequest<'a> {
@@ -671,7 +671,7 @@ impl<'a> QueuesAckMessagesRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<MqApiV4Success> {
         self.builder.send().await
     }
 }
@@ -764,7 +764,7 @@ pub fn queues_push_messages(api: &ApiClient) -> QueuesPushMessagesRequest<'_> {
 
 #[derive(Debug)]
 pub struct QueuesPullMessagesRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, MqApiV4Success>,
 }
 
 impl<'a> QueuesPullMessagesRequest<'a> {
@@ -794,7 +794,7 @@ impl<'a> QueuesPullMessagesRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<MqApiV4Success> {
         self.builder.send().await
     }
 }
@@ -827,7 +827,7 @@ pub fn queues_pull_messages(api: &ApiClient) -> QueuesPullMessagesRequest<'_> {
 
 #[derive(Debug)]
 pub struct QueuesPurgeGetRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, MqApiV4Success>,
 }
 
 impl<'a> QueuesPurgeGetRequest<'a> {
@@ -850,7 +850,7 @@ impl<'a> QueuesPurgeGetRequest<'a> {
         self.builder = self.builder.path_param("queue_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<MqApiV4Success> {
         self.builder.send().await
     }
 }
@@ -881,7 +881,7 @@ pub fn queues_purge_get(api: &ApiClient) -> QueuesPurgeGetRequest<'_> {
 
 #[derive(Debug)]
 pub struct QueuesPurgeRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, MqApiV4Success>,
 }
 
 impl<'a> QueuesPurgeRequest<'a> {
@@ -911,7 +911,7 @@ impl<'a> QueuesPurgeRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<MqApiV4Success> {
         self.builder.send().await
     }
 }

@@ -15,4 +15,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type SecretsStoreStoreObject = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct SecretsStoreStoreObject {
+    pub created: crate::models::secrets_store_created::SecretsStoreCreated,
+    pub id: crate::models::secrets_store_store_identifier::SecretsStoreStoreIdentifier,
+    pub modified: crate::models::secrets_store_modified::SecretsStoreModified,
+    pub name: crate::models::secrets_store_store_name::SecretsStoreStoreName,
+}

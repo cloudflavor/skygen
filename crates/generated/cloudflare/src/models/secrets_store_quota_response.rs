@@ -15,5 +15,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type SecretsStoreQuotaResponse =
-    crate::models::secrets_store_api_response_collection::SecretsStoreApiResponseCollection;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct SecretsStoreQuotaResponse {
+    pub result:
+        Option<crate::models::secrets_store_secrets_usage_object::SecretsStoreSecretsUsageObject>,
+    #[serde(flatten)]
+    pub secrets_store_api_response_collection:
+        crate::models::secrets_store_api_response_collection::SecretsStoreApiResponseCollection,
+}

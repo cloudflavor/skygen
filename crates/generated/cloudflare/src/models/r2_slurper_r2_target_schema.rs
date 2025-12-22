@@ -15,4 +15,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type R2SlurperR2TargetSchema = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct R2SlurperR2TargetSchema {
+    #[serde(flatten)]
+    pub r2_slurper_r2_source_schema:
+        crate::models::r2_slurper_r2_source_schema::R2SlurperR2SourceSchema,
+}

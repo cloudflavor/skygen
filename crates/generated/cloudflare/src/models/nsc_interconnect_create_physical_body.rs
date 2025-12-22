@@ -15,4 +15,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type NscInterconnectCreatePhysicalBody = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct NscInterconnectCreatePhysicalBody {
+    pub account: String,
+    pub r#type: String,
+    pub slot_id: String,
+    pub speed: Option<String>,
+}

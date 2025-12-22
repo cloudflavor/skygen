@@ -15,6 +15,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::api_shield_api_response_collection::ApiShieldApiResponseCollection;
+use crate::models::api_shield_api_response_common::ApiShieldApiResponseCommon;
 use crate::models::api_shield_api_response_single::ApiShieldApiResponseSingle;
 use crate::models::api_shield_operation_schema_validation_settings::ApiShieldOperationSchemaValidationSettings;
 use crate::models::api_shield_zone_schema_validation_settings::ApiShieldZoneSchemaValidationSettings;
@@ -23,7 +25,7 @@ use reqwest::Method;
 
 #[derive(Debug)]
 pub struct UpdateMultipleOperationLevelRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, ApiShieldApiResponseCommon>,
 }
 
 impl<'a> UpdateMultipleOperationLevelRequest<'a> {
@@ -49,7 +51,7 @@ impl<'a> UpdateMultipleOperationLevelRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<ApiShieldApiResponseCommon> {
         self.builder.send().await
     }
 }
@@ -361,7 +363,7 @@ pub fn patch_level_settings(api: &ApiClient) -> PatchLevelSettingsRequest<'_> {
 
 #[derive(Debug)]
 pub struct RetrieveInformationAboutAllRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, ApiShieldApiResponseCollection>,
 }
 
 impl<'a> RetrieveInformationAboutAllRequest<'a> {
@@ -380,7 +382,7 @@ impl<'a> RetrieveInformationAboutAllRequest<'a> {
         self.builder = self.builder.header_param("validation_enabled", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<ApiShieldApiResponseCollection> {
         self.builder.send().await
     }
 }
@@ -409,7 +411,7 @@ pub fn retrieve_information_about_all(api: &ApiClient) -> RetrieveInformationAbo
 
 #[derive(Debug)]
 pub struct PostSchemaRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, ApiShieldApiResponseCommon>,
 }
 
 impl<'a> PostSchemaRequest<'a> {
@@ -427,7 +429,7 @@ impl<'a> PostSchemaRequest<'a> {
         self.builder = self.builder.path_param("zone_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<ApiShieldApiResponseCommon> {
         self.builder.send().await
     }
 }
@@ -454,7 +456,7 @@ pub fn post_schema(api: &ApiClient) -> PostSchemaRequest<'_> {
 
 #[derive(Debug)]
 pub struct RetrieveSchemaHostsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, ApiShieldApiResponseCollection>,
 }
 
 impl<'a> RetrieveSchemaHostsRequest<'a> {
@@ -472,7 +474,7 @@ impl<'a> RetrieveSchemaHostsRequest<'a> {
         self.builder = self.builder.path_param("zone_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<ApiShieldApiResponseCollection> {
         self.builder.send().await
     }
 }
@@ -499,7 +501,7 @@ pub fn retrieve_schema_hosts(api: &ApiClient) -> RetrieveSchemaHostsRequest<'_> 
 
 #[derive(Debug)]
 pub struct RetrieveInformationAboutSpecificRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, ApiShieldApiResponseCommon>,
 }
 
 impl<'a> RetrieveInformationAboutSpecificRequest<'a> {
@@ -522,7 +524,7 @@ impl<'a> RetrieveInformationAboutSpecificRequest<'a> {
         self.builder = self.builder.path_param("schema_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<ApiShieldApiResponseCommon> {
         self.builder.send().await
     }
 }
@@ -605,7 +607,7 @@ pub fn delete_schema(api: &ApiClient) -> DeleteSchemaRequest<'_> {
 
 #[derive(Debug)]
 pub struct EnableValidationSchemaRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, ApiShieldApiResponseCommon>,
 }
 
 impl<'a> EnableValidationSchemaRequest<'a> {
@@ -636,7 +638,7 @@ impl<'a> EnableValidationSchemaRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<ApiShieldApiResponseCommon> {
         self.builder.send().await
     }
 }
@@ -667,7 +669,7 @@ pub fn enable_validation_schema(api: &ApiClient) -> EnableValidationSchemaReques
 
 #[derive(Debug)]
 pub struct ExtractOperationsSchemaRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, ApiShieldApiResponseCollection>,
 }
 
 impl<'a> ExtractOperationsSchemaRequest<'a> {
@@ -694,7 +696,7 @@ impl<'a> ExtractOperationsSchemaRequest<'a> {
         self.builder = self.builder.header_param("operation_status", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<ApiShieldApiResponseCollection> {
         self.builder.send().await
     }
 }

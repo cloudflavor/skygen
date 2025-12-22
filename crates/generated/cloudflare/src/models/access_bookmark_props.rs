@@ -25,6 +25,6 @@ pub struct AccessBookmarkProps {
     pub logo_url: Option<crate::models::access_logo_url::AccessLogoUrl>,
     pub name:
         Option<crate::models::access_apps_components_schemas_name::AccessAppsComponentsSchemasName>,
-    pub r#type: Option<serde_json::Value>,
+    pub r#type: Option<crate::models::access_type::AccessType>,
     pub tags: Option<crate::models::access_tags::AccessTags>,
 }

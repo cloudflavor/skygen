@@ -15,12 +15,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::digital_experience_monitoring_api_response_collection::DigitalExperienceMonitoringApiResponseCollection;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct GetRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, DigitalExperienceMonitoringApiResponseCollection>,
 }
 
 impl<'a> GetRequest<'a> {
@@ -67,7 +68,7 @@ impl<'a> GetRequest<'a> {
         self.builder = self.builder.header_param("status", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<DigitalExperienceMonitoringApiResponseCollection> {
         self.builder.send().await
     }
 }
@@ -112,7 +113,7 @@ pub fn get(api: &ApiClient) -> GetRequest<'_> {
 
 #[derive(Debug)]
 pub struct PostRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, DigitalExperienceMonitoringApiResponseCollection>,
 }
 
 impl<'a> PostRequest<'a> {
@@ -135,7 +136,7 @@ impl<'a> PostRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<DigitalExperienceMonitoringApiResponseCollection> {
         self.builder.send().await
     }
 }
@@ -166,7 +167,7 @@ pub fn post(api: &ApiClient) -> PostRequest<'_> {
 
 #[derive(Debug)]
 pub struct EligibleDevicesRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, DigitalExperienceMonitoringApiResponseCollection>,
 }
 
 impl<'a> EligibleDevicesRequest<'a> {
@@ -196,7 +197,7 @@ impl<'a> EligibleDevicesRequest<'a> {
         self.builder = self.builder.header_param("search", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<DigitalExperienceMonitoringApiResponseCollection> {
         self.builder.send().await
     }
 }
@@ -231,7 +232,7 @@ pub fn eligible_devices(api: &ApiClient) -> EligibleDevicesRequest<'_> {
 
 #[derive(Debug)]
 pub struct QuotaRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, DigitalExperienceMonitoringApiResponseCollection>,
 }
 
 impl<'a> QuotaRequest<'a> {
@@ -246,7 +247,7 @@ impl<'a> QuotaRequest<'a> {
         self.builder = self.builder.path_param("account_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<DigitalExperienceMonitoringApiResponseCollection> {
         self.builder.send().await
     }
 }

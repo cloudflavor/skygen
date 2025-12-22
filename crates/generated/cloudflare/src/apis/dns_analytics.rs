@@ -15,12 +15,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::dns_analytics_api_response_single::DnsAnalyticsApiResponseSingle;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct TableRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, DnsAnalyticsApiResponseSingle>,
 }
 
 impl<'a> TableRequest<'a> {
@@ -63,7 +64,7 @@ impl<'a> TableRequest<'a> {
         self.builder = self.builder.header_param("filters", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<DnsAnalyticsApiResponseSingle> {
         self.builder.send().await
     }
 }
@@ -108,7 +109,7 @@ pub fn table(api: &ApiClient) -> TableRequest<'_> {
 
 #[derive(Debug)]
 pub struct GetRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, DnsAnalyticsApiResponseSingle>,
 }
 
 impl<'a> GetRequest<'a> {
@@ -158,7 +159,7 @@ impl<'a> GetRequest<'a> {
         self.builder = self.builder.header_param("time_delta", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<DnsAnalyticsApiResponseSingle> {
         self.builder.send().await
     }
 }

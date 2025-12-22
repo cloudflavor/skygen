@@ -15,4 +15,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type StreamOutput = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct StreamOutput {
+    pub enabled: Option<crate::models::stream_output_enabled::StreamOutputEnabled>,
+    pub stream_key: Option<crate::models::stream_output_stream_key::StreamOutputStreamKey>,
+    pub uid: Option<crate::models::stream_output_identifier::StreamOutputIdentifier>,
+    pub url: Option<crate::models::stream_output_url::StreamOutputUrl>,
+}

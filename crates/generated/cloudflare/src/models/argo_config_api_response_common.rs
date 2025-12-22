@@ -21,6 +21,6 @@ use serde::{Deserialize, Serialize};
 pub struct ArgoConfigApiResponseCommon {
     pub errors: crate::models::argo_config_messages::ArgoConfigMessages,
     pub messages: crate::models::argo_config_messages::ArgoConfigMessages,
-    pub result: serde_json::Value,
+    pub result: std::collections::BTreeMap<String, serde_json::Value>,
     pub success: bool,
 }

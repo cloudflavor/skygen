@@ -15,4 +15,20 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type CustomIndicatorFeedsPermissionListItem = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct CustomIndicatorFeedsPermissionListItem {
+    pub description:
+        Option<crate::models::custom_indicator_feeds_description::CustomIndicatorFeedsDescription>,
+    pub id: Option<crate::models::custom_indicator_feeds_id::CustomIndicatorFeedsId>,
+    pub is_attributable: Option<
+        crate::models::custom_indicator_feeds_is_attributable::CustomIndicatorFeedsIsAttributable,
+    >,
+    pub is_downloadable: Option<
+        crate::models::custom_indicator_feeds_is_downloadable::CustomIndicatorFeedsIsDownloadable,
+    >,
+    pub is_public:
+        Option<crate::models::custom_indicator_feeds_is_public::CustomIndicatorFeedsIsPublic>,
+    pub name: Option<crate::models::custom_indicator_feeds_name::CustomIndicatorFeedsName>,
+}

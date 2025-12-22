@@ -21,4 +21,5 @@ use serde::{Deserialize, Serialize};
 pub struct MagicAppsCollectionResponse {
     #[serde(flatten)]
     pub magic_apps_response_array: crate::models::magic_apps_response_array::MagicAppsResponseArray,
+    pub result: Option<Vec<crate::models::magic_app::MagicApp>>,
 }

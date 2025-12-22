@@ -15,4 +15,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type ZarazZarazConfigRowBase = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct ZarazZarazConfigRowBase {
+    pub created_at: String,
+    pub id: i64,
+    pub updated_at: String,
+    pub user_id: String,
+}

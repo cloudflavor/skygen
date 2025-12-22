@@ -15,4 +15,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type McnReadAccountResourceResponse = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct McnReadAccountResourceResponse {
+    #[serde(flatten)]
+    pub mcn_good_response: crate::models::mcn_good_response::McnGoodResponse,
+    pub result: Option<crate::models::mcn_resource_details::McnResourceDetails>,
+}

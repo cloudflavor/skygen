@@ -15,5 +15,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type AaaComponentsSchemasResponseCollection =
-    crate::models::aaa_api_response_collection::AaaApiResponseCollection;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct AaaComponentsSchemasResponseCollection {
+    #[serde(flatten)]
+    pub aaa_api_response_collection:
+        crate::models::aaa_api_response_collection::AaaApiResponseCollection,
+    pub result: Option<Vec<crate::models::aaa_pagerduty::AaaPagerduty>>,
+}

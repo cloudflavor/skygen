@@ -15,4 +15,15 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type BotManagementBaseConfig = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct BotManagementBaseConfig {
+    pub ai_bots_protection:
+        Option<crate::models::bot_management_ai_bots_protection::BotManagementAiBotsProtection>,
+    pub crawler_protection:
+        Option<crate::models::bot_management_crawler_protection::BotManagementCrawlerProtection>,
+    pub enable_js: Option<crate::models::bot_management_enable_js::BotManagementEnableJs>,
+    pub using_latest_model:
+        Option<crate::models::bot_management_using_latest_model::BotManagementUsingLatestModel>,
+}

@@ -15,12 +15,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::workers_api_response_common::WorkersApiResponseCommon;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct GetSubdomainRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, WorkersApiResponseCommon>,
 }
 
 impl<'a> GetSubdomainRequest<'a> {
@@ -35,7 +36,7 @@ impl<'a> GetSubdomainRequest<'a> {
         self.builder = self.builder.path_param("account_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<WorkersApiResponseCommon> {
         self.builder.send().await
     }
 }
@@ -64,7 +65,7 @@ pub fn get_subdomain(api: &ApiClient) -> GetSubdomainRequest<'_> {
 
 #[derive(Debug)]
 pub struct CreateSubdomainRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, WorkersApiResponseCommon>,
 }
 
 impl<'a> CreateSubdomainRequest<'a> {
@@ -87,7 +88,7 @@ impl<'a> CreateSubdomainRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<WorkersApiResponseCommon> {
         self.builder.send().await
     }
 }

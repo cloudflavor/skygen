@@ -15,4 +15,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type SpeedCloudflareFonts = crate::models::speed_base::SpeedBase;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct SpeedCloudflareFonts {
+    pub id: Option<serde_json::Value>,
+    #[serde(flatten)]
+    pub speed_base: crate::models::speed_base::SpeedBase,
+    pub value: Option<crate::models::speed_cloudflare_fonts_value::SpeedCloudflareFontsValue>,
+}

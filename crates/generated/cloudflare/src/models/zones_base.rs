@@ -15,4 +15,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type ZonesBase = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct ZonesBase {
+    pub editable: Option<bool>,
+    pub id: String,
+    pub modified_on: Option<String>,
+    pub value: serde_json::Value,
+}

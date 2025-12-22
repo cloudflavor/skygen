@@ -15,5 +15,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type EmailEmailSettingsResponseSingle =
-    crate::models::email_api_response_single::EmailApiResponseSingle;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct EmailEmailSettingsResponseSingle {
+    #[serde(flatten)]
+    pub email_api_response_single: crate::models::email_api_response_single::EmailApiResponseSingle,
+    pub result: Option<crate::models::email_settings::EmailSettings>,
+}

@@ -15,4 +15,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type WaitingroomApiResponseCollection = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct WaitingroomApiResponseCollection {
+    pub result_info: Option<std::collections::BTreeMap<String, serde_json::Value>>,
+    #[serde(flatten)]
+    pub waitingroom_schemas_api_response_common:
+        crate::models::waitingroom_schemas_api_response_common::WaitingroomSchemasApiResponseCommon,
+}

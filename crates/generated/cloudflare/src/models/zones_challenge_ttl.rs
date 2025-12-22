@@ -15,4 +15,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type ZonesChallengeTtl = crate::models::zones_base::ZonesBase;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct ZonesChallengeTtl {
+    pub id: Option<serde_json::Value>,
+    pub value: Option<crate::models::zones_challenge_ttl_value::ZonesChallengeTtlValue>,
+    #[serde(flatten)]
+    pub zones_base: crate::models::zones_base::ZonesBase,
+}

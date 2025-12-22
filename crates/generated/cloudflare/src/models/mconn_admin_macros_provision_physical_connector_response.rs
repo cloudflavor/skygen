@@ -15,4 +15,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type MconnAdminMacrosProvisionPhysicalConnectorResponse = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct MconnAdminMacrosProvisionPhysicalConnectorResponse {
+    #[serde(flatten)]
+    pub mconn_good_response: crate::models::mconn_good_response::MconnGoodResponse,
+    pub result: Option<crate::models::mconn_admin_macros_provision_physical_connector_result::MconnAdminMacrosProvisionPhysicalConnectorResult>,
+}

@@ -15,4 +15,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type VectorizeApiResponseCollection = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct VectorizeApiResponseCollection {
+    pub result: Option<Vec<serde_json::Value>>,
+    pub result_info: Option<crate::models::vectorize_result_info::VectorizeResultInfo>,
+    #[serde(flatten)]
+    pub vectorize_api_response_common:
+        crate::models::vectorize_api_response_common::VectorizeApiResponseCommon,
+}

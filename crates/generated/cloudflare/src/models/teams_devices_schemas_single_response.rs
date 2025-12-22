@@ -20,5 +20,6 @@ use serde::{Deserialize, Serialize};
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct TeamsDevicesSchemasSingleResponse {
     pub result: Option<crate::models::teams_devices_device_posture_integrations::TeamsDevicesDevicePostureIntegrations>,
+    #[serde(flatten)]
     pub teams_devices_api_response_single: crate::models::teams_devices_api_response_single::TeamsDevicesApiResponseSingle,
 }

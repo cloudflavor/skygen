@@ -15,4 +15,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type CustomPagesApiResponseCollection = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct CustomPagesApiResponseCollection {
+    #[serde(flatten)]
+    pub custom_pages_api_response_common:
+        crate::models::custom_pages_api_response_common::CustomPagesApiResponseCommon,
+    pub result: Option<Vec<serde_json::Value>>,
+    pub result_info: Option<crate::models::custom_pages_result_info::CustomPagesResultInfo>,
+}

@@ -23,7 +23,7 @@ pub struct AccessSchemasServiceTokens {
     pub created_at: Option<crate::models::access_timestamp::AccessTimestamp>,
     pub duration: Option<crate::models::access_schemas_duration::AccessSchemasDuration>,
     pub expires_at: Option<crate::models::access_timestamp::AccessTimestamp>,
-    pub id: Option<serde_json::Value>,
+    pub id: Option<crate::models::access_uuid::AccessUuid>,
     pub last_seen_at: Option<crate::models::access_timestamp::AccessTimestamp>,
     pub name: Option<crate::models::access_service_tokens_components_schemas_name::AccessServiceTokensComponentsSchemasName>,
     pub updated_at: Option<crate::models::access_timestamp::AccessTimestamp>,

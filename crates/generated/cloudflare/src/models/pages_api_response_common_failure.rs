@@ -19,8 +19,8 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct PagesApiResponseCommonFailure {
-    pub errors: serde_json::Value,
-    pub messages: serde_json::Value,
+    pub errors: crate::models::pages_messages::PagesMessages,
+    pub messages: crate::models::pages_messages::PagesMessages,
     pub result: std::collections::BTreeMap<String, serde_json::Value>,
     pub success: bool,
 }

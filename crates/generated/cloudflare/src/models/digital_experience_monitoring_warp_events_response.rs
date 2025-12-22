@@ -15,4 +15,4 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type DigitalExperienceMonitoringWarpEventsResponse = Vec<serde_json::Value>;
+pub type DigitalExperienceMonitoringWarpEventsResponse = Vec<crate::models::digital_experience_monitoring_warp_toggle_change_event::DigitalExperienceMonitoringWarpToggleChangeEvent>;

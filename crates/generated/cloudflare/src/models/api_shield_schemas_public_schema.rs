@@ -22,7 +22,7 @@ pub struct ApiShieldSchemasPublicSchema {
     pub created_at: crate::models::api_shield_schemas_timestamp::ApiShieldSchemasTimestamp,
     pub kind: String,
     pub name: String,
-    pub schema_id: serde_json::Value,
+    pub schema_id: crate::models::api_shield_schemas_uuid::ApiShieldSchemasUuid,
     pub source: String,
     pub validation_enabled: Option<bool>,
 }

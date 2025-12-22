@@ -15,12 +15,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::dlp_api_response_single::DlpApiResponseSingle;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct ReadAllRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, DlpApiResponseSingle>,
 }
 
 impl<'a> ReadAllRequest<'a> {
@@ -35,7 +36,7 @@ impl<'a> ReadAllRequest<'a> {
         self.builder = self.builder.path_param("account_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<DlpApiResponseSingle> {
         self.builder.send().await
     }
 }
@@ -62,7 +63,7 @@ pub fn read_all(api: &ApiClient) -> ReadAllRequest<'_> {
 
 #[derive(Debug)]
 pub struct CreateRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, DlpApiResponseSingle>,
 }
 
 impl<'a> CreateRequest<'a> {
@@ -82,7 +83,7 @@ impl<'a> CreateRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<DlpApiResponseSingle> {
         self.builder.send().await
     }
 }
@@ -111,7 +112,7 @@ pub fn create(api: &ApiClient) -> CreateRequest<'_> {
 
 #[derive(Debug)]
 pub struct ReadRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, DlpApiResponseSingle>,
 }
 
 impl<'a> ReadRequest<'a> {
@@ -134,7 +135,7 @@ impl<'a> ReadRequest<'a> {
         self.builder = self.builder.path_param("dataset_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<DlpApiResponseSingle> {
         self.builder.send().await
     }
 }
@@ -163,7 +164,7 @@ pub fn read(api: &ApiClient) -> ReadRequest<'_> {
 
 #[derive(Debug)]
 pub struct UpdateRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, DlpApiResponseSingle>,
 }
 
 impl<'a> UpdateRequest<'a> {
@@ -191,7 +192,7 @@ impl<'a> UpdateRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<DlpApiResponseSingle> {
         self.builder.send().await
     }
 }
@@ -276,7 +277,7 @@ pub fn delete(api: &ApiClient) -> DeleteRequest<'_> {
 
 #[derive(Debug)]
 pub struct CreateVersionRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, DlpApiResponseSingle>,
 }
 
 impl<'a> CreateVersionRequest<'a> {
@@ -299,7 +300,7 @@ impl<'a> CreateVersionRequest<'a> {
         self.builder = self.builder.path_param("dataset_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<DlpApiResponseSingle> {
         self.builder.send().await
     }
 }
@@ -328,7 +329,7 @@ pub fn create_version(api: &ApiClient) -> CreateVersionRequest<'_> {
 
 #[derive(Debug)]
 pub struct UploadVersionRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, DlpApiResponseSingle>,
 }
 
 impl<'a> UploadVersionRequest<'a> {
@@ -356,7 +357,7 @@ impl<'a> UploadVersionRequest<'a> {
         self.builder = self.builder.path_param("version", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<DlpApiResponseSingle> {
         self.builder.send().await
     }
 }
@@ -392,7 +393,7 @@ pub fn upload_version(api: &ApiClient) -> UploadVersionRequest<'_> {
 
 #[derive(Debug)]
 pub struct DefineColumnsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, DlpApiResponseSingle>,
 }
 
 impl<'a> DefineColumnsRequest<'a> {
@@ -428,7 +429,7 @@ impl<'a> DefineColumnsRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<DlpApiResponseSingle> {
         self.builder.send().await
     }
 }
@@ -465,7 +466,7 @@ pub fn define_columns(api: &ApiClient) -> DefineColumnsRequest<'_> {
 
 #[derive(Debug)]
 pub struct UploadDatasetColumnRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, DlpApiResponseSingle>,
 }
 
 impl<'a> UploadDatasetColumnRequest<'a> {
@@ -498,7 +499,7 @@ impl<'a> UploadDatasetColumnRequest<'a> {
         self.builder = self.builder.path_param("entry_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<DlpApiResponseSingle> {
         self.builder.send().await
     }
 }

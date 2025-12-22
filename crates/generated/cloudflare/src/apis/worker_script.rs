@@ -15,12 +15,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::workers_api_response_common::WorkersApiResponseCommon;
 use crate::models::workers_api_response_null_result::WorkersApiResponseNullResult;
 use crate::models::workers_completed_upload_assets_response::WorkersCompletedUploadAssetsResponse;
 use crate::models::workers_create_assets_upload_session_response::WorkersCreateAssetsUploadSessionResponse;
 use crate::models::workers_script_and_version_settings_response::WorkersScriptAndVersionSettingsResponse;
 use crate::models::workers_script_response_collection::WorkersScriptResponseCollection;
 use crate::models::workers_script_response_single::WorkersScriptResponseSingle;
+use crate::models::workers_script_response_upload_single::WorkersScriptResponseUploadSingle;
 use crate::models::workers_script_settings_response::WorkersScriptSettingsResponse;
 use crate::models::workers_usage_model_response::WorkersUsageModelResponse;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
@@ -179,7 +181,7 @@ pub fn download_worker(api: &ApiClient) -> DownloadWorkerRequest<'_> {
 
 #[derive(Debug)]
 pub struct UploadWorkerModuleRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, WorkersScriptResponseUploadSingle>,
 }
 
 impl<'a> UploadWorkerModuleRequest<'a> {
@@ -202,7 +204,7 @@ impl<'a> UploadWorkerModuleRequest<'a> {
         self.builder = self.builder.path_param("script_name", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<WorkersScriptResponseUploadSingle> {
         self.builder.send().await
     }
 }
@@ -597,7 +599,7 @@ pub fn settings_patch_settings(api: &ApiClient) -> SettingsPatchSettingsRequest<
 
 #[derive(Debug)]
 pub struct ListScriptSecretsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, WorkersApiResponseCommon>,
 }
 
 impl<'a> ListScriptSecretsRequest<'a> {
@@ -620,7 +622,7 @@ impl<'a> ListScriptSecretsRequest<'a> {
         self.builder = self.builder.path_param("script_name", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<WorkersApiResponseCommon> {
         self.builder.send().await
     }
 }
@@ -651,7 +653,7 @@ pub fn list_script_secrets(api: &ApiClient) -> ListScriptSecretsRequest<'_> {
 
 #[derive(Debug)]
 pub struct PutScriptSecretRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, WorkersApiResponseCommon>,
 }
 
 impl<'a> PutScriptSecretRequest<'a> {
@@ -679,7 +681,7 @@ impl<'a> PutScriptSecretRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<WorkersApiResponseCommon> {
         self.builder.send().await
     }
 }
@@ -712,7 +714,7 @@ pub fn put_script_secret(api: &ApiClient) -> PutScriptSecretRequest<'_> {
 
 #[derive(Debug)]
 pub struct GetScriptSecretRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, WorkersApiResponseCommon>,
 }
 
 impl<'a> GetScriptSecretRequest<'a> {
@@ -740,7 +742,7 @@ impl<'a> GetScriptSecretRequest<'a> {
         self.builder = self.builder.path_param("secret_name", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<WorkersApiResponseCommon> {
         self.builder.send().await
     }
 }
@@ -942,7 +944,7 @@ pub fn patch_settings(api: &ApiClient) -> PatchSettingsRequest<'_> {
 
 #[derive(Debug)]
 pub struct GetSubdomainRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, WorkersApiResponseCommon>,
 }
 
 impl<'a> GetSubdomainRequest<'a> {
@@ -965,7 +967,7 @@ impl<'a> GetSubdomainRequest<'a> {
         self.builder = self.builder.path_param("script_name", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<WorkersApiResponseCommon> {
         self.builder.send().await
     }
 }
@@ -996,7 +998,7 @@ pub fn get_subdomain(api: &ApiClient) -> GetSubdomainRequest<'_> {
 
 #[derive(Debug)]
 pub struct PostSubdomainRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, WorkersApiResponseCommon>,
 }
 
 impl<'a> PostSubdomainRequest<'a> {
@@ -1027,7 +1029,7 @@ impl<'a> PostSubdomainRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<WorkersApiResponseCommon> {
         self.builder.send().await
     }
 }
@@ -1060,7 +1062,7 @@ pub fn post_subdomain(api: &ApiClient) -> PostSubdomainRequest<'_> {
 
 #[derive(Debug)]
 pub struct DeleteSubdomainRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, WorkersApiResponseCommon>,
 }
 
 impl<'a> DeleteSubdomainRequest<'a> {
@@ -1083,7 +1085,7 @@ impl<'a> DeleteSubdomainRequest<'a> {
         self.builder = self.builder.path_param("script_name", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<WorkersApiResponseCommon> {
         self.builder.send().await
     }
 }

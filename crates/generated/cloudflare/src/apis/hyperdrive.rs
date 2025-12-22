@@ -15,12 +15,15 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::hyperdrive_api_response_collection::HyperdriveApiResponseCollection;
+use crate::models::hyperdrive_api_response_common::HyperdriveApiResponseCommon;
+use crate::models::hyperdrive_api_response_single::HyperdriveApiResponseSingle;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct ListHyperdriveRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, HyperdriveApiResponseCollection>,
 }
 
 impl<'a> ListHyperdriveRequest<'a> {
@@ -35,7 +38,7 @@ impl<'a> ListHyperdriveRequest<'a> {
         self.builder = self.builder.path_param("account_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<HyperdriveApiResponseCollection> {
         self.builder.send().await
     }
 }
@@ -64,7 +67,7 @@ pub fn list_hyperdrive(api: &ApiClient) -> ListHyperdriveRequest<'_> {
 
 #[derive(Debug)]
 pub struct CreateHyperdriveRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, HyperdriveApiResponseSingle>,
 }
 
 impl<'a> CreateHyperdriveRequest<'a> {
@@ -90,7 +93,7 @@ impl<'a> CreateHyperdriveRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<HyperdriveApiResponseSingle> {
         self.builder.send().await
     }
 }
@@ -121,7 +124,7 @@ pub fn create_hyperdrive(api: &ApiClient) -> CreateHyperdriveRequest<'_> {
 
 #[derive(Debug)]
 pub struct GetRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, HyperdriveApiResponseSingle>,
 }
 
 impl<'a> GetRequest<'a> {
@@ -144,7 +147,7 @@ impl<'a> GetRequest<'a> {
         self.builder = self.builder.path_param("hyperdrive_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<HyperdriveApiResponseSingle> {
         self.builder.send().await
     }
 }
@@ -175,7 +178,7 @@ pub fn get(api: &ApiClient) -> GetRequest<'_> {
 
 #[derive(Debug)]
 pub struct UpdateHyperdriveRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, HyperdriveApiResponseSingle>,
 }
 
 impl<'a> UpdateHyperdriveRequest<'a> {
@@ -206,7 +209,7 @@ impl<'a> UpdateHyperdriveRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<HyperdriveApiResponseSingle> {
         self.builder.send().await
     }
 }
@@ -239,7 +242,7 @@ pub fn update_hyperdrive(api: &ApiClient) -> UpdateHyperdriveRequest<'_> {
 
 #[derive(Debug)]
 pub struct DeleteRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, HyperdriveApiResponseSingle>,
 }
 
 impl<'a> DeleteRequest<'a> {
@@ -262,7 +265,7 @@ impl<'a> DeleteRequest<'a> {
         self.builder = self.builder.path_param("hyperdrive_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<HyperdriveApiResponseSingle> {
         self.builder.send().await
     }
 }
@@ -293,7 +296,7 @@ pub fn delete(api: &ApiClient) -> DeleteRequest<'_> {
 
 #[derive(Debug)]
 pub struct PatchRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, HyperdriveApiResponseCommon>,
 }
 
 impl<'a> PatchRequest<'a> {
@@ -324,7 +327,7 @@ impl<'a> PatchRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<HyperdriveApiResponseCommon> {
         self.builder.send().await
     }
 }

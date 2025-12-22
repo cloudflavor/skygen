@@ -21,8 +21,8 @@ use serde::{Deserialize, Serialize};
 pub struct EmailSecurityDisplayName {
     pub comments: Option<String>,
     pub created_at: String,
-    pub directory_id: Option<serde_json::Value>,
-    pub directory_node_id: Option<serde_json::Value>,
+    pub directory_id: Option<i64>,
+    pub directory_node_id: Option<i64>,
     pub email: String,
     pub external_directory_node_id: Option<String>,
     pub id: i64,

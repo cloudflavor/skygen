@@ -15,4 +15,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type EmailAddresses = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct EmailAddresses {
+    #[serde(flatten)]
+    pub email_destination_address_properties:
+        crate::models::email_destination_address_properties::EmailDestinationAddressProperties,
+}

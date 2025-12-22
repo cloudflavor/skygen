@@ -22,10 +22,13 @@ pub struct EmailSecurityMailsearchMessage {
     pub action_log: serde_json::Value,
     pub alert_id: Option<String>,
     pub client_recipients: Vec<String>,
-    pub delivery_mode: Option<serde_json::Value>,
+    pub delivery_mode: Option<
+        crate::models::email_security_message_delivery_mode::EmailSecurityMessageDeliveryMode,
+    >,
     pub detection_reasons: Vec<String>,
     pub edf_hash: Option<String>,
-    pub final_disposition: Option<serde_json::Value>,
+    pub final_disposition:
+        Option<crate::models::email_security_disposition_label::EmailSecurityDispositionLabel>,
     pub from: Option<String>,
     pub from_name: Option<String>,
     pub id: String,
@@ -40,5 +43,5 @@ pub struct EmailSecurityMailsearchMessage {
     pub to: Option<Vec<String>>,
     pub to_name: Option<Vec<String>>,
     pub ts: String,
-    pub validation: Option<serde_json::Value>,
+    pub validation: Option<std::collections::BTreeMap<String, serde_json::Value>>,
 }

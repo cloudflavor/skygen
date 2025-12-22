@@ -15,5 +15,17 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type BotManagementBmSubscriptionConfig =
-    crate::models::bot_management_base_config::BotManagementBaseConfig;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct BotManagementBmSubscriptionConfig {
+    pub auto_update_model:
+        Option<crate::models::bot_management_auto_update_model::BotManagementAutoUpdateModel>,
+    #[serde(flatten)]
+    pub bot_management_base_config:
+        crate::models::bot_management_base_config::BotManagementBaseConfig,
+    pub stale_zone_configuration: Option<serde_json::Value>,
+    pub suppress_session_score: Option<
+        crate::models::bot_management_suppress_session_score::BotManagementSuppressSessionScore,
+    >,
+}

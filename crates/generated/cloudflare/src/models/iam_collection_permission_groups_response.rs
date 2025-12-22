@@ -19,6 +19,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct IamCollectionPermissionGroupsResponse {
+    #[serde(flatten)]
     pub iam_api_response_collection:
         crate::models::iam_api_response_collection::IamApiResponseCollection,
     pub result: Option<crate::models::iam_permission_groups::IamPermissionGroups>,

@@ -19,8 +19,8 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct WorkersScriptSettingsItem {
-    pub logpush: Option<serde_json::Value>,
-    pub observability: Option<serde_json::Value>,
+    pub logpush: Option<crate::models::workers_logpush::WorkersLogpush>,
+    pub observability: Option<crate::models::workers_observability::WorkersObservability>,
     pub tail_consumers:
         Option<Vec<crate::models::workers_tail_consumers_script::WorkersTailConsumersScript>>,
 }

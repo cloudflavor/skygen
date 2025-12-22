@@ -21,4 +21,5 @@ use serde::{Deserialize, Serialize};
 pub struct DigitalExperienceMonitoringDexDeleteResponseCollection {
     #[serde(flatten)]
     pub digital_experience_monitoring_api_response_common: crate::models::digital_experience_monitoring_api_response_common::DigitalExperienceMonitoringApiResponseCommon,
+    pub result: Option<std::collections::BTreeMap<String, serde_json::Value>>,
 }

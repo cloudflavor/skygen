@@ -15,4 +15,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type RegistrarApiApiResponseSingle = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct RegistrarApiApiResponseSingle {
+    #[serde(flatten)]
+    pub registrar_api_api_response_common:
+        crate::models::registrar_api_api_response_common::RegistrarApiApiResponseCommon,
+    pub result: Option<std::collections::BTreeMap<String, serde_json::Value>>,
+}

@@ -15,4 +15,10 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type BillSubsApiSchemasRatePlan = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct BillSubsApiSchemasRatePlan {
+    #[serde(flatten)]
+    pub bill_subs_api_rate_plan: crate::models::bill_subs_api_rate_plan::BillSubsApiRatePlan,
+}

@@ -15,4 +15,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type RegistrarApiApiResponseCollection = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct RegistrarApiApiResponseCollection {
+    #[serde(flatten)]
+    pub registrar_api_api_response_common:
+        crate::models::registrar_api_api_response_common::RegistrarApiApiResponseCommon,
+    pub result: Option<Vec<serde_json::Value>>,
+    pub result_info: Option<crate::models::registrar_api_result_info::RegistrarApiResultInfo>,
+}

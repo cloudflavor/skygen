@@ -20,5 +20,6 @@ use serde::{Deserialize, Serialize};
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct TlsCertificatesAndHostnamesSchemasCertificateResponseCollection {
     pub result: Option<Vec<crate::models::tls_certificates_and_hostnames_certificates::TlsCertificatesAndHostnamesCertificates>>,
+    #[serde(flatten)]
     pub tls_certificates_and_hostnames_api_response_collection: crate::models::tls_certificates_and_hostnames_api_response_collection::TlsCertificatesAndHostnamesApiResponseCollection,
 }

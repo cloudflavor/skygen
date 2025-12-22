@@ -15,4 +15,9 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type StreamUpdateOutputRequest = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct StreamUpdateOutputRequest {
+    pub enabled: crate::models::stream_output_enabled::StreamOutputEnabled,
+}

@@ -21,6 +21,6 @@ use serde::{Deserialize, Serialize};
 pub struct HealthchecksApiResponseCommon {
     pub errors: crate::models::healthchecks_messages::HealthchecksMessages,
     pub messages: crate::models::healthchecks_messages::HealthchecksMessages,
-    pub result: serde_json::Value,
+    pub result: std::collections::BTreeMap<String, serde_json::Value>,
     pub success: bool,
 }

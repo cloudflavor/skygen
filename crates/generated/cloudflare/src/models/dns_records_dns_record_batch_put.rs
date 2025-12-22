@@ -15,4 +15,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type DnsRecordsDnsRecordBatchPut = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct DnsRecordsDnsRecordBatchPut {
+    pub dns_records_dns_record_post:
+        crate::models::dns_records_dns_record_post::DnsRecordsDnsRecordPost,
+    pub id: crate::models::dns_records_identifier::DnsRecordsIdentifier,
+}

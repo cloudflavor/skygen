@@ -21,6 +21,6 @@ use serde::{Deserialize, Serialize};
 pub struct R2V4ResponseFailure {
     pub errors: crate::models::r2_errors::R2Errors,
     pub messages: crate::models::r2_messages::R2Messages,
-    pub result: serde_json::Value,
+    pub result: std::collections::BTreeMap<String, serde_json::Value>,
     pub success: bool,
 }

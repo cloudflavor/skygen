@@ -19,8 +19,10 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct TlsCertificatesAndHostnamesApiResponseCommonFailure {
-    pub errors: serde_json::Value,
-    pub messages: serde_json::Value,
-    pub result: serde_json::Value,
+    pub errors:
+        crate::models::tls_certificates_and_hostnames_messages::TlsCertificatesAndHostnamesMessages,
+    pub messages:
+        crate::models::tls_certificates_and_hostnames_messages::TlsCertificatesAndHostnamesMessages,
+    pub result: std::collections::BTreeMap<String, serde_json::Value>,
     pub success: bool,
 }

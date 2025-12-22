@@ -15,4 +15,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type IamListMemberPolicy = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct IamListMemberPolicy {
+    pub access: Option<crate::models::iam_access::IamAccess>,
+    pub id: Option<crate::models::iam_identifier::IamIdentifier>,
+    pub permission_groups: Option<crate::models::iam_permission_groups::IamPermissionGroups>,
+    pub resource_groups: Option<crate::models::iam_resource_groups::IamResourceGroups>,
+}

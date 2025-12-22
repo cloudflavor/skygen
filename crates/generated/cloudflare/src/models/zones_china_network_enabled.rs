@@ -15,4 +15,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type ZonesChinaNetworkEnabled = crate::models::zones_base::ZonesBase;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct ZonesChinaNetworkEnabled {
+    pub id: Option<serde_json::Value>,
+    pub value:
+        Option<crate::models::zones_china_network_enabled_value::ZonesChinaNetworkEnabledValue>,
+    #[serde(flatten)]
+    pub zones_base: crate::models::zones_base::ZonesBase,
+}

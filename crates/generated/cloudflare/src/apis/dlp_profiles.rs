@@ -15,12 +15,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::dlp_api_response_single::DlpApiResponseSingle;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct ListAllProfilesRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, DlpApiResponseSingle>,
 }
 
 impl<'a> ListAllProfilesRequest<'a> {
@@ -39,7 +40,7 @@ impl<'a> ListAllProfilesRequest<'a> {
         self.builder = self.builder.header_param("all", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<DlpApiResponseSingle> {
         self.builder.send().await
     }
 }
@@ -70,7 +71,7 @@ pub fn list_all_profiles(api: &ApiClient) -> ListAllProfilesRequest<'_> {
 
 #[derive(Debug)]
 pub struct CreateCustomProfilesRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, DlpApiResponseSingle>,
 }
 
 impl<'a> CreateCustomProfilesRequest<'a> {
@@ -96,7 +97,7 @@ impl<'a> CreateCustomProfilesRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<DlpApiResponseSingle> {
         self.builder.send().await
     }
 }
@@ -127,7 +128,7 @@ pub fn create_custom_profiles(api: &ApiClient) -> CreateCustomProfilesRequest<'_
 
 #[derive(Debug)]
 pub struct GetCustomProfileRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, DlpApiResponseSingle>,
 }
 
 impl<'a> GetCustomProfileRequest<'a> {
@@ -150,7 +151,7 @@ impl<'a> GetCustomProfileRequest<'a> {
         self.builder = self.builder.path_param("profile_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<DlpApiResponseSingle> {
         self.builder.send().await
     }
 }
@@ -181,7 +182,7 @@ pub fn get_custom_profile(api: &ApiClient) -> GetCustomProfileRequest<'_> {
 
 #[derive(Debug)]
 pub struct UpdateCustomProfileRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, DlpApiResponseSingle>,
 }
 
 impl<'a> UpdateCustomProfileRequest<'a> {
@@ -212,7 +213,7 @@ impl<'a> UpdateCustomProfileRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<DlpApiResponseSingle> {
         self.builder.send().await
     }
 }
@@ -245,7 +246,7 @@ pub fn update_custom_profile(api: &ApiClient) -> UpdateCustomProfileRequest<'_> 
 
 #[derive(Debug)]
 pub struct DeleteCustomProfileRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, DlpApiResponseSingle>,
 }
 
 impl<'a> DeleteCustomProfileRequest<'a> {
@@ -268,7 +269,7 @@ impl<'a> DeleteCustomProfileRequest<'a> {
         self.builder = self.builder.path_param("profile_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<DlpApiResponseSingle> {
         self.builder.send().await
     }
 }
@@ -299,7 +300,7 @@ pub fn delete_custom_profile(api: &ApiClient) -> DeleteCustomProfileRequest<'_> 
 
 #[derive(Debug)]
 pub struct GetPredefinedProfileRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, DlpApiResponseSingle>,
 }
 
 impl<'a> GetPredefinedProfileRequest<'a> {
@@ -322,7 +323,7 @@ impl<'a> GetPredefinedProfileRequest<'a> {
         self.builder = self.builder.path_param("profile_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<DlpApiResponseSingle> {
         self.builder.send().await
     }
 }
@@ -353,7 +354,7 @@ pub fn get_predefined_profile(api: &ApiClient) -> GetPredefinedProfileRequest<'_
 
 #[derive(Debug)]
 pub struct UpdatePredefinedProfileRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, DlpApiResponseSingle>,
 }
 
 impl<'a> UpdatePredefinedProfileRequest<'a> {
@@ -384,7 +385,7 @@ impl<'a> UpdatePredefinedProfileRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<DlpApiResponseSingle> {
         self.builder.send().await
     }
 }
@@ -417,7 +418,7 @@ pub fn update_predefined_profile(api: &ApiClient) -> UpdatePredefinedProfileRequ
 
 #[derive(Debug)]
 pub struct GetDlpProfileRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, DlpApiResponseSingle>,
 }
 
 impl<'a> GetDlpProfileRequest<'a> {
@@ -440,7 +441,7 @@ impl<'a> GetDlpProfileRequest<'a> {
         self.builder = self.builder.path_param("profile_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<DlpApiResponseSingle> {
         self.builder.send().await
     }
 }

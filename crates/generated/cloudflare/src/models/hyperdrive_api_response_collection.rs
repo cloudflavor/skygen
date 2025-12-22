@@ -15,4 +15,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type HyperdriveApiResponseCollection = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct HyperdriveApiResponseCollection {
+    #[serde(flatten)]
+    pub hyperdrive_api_response_common:
+        crate::models::hyperdrive_api_response_common::HyperdriveApiResponseCommon,
+    pub result_info: Option<crate::models::hyperdrive_result_info::HyperdriveResultInfo>,
+}

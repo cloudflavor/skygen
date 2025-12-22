@@ -37,7 +37,7 @@ pub struct AccessSelfHostedProps {
     pub name: Option<crate::models::access_apps_components_schemas_name::AccessAppsComponentsSchemasName>,
     pub options_preflight_bypass: Option<crate::models::access_options_preflight_bypass::AccessOptionsPreflightBypass>,
     pub path_cookie_attribute: Option<crate::models::access_path_cookie_attribute::AccessPathCookieAttribute>,
-    pub r#type: serde_json::Value,
+    pub r#type: crate::models::access_type::AccessType,
     pub read_service_tokens_from_header: Option<crate::models::access_read_service_tokens_from_header::AccessReadServiceTokensFromHeader>,
     pub same_site_cookie_attribute: Option<crate::models::access_same_site_cookie_attribute::AccessSameSiteCookieAttribute>,
     pub self_hosted_domains: Option<crate::models::access_self_hosted_domains::AccessSelfHostedDomains>,

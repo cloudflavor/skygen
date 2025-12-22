@@ -15,12 +15,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::vectorize_api_response_common::VectorizeApiResponseCommon;
+use crate::models::vectorize_api_response_single::VectorizeApiResponseSingle;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct ListVectorizeIndexesRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, VectorizeApiResponseCommon>,
 }
 
 impl<'a> ListVectorizeIndexesRequest<'a> {
@@ -35,7 +37,7 @@ impl<'a> ListVectorizeIndexesRequest<'a> {
         self.builder = self.builder.path_param("account_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<VectorizeApiResponseCommon> {
         self.builder.send().await
     }
 }
@@ -64,7 +66,7 @@ pub fn list_vectorize_indexes(api: &ApiClient) -> ListVectorizeIndexesRequest<'_
 
 #[derive(Debug)]
 pub struct CreateVectorizeIndexRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, VectorizeApiResponseSingle>,
 }
 
 impl<'a> CreateVectorizeIndexRequest<'a> {
@@ -87,7 +89,7 @@ impl<'a> CreateVectorizeIndexRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<VectorizeApiResponseSingle> {
         self.builder.send().await
     }
 }
@@ -118,7 +120,7 @@ pub fn create_vectorize_index(api: &ApiClient) -> CreateVectorizeIndexRequest<'_
 
 #[derive(Debug)]
 pub struct GetVectorizeIndexRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, VectorizeApiResponseSingle>,
 }
 
 impl<'a> GetVectorizeIndexRequest<'a> {
@@ -141,7 +143,7 @@ impl<'a> GetVectorizeIndexRequest<'a> {
         self.builder = self.builder.path_param("index_name", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<VectorizeApiResponseSingle> {
         self.builder.send().await
     }
 }
@@ -172,7 +174,7 @@ pub fn get_vectorize_index(api: &ApiClient) -> GetVectorizeIndexRequest<'_> {
 
 #[derive(Debug)]
 pub struct UpdateVectorizeIndexRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, VectorizeApiResponseSingle>,
 }
 
 impl<'a> UpdateVectorizeIndexRequest<'a> {
@@ -203,7 +205,7 @@ impl<'a> UpdateVectorizeIndexRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<VectorizeApiResponseSingle> {
         self.builder.send().await
     }
 }
@@ -236,7 +238,7 @@ pub fn update_vectorize_index(api: &ApiClient) -> UpdateVectorizeIndexRequest<'_
 
 #[derive(Debug)]
 pub struct DeleteVectorizeIndexRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, VectorizeApiResponseSingle>,
 }
 
 impl<'a> DeleteVectorizeIndexRequest<'a> {
@@ -259,7 +261,7 @@ impl<'a> DeleteVectorizeIndexRequest<'a> {
         self.builder = self.builder.path_param("index_name", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<VectorizeApiResponseSingle> {
         self.builder.send().await
     }
 }
@@ -290,7 +292,7 @@ pub fn delete_vectorize_index(api: &ApiClient) -> DeleteVectorizeIndexRequest<'_
 
 #[derive(Debug)]
 pub struct DeleteVectorsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, VectorizeApiResponseSingle>,
 }
 
 impl<'a> DeleteVectorsRequest<'a> {
@@ -321,7 +323,7 @@ impl<'a> DeleteVectorsRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<VectorizeApiResponseSingle> {
         self.builder.send().await
     }
 }
@@ -354,7 +356,7 @@ pub fn delete_vectors(api: &ApiClient) -> DeleteVectorsRequest<'_> {
 
 #[derive(Debug)]
 pub struct GetVectorsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, VectorizeApiResponseSingle>,
 }
 
 impl<'a> GetVectorsRequest<'a> {
@@ -385,7 +387,7 @@ impl<'a> GetVectorsRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<VectorizeApiResponseSingle> {
         self.builder.send().await
     }
 }
@@ -418,7 +420,7 @@ pub fn get_vectors(api: &ApiClient) -> GetVectorsRequest<'_> {
 
 #[derive(Debug)]
 pub struct InsertVectorRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, VectorizeApiResponseSingle>,
 }
 
 impl<'a> InsertVectorRequest<'a> {
@@ -441,7 +443,7 @@ impl<'a> InsertVectorRequest<'a> {
         self.builder = self.builder.path_param("index_name", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<VectorizeApiResponseSingle> {
         self.builder.send().await
     }
 }
@@ -472,7 +474,7 @@ pub fn insert_vector(api: &ApiClient) -> InsertVectorRequest<'_> {
 
 #[derive(Debug)]
 pub struct QueryVectorRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, VectorizeApiResponseSingle>,
 }
 
 impl<'a> QueryVectorRequest<'a> {
@@ -503,7 +505,7 @@ impl<'a> QueryVectorRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<VectorizeApiResponseSingle> {
         self.builder.send().await
     }
 }
@@ -536,7 +538,7 @@ pub fn query_vector(api: &ApiClient) -> QueryVectorRequest<'_> {
 
 #[derive(Debug)]
 pub struct UpsertVectorRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, VectorizeApiResponseSingle>,
 }
 
 impl<'a> UpsertVectorRequest<'a> {
@@ -559,7 +561,7 @@ impl<'a> UpsertVectorRequest<'a> {
         self.builder = self.builder.path_param("index_name", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<VectorizeApiResponseSingle> {
         self.builder.send().await
     }
 }

@@ -15,4 +15,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type ResourceSharingShareResourceResponseCollection = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct ResourceSharingShareResourceResponseCollection {
+    #[serde(flatten)]
+    pub resource_sharing_api_response_collection: crate::models::resource_sharing_api_response_collection::ResourceSharingApiResponseCollection,
+    pub result: Option<Vec<crate::models::resource_sharing_share_resource_object::ResourceSharingShareResourceObject>>,
+}

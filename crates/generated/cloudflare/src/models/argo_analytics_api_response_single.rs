@@ -15,4 +15,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type ArgoAnalyticsApiResponseSingle = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct ArgoAnalyticsApiResponseSingle {
+    #[serde(flatten)]
+    pub argo_analytics_api_response_common:
+        crate::models::argo_analytics_api_response_common::ArgoAnalyticsApiResponseCommon,
+    pub result: Option<std::collections::BTreeMap<String, serde_json::Value>>,
+}

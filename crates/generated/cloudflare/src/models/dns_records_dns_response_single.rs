@@ -19,6 +19,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct DnsRecordsDnsResponseSingle {
+    #[serde(flatten)]
     pub dns_records_api_response_single:
         crate::models::dns_records_api_response_single::DnsRecordsApiResponseSingle,
     pub result: Option<crate::models::dns_records_dns_record_response::DnsRecordsDnsRecordResponse>,

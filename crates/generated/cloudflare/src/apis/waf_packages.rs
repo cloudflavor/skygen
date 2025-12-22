@@ -160,7 +160,7 @@ pub fn get_waf_package(api: &ApiClient) -> GetWafPackageRequest<'_> {
 
 #[derive(Debug)]
 pub struct UpdateWafPackageRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, FirewallPackageResponseSingle>,
 }
 
 impl<'a> UpdateWafPackageRequest<'a> {
@@ -191,7 +191,7 @@ impl<'a> UpdateWafPackageRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<FirewallPackageResponseSingle> {
         self.builder.send().await
     }
 }

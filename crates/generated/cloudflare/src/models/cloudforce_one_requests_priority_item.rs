@@ -19,11 +19,11 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct CloudforceOneRequestsPriorityItem {
-    pub created: serde_json::Value,
+    pub created: crate::models::cloudforce_one_requests_time::CloudforceOneRequestsTime,
     pub id: crate::models::cloudforce_one_requests_uuid::CloudforceOneRequestsUuid,
     pub labels: crate::models::cloudforce_one_requests_labels::CloudforceOneRequestsLabels,
     pub priority: i64,
     pub requirement: String,
     pub tlp: crate::models::cloudforce_one_requests_tlp::CloudforceOneRequestsTlp,
-    pub updated: serde_json::Value,
+    pub updated: crate::models::cloudforce_one_requests_time::CloudforceOneRequestsTime,
 }

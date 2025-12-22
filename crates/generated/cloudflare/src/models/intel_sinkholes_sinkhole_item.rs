@@ -15,4 +15,15 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type IntelSinkholesSinkholeItem = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct IntelSinkholesSinkholeItem {
+    pub account_tag: Option<String>,
+    pub created_on: Option<String>,
+    pub id: Option<crate::models::intel_sinkholes_id::IntelSinkholesId>,
+    pub modified_on: Option<String>,
+    pub name: Option<crate::models::intel_sinkholes_name::IntelSinkholesName>,
+    pub r2_bucket: Option<String>,
+    pub r2_id: Option<String>,
+}

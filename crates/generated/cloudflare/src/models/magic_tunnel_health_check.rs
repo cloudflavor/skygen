@@ -19,6 +19,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct MagicTunnelHealthCheck {
+    pub direction: Option<String>,
     #[serde(flatten)]
     pub magic_health_check_base: crate::models::magic_health_check_base::MagicHealthCheckBase,
 }

@@ -15,4 +15,15 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type WafManagedRulesAnomalyRule = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct WafManagedRulesAnomalyRule {
+    pub allowed_modes: Option<
+        crate::models::waf_managed_rules_allowed_modes_anomaly::WafManagedRulesAllowedModesAnomaly,
+    >,
+    pub mode: Option<crate::models::waf_managed_rules_mode_anomaly::WafManagedRulesModeAnomaly>,
+    #[serde(flatten)]
+    pub waf_managed_rules_schemas_base:
+        crate::models::waf_managed_rules_schemas_base::WafManagedRulesSchemasBase,
+}

@@ -15,4 +15,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type AccessReusablePolicyResp = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct AccessReusablePolicyResp {
+    #[serde(flatten)]
+    pub access_policy_resp: crate::models::access_policy_resp::AccessPolicyResp,
+    pub app_count: Option<crate::models::access_app_count::AccessAppCount>,
+    pub reusable: Option<bool>,
+}

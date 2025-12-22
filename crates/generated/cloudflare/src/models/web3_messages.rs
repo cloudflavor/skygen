@@ -15,4 +15,4 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type Web3Messages = Vec<serde_json::Value>;
+pub type Web3Messages = Vec<std::collections::BTreeMap<String, serde_json::Value>>;

@@ -15,4 +15,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type MagicAppAddSingleRequest = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct MagicAppAddSingleRequest {
+    pub hostnames: Option<crate::models::magic_app_hostnames::MagicAppHostnames>,
+    pub ip_subnets: Option<crate::models::magic_app_subnets::MagicAppSubnets>,
+    pub name: crate::models::magic_app_name::MagicAppName,
+    pub r#type: crate::models::magic_app_type::MagicAppType,
+}

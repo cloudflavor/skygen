@@ -15,6 +15,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::dns_firewall_api_response_single::DnsFirewallApiResponseSingle;
 use crate::models::dns_firewall_dns_firewall_response_collection::DnsFirewallDnsFirewallResponseCollection;
 use crate::models::dns_firewall_dns_firewall_reverse_dns_response_1::DnsFirewallDnsFirewallReverseDnsResponse;
 use crate::models::dns_firewall_dns_firewall_single_response::DnsFirewallDnsFirewallSingleResponse;
@@ -187,7 +188,7 @@ pub fn cluster_details(api: &ApiClient) -> ClusterDetailsRequest<'_> {
 
 #[derive(Debug)]
 pub struct DeleteDnsFirewallClusterRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, DnsFirewallApiResponseSingle>,
 }
 
 impl<'a> DeleteDnsFirewallClusterRequest<'a> {
@@ -210,7 +211,7 @@ impl<'a> DeleteDnsFirewallClusterRequest<'a> {
         self.builder = self.builder.path_param("dns_firewall_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<DnsFirewallApiResponseSingle> {
         self.builder.send().await
     }
 }

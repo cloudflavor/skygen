@@ -19,6 +19,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct IamResponseSingleValue {
+    #[serde(flatten)]
     pub iam_api_response_single: crate::models::iam_api_response_single::IamApiResponseSingle,
     pub result: Option<crate::models::iam_value::IamValue>,
 }

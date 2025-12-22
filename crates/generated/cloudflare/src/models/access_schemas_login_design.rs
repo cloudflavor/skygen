@@ -15,4 +15,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type AccessSchemasLoginDesign = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct AccessSchemasLoginDesign {
+    pub background_color: Option<String>,
+    pub footer_text: Option<String>,
+    pub header_text: Option<String>,
+    pub logo_path: Option<String>,
+    pub text_color: Option<String>,
+}

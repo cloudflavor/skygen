@@ -15,4 +15,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type AccessKeysComponentsSchemasSingleResponse = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct AccessKeysComponentsSchemasSingleResponse {
+    #[serde(flatten)]
+    pub access_api_response_single:
+        crate::models::access_api_response_single::AccessApiResponseSingle,
+    pub result: Option<crate::models::access_key_config::AccessKeyConfig>,
+}

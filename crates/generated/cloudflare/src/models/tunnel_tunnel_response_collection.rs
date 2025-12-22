@@ -19,7 +19,8 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct TunnelTunnelResponseCollection {
-    pub result: Option<Vec<serde_json::Value>>,
+    pub result: Option<Vec<crate::models::tunnel_cfd_tunnel::TunnelCfdTunnel>>,
+    #[serde(flatten)]
     pub tunnel_api_response_collection:
         crate::models::tunnel_api_response_collection::TunnelApiResponseCollection,
 }

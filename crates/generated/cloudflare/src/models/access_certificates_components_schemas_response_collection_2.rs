@@ -15,4 +15,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type AccessCertificatesComponentsSchemasResponseCollection2 = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct AccessCertificatesComponentsSchemasResponseCollection2 {
+    #[serde(flatten)]
+    pub access_api_response_collection: crate::models::access_api_response_collection::AccessApiResponseCollection,
+    pub result: Option<Vec<crate::models::access_components_schemas_certificates::AccessComponentsSchemasCertificates>>,
+}

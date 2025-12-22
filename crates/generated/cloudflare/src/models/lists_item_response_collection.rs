@@ -19,6 +19,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct ListsItemResponseCollection {
+    #[serde(flatten)]
     pub lists_api_response_collection:
         crate::models::lists_api_response_collection::ListsApiResponseCollection,
     pub result: Option<crate::models::lists_item::ListsItem>,

@@ -22,4 +22,5 @@ pub struct ImagesImagesListResponse {
     #[serde(flatten)]
     pub images_api_response_common:
         crate::models::images_api_response_common::ImagesApiResponseCommon,
+    pub result: Option<std::collections::BTreeMap<String, serde_json::Value>>,
 }

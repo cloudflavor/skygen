@@ -15,4 +15,16 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type ListsItem = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct ListsItem {
+    pub asn: Option<crate::models::lists_item_asn::ListsItemAsn>,
+    pub comment: Option<crate::models::lists_item_comment::ListsItemComment>,
+    pub created_on: Option<String>,
+    pub hostname: Option<crate::models::lists_item_hostname::ListsItemHostname>,
+    pub id: Option<crate::models::lists_list_id::ListsListId>,
+    pub ip: Option<crate::models::lists_item_ip::ListsItemIp>,
+    pub modified_on: Option<String>,
+    pub redirect: Option<crate::models::lists_item_redirect::ListsItemRedirect>,
+}

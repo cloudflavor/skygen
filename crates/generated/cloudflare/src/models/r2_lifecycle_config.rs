@@ -19,5 +19,5 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct R2LifecycleConfig {
-    pub rules: Option<Vec<serde_json::Value>>,
+    pub rules: Option<Vec<crate::models::r2_lifecycle_rule::R2LifecycleRule>>,
 }

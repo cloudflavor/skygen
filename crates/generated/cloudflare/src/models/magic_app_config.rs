@@ -15,4 +15,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type MagicAppConfig = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct MagicAppConfig {
+    pub breakout: Option<crate::models::magic_app_breakout::MagicAppBreakout>,
+    pub id: crate::models::magic_identifier::MagicIdentifier,
+    pub priority: Option<crate::models::magic_app_priority::MagicAppPriority>,
+    pub site_id: crate::models::magic_identifier::MagicIdentifier,
+}

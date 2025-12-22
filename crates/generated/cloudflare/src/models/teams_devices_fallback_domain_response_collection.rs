@@ -21,6 +21,7 @@ use serde::{Deserialize, Serialize};
 pub struct TeamsDevicesFallbackDomainResponseCollection {
     pub result:
         Option<Vec<crate::models::teams_devices_fallback_domain::TeamsDevicesFallbackDomain>>,
+    #[serde(flatten)]
     pub teams_devices_api_response_collection:
         crate::models::teams_devices_api_response_collection::TeamsDevicesApiResponseCollection,
 }

@@ -15,4 +15,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type WafProductApiBundleSchemasApiResponseSingle = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct WafProductApiBundleSchemasApiResponseSingle {
+    pub result: Option<std::collections::BTreeMap<String, serde_json::Value>>,
+    #[serde(flatten)]
+    pub waf_product_api_bundle_schemas_api_response_common: crate::models::waf_product_api_bundle_schemas_api_response_common::WafProductApiBundleSchemasApiResponseCommon,
+}

@@ -19,6 +19,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct IamResponseCreate {
+    #[serde(flatten)]
     pub iam_api_response_single: crate::models::iam_api_response_single::IamApiResponseSingle,
-    pub result: Option<serde_json::Value>,
+    pub result: Option<std::collections::BTreeMap<String, serde_json::Value>>,
 }

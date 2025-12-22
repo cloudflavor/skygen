@@ -19,6 +19,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct DnsCustomNameserversGetResponse {
+    #[serde(flatten)]
     pub dns_custom_nameservers_api_response_collection: crate::models::dns_custom_nameservers_api_response_collection::DnsCustomNameserversApiResponseCollection,
     #[serde(flatten)]
     pub dns_custom_nameservers_zone_metadata: crate::models::dns_custom_nameservers_zone_metadata::DnsCustomNameserversZoneMetadata,

@@ -17,6 +17,7 @@
 
 use crate::models::bill_subs_api_account_subscription_response_collection::BillSubsApiAccountSubscriptionResponseCollection;
 use crate::models::bill_subs_api_account_subscription_response_single::BillSubsApiAccountSubscriptionResponseSingle;
+use crate::models::bill_subs_api_api_response_single::BillSubsApiApiResponseSingle;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
@@ -184,7 +185,7 @@ pub fn update_subscription(api: &ApiClient) -> UpdateSubscriptionRequest<'_> {
 
 #[derive(Debug)]
 pub struct DeleteSubscriptionRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, BillSubsApiApiResponseSingle>,
 }
 
 impl<'a> DeleteSubscriptionRequest<'a> {
@@ -207,7 +208,7 @@ impl<'a> DeleteSubscriptionRequest<'a> {
         self.builder = self.builder.path_param("subscription_identifier", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<BillSubsApiApiResponseSingle> {
         self.builder.send().await
     }
 }

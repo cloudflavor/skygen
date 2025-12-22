@@ -19,7 +19,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct WorkersDeploymentsSingleResponse {
-    pub result: Option<serde_json::Value>,
+    pub result: Option<crate::models::workers_deployments_base::WorkersDeploymentsBase>,
     #[serde(flatten)]
     pub workers_api_response_common:
         crate::models::workers_api_response_common::WorkersApiResponseCommon,

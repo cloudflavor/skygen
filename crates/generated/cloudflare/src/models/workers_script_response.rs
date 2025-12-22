@@ -15,4 +15,20 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type WorkersScriptResponse = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct WorkersScriptResponse {
+    pub created_on: Option<crate::models::workers_created_on::WorkersCreatedOn>,
+    pub etag: Option<crate::models::workers_etag::WorkersEtag>,
+    pub has_assets: Option<crate::models::workers_has_assets::WorkersHasAssets>,
+    pub has_modules: Option<crate::models::workers_has_modules::WorkersHasModules>,
+    pub id: Option<String>,
+    pub logpush: Option<crate::models::workers_logpush::WorkersLogpush>,
+    pub modified_on: Option<crate::models::workers_modified_on::WorkersModifiedOn>,
+    pub placement: Option<crate::models::workers_placement_info::WorkersPlacementInfo>,
+    pub placement_mode: Option<crate::models::workers_placement_mode::WorkersPlacementMode>,
+    pub placement_status: Option<crate::models::workers_placement_status::WorkersPlacementStatus>,
+    pub tail_consumers: Option<crate::models::workers_tail_consumers::WorkersTailConsumers>,
+    pub usage_model: Option<crate::models::workers_usage_model::WorkersUsageModel>,
+}

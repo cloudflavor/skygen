@@ -19,6 +19,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct MagicRouteUpdateSingleRequest {
+    pub id: crate::models::magic_identifier::MagicIdentifier,
     #[serde(flatten)]
     pub magic_route_add_single_request:
         crate::models::magic_route_add_single_request::MagicRouteAddSingleRequest,

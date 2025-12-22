@@ -15,12 +15,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::infra_api_response_collection::InfraApiResponseCollection;
+use crate::models::infra_api_response_single::InfraApiResponseSingle;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct InfraTargetsListRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, InfraApiResponseCollection>,
 }
 
 impl<'a> InfraTargetsListRequest<'a> {
@@ -118,7 +120,7 @@ impl<'a> InfraTargetsListRequest<'a> {
         self.builder = self.builder.header_param("direction", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<InfraApiResponseCollection> {
         self.builder.send().await
     }
 }
@@ -188,7 +190,7 @@ pub fn infra_targets_list(api: &ApiClient) -> InfraTargetsListRequest<'_> {
 
 #[derive(Debug)]
 pub struct InfraTargetsPostRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, InfraApiResponseSingle>,
 }
 
 impl<'a> InfraTargetsPostRequest<'a> {
@@ -214,7 +216,7 @@ impl<'a> InfraTargetsPostRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<InfraApiResponseSingle> {
         self.builder.send().await
     }
 }
@@ -243,7 +245,7 @@ pub fn infra_targets_post(api: &ApiClient) -> InfraTargetsPostRequest<'_> {
 
 #[derive(Debug)]
 pub struct InfraTargetsPutBatchRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, InfraApiResponseSingle>,
 }
 
 impl<'a> InfraTargetsPutBatchRequest<'a> {
@@ -269,7 +271,7 @@ impl<'a> InfraTargetsPutBatchRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<InfraApiResponseSingle> {
         self.builder.send().await
     }
 }
@@ -414,7 +416,7 @@ pub fn infra_targets_delete_batch_post(api: &ApiClient) -> InfraTargetsDeleteBat
 
 #[derive(Debug)]
 pub struct InfraTargetsGetRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, InfraApiResponseSingle>,
 }
 
 impl<'a> InfraTargetsGetRequest<'a> {
@@ -437,7 +439,7 @@ impl<'a> InfraTargetsGetRequest<'a> {
         self.builder = self.builder.path_param("target_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<InfraApiResponseSingle> {
         self.builder.send().await
     }
 }
@@ -466,7 +468,7 @@ pub fn infra_targets_get(api: &ApiClient) -> InfraTargetsGetRequest<'_> {
 
 #[derive(Debug)]
 pub struct InfraTargetsPutRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, InfraApiResponseSingle>,
 }
 
 impl<'a> InfraTargetsPutRequest<'a> {
@@ -497,7 +499,7 @@ impl<'a> InfraTargetsPutRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<InfraApiResponseSingle> {
         self.builder.send().await
     }
 }

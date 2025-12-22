@@ -15,4 +15,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type RegistrarApiTransferIn = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct RegistrarApiTransferIn {
+    pub accept_foa: Option<String>,
+    pub approve_transfer: Option<String>,
+    pub can_cancel_transfer: Option<bool>,
+    pub disable_privacy: Option<String>,
+    pub enter_auth_code: Option<String>,
+    pub unlock_domain: Option<String>,
+}

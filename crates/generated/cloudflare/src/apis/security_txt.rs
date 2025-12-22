@@ -15,12 +15,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::security_center_api_response_common::SecurityCenterApiResponseCommon;
+use crate::models::security_center_api_response_single::SecurityCenterApiResponseSingle;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct GetRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, SecurityCenterApiResponseCommon>,
 }
 
 impl<'a> GetRequest<'a> {
@@ -38,7 +40,7 @@ impl<'a> GetRequest<'a> {
         self.builder = self.builder.path_param("zone_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<SecurityCenterApiResponseCommon> {
         self.builder.send().await
     }
 }
@@ -65,7 +67,7 @@ pub fn get(api: &ApiClient) -> GetRequest<'_> {
 
 #[derive(Debug)]
 pub struct UpdateSecurityTxtRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, SecurityCenterApiResponseSingle>,
 }
 
 impl<'a> UpdateSecurityTxtRequest<'a> {
@@ -91,7 +93,7 @@ impl<'a> UpdateSecurityTxtRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<SecurityCenterApiResponseSingle> {
         self.builder.send().await
     }
 }
@@ -120,7 +122,7 @@ pub fn update_security_txt(api: &ApiClient) -> UpdateSecurityTxtRequest<'_> {
 
 #[derive(Debug)]
 pub struct DeleteRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, SecurityCenterApiResponseSingle>,
 }
 
 impl<'a> DeleteRequest<'a> {
@@ -138,7 +140,7 @@ impl<'a> DeleteRequest<'a> {
         self.builder = self.builder.path_param("zone_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<SecurityCenterApiResponseSingle> {
         self.builder.send().await
     }
 }

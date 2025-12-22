@@ -42,7 +42,10 @@ impl<'a> PostContentRequest<'a> {
         self.builder = self.builder.header_param("cacheTTL", value);
         self
     }
-    pub fn with_body(mut self, body: serde_json::Value) -> Self {
+    pub fn with_body(
+        mut self,
+        body: std::collections::BTreeMap<String, serde_json::Value>,
+    ) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
@@ -65,7 +68,7 @@ impl<'a> PostContentRequest<'a> {
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::brapi };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// # let body: serde_json::Value = todo!();
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = post_content(&api)
 ///     .with_account_id("account_id")
 ///     .with_cache_ttl("cacheTTL")
@@ -101,7 +104,10 @@ impl<'a> PostJsonRequest<'a> {
         self.builder = self.builder.header_param("cacheTTL", value);
         self
     }
-    pub fn with_body(mut self, body: serde_json::Value) -> Self {
+    pub fn with_body(
+        mut self,
+        body: std::collections::BTreeMap<String, serde_json::Value>,
+    ) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
@@ -124,7 +130,7 @@ impl<'a> PostJsonRequest<'a> {
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::brapi };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// # let body: serde_json::Value = todo!();
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = post_json(&api)
 ///     .with_account_id("account_id")
 ///     .with_cache_ttl("cacheTTL")
@@ -160,7 +166,10 @@ impl<'a> PostLinksRequest<'a> {
         self.builder = self.builder.header_param("cacheTTL", value);
         self
     }
-    pub fn with_body(mut self, body: serde_json::Value) -> Self {
+    pub fn with_body(
+        mut self,
+        body: std::collections::BTreeMap<String, serde_json::Value>,
+    ) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
@@ -183,7 +192,7 @@ impl<'a> PostLinksRequest<'a> {
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::brapi };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// # let body: serde_json::Value = todo!();
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = post_links(&api)
 ///     .with_account_id("account_id")
 ///     .with_cache_ttl("cacheTTL")
@@ -219,7 +228,10 @@ impl<'a> PostMarkdownRequest<'a> {
         self.builder = self.builder.header_param("cacheTTL", value);
         self
     }
-    pub fn with_body(mut self, body: serde_json::Value) -> Self {
+    pub fn with_body(
+        mut self,
+        body: std::collections::BTreeMap<String, serde_json::Value>,
+    ) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
@@ -242,7 +254,7 @@ impl<'a> PostMarkdownRequest<'a> {
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::brapi };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// # let body: serde_json::Value = todo!();
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = post_markdown(&api)
 ///     .with_account_id("account_id")
 ///     .with_cache_ttl("cacheTTL")
@@ -278,7 +290,10 @@ impl<'a> PostPdfRequest<'a> {
         self.builder = self.builder.header_param("cacheTTL", value);
         self
     }
-    pub fn with_body(mut self, body: serde_json::Value) -> Self {
+    pub fn with_body(
+        mut self,
+        body: std::collections::BTreeMap<String, serde_json::Value>,
+    ) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
@@ -301,7 +316,7 @@ impl<'a> PostPdfRequest<'a> {
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::brapi };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// # let body: serde_json::Value = todo!();
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = post_pdf(&api)
 ///     .with_account_id("account_id")
 ///     .with_cache_ttl("cacheTTL")
@@ -337,7 +352,10 @@ impl<'a> PostScrapeRequest<'a> {
         self.builder = self.builder.header_param("cacheTTL", value);
         self
     }
-    pub fn with_body(mut self, body: serde_json::Value) -> Self {
+    pub fn with_body(
+        mut self,
+        body: std::collections::BTreeMap<String, serde_json::Value>,
+    ) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
@@ -360,7 +378,7 @@ impl<'a> PostScrapeRequest<'a> {
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::brapi };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// # let body: serde_json::Value = todo!();
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = post_scrape(&api)
 ///     .with_account_id("account_id")
 ///     .with_cache_ttl("cacheTTL")
@@ -396,7 +414,10 @@ impl<'a> PostScreenshotRequest<'a> {
         self.builder = self.builder.header_param("cacheTTL", value);
         self
     }
-    pub fn with_body(mut self, body: serde_json::Value) -> Self {
+    pub fn with_body(
+        mut self,
+        body: std::collections::BTreeMap<String, serde_json::Value>,
+    ) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
@@ -419,7 +440,7 @@ impl<'a> PostScreenshotRequest<'a> {
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::brapi };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// # let body: serde_json::Value = todo!();
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = post_screenshot(&api)
 ///     .with_account_id("account_id")
 ///     .with_cache_ttl("cacheTTL")
@@ -455,7 +476,10 @@ impl<'a> PostSnapshotRequest<'a> {
         self.builder = self.builder.header_param("cacheTTL", value);
         self
     }
-    pub fn with_body(mut self, body: serde_json::Value) -> Self {
+    pub fn with_body(
+        mut self,
+        body: std::collections::BTreeMap<String, serde_json::Value>,
+    ) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
@@ -478,7 +502,7 @@ impl<'a> PostSnapshotRequest<'a> {
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::brapi };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// # let body: serde_json::Value = todo!();
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = post_snapshot(&api)
 ///     .with_account_id("account_id")
 ///     .with_cache_ttl("cacheTTL")

@@ -15,5 +15,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type AaaResponseCollection =
-    crate::models::aaa_api_response_collection::AaaApiResponseCollection;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct AaaResponseCollection {
+    #[serde(flatten)]
+    pub aaa_api_response_collection:
+        crate::models::aaa_api_response_collection::AaaApiResponseCollection,
+    pub result: Option<std::collections::BTreeMap<String, serde_json::Value>>,
+}

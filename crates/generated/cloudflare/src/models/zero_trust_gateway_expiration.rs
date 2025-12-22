@@ -21,5 +21,5 @@ use serde::{Deserialize, Serialize};
 pub struct ZeroTrustGatewayExpiration {
     pub duration: Option<i64>,
     pub expired: Option<bool>,
-    pub expires_at: serde_json::Value,
+    pub expires_at: crate::models::zero_trust_gateway_timestamp::ZeroTrustGatewayTimestamp,
 }

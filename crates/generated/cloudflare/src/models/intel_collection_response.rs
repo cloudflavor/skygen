@@ -15,4 +15,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type IntelCollectionResponse = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct IntelCollectionResponse {
+    #[serde(flatten)]
+    pub intel_api_response_collection:
+        crate::models::intel_api_response_collection::IntelApiResponseCollection,
+    pub result: Option<Vec<std::collections::BTreeMap<String, serde_json::Value>>>,
+}

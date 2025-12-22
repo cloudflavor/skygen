@@ -22,6 +22,7 @@ pub struct TeamsDevicesDeviceSettingsResponseCollection {
     pub result: Option<
         Vec<crate::models::teams_devices_device_settings_policy::TeamsDevicesDeviceSettingsPolicy>,
     >,
+    #[serde(flatten)]
     pub teams_devices_api_response_collection:
         crate::models::teams_devices_api_response_collection::TeamsDevicesApiResponseCollection,
 }

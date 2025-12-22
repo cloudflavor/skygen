@@ -15,4 +15,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type MconnCustomerConnectorCreateRequest = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct MconnCustomerConnectorCreateRequest {
+    pub device: crate::models::mconn_customer_device_identifier::MconnCustomerDeviceIdentifier,
+    #[serde(flatten)]
+    pub mconn_customer_connector_fields:
+        crate::models::mconn_customer_connector_fields::MconnCustomerConnectorFields,
+}

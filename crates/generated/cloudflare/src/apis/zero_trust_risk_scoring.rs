@@ -15,12 +15,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::dlp_api_response_collection::DlpApiResponseCollection;
+use crate::models::dlp_api_response_single::DlpApiResponseSingle;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct DlpRiskScoreBehaviorsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, DlpApiResponseSingle>,
 }
 
 impl<'a> DlpRiskScoreBehaviorsRequest<'a> {
@@ -38,7 +40,7 @@ impl<'a> DlpRiskScoreBehaviorsRequest<'a> {
         self.builder = self.builder.path_param("account_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<DlpApiResponseSingle> {
         self.builder.send().await
     }
 }
@@ -65,7 +67,7 @@ pub fn dlp_risk_score_behaviors(api: &ApiClient) -> DlpRiskScoreBehaviorsRequest
 
 #[derive(Debug)]
 pub struct DlpRiskScoreBehaviorsPutRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, DlpApiResponseSingle>,
 }
 
 impl<'a> DlpRiskScoreBehaviorsPutRequest<'a> {
@@ -91,7 +93,7 @@ impl<'a> DlpRiskScoreBehaviorsPutRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<DlpApiResponseSingle> {
         self.builder.send().await
     }
 }
@@ -120,7 +122,7 @@ pub fn dlp_risk_score_behaviors_put(api: &ApiClient) -> DlpRiskScoreBehaviorsPut
 
 #[derive(Debug)]
 pub struct DlpRiskScoreSummaryRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, DlpApiResponseCollection>,
 }
 
 impl<'a> DlpRiskScoreSummaryRequest<'a> {
@@ -138,7 +140,7 @@ impl<'a> DlpRiskScoreSummaryRequest<'a> {
         self.builder = self.builder.path_param("account_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<DlpApiResponseCollection> {
         self.builder.send().await
     }
 }
@@ -165,7 +167,7 @@ pub fn dlp_risk_score_summary(api: &ApiClient) -> DlpRiskScoreSummaryRequest<'_>
 
 #[derive(Debug)]
 pub struct DlpRiskScoreSummaryGetRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, DlpApiResponseCollection>,
 }
 
 impl<'a> DlpRiskScoreSummaryGetRequest<'a> {
@@ -188,7 +190,7 @@ impl<'a> DlpRiskScoreSummaryGetRequest<'a> {
         self.builder = self.builder.path_param("user_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<DlpApiResponseCollection> {
         self.builder.send().await
     }
 }
@@ -217,7 +219,7 @@ pub fn dlp_risk_score_summary_get(api: &ApiClient) -> DlpRiskScoreSummaryGetRequ
 
 #[derive(Debug)]
 pub struct DlpRiskScoreResetRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, DlpApiResponseSingle>,
 }
 
 impl<'a> DlpRiskScoreResetRequest<'a> {
@@ -240,7 +242,7 @@ impl<'a> DlpRiskScoreResetRequest<'a> {
         self.builder = self.builder.path_param("user_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<DlpApiResponseSingle> {
         self.builder.send().await
     }
 }

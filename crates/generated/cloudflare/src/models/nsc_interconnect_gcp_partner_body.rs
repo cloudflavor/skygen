@@ -15,4 +15,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type NscInterconnectGcpPartnerBody = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct NscInterconnectGcpPartnerBody {
+    pub account: String,
+    pub name: String,
+    pub owner: Option<String>,
+    pub r#type: String,
+    pub region: String,
+}

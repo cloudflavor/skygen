@@ -15,6 +15,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::stream_api_response_common::StreamApiResponseCommon;
 use crate::models::stream_language_response_collection::StreamLanguageResponseCollection;
 use crate::models::stream_language_response_single::StreamLanguageResponseSingle;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
@@ -198,7 +199,7 @@ pub fn upload_captions_subtitles(api: &ApiClient) -> UploadCaptionsSubtitlesRequ
 
 #[derive(Debug)]
 pub struct DeleteCaptionsSubtitlesRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, StreamApiResponseCommon>,
 }
 
 impl<'a> DeleteCaptionsSubtitlesRequest<'a> {
@@ -226,7 +227,7 @@ impl<'a> DeleteCaptionsSubtitlesRequest<'a> {
         self.builder = self.builder.path_param("language", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<StreamApiResponseCommon> {
         self.builder.send().await
     }
 }

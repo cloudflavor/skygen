@@ -15,13 +15,15 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::zones_api_response_single::ZonesApiResponseSingle;
+use crate::models::zones_schemas_api_response_common::ZonesSchemasApiResponseCommon;
 use crate::models::zones_schemas_api_response_single_id::ZonesSchemasApiResponseSingleId;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct ListPageRulesRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, ZonesSchemasApiResponseCommon>,
 }
 
 impl<'a> ListPageRulesRequest<'a> {
@@ -51,7 +53,7 @@ impl<'a> ListPageRulesRequest<'a> {
         self.builder = self.builder.header_param("status", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<ZonesSchemasApiResponseCommon> {
         self.builder.send().await
     }
 }
@@ -88,7 +90,7 @@ pub fn list_page_rules(api: &ApiClient) -> ListPageRulesRequest<'_> {
 
 #[derive(Debug)]
 pub struct CreatePageRuleRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, ZonesApiResponseSingle>,
 }
 
 impl<'a> CreatePageRuleRequest<'a> {
@@ -110,7 +112,7 @@ impl<'a> CreatePageRuleRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<ZonesApiResponseSingle> {
         self.builder.send().await
     }
 }
@@ -141,7 +143,7 @@ pub fn create_page_rule(api: &ApiClient) -> CreatePageRuleRequest<'_> {
 
 #[derive(Debug)]
 pub struct GetPageRuleRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, ZonesApiResponseSingle>,
 }
 
 impl<'a> GetPageRuleRequest<'a> {
@@ -161,7 +163,7 @@ impl<'a> GetPageRuleRequest<'a> {
         self.builder = self.builder.path_param("pagerule_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<ZonesApiResponseSingle> {
         self.builder.send().await
     }
 }
@@ -192,7 +194,7 @@ pub fn get_page_rule(api: &ApiClient) -> GetPageRuleRequest<'_> {
 
 #[derive(Debug)]
 pub struct UpdatePageRuleRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, ZonesApiResponseSingle>,
 }
 
 impl<'a> UpdatePageRuleRequest<'a> {
@@ -220,7 +222,7 @@ impl<'a> UpdatePageRuleRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<ZonesApiResponseSingle> {
         self.builder.send().await
     }
 }
@@ -307,7 +309,7 @@ pub fn delete_page_rule(api: &ApiClient) -> DeletePageRuleRequest<'_> {
 
 #[derive(Debug)]
 pub struct EditPageRuleRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, ZonesApiResponseSingle>,
 }
 
 impl<'a> EditPageRuleRequest<'a> {
@@ -338,7 +340,7 @@ impl<'a> EditPageRuleRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<ZonesApiResponseSingle> {
         self.builder.send().await
     }
 }

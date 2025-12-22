@@ -15,4 +15,19 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type TlsCertificatesAndHostnamesCustomhostname = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct TlsCertificatesAndHostnamesCustomhostname {
+    pub created_at: Option<crate::models::tls_certificates_and_hostnames_created_at::TlsCertificatesAndHostnamesCreatedAt>,
+    pub custom_metadata: Option<crate::models::tls_certificates_and_hostnames_custom_metadata::TlsCertificatesAndHostnamesCustomMetadata>,
+    pub custom_origin_server: Option<crate::models::tls_certificates_and_hostnames_custom_origin_server::TlsCertificatesAndHostnamesCustomOriginServer>,
+    pub custom_origin_sni: Option<crate::models::tls_certificates_and_hostnames_custom_origin_sni::TlsCertificatesAndHostnamesCustomOriginSni>,
+    pub hostname: Option<crate::models::tls_certificates_and_hostnames_hostname::TlsCertificatesAndHostnamesHostname>,
+    pub id: Option<crate::models::tls_certificates_and_hostnames_identifier::TlsCertificatesAndHostnamesIdentifier>,
+    pub ownership_verification: Option<crate::models::tls_certificates_and_hostnames_ownership_verification::TlsCertificatesAndHostnamesOwnershipVerification>,
+    pub ownership_verification_http: Option<crate::models::tls_certificates_and_hostnames_ownership_verification_http::TlsCertificatesAndHostnamesOwnershipVerificationHttp>,
+    pub ssl: Option<crate::models::tls_certificates_and_hostnames_ssl::TlsCertificatesAndHostnamesSsl>,
+    pub status: Option<crate::models::tls_certificates_and_hostnames_components_schemas_status::TlsCertificatesAndHostnamesComponentsSchemasStatus>,
+    pub verification_errors: Option<crate::models::tls_certificates_and_hostnames_verification_errors::TlsCertificatesAndHostnamesVerificationErrors>,
+}

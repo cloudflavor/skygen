@@ -15,4 +15,15 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type DnsRecordsDnsRecordResponse = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct DnsRecordsDnsRecordResponse {
+    pub comment_modified_on: Option<String>,
+    pub created_on: String,
+    pub id: crate::models::dns_records_identifier::DnsRecordsIdentifier,
+    pub meta: std::collections::BTreeMap<String, serde_json::Value>,
+    pub modified_on: String,
+    pub proxiable: bool,
+    pub tags_modified_on: Option<String>,
+}

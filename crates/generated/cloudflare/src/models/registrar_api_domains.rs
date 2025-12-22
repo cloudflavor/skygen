@@ -15,4 +15,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type RegistrarApiDomains = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct RegistrarApiDomains {
+    #[serde(flatten)]
+    pub registrar_api_domain_properties:
+        crate::models::registrar_api_domain_properties::RegistrarApiDomainProperties,
+}

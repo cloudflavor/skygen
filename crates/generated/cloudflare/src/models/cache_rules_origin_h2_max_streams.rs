@@ -15,4 +15,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type CacheRulesOriginH2MaxStreams = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct CacheRulesOriginH2MaxStreams {
+    #[serde(flatten)]
+    pub cache_rules_base: crate::models::cache_rules_base::CacheRulesBase,
+    pub id: Option<String>,
+    pub value: Option<
+        crate::models::cache_rules_origin_h2_max_streams_value::CacheRulesOriginH2MaxStreamsValue,
+    >,
+}

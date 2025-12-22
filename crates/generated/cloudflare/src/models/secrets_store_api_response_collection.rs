@@ -15,4 +15,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type SecretsStoreApiResponseCollection = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct SecretsStoreApiResponseCollection {
+    pub result_info: Option<crate::models::secrets_store_result_info::SecretsStoreResultInfo>,
+    #[serde(flatten)]
+    pub secrets_store_api_response_common:
+        crate::models::secrets_store_api_response_common::SecretsStoreApiResponseCommon,
+}

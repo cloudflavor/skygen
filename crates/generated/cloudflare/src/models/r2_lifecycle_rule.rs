@@ -25,5 +25,6 @@ pub struct R2LifecycleRule {
     pub delete_objects_transition: Option<std::collections::BTreeMap<String, serde_json::Value>>,
     pub enabled: bool,
     pub id: String,
-    pub storage_class_transitions: Option<Vec<serde_json::Value>>,
+    pub storage_class_transitions:
+        Option<Vec<crate::models::r2_lifecycle_storage_transition::R2LifecycleStorageTransition>>,
 }

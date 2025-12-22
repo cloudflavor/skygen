@@ -15,4 +15,5 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type ListsItemsUpdateRequestCollection = Vec<serde_json::Value>;
+pub type ListsItemsUpdateRequestCollection =
+    Vec<std::collections::BTreeMap<String, serde_json::Value>>;

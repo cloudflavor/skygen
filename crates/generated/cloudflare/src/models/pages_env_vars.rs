@@ -15,4 +15,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type PagesEnvVars = std::collections::BTreeMap<String, serde_json::Value>;
+pub type PagesEnvVars = std::collections::BTreeMap<
+    String,
+    crate::models::pages_plain_text_env_var::PagesPlainTextEnvVar,
+>;

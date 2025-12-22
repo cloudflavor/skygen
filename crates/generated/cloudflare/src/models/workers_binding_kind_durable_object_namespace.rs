@@ -22,7 +22,8 @@ pub struct WorkersBindingKindDurableObjectNamespace {
     pub class_name: Option<String>,
     pub environment: Option<String>,
     pub name: crate::models::workers_binding_name::WorkersBindingName,
-    pub namespace_id: Option<serde_json::Value>,
+    pub namespace_id:
+        Option<crate::models::workers_namespace_identifier::WorkersNamespaceIdentifier>,
     pub r#type: String,
     pub script_name: Option<String>,
 }

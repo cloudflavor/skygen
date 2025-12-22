@@ -15,4 +15,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type PageShieldPolicyWithId = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct PageShieldPolicyWithId {
+    pub id: crate::models::page_shield_id::PageShieldId,
+    #[serde(flatten)]
+    pub page_shield_policy: crate::models::page_shield_policy::PageShieldPolicy,
+}

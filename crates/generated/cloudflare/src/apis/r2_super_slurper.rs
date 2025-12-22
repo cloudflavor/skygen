@@ -15,12 +15,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::r2_slurper_api_v4_success::R2SlurperApiV4Success;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct ListJobsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, R2SlurperApiV4Success>,
 }
 
 impl<'a> ListJobsRequest<'a> {
@@ -43,7 +44,7 @@ impl<'a> ListJobsRequest<'a> {
         self.builder = self.builder.header_param("offset", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<R2SlurperApiV4Success> {
         self.builder.send().await
     }
 }
@@ -74,7 +75,7 @@ pub fn list_jobs(api: &ApiClient) -> ListJobsRequest<'_> {
 
 #[derive(Debug)]
 pub struct CreateJobRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, R2SlurperApiV4Success>,
 }
 
 impl<'a> CreateJobRequest<'a> {
@@ -97,7 +98,7 @@ impl<'a> CreateJobRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<R2SlurperApiV4Success> {
         self.builder.send().await
     }
 }
@@ -126,7 +127,7 @@ pub fn create_job(api: &ApiClient) -> CreateJobRequest<'_> {
 
 #[derive(Debug)]
 pub struct AbortAllJobsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, R2SlurperApiV4Success>,
 }
 
 impl<'a> AbortAllJobsRequest<'a> {
@@ -144,7 +145,7 @@ impl<'a> AbortAllJobsRequest<'a> {
         self.builder = self.builder.path_param("account_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<R2SlurperApiV4Success> {
         self.builder.send().await
     }
 }
@@ -171,7 +172,7 @@ pub fn abort_all_jobs(api: &ApiClient) -> AbortAllJobsRequest<'_> {
 
 #[derive(Debug)]
 pub struct GetJobRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, R2SlurperApiV4Success>,
 }
 
 impl<'a> GetJobRequest<'a> {
@@ -194,7 +195,7 @@ impl<'a> GetJobRequest<'a> {
         self.builder = self.builder.path_param("job_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<R2SlurperApiV4Success> {
         self.builder.send().await
     }
 }
@@ -223,7 +224,7 @@ pub fn get_job(api: &ApiClient) -> GetJobRequest<'_> {
 
 #[derive(Debug)]
 pub struct AbortJobRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, R2SlurperApiV4Success>,
 }
 
 impl<'a> AbortJobRequest<'a> {
@@ -246,7 +247,7 @@ impl<'a> AbortJobRequest<'a> {
         self.builder = self.builder.path_param("job_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<R2SlurperApiV4Success> {
         self.builder.send().await
     }
 }
@@ -275,7 +276,7 @@ pub fn abort_job(api: &ApiClient) -> AbortJobRequest<'_> {
 
 #[derive(Debug)]
 pub struct GetJobLogsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, R2SlurperApiV4Success>,
 }
 
 impl<'a> GetJobLogsRequest<'a> {
@@ -306,7 +307,7 @@ impl<'a> GetJobLogsRequest<'a> {
         self.builder = self.builder.header_param("offset", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<R2SlurperApiV4Success> {
         self.builder.send().await
     }
 }
@@ -339,7 +340,7 @@ pub fn get_job_logs(api: &ApiClient) -> GetJobLogsRequest<'_> {
 
 #[derive(Debug)]
 pub struct PauseJobRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, R2SlurperApiV4Success>,
 }
 
 impl<'a> PauseJobRequest<'a> {
@@ -362,7 +363,7 @@ impl<'a> PauseJobRequest<'a> {
         self.builder = self.builder.path_param("job_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<R2SlurperApiV4Success> {
         self.builder.send().await
     }
 }
@@ -391,7 +392,7 @@ pub fn pause_job(api: &ApiClient) -> PauseJobRequest<'_> {
 
 #[derive(Debug)]
 pub struct GetJobProgressRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, R2SlurperApiV4Success>,
 }
 
 impl<'a> GetJobProgressRequest<'a> {
@@ -414,7 +415,7 @@ impl<'a> GetJobProgressRequest<'a> {
         self.builder = self.builder.path_param("job_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<R2SlurperApiV4Success> {
         self.builder.send().await
     }
 }
@@ -443,7 +444,7 @@ pub fn get_job_progress(api: &ApiClient) -> GetJobProgressRequest<'_> {
 
 #[derive(Debug)]
 pub struct ResumeJobRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, R2SlurperApiV4Success>,
 }
 
 impl<'a> ResumeJobRequest<'a> {
@@ -466,7 +467,7 @@ impl<'a> ResumeJobRequest<'a> {
         self.builder = self.builder.path_param("job_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<R2SlurperApiV4Success> {
         self.builder.send().await
     }
 }
@@ -495,7 +496,7 @@ pub fn resume_job(api: &ApiClient) -> ResumeJobRequest<'_> {
 
 #[derive(Debug)]
 pub struct CheckSourceConnectivityRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, R2SlurperApiV4Success>,
 }
 
 impl<'a> CheckSourceConnectivityRequest<'a> {
@@ -521,7 +522,7 @@ impl<'a> CheckSourceConnectivityRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<R2SlurperApiV4Success> {
         self.builder.send().await
     }
 }
@@ -552,7 +553,7 @@ pub fn check_source_connectivity(api: &ApiClient) -> CheckSourceConnectivityRequ
 
 #[derive(Debug)]
 pub struct CheckTargetConnectivityRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, R2SlurperApiV4Success>,
 }
 
 impl<'a> CheckTargetConnectivityRequest<'a> {
@@ -578,7 +579,7 @@ impl<'a> CheckTargetConnectivityRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<R2SlurperApiV4Success> {
         self.builder.send().await
     }
 }

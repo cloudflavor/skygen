@@ -15,4 +15,10 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type CustomIndicatorFeedsApiResponseSingle = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct CustomIndicatorFeedsApiResponseSingle {
+    #[serde(flatten)]
+    pub custom_indicator_feeds_api_response_common: crate::models::custom_indicator_feeds_api_response_common::CustomIndicatorFeedsApiResponseCommon,
+}

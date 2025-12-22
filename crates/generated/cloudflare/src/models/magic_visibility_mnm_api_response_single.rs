@@ -15,4 +15,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type MagicVisibilityMnmApiResponseSingle = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct MagicVisibilityMnmApiResponseSingle {
+    #[serde(flatten)]
+    pub magic_visibility_mnm_api_response_common: crate::models::magic_visibility_mnm_api_response_common::MagicVisibilityMnmApiResponseCommon,
+    pub result: Option<std::collections::BTreeMap<String, serde_json::Value>>,
+}

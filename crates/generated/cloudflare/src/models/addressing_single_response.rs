@@ -15,5 +15,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type AddressingSingleResponse =
-    crate::models::addressing_api_response_single::AddressingApiResponseSingle;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct AddressingSingleResponse {
+    #[serde(flatten)]
+    pub addressing_api_response_single:
+        crate::models::addressing_api_response_single::AddressingApiResponseSingle,
+    pub result: Option<crate::models::addressing_ipam_prefixes::AddressingIpamPrefixes>,
+}

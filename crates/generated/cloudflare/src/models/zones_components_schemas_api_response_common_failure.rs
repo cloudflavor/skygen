@@ -19,8 +19,8 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct ZonesComponentsSchemasApiResponseCommonFailure {
-    pub errors: serde_json::Value,
-    pub messages: serde_json::Value,
+    pub errors: crate::models::zones_messages::ZonesMessages,
+    pub messages: crate::models::zones_messages::ZonesMessages,
     pub result: std::collections::BTreeMap<String, serde_json::Value>,
     pub success: bool,
 }

@@ -15,6 +15,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::logcontrol_api_response_common::LogcontrolApiResponseCommon;
 use crate::models::logcontrol_cmb_config_response_single::LogcontrolCmbConfigResponseSingle;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
@@ -125,7 +126,7 @@ pub fn accounts_logs_control_cmb_post(api: &ApiClient) -> AccountsLogsControlCmb
 
 #[derive(Debug)]
 pub struct AccountsLogsControlCmbDeleteRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, LogcontrolApiResponseCommon>,
 }
 
 impl<'a> AccountsLogsControlCmbDeleteRequest<'a> {
@@ -143,7 +144,7 @@ impl<'a> AccountsLogsControlCmbDeleteRequest<'a> {
         self.builder = self.builder.path_param("account_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<LogcontrolApiResponseCommon> {
         self.builder.send().await
     }
 }

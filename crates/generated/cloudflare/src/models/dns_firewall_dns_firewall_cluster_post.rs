@@ -15,4 +15,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type DnsFirewallDnsFirewallClusterPost = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct DnsFirewallDnsFirewallClusterPost {
+    #[serde(flatten)]
+    pub dns_firewall_dns_firewall_cluster:
+        crate::models::dns_firewall_dns_firewall_cluster::DnsFirewallDnsFirewallCluster,
+}

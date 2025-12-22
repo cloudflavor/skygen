@@ -15,4 +15,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type AccessUsersComponentsSchemasResponseCollection = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct AccessUsersComponentsSchemasResponseCollection {
+    #[serde(flatten)]
+    pub access_api_response_collection:
+        crate::models::access_api_response_collection::AccessApiResponseCollection,
+    pub result: Option<Vec<crate::models::access_schemas_users::AccessSchemasUsers>>,
+    pub result_info: Option<std::collections::BTreeMap<String, serde_json::Value>>,
+}

@@ -20,5 +20,5 @@ use serde::{Deserialize, Serialize};
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct McnListItem {
     pub item_type: String,
-    pub list: Vec<serde_json::Value>,
+    pub list: Vec<crate::models::mcn_string_item::McnStringItem>,
 }

@@ -15,4 +15,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type DigitalExperienceMonitoringDexResponseCollection = crate::models::digital_experience_monitoring_api_response_collection_common::DigitalExperienceMonitoringApiResponseCollectionCommon;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct DigitalExperienceMonitoringDexResponseCollection {
+    #[serde(flatten)]
+    pub digital_experience_monitoring_api_response_collection_common: crate::models::digital_experience_monitoring_api_response_collection_common::DigitalExperienceMonitoringApiResponseCollectionCommon,
+    pub result: Option<Vec<crate::models::digital_experience_monitoring_device_dex_test_schemas_http::DigitalExperienceMonitoringDeviceDexTestSchemasHttp>>,
+}

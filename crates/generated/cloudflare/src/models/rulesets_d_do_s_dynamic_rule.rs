@@ -19,6 +19,8 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct RulesetsDDoSDynamicRule {
+    pub action: Option<serde_json::Value>,
+    pub description: Option<serde_json::Value>,
     #[serde(flatten)]
     pub rulesets_rule: crate::models::rulesets_rule::RulesetsRule,
 }

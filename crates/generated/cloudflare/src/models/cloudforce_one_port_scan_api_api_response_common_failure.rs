@@ -21,4 +21,6 @@ use serde::{Deserialize, Serialize};
 pub struct CloudforceOnePortScanApiApiResponseCommonFailure {
     #[serde(flatten)]
     pub cloudforce_one_port_scan_api_api_response_common: crate::models::cloudforce_one_port_scan_api_api_response_common::CloudforceOnePortScanApiApiResponseCommon,
+    pub errors: Option<std::collections::BTreeMap<String, serde_json::Value>>,
+    pub success: Option<bool>,
 }

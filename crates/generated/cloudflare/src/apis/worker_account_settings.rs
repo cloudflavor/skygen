@@ -15,12 +15,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::workers_api_response_common::WorkersApiResponseCommon;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct FetchWorkerSettingsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, WorkersApiResponseCommon>,
 }
 
 impl<'a> FetchWorkerSettingsRequest<'a> {
@@ -38,7 +39,7 @@ impl<'a> FetchWorkerSettingsRequest<'a> {
         self.builder = self.builder.path_param("account_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<WorkersApiResponseCommon> {
         self.builder.send().await
     }
 }
@@ -67,7 +68,7 @@ pub fn fetch_worker_settings(api: &ApiClient) -> FetchWorkerSettingsRequest<'_> 
 
 #[derive(Debug)]
 pub struct CreateWorkerSettingsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, WorkersApiResponseCommon>,
 }
 
 impl<'a> CreateWorkerSettingsRequest<'a> {
@@ -93,7 +94,7 @@ impl<'a> CreateWorkerSettingsRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<WorkersApiResponseCommon> {
         self.builder.send().await
     }
 }

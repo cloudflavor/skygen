@@ -15,4 +15,17 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type TunnelSchemasConnection = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct TunnelSchemasConnection {
+    pub client_id: Option<crate::models::tunnel_client_id::TunnelClientId>,
+    pub client_version: Option<crate::models::tunnel_version::TunnelVersion>,
+    pub colo_name: Option<crate::models::tunnel_colo_name::TunnelColoName>,
+    pub id: Option<crate::models::tunnel_connection_id::TunnelConnectionId>,
+    pub is_pending_reconnect:
+        Option<crate::models::tunnel_is_pending_reconnect::TunnelIsPendingReconnect>,
+    pub opened_at: Option<String>,
+    pub origin_ip: Option<crate::models::tunnel_ip::TunnelIp>,
+    pub uuid: Option<crate::models::tunnel_connection_id::TunnelConnectionId>,
+}

@@ -19,6 +19,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct ZarazZarazConfigHistoryResponse {
+    pub result: Option<std::collections::BTreeMap<String, serde_json::Value>>,
     #[serde(flatten)]
     pub zaraz_api_response_common: crate::models::zaraz_api_response_common::ZarazApiResponseCommon,
 }

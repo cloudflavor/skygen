@@ -15,4 +15,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type ZonesSchemasEmailObfuscation = crate::models::zones_base::ZonesBase;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct ZonesSchemasEmailObfuscation {
+    pub id: Option<serde_json::Value>,
+    pub value: Option<crate::models::zones_email_obfuscation_value::ZonesEmailObfuscationValue>,
+    #[serde(flatten)]
+    pub zones_base: crate::models::zones_base::ZonesBase,
+}

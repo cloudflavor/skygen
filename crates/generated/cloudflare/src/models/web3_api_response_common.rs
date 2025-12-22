@@ -21,6 +21,6 @@ use serde::{Deserialize, Serialize};
 pub struct Web3ApiResponseCommon {
     pub errors: crate::models::web3_messages::Web3Messages,
     pub messages: crate::models::web3_messages::Web3Messages,
-    pub result: serde_json::Value,
+    pub result: std::collections::BTreeMap<String, serde_json::Value>,
     pub success: bool,
 }

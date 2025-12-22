@@ -19,7 +19,8 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct AddressingFullResponse {
+    #[serde(flatten)]
     pub addressing_api_response_single:
         crate::models::addressing_api_response_single::AddressingApiResponseSingle,
-    pub result: Option<serde_json::Value>,
+    pub result: Option<crate::models::addressing_address_maps::AddressingAddressMaps>,
 }

@@ -19,7 +19,10 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct BotManagementBotManagementResponseBody {
+    #[serde(flatten)]
     pub bot_management_api_response_single:
         crate::models::bot_management_api_response_single::BotManagementApiResponseSingle,
-    pub result: Option<serde_json::Value>,
+    pub result: Option<
+        crate::models::bot_management_bot_fight_mode_config::BotManagementBotFightModeConfig,
+    >,
 }

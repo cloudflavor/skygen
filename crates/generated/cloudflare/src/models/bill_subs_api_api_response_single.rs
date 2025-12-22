@@ -15,4 +15,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type BillSubsApiApiResponseSingle = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct BillSubsApiApiResponseSingle {
+    #[serde(flatten)]
+    pub bill_subs_api_api_response_common:
+        crate::models::bill_subs_api_api_response_common::BillSubsApiApiResponseCommon,
+    pub result: Option<std::collections::BTreeMap<String, serde_json::Value>>,
+}

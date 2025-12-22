@@ -19,6 +19,6 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct R2LifecycleStorageTransition {
-    pub condition: serde_json::Value,
+    pub condition: crate::models::r2_lifecycle_age_condition::R2LifecycleAgeCondition,
     pub storage_class: String,
 }

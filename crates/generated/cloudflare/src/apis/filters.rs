@@ -109,7 +109,7 @@ pub fn list_filters(api: &ApiClient) -> ListFiltersRequest<'_> {
 
 #[derive(Debug)]
 pub struct CreateFiltersRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, FirewallFilterResponseCollection>,
 }
 
 impl<'a> CreateFiltersRequest<'a> {
@@ -131,7 +131,7 @@ impl<'a> CreateFiltersRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<FirewallFilterResponseCollection> {
         self.builder.send().await
     }
 }

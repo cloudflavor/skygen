@@ -195,7 +195,7 @@ pub fn get_waf_rule(api: &ApiClient) -> GetWafRuleRequest<'_> {
 
 #[derive(Debug)]
 pub struct UpdateWafRuleRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, WafManagedRulesRuleResponseSingle>,
 }
 
 impl<'a> UpdateWafRuleRequest<'a> {
@@ -231,7 +231,7 @@ impl<'a> UpdateWafRuleRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<WafManagedRulesRuleResponseSingle> {
         self.builder.send().await
     }
 }

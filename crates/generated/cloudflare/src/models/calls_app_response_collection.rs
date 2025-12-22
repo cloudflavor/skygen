@@ -21,4 +21,5 @@ use serde::{Deserialize, Serialize};
 pub struct CallsAppResponseCollection {
     #[serde(flatten)]
     pub calls_api_response_common: crate::models::calls_api_response_common::CallsApiResponseCommon,
+    pub result: Option<Vec<crate::models::calls_app::CallsApp>>,
 }

@@ -15,12 +15,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::cloudforce_one_port_scan_api_api_response_common::CloudforceOnePortScanApiApiResponseCommon;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct ConfigFetchRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, CloudforceOnePortScanApiApiResponseCommon>,
 }
 
 impl<'a> ConfigFetchRequest<'a> {
@@ -38,7 +39,7 @@ impl<'a> ConfigFetchRequest<'a> {
         self.builder = self.builder.path_param("account_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<CloudforceOnePortScanApiApiResponseCommon> {
         self.builder.send().await
     }
 }
@@ -65,7 +66,7 @@ pub fn config_fetch(api: &ApiClient) -> ConfigFetchRequest<'_> {
 
 #[derive(Debug)]
 pub struct ConfigCreateRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, CloudforceOnePortScanApiApiResponseCommon>,
 }
 
 impl<'a> ConfigCreateRequest<'a> {
@@ -90,7 +91,7 @@ impl<'a> ConfigCreateRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<CloudforceOnePortScanApiApiResponseCommon> {
         self.builder.send().await
     }
 }
@@ -171,7 +172,7 @@ pub fn delete_scans(api: &ApiClient) -> DeleteScansRequest<'_> {
 
 #[derive(Debug)]
 pub struct PostConfigUpdateRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, CloudforceOnePortScanApiApiResponseCommon>,
 }
 
 impl<'a> PostConfigUpdateRequest<'a> {
@@ -201,7 +202,7 @@ impl<'a> PostConfigUpdateRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<CloudforceOnePortScanApiApiResponseCommon> {
         self.builder.send().await
     }
 }

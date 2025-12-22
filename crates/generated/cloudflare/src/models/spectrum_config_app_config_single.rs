@@ -15,5 +15,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type SpectrumConfigAppConfigSingle =
-    crate::models::spectrum_config_api_response_single::SpectrumConfigApiResponseSingle;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct SpectrumConfigAppConfigSingle {
+    pub result: Option<crate::models::spectrum_config_app_config::SpectrumConfigAppConfig>,
+    #[serde(flatten)]
+    pub spectrum_config_api_response_single:
+        crate::models::spectrum_config_api_response_single::SpectrumConfigApiResponseSingle,
+}

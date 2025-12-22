@@ -19,7 +19,8 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct ApiShieldMultipleOperationResponsePaginated {
+    #[serde(flatten)]
     pub api_shield_api_response_collection:
         crate::models::api_shield_api_response_collection::ApiShieldApiResponseCollection,
-    pub result: Vec<serde_json::Value>,
+    pub result: Vec<crate::models::api_shield_operation::ApiShieldOperation>,
 }

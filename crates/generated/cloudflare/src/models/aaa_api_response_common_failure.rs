@@ -19,7 +19,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct AaaApiResponseCommonFailure {
-    pub errors: serde_json::Value,
+    pub errors: crate::models::aaa_messages::AaaMessages,
     pub messages: crate::models::aaa_messages::AaaMessages,
     pub success: bool,
 }

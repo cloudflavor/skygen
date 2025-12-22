@@ -15,4 +15,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type AccessCustomPagesComponentsSchemasResponseCollection = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct AccessCustomPagesComponentsSchemasResponseCollection {
+    #[serde(flatten)]
+    pub access_api_response_collection:
+        crate::models::access_api_response_collection::AccessApiResponseCollection,
+    pub result:
+        Option<Vec<crate::models::access_custom_page_without_html::AccessCustomPageWithoutHtml>>,
+}

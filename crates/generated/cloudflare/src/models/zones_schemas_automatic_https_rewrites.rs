@@ -15,4 +15,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type ZonesSchemasAutomaticHttpsRewrites = crate::models::zones_base::ZonesBase;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct ZonesSchemasAutomaticHttpsRewrites {
+    pub id: Option<serde_json::Value>,
+    pub value: Option<
+        crate::models::zones_automatic_https_rewrites_value::ZonesAutomaticHttpsRewritesValue,
+    >,
+    #[serde(flatten)]
+    pub zones_base: crate::models::zones_base::ZonesBase,
+}

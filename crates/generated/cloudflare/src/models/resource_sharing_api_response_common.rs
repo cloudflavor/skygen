@@ -20,6 +20,6 @@ use serde::{Deserialize, Serialize};
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct ResourceSharingApiResponseCommon {
     pub errors: crate::models::resource_sharing_v4errors::ResourceSharingV4errors,
-    pub result: Option<serde_json::Value>,
+    pub result: Option<std::collections::BTreeMap<String, serde_json::Value>>,
     pub success: bool,
 }

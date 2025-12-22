@@ -15,12 +15,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::workers_api_response_common::WorkersApiResponseCommon;
 use crate::models::workers_api_response_null_result::WorkersApiResponseNullResult;
 use crate::models::workers_create_assets_upload_session_response::WorkersCreateAssetsUploadSessionResponse;
 use crate::models::workers_namespace_list_response::WorkersNamespaceListResponse;
 use crate::models::workers_namespace_script_response_single::WorkersNamespaceScriptResponseSingle;
 use crate::models::workers_namespace_single_response::WorkersNamespaceSingleResponse;
 use crate::models::workers_script_response_single::WorkersScriptResponseSingle;
+use crate::models::workers_script_response_upload_single::WorkersScriptResponseUploadSingle;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
@@ -297,7 +299,7 @@ pub fn namespace_worker_script_worker(api: &ApiClient) -> NamespaceWorkerScriptW
 
 #[derive(Debug)]
 pub struct NamespaceWorkerScriptUploadRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, WorkersScriptResponseUploadSingle>,
 }
 
 impl<'a> NamespaceWorkerScriptUploadRequest<'a> {
@@ -321,7 +323,7 @@ impl<'a> NamespaceWorkerScriptUploadRequest<'a> {
         self.builder = self.builder.path_param("script_name", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<WorkersScriptResponseUploadSingle> {
         self.builder.send().await
     }
 }
@@ -484,7 +486,7 @@ pub fn namespace_worker_script_update(api: &ApiClient) -> NamespaceWorkerScriptU
 
 #[derive(Debug)]
 pub struct NamespaceWorkerGetScriptRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, WorkersApiResponseCommon>,
 }
 
 impl<'a> NamespaceWorkerGetScriptRequest<'a> {
@@ -508,7 +510,7 @@ impl<'a> NamespaceWorkerGetScriptRequest<'a> {
         self.builder = self.builder.path_param("script_name", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<WorkersApiResponseCommon> {
         self.builder.send().await
     }
 }
@@ -669,7 +671,7 @@ pub fn namespace_worker_put_script(api: &ApiClient) -> NamespaceWorkerPutScriptR
 
 #[derive(Debug)]
 pub struct NamespaceWorkerListScriptRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, WorkersApiResponseCommon>,
 }
 
 impl<'a> NamespaceWorkerListScriptRequest<'a> {
@@ -693,7 +695,7 @@ impl<'a> NamespaceWorkerListScriptRequest<'a> {
         self.builder = self.builder.path_param("script_name", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<WorkersApiResponseCommon> {
         self.builder.send().await
     }
 }
@@ -726,7 +728,7 @@ pub fn namespace_worker_list_script(api: &ApiClient) -> NamespaceWorkerListScrip
 
 #[derive(Debug)]
 pub struct NamespaceWorkerPutScriptPutRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, WorkersApiResponseCommon>,
 }
 
 impl<'a> NamespaceWorkerPutScriptPutRequest<'a> {
@@ -755,7 +757,7 @@ impl<'a> NamespaceWorkerPutScriptPutRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<WorkersApiResponseCommon> {
         self.builder.send().await
     }
 }
@@ -790,7 +792,7 @@ pub fn namespace_worker_put_script_put(api: &ApiClient) -> NamespaceWorkerPutScr
 
 #[derive(Debug)]
 pub struct NamespaceWorkerGetScriptGet3Request<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, WorkersApiResponseCommon>,
 }
 
 impl<'a> NamespaceWorkerGetScriptGet3Request<'a> {
@@ -819,7 +821,7 @@ impl<'a> NamespaceWorkerGetScriptGet3Request<'a> {
         self.builder = self.builder.path_param("secret_name", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<WorkersApiResponseCommon> {
         self.builder.send().await
     }
 }
@@ -920,7 +922,7 @@ pub fn namespace_worker_delete_script(api: &ApiClient) -> NamespaceWorkerDeleteS
 
 #[derive(Debug)]
 pub struct NamespaceWorkerGetScriptGet4Request<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, WorkersApiResponseCommon>,
 }
 
 impl<'a> NamespaceWorkerGetScriptGet4Request<'a> {
@@ -944,7 +946,7 @@ impl<'a> NamespaceWorkerGetScriptGet4Request<'a> {
         self.builder = self.builder.path_param("script_name", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<WorkersApiResponseCommon> {
         self.builder.send().await
     }
 }
@@ -979,7 +981,7 @@ pub fn namespace_worker_get_script_get_4(
 
 #[derive(Debug)]
 pub struct NamespaceWorkerPatchScriptRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, WorkersApiResponseCommon>,
 }
 
 impl<'a> NamespaceWorkerPatchScriptRequest<'a> {
@@ -1003,7 +1005,7 @@ impl<'a> NamespaceWorkerPatchScriptRequest<'a> {
         self.builder = self.builder.path_param("script_name", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<WorkersApiResponseCommon> {
         self.builder.send().await
     }
 }
@@ -1036,7 +1038,7 @@ pub fn namespace_worker_patch_script(api: &ApiClient) -> NamespaceWorkerPatchScr
 
 #[derive(Debug)]
 pub struct NamespaceWorkerGetScriptGet5Request<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, WorkersApiResponseCommon>,
 }
 
 impl<'a> NamespaceWorkerGetScriptGet5Request<'a> {
@@ -1060,7 +1062,7 @@ impl<'a> NamespaceWorkerGetScriptGet5Request<'a> {
         self.builder = self.builder.path_param("script_name", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<WorkersApiResponseCommon> {
         self.builder.send().await
     }
 }
@@ -1095,7 +1097,7 @@ pub fn namespace_worker_get_script_get_5(
 
 #[derive(Debug)]
 pub struct NamespaceWorkerPutScriptPut3Request<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, WorkersApiResponseCommon>,
 }
 
 impl<'a> NamespaceWorkerPutScriptPut3Request<'a> {
@@ -1124,7 +1126,7 @@ impl<'a> NamespaceWorkerPutScriptPut3Request<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<WorkersApiResponseCommon> {
         self.builder.send().await
     }
 }

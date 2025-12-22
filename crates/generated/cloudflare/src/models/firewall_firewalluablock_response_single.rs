@@ -19,6 +19,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct FirewallFirewalluablockResponseSingle {
+    #[serde(flatten)]
     pub firewall_api_response_single:
         crate::models::firewall_api_response_single::FirewallApiResponseSingle,
     pub result: Option<std::collections::BTreeMap<String, serde_json::Value>>,

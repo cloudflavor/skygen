@@ -19,7 +19,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct AaaSchemasApiResponseCommonFailure {
-    pub errors: Vec<serde_json::Value>,
-    pub messages: Option<Vec<serde_json::Value>>,
+    pub errors: Vec<std::collections::BTreeMap<String, serde_json::Value>>,
+    pub messages: Option<Vec<std::collections::BTreeMap<String, serde_json::Value>>>,
     pub success: bool,
 }

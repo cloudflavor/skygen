@@ -15,6 +15,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::pages_api_response_common::PagesApiResponseCommon;
 use crate::models::pages_domain_response_collection::PagesDomainResponseCollection;
 use crate::models::pages_domain_response_single::PagesDomainResponseSingle;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
@@ -198,7 +199,7 @@ pub fn get_domain(api: &ApiClient) -> GetDomainRequest<'_> {
 
 #[derive(Debug)]
 pub struct DeleteDomainRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, PagesApiResponseCommon>,
 }
 
 impl<'a> DeleteDomainRequest<'a> {
@@ -226,7 +227,7 @@ impl<'a> DeleteDomainRequest<'a> {
         self.builder = self.builder.path_param("domain_name", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<PagesApiResponseCommon> {
         self.builder.send().await
     }
 }

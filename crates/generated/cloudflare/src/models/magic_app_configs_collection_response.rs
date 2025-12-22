@@ -22,4 +22,5 @@ pub struct MagicAppConfigsCollectionResponse {
     #[serde(flatten)]
     pub magic_apps_response_object:
         crate::models::magic_apps_response_object::MagicAppsResponseObject,
+    pub result: Option<Vec<crate::models::magic_app_config::MagicAppConfig>>,
 }

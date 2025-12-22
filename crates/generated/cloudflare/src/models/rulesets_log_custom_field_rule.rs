@@ -19,6 +19,9 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct RulesetsLogCustomFieldRule {
+    pub action: Option<serde_json::Value>,
+    pub action_parameters: Option<serde_json::Value>,
+    pub description: Option<serde_json::Value>,
     #[serde(flatten)]
     pub rulesets_rule: crate::models::rulesets_rule::RulesetsRule,
 }

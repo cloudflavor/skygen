@@ -15,4 +15,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type TeamsDevicesApiResponseCollectionCommon = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct TeamsDevicesApiResponseCollectionCommon {
+    pub result: Option<Vec<std::collections::BTreeMap<String, serde_json::Value>>>,
+    #[serde(flatten)]
+    pub teams_devices_api_response_common:
+        crate::models::teams_devices_api_response_common::TeamsDevicesApiResponseCommon,
+}

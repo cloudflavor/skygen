@@ -15,4 +15,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type DnssecApiResponseSingle = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct DnssecApiResponseSingle {
+    #[serde(flatten)]
+    pub dnssec_api_response_common:
+        crate::models::dnssec_api_response_common::DnssecApiResponseCommon,
+}

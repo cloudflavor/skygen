@@ -23,5 +23,5 @@ pub struct DlpRiskEvents {
     pub events: Vec<crate::models::dlp_risk_event::DlpRiskEvent>,
     pub last_reset_time: Option<String>,
     pub name: String,
-    pub risk_level: Option<serde_json::Value>,
+    pub risk_level: Option<crate::models::dlp_risk_level::DlpRiskLevel>,
 }

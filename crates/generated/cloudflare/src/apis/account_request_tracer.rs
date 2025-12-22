@@ -15,12 +15,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::request_tracer_api_response_common::RequestTracerApiResponseCommon;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct TraceRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, RequestTracerApiResponseCommon>,
 }
 
 impl<'a> TraceRequest<'a> {
@@ -46,7 +47,7 @@ impl<'a> TraceRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<RequestTracerApiResponseCommon> {
         self.builder.send().await
     }
 }

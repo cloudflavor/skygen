@@ -21,4 +21,5 @@ use serde::{Deserialize, Serialize};
 pub struct PagesDeploymentResponseDetails {
     #[serde(flatten)]
     pub pages_api_response_common: crate::models::pages_api_response_common::PagesApiResponseCommon,
+    pub result: Option<crate::models::pages_deployments::PagesDeployments>,
 }

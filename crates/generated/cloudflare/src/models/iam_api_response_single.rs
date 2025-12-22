@@ -15,4 +15,10 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type IamApiResponseSingle = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct IamApiResponseSingle {
+    #[serde(flatten)]
+    pub iam_api_response_common: crate::models::iam_api_response_common::IamApiResponseCommon,
+}

@@ -22,5 +22,5 @@ pub struct ApiShieldSchemaHosts {
     pub created_at: crate::models::api_shield_schemas_timestamp::ApiShieldSchemasTimestamp,
     pub hosts: Vec<String>,
     pub name: String,
-    pub schema_id: serde_json::Value,
+    pub schema_id: crate::models::api_shield_schemas_uuid::ApiShieldSchemasUuid,
 }

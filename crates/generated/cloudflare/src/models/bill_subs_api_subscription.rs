@@ -15,4 +15,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type BillSubsApiSubscription = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct BillSubsApiSubscription {
+    #[serde(flatten)]
+    pub bill_subs_api_subscription_v2:
+        crate::models::bill_subs_api_subscription_v2::BillSubsApiSubscriptionV2,
+}

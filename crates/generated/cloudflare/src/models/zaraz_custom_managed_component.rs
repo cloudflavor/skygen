@@ -19,6 +19,8 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct ZarazCustomManagedComponent {
+    pub r#type: String,
+    pub worker: std::collections::BTreeMap<String, serde_json::Value>,
     #[serde(flatten)]
     pub zaraz_base_mc: crate::models::zaraz_base_mc::ZarazBaseMc,
 }

@@ -15,5 +15,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type Web3CollectionResponse =
-    crate::models::web3_api_response_collection::Web3ApiResponseCollection;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct Web3CollectionResponse {
+    pub result: Option<Vec<crate::models::web3_web3_hostname::Web3Web3Hostname>>,
+    #[serde(flatten)]
+    pub web3_api_response_collection:
+        crate::models::web3_api_response_collection::Web3ApiResponseCollection,
+}

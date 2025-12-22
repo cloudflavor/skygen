@@ -15,5 +15,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type LoadBalancingComponentsSchemasIdResponse =
-    crate::models::load_balancing_api_response_single::LoadBalancingApiResponseSingle;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct LoadBalancingComponentsSchemasIdResponse {
+    #[serde(flatten)]
+    pub load_balancing_api_response_single:
+        crate::models::load_balancing_api_response_single::LoadBalancingApiResponseSingle,
+    pub result: Option<std::collections::BTreeMap<String, serde_json::Value>>,
+}

@@ -25,5 +25,6 @@ pub struct HyperdriveHyperdriveConfig {
     pub modified_on: Option<String>,
     pub mtls: Option<crate::models::hyperdrive_hyperdrive_mtls::HyperdriveHyperdriveMtls>,
     pub name: crate::models::hyperdrive_hyperdrive_name::HyperdriveHyperdriveName,
-    pub origin: serde_json::Value,
+    pub origin:
+        crate::models::hyperdrive_hyperdrive_database_full::HyperdriveHyperdriveDatabaseFull,
 }

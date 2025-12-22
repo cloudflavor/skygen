@@ -15,12 +15,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::r2_v4_response::R2V4Response;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct GetLevelMetricsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, R2V4Response>,
 }
 
 impl<'a> GetLevelMetricsRequest<'a> {
@@ -34,7 +35,7 @@ impl<'a> GetLevelMetricsRequest<'a> {
         self.builder = self.builder.path_param("account_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<R2V4Response> {
         self.builder.send().await
     }
 }

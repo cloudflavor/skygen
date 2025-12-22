@@ -19,6 +19,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct FirewallZonelockdownResponseSingle {
+    #[serde(flatten)]
     pub firewall_api_response_single:
         crate::models::firewall_api_response_single::FirewallApiResponseSingle,
     pub result: crate::models::firewall_zonelockdown::FirewallZonelockdown,

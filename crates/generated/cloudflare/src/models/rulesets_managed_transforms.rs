@@ -19,6 +19,8 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct RulesetsManagedTransforms {
-    pub managed_request_headers: Vec<serde_json::Value>,
-    pub managed_response_headers: Vec<serde_json::Value>,
+    pub managed_request_headers:
+        Vec<crate::models::rulesets_managed_transform::RulesetsManagedTransform>,
+    pub managed_response_headers:
+        Vec<crate::models::rulesets_managed_transform::RulesetsManagedTransform>,
 }

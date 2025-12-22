@@ -15,4 +15,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type FirewallApiResponseCollection = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct FirewallApiResponseCollection {
+    #[serde(flatten)]
+    pub firewall_api_response_common:
+        crate::models::firewall_api_response_common::FirewallApiResponseCommon,
+    pub result: Option<Vec<std::collections::BTreeMap<String, serde_json::Value>>>,
+    pub result_info: Option<crate::models::firewall_result_info::FirewallResultInfo>,
+}

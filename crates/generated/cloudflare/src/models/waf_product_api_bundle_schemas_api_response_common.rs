@@ -21,6 +21,6 @@ use serde::{Deserialize, Serialize};
 pub struct WafProductApiBundleSchemasApiResponseCommon {
     pub errors: crate::models::waf_product_api_bundle_messages::WafProductApiBundleMessages,
     pub messages: crate::models::waf_product_api_bundle_messages::WafProductApiBundleMessages,
-    pub result: serde_json::Value,
+    pub result: std::collections::BTreeMap<String, serde_json::Value>,
     pub success: bool,
 }

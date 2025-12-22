@@ -15,4 +15,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type MagicTransitApiResponseCollection = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct MagicTransitApiResponseCollection {
+    #[serde(flatten)]
+    pub magic_transit_api_response_common:
+        crate::models::magic_transit_api_response_common::MagicTransitApiResponseCommon,
+    pub result: Option<Vec<serde_json::Value>>,
+}

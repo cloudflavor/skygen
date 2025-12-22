@@ -19,6 +19,6 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct ZonesUrlTarget {
-    pub constraint: Option<serde_json::Value>,
+    pub constraint: Option<crate::models::zones_string_constraint::ZonesStringConstraint>,
     pub target: Option<serde_json::Value>,
 }

@@ -15,12 +15,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::cache_rules_zone_cache_settings_response_single::CacheRulesZoneCacheSettingsResponseSingle;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct GetTieredCachingSettingRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, CacheRulesZoneCacheSettingsResponseSingle>,
 }
 
 impl<'a> GetTieredCachingSettingRequest<'a> {
@@ -35,7 +36,7 @@ impl<'a> GetTieredCachingSettingRequest<'a> {
         self.builder = self.builder.path_param("zone_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<CacheRulesZoneCacheSettingsResponseSingle> {
         self.builder.send().await
     }
 }
@@ -64,7 +65,7 @@ pub fn get_tiered_caching_setting(api: &ApiClient) -> GetTieredCachingSettingReq
 
 #[derive(Debug)]
 pub struct PatchTieredCachingSettingRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, CacheRulesZoneCacheSettingsResponseSingle>,
 }
 
 impl<'a> PatchTieredCachingSettingRequest<'a> {
@@ -84,7 +85,7 @@ impl<'a> PatchTieredCachingSettingRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<CacheRulesZoneCacheSettingsResponseSingle> {
         self.builder.send().await
     }
 }

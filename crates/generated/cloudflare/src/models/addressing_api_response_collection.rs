@@ -15,4 +15,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type AddressingApiResponseCollection = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct AddressingApiResponseCollection {
+    #[serde(flatten)]
+    pub addressing_api_response_common:
+        crate::models::addressing_api_response_common::AddressingApiResponseCommon,
+    pub result_info: Option<std::collections::BTreeMap<String, serde_json::Value>>,
+}

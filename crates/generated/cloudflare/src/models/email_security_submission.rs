@@ -19,13 +19,16 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct EmailSecuritySubmission {
-    pub original_disposition: Option<serde_json::Value>,
+    pub original_disposition:
+        Option<crate::models::email_security_disposition_label::EmailSecurityDispositionLabel>,
     pub original_edf_hash: Option<String>,
     pub outcome: Option<String>,
-    pub outcome_disposition: Option<serde_json::Value>,
+    pub outcome_disposition:
+        Option<crate::models::email_security_disposition_label::EmailSecurityDispositionLabel>,
     pub r#type: Option<String>,
     pub requested_by: Option<String>,
-    pub requested_disposition: Option<serde_json::Value>,
+    pub requested_disposition:
+        Option<crate::models::email_security_disposition_label::EmailSecurityDispositionLabel>,
     pub requested_ts: String,
     pub status: Option<String>,
     pub subject: Option<String>,

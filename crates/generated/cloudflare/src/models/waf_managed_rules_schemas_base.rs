@@ -15,4 +15,10 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type WafManagedRulesSchemasBase = crate::models::waf_managed_rules_base::WafManagedRulesBase;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct WafManagedRulesSchemasBase {
+    #[serde(flatten)]
+    pub waf_managed_rules_base: crate::models::waf_managed_rules_base::WafManagedRulesBase,
+}

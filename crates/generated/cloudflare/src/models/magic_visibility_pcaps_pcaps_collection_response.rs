@@ -15,4 +15,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type MagicVisibilityPcapsPcapsCollectionResponse = crate::models::magic_visibility_pcaps_api_response_collection::MagicVisibilityPcapsApiResponseCollection;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct MagicVisibilityPcapsPcapsCollectionResponse {
+    #[serde(flatten)]
+    pub magic_visibility_pcaps_api_response_collection: crate::models::magic_visibility_pcaps_api_response_collection::MagicVisibilityPcapsApiResponseCollection,
+    pub result: Option<Vec<crate::models::magic_visibility_pcaps_pcaps_response_simple::MagicVisibilityPcapsPcapsResponseSimple>>,
+}

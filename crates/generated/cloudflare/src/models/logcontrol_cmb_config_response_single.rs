@@ -15,5 +15,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type LogcontrolCmbConfigResponseSingle =
-    crate::models::logcontrol_api_response_single::LogcontrolApiResponseSingle;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct LogcontrolCmbConfigResponseSingle {
+    #[serde(flatten)]
+    pub logcontrol_api_response_single:
+        crate::models::logcontrol_api_response_single::LogcontrolApiResponseSingle,
+    pub result: Option<crate::models::logcontrol_cmb_config::LogcontrolCmbConfig>,
+}

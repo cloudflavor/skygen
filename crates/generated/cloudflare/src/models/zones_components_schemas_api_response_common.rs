@@ -21,6 +21,6 @@ use serde::{Deserialize, Serialize};
 pub struct ZonesComponentsSchemasApiResponseCommon {
     pub errors: crate::models::zones_messages::ZonesMessages,
     pub messages: crate::models::zones_messages::ZonesMessages,
-    pub result: serde_json::Value,
+    pub result: std::collections::BTreeMap<String, serde_json::Value>,
     pub success: bool,
 }

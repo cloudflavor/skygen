@@ -20,8 +20,8 @@ use serde::{Deserialize, Serialize};
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct RulesetsRuleset {
     pub description: Option<String>,
-    pub id: serde_json::Value,
+    pub id: crate::models::rulesets_ruleset_id::RulesetsRulesetId,
     pub last_updated: String,
     pub name: Option<String>,
-    pub version: serde_json::Value,
+    pub version: crate::models::rulesets_ruleset_version::RulesetsRulesetVersion,
 }

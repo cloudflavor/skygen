@@ -20,6 +20,7 @@ use serde::{Deserialize, Serialize};
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct StreamSignedTokenResponse {
     pub result: Option<std::collections::BTreeMap<String, serde_json::Value>>,
+    #[serde(flatten)]
     pub stream_api_response_single:
         crate::models::stream_api_response_single::StreamApiResponseSingle,
 }

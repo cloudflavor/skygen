@@ -15,4 +15,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type CacheRulesZoneCacheSettingsDeleteResponseSingle = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct CacheRulesZoneCacheSettingsDeleteResponseSingle {
+    #[serde(flatten)]
+    pub cache_rules_api_response_common:
+        crate::models::cache_rules_api_response_common::CacheRulesApiResponseCommon,
+    pub result:
+        Option<crate::models::cache_rules_result_object_delete::CacheRulesResultObjectDelete>,
+}

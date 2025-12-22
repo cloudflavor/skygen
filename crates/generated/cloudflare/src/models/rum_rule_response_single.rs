@@ -19,6 +19,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct RumRuleResponseSingle {
+    pub result: Option<crate::models::rum_rule::RumRule>,
     #[serde(flatten)]
     pub rum_api_response_common: crate::models::rum_api_response_common::RumApiResponseCommon,
 }

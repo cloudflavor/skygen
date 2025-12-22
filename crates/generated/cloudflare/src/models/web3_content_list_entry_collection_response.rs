@@ -15,5 +15,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type Web3ContentListEntryCollectionResponse =
-    crate::models::web3_api_response_collection::Web3ApiResponseCollection;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct Web3ContentListEntryCollectionResponse {
+    pub result: Option<std::collections::BTreeMap<String, serde_json::Value>>,
+    #[serde(flatten)]
+    pub web3_api_response_collection:
+        crate::models::web3_api_response_collection::Web3ApiResponseCollection,
+}

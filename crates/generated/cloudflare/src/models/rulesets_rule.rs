@@ -23,7 +23,7 @@ pub struct RulesetsRule {
     pub action_parameters: Option<serde_json::Value>,
     pub categories: Option<Vec<crate::models::rulesets_rule_category::RulesetsRuleCategory>>,
     pub description: Option<String>,
-    pub enabled: Option<serde_json::Value>,
+    pub enabled: Option<crate::models::rulesets_rule_enabled::RulesetsRuleEnabled>,
     pub exposed_credential_check: Option<serde_json::Value>,
     pub expression: Option<String>,
     pub id: Option<crate::models::rulesets_rule_id::RulesetsRuleId>,

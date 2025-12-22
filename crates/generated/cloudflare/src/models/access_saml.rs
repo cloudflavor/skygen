@@ -15,4 +15,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type AccessSaml = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct AccessSaml {
+    #[serde(flatten)]
+    pub access_identity_provider: crate::models::access_identity_provider::AccessIdentityProvider,
+    pub config: Option<std::collections::BTreeMap<String, serde_json::Value>>,
+}

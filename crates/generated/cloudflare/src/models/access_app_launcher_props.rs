@@ -21,4 +21,7 @@ use serde::{Deserialize, Serialize};
 pub struct AccessAppLauncherProps {
     #[serde(flatten)]
     pub access_feature_app_props: crate::models::access_feature_app_props::AccessFeatureAppProps,
+    pub domain: Option<serde_json::Value>,
+    pub name: Option<serde_json::Value>,
+    pub r#type: Option<crate::models::access_type::AccessType>,
 }

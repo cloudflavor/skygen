@@ -15,4 +15,4 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type RequestTracerMessages = Vec<serde_json::Value>;
+pub type RequestTracerMessages = Vec<std::collections::BTreeMap<String, serde_json::Value>>;

@@ -15,4 +15,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type ZonesSchemasOriginErrorPagePassThru = crate::models::zones_base::ZonesBase;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct ZonesSchemasOriginErrorPagePassThru {
+    pub id: Option<serde_json::Value>,
+    pub value: Option<
+        crate::models::zones_origin_error_page_pass_thru_value::ZonesOriginErrorPagePassThruValue,
+    >,
+    #[serde(flatten)]
+    pub zones_base: crate::models::zones_base::ZonesBase,
+}

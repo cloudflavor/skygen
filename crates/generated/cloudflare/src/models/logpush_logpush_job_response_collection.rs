@@ -22,4 +22,5 @@ pub struct LogpushLogpushJobResponseCollection {
     #[serde(flatten)]
     pub logpush_api_response_common:
         crate::models::logpush_api_response_common::LogpushApiResponseCommon,
+    pub result: Option<Vec<crate::models::logpush_logpush_job::LogpushLogpushJob>>,
 }

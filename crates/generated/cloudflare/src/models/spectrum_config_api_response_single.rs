@@ -15,4 +15,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type SpectrumConfigApiResponseSingle = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct SpectrumConfigApiResponseSingle {
+    #[serde(flatten)]
+    pub spectrum_config_api_response_common:
+        crate::models::spectrum_config_api_response_common::SpectrumConfigApiResponseCommon,
+}

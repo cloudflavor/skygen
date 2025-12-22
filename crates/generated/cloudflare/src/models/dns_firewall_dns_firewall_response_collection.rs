@@ -15,5 +15,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type DnsFirewallDnsFirewallResponseCollection =
-    crate::models::dns_firewall_api_response_collection::DnsFirewallApiResponseCollection;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct DnsFirewallDnsFirewallResponseCollection {
+    #[serde(flatten)]
+    pub dns_firewall_api_response_collection: crate::models::dns_firewall_api_response_collection::DnsFirewallApiResponseCollection,
+    pub result: Option<Vec<crate::models::dns_firewall_dns_firewall_cluster_response::DnsFirewallDnsFirewallClusterResponse>>,
+}

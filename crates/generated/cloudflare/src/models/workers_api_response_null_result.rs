@@ -19,7 +19,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct WorkersApiResponseNullResult {
-    pub result: Option<serde_json::Value>,
+    pub result: Option<std::collections::BTreeMap<String, serde_json::Value>>,
     #[serde(flatten)]
     pub workers_api_response_common:
         crate::models::workers_api_response_common::WorkersApiResponseCommon,

@@ -15,4 +15,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type WorkersKvApiResponseCollection = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct WorkersKvApiResponseCollection {
+    pub result_info: Option<crate::models::workers_kv_result_info::WorkersKvResultInfo>,
+    #[serde(flatten)]
+    pub workers_kv_api_response_common:
+        crate::models::workers_kv_api_response_common::WorkersKvApiResponseCommon,
+}

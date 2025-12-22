@@ -15,12 +15,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::workers_api_response_common::WorkersApiResponseCommon;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct ListRoutesRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, WorkersApiResponseCommon>,
 }
 
 impl<'a> ListRoutesRequest<'a> {
@@ -34,7 +35,7 @@ impl<'a> ListRoutesRequest<'a> {
         self.builder = self.builder.path_param("zone_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<WorkersApiResponseCommon> {
         self.builder.send().await
     }
 }
@@ -63,7 +64,7 @@ pub fn list_routes(api: &ApiClient) -> ListRoutesRequest<'_> {
 
 #[derive(Debug)]
 pub struct CreateRouteRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, WorkersApiResponseCommon>,
 }
 
 impl<'a> CreateRouteRequest<'a> {
@@ -82,7 +83,7 @@ impl<'a> CreateRouteRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<WorkersApiResponseCommon> {
         self.builder.send().await
     }
 }
@@ -113,7 +114,7 @@ pub fn create_route(api: &ApiClient) -> CreateRouteRequest<'_> {
 
 #[derive(Debug)]
 pub struct GetRouteRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, WorkersApiResponseCommon>,
 }
 
 impl<'a> GetRouteRequest<'a> {
@@ -136,7 +137,7 @@ impl<'a> GetRouteRequest<'a> {
         self.builder = self.builder.path_param("route_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<WorkersApiResponseCommon> {
         self.builder.send().await
     }
 }
@@ -167,7 +168,7 @@ pub fn get_route(api: &ApiClient) -> GetRouteRequest<'_> {
 
 #[derive(Debug)]
 pub struct UpdateRouteRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, WorkersApiResponseCommon>,
 }
 
 impl<'a> UpdateRouteRequest<'a> {
@@ -195,7 +196,7 @@ impl<'a> UpdateRouteRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<WorkersApiResponseCommon> {
         self.builder.send().await
     }
 }
@@ -228,7 +229,7 @@ pub fn update_route(api: &ApiClient) -> UpdateRouteRequest<'_> {
 
 #[derive(Debug)]
 pub struct DeleteRouteRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, WorkersApiResponseCommon>,
 }
 
 impl<'a> DeleteRouteRequest<'a> {
@@ -251,7 +252,7 @@ impl<'a> DeleteRouteRequest<'a> {
         self.builder = self.builder.path_param("route_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<WorkersApiResponseCommon> {
         self.builder.send().await
     }
 }

@@ -15,4 +15,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type ZonesDevelopmentMode = crate::models::zones_base::ZonesBase;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct ZonesDevelopmentMode {
+    pub id: Option<serde_json::Value>,
+    pub time_remaining: Option<f64>,
+    pub value: Option<crate::models::zones_development_mode_value::ZonesDevelopmentModeValue>,
+    #[serde(flatten)]
+    pub zones_base: crate::models::zones_base::ZonesBase,
+}

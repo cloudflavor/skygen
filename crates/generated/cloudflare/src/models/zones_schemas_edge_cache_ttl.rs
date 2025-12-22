@@ -15,4 +15,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type ZonesSchemasEdgeCacheTtl = crate::models::zones_base::ZonesBase;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct ZonesSchemasEdgeCacheTtl {
+    pub id: Option<serde_json::Value>,
+    pub value: Option<crate::models::zones_edge_cache_ttl_value::ZonesEdgeCacheTtlValue>,
+    #[serde(flatten)]
+    pub zones_base: crate::models::zones_base::ZonesBase,
+}

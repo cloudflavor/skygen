@@ -15,4 +15,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type McnProviderWithAccount = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct McnProviderWithAccount {
+    pub account_id: crate::models::mcn_account_id::McnAccountId,
+    #[serde(flatten)]
+    pub mcn_provider: crate::models::mcn_provider::McnProvider,
+}

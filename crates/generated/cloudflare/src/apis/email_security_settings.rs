@@ -15,12 +15,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::email_security_api_response_common::EmailSecurityApiResponseCommon;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct ListAllowPoliciesRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, EmailSecurityApiResponseCommon>,
 }
 
 impl<'a> ListAllowPoliciesRequest<'a> {
@@ -90,7 +91,7 @@ impl<'a> ListAllowPoliciesRequest<'a> {
         self.builder = self.builder.header_param("pattern_type", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<EmailSecurityApiResponseCommon> {
         self.builder.send().await
     }
 }
@@ -145,7 +146,7 @@ pub fn list_allow_policies(api: &ApiClient) -> ListAllowPoliciesRequest<'_> {
 
 #[derive(Debug)]
 pub struct CreateAllowPolicyRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, EmailSecurityApiResponseCommon>,
 }
 
 impl<'a> CreateAllowPolicyRequest<'a> {
@@ -171,7 +172,7 @@ impl<'a> CreateAllowPolicyRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<EmailSecurityApiResponseCommon> {
         self.builder.send().await
     }
 }
@@ -200,7 +201,7 @@ pub fn create_allow_policy(api: &ApiClient) -> CreateAllowPolicyRequest<'_> {
 
 #[derive(Debug)]
 pub struct GetAllowPolicyRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, EmailSecurityApiResponseCommon>,
 }
 
 impl<'a> GetAllowPolicyRequest<'a> {
@@ -223,7 +224,7 @@ impl<'a> GetAllowPolicyRequest<'a> {
         self.builder = self.builder.path_param("policy_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<EmailSecurityApiResponseCommon> {
         self.builder.send().await
     }
 }
@@ -252,7 +253,7 @@ pub fn get_allow_policy(api: &ApiClient) -> GetAllowPolicyRequest<'_> {
 
 #[derive(Debug)]
 pub struct DeleteAllowPolicyRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, EmailSecurityApiResponseCommon>,
 }
 
 impl<'a> DeleteAllowPolicyRequest<'a> {
@@ -275,7 +276,7 @@ impl<'a> DeleteAllowPolicyRequest<'a> {
         self.builder = self.builder.path_param("policy_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<EmailSecurityApiResponseCommon> {
         self.builder.send().await
     }
 }
@@ -304,7 +305,7 @@ pub fn delete_allow_policy(api: &ApiClient) -> DeleteAllowPolicyRequest<'_> {
 
 #[derive(Debug)]
 pub struct UpdateAllowPolicyRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, EmailSecurityApiResponseCommon>,
 }
 
 impl<'a> UpdateAllowPolicyRequest<'a> {
@@ -335,7 +336,7 @@ impl<'a> UpdateAllowPolicyRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<EmailSecurityApiResponseCommon> {
         self.builder.send().await
     }
 }
@@ -366,7 +367,7 @@ pub fn update_allow_policy(api: &ApiClient) -> UpdateAllowPolicyRequest<'_> {
 
 #[derive(Debug)]
 pub struct ListBlockedSendersRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, EmailSecurityApiResponseCommon>,
 }
 
 impl<'a> ListBlockedSendersRequest<'a> {
@@ -408,7 +409,7 @@ impl<'a> ListBlockedSendersRequest<'a> {
         self.builder = self.builder.header_param("pattern_type", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<EmailSecurityApiResponseCommon> {
         self.builder.send().await
     }
 }
@@ -447,7 +448,7 @@ pub fn list_blocked_senders(api: &ApiClient) -> ListBlockedSendersRequest<'_> {
 
 #[derive(Debug)]
 pub struct CreateBlockedSenderRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, EmailSecurityApiResponseCommon>,
 }
 
 impl<'a> CreateBlockedSenderRequest<'a> {
@@ -473,7 +474,7 @@ impl<'a> CreateBlockedSenderRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<EmailSecurityApiResponseCommon> {
         self.builder.send().await
     }
 }
@@ -502,7 +503,7 @@ pub fn create_blocked_sender(api: &ApiClient) -> CreateBlockedSenderRequest<'_> 
 
 #[derive(Debug)]
 pub struct GetBlockedSenderRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, EmailSecurityApiResponseCommon>,
 }
 
 impl<'a> GetBlockedSenderRequest<'a> {
@@ -525,7 +526,7 @@ impl<'a> GetBlockedSenderRequest<'a> {
         self.builder = self.builder.path_param("pattern_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<EmailSecurityApiResponseCommon> {
         self.builder.send().await
     }
 }
@@ -554,7 +555,7 @@ pub fn get_blocked_sender(api: &ApiClient) -> GetBlockedSenderRequest<'_> {
 
 #[derive(Debug)]
 pub struct DeleteBlockedSenderRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, EmailSecurityApiResponseCommon>,
 }
 
 impl<'a> DeleteBlockedSenderRequest<'a> {
@@ -577,7 +578,7 @@ impl<'a> DeleteBlockedSenderRequest<'a> {
         self.builder = self.builder.path_param("pattern_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<EmailSecurityApiResponseCommon> {
         self.builder.send().await
     }
 }
@@ -606,7 +607,7 @@ pub fn delete_blocked_sender(api: &ApiClient) -> DeleteBlockedSenderRequest<'_> 
 
 #[derive(Debug)]
 pub struct UpdateBlockedSenderRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, EmailSecurityApiResponseCommon>,
 }
 
 impl<'a> UpdateBlockedSenderRequest<'a> {
@@ -637,7 +638,7 @@ impl<'a> UpdateBlockedSenderRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<EmailSecurityApiResponseCommon> {
         self.builder.send().await
     }
 }
@@ -668,7 +669,7 @@ pub fn update_blocked_sender(api: &ApiClient) -> UpdateBlockedSenderRequest<'_> 
 
 #[derive(Debug)]
 pub struct ListDomainsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, EmailSecurityApiResponseCommon>,
 }
 
 impl<'a> ListDomainsRequest<'a> {
@@ -718,7 +719,7 @@ impl<'a> ListDomainsRequest<'a> {
         self.builder = self.builder.header_param("active_delivery_mode", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<EmailSecurityApiResponseCommon> {
         self.builder.send().await
     }
 }
@@ -763,7 +764,7 @@ pub fn list_domains(api: &ApiClient) -> ListDomainsRequest<'_> {
 
 #[derive(Debug)]
 pub struct DeleteDomainsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, EmailSecurityApiResponseCommon>,
 }
 
 impl<'a> DeleteDomainsRequest<'a> {
@@ -789,7 +790,7 @@ impl<'a> DeleteDomainsRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<EmailSecurityApiResponseCommon> {
         self.builder.send().await
     }
 }
@@ -818,7 +819,7 @@ pub fn delete_domains(api: &ApiClient) -> DeleteDomainsRequest<'_> {
 
 #[derive(Debug)]
 pub struct GetDomainRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, EmailSecurityApiResponseCommon>,
 }
 
 impl<'a> GetDomainRequest<'a> {
@@ -841,7 +842,7 @@ impl<'a> GetDomainRequest<'a> {
         self.builder = self.builder.path_param("domain_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<EmailSecurityApiResponseCommon> {
         self.builder.send().await
     }
 }
@@ -870,7 +871,7 @@ pub fn get_domain(api: &ApiClient) -> GetDomainRequest<'_> {
 
 #[derive(Debug)]
 pub struct DeleteDomainRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, EmailSecurityApiResponseCommon>,
 }
 
 impl<'a> DeleteDomainRequest<'a> {
@@ -893,7 +894,7 @@ impl<'a> DeleteDomainRequest<'a> {
         self.builder = self.builder.path_param("domain_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<EmailSecurityApiResponseCommon> {
         self.builder.send().await
     }
 }
@@ -922,7 +923,7 @@ pub fn delete_domain(api: &ApiClient) -> DeleteDomainRequest<'_> {
 
 #[derive(Debug)]
 pub struct UpdateDomainRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, EmailSecurityApiResponseCommon>,
 }
 
 impl<'a> UpdateDomainRequest<'a> {
@@ -953,7 +954,7 @@ impl<'a> UpdateDomainRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<EmailSecurityApiResponseCommon> {
         self.builder.send().await
     }
 }
@@ -984,7 +985,7 @@ pub fn update_domain(api: &ApiClient) -> UpdateDomainRequest<'_> {
 
 #[derive(Debug)]
 pub struct ListDisplayNamesRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, EmailSecurityApiResponseCommon>,
 }
 
 impl<'a> ListDisplayNamesRequest<'a> {
@@ -1026,7 +1027,7 @@ impl<'a> ListDisplayNamesRequest<'a> {
         self.builder = self.builder.header_param("provenance", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<EmailSecurityApiResponseCommon> {
         self.builder.send().await
     }
 }
@@ -1067,7 +1068,7 @@ pub fn list_display_names(api: &ApiClient) -> ListDisplayNamesRequest<'_> {
 
 #[derive(Debug)]
 pub struct CreateDisplayNameRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, EmailSecurityApiResponseCommon>,
 }
 
 impl<'a> CreateDisplayNameRequest<'a> {
@@ -1093,7 +1094,7 @@ impl<'a> CreateDisplayNameRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<EmailSecurityApiResponseCommon> {
         self.builder.send().await
     }
 }
@@ -1122,7 +1123,7 @@ pub fn create_display_name(api: &ApiClient) -> CreateDisplayNameRequest<'_> {
 
 #[derive(Debug)]
 pub struct GetDisplayNameRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, EmailSecurityApiResponseCommon>,
 }
 
 impl<'a> GetDisplayNameRequest<'a> {
@@ -1141,7 +1142,7 @@ impl<'a> GetDisplayNameRequest<'a> {
         self.builder = self.builder.path_param("display_name_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<EmailSecurityApiResponseCommon> {
         self.builder.send().await
     }
 }
@@ -1170,7 +1171,7 @@ pub fn get_display_name(api: &ApiClient) -> GetDisplayNameRequest<'_> {
 
 #[derive(Debug)]
 pub struct DeleteDisplayNameRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, EmailSecurityApiResponseCommon>,
 }
 
 impl<'a> DeleteDisplayNameRequest<'a> {
@@ -1189,7 +1190,7 @@ impl<'a> DeleteDisplayNameRequest<'a> {
         self.builder = self.builder.path_param("display_name_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<EmailSecurityApiResponseCommon> {
         self.builder.send().await
     }
 }
@@ -1218,7 +1219,7 @@ pub fn delete_display_name(api: &ApiClient) -> DeleteDisplayNameRequest<'_> {
 
 #[derive(Debug)]
 pub struct UpdateDisplayNameRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, EmailSecurityApiResponseCommon>,
 }
 
 impl<'a> UpdateDisplayNameRequest<'a> {
@@ -1245,7 +1246,7 @@ impl<'a> UpdateDisplayNameRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<EmailSecurityApiResponseCommon> {
         self.builder.send().await
     }
 }
@@ -1276,7 +1277,7 @@ pub fn update_display_name(api: &ApiClient) -> UpdateDisplayNameRequest<'_> {
 
 #[derive(Debug)]
 pub struct ListTrustedDomainsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, EmailSecurityApiResponseCommon>,
 }
 
 impl<'a> ListTrustedDomainsRequest<'a> {
@@ -1322,7 +1323,7 @@ impl<'a> ListTrustedDomainsRequest<'a> {
         self.builder = self.builder.header_param("is_similarity", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<EmailSecurityApiResponseCommon> {
         self.builder.send().await
     }
 }
@@ -1365,7 +1366,7 @@ pub fn list_trusted_domains(api: &ApiClient) -> ListTrustedDomainsRequest<'_> {
 
 #[derive(Debug)]
 pub struct CreateTrustedDomainRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, EmailSecurityApiResponseCommon>,
 }
 
 impl<'a> CreateTrustedDomainRequest<'a> {
@@ -1384,11 +1385,14 @@ impl<'a> CreateTrustedDomainRequest<'a> {
         self.builder = self.builder.path_param("account_id", value);
         self
     }
-    pub fn with_body(mut self, body: serde_json::Value) -> Self {
+    pub fn with_body(
+        mut self,
+        body: crate::models::email_security_create_trusted_domain::EmailSecurityCreateTrustedDomain,
+    ) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<EmailSecurityApiResponseCommon> {
         self.builder.send().await
     }
 }
@@ -1404,7 +1408,7 @@ impl<'a> CreateTrustedDomainRequest<'a> {
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::email_security_settings };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// # let body: serde_json::Value = todo!();
+/// # let body: crate::models::email_security_create_trusted_domain::EmailSecurityCreateTrustedDomain = todo!();
 /// let response = create_trusted_domain(&api)
 ///     .with_account_id("account_id")
 ///     .with_body(body)
@@ -1417,7 +1421,7 @@ pub fn create_trusted_domain(api: &ApiClient) -> CreateTrustedDomainRequest<'_> 
 
 #[derive(Debug)]
 pub struct GetTrustedDomainRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, EmailSecurityApiResponseCommon>,
 }
 
 impl<'a> GetTrustedDomainRequest<'a> {
@@ -1440,7 +1444,7 @@ impl<'a> GetTrustedDomainRequest<'a> {
         self.builder = self.builder.path_param("trusted_domain_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<EmailSecurityApiResponseCommon> {
         self.builder.send().await
     }
 }
@@ -1469,7 +1473,7 @@ pub fn get_trusted_domain(api: &ApiClient) -> GetTrustedDomainRequest<'_> {
 
 #[derive(Debug)]
 pub struct DeleteTrustedDomainRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, EmailSecurityApiResponseCommon>,
 }
 
 impl<'a> DeleteTrustedDomainRequest<'a> {
@@ -1492,7 +1496,7 @@ impl<'a> DeleteTrustedDomainRequest<'a> {
         self.builder = self.builder.path_param("trusted_domain_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<EmailSecurityApiResponseCommon> {
         self.builder.send().await
     }
 }
@@ -1521,7 +1525,7 @@ pub fn delete_trusted_domain(api: &ApiClient) -> DeleteTrustedDomainRequest<'_> 
 
 #[derive(Debug)]
 pub struct UpdateTrustedDomainRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, EmailSecurityApiResponseCommon>,
 }
 
 impl<'a> UpdateTrustedDomainRequest<'a> {
@@ -1552,7 +1556,7 @@ impl<'a> UpdateTrustedDomainRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<EmailSecurityApiResponseCommon> {
         self.builder.send().await
     }
 }

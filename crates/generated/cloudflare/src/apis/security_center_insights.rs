@@ -15,13 +15,15 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::security_center_api_response_common::SecurityCenterApiResponseCommon;
+use crate::models::security_center_api_response_single::SecurityCenterApiResponseSingle;
 use crate::models::security_center_value_counts_response::SecurityCenterValueCountsResponse;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct IssueTypesRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, SecurityCenterApiResponseCommon>,
 }
 
 impl<'a> IssueTypesRequest<'a> {
@@ -39,7 +41,7 @@ impl<'a> IssueTypesRequest<'a> {
         self.builder = self.builder.path_param("account_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<SecurityCenterApiResponseCommon> {
         self.builder.send().await
     }
 }
@@ -66,7 +68,7 @@ pub fn issue_types(api: &ApiClient) -> IssueTypesRequest<'_> {
 
 #[derive(Debug)]
 pub struct IssuesRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, SecurityCenterApiResponseCommon>,
 }
 
 impl<'a> IssuesRequest<'a> {
@@ -136,7 +138,7 @@ impl<'a> IssuesRequest<'a> {
         self.builder = self.builder.header_param("per_page", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<SecurityCenterApiResponseCommon> {
         self.builder.send().await
     }
 }
@@ -522,7 +524,7 @@ pub fn issue_counts_get_3(api: &ApiClient) -> IssueCountsGet3Request<'_> {
 
 #[derive(Debug)]
 pub struct ArchiveSecurityCenterInsightRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, SecurityCenterApiResponseSingle>,
 }
 
 impl<'a> ArchiveSecurityCenterInsightRequest<'a> {
@@ -553,7 +555,7 @@ impl<'a> ArchiveSecurityCenterInsightRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<SecurityCenterApiResponseSingle> {
         self.builder.send().await
     }
 }
@@ -584,7 +586,7 @@ pub fn archive_security_center_insight(api: &ApiClient) -> ArchiveSecurityCenter
 
 #[derive(Debug)]
 pub struct GetRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, SecurityCenterApiResponseCommon>,
 }
 
 impl<'a> GetRequest<'a> {
@@ -654,7 +656,7 @@ impl<'a> GetRequest<'a> {
         self.builder = self.builder.header_param("per_page", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<SecurityCenterApiResponseCommon> {
         self.builder.send().await
     }
 }
@@ -1040,7 +1042,7 @@ pub fn insight_counts_get_3(api: &ApiClient) -> InsightCountsGet3Request<'_> {
 
 #[derive(Debug)]
 pub struct ArchiveSecurityCenterInsightPutRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, SecurityCenterApiResponseSingle>,
 }
 
 impl<'a> ArchiveSecurityCenterInsightPutRequest<'a> {
@@ -1071,7 +1073,7 @@ impl<'a> ArchiveSecurityCenterInsightPutRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<SecurityCenterApiResponseSingle> {
         self.builder.send().await
     }
 }
@@ -1104,7 +1106,7 @@ pub fn archive_security_center_insight_put(
 
 #[derive(Debug)]
 pub struct ZoneSecurityCenterInsightsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, SecurityCenterApiResponseCommon>,
 }
 
 impl<'a> ZoneSecurityCenterInsightsRequest<'a> {
@@ -1171,7 +1173,7 @@ impl<'a> ZoneSecurityCenterInsightsRequest<'a> {
         self.builder = self.builder.header_param("per_page", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<SecurityCenterApiResponseCommon> {
         self.builder.send().await
     }
 }
@@ -1561,7 +1563,7 @@ pub fn zone_security_center_insight_get_3(
 
 #[derive(Debug)]
 pub struct ArchiveSecurityCenterInsightPut3Request<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, SecurityCenterApiResponseSingle>,
 }
 
 impl<'a> ArchiveSecurityCenterInsightPut3Request<'a> {
@@ -1592,7 +1594,7 @@ impl<'a> ArchiveSecurityCenterInsightPut3Request<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<SecurityCenterApiResponseSingle> {
         self.builder.send().await
     }
 }

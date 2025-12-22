@@ -15,4 +15,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type TlsCertificatesAndHostnamesSettingObjectDelete = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct TlsCertificatesAndHostnamesSettingObjectDelete {
+    pub created_at: Option<crate::models::tls_certificates_and_hostnames_hostname_tls_settings_components_schemas_created_at::TlsCertificatesAndHostnamesHostnameTlsSettingsComponentsSchemasCreatedAt>,
+    pub hostname: Option<crate::models::tls_certificates_and_hostnames_components_schemas_hostname::TlsCertificatesAndHostnamesComponentsSchemasHostname>,
+    pub status: Option<crate::models::tls_certificates_and_hostnames_hostname_tls_settings_components_schemas_status::TlsCertificatesAndHostnamesHostnameTlsSettingsComponentsSchemasStatus>,
+    pub updated_at: Option<crate::models::tls_certificates_and_hostnames_hostname_tls_settings_components_schemas_updated_at::TlsCertificatesAndHostnamesHostnameTlsSettingsComponentsSchemasUpdatedAt>,
+    pub value: Option<crate::models::tls_certificates_and_hostnames_value::TlsCertificatesAndHostnamesValue>,
+}

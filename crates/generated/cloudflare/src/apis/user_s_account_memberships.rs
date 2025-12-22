@@ -15,13 +15,15 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::iam_api_response_single::IamApiResponseSingle;
+use crate::models::iam_collection_membership_response::IamCollectionMembershipResponse;
 use crate::models::iam_single_membership_response_with_policies::IamSingleMembershipResponseWithPolicies;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct ListMembershipsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, IamCollectionMembershipResponse>,
 }
 
 impl<'a> ListMembershipsRequest<'a> {
@@ -58,7 +60,7 @@ impl<'a> ListMembershipsRequest<'a> {
         self.builder = self.builder.header_param("status", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<IamCollectionMembershipResponse> {
         self.builder.send().await
     }
 }
@@ -192,7 +194,7 @@ pub fn update_membership(api: &ApiClient) -> UpdateMembershipRequest<'_> {
 
 #[derive(Debug)]
 pub struct DeleteMembershipRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, IamApiResponseSingle>,
 }
 
 impl<'a> DeleteMembershipRequest<'a> {
@@ -206,7 +208,7 @@ impl<'a> DeleteMembershipRequest<'a> {
         self.builder = self.builder.path_param("membership_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<IamApiResponseSingle> {
         self.builder.send().await
     }
 }

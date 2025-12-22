@@ -15,5 +15,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type SpectrumConfigAppConfigCollection =
-    crate::models::spectrum_config_api_response_collection::SpectrumConfigApiResponseCollection;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct SpectrumConfigAppConfigCollection {
+    pub result: Option<Vec<crate::models::spectrum_config_app_config::SpectrumConfigAppConfig>>,
+    #[serde(flatten)]
+    pub spectrum_config_api_response_collection:
+        crate::models::spectrum_config_api_response_collection::SpectrumConfigApiResponseCollection,
+}

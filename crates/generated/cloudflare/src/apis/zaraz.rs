@@ -15,6 +15,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::zaraz_api_response_common::ZarazApiResponseCommon;
 use crate::models::zaraz_zaraz_config_history_response::ZarazZarazConfigHistoryResponse;
 use crate::models::zaraz_zaraz_config_response::ZarazZarazConfigResponse;
 use crate::models::zaraz_zaraz_config_return::ZarazZarazConfigReturn;
@@ -383,7 +384,7 @@ pub fn zones_zaraz_config_history(api: &ApiClient) -> ZonesZarazConfigHistoryReq
 
 #[derive(Debug)]
 pub struct ZonesZarazPublishRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, ZarazApiResponseCommon>,
 }
 
 impl<'a> ZonesZarazPublishRequest<'a> {
@@ -402,7 +403,7 @@ impl<'a> ZonesZarazPublishRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<ZarazApiResponseCommon> {
         self.builder.send().await
     }
 }

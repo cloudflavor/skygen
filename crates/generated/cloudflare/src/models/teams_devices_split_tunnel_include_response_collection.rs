@@ -22,6 +22,7 @@ pub struct TeamsDevicesSplitTunnelIncludeResponseCollection {
     pub result: Option<
         Vec<crate::models::teams_devices_split_tunnel_include::TeamsDevicesSplitTunnelInclude>,
     >,
+    #[serde(flatten)]
     pub teams_devices_api_response_collection:
         crate::models::teams_devices_api_response_collection::TeamsDevicesApiResponseCollection,
 }

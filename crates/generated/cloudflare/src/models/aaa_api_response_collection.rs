@@ -15,4 +15,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type AaaApiResponseCollection = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct AaaApiResponseCollection {
+    #[serde(flatten)]
+    pub aaa_api_response_common: crate::models::aaa_api_response_common::AaaApiResponseCommon,
+    pub result_info: Option<crate::models::aaa_schemas_result_info::AaaSchemasResultInfo>,
+}

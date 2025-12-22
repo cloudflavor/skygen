@@ -15,4 +15,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type SecurityCenterApiResponseSingle = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct SecurityCenterApiResponseSingle {
+    #[serde(flatten)]
+    pub security_center_api_response_common:
+        crate::models::security_center_api_response_common::SecurityCenterApiResponseCommon,
+}

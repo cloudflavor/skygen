@@ -19,6 +19,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct ArgoAnalyticsResponseSingle {
+    #[serde(flatten)]
     pub argo_analytics_api_response_single:
         crate::models::argo_analytics_api_response_single::ArgoAnalyticsApiResponseSingle,
     pub result: Option<std::collections::BTreeMap<String, serde_json::Value>>,

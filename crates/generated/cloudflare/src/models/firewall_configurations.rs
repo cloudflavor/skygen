@@ -15,4 +15,5 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type FirewallConfigurations = Vec<serde_json::Value>;
+pub type FirewallConfigurations =
+    Vec<crate::models::firewall_schemas_ip_configuration::FirewallSchemasIpConfiguration>;

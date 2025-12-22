@@ -15,5 +15,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type SecondaryDnsForceResponse =
-    crate::models::secondary_dns_api_response_single::SecondaryDnsApiResponseSingle;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct SecondaryDnsForceResponse {
+    pub result: Option<crate::models::secondary_dns_force_result::SecondaryDnsForceResult>,
+    #[serde(flatten)]
+    pub secondary_dns_api_response_single:
+        crate::models::secondary_dns_api_response_single::SecondaryDnsApiResponseSingle,
+}

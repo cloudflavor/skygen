@@ -15,5 +15,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type BillSubsApiBillingHistoryCollection =
-    crate::models::bill_subs_api_api_response_collection::BillSubsApiApiResponseCollection;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct BillSubsApiBillingHistoryCollection {
+    #[serde(flatten)]
+    pub bill_subs_api_api_response_collection:
+        crate::models::bill_subs_api_api_response_collection::BillSubsApiApiResponseCollection,
+    pub result:
+        Option<Vec<crate::models::bill_subs_api_billing_history::BillSubsApiBillingHistory>>,
+}

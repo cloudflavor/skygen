@@ -19,5 +19,5 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct CacheRulesSmartTieredCacheResponseValue {
-    pub result: Option<serde_json::Value>,
+    pub result: Option<crate::models::cache_rules_smart_tiered_cache::CacheRulesSmartTieredCache>,
 }

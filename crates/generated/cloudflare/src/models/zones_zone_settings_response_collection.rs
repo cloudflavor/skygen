@@ -19,6 +19,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct ZonesZoneSettingsResponseCollection {
+    pub result: Option<Vec<crate::models::zones_0rtt::Zones0rtt>>,
     #[serde(flatten)]
     pub zones_settings_api_components_schemas_api_response_common: crate::models::zones_settings_api_components_schemas_api_response_common::ZonesSettingsApiComponentsSchemasApiResponseCommon,
 }

@@ -15,4 +15,18 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type FirewallAnomalyPackage = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct FirewallAnomalyPackage {
+    pub action_mode: Option<crate::models::firewall_action_mode::FirewallActionMode>,
+    pub description:
+        Option<crate::models::firewall_anomaly_description::FirewallAnomalyDescription>,
+    pub detection_mode:
+        Option<crate::models::firewall_anomaly_detection_mode::FirewallAnomalyDetectionMode>,
+    #[serde(flatten)]
+    pub firewall_package_definition:
+        crate::models::firewall_package_definition::FirewallPackageDefinition,
+    pub name: Option<crate::models::firewall_anomaly_name::FirewallAnomalyName>,
+    pub sensitivity: Option<crate::models::firewall_sensitivity::FirewallSensitivity>,
+}

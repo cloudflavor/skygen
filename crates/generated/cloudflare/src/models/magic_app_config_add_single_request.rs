@@ -15,4 +15,10 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type MagicAppConfigAddSingleRequest = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct MagicAppConfigAddSingleRequest {
+    pub breakout: Option<crate::models::magic_app_breakout::MagicAppBreakout>,
+    pub priority: Option<crate::models::magic_app_priority::MagicAppPriority>,
+}

@@ -15,4 +15,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type DnsFirewallDnsFirewallReverseDnsPatch = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct DnsFirewallDnsFirewallReverseDnsPatch {
+    #[serde(flatten)]
+    pub dns_firewall_dns_firewall_reverse_dns:
+        crate::models::dns_firewall_dns_firewall_reverse_dns::DnsFirewallDnsFirewallReverseDns,
+}

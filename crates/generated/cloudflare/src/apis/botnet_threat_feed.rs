@@ -15,12 +15,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::dos_api_response_common::DosApiResponseCommon;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct GetDayReportRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, DosApiResponseCommon>,
 }
 
 impl<'a> GetDayReportRequest<'a> {
@@ -47,7 +48,7 @@ impl<'a> GetDayReportRequest<'a> {
         self.builder = self.builder.header_param("date", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<DosApiResponseCommon> {
         self.builder.send().await
     }
 }
@@ -80,7 +81,7 @@ pub fn get_day_report(api: &ApiClient) -> GetDayReportRequest<'_> {
 
 #[derive(Debug)]
 pub struct GetFullReportRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, DosApiResponseCommon>,
 }
 
 impl<'a> GetFullReportRequest<'a> {
@@ -103,7 +104,7 @@ impl<'a> GetFullReportRequest<'a> {
         self.builder = self.builder.path_param("asn_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<DosApiResponseCommon> {
         self.builder.send().await
     }
 }
@@ -134,7 +135,7 @@ pub fn get_full_report(api: &ApiClient) -> GetFullReportRequest<'_> {
 
 #[derive(Debug)]
 pub struct ListAsnRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, DosApiResponseCommon>,
 }
 
 impl<'a> ListAsnRequest<'a> {
@@ -152,7 +153,7 @@ impl<'a> ListAsnRequest<'a> {
         self.builder = self.builder.path_param("account_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<DosApiResponseCommon> {
         self.builder.send().await
     }
 }
@@ -181,7 +182,7 @@ pub fn list_asn(api: &ApiClient) -> ListAsnRequest<'_> {
 
 #[derive(Debug)]
 pub struct DeleteAsnRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, DosApiResponseCommon>,
 }
 
 impl<'a> DeleteAsnRequest<'a> {
@@ -204,7 +205,7 @@ impl<'a> DeleteAsnRequest<'a> {
         self.builder = self.builder.path_param("asn_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<DosApiResponseCommon> {
         self.builder.send().await
     }
 }

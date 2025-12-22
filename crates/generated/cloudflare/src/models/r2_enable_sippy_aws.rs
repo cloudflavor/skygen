@@ -15,4 +15,10 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type R2EnableSippyAws = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct R2EnableSippyAws {
+    pub destination: Option<std::collections::BTreeMap<String, serde_json::Value>>,
+    pub source: Option<std::collections::BTreeMap<String, serde_json::Value>>,
+}

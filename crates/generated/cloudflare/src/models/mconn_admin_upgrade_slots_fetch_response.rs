@@ -15,4 +15,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type MconnAdminUpgradeSlotsFetchResponse = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct MconnAdminUpgradeSlotsFetchResponse {
+    #[serde(flatten)]
+    pub mconn_good_response: crate::models::mconn_good_response::MconnGoodResponse,
+    pub result: Option<Vec<crate::models::mconn_admin_upgrade_slot::MconnAdminUpgradeSlot>>,
+}

@@ -19,8 +19,8 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct TurnstileApiResponseCommonFailure {
-    pub errors: serde_json::Value,
-    pub messages: serde_json::Value,
+    pub errors: crate::models::turnstile_messages::TurnstileMessages,
+    pub messages: crate::models::turnstile_messages::TurnstileMessages,
     pub result: std::collections::BTreeMap<String, serde_json::Value>,
     pub success: bool,
 }

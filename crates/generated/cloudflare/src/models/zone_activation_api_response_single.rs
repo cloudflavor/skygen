@@ -15,4 +15,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type ZoneActivationApiResponseSingle = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct ZoneActivationApiResponseSingle {
+    #[serde(flatten)]
+    pub zone_activation_api_response_common:
+        crate::models::zone_activation_api_response_common::ZoneActivationApiResponseCommon,
+}

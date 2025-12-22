@@ -15,4 +15,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type FirewallFilterRuleResponse = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct FirewallFilterRuleResponse {
+    pub filter: Option<crate::models::firewall_filter::FirewallFilter>,
+    #[serde(flatten)]
+    pub firewall_filter_rule_base: crate::models::firewall_filter_rule_base::FirewallFilterRuleBase,
+}

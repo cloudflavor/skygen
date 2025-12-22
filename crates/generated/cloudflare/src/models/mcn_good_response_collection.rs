@@ -15,4 +15,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type McnGoodResponseCollection = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct McnGoodResponseCollection {
+    pub errors: Option<serde_json::Value>,
+    #[serde(flatten)]
+    pub mcn_response_collection: crate::models::mcn_response_collection::McnResponseCollection,
+}

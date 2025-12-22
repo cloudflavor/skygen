@@ -15,4 +15,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type MagicVisibilityMnmMnmRulesCollectionResponse = crate::models::magic_visibility_mnm_api_response_collection::MagicVisibilityMnmApiResponseCollection;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct MagicVisibilityMnmMnmRulesCollectionResponse {
+    #[serde(flatten)]
+    pub magic_visibility_mnm_api_response_collection: crate::models::magic_visibility_mnm_api_response_collection::MagicVisibilityMnmApiResponseCollection,
+    pub result: Option<Vec<crate::models::magic_visibility_mnm_mnm_rule::MagicVisibilityMnmMnmRule>>,
+}

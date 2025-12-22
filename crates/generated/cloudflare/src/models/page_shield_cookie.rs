@@ -15,4 +15,22 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type PageShieldCookie = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct PageShieldCookie {
+    pub domain_attribute: Option<String>,
+    pub expires_attribute: Option<String>,
+    pub first_seen_at: String,
+    pub host: String,
+    pub http_only_attribute: Option<bool>,
+    pub id: crate::models::page_shield_id::PageShieldId,
+    pub last_seen_at: String,
+    pub max_age_attribute: Option<i64>,
+    pub name: String,
+    pub page_urls: Option<Vec<String>>,
+    pub path_attribute: Option<String>,
+    pub r#type: String,
+    pub same_site_attribute: Option<String>,
+    pub secure_attribute: Option<bool>,
+}

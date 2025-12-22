@@ -15,4 +15,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type CustomIndicatorFeedsUpdateFeed = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct CustomIndicatorFeedsUpdateFeed {
+    pub file_id: Option<i64>,
+    pub filename: Option<String>,
+    pub status: Option<String>,
+}

@@ -20,5 +20,6 @@ use serde::{Deserialize, Serialize};
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct WorkersScriptResponseUpload {
     pub startup_time_ms: i64,
+    #[serde(flatten)]
     pub workers_script_response: crate::models::workers_script_response::WorkersScriptResponse,
 }

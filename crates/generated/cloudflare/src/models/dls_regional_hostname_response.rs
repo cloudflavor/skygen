@@ -19,7 +19,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct DlsRegionalHostnameResponse {
-    pub created_on: serde_json::Value,
+    pub created_on: crate::models::dls_timestamp::DlsTimestamp,
     pub hostname: crate::models::dls_hostname::DlsHostname,
     pub region_key: crate::models::dls_region_key::DlsRegionKey,
     pub routing: Option<crate::models::dls_routing::DlsRouting>,

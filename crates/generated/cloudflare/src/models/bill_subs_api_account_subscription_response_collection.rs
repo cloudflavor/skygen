@@ -19,6 +19,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct BillSubsApiAccountSubscriptionResponseCollection {
+    #[serde(flatten)]
     pub bill_subs_api_api_response_collection:
         crate::models::bill_subs_api_api_response_collection::BillSubsApiApiResponseCollection,
     pub result: Option<Vec<crate::models::bill_subs_api_subscription::BillSubsApiSubscription>>,

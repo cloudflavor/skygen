@@ -15,4 +15,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type ResourceSharingShareResponseSingle = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct ResourceSharingShareResponseSingle {
+    #[serde(flatten)]
+    pub resource_sharing_api_response_common:
+        crate::models::resource_sharing_api_response_common::ResourceSharingApiResponseCommon,
+    pub result: Option<crate::models::resource_sharing_share_object::ResourceSharingShareObject>,
+}

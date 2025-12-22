@@ -20,5 +20,6 @@ use serde::{Deserialize, Serialize};
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct WafProductApiBundleSchemasResponseStatus {
     pub result: Option<crate::models::waf_product_api_bundle_schemas_status::WafProductApiBundleSchemasStatus>,
+    #[serde(flatten)]
     pub waf_product_api_bundle_schemas_api_response_single: crate::models::waf_product_api_bundle_schemas_api_response_single::WafProductApiBundleSchemasApiResponseSingle,
 }

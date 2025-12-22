@@ -15,5 +15,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type HealthchecksIdResponse =
-    crate::models::healthchecks_api_response_single::HealthchecksApiResponseSingle;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct HealthchecksIdResponse {
+    #[serde(flatten)]
+    pub healthchecks_api_response_single:
+        crate::models::healthchecks_api_response_single::HealthchecksApiResponseSingle,
+    pub result: Option<std::collections::BTreeMap<String, serde_json::Value>>,
+}

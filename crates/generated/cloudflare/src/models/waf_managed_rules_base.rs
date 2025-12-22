@@ -15,4 +15,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type WafManagedRulesBase = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct WafManagedRulesBase {
+    pub description: Option<crate::models::waf_managed_rules_schemas_description::WafManagedRulesSchemasDescription>,
+    pub group: Option<std::collections::BTreeMap<String, serde_json::Value>>,
+    pub id: Option<crate::models::waf_managed_rules_rule_components_schemas_identifier::WafManagedRulesRuleComponentsSchemasIdentifier>,
+    pub package_id: Option<crate::models::waf_managed_rules_identifier::WafManagedRulesIdentifier>,
+    pub priority: Option<crate::models::waf_managed_rules_priority::WafManagedRulesPriority>,
+}

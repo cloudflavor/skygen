@@ -15,13 +15,15 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::bill_subs_api_api_response_collection::BillSubsApiApiResponseCollection;
+use crate::models::bill_subs_api_api_response_single::BillSubsApiApiResponseSingle;
 use crate::models::bill_subs_api_plan_response_collection::BillSubsApiPlanResponseCollection;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct ListAvailablePlansRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, BillSubsApiApiResponseCollection>,
 }
 
 impl<'a> ListAvailablePlansRequest<'a> {
@@ -35,7 +37,7 @@ impl<'a> ListAvailablePlansRequest<'a> {
         self.builder = self.builder.path_param("zone_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<BillSubsApiApiResponseCollection> {
         self.builder.send().await
     }
 }
@@ -64,7 +66,7 @@ pub fn list_available_plans(api: &ApiClient) -> ListAvailablePlansRequest<'_> {
 
 #[derive(Debug)]
 pub struct AvailablePlanDetailsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, BillSubsApiApiResponseSingle>,
 }
 
 impl<'a> AvailablePlanDetailsRequest<'a> {
@@ -87,7 +89,7 @@ impl<'a> AvailablePlanDetailsRequest<'a> {
         self.builder = self.builder.path_param("plan_identifier", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<BillSubsApiApiResponseSingle> {
         self.builder.send().await
     }
 }

@@ -15,4 +15,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type MagicTransitOptions = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct MagicTransitOptions {
+    pub max_ttl: Option<crate::models::magic_transit_max_ttl::MagicTransitMaxTtl>,
+    pub packet_type: Option<crate::models::magic_transit_packet_type::MagicTransitPacketType>,
+    pub packets_per_ttl:
+        Option<crate::models::magic_transit_packets_per_ttl::MagicTransitPacketsPerTtl>,
+    pub port: Option<crate::models::magic_transit_port::MagicTransitPort>,
+    pub wait_time: Option<crate::models::magic_transit_wait_time::MagicTransitWaitTime>,
+}

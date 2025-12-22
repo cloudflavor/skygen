@@ -23,5 +23,5 @@ pub struct EmailDnsRecord {
     pub name: Option<String>,
     pub priority: Option<f64>,
     pub r#type: Option<String>,
-    pub ttl: Option<serde_json::Value>,
+    pub ttl: Option<f64>,
 }

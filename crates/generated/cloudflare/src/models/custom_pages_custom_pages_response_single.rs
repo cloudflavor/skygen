@@ -15,5 +15,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type CustomPagesCustomPagesResponseSingle =
-    crate::models::custom_pages_api_response_single::CustomPagesApiResponseSingle;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct CustomPagesCustomPagesResponseSingle {
+    #[serde(flatten)]
+    pub custom_pages_api_response_single:
+        crate::models::custom_pages_api_response_single::CustomPagesApiResponseSingle,
+    pub result: Option<std::collections::BTreeMap<String, serde_json::Value>>,
+}

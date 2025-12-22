@@ -15,4 +15,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type ListsListsResponseCollection = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct ListsListsResponseCollection {
+    #[serde(flatten)]
+    pub lists_api_response_collection:
+        crate::models::lists_api_response_collection::ListsApiResponseCollection,
+    pub result: Option<Vec<crate::models::lists_list::ListsList>>,
+}

@@ -15,5 +15,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type AddressingSchemasResponseCollection =
-    crate::models::addressing_api_response_collection::AddressingApiResponseCollection;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct AddressingSchemasResponseCollection {
+    #[serde(flatten)]
+    pub addressing_api_response_collection:
+        crate::models::addressing_api_response_collection::AddressingApiResponseCollection,
+    pub result: Option<Vec<crate::models::addressing_ipam_delegations::AddressingIpamDelegations>>,
+}

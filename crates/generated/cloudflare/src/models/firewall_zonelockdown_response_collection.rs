@@ -19,6 +19,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct FirewallZonelockdownResponseCollection {
+    #[serde(flatten)]
     pub firewall_api_response_collection:
         crate::models::firewall_api_response_collection::FirewallApiResponseCollection,
     pub result: Vec<crate::models::firewall_zonelockdown::FirewallZonelockdown>,

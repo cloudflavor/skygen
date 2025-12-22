@@ -19,6 +19,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct ZarazManagedComponent {
+    pub r#type: String,
     #[serde(flatten)]
     pub zaraz_base_mc: crate::models::zaraz_base_mc::ZarazBaseMc,
 }

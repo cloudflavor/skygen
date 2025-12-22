@@ -19,7 +19,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct TunnelTunnelResponseSingle {
-    pub result: Option<serde_json::Value>,
+    pub result: Option<crate::models::tunnel_cfd_tunnel::TunnelCfdTunnel>,
     #[serde(flatten)]
     pub tunnel_api_response_common:
         crate::models::tunnel_api_response_common::TunnelApiResponseCommon,

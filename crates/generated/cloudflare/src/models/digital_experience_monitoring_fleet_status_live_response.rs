@@ -19,6 +19,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct DigitalExperienceMonitoringFleetStatusLiveResponse {
+    #[serde(flatten)]
     pub digital_experience_monitoring_api_response_single: crate::models::digital_experience_monitoring_api_response_single::DigitalExperienceMonitoringApiResponseSingle,
     pub result: Option<std::collections::BTreeMap<String, serde_json::Value>>,
 }

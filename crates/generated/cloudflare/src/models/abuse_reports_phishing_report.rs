@@ -15,4 +15,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type AbuseReportsPhishingReport = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct AbuseReportsPhishingReport {
+    #[serde(flatten)]
+    pub abuse_reports_base_report_fields:
+        crate::models::abuse_reports_base_report_fields::AbuseReportsBaseReportFields,
+    pub act: Option<serde_json::Value>,
+    pub host_notification: Option<serde_json::Value>,
+    pub owner_notification: Option<serde_json::Value>,
+}

@@ -15,5 +15,15 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type BotManagementSbfmDefinitelyConfig =
-    crate::models::bot_management_base_config::BotManagementBaseConfig;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct BotManagementSbfmDefinitelyConfig {
+    #[serde(flatten)]
+    pub bot_management_base_config: crate::models::bot_management_base_config::BotManagementBaseConfig,
+    pub optimize_wordpress: Option<crate::models::bot_management_optimize_wordpress::BotManagementOptimizeWordpress>,
+    pub sbfm_definitely_automated: Option<crate::models::bot_management_sbfm_definitely_automated::BotManagementSbfmDefinitelyAutomated>,
+    pub sbfm_static_resource_protection: Option<crate::models::bot_management_sbfm_static_resource_protection::BotManagementSbfmStaticResourceProtection>,
+    pub sbfm_verified_bots: Option<crate::models::bot_management_sbfm_verified_bots::BotManagementSbfmVerifiedBots>,
+    pub stale_zone_configuration: Option<serde_json::Value>,
+}

@@ -19,6 +19,8 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct RumSitesResponseCollection {
+    pub result: Option<Vec<crate::models::rum_site::RumSite>>,
+    pub result_info: Option<crate::models::rum_result_info::RumResultInfo>,
     #[serde(flatten)]
     pub rum_api_response_common: crate::models::rum_api_response_common::RumApiResponseCommon,
 }

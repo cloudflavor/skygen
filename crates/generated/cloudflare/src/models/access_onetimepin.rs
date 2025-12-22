@@ -15,4 +15,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type AccessOnetimepin = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct AccessOnetimepin {
+    #[serde(flatten)]
+    pub access_identity_provider: crate::models::access_identity_provider::AccessIdentityProvider,
+    pub config: Option<std::collections::BTreeMap<String, serde_json::Value>>,
+    pub r#type: Option<String>,
+}

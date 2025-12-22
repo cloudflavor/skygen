@@ -19,6 +19,11 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct ZarazBaseMc {
+    pub actions: Option<std::collections::BTreeMap<String, serde_json::Value>>,
+    pub component: String,
+    pub neo_events: Option<Vec<std::collections::BTreeMap<String, serde_json::Value>>>,
+    pub permissions: Vec<String>,
+    pub settings: std::collections::BTreeMap<String, serde_json::Value>,
     #[serde(flatten)]
     pub zaraz_base_tool: crate::models::zaraz_base_tool::ZarazBaseTool,
 }

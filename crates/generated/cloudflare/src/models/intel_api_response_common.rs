@@ -21,6 +21,6 @@ use serde::{Deserialize, Serialize};
 pub struct IntelApiResponseCommon {
     pub errors: crate::models::intel_messages::IntelMessages,
     pub messages: crate::models::intel_messages::IntelMessages,
-    pub result: serde_json::Value,
+    pub result: std::collections::BTreeMap<String, serde_json::Value>,
     pub success: bool,
 }

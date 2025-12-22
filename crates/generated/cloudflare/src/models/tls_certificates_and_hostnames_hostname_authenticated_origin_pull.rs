@@ -15,4 +15,16 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type TlsCertificatesAndHostnamesHostnameAuthenticatedOriginPull = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct TlsCertificatesAndHostnamesHostnameAuthenticatedOriginPull {
+    pub cert_id: Option<crate::models::tls_certificates_and_hostnames_identifier::TlsCertificatesAndHostnamesIdentifier>,
+    pub certificate: Option<crate::models::tls_certificates_and_hostnames_hostname_authenticated_origin_pull_components_schemas_certificate::TlsCertificatesAndHostnamesHostnameAuthenticatedOriginPullComponentsSchemasCertificate>,
+    pub enabled: Option<crate::models::tls_certificates_and_hostnames_hostname_authenticated_origin_pull_components_schemas_enabled::TlsCertificatesAndHostnamesHostnameAuthenticatedOriginPullComponentsSchemasEnabled>,
+    pub hostname: Option<crate::models::tls_certificates_and_hostnames_schemas_hostname::TlsCertificatesAndHostnamesSchemasHostname>,
+    pub id: Option<crate::models::tls_certificates_and_hostnames_identifier::TlsCertificatesAndHostnamesIdentifier>,
+    pub private_key: Option<crate::models::tls_certificates_and_hostnames_schemas_private_key::TlsCertificatesAndHostnamesSchemasPrivateKey>,
+    #[serde(flatten)]
+    pub tls_certificates_and_hostnames_hostname_certid_object: crate::models::tls_certificates_and_hostnames_hostname_certid_object::TlsCertificatesAndHostnamesHostnameCertidObject,
+}

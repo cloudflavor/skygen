@@ -15,4 +15,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type StreamMediaStatus = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct StreamMediaStatus {
+    pub error_reason_code: Option<crate::models::stream_error_reason_code::StreamErrorReasonCode>,
+    pub error_reason_text: Option<crate::models::stream_error_reason_text::StreamErrorReasonText>,
+    pub pct_complete: Option<crate::models::stream_pct_complete::StreamPctComplete>,
+    pub state: Option<crate::models::stream_media_state::StreamMediaState>,
+}

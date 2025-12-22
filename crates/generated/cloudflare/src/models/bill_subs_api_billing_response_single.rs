@@ -19,6 +19,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct BillSubsApiBillingResponseSingle {
+    #[serde(flatten)]
     pub bill_subs_api_api_response_single:
         crate::models::bill_subs_api_api_response_single::BillSubsApiApiResponseSingle,
     pub result: Option<std::collections::BTreeMap<String, serde_json::Value>>,

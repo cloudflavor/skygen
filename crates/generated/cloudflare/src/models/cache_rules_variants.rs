@@ -15,4 +15,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type CacheRulesVariants = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct CacheRulesVariants {
+    #[serde(flatten)]
+    pub cache_rules_base: crate::models::cache_rules_base::CacheRulesBase,
+    pub id: Option<String>,
+}

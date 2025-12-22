@@ -15,4 +15,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type TlsCertificatesAndHostnamesCustomHostname = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct TlsCertificatesAndHostnamesCustomHostname {
+    pub hostname: crate::models::tls_certificates_and_hostnames_hostname::TlsCertificatesAndHostnamesHostname,
+    pub id: crate::models::tls_certificates_and_hostnames_identifier::TlsCertificatesAndHostnamesIdentifier,
+    pub ssl: crate::models::tls_certificates_and_hostnames_ssl::TlsCertificatesAndHostnamesSsl,
+    #[serde(flatten)]
+    pub tls_certificates_and_hostnames_customhostname: crate::models::tls_certificates_and_hostnames_customhostname::TlsCertificatesAndHostnamesCustomhostname,
+}

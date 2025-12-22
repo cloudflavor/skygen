@@ -21,6 +21,6 @@ use serde::{Deserialize, Serialize};
 pub struct ImagesApiResponseCommon {
     pub errors: crate::models::images_messages::ImagesMessages,
     pub messages: crate::models::images_messages::ImagesMessages,
-    pub result: serde_json::Value,
+    pub result: std::collections::BTreeMap<String, serde_json::Value>,
     pub success: bool,
 }

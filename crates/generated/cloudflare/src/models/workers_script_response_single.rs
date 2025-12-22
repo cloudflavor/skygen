@@ -20,6 +20,7 @@ use serde::{Deserialize, Serialize};
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct WorkersScriptResponseSingle {
     pub result: crate::models::workers_script_response::WorkersScriptResponse,
+    #[serde(flatten)]
     pub workers_api_response_single:
         crate::models::workers_api_response_single::WorkersApiResponseSingle,
 }

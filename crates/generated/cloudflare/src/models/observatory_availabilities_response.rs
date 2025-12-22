@@ -15,5 +15,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type ObservatoryAvailabilitiesResponse =
-    crate::models::observatory_api_response_single::ObservatoryApiResponseSingle;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct ObservatoryAvailabilitiesResponse {
+    #[serde(flatten)]
+    pub observatory_api_response_single:
+        crate::models::observatory_api_response_single::ObservatoryApiResponseSingle,
+    pub result: Option<crate::models::observatory_availabilities::ObservatoryAvailabilities>,
+}

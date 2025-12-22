@@ -15,6 +15,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::email_api_response_single::EmailApiResponseSingle;
+use crate::models::email_email_routing_dns_query_response::EmailEmailRoutingDnsQueryResponse;
 use crate::models::email_email_settings_response_single::EmailEmailSettingsResponseSingle;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
@@ -108,7 +110,7 @@ pub fn disable_email_routing(api: &ApiClient) -> DisableEmailRoutingRequest<'_> 
 
 #[derive(Debug)]
 pub struct DnsSettingsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, EmailEmailRoutingDnsQueryResponse>,
 }
 
 impl<'a> DnsSettingsRequest<'a> {
@@ -126,7 +128,7 @@ impl<'a> DnsSettingsRequest<'a> {
         self.builder = self.builder.header_param("subdomain", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<EmailEmailRoutingDnsQueryResponse> {
         self.builder.send().await
     }
 }
@@ -210,7 +212,7 @@ pub fn enable_email_routing_dns(api: &ApiClient) -> EnableEmailRoutingDnsRequest
 
 #[derive(Debug)]
 pub struct DisableEmailRoutingDnsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, EmailApiResponseSingle>,
 }
 
 impl<'a> DisableEmailRoutingDnsRequest<'a> {
@@ -232,7 +234,7 @@ impl<'a> DisableEmailRoutingDnsRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<EmailApiResponseSingle> {
         self.builder.send().await
     }
 }

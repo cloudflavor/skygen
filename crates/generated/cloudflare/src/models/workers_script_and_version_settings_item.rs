@@ -19,15 +19,19 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct WorkersScriptAndVersionSettingsItem {
-    pub bindings: Option<serde_json::Value>,
-    pub compatibility_date: Option<serde_json::Value>,
-    pub compatibility_flags: Option<serde_json::Value>,
+    pub bindings: Option<crate::models::workers_bindings::WorkersBindings>,
+    pub compatibility_date:
+        Option<crate::models::workers_compatibility_date::WorkersCompatibilityDate>,
+    pub compatibility_flags:
+        Option<crate::models::workers_compatibility_flags::WorkersCompatibilityFlags>,
     pub limits: Option<crate::models::workers_limits::WorkersLimits>,
-    pub logpush: Option<serde_json::Value>,
-    pub migrations: Option<serde_json::Value>,
+    pub logpush: Option<crate::models::workers_logpush::WorkersLogpush>,
+    pub migrations:
+        Option<crate::models::workers_single_step_migrations::WorkersSingleStepMigrations>,
     pub observability: Option<crate::models::workers_observability::WorkersObservability>,
-    pub placement: Option<serde_json::Value>,
-    pub tags: Option<serde_json::Value>,
-    pub tail_consumers: Option<serde_json::Value>,
-    pub usage_model: Option<serde_json::Value>,
+    pub placement:
+        Option<crate::models::workers_placement_info_no_status::WorkersPlacementInfoNoStatus>,
+    pub tags: Option<crate::models::workers_tags::WorkersTags>,
+    pub tail_consumers: Option<crate::models::workers_tail_consumers::WorkersTailConsumers>,
+    pub usage_model: Option<crate::models::workers_usage_model::WorkersUsageModel>,
 }

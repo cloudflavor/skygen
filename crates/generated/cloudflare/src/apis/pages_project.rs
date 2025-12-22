@@ -15,6 +15,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::pages_api_response_common::PagesApiResponseCommon;
 use crate::models::pages_project_response::PagesProjectResponse;
 use crate::models::pages_projects_response::PagesProjectsResponse;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
@@ -174,7 +175,7 @@ pub fn get_project(api: &ApiClient) -> GetProjectRequest<'_> {
 
 #[derive(Debug)]
 pub struct DeleteProjectRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, PagesApiResponseCommon>,
 }
 
 impl<'a> DeleteProjectRequest<'a> {
@@ -197,7 +198,7 @@ impl<'a> DeleteProjectRequest<'a> {
         self.builder = self.builder.path_param("project_name", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<PagesApiResponseCommon> {
         self.builder.send().await
     }
 }

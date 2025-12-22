@@ -19,6 +19,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct SecurityCenterValueCountsResponse {
+    pub result: Option<Vec<std::collections::BTreeMap<String, serde_json::Value>>>,
     #[serde(flatten)]
     pub security_center_api_response_common:
         crate::models::security_center_api_response_common::SecurityCenterApiResponseCommon,

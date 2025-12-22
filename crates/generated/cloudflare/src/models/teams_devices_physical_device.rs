@@ -27,7 +27,7 @@ pub struct TeamsDevicesPhysicalDevice {
     pub hardware_id: Option<String>,
     pub id: String,
     pub last_seen_at: String,
-    pub last_seen_user: Option<serde_json::Value>,
+    pub last_seen_user: Option<crate::models::teams_devices_user::TeamsDevicesUser>,
     pub mac_address: Option<String>,
     pub manufacturer: Option<String>,
     pub model: Option<String>,

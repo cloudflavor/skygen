@@ -15,4 +15,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type ZeroTrustGatewayApiResponseSingle = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct ZeroTrustGatewayApiResponseSingle {
+    #[serde(flatten)]
+    pub zero_trust_gateway_api_response_common:
+        crate::models::zero_trust_gateway_api_response_common::ZeroTrustGatewayApiResponseCommon,
+}

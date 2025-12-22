@@ -15,13 +15,15 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::workers_kv_api_response_collection::WorkersKvApiResponseCollection;
+use crate::models::workers_kv_api_response_common::WorkersKvApiResponseCommon;
 use crate::models::workers_kv_api_response_common_no_result::WorkersKvApiResponseCommonNoResult;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct ListNamespacesRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, WorkersKvApiResponseCollection>,
 }
 
 impl<'a> ListNamespacesRequest<'a> {
@@ -55,7 +57,7 @@ impl<'a> ListNamespacesRequest<'a> {
         self.builder = self.builder.header_param("direction", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<WorkersKvApiResponseCollection> {
         self.builder.send().await
     }
 }
@@ -92,7 +94,7 @@ pub fn list_namespaces(api: &ApiClient) -> ListNamespacesRequest<'_> {
 
 #[derive(Debug)]
 pub struct CreateNamespaceRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, WorkersKvApiResponseCommon>,
 }
 
 impl<'a> CreateNamespaceRequest<'a> {
@@ -118,7 +120,7 @@ impl<'a> CreateNamespaceRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<WorkersKvApiResponseCommon> {
         self.builder.send().await
     }
 }
@@ -149,7 +151,7 @@ pub fn create_namespace(api: &ApiClient) -> CreateNamespaceRequest<'_> {
 
 #[derive(Debug)]
 pub struct GetNamespaceRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, WorkersKvApiResponseCommon>,
 }
 
 impl<'a> GetNamespaceRequest<'a> {
@@ -172,7 +174,7 @@ impl<'a> GetNamespaceRequest<'a> {
         self.builder = self.builder.path_param("namespace_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<WorkersKvApiResponseCommon> {
         self.builder.send().await
     }
 }
@@ -203,7 +205,7 @@ pub fn get_namespace(api: &ApiClient) -> GetNamespaceRequest<'_> {
 
 #[derive(Debug)]
 pub struct RenameNamespaceRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, WorkersKvApiResponseCommon>,
 }
 
 impl<'a> RenameNamespaceRequest<'a> {
@@ -234,7 +236,7 @@ impl<'a> RenameNamespaceRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<WorkersKvApiResponseCommon> {
         self.builder.send().await
     }
 }
@@ -321,7 +323,7 @@ pub fn remove_namespace(api: &ApiClient) -> RemoveNamespaceRequest<'_> {
 
 #[derive(Debug)]
 pub struct WriteMultipleKeyValueRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, WorkersKvApiResponseCommonNoResult>,
 }
 
 impl<'a> WriteMultipleKeyValueRequest<'a> {
@@ -352,7 +354,7 @@ impl<'a> WriteMultipleKeyValueRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<WorkersKvApiResponseCommonNoResult> {
         self.builder.send().await
     }
 }
@@ -385,7 +387,7 @@ pub fn write_multiple_key_value(api: &ApiClient) -> WriteMultipleKeyValueRequest
 
 #[derive(Debug)]
 pub struct DeleteMultipleKeyValueRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, WorkersKvApiResponseCommonNoResult>,
 }
 
 impl<'a> DeleteMultipleKeyValueRequest<'a> {
@@ -416,7 +418,7 @@ impl<'a> DeleteMultipleKeyValueRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<WorkersKvApiResponseCommonNoResult> {
         self.builder.send().await
     }
 }
@@ -449,7 +451,7 @@ pub fn delete_multiple_key_value(api: &ApiClient) -> DeleteMultipleKeyValueReque
 
 #[derive(Debug)]
 pub struct DeleteMultipleKeyValuePostRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, WorkersKvApiResponseCommonNoResult>,
 }
 
 impl<'a> DeleteMultipleKeyValuePostRequest<'a> {
@@ -480,7 +482,7 @@ impl<'a> DeleteMultipleKeyValuePostRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<WorkersKvApiResponseCommonNoResult> {
         self.builder.send().await
     }
 }
@@ -513,7 +515,7 @@ pub fn delete_multiple_key_value_post(api: &ApiClient) -> DeleteMultipleKeyValue
 
 #[derive(Debug)]
 pub struct GetMultipleKeyValueRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, WorkersKvApiResponseCommonNoResult>,
 }
 
 impl<'a> GetMultipleKeyValueRequest<'a> {
@@ -544,7 +546,7 @@ impl<'a> GetMultipleKeyValueRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<WorkersKvApiResponseCommonNoResult> {
         self.builder.send().await
     }
 }
@@ -577,7 +579,7 @@ pub fn get_multiple_key_value(api: &ApiClient) -> GetMultipleKeyValueRequest<'_>
 
 #[derive(Debug)]
 pub struct ListNamespaceSKeysRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, WorkersKvApiResponseCommon>,
 }
 
 impl<'a> ListNamespaceSKeysRequest<'a> {
@@ -612,7 +614,7 @@ impl<'a> ListNamespaceSKeysRequest<'a> {
         self.builder = self.builder.header_param("cursor", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<WorkersKvApiResponseCommon> {
         self.builder.send().await
     }
 }
@@ -649,7 +651,7 @@ pub fn list_namespace_s_keys(api: &ApiClient) -> ListNamespaceSKeysRequest<'_> {
 
 #[derive(Debug)]
 pub struct ReadMetadataKeyRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, WorkersKvApiResponseCommon>,
 }
 
 impl<'a> ReadMetadataKeyRequest<'a> {
@@ -677,7 +679,7 @@ impl<'a> ReadMetadataKeyRequest<'a> {
         self.builder = self.builder.path_param("key_name", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<WorkersKvApiResponseCommon> {
         self.builder.send().await
     }
 }

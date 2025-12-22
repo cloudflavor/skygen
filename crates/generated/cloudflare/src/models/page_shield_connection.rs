@@ -15,4 +15,21 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type PageShieldConnection = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct PageShieldConnection {
+    pub added_at: String,
+    pub domain_reported_malicious: Option<bool>,
+    pub first_page_url: Option<String>,
+    pub first_seen_at: String,
+    pub host: String,
+    pub id: crate::models::page_shield_id::PageShieldId,
+    pub last_seen_at: String,
+    pub malicious_domain_categories: Option<Vec<String>>,
+    pub malicious_url_categories: Option<Vec<String>>,
+    pub page_urls: Option<Vec<String>>,
+    pub url: String,
+    pub url_contains_cdn_cgi_path: bool,
+    pub url_reported_malicious: Option<bool>,
+}

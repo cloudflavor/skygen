@@ -19,6 +19,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct MagicVisibilityMnmMnmVpcFlowsSingleResponse {
+    #[serde(flatten)]
     pub magic_visibility_mnm_api_response_single: crate::models::magic_visibility_mnm_api_response_single::MagicVisibilityMnmApiResponseSingle,
     pub result: Option<crate::models::magic_visibility_mnm_mnm_vpc_flows_token::MagicVisibilityMnmMnmVpcFlowsToken>,
 }

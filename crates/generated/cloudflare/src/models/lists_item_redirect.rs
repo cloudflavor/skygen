@@ -15,4 +15,15 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type ListsItemRedirect = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct ListsItemRedirect {
+    pub include_subdomains: Option<bool>,
+    pub preserve_path_suffix: Option<bool>,
+    pub preserve_query_string: Option<bool>,
+    pub source_url: String,
+    pub status_code: Option<i64>,
+    pub subpath_matching: Option<bool>,
+    pub target_url: String,
+}

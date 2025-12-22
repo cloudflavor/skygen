@@ -20,5 +20,5 @@ use serde::{Deserialize, Serialize};
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct IamUpdateUserGroupBody {
     pub name: Option<String>,
-    pub policies: Option<Vec<serde_json::Value>>,
+    pub policies: Option<Vec<std::collections::BTreeMap<String, serde_json::Value>>>,
 }

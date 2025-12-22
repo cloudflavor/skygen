@@ -15,4 +15,4 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type MagicAppSubnets = Vec<serde_json::Value>;
+pub type MagicAppSubnets = Vec<crate::models::magic_cidr::MagicCidr>;

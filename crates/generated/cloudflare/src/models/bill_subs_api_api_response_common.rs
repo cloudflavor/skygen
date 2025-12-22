@@ -21,6 +21,6 @@ use serde::{Deserialize, Serialize};
 pub struct BillSubsApiApiResponseCommon {
     pub errors: crate::models::bill_subs_api_messages::BillSubsApiMessages,
     pub messages: crate::models::bill_subs_api_messages::BillSubsApiMessages,
-    pub result: serde_json::Value,
+    pub result: std::collections::BTreeMap<String, serde_json::Value>,
     pub success: bool,
 }

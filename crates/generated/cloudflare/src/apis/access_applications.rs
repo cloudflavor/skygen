@@ -90,7 +90,7 @@ pub fn list_access_applications(api: &ApiClient) -> ListAccessApplicationsReques
 
 #[derive(Debug)]
 pub struct AddApplicationRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, AccessAppsComponentsSchemasSingleResponse>,
 }
 
 impl<'a> AddApplicationRequest<'a> {
@@ -110,7 +110,7 @@ impl<'a> AddApplicationRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<AccessAppsComponentsSchemasSingleResponse> {
         self.builder.send().await
     }
 }
@@ -195,7 +195,7 @@ pub fn get_access_application(api: &ApiClient) -> GetAccessApplicationRequest<'_
 
 #[derive(Debug)]
 pub struct UpdateAccessApplicationRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, AccessAppsComponentsSchemasSingleResponse>,
 }
 
 impl<'a> UpdateAccessApplicationRequest<'a> {
@@ -223,7 +223,7 @@ impl<'a> UpdateAccessApplicationRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<AccessAppsComponentsSchemasSingleResponse> {
         self.builder.send().await
     }
 }

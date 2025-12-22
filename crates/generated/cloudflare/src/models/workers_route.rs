@@ -19,7 +19,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct WorkersRoute {
-    pub id: serde_json::Value,
+    pub id: crate::models::workers_identifier::WorkersIdentifier,
     pub pattern: String,
     pub script: Option<String>,
 }

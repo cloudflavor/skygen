@@ -15,4 +15,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type IntelPhishingUrlSubmitComponentsSchemasSingleResponse = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct IntelPhishingUrlSubmitComponentsSchemasSingleResponse {
+    #[serde(flatten)]
+    pub intel_api_response_single: crate::models::intel_api_response_single::IntelApiResponseSingle,
+    pub result: Option<crate::models::intel_phishing_url_submit::IntelPhishingUrlSubmit>,
+}

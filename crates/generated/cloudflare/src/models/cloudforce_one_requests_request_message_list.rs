@@ -19,8 +19,8 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct CloudforceOneRequestsRequestMessageList {
-    pub after: Option<serde_json::Value>,
-    pub before: Option<serde_json::Value>,
+    pub after: Option<crate::models::cloudforce_one_requests_time::CloudforceOneRequestsTime>,
+    pub before: Option<crate::models::cloudforce_one_requests_time::CloudforceOneRequestsTime>,
     pub page: i64,
     pub per_page: i64,
     pub sort_by: Option<String>,

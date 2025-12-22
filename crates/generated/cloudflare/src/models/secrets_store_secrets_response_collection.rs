@@ -15,5 +15,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type SecretsStoreSecretsResponseCollection =
-    crate::models::secrets_store_api_response_collection::SecretsStoreApiResponseCollection;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct SecretsStoreSecretsResponseCollection {
+    pub result: Option<Vec<crate::models::secrets_store_secret_object::SecretsStoreSecretObject>>,
+    #[serde(flatten)]
+    pub secrets_store_api_response_collection:
+        crate::models::secrets_store_api_response_collection::SecretsStoreApiResponseCollection,
+}

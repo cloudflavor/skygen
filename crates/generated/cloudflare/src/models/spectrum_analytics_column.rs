@@ -20,5 +20,5 @@ use serde::{Deserialize, Serialize};
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct SpectrumAnalyticsColumn {
     pub dimensions: Option<Vec<String>>,
-    pub metrics: Option<serde_json::Value>,
+    pub metrics: Option<Vec<f64>>,
 }

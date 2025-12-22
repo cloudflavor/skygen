@@ -19,6 +19,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct DnsRecordsDnsResponseCollection {
+    #[serde(flatten)]
     pub dns_records_api_response_collection:
         crate::models::dns_records_api_response_collection::DnsRecordsApiResponseCollection,
     pub result:

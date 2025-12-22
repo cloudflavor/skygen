@@ -15,4 +15,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type MconnControllerEndAttestationSessionResponse = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct MconnControllerEndAttestationSessionResponse {
+    #[serde(flatten)]
+    pub mconn_good_response: crate::models::mconn_good_response::MconnGoodResponse,
+    pub result: Option<crate::models::mconn_controller_end_attestation_session_result::MconnControllerEndAttestationSessionResult>,
+}

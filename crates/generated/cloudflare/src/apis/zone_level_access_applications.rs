@@ -66,7 +66,7 @@ pub fn list_access_applications(api: &ApiClient) -> ListAccessApplicationsReques
 
 #[derive(Debug)]
 pub struct AddBookmarkApplicationRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, AccessAppsComponentsSchemasSingleResponse2>,
 }
 
 impl<'a> AddBookmarkApplicationRequest<'a> {
@@ -85,7 +85,7 @@ impl<'a> AddBookmarkApplicationRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<AccessAppsComponentsSchemasSingleResponse2> {
         self.builder.send().await
     }
 }
@@ -167,7 +167,7 @@ pub fn get_access_application(api: &ApiClient) -> GetAccessApplicationRequest<'_
 
 #[derive(Debug)]
 pub struct UpdateBookmarkApplicationRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, AccessAppsComponentsSchemasSingleResponse2>,
 }
 
 impl<'a> UpdateBookmarkApplicationRequest<'a> {
@@ -192,7 +192,7 @@ impl<'a> UpdateBookmarkApplicationRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<AccessAppsComponentsSchemasSingleResponse2> {
         self.builder.send().await
     }
 }

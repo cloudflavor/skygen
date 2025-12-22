@@ -15,4 +15,10 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type EmailApiResponseSingle = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct EmailApiResponseSingle {
+    #[serde(flatten)]
+    pub email_api_response_common: crate::models::email_api_response_common::EmailApiResponseCommon,
+}

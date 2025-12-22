@@ -22,4 +22,5 @@ pub struct AccessAccessRequestsComponentsSchemasResponseCollection {
     #[serde(flatten)]
     pub access_api_response_common:
         crate::models::access_api_response_common::AccessApiResponseCommon,
+    pub result: Option<Vec<crate::models::access_access_requests::AccessAccessRequests>>,
 }

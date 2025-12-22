@@ -20,6 +20,7 @@ use serde::{Deserialize, Serialize};
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct StreamWatermarkResponseSingle {
     pub result: Option<crate::models::stream_watermarks::StreamWatermarks>,
+    #[serde(flatten)]
     pub stream_api_response_single:
         crate::models::stream_api_response_single::StreamApiResponseSingle,
 }

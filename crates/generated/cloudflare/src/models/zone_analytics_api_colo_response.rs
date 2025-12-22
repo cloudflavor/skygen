@@ -15,5 +15,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type ZoneAnalyticsApiColoResponse =
-    crate::models::zone_analytics_api_api_response_single::ZoneAnalyticsApiApiResponseSingle;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct ZoneAnalyticsApiColoResponse {
+    pub query:
+        Option<crate::models::zone_analytics_api_query_response::ZoneAnalyticsApiQueryResponse>,
+    pub result: Option<crate::models::zone_analytics_api_datacenters::ZoneAnalyticsApiDatacenters>,
+    #[serde(flatten)]
+    pub zone_analytics_api_api_response_single:
+        crate::models::zone_analytics_api_api_response_single::ZoneAnalyticsApiApiResponseSingle,
+}

@@ -21,7 +21,7 @@ use serde::{Deserialize, Serialize};
 pub struct DlpPredefinedProfile {
     pub ai_context_enabled: Option<bool>,
     pub allowed_match_count: i64,
-    pub confidence_threshold: Option<serde_json::Value>,
+    pub confidence_threshold: Option<crate::models::dlp_confidence::DlpConfidence>,
     pub context_awareness: Option<crate::models::dlp_context_awareness::DlpContextAwareness>,
     pub entries: Vec<crate::models::dlp_entry::DlpEntry>,
     pub id: String,

@@ -20,5 +20,5 @@ use serde::{Deserialize, Serialize};
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct DlpPattern {
     pub regex: String,
-    pub validation: Option<serde_json::Value>,
+    pub validation: Option<crate::models::dlp_validation::DlpValidation>,
 }

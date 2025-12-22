@@ -15,12 +15,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::dls_api_response_collection::DlsApiResponseCollection;
+use crate::models::dls_api_response_common::DlsApiResponseCommon;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct HostnamesListRegionsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, DlsApiResponseCollection>,
 }
 
 impl<'a> HostnamesListRegionsRequest<'a> {
@@ -38,7 +40,7 @@ impl<'a> HostnamesListRegionsRequest<'a> {
         self.builder = self.builder.path_param("account_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<DlsApiResponseCollection> {
         self.builder.send().await
     }
 }
@@ -67,7 +69,7 @@ pub fn hostnames_list_regions(api: &ApiClient) -> HostnamesListRegionsRequest<'_
 
 #[derive(Debug)]
 pub struct HostnamesListHostnamesRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, DlsApiResponseCollection>,
 }
 
 impl<'a> HostnamesListHostnamesRequest<'a> {
@@ -85,7 +87,7 @@ impl<'a> HostnamesListHostnamesRequest<'a> {
         self.builder = self.builder.path_param("zone_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<DlsApiResponseCollection> {
         self.builder.send().await
     }
 }
@@ -114,7 +116,7 @@ pub fn hostnames_list_hostnames(api: &ApiClient) -> HostnamesListHostnamesReques
 
 #[derive(Debug)]
 pub struct HostnamesCreateHostnameRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, DlsApiResponseCommon>,
 }
 
 impl<'a> HostnamesCreateHostnameRequest<'a> {
@@ -139,7 +141,7 @@ impl<'a> HostnamesCreateHostnameRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<DlsApiResponseCommon> {
         self.builder.send().await
     }
 }
@@ -170,7 +172,7 @@ pub fn hostnames_create_hostname(api: &ApiClient) -> HostnamesCreateHostnameRequ
 
 #[derive(Debug)]
 pub struct HostnamesFetchHostnameRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, DlsApiResponseCommon>,
 }
 
 impl<'a> HostnamesFetchHostnameRequest<'a> {
@@ -193,7 +195,7 @@ impl<'a> HostnamesFetchHostnameRequest<'a> {
         self.builder = self.builder.path_param("hostname", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<DlsApiResponseCommon> {
         self.builder.send().await
     }
 }
@@ -224,7 +226,7 @@ pub fn hostnames_fetch_hostname(api: &ApiClient) -> HostnamesFetchHostnameReques
 
 #[derive(Debug)]
 pub struct HostnamesDeleteHostnameRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, DlsApiResponseCommon>,
 }
 
 impl<'a> HostnamesDeleteHostnameRequest<'a> {
@@ -247,7 +249,7 @@ impl<'a> HostnamesDeleteHostnameRequest<'a> {
         self.builder = self.builder.path_param("hostname", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<DlsApiResponseCommon> {
         self.builder.send().await
     }
 }
@@ -278,7 +280,7 @@ pub fn hostnames_delete_hostname(api: &ApiClient) -> HostnamesDeleteHostnameRequ
 
 #[derive(Debug)]
 pub struct HostnamesPatchHostnameRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, DlsApiResponseCommon>,
 }
 
 impl<'a> HostnamesPatchHostnameRequest<'a> {
@@ -308,7 +310,7 @@ impl<'a> HostnamesPatchHostnameRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<DlsApiResponseCommon> {
         self.builder.send().await
     }
 }

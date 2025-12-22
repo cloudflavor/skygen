@@ -15,4 +15,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type ZonesSchemasTrueClientIpHeader = crate::models::zones_base::ZonesBase;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct ZonesSchemasTrueClientIpHeader {
+    pub id: Option<serde_json::Value>,
+    pub value:
+        Option<crate::models::zones_true_client_ip_header_value::ZonesTrueClientIpHeaderValue>,
+    #[serde(flatten)]
+    pub zones_base: crate::models::zones_base::ZonesBase,
+}

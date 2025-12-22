@@ -20,6 +20,7 @@ use serde::{Deserialize, Serialize};
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct TunnelSubnetResponseCollection {
     pub result: Option<Vec<crate::models::tunnel_subnet::TunnelSubnet>>,
+    #[serde(flatten)]
     pub tunnel_api_response_collection:
         crate::models::tunnel_api_response_collection::TunnelApiResponseCollection,
 }

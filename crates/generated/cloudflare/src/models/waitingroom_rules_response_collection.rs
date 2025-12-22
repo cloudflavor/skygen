@@ -15,4 +15,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type WaitingroomRulesResponseCollection = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct WaitingroomRulesResponseCollection {
+    pub result: Option<Vec<crate::models::waitingroom_rule_result::WaitingroomRuleResult>>,
+    #[serde(flatten)]
+    pub waitingroom_api_response_collection:
+        crate::models::waitingroom_api_response_collection::WaitingroomApiResponseCollection,
+}

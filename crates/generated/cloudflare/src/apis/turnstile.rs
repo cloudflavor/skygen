@@ -15,12 +15,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::turnstile_api_response_common::TurnstileApiResponseCommon;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct AccountsTurnstileWidgetsListRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, TurnstileApiResponseCommon>,
 }
 
 impl<'a> AccountsTurnstileWidgetsListRequest<'a> {
@@ -51,7 +52,7 @@ impl<'a> AccountsTurnstileWidgetsListRequest<'a> {
         self.builder = self.builder.header_param("direction", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<TurnstileApiResponseCommon> {
         self.builder.send().await
     }
 }
@@ -88,7 +89,7 @@ pub fn accounts_turnstile_widgets_list(api: &ApiClient) -> AccountsTurnstileWidg
 
 #[derive(Debug)]
 pub struct AccountsTurnstileWidgetCreateRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, TurnstileApiResponseCommon>,
 }
 
 impl<'a> AccountsTurnstileWidgetCreateRequest<'a> {
@@ -130,7 +131,7 @@ impl<'a> AccountsTurnstileWidgetCreateRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<TurnstileApiResponseCommon> {
         self.builder.send().await
     }
 }
@@ -171,7 +172,7 @@ pub fn accounts_turnstile_widget_create(
 
 #[derive(Debug)]
 pub struct AccountsTurnstileWidgetGetRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, TurnstileApiResponseCommon>,
 }
 
 impl<'a> AccountsTurnstileWidgetGetRequest<'a> {
@@ -194,7 +195,7 @@ impl<'a> AccountsTurnstileWidgetGetRequest<'a> {
         self.builder = self.builder.path_param("sitekey", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<TurnstileApiResponseCommon> {
         self.builder.send().await
     }
 }
@@ -225,7 +226,7 @@ pub fn accounts_turnstile_widget_get(api: &ApiClient) -> AccountsTurnstileWidget
 
 #[derive(Debug)]
 pub struct AccountsTurnstileWidgetUpdateRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, TurnstileApiResponseCommon>,
 }
 
 impl<'a> AccountsTurnstileWidgetUpdateRequest<'a> {
@@ -256,7 +257,7 @@ impl<'a> AccountsTurnstileWidgetUpdateRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<TurnstileApiResponseCommon> {
         self.builder.send().await
     }
 }
@@ -291,7 +292,7 @@ pub fn accounts_turnstile_widget_update(
 
 #[derive(Debug)]
 pub struct AccountsTurnstileWidgetDeleteRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, TurnstileApiResponseCommon>,
 }
 
 impl<'a> AccountsTurnstileWidgetDeleteRequest<'a> {
@@ -314,7 +315,7 @@ impl<'a> AccountsTurnstileWidgetDeleteRequest<'a> {
         self.builder = self.builder.path_param("sitekey", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<TurnstileApiResponseCommon> {
         self.builder.send().await
     }
 }
@@ -347,7 +348,7 @@ pub fn accounts_turnstile_widget_delete(
 
 #[derive(Debug)]
 pub struct AccountsTurnstileWidgetRotateRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, TurnstileApiResponseCommon>,
 }
 
 impl<'a> AccountsTurnstileWidgetRotateRequest<'a> {
@@ -378,7 +379,7 @@ impl<'a> AccountsTurnstileWidgetRotateRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<TurnstileApiResponseCommon> {
         self.builder.send().await
     }
 }

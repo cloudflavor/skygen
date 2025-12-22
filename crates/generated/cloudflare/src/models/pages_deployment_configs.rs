@@ -19,6 +19,8 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct PagesDeploymentConfigs {
-    pub preview: Option<serde_json::Value>,
-    pub production: Option<serde_json::Value>,
+    pub preview:
+        Option<crate::models::pages_deployment_configs_values::PagesDeploymentConfigsValues>,
+    pub production:
+        Option<crate::models::pages_deployment_configs_values::PagesDeploymentConfigsValues>,
 }

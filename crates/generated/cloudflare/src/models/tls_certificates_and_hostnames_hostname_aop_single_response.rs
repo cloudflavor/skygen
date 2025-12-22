@@ -15,4 +15,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type TlsCertificatesAndHostnamesHostnameAopSingleResponse = crate::models::tls_certificates_and_hostnames_api_response_single::TlsCertificatesAndHostnamesApiResponseSingle;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct TlsCertificatesAndHostnamesHostnameAopSingleResponse {
+    pub result: Option<crate::models::tls_certificates_and_hostnames_hostname_certid_object::TlsCertificatesAndHostnamesHostnameCertidObject>,
+    #[serde(flatten)]
+    pub tls_certificates_and_hostnames_api_response_single: crate::models::tls_certificates_and_hostnames_api_response_single::TlsCertificatesAndHostnamesApiResponseSingle,
+}

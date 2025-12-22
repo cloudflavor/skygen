@@ -22,4 +22,5 @@ pub struct AccessSchemasSshProps {
     #[serde(flatten)]
     pub access_schemas_self_hosted_props:
         crate::models::access_schemas_self_hosted_props::AccessSchemasSelfHostedProps,
+    pub r#type: Option<String>,
 }

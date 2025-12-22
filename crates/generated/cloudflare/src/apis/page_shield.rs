@@ -15,6 +15,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::page_shield_api_get_response_collection::PageShieldApiGetResponseCollection;
 use crate::models::page_shield_get_zone_connection_response::PageShieldGetZoneConnectionResponse;
 use crate::models::page_shield_get_zone_cookie_response::PageShieldGetZoneCookieResponse;
 use crate::models::page_shield_get_zone_policy_response::PageShieldGetZonePolicyResponse;
@@ -23,12 +24,13 @@ use crate::models::page_shield_list_zone_connections_response::PageShieldListZon
 use crate::models::page_shield_list_zone_cookies_response::PageShieldListZoneCookiesResponse;
 use crate::models::page_shield_list_zone_policies_response::PageShieldListZonePoliciesResponse;
 use crate::models::page_shield_list_zone_scripts_response::PageShieldListZoneScriptsResponse;
+use crate::models::page_shield_zone_settings_response_single::PageShieldZoneSettingsResponseSingle;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct GetSettingsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, PageShieldApiGetResponseCollection>,
 }
 
 impl<'a> GetSettingsRequest<'a> {
@@ -42,7 +44,7 @@ impl<'a> GetSettingsRequest<'a> {
         self.builder = self.builder.path_param("zone_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<PageShieldApiGetResponseCollection> {
         self.builder.send().await
     }
 }
@@ -71,7 +73,7 @@ pub fn get_settings(api: &ApiClient) -> GetSettingsRequest<'_> {
 
 #[derive(Debug)]
 pub struct UpdateSettingsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, PageShieldZoneSettingsResponseSingle>,
 }
 
 impl<'a> UpdateSettingsRequest<'a> {
@@ -90,7 +92,7 @@ impl<'a> UpdateSettingsRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<PageShieldZoneSettingsResponseSingle> {
         self.builder.send().await
     }
 }

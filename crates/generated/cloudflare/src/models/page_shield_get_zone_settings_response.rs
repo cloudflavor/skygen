@@ -15,4 +15,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type PageShieldGetZoneSettingsResponse = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct PageShieldGetZoneSettingsResponse {
+    pub enabled: crate::models::page_shield_enabled::PageShieldEnabled,
+    pub updated_at: crate::models::page_shield_updated_at::PageShieldUpdatedAt,
+    pub use_cloudflare_reporting_endpoint: crate::models::page_shield_use_cloudflare_reporting_endpoint::PageShieldUseCloudflareReportingEndpoint,
+    pub use_connection_url_path: crate::models::page_shield_use_connection_url_path::PageShieldUseConnectionUrlPath,
+}

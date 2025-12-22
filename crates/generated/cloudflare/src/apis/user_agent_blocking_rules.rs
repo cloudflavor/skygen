@@ -267,7 +267,7 @@ pub fn update_agent_blocking_rule(api: &ApiClient) -> UpdateAgentBlockingRuleReq
 
 #[derive(Debug)]
 pub struct DeleteAgentBlockingRuleRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, FirewallFirewalluablockResponseSingle>,
 }
 
 impl<'a> DeleteAgentBlockingRuleRequest<'a> {
@@ -290,7 +290,7 @@ impl<'a> DeleteAgentBlockingRuleRequest<'a> {
         self.builder = self.builder.path_param("ua_rule_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<FirewallFirewalluablockResponseSingle> {
         self.builder.send().await
     }
 }

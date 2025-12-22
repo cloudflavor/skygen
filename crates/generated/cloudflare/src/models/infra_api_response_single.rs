@@ -15,4 +15,10 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type InfraApiResponseSingle = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct InfraApiResponseSingle {
+    #[serde(flatten)]
+    pub infra_api_response_common: crate::models::infra_api_response_common::InfraApiResponseCommon,
+}

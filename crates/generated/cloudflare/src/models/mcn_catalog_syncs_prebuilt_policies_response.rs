@@ -15,4 +15,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type McnCatalogSyncsPrebuiltPoliciesResponse = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct McnCatalogSyncsPrebuiltPoliciesResponse {
+    #[serde(flatten)]
+    pub mcn_good_response: crate::models::mcn_good_response::McnGoodResponse,
+    pub result: Option<
+        Vec<crate::models::mcn_catalog_syncs_prebuilt_policy::McnCatalogSyncsPrebuiltPolicy>,
+    >,
+}

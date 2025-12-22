@@ -15,13 +15,15 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::iam_api_response_collection::IamApiResponseCollection;
+use crate::models::iam_api_response_single::IamApiResponseSingle;
 use crate::models::iam_api_response_single_id::IamApiResponseSingleId;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct GroupListRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, IamApiResponseCollection>,
 }
 
 impl<'a> GroupListRequest<'a> {
@@ -60,7 +62,7 @@ impl<'a> GroupListRequest<'a> {
         self.builder = self.builder.header_param("direction", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<IamApiResponseCollection> {
         self.builder.send().await
     }
 }
@@ -101,7 +103,7 @@ pub fn group_list(api: &ApiClient) -> GroupListRequest<'_> {
 
 #[derive(Debug)]
 pub struct GroupCreateRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, IamApiResponseSingle>,
 }
 
 impl<'a> GroupCreateRequest<'a> {
@@ -124,7 +126,7 @@ impl<'a> GroupCreateRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<IamApiResponseSingle> {
         self.builder.send().await
     }
 }
@@ -155,7 +157,7 @@ pub fn group_create(api: &ApiClient) -> GroupCreateRequest<'_> {
 
 #[derive(Debug)]
 pub struct GroupDetailsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, IamApiResponseSingle>,
 }
 
 impl<'a> GroupDetailsRequest<'a> {
@@ -178,7 +180,7 @@ impl<'a> GroupDetailsRequest<'a> {
         self.builder = self.builder.path_param("user_group_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<IamApiResponseSingle> {
         self.builder.send().await
     }
 }
@@ -209,7 +211,7 @@ pub fn group_details(api: &ApiClient) -> GroupDetailsRequest<'_> {
 
 #[derive(Debug)]
 pub struct GroupUpdateRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, IamApiResponseSingle>,
 }
 
 impl<'a> GroupUpdateRequest<'a> {
@@ -240,7 +242,7 @@ impl<'a> GroupUpdateRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<IamApiResponseSingle> {
         self.builder.send().await
     }
 }
@@ -327,7 +329,7 @@ pub fn group_delete(api: &ApiClient) -> GroupDeleteRequest<'_> {
 
 #[derive(Debug)]
 pub struct GroupMemberListRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, IamApiResponseCollection>,
 }
 
 impl<'a> GroupMemberListRequest<'a> {
@@ -358,7 +360,7 @@ impl<'a> GroupMemberListRequest<'a> {
         self.builder = self.builder.header_param("per_page", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<IamApiResponseCollection> {
         self.builder.send().await
     }
 }
@@ -393,7 +395,7 @@ pub fn group_member_list(api: &ApiClient) -> GroupMemberListRequest<'_> {
 
 #[derive(Debug)]
 pub struct GroupMemberCreateRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, IamApiResponseSingle>,
 }
 
 impl<'a> GroupMemberCreateRequest<'a> {
@@ -424,7 +426,7 @@ impl<'a> GroupMemberCreateRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<IamApiResponseSingle> {
         self.builder.send().await
     }
 }
@@ -457,7 +459,7 @@ pub fn group_member_create(api: &ApiClient) -> GroupMemberCreateRequest<'_> {
 
 #[derive(Debug)]
 pub struct GroupMembersUpdateRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, IamApiResponseSingle>,
 }
 
 impl<'a> GroupMembersUpdateRequest<'a> {
@@ -488,7 +490,7 @@ impl<'a> GroupMembersUpdateRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<IamApiResponseSingle> {
         self.builder.send().await
     }
 }
@@ -521,7 +523,7 @@ pub fn group_members_update(api: &ApiClient) -> GroupMembersUpdateRequest<'_> {
 
 #[derive(Debug)]
 pub struct GroupMemberDeleteRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, IamApiResponseSingle>,
 }
 
 impl<'a> GroupMemberDeleteRequest<'a> {
@@ -549,7 +551,7 @@ impl<'a> GroupMemberDeleteRequest<'a> {
         self.builder = self.builder.path_param("member_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<IamApiResponseSingle> {
         self.builder.send().await
     }
 }

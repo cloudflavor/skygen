@@ -19,6 +19,9 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct DnsAnalyticsReportBytime {
+    pub data: serde_json::Value,
     #[serde(flatten)]
     pub dns_analytics_result: crate::models::dns_analytics_result::DnsAnalyticsResult,
+    pub query: std::collections::BTreeMap<String, serde_json::Value>,
+    pub time_intervals: Vec<Vec<String>>,
 }

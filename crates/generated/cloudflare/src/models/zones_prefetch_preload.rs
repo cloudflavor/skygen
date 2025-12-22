@@ -15,4 +15,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type ZonesPrefetchPreload = crate::models::zones_base::ZonesBase;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct ZonesPrefetchPreload {
+    pub id: Option<serde_json::Value>,
+    pub value: Option<crate::models::zones_prefetch_preload_value::ZonesPrefetchPreloadValue>,
+    #[serde(flatten)]
+    pub zones_base: crate::models::zones_base::ZonesBase,
+}

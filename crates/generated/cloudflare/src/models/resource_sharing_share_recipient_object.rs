@@ -15,4 +15,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type ResourceSharingShareRecipientObject = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct ResourceSharingShareRecipientObject {
+    pub account_id: crate::models::resource_sharing_account_id::ResourceSharingAccountId,
+    pub association_status: crate::models::resource_sharing_recipient_association_status::ResourceSharingRecipientAssociationStatus,
+    pub created: crate::models::resource_sharing_created::ResourceSharingCreated,
+    pub id: crate::models::resource_sharing_recipient_id::ResourceSharingRecipientId,
+    pub modified: crate::models::resource_sharing_modified::ResourceSharingModified,
+    pub status_message: crate::models::resource_sharing_recipient_status_message::ResourceSharingRecipientStatusMessage,
+}

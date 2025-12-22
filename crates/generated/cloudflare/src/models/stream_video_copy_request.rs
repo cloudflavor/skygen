@@ -15,4 +15,19 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type StreamVideoCopyRequest = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct StreamVideoCopyRequest {
+    pub allowed_origins: Option<crate::models::stream_allowed_origins::StreamAllowedOrigins>,
+    pub creator: Option<crate::models::stream_creator::StreamCreator>,
+    pub meta: Option<crate::models::stream_media_metadata::StreamMediaMetadata>,
+    pub require_signed_ur_ls:
+        Option<crate::models::stream_require_signed_ur_ls::StreamRequireSignedUrLs>,
+    pub scheduled_deletion:
+        Option<crate::models::stream_scheduled_deletion::StreamScheduledDeletion>,
+    pub thumbnail_timestamp_pct:
+        Option<crate::models::stream_thumbnail_timestamp_pct::StreamThumbnailTimestampPct>,
+    pub url: String,
+    pub watermark: Option<crate::models::stream_watermark_at_upload_1::StreamWatermarkAtUpload>,
+}

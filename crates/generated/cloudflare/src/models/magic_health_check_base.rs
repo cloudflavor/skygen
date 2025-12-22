@@ -22,5 +22,5 @@ pub struct MagicHealthCheckBase {
     pub enabled: Option<bool>,
     pub r#type: Option<String>,
     pub rate: Option<String>,
-    pub target: Option<serde_json::Value>,
+    pub target: Option<crate::models::magic_health_check_target::MagicHealthCheckTarget>,
 }

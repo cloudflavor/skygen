@@ -15,4 +15,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type LoadBalancingComponentsSchemasResponseCollection = crate::models::load_balancing_api_paginated_response_collection::LoadBalancingApiPaginatedResponseCollection;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct LoadBalancingComponentsSchemasResponseCollection {
+    #[serde(flatten)]
+    pub load_balancing_api_paginated_response_collection: crate::models::load_balancing_api_paginated_response_collection::LoadBalancingApiPaginatedResponseCollection,
+    pub result: Option<Vec<crate::models::load_balancing_analytics::LoadBalancingAnalytics>>,
+}

@@ -19,7 +19,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct TunnelEmptyResponse {
-    pub result: Option<serde_json::Value>,
+    pub result: Option<std::collections::BTreeMap<String, serde_json::Value>>,
     #[serde(flatten)]
     pub tunnel_api_response_common:
         crate::models::tunnel_api_response_common::TunnelApiResponseCommon,

@@ -19,8 +19,8 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct WorkersKvApiResponseCommonFailure {
-    pub errors: serde_json::Value,
-    pub messages: serde_json::Value,
+    pub errors: crate::models::workers_kv_messages::WorkersKvMessages,
+    pub messages: crate::models::workers_kv_messages::WorkersKvMessages,
     pub result: std::collections::BTreeMap<String, serde_json::Value>,
     pub success: bool,
 }

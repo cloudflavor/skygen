@@ -19,5 +19,5 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct AccessAppReqEmbeddedPolicies {
-    pub policies: Option<Vec<serde_json::Value>>,
+    pub policies: Option<Vec<crate::models::access_app_policy_link::AccessAppPolicyLink>>,
 }

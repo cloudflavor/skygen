@@ -19,6 +19,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct ZarazZarazHistoryResponse {
+    pub result: Option<Vec<crate::models::zaraz_zaraz_config_row_base::ZarazZarazConfigRowBase>>,
     #[serde(flatten)]
     pub zaraz_api_response_common: crate::models::zaraz_api_response_common::ZarazApiResponseCommon,
 }

@@ -16,6 +16,7 @@
 // limitations under the License.
 
 use crate::models::access_empty_response::AccessEmptyResponse;
+use crate::models::access_schemas_single_response::AccessSchemasSingleResponse;
 use crate::models::access_single_response::AccessSingleResponse;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
@@ -177,7 +178,7 @@ pub fn update_your_zero_trust(api: &ApiClient) -> UpdateYourZeroTrustRequest<'_>
 
 #[derive(Debug)]
 pub struct GetYourZeroTrustGetRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, AccessSchemasSingleResponse>,
 }
 
 impl<'a> GetYourZeroTrustGetRequest<'a> {
@@ -195,7 +196,7 @@ impl<'a> GetYourZeroTrustGetRequest<'a> {
         self.builder = self.builder.path_param("account_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<AccessSchemasSingleResponse> {
         self.builder.send().await
     }
 }
@@ -224,7 +225,7 @@ pub fn get_your_zero_trust_get(api: &ApiClient) -> GetYourZeroTrustGetRequest<'_
 
 #[derive(Debug)]
 pub struct UpdateYourZeroTrustPutRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, AccessSchemasSingleResponse>,
 }
 
 impl<'a> UpdateYourZeroTrustPutRequest<'a> {
@@ -246,7 +247,7 @@ impl<'a> UpdateYourZeroTrustPutRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<AccessSchemasSingleResponse> {
         self.builder.send().await
     }
 }

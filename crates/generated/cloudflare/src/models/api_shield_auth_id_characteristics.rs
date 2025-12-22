@@ -15,4 +15,5 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type ApiShieldAuthIdCharacteristics = Vec<serde_json::Value>;
+pub type ApiShieldAuthIdCharacteristics =
+    Vec<crate::models::api_shield_auth_id_characteristic::ApiShieldAuthIdCharacteristic>;

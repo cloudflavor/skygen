@@ -21,5 +21,5 @@ use serde::{Deserialize, Serialize};
 pub struct McnResourceDetailsSectionItem {
     pub help_text: Option<String>,
     pub name: Option<String>,
-    pub value: Option<serde_json::Value>,
+    pub value: Option<crate::models::mcn_string_item::McnStringItem>,
 }

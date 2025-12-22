@@ -16,12 +16,13 @@
 // limitations under the License.
 
 use crate::models::r2_v4_response::R2V4Response;
+use crate::models::r2_v4_response_list::R2V4ResponseList;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct GetEventNotificationConfigsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, R2V4Response>,
 }
 
 impl<'a> GetEventNotificationConfigsRequest<'a> {
@@ -48,7 +49,7 @@ impl<'a> GetEventNotificationConfigsRequest<'a> {
         self.builder = self.builder.header_param("cf-r2-jurisdiction", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<R2V4Response> {
         self.builder.send().await
     }
 }
@@ -81,7 +82,7 @@ pub fn get_event_notification_configs(api: &ApiClient) -> GetEventNotificationCo
 
 #[derive(Debug)]
 pub struct GetEventNotificationConfigRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, R2V4Response>,
 }
 
 impl<'a> GetEventNotificationConfigRequest<'a> {
@@ -109,7 +110,7 @@ impl<'a> GetEventNotificationConfigRequest<'a> {
         self.builder = self.builder.header_param("cf-r2-jurisdiction", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<R2V4Response> {
         self.builder.send().await
     }
 }
@@ -144,7 +145,7 @@ pub fn get_event_notification_config(api: &ApiClient) -> GetEventNotificationCon
 
 #[derive(Debug)]
 pub struct PutEventNotificationConfigRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, R2V4Response>,
 }
 
 impl<'a> PutEventNotificationConfigRequest<'a> {
@@ -180,7 +181,7 @@ impl<'a> PutEventNotificationConfigRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<R2V4Response> {
         self.builder.send().await
     }
 }
@@ -217,7 +218,7 @@ pub fn put_event_notification_config(api: &ApiClient) -> PutEventNotificationCon
 
 #[derive(Debug)]
 pub struct EventNotificationDeleteConfigRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, R2V4Response>,
 }
 
 impl<'a> EventNotificationDeleteConfigRequest<'a> {
@@ -252,7 +253,7 @@ impl<'a> EventNotificationDeleteConfigRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<R2V4Response> {
         self.builder.send().await
     }
 }
@@ -291,7 +292,7 @@ pub fn event_notification_delete_config(
 
 #[derive(Debug)]
 pub struct ListBucketsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, R2V4ResponseList>,
 }
 
 impl<'a> ListBucketsRequest<'a> {
@@ -333,7 +334,7 @@ impl<'a> ListBucketsRequest<'a> {
         self.builder = self.builder.header_param("cf-r2-jurisdiction", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<R2V4ResponseList> {
         self.builder.send().await
     }
 }
@@ -376,7 +377,7 @@ pub fn list_buckets(api: &ApiClient) -> ListBucketsRequest<'_> {
 
 #[derive(Debug)]
 pub struct CreateBucketRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, R2V4Response>,
 }
 
 impl<'a> CreateBucketRequest<'a> {
@@ -402,7 +403,7 @@ impl<'a> CreateBucketRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<R2V4Response> {
         self.builder.send().await
     }
 }
@@ -435,7 +436,7 @@ pub fn create_bucket(api: &ApiClient) -> CreateBucketRequest<'_> {
 
 #[derive(Debug)]
 pub struct GetBucketRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, R2V4Response>,
 }
 
 impl<'a> GetBucketRequest<'a> {
@@ -462,7 +463,7 @@ impl<'a> GetBucketRequest<'a> {
         self.builder = self.builder.header_param("cf-r2-jurisdiction", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<R2V4Response> {
         self.builder.send().await
     }
 }
@@ -555,7 +556,7 @@ pub fn delete_bucket(api: &ApiClient) -> DeleteBucketRequest<'_> {
 
 #[derive(Debug)]
 pub struct PatchBucketRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, R2V4Response>,
 }
 
 impl<'a> PatchBucketRequest<'a> {
@@ -586,7 +587,7 @@ impl<'a> PatchBucketRequest<'a> {
         self.builder = self.builder.header_param("cf-r2-storage-class", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<R2V4Response> {
         self.builder.send().await
     }
 }
@@ -621,7 +622,7 @@ pub fn patch_bucket(api: &ApiClient) -> PatchBucketRequest<'_> {
 
 #[derive(Debug)]
 pub struct GetBucketCorsPolicyRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, R2V4Response>,
 }
 
 impl<'a> GetBucketCorsPolicyRequest<'a> {
@@ -648,7 +649,7 @@ impl<'a> GetBucketCorsPolicyRequest<'a> {
         self.builder = self.builder.header_param("cf-r2-jurisdiction", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<R2V4Response> {
         self.builder.send().await
     }
 }
@@ -681,7 +682,7 @@ pub fn get_bucket_cors_policy(api: &ApiClient) -> GetBucketCorsPolicyRequest<'_>
 
 #[derive(Debug)]
 pub struct PutBucketCorsPolicyRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, R2V4Response>,
 }
 
 impl<'a> PutBucketCorsPolicyRequest<'a> {
@@ -716,7 +717,7 @@ impl<'a> PutBucketCorsPolicyRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<R2V4Response> {
         self.builder.send().await
     }
 }
@@ -751,7 +752,7 @@ pub fn put_bucket_cors_policy(api: &ApiClient) -> PutBucketCorsPolicyRequest<'_>
 
 #[derive(Debug)]
 pub struct DeleteBucketCorsPolicyRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, R2V4Response>,
 }
 
 impl<'a> DeleteBucketCorsPolicyRequest<'a> {
@@ -778,7 +779,7 @@ impl<'a> DeleteBucketCorsPolicyRequest<'a> {
         self.builder = self.builder.header_param("cf-r2-jurisdiction", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<R2V4Response> {
         self.builder.send().await
     }
 }
@@ -811,7 +812,7 @@ pub fn delete_bucket_cors_policy(api: &ApiClient) -> DeleteBucketCorsPolicyReque
 
 #[derive(Debug)]
 pub struct ListCustomDomainsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, R2V4Response>,
 }
 
 impl<'a> ListCustomDomainsRequest<'a> {
@@ -838,7 +839,7 @@ impl<'a> ListCustomDomainsRequest<'a> {
         self.builder = self.builder.header_param("cf-r2-jurisdiction", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<R2V4Response> {
         self.builder.send().await
     }
 }
@@ -871,7 +872,7 @@ pub fn list_custom_domains(api: &ApiClient) -> ListCustomDomainsRequest<'_> {
 
 #[derive(Debug)]
 pub struct AddCustomDomainRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, R2V4Response>,
 }
 
 impl<'a> AddCustomDomainRequest<'a> {
@@ -906,7 +907,7 @@ impl<'a> AddCustomDomainRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<R2V4Response> {
         self.builder.send().await
     }
 }
@@ -941,7 +942,7 @@ pub fn add_custom_domain(api: &ApiClient) -> AddCustomDomainRequest<'_> {
 
 #[derive(Debug)]
 pub struct GetCustomDomainSettingsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, R2V4Response>,
 }
 
 impl<'a> GetCustomDomainSettingsRequest<'a> {
@@ -973,7 +974,7 @@ impl<'a> GetCustomDomainSettingsRequest<'a> {
         self.builder = self.builder.header_param("cf-r2-jurisdiction", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<R2V4Response> {
         self.builder.send().await
     }
 }
@@ -1008,7 +1009,7 @@ pub fn get_custom_domain_settings(api: &ApiClient) -> GetCustomDomainSettingsReq
 
 #[derive(Debug)]
 pub struct EditCustomDomainSettingsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, R2V4Response>,
 }
 
 impl<'a> EditCustomDomainSettingsRequest<'a> {
@@ -1048,7 +1049,7 @@ impl<'a> EditCustomDomainSettingsRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<R2V4Response> {
         self.builder.send().await
     }
 }
@@ -1085,7 +1086,7 @@ pub fn edit_custom_domain_settings(api: &ApiClient) -> EditCustomDomainSettingsR
 
 #[derive(Debug)]
 pub struct DeleteCustomDomainRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, R2V4Response>,
 }
 
 impl<'a> DeleteCustomDomainRequest<'a> {
@@ -1117,7 +1118,7 @@ impl<'a> DeleteCustomDomainRequest<'a> {
         self.builder = self.builder.header_param("cf-r2-jurisdiction", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<R2V4Response> {
         self.builder.send().await
     }
 }
@@ -1152,7 +1153,7 @@ pub fn delete_custom_domain(api: &ApiClient) -> DeleteCustomDomainRequest<'_> {
 
 #[derive(Debug)]
 pub struct GetBucketPublicPolicyRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, R2V4Response>,
 }
 
 impl<'a> GetBucketPublicPolicyRequest<'a> {
@@ -1179,7 +1180,7 @@ impl<'a> GetBucketPublicPolicyRequest<'a> {
         self.builder = self.builder.header_param("cf-r2-jurisdiction", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<R2V4Response> {
         self.builder.send().await
     }
 }
@@ -1212,7 +1213,7 @@ pub fn get_bucket_public_policy(api: &ApiClient) -> GetBucketPublicPolicyRequest
 
 #[derive(Debug)]
 pub struct PutBucketPublicPolicyRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, R2V4Response>,
 }
 
 impl<'a> PutBucketPublicPolicyRequest<'a> {
@@ -1247,7 +1248,7 @@ impl<'a> PutBucketPublicPolicyRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<R2V4Response> {
         self.builder.send().await
     }
 }
@@ -1282,7 +1283,7 @@ pub fn put_bucket_public_policy(api: &ApiClient) -> PutBucketPublicPolicyRequest
 
 #[derive(Debug)]
 pub struct GetBucketLifecycleConfigurationRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, R2V4Response>,
 }
 
 impl<'a> GetBucketLifecycleConfigurationRequest<'a> {
@@ -1309,7 +1310,7 @@ impl<'a> GetBucketLifecycleConfigurationRequest<'a> {
         self.builder = self.builder.header_param("cf-r2-jurisdiction", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<R2V4Response> {
         self.builder.send().await
     }
 }
@@ -1344,7 +1345,7 @@ pub fn get_bucket_lifecycle_configuration(
 
 #[derive(Debug)]
 pub struct PutBucketLifecycleConfigurationRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, R2V4Response>,
 }
 
 impl<'a> PutBucketLifecycleConfigurationRequest<'a> {
@@ -1379,7 +1380,7 @@ impl<'a> PutBucketLifecycleConfigurationRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<R2V4Response> {
         self.builder.send().await
     }
 }
@@ -1416,7 +1417,7 @@ pub fn put_bucket_lifecycle_configuration(
 
 #[derive(Debug)]
 pub struct GetBucketLockConfigurationRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, R2V4Response>,
 }
 
 impl<'a> GetBucketLockConfigurationRequest<'a> {
@@ -1443,7 +1444,7 @@ impl<'a> GetBucketLockConfigurationRequest<'a> {
         self.builder = self.builder.header_param("cf-r2-jurisdiction", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<R2V4Response> {
         self.builder.send().await
     }
 }
@@ -1476,7 +1477,7 @@ pub fn get_bucket_lock_configuration(api: &ApiClient) -> GetBucketLockConfigurat
 
 #[derive(Debug)]
 pub struct PutBucketLockConfigurationRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, R2V4Response>,
 }
 
 impl<'a> PutBucketLockConfigurationRequest<'a> {
@@ -1511,7 +1512,7 @@ impl<'a> PutBucketLockConfigurationRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<R2V4Response> {
         self.builder.send().await
     }
 }
@@ -1546,7 +1547,7 @@ pub fn put_bucket_lock_configuration(api: &ApiClient) -> PutBucketLockConfigurat
 
 #[derive(Debug)]
 pub struct GetBucketSippyConfigRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, R2V4Response>,
 }
 
 impl<'a> GetBucketSippyConfigRequest<'a> {
@@ -1573,7 +1574,7 @@ impl<'a> GetBucketSippyConfigRequest<'a> {
         self.builder = self.builder.header_param("cf-r2-jurisdiction", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<R2V4Response> {
         self.builder.send().await
     }
 }
@@ -1606,7 +1607,7 @@ pub fn get_bucket_sippy_config(api: &ApiClient) -> GetBucketSippyConfigRequest<'
 
 #[derive(Debug)]
 pub struct PutBucketSippyConfigRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, R2V4Response>,
 }
 
 impl<'a> PutBucketSippyConfigRequest<'a> {
@@ -1634,11 +1635,11 @@ impl<'a> PutBucketSippyConfigRequest<'a> {
         self.builder = self.builder.header_param("cf-r2-jurisdiction", value);
         self
     }
-    pub fn with_body(mut self, body: serde_json::Value) -> Self {
+    pub fn with_body(mut self, body: crate::models::r2_enable_sippy_aws::R2EnableSippyAws) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<R2V4Response> {
         self.builder.send().await
     }
 }
@@ -1658,7 +1659,7 @@ impl<'a> PutBucketSippyConfigRequest<'a> {
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::r2_bucket };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// # let body: serde_json::Value = todo!();
+/// # let body: crate::models::r2_enable_sippy_aws::R2EnableSippyAws = todo!();
 /// let response = put_bucket_sippy_config(&api)
 ///     .with_account_id("account_id")
 ///     .with_bucket_name("bucket_name")
@@ -1673,7 +1674,7 @@ pub fn put_bucket_sippy_config(api: &ApiClient) -> PutBucketSippyConfigRequest<'
 
 #[derive(Debug)]
 pub struct DeleteBucketSippyConfigRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, R2V4Response>,
 }
 
 impl<'a> DeleteBucketSippyConfigRequest<'a> {
@@ -1700,7 +1701,7 @@ impl<'a> DeleteBucketSippyConfigRequest<'a> {
         self.builder = self.builder.header_param("cf-r2-jurisdiction", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<R2V4Response> {
         self.builder.send().await
     }
 }
@@ -1733,7 +1734,7 @@ pub fn delete_bucket_sippy_config(api: &ApiClient) -> DeleteBucketSippyConfigReq
 
 #[derive(Debug)]
 pub struct CreateTempAccessCredentialsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, R2V4Response>,
 }
 
 impl<'a> CreateTempAccessCredentialsRequest<'a> {
@@ -1759,7 +1760,7 @@ impl<'a> CreateTempAccessCredentialsRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<R2V4Response> {
         self.builder.send().await
     }
 }

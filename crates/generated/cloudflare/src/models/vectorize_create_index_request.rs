@@ -19,7 +19,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct VectorizeCreateIndexRequest {
-    pub config: serde_json::Value,
+    pub config: crate::models::vectorize_index_configuration::VectorizeIndexConfiguration,
     pub description: Option<crate::models::vectorize_index_description::VectorizeIndexDescription>,
     pub name: crate::models::vectorize_index_name::VectorizeIndexName,
 }

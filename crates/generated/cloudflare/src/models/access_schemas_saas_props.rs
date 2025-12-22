@@ -25,5 +25,5 @@ pub struct AccessSchemasSaasProps {
     pub logo_url: Option<crate::models::access_logo_url::AccessLogoUrl>,
     pub name: Option<crate::models::access_apps_components_schemas_name::AccessAppsComponentsSchemasName>,
     pub r#type: Option<String>,
-    pub saas_app: Option<serde_json::Value>,
+    pub saas_app: Option<crate::models::access_schemas_saml_saas_app::AccessSchemasSamlSaasApp>,
 }

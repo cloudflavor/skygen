@@ -15,4 +15,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type CachePurgeApiResponseSingleId = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct CachePurgeApiResponseSingleId {
+    #[serde(flatten)]
+    pub cache_purge_api_response_common:
+        crate::models::cache_purge_api_response_common::CachePurgeApiResponseCommon,
+    pub result: Option<std::collections::BTreeMap<String, serde_json::Value>>,
+}

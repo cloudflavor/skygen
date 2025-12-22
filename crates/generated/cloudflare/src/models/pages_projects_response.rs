@@ -24,4 +24,5 @@ pub struct PagesProjectsResponse {
     #[serde(flatten)]
     pub pages_api_response_pagination:
         crate::models::pages_api_response_pagination::PagesApiResponsePagination,
+    pub result: Option<Vec<crate::models::pages_deployments::PagesDeployments>>,
 }

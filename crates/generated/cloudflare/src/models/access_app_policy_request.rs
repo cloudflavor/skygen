@@ -15,4 +15,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type AccessAppPolicyRequest = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct AccessAppPolicyRequest {
+    #[serde(flatten)]
+    pub access_policy_req: crate::models::access_policy_req::AccessPolicyReq,
+    pub precedence: Option<crate::models::access_precedence::AccessPrecedence>,
+}

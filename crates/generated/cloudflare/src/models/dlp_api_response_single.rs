@@ -15,4 +15,10 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type DlpApiResponseSingle = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct DlpApiResponseSingle {
+    #[serde(flatten)]
+    pub dlp_api_response_common: crate::models::dlp_api_response_common::DlpApiResponseCommon,
+}

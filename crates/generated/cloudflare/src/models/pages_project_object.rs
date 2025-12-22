@@ -20,12 +20,12 @@ use serde::{Deserialize, Serialize};
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct PagesProjectObject {
     pub build_config: Option<crate::models::pages_build_config::PagesBuildConfig>,
-    pub canonical_deployment: Option<serde_json::Value>,
+    pub canonical_deployment: Option<crate::models::pages_deployments::PagesDeployments>,
     pub created_on: Option<String>,
     pub deployment_configs: Option<crate::models::pages_deployment_configs::PagesDeploymentConfigs>,
     pub domains: Option<Vec<String>>,
     pub id: Option<String>,
-    pub latest_deployment: Option<serde_json::Value>,
+    pub latest_deployment: Option<crate::models::pages_deployments::PagesDeployments>,
     pub name: Option<String>,
     pub production_branch: Option<String>,
     pub source: Option<crate::models::pages_source::PagesSource>,

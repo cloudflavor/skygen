@@ -21,6 +21,6 @@ use serde::{Deserialize, Serialize};
 pub struct MagicVisibilityPcapsApiResponseCommon {
     pub errors: crate::models::magic_visibility_pcaps_messages::MagicVisibilityPcapsMessages,
     pub messages: crate::models::magic_visibility_pcaps_messages::MagicVisibilityPcapsMessages,
-    pub result: serde_json::Value,
+    pub result: std::collections::BTreeMap<String, serde_json::Value>,
     pub success: bool,
 }

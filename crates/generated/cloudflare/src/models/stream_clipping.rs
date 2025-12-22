@@ -15,4 +15,28 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type StreamClipping = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct StreamClipping {
+    pub allowed_origins: Option<crate::models::stream_allowed_origins::StreamAllowedOrigins>,
+    pub clipped_from_video_uid:
+        Option<crate::models::stream_clipped_from_video_uid::StreamClippedFromVideoUid>,
+    pub created: Option<crate::models::stream_clipping_created::StreamClippingCreated>,
+    pub creator: Option<crate::models::stream_creator::StreamCreator>,
+    pub end_time_seconds: Option<crate::models::stream_end_time_seconds::StreamEndTimeSeconds>,
+    pub max_duration_seconds:
+        Option<crate::models::stream_max_duration_seconds::StreamMaxDurationSeconds>,
+    pub meta: Option<crate::models::stream_media_metadata::StreamMediaMetadata>,
+    pub modified: Option<crate::models::stream_live_input_modified::StreamLiveInputModified>,
+    pub playback: Option<crate::models::stream_playback::StreamPlayback>,
+    pub preview: Option<crate::models::stream_preview::StreamPreview>,
+    pub require_signed_ur_ls:
+        Option<crate::models::stream_require_signed_ur_ls::StreamRequireSignedUrLs>,
+    pub start_time_seconds:
+        Option<crate::models::stream_start_time_seconds::StreamStartTimeSeconds>,
+    pub status: Option<crate::models::stream_media_state::StreamMediaState>,
+    pub thumbnail_timestamp_pct:
+        Option<crate::models::stream_thumbnail_timestamp_pct::StreamThumbnailTimestampPct>,
+    pub watermark: Option<crate::models::stream_watermark_at_upload::StreamWatermarkAtUpload>,
+}

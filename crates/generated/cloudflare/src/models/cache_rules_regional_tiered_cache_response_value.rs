@@ -19,5 +19,6 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct CacheRulesRegionalTieredCacheResponseValue {
-    pub result: Option<serde_json::Value>,
+    pub result:
+        Option<crate::models::cache_rules_regional_tiered_cache::CacheRulesRegionalTieredCache>,
 }

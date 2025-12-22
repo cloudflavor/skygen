@@ -21,6 +21,6 @@ use serde::{Deserialize, Serialize};
 pub struct PageShieldApiResponseCommonFailure {
     pub errors: crate::models::page_shield_messages::PageShieldMessages,
     pub messages: Option<crate::models::page_shield_messages::PageShieldMessages>,
-    pub result: Option<serde_json::Value>,
+    pub result: Option<std::collections::BTreeMap<String, serde_json::Value>>,
     pub success: bool,
 }

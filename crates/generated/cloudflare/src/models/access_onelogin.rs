@@ -15,4 +15,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type AccessOnelogin = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct AccessOnelogin {
+    #[serde(flatten)]
+    pub access_identity_provider: crate::models::access_identity_provider::AccessIdentityProvider,
+    pub config: Option<crate::models::access_generic_oauth_config::AccessGenericOauthConfig>,
+}

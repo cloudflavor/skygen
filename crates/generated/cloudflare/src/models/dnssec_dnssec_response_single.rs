@@ -15,5 +15,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type DnssecDnssecResponseSingle =
-    crate::models::dnssec_api_response_single::DnssecApiResponseSingle;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct DnssecDnssecResponseSingle {
+    #[serde(flatten)]
+    pub dnssec_api_response_single:
+        crate::models::dnssec_api_response_single::DnssecApiResponseSingle,
+    pub result: Option<crate::models::dnssec_dnssec::DnssecDnssec>,
+}

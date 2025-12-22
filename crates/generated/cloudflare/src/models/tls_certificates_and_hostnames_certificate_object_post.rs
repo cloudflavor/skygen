@@ -15,4 +15,18 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type TlsCertificatesAndHostnamesCertificateObjectPost = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct TlsCertificatesAndHostnamesCertificateObjectPost {
+    pub ca: Option<crate::models::tls_certificates_and_hostnames_ca::TlsCertificatesAndHostnamesCa>,
+    pub certificates: Option<crate::models::tls_certificates_and_hostnames_schemas_certificates::TlsCertificatesAndHostnamesSchemasCertificates>,
+    pub expires_on: Option<crate::models::tls_certificates_and_hostnames_mtls_management_components_schemas_expires_on::TlsCertificatesAndHostnamesMtlsManagementComponentsSchemasExpiresOn>,
+    pub id: Option<crate::models::tls_certificates_and_hostnames_identifier::TlsCertificatesAndHostnamesIdentifier>,
+    pub issuer: Option<crate::models::tls_certificates_and_hostnames_schemas_issuer::TlsCertificatesAndHostnamesSchemasIssuer>,
+    pub name: Option<crate::models::tls_certificates_and_hostnames_schemas_name::TlsCertificatesAndHostnamesSchemasName>,
+    pub serial_number: Option<crate::models::tls_certificates_and_hostnames_schemas_serial_number::TlsCertificatesAndHostnamesSchemasSerialNumber>,
+    pub signature: Option<crate::models::tls_certificates_and_hostnames_signature::TlsCertificatesAndHostnamesSignature>,
+    pub updated_at: Option<crate::models::tls_certificates_and_hostnames_components_schemas_updated_at::TlsCertificatesAndHostnamesComponentsSchemasUpdatedAt>,
+    pub uploaded_on: Option<crate::models::tls_certificates_and_hostnames_mtls_management_components_schemas_uploaded_on::TlsCertificatesAndHostnamesMtlsManagementComponentsSchemasUploadedOn>,
+}

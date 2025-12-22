@@ -42,7 +42,10 @@ impl<'a> PostRunCfBaaiRequest<'a> {
         self.builder = self.builder.header_param("queueRequest", value);
         self
     }
-    pub fn with_body(mut self, body: serde_json::Value) -> Self {
+    pub fn with_body(
+        mut self,
+        body: std::collections::BTreeMap<String, serde_json::Value>,
+    ) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
@@ -63,7 +66,7 @@ impl<'a> PostRunCfBaaiRequest<'a> {
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_ai_text_embeddings };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// # let body: serde_json::Value = todo!();
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = post_run_cf_baai(&api)
 ///     .with_account_id("account_id")
 ///     .with_queue_request("queueRequest")
@@ -99,7 +102,10 @@ impl<'a> PostRunCfBaaiPostRequest<'a> {
         self.builder = self.builder.header_param("queueRequest", value);
         self
     }
-    pub fn with_body(mut self, body: serde_json::Value) -> Self {
+    pub fn with_body(
+        mut self,
+        body: std::collections::BTreeMap<String, serde_json::Value>,
+    ) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
@@ -120,7 +126,7 @@ impl<'a> PostRunCfBaaiPostRequest<'a> {
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_ai_text_embeddings };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// # let body: serde_json::Value = todo!();
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = post_run_cf_baai_post(&api)
 ///     .with_account_id("account_id")
 ///     .with_queue_request("queueRequest")
@@ -213,7 +219,10 @@ impl<'a> PostRunCfBaaiPost4Request<'a> {
         self.builder = self.builder.header_param("queueRequest", value);
         self
     }
-    pub fn with_body(mut self, body: serde_json::Value) -> Self {
+    pub fn with_body(
+        mut self,
+        body: std::collections::BTreeMap<String, serde_json::Value>,
+    ) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
@@ -234,7 +243,7 @@ impl<'a> PostRunCfBaaiPost4Request<'a> {
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_ai_text_embeddings };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// # let body: serde_json::Value = todo!();
+/// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = post_run_cf_baai_post_4(&api)
 ///     .with_account_id("account_id")
 ///     .with_queue_request("queueRequest")

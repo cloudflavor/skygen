@@ -19,6 +19,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct FirewallRatelimitResponseSingle {
+    #[serde(flatten)]
     pub firewall_api_response_single:
         crate::models::firewall_api_response_single::FirewallApiResponseSingle,
     pub result: Option<crate::models::firewall_rate_limits::FirewallRateLimits>,

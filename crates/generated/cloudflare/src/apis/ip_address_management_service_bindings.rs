@@ -21,7 +21,7 @@ use reqwest::Method;
 
 #[derive(Debug)]
 pub struct ListServiceBindingsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, AddressingApiResponseCommon>,
 }
 
 impl<'a> ListServiceBindingsRequest<'a> {
@@ -44,7 +44,7 @@ impl<'a> ListServiceBindingsRequest<'a> {
         self.builder = self.builder.path_param("prefix_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<AddressingApiResponseCommon> {
         self.builder.send().await
     }
 }
@@ -76,7 +76,7 @@ pub fn list_service_bindings(api: &ApiClient) -> ListServiceBindingsRequest<'_> 
 
 #[derive(Debug)]
 pub struct CreateServiceBindingRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, AddressingApiResponseCommon>,
 }
 
 impl<'a> CreateServiceBindingRequest<'a> {
@@ -106,7 +106,7 @@ impl<'a> CreateServiceBindingRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<AddressingApiResponseCommon> {
         self.builder.send().await
     }
 }
@@ -140,7 +140,7 @@ pub fn create_service_binding(api: &ApiClient) -> CreateServiceBindingRequest<'_
 
 #[derive(Debug)]
 pub struct GetServiceBindingRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, AddressingApiResponseCommon>,
 }
 
 impl<'a> GetServiceBindingRequest<'a> {
@@ -168,7 +168,7 @@ impl<'a> GetServiceBindingRequest<'a> {
         self.builder = self.builder.path_param("binding_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<AddressingApiResponseCommon> {
         self.builder.send().await
     }
 }
@@ -262,7 +262,7 @@ pub fn delete_service_binding(api: &ApiClient) -> DeleteServiceBindingRequest<'_
 
 #[derive(Debug)]
 pub struct ListServicesRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, AddressingApiResponseCommon>,
 }
 
 impl<'a> ListServicesRequest<'a> {
@@ -280,7 +280,7 @@ impl<'a> ListServicesRequest<'a> {
         self.builder = self.builder.path_param("account_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<AddressingApiResponseCommon> {
         self.builder.send().await
     }
 }

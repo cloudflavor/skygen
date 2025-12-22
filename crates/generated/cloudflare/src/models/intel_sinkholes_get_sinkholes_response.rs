@@ -22,4 +22,6 @@ pub struct IntelSinkholesGetSinkholesResponse {
     #[serde(flatten)]
     pub intel_sinkholes_api_response_common:
         crate::models::intel_sinkholes_api_response_common::IntelSinkholesApiResponseCommon,
+    pub result:
+        Option<Vec<crate::models::intel_sinkholes_sinkhole_item::IntelSinkholesSinkholeItem>>,
 }

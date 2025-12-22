@@ -15,5 +15,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type SpectrumAnalyticsQueryResponseSingle =
-    crate::models::spectrum_analytics_api_response_single::SpectrumAnalyticsApiResponseSingle;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct SpectrumAnalyticsQueryResponseSingle {
+    pub result: Option<std::collections::BTreeMap<String, serde_json::Value>>,
+    #[serde(flatten)]
+    pub spectrum_analytics_api_response_single:
+        crate::models::spectrum_analytics_api_response_single::SpectrumAnalyticsApiResponseSingle,
+}

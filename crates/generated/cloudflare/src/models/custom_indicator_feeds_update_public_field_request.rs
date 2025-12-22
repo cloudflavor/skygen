@@ -15,4 +15,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type CustomIndicatorFeedsUpdatePublicFieldRequest = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct CustomIndicatorFeedsUpdatePublicFieldRequest {
+    pub description: Option<String>,
+    pub is_attributable: Option<bool>,
+    pub is_downloadable: Option<bool>,
+    pub is_public: Option<bool>,
+    pub name: Option<String>,
+}

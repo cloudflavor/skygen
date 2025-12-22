@@ -15,4 +15,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type MconnControllerFetchCloudflaredTokenResponse = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct MconnControllerFetchCloudflaredTokenResponse {
+    #[serde(flatten)]
+    pub mconn_good_response: crate::models::mconn_good_response::MconnGoodResponse,
+    pub result: Option<crate::models::mconn_controller_fetch_cloudflared_token_result::MconnControllerFetchCloudflaredTokenResult>,
+}

@@ -15,4 +15,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type AccessIdentityProvidersComponentsSchemasSingleResponse = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct AccessIdentityProvidersComponentsSchemasSingleResponse {
+    #[serde(flatten)]
+    pub access_api_response_single:
+        crate::models::access_api_response_single::AccessApiResponseSingle,
+    pub result:
+        Option<crate::models::access_schemas_identity_providers::AccessSchemasIdentityProviders>,
+}

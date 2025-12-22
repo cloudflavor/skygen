@@ -19,7 +19,8 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct FirewallFilterResponseCollection {
+    #[serde(flatten)]
     pub firewall_api_response_collection:
         crate::models::firewall_api_response_collection::FirewallApiResponseCollection,
-    pub result: Option<Vec<serde_json::Value>>,
+    pub result: Option<Vec<crate::models::firewall_filter::FirewallFilter>>,
 }

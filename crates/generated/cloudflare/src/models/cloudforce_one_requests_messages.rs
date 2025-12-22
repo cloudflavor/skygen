@@ -15,4 +15,4 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type CloudforceOneRequestsMessages = Vec<serde_json::Value>;
+pub type CloudforceOneRequestsMessages = Vec<std::collections::BTreeMap<String, serde_json::Value>>;

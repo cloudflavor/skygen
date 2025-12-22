@@ -25,6 +25,6 @@ pub struct EmailSecurityUpdateAllowPolicy {
     pub is_regex: Option<bool>,
     pub is_trusted_sender: Option<bool>,
     pub pattern: Option<String>,
-    pub pattern_type: Option<serde_json::Value>,
+    pub pattern_type: Option<crate::models::email_security_pattern_type::EmailSecurityPatternType>,
     pub verify_sender: Option<bool>,
 }

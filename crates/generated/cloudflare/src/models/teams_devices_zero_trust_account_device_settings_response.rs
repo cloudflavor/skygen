@@ -15,4 +15,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type TeamsDevicesZeroTrustAccountDeviceSettingsResponse = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct TeamsDevicesZeroTrustAccountDeviceSettingsResponse {
+    pub result: Option<crate::models::teams_devices_zero_trust_account_device_settings::TeamsDevicesZeroTrustAccountDeviceSettings>,
+    #[serde(flatten)]
+    pub teams_devices_api_response_single: crate::models::teams_devices_api_response_single::TeamsDevicesApiResponseSingle,
+}

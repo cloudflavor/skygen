@@ -15,12 +15,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::email_security_api_response_common::EmailSecurityApiResponseCommon;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct InvestigateRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, EmailSecurityApiResponseCommon>,
 }
 
 impl<'a> InvestigateRequest<'a> {
@@ -98,7 +99,7 @@ impl<'a> InvestigateRequest<'a> {
         self.builder = self.builder.header_param("per_page", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<EmailSecurityApiResponseCommon> {
         self.builder.send().await
     }
 }
@@ -157,7 +158,7 @@ pub fn investigate(api: &ApiClient) -> InvestigateRequest<'_> {
 
 #[derive(Debug)]
 pub struct PostBulkMessageMoveRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, EmailSecurityApiResponseCommon>,
 }
 
 impl<'a> PostBulkMessageMoveRequest<'a> {
@@ -183,7 +184,7 @@ impl<'a> PostBulkMessageMoveRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<EmailSecurityApiResponseCommon> {
         self.builder.send().await
     }
 }
@@ -212,7 +213,7 @@ pub fn post_bulk_message_move(api: &ApiClient) -> PostBulkMessageMoveRequest<'_>
 
 #[derive(Debug)]
 pub struct PostPreviewRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, EmailSecurityApiResponseCommon>,
 }
 
 impl<'a> PostPreviewRequest<'a> {
@@ -238,7 +239,7 @@ impl<'a> PostPreviewRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<EmailSecurityApiResponseCommon> {
         self.builder.send().await
     }
 }
@@ -267,7 +268,7 @@ pub fn post_preview(api: &ApiClient) -> PostPreviewRequest<'_> {
 
 #[derive(Debug)]
 pub struct PostReleaseRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, EmailSecurityApiResponseCommon>,
 }
 
 impl<'a> PostReleaseRequest<'a> {
@@ -293,7 +294,7 @@ impl<'a> PostReleaseRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<EmailSecurityApiResponseCommon> {
         self.builder.send().await
     }
 }
@@ -322,7 +323,7 @@ pub fn post_release(api: &ApiClient) -> PostReleaseRequest<'_> {
 
 #[derive(Debug)]
 pub struct GetMessageRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, EmailSecurityApiResponseCommon>,
 }
 
 impl<'a> GetMessageRequest<'a> {
@@ -345,7 +346,7 @@ impl<'a> GetMessageRequest<'a> {
         self.builder = self.builder.path_param("postfix_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<EmailSecurityApiResponseCommon> {
         self.builder.send().await
     }
 }
@@ -374,7 +375,7 @@ pub fn get_message(api: &ApiClient) -> GetMessageRequest<'_> {
 
 #[derive(Debug)]
 pub struct GetMessageDetectionsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, EmailSecurityApiResponseCommon>,
 }
 
 impl<'a> GetMessageDetectionsRequest<'a> {
@@ -397,7 +398,7 @@ impl<'a> GetMessageDetectionsRequest<'a> {
         self.builder = self.builder.path_param("postfix_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<EmailSecurityApiResponseCommon> {
         self.builder.send().await
     }
 }
@@ -428,7 +429,7 @@ pub fn get_message_detections(api: &ApiClient) -> GetMessageDetectionsRequest<'_
 
 #[derive(Debug)]
 pub struct PostMessageMoveRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, EmailSecurityApiResponseCommon>,
 }
 
 impl<'a> PostMessageMoveRequest<'a> {
@@ -459,7 +460,7 @@ impl<'a> PostMessageMoveRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<EmailSecurityApiResponseCommon> {
         self.builder.send().await
     }
 }
@@ -490,7 +491,7 @@ pub fn post_message_move(api: &ApiClient) -> PostMessageMoveRequest<'_> {
 
 #[derive(Debug)]
 pub struct GetMessagePreviewRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, EmailSecurityApiResponseCommon>,
 }
 
 impl<'a> GetMessagePreviewRequest<'a> {
@@ -513,7 +514,7 @@ impl<'a> GetMessagePreviewRequest<'a> {
         self.builder = self.builder.path_param("postfix_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<EmailSecurityApiResponseCommon> {
         self.builder.send().await
     }
 }
@@ -544,7 +545,7 @@ pub fn get_message_preview(api: &ApiClient) -> GetMessagePreviewRequest<'_> {
 
 #[derive(Debug)]
 pub struct GetMessageRawRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, EmailSecurityApiResponseCommon>,
 }
 
 impl<'a> GetMessageRawRequest<'a> {
@@ -567,7 +568,7 @@ impl<'a> GetMessageRawRequest<'a> {
         self.builder = self.builder.path_param("postfix_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<EmailSecurityApiResponseCommon> {
         self.builder.send().await
     }
 }
@@ -660,7 +661,7 @@ pub fn post_reclassify(api: &ApiClient) -> PostReclassifyRequest<'_> {
 
 #[derive(Debug)]
 pub struct GetMessageTraceRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, EmailSecurityApiResponseCommon>,
 }
 
 impl<'a> GetMessageTraceRequest<'a> {
@@ -683,7 +684,7 @@ impl<'a> GetMessageTraceRequest<'a> {
         self.builder = self.builder.path_param("postfix_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<EmailSecurityApiResponseCommon> {
         self.builder.send().await
     }
 }
@@ -712,7 +713,7 @@ pub fn get_message_trace(api: &ApiClient) -> GetMessageTraceRequest<'_> {
 
 #[derive(Debug)]
 pub struct SubmissionsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, EmailSecurityApiResponseCommon>,
 }
 
 impl<'a> SubmissionsRequest<'a> {
@@ -770,7 +771,7 @@ impl<'a> SubmissionsRequest<'a> {
         self.builder = self.builder.header_param("per_page", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<EmailSecurityApiResponseCommon> {
         self.builder.send().await
     }
 }

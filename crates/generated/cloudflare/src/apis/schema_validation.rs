@@ -15,13 +15,15 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::api_shield_api_response_collection::ApiShieldApiResponseCollection;
+use crate::models::api_shield_api_response_single::ApiShieldApiResponseSingle;
 use crate::models::api_shield_public_schema_success_result::ApiShieldPublicSchemaSuccessResult;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct ListSchemasPaginatedRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, ApiShieldApiResponseCollection>,
 }
 
 impl<'a> ListSchemasPaginatedRequest<'a> {
@@ -43,7 +45,7 @@ impl<'a> ListSchemasPaginatedRequest<'a> {
         self.builder = self.builder.header_param("validation_enabled", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<ApiShieldApiResponseCollection> {
         self.builder.send().await
     }
 }
@@ -72,7 +74,7 @@ pub fn list_schemas_paginated(api: &ApiClient) -> ListSchemasPaginatedRequest<'_
 
 #[derive(Debug)]
 pub struct CreateSchemaRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, ApiShieldPublicSchemaSuccessResult>,
 }
 
 impl<'a> CreateSchemaRequest<'a> {
@@ -98,7 +100,7 @@ impl<'a> CreateSchemaRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<ApiShieldPublicSchemaSuccessResult> {
         self.builder.send().await
     }
 }
@@ -127,7 +129,7 @@ pub fn create_schema(api: &ApiClient) -> CreateSchemaRequest<'_> {
 
 #[derive(Debug)]
 pub struct ListSchemaHostsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, ApiShieldApiResponseCollection>,
 }
 
 impl<'a> ListSchemaHostsRequest<'a> {
@@ -145,7 +147,7 @@ impl<'a> ListSchemaHostsRequest<'a> {
         self.builder = self.builder.path_param("zone_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<ApiShieldApiResponseCollection> {
         self.builder.send().await
     }
 }
@@ -224,7 +226,7 @@ pub fn get_schema(api: &ApiClient) -> GetSchemaRequest<'_> {
 
 #[derive(Debug)]
 pub struct DeleteSchemaRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, ApiShieldApiResponseSingle>,
 }
 
 impl<'a> DeleteSchemaRequest<'a> {
@@ -247,7 +249,7 @@ impl<'a> DeleteSchemaRequest<'a> {
         self.builder = self.builder.path_param("schema_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<ApiShieldApiResponseSingle> {
         self.builder.send().await
     }
 }
@@ -338,7 +340,7 @@ pub fn edit_schema(api: &ApiClient) -> EditSchemaRequest<'_> {
 
 #[derive(Debug)]
 pub struct ExtractOperationsSchemaRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, ApiShieldApiResponseCollection>,
 }
 
 impl<'a> ExtractOperationsSchemaRequest<'a> {
@@ -365,7 +367,7 @@ impl<'a> ExtractOperationsSchemaRequest<'a> {
         self.builder = self.builder.header_param("operation_status", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<ApiShieldApiResponseCollection> {
         self.builder.send().await
     }
 }

@@ -20,5 +20,6 @@ use serde::{Deserialize, Serialize};
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct TeamsDevicesSchemasResponseCollection {
     pub result: Option<Vec<crate::models::teams_devices_device_posture_integrations::TeamsDevicesDevicePostureIntegrations>>,
+    #[serde(flatten)]
     pub teams_devices_api_response_collection: crate::models::teams_devices_api_response_collection::TeamsDevicesApiResponseCollection,
 }

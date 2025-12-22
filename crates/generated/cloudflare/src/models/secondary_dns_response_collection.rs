@@ -15,5 +15,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type SecondaryDnsResponseCollection =
-    crate::models::secondary_dns_api_response_collection::SecondaryDnsApiResponseCollection;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct SecondaryDnsResponseCollection {
+    pub result: Option<Vec<crate::models::secondary_dns_tsig::SecondaryDnsTsig>>,
+    #[serde(flatten)]
+    pub secondary_dns_api_response_collection:
+        crate::models::secondary_dns_api_response_collection::SecondaryDnsApiResponseCollection,
+}

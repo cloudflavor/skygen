@@ -19,5 +19,5 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct CacheRulesCacheReserveResponseValue {
-    pub result: Option<serde_json::Value>,
+    pub result: Option<crate::models::cache_rules_cache_reserve::CacheRulesCacheReserve>,
 }

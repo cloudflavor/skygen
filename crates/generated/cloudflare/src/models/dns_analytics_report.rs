@@ -19,6 +19,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct DnsAnalyticsReport {
+    pub data: serde_json::Value,
     #[serde(flatten)]
     pub dns_analytics_result: crate::models::dns_analytics_result::DnsAnalyticsResult,
 }

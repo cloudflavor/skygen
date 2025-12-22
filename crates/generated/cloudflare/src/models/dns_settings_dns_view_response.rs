@@ -15,4 +15,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type DnsSettingsDnsViewResponse = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct DnsSettingsDnsViewResponse {
+    #[serde(flatten)]
+    pub dns_settings_dns_view: crate::models::dns_settings_dns_view::DnsSettingsDnsView,
+    pub id: crate::models::dns_settings_identifier::DnsSettingsIdentifier,
+}

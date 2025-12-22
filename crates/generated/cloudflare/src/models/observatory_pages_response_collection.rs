@@ -15,5 +15,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type ObservatoryPagesResponseCollection =
-    crate::models::observatory_api_response_collection::ObservatoryApiResponseCollection;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct ObservatoryPagesResponseCollection {
+    #[serde(flatten)]
+    pub observatory_api_response_collection:
+        crate::models::observatory_api_response_collection::ObservatoryApiResponseCollection,
+    pub result: Option<Vec<serde_json::Value>>,
+}

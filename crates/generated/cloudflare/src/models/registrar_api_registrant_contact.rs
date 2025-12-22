@@ -15,5 +15,10 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type RegistrarApiRegistrantContact =
-    crate::models::registrar_api_contacts::RegistrarApiContacts;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct RegistrarApiRegistrantContact {
+    #[serde(flatten)]
+    pub registrar_api_contacts: crate::models::registrar_api_contacts::RegistrarApiContacts,
+}

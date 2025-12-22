@@ -15,5 +15,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type MagicLanModifiedResponse =
-    crate::models::magic_api_response_single::MagicApiResponseSingle;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct MagicLanModifiedResponse {
+    #[serde(flatten)]
+    pub magic_api_response_single: crate::models::magic_api_response_single::MagicApiResponseSingle,
+    pub result: Option<crate::models::magic_lan::MagicLan>,
+}

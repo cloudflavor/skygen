@@ -40,7 +40,7 @@ impl<'a> SubmitSuspiciousUrlScanningRequest<'a> {
         self.builder = self.builder.path_param("account_id", value);
         self
     }
-    pub fn with_body(mut self, body: serde_json::Value) -> Self {
+    pub fn with_body(mut self, body: crate::models::intel_url_param::IntelUrlParam) -> Self {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
@@ -62,7 +62,7 @@ impl<'a> SubmitSuspiciousUrlScanningRequest<'a> {
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::phishing_url_scanner };
 /// let api = ApiClient::builder("https://api.example.com").build().expect("client");
-/// # let body: serde_json::Value = todo!();
+/// # let body: crate::models::intel_url_param::IntelUrlParam = todo!();
 /// let response = submit_suspicious_url_scanning(&api)
 ///     .with_account_id("account_id")
 ///     .with_body(body)

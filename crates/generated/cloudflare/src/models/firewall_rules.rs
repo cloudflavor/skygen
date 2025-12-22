@@ -15,4 +15,5 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type FirewallRules = std::collections::BTreeMap<String, serde_json::Value>;
+pub type FirewallRules =
+    std::collections::BTreeMap<String, crate::models::firewall_waf_action::FirewallWafAction>;

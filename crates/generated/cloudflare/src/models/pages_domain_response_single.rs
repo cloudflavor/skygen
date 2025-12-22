@@ -15,5 +15,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type PagesDomainResponseSingle =
-    crate::models::pages_api_response_single::PagesApiResponseSingle;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct PagesDomainResponseSingle {
+    #[serde(flatten)]
+    pub pages_api_response_single: crate::models::pages_api_response_single::PagesApiResponseSingle,
+    pub result: Option<crate::models::pages_domain_object::PagesDomainObject>,
+}

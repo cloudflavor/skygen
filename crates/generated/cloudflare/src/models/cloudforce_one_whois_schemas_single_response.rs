@@ -19,6 +19,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct CloudforceOneWhoisSchemasSingleResponse {
+    #[serde(flatten)]
     pub cloudforce_one_whois_api_response_single: crate::models::cloudforce_one_whois_api_response_single::CloudforceOneWhoisApiResponseSingle,
-    pub result: Option<serde_json::Value>,
+    pub result: Option<crate::models::cloudforce_one_whois_whois::CloudforceOneWhoisWhois>,
 }

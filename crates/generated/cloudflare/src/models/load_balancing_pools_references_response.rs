@@ -22,4 +22,5 @@ pub struct LoadBalancingPoolsReferencesResponse {
     #[serde(flatten)]
     pub load_balancing_api_response_common:
         crate::models::load_balancing_api_response_common::LoadBalancingApiResponseCommon,
+    pub result: Option<Vec<std::collections::BTreeMap<String, serde_json::Value>>>,
 }

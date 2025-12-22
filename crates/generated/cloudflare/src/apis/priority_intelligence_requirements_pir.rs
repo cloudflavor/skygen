@@ -21,7 +21,7 @@ use reqwest::Method;
 
 #[derive(Debug)]
 pub struct CloudforceOnePriorityListRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, CloudforceOneRequestsApiResponseCommon>,
 }
 
 impl<'a> CloudforceOnePriorityListRequest<'a> {
@@ -47,7 +47,7 @@ impl<'a> CloudforceOnePriorityListRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<CloudforceOneRequestsApiResponseCommon> {
         self.builder.send().await
     }
 }
@@ -76,7 +76,7 @@ pub fn cloudforce_one_priority_list(api: &ApiClient) -> CloudforceOnePriorityLis
 
 #[derive(Debug)]
 pub struct CloudforceOnePriorityNewRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, CloudforceOneRequestsApiResponseCommon>,
 }
 
 impl<'a> CloudforceOnePriorityNewRequest<'a> {
@@ -102,7 +102,7 @@ impl<'a> CloudforceOnePriorityNewRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<CloudforceOneRequestsApiResponseCommon> {
         self.builder.send().await
     }
 }
@@ -131,7 +131,7 @@ pub fn cloudforce_one_priority_new(api: &ApiClient) -> CloudforceOnePriorityNewR
 
 #[derive(Debug)]
 pub struct CloudforceOnePriorityQuotaRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, CloudforceOneRequestsApiResponseCommon>,
 }
 
 impl<'a> CloudforceOnePriorityQuotaRequest<'a> {
@@ -149,7 +149,7 @@ impl<'a> CloudforceOnePriorityQuotaRequest<'a> {
         self.builder = self.builder.path_param("account_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<CloudforceOneRequestsApiResponseCommon> {
         self.builder.send().await
     }
 }
@@ -176,7 +176,7 @@ pub fn cloudforce_one_priority_quota(api: &ApiClient) -> CloudforceOnePriorityQu
 
 #[derive(Debug)]
 pub struct CloudforceOnePriorityGetRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, CloudforceOneRequestsApiResponseCommon>,
 }
 
 impl<'a> CloudforceOnePriorityGetRequest<'a> {
@@ -199,7 +199,7 @@ impl<'a> CloudforceOnePriorityGetRequest<'a> {
         self.builder = self.builder.path_param("priority_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<CloudforceOneRequestsApiResponseCommon> {
         self.builder.send().await
     }
 }
@@ -228,7 +228,7 @@ pub fn cloudforce_one_priority_get(api: &ApiClient) -> CloudforceOnePriorityGetR
 
 #[derive(Debug)]
 pub struct CloudforceOnePriorityUpdateRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, CloudforceOneRequestsApiResponseCommon>,
 }
 
 impl<'a> CloudforceOnePriorityUpdateRequest<'a> {
@@ -259,7 +259,7 @@ impl<'a> CloudforceOnePriorityUpdateRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<CloudforceOneRequestsApiResponseCommon> {
         self.builder.send().await
     }
 }

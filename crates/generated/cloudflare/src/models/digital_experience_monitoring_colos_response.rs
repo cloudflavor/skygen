@@ -15,4 +15,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type DigitalExperienceMonitoringColosResponse = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct DigitalExperienceMonitoringColosResponse {
+    pub airport_code: Option<String>,
+    pub city: Option<String>,
+    pub country_code: Option<String>,
+}

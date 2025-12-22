@@ -21,6 +21,6 @@ use serde::{Deserialize, Serialize};
 pub struct TeamsDevicesApiResponseCommon {
     pub errors: crate::models::teams_devices_messages::TeamsDevicesMessages,
     pub messages: crate::models::teams_devices_messages::TeamsDevicesMessages,
-    pub result: serde_json::Value,
+    pub result: std::collections::BTreeMap<String, serde_json::Value>,
     pub success: bool,
 }

@@ -15,4 +15,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type DnsFirewallApiResponseCollection = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct DnsFirewallApiResponseCollection {
+    #[serde(flatten)]
+    pub dns_firewall_api_response_common:
+        crate::models::dns_firewall_api_response_common::DnsFirewallApiResponseCommon,
+    pub result_info: Option<crate::models::dns_firewall_result_info::DnsFirewallResultInfo>,
+}

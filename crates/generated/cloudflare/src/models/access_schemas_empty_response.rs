@@ -15,4 +15,10 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type AccessSchemasEmptyResponse = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct AccessSchemasEmptyResponse {
+    pub result: Option<std::collections::BTreeMap<String, serde_json::Value>>,
+    pub success: Option<bool>,
+}

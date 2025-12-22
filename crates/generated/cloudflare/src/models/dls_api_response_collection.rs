@@ -15,4 +15,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type DlsApiResponseCollection = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct DlsApiResponseCollection {
+    #[serde(flatten)]
+    pub dls_api_response_common: crate::models::dls_api_response_common::DlsApiResponseCommon,
+    pub result_info: Option<crate::models::dls_result_info::DlsResultInfo>,
+}

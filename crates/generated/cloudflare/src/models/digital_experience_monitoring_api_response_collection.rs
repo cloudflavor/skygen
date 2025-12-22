@@ -15,4 +15,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type DigitalExperienceMonitoringApiResponseCollection = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct DigitalExperienceMonitoringApiResponseCollection {
+    #[serde(flatten)]
+    pub digital_experience_monitoring_api_response_common: crate::models::digital_experience_monitoring_api_response_common::DigitalExperienceMonitoringApiResponseCommon,
+    pub result_info: Option<std::collections::BTreeMap<String, serde_json::Value>>,
+}

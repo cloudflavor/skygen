@@ -15,5 +15,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type HealthchecksSingleResponse =
-    crate::models::healthchecks_api_response_single::HealthchecksApiResponseSingle;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct HealthchecksSingleResponse {
+    #[serde(flatten)]
+    pub healthchecks_api_response_single:
+        crate::models::healthchecks_api_response_single::HealthchecksApiResponseSingle,
+    pub result: Option<crate::models::healthchecks_healthchecks::HealthchecksHealthchecks>,
+}

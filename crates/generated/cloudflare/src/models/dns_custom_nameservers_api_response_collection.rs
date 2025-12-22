@@ -15,4 +15,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type DnsCustomNameserversApiResponseCollection = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct DnsCustomNameserversApiResponseCollection {
+    #[serde(flatten)]
+    pub dns_custom_nameservers_api_response_common: crate::models::dns_custom_nameservers_api_response_common::DnsCustomNameserversApiResponseCommon,
+    pub result_info: Option<crate::models::dns_custom_nameservers_result_info::DnsCustomNameserversResultInfo>,
+}

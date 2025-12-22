@@ -15,4 +15,15 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type StreamLiveInputObjectWithoutUrl = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct StreamLiveInputObjectWithoutUrl {
+    pub created: Option<crate::models::stream_live_input_created::StreamLiveInputCreated>,
+    pub delete_recording_after_days: Option<
+        crate::models::stream_live_input_recording_deletion::StreamLiveInputRecordingDeletion,
+    >,
+    pub meta: Option<crate::models::stream_live_input_metadata::StreamLiveInputMetadata>,
+    pub modified: Option<crate::models::stream_live_input_modified::StreamLiveInputModified>,
+    pub uid: Option<crate::models::stream_live_input_identifier::StreamLiveInputIdentifier>,
+}

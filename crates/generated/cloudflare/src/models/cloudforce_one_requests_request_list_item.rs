@@ -19,8 +19,8 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct CloudforceOneRequestsRequestListItem {
-    pub completed: Option<serde_json::Value>,
-    pub created: serde_json::Value,
+    pub completed: Option<crate::models::cloudforce_one_requests_time::CloudforceOneRequestsTime>,
+    pub created: crate::models::cloudforce_one_requests_time::CloudforceOneRequestsTime,
     pub id: crate::models::cloudforce_one_requests_uuid::CloudforceOneRequestsUuid,
     pub message_tokens: Option<i64>,
     pub priority: crate::models::cloudforce_one_requests_priority::CloudforceOneRequestsPriority,
@@ -30,5 +30,5 @@ pub struct CloudforceOneRequestsRequestListItem {
     pub summary: crate::models::cloudforce_one_requests_request_summary::CloudforceOneRequestsRequestSummary,
     pub tlp: crate::models::cloudforce_one_requests_tlp::CloudforceOneRequestsTlp,
     pub tokens: Option<i64>,
-    pub updated: serde_json::Value,
+    pub updated: crate::models::cloudforce_one_requests_time::CloudforceOneRequestsTime,
 }

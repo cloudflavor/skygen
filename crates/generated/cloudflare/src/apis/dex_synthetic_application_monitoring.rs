@@ -15,6 +15,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::models::digital_experience_monitoring_api_response_collection::DigitalExperienceMonitoringApiResponseCollection;
+use crate::models::digital_experience_monitoring_api_response_single::DigitalExperienceMonitoringApiResponseSingle;
 use crate::models::digital_experience_monitoring_device::DigitalExperienceMonitoringDevice;
 use crate::models::digital_experience_monitoring_fleet_status_devices_response::DigitalExperienceMonitoringFleetStatusDevicesResponse;
 use crate::models::digital_experience_monitoring_fleet_status_live_response::DigitalExperienceMonitoringFleetStatusLiveResponse;
@@ -23,7 +25,7 @@ use reqwest::Method;
 
 #[derive(Debug)]
 pub struct EndpointsListColosRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, DigitalExperienceMonitoringApiResponseCollection>,
 }
 
 impl<'a> EndpointsListColosRequest<'a> {
@@ -49,7 +51,7 @@ impl<'a> EndpointsListColosRequest<'a> {
         self.builder = self.builder.header_param("sortBy", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<DigitalExperienceMonitoringApiResponseCollection> {
         self.builder.send().await
     }
 }
@@ -399,7 +401,7 @@ pub fn fleet_status_over_time(api: &ApiClient) -> FleetStatusOverTimeRequest<'_>
 
 #[derive(Debug)]
 pub struct EndpointsHttpTestDetailsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, DigitalExperienceMonitoringApiResponseSingle>,
 }
 
 impl<'a> EndpointsHttpTestDetailsRequest<'a> {
@@ -442,7 +444,7 @@ impl<'a> EndpointsHttpTestDetailsRequest<'a> {
         self.builder = self.builder.header_param("colo", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<DigitalExperienceMonitoringApiResponseSingle> {
         self.builder.send().await
     }
 }
@@ -483,7 +485,7 @@ pub fn endpoints_http_test_details(api: &ApiClient) -> EndpointsHttpTestDetailsR
 
 #[derive(Debug)]
 pub struct EndpointsHttpTestPercentilesRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, DigitalExperienceMonitoringApiResponseSingle>,
 }
 
 impl<'a> EndpointsHttpTestPercentilesRequest<'a> {
@@ -522,7 +524,7 @@ impl<'a> EndpointsHttpTestPercentilesRequest<'a> {
         self.builder = self.builder.header_param("colo", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<DigitalExperienceMonitoringApiResponseSingle> {
         self.builder.send().await
     }
 }
@@ -561,7 +563,7 @@ pub fn endpoints_http_test_percentiles(api: &ApiClient) -> EndpointsHttpTestPerc
 
 #[derive(Debug)]
 pub struct EndpointsListTestsOverviewRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, DigitalExperienceMonitoringApiResponseSingle>,
 }
 
 impl<'a> EndpointsListTestsOverviewRequest<'a> {
@@ -596,7 +598,7 @@ impl<'a> EndpointsListTestsOverviewRequest<'a> {
         self.builder = self.builder.header_param("per_page", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<DigitalExperienceMonitoringApiResponseSingle> {
         self.builder.send().await
     }
 }
@@ -635,7 +637,7 @@ pub fn endpoints_list_tests_overview(api: &ApiClient) -> EndpointsListTestsOverv
 
 #[derive(Debug)]
 pub struct EndpointsTestsUniqueDevicesRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, DigitalExperienceMonitoringApiResponseSingle>,
 }
 
 impl<'a> EndpointsTestsUniqueDevicesRequest<'a> {
@@ -661,7 +663,7 @@ impl<'a> EndpointsTestsUniqueDevicesRequest<'a> {
         self.builder = self.builder.header_param("deviceId", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<DigitalExperienceMonitoringApiResponseSingle> {
         self.builder.send().await
     }
 }
@@ -694,7 +696,7 @@ pub fn endpoints_tests_unique_devices(api: &ApiClient) -> EndpointsTestsUniqueDe
 
 #[derive(Debug)]
 pub struct EndpointsTracerouteTestResultRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, DigitalExperienceMonitoringApiResponseSingle>,
 }
 
 impl<'a> EndpointsTracerouteTestResultRequest<'a> {
@@ -717,7 +719,7 @@ impl<'a> EndpointsTracerouteTestResultRequest<'a> {
         self.builder = self.builder.path_param("test_result_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<DigitalExperienceMonitoringApiResponseSingle> {
         self.builder.send().await
     }
 }
@@ -750,7 +752,7 @@ pub fn endpoints_traceroute_test_result(
 
 #[derive(Debug)]
 pub struct EndpointsTracerouteTestDetailsRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, DigitalExperienceMonitoringApiResponseSingle>,
 }
 
 impl<'a> EndpointsTracerouteTestDetailsRequest<'a> {
@@ -793,7 +795,7 @@ impl<'a> EndpointsTracerouteTestDetailsRequest<'a> {
         self.builder = self.builder.header_param("colo", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<DigitalExperienceMonitoringApiResponseSingle> {
         self.builder.send().await
     }
 }
@@ -836,7 +838,7 @@ pub fn endpoints_traceroute_test_details(
 
 #[derive(Debug)]
 pub struct EndpointsTracerouteTestNetworkRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, DigitalExperienceMonitoringApiResponseSingle>,
 }
 
 impl<'a> EndpointsTracerouteTestNetworkRequest<'a> {
@@ -875,7 +877,7 @@ impl<'a> EndpointsTracerouteTestNetworkRequest<'a> {
         self.builder = self.builder.header_param("interval", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<DigitalExperienceMonitoringApiResponseSingle> {
         self.builder.send().await
     }
 }
@@ -916,7 +918,7 @@ pub fn endpoints_traceroute_test_network(
 
 #[derive(Debug)]
 pub struct EndpointsTracerouteTestPercentilesRequest<'a> {
-    builder: ApiRequestBuilder<'a, serde_json::Value>,
+    builder: ApiRequestBuilder<'a, DigitalExperienceMonitoringApiResponseSingle>,
 }
 
 impl<'a> EndpointsTracerouteTestPercentilesRequest<'a> {
@@ -955,7 +957,7 @@ impl<'a> EndpointsTracerouteTestPercentilesRequest<'a> {
         self.builder = self.builder.header_param("colo", value);
         self
     }
-    pub async fn send(self) -> ApiResult<serde_json::Value> {
+    pub async fn send(self) -> ApiResult<DigitalExperienceMonitoringApiResponseSingle> {
         self.builder.send().await
     }
 }

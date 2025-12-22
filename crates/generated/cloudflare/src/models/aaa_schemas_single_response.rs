@@ -15,4 +15,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type AaaSchemasSingleResponse = crate::models::aaa_api_response_single::AaaApiResponseSingle;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct AaaSchemasSingleResponse {
+    #[serde(flatten)]
+    pub aaa_api_response_single: crate::models::aaa_api_response_single::AaaApiResponseSingle,
+    pub result: Option<crate::models::aaa_webhooks::AaaWebhooks>,
+}

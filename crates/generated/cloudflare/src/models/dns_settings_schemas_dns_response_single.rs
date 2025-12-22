@@ -19,6 +19,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct DnsSettingsSchemasDnsResponseSingle {
+    #[serde(flatten)]
     pub dns_settings_api_response_single:
         crate::models::dns_settings_api_response_single::DnsSettingsApiResponseSingle,
     pub result: Option<crate::models::dns_settings_dns_settings_zone::DnsSettingsDnsSettingsZone>,

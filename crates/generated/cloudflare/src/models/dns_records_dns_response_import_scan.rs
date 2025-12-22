@@ -19,6 +19,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct DnsRecordsDnsResponseImportScan {
+    #[serde(flatten)]
     pub dns_records_api_response_single:
         crate::models::dns_records_api_response_single::DnsRecordsApiResponseSingle,
     pub result: Option<std::collections::BTreeMap<String, serde_json::Value>>,

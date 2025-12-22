@@ -22,4 +22,5 @@ pub struct ImagesImageVariantListResponse {
     #[serde(flatten)]
     pub images_api_response_common:
         crate::models::images_api_response_common::ImagesApiResponseCommon,
+    pub result: Option<crate::models::images_image_variants_response::ImagesImageVariantsResponse>,
 }

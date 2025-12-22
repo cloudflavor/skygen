@@ -15,5 +15,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type DnsFirewallDnsFirewallReverseDnsResponse =
-    crate::models::dns_firewall_api_response_single::DnsFirewallApiResponseSingle;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct DnsFirewallDnsFirewallReverseDnsResponse {
+    #[serde(flatten)]
+    pub dns_firewall_api_response_single: crate::models::dns_firewall_api_response_single::DnsFirewallApiResponseSingle,
+    pub result: Option<crate::models::dns_firewall_dns_firewall_reverse_dns_response::DnsFirewallDnsFirewallReverseDnsResponse>,
+}

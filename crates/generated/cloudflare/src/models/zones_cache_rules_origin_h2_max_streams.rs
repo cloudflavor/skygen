@@ -15,4 +15,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type ZonesCacheRulesOriginH2MaxStreams = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct ZonesCacheRulesOriginH2MaxStreams {
+    pub id: Option<String>,
+    pub value: Option<crate::models::zones_cache_rules_origin_h2_max_streams_value::ZonesCacheRulesOriginH2MaxStreamsValue>,
+    #[serde(flatten)]
+    pub zones_cache_rules_base: crate::models::zones_cache_rules_base::ZonesCacheRulesBase,
+}
