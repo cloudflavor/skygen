@@ -122,7 +122,8 @@ impl<'a> {{ function.builder_struct }}<'a> {
 /// # Example
 /// ```no_run
 /// use {{ crate_name }}::{ ApiClient, apis::{{ module_name }} };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+///
+/// let api = ApiClient::builder().build().expect("client");
 {%- if function.request_body %}
 /// # let body: {{ function.request_body.ty }} = todo!();
 {%- endif %}

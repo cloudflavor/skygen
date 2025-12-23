@@ -20,10 +20,10 @@ use anyhow::{anyhow, Context, Result};
 use include_dir::{include_dir, Dir};
 use openapiv3::OpenAPI;
 use serde::de::DeserializeOwned;
+use serde::Deserialize;
 use serde_json::Deserializer;
 use serde_yaml::Value as YamlValue;
-use std::path::PathBuf;
-use structopt::clap::arg_enum;
+use std::path::{Path, PathBuf};
 use structopt::StructOpt;
 use transformer::{
     clamp_overflowing_numeric_literals, fix_json_large_numbers, fix_yaml_large_numbers,
@@ -50,16 +50,9 @@ pub enum Commands {
     Generate(GenerateArgs),
 }
 
-arg_enum! {
-    #[derive(Debug)]
-    pub enum BindingKind {
-        Wit,
-        Http,
-    }
-}
-
 #[derive(StructOpt)]
 pub struct GenerateArgs {
+    /// OpenAPIv3 Spec file to generate the SDK from
     #[structopt(short = "s", long = "spec-file")]
     pub schema: String,
 
@@ -67,8 +60,26 @@ pub struct GenerateArgs {
     #[structopt(short = "o", long = "output-dir")]
     pub output: PathBuf,
 
-    #[structopt(long = "kind", default_value = "wit", possible_values = &BindingKind::variants(), case_insensitive = true)]
-    pub kind: BindingKind,
+    /// Skygen config for generating the SDK.
+    #[structopt(short = "c", long = "config")]
+    pub config: PathBuf,
+}
+
+#[derive(Debug, Deserialize)]
+pub struct Config {
+    name: String,
+    version: String,
+    description: String,
+    keywords: Vec<String>,
+    api_url: String,
+    authors: Vec<String>,
+}
+
+pub async fn read_config(config_file: impl AsRef<Path>) -> Result<Config> {
+    let resp = tokio::fs::read_to_string(&config_file).await?;
+    let config: Config = toml::from_str(resp.as_str())?;
+
+    Ok(config)
 }
 
 pub(crate) async fn deserialize_data(data: &str) -> Result<OpenAPI> {

@@ -229,17 +229,21 @@ pub fn infer_param_type_from_schema(schema_or_ref: &ReferenceOr<OApiSchema>) -> 
 }
 
 fn infer_from_composed(parts: &[ReferenceOr<OApiSchema>]) -> ParamType {
-    parts
-        .iter()
-        .filter_map(|part| {
-            let ty = infer_param_type_from_schema(part);
-            match ty {
-                ParamType::Unknown => None,
-                other => Some(other),
+    let mut parts_iter = parts.iter().peekable();
+    while let Some(part) = parts_iter.next() {
+        if let ReferenceOr::Reference { reference } = part {
+            if reference_name(reference) == "rulesets_Response" {
+                if parts_iter.peek().is_some() {
+                    continue;
+                }
             }
-        })
-        .next()
-        .unwrap_or(ParamType::Unknown)
+        }
+        let ty = infer_param_type_from_schema(part);
+        if !matches!(ty, ParamType::Unknown) {
+            return ty;
+        }
+    }
+    ParamType::Unknown
 }
 
 fn reference_name(reference: &str) -> &str {

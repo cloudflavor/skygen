@@ -12,7 +12,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-use crate::deserialize_data;
 use crate::ir::{
     Function, FunctionParam, HttpMethod, Operation, ParamLocation, ParamType, PathParam,
     RequestBodyConfig,
@@ -22,23 +21,28 @@ use crate::transformer::{
     infer_param_type_from_schema, RefResolver,
 };
 use crate::TEMPLATES;
+use crate::{deserialize_data, Config};
 use anyhow::{ensure, Context, Result};
 use heck::{ToSnakeCase, ToUpperCamelCase};
 use openapiv3::{Components, Info as OApiInfo, OpenAPI, Paths, ReferenceOr, SchemaKind};
-use semver::Version;
 use serde::Serialize;
 use std::collections::btree_map::Entry;
 use std::collections::{BTreeMap, BTreeSet, HashMap, HashSet};
 use std::path::Path;
 use tokio::process::Command;
 
-pub async fn generate(schema: impl AsRef<Path>, output_dir: impl AsRef<Path>) -> Result<()> {
+pub async fn generate(
+    config: &Config,
+    schema: impl AsRef<Path>,
+    output_dir: impl AsRef<Path>,
+) -> Result<()> {
     match tokio::fs::read_to_string(schema).await {
         Ok(content) => {
             let openapi: OpenAPI = deserialize_data(content.as_str()).await?;
             let component_ref = openapi.components.as_ref();
             let reqs = walk_paths(openapi.paths, component_ref).await?;
-            generate_lib(reqs, output_dir, openapi.info, component_ref).await?;
+            generate_lib(config, reqs, output_dir, openapi.info, component_ref).await?;
+
             Ok(())
         }
         Err(e) => Err(e.into()),
@@ -268,6 +272,7 @@ pub async fn walk_paths(
 }
 
 async fn generate_lib(
+    config: &Config,
     reqs: BTreeMap<String, Vec<Operation>>,
     path: impl AsRef<Path>,
     api_info: OApiInfo,
@@ -294,7 +299,6 @@ async fn generate_lib(
         version,
         ..
     } = api_info;
-    let crate_version = sanitize_crate_version(&version);
     let sample_metadata = reqs.iter().next().map(|(tag, ops)| {
         let module_tokens: Vec<String> = tag
             .to_lowercase()
@@ -315,7 +319,7 @@ async fn generate_lib(
             .unwrap_or_else(|| "health_check".to_string());
         (module_tokens, func)
     });
-    let crate_name_slug = sanitize_crate_name(title.as_str());
+    let crate_name_slug = &config.name;
     let sample_function_name = sample_metadata
         .as_ref()
         .map(|(_, func)| func.clone())
@@ -444,6 +448,7 @@ async fn generate_lib(
         context.insert("module_name", &module_name);
         context.insert("functions", &module_functions);
         context.insert("model_uses", &uses);
+        context.insert("api_url", &config.api_url);
         let render = tera
             .render("operations.rs", &context)
             .with_context(|| "failed to render module template")?;
@@ -492,6 +497,7 @@ async fn generate_lib(
     context.insert("sample_function", &sample_function);
     context.insert("docs", &docs_block);
     context.insert("modules", &lib_modules);
+    context.insert("api_url", &config.api_url);
     let render = tera
         .render("lib.rs", &context)
         .with_context(|| "failed to render lib template")?;
@@ -500,8 +506,8 @@ async fn generate_lib(
         .await
         .with_context(|| "failed to write lib.rs")?;
 
-    create_rust_project(title, crate_version, &output_root).await?;
-    if let Err(err) = run_cargo_tasks(&output_root).await {
+    create_rust_project(&config, &output_root).await?;
+    if let Err(err) = run_post_op(&output_root).await {
         tracing::warn!("cargo post-processing failed: {err}");
     }
 
@@ -529,9 +535,21 @@ async fn render_mod_file(modules: &[String], destination: impl AsRef<Path>) -> R
     Ok(())
 }
 
-async fn run_cargo_tasks(path: &Path) -> Result<()> {
+async fn run_post_op(path: &Path) -> Result<()> {
     run_cargo_command(path, &["fmt"]).await?;
     run_cargo_command(path, &["check"]).await?;
+    run_toml_format(path).await?;
+
+    Ok(())
+}
+
+async fn run_toml_format(path: impl AsRef<Path>) -> Result<()> {
+    Command::new("taplo")
+        .current_dir(&path)
+        .args(&["format"])
+        .status()
+        .await?;
+
     Ok(())
 }
 
@@ -740,10 +758,24 @@ fn schema_supports_struct_item(
         SchemaKind::AllOf { all_of } => all_of
             .iter()
             .any(|inner| schema_supports_struct(inner, resolver, visited)),
+        SchemaKind::OneOf { one_of } => one_of
+            .iter()
+            .any(|inner| schema_supports_struct(inner, resolver, visited)),
+        SchemaKind::AnyOf { any_of } => any_of
+            .iter()
+            .any(|inner| schema_supports_struct(inner, resolver, visited)),
         SchemaKind::Any(any_schema) => {
             !any_schema.properties.is_empty()
                 || any_schema
                     .all_of
+                    .iter()
+                    .any(|inner| schema_supports_struct(inner, resolver, visited))
+                || any_schema
+                    .one_of
+                    .iter()
+                    .any(|inner| schema_supports_struct(inner, resolver, visited))
+                || any_schema
+                    .any_of
                     .iter()
                     .any(|inner| schema_supports_struct(inner, resolver, visited))
         }
@@ -846,6 +878,40 @@ fn collect_fields_from_schema(
             );
             Some(merge_model_fields(fields))
         }
+        SchemaKind::OneOf { one_of } => {
+            let mut fields = Vec::new();
+            append_composed_fields(
+                &mut fields,
+                one_of,
+                resolver,
+                module_name_map,
+                struct_modules,
+                available_modules,
+                visited,
+            );
+            if fields.is_empty() {
+                None
+            } else {
+                Some(merge_model_fields(fields))
+            }
+        }
+        SchemaKind::AnyOf { any_of } => {
+            let mut fields = Vec::new();
+            append_composed_fields(
+                &mut fields,
+                any_of,
+                resolver,
+                module_name_map,
+                struct_modules,
+                available_modules,
+                visited,
+            );
+            if fields.is_empty() {
+                None
+            } else {
+                Some(merge_model_fields(fields))
+            }
+        }
         SchemaKind::Any(any_schema) => {
             let mut fields = Vec::new();
             if !any_schema.properties.is_empty() {
@@ -872,6 +938,30 @@ fn collect_fields_from_schema(
                 append_all_of_fields(
                     &mut fields,
                     &any_schema.all_of,
+                    resolver,
+                    module_name_map,
+                    struct_modules,
+                    available_modules,
+                    visited,
+                );
+            }
+
+            if !any_schema.one_of.is_empty() {
+                append_composed_fields(
+                    &mut fields,
+                    &any_schema.one_of,
+                    resolver,
+                    module_name_map,
+                    struct_modules,
+                    available_modules,
+                    visited,
+                );
+            }
+
+            if !any_schema.any_of.is_empty() {
+                append_composed_fields(
+                    &mut fields,
+                    &any_schema.any_of,
                     resolver,
                     module_name_map,
                     struct_modules,
@@ -927,6 +1017,47 @@ fn append_all_of_fields(
             ReferenceOr::Item(inline_schema) => {
                 if let Some(mut nested) = collect_fields_from_schema(
                     inline_schema,
+                    resolver,
+                    module_name_map,
+                    struct_modules,
+                    available_modules,
+                    visited,
+                ) {
+                    fields.append(&mut nested);
+                }
+            }
+        }
+    }
+}
+
+fn append_composed_fields(
+    fields: &mut Vec<ModelField>,
+    variants: &[ReferenceOr<openapiv3::Schema>],
+    resolver: &RefResolver<'_>,
+    module_name_map: &HashMap<String, String>,
+    struct_modules: &HashSet<String>,
+    available_modules: &HashSet<String>,
+    visited: &mut BTreeSet<String>,
+) {
+    for variant in variants {
+        match variant {
+            ReferenceOr::Reference { reference } => {
+                if let Some(schema) = resolver.resolve_schema(reference) {
+                    if let Some(mut nested) = collect_fields_from_schema(
+                        schema,
+                        resolver,
+                        module_name_map,
+                        struct_modules,
+                        available_modules,
+                        visited,
+                    ) {
+                        fields.append(&mut nested);
+                    }
+                }
+            }
+            ReferenceOr::Item(schema) => {
+                if let Some(mut nested) = collect_fields_from_schema(
+                    schema,
                     resolver,
                     module_name_map,
                     struct_modules,
@@ -1357,135 +1488,18 @@ fn hyperlinkize(line: &str) -> String {
     result
 }
 
-fn sanitize_crate_version(raw: &str) -> String {
-    let trimmed = raw.trim();
-    let stripped = trimmed.trim_start_matches(|c| c == 'v' || c == 'V');
-    let candidate = if stripped.is_empty() {
-        trimmed
-    } else {
-        stripped
-    };
-
-    if candidate.is_empty() {
-        tracing::warn!("OpenAPI info.version missing; defaulting to 0.1.0");
-        return "0.1.0".to_string();
-    }
-
-    if Version::parse(candidate).is_ok() {
-        return append_alpha(candidate);
-    }
-
-    if let Some(padded) = pad_semver_components(candidate) {
-        if Version::parse(&padded).is_ok() {
-            tracing::warn!("normalized OpenAPI version '{}' to '{}'", raw, padded);
-            return append_alpha(&padded);
-        }
-    }
-
-    tracing::warn!(
-        "unable to parse OpenAPI version '{}' - falling back to 0.1.0",
-        raw
-    );
-    append_alpha("0.1.0")
-}
-
-fn pad_semver_components(value: &str) -> Option<String> {
-    let mut core = value;
-    let mut build = "";
-    if let Some(idx) = core.find('+') {
-        build = &core[idx + 1..];
-        core = &core[..idx];
-    }
-
-    let mut pre_release = "";
-    if let Some(idx) = core.find('-') {
-        pre_release = &core[idx + 1..];
-        core = &core[..idx];
-    }
-
-    if core.is_empty() {
-        return None;
-    }
-
-    let mut numbers: Vec<u64> = Vec::new();
-    for (idx, part) in core
-        .split('.')
-        .filter(|segment| !segment.is_empty())
-        .enumerate()
-    {
-        let parsed = part.parse::<u64>().ok()?;
-        numbers.push(parsed);
-        if idx == 2 {
-            break;
-        }
-    }
-
-    if numbers.is_empty() {
-        return None;
-    }
-
-    while numbers.len() < 3 {
-        numbers.push(0);
-    }
-
-    let mut version = format!("{}.{}.{}", numbers[0], numbers[1], numbers[2]);
-    if !pre_release.is_empty() {
-        version.push('-');
-        version.push_str(pre_release);
-    }
-    if !build.is_empty() {
-        version.push('+');
-        version.push_str(build);
-    }
-
-    Some(version)
-}
-
-fn append_alpha(version: &str) -> String {
-    if version.ends_with("-alpha") {
-        version.to_string()
-    } else {
-        format!("{}-alpha", version.trim_end_matches('-'))
-    }
-}
-
-fn sanitize_crate_name(raw: &str) -> String {
-    let mut slug = raw
-        .to_lowercase()
-        .replace("public_api", "")
-        .replace("api", "")
-        .replace("swgger", "")
-        .replace('_', "")
-        .replace(' ', "")
-        .replace("-", "");
-
-    slug = slug.trim_matches('_').to_string();
-    if slug.is_empty() {
-        panic!("empty name");
-    }
-    // for pattern in ["public_api", "api", "swagger"] {
-    //     if let Some(stripped) = slug.strip_suffix(pattern) {
-    //         slug = stripped.trim_end_matches('_').to_string();
-    //     }
-    // }
-    // slug = slug.trim_matches('_').to_string();
-    // if slug.is_empty() {
-    //     panic!("empty name");
-    // }
-    slug
-}
-
-async fn create_rust_project(title: String, version: String, path: impl AsRef<Path>) -> Result<()> {
+async fn create_rust_project(config: &Config, path: impl AsRef<Path>) -> Result<()> {
     let cargo_template = TEMPLATES
         .get_file("cargo.toml.tera")
         .with_context(|| "failed to retrieve cargo tera template")?;
     let mut tera = tera::Tera::default();
     let mut context = tera::Context::new();
-    let crate_name = sanitize_crate_name(&title.to_snake_case());
-    let skygen_name = format!("{}_skygen", &crate_name);
-    context.insert("crate_name", &skygen_name);
-    context.insert("normalized_name", &crate_name);
-    context.insert("version", &version);
+    context.insert("crate_name", &config.name);
+    context.insert("version", &config.version);
+    context.insert("authors", &config.authors);
+    context.insert("description", &config.description);
+    context.insert("keywords", &config.keywords);
+
     let contents = cargo_template
         .contents_utf8()
         .with_context(|| "failed to read cargo template")?;

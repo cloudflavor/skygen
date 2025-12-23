@@ -34,7 +34,8 @@ async fn main() -> Result<()> {
 
     match opts.commands {
         skygen::Commands::Generate(args) => {
-            create_writer::generate(args.schema, args.output).await?
+            let config = skygen::read_config(args.config).await?;
+            create_writer::generate(&config, args.schema, args.output).await?
         }
     }
 
