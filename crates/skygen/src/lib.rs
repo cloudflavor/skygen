@@ -14,7 +14,7 @@
 
 pub mod generator;
 pub mod ir;
-pub mod transformer;
+pub mod transformers;
 
 use anyhow::{anyhow, Result};
 use include_dir::{include_dir, Dir};

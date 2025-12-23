@@ -16,9 +16,8 @@ use crate::ir::{
     Function, FunctionParam, HttpMethod, Operation, ParamLocation, ParamType, PathParam,
     RequestBodyConfig,
 };
-use crate::transformer::{
-    convert_param, extract_body, extract_response, fallback_operation_id,
-    schemas, RefResolver,
+use crate::transformers::{
+    convert_param, extract_body, extract_response, fallback_operation_id, schemas, RefResolver,
 };
 use crate::TEMPLATES;
 use crate::{deserialize_data, Config};
@@ -135,8 +134,7 @@ fn should_drop_token(token: &str, position: usize) -> bool {
         normalized,
         "id" | "ids" | "identifier" | "account" | "accounts" | "zone" | "zones" | "user" | "users"
     );
-    (structural && position > 0)
-        || (identifier_tokens && position > 0)
+    (structural || identifier_tokens) && position > 0
         || (normalized.len() == 1 && !normalized.chars().any(|c| c.is_alphabetic()))
 }
 
@@ -171,7 +169,7 @@ fn extract_path_params(path: &str) -> Vec<PathParam> {
     let mut params = Vec::new();
     let mut seen = HashSet::new();
     let mut start = None;
-    for (idx, ch) in path.chars().enumerate() {
+    for (idx, ch) in path.char_indices() {
         match (ch, start) {
             ('{', None) => start = Some(idx + 1),
             ('}', Some(begin)) if begin < idx => {
@@ -477,7 +475,7 @@ async fn generate_lib(
         .await
         .with_context(|| "failed to write lib.rs")?;
 
-    create_rust_project(&config, &output_root).await?;
+    create_rust_project(config, &output_root).await?;
     if let Err(err) = run_post_op(&output_root).await {
         tracing::warn!("cargo post-processing failed: {}", err);
     }
@@ -516,8 +514,8 @@ async fn run_post_op(path: &Path) -> Result<()> {
 
 async fn run_toml_format(path: impl AsRef<Path>) -> Result<()> {
     Command::new("taplo")
-        .current_dir(&path)
-        .args(&["format"])
+        .current_dir(path)
+        .args(["format"])
         .status()
         .await?;
 
@@ -734,7 +732,7 @@ fn hyperlinkize(line: &str) -> String {
         result.push_str(prefix);
         let end = tail
             .find(|c: char| c.is_whitespace())
-            .unwrap_or_else(|| tail.len());
+            .unwrap_or(tail.len());
         let (url, remainder) = tail.split_at(end);
         if url.starts_with('<') && url.ends_with('>') {
             result.push_str(url);

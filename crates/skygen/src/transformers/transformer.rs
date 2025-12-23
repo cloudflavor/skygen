@@ -38,8 +38,7 @@ pub fn fallback_operation_id(method: &str, path: &str) -> String {
     let normalized_path = path
         .trim_matches('/')
         .replace('/', "_")
-        .replace('{', "")
-        .replace('}', "");
+        .replace(['{', '}'], "");
     format!("{}_{}", method, normalized_path)
 }
 
@@ -232,10 +231,8 @@ fn infer_from_composed(parts: &[ReferenceOr<OApiSchema>]) -> ParamType {
     let mut parts_iter = parts.iter().peekable();
     while let Some(part) = parts_iter.next() {
         if let ReferenceOr::Reference { reference } = part {
-            if reference_name(reference) == "rulesets_Response" {
-                if parts_iter.peek().is_some() {
-                    continue;
-                }
+            if reference_name(reference) == "rulesets_Response" && parts_iter.peek().is_some() {
+                continue;
             }
         }
         let ty = infer_param_type_from_schema(part);
@@ -280,7 +277,7 @@ fn normalize_json_value(
         }
         JsonVal::Object(map) => {
             let (has_type_field, local_hint) = infer_numeric_hint_from_map(map);
-            let next_hint = local_hint.or_else(|| if has_type_field { None } else { numeric_hint });
+            let next_hint = local_hint.or(if has_type_field { None } else { numeric_hint });
 
             for (key, val) in map.iter_mut() {
                 normalize_json_value(val, Some(key.as_str()), next_hint);
@@ -383,11 +380,7 @@ fn numeric_kind_for_key(key: Option<&str>, hint: Option<NumericHint>) -> Option<
         Some("maximum") | Some("minimum") | Some("multipleOf") | Some("enum") | Some("default")
         | Some("example") => match hint {
             Some(NumericHint::Integer) => {
-                if key == Some("enum") {
-                    Some(NumericValueKind::Signed)
-                } else {
-                    Some(NumericValueKind::Signed)
-                }
+                Some(NumericValueKind::Signed)
             }
             Some(NumericHint::Number) => Some(NumericValueKind::Float),
             None => None,
