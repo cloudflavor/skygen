@@ -59,7 +59,7 @@ impl<'a> ListRoutesRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::magic_static_routes };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = list_routes(&api)
 ///     .with_account_id("account_id")
 ///     .send()
@@ -111,7 +111,7 @@ impl<'a> CreateRoutesRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::magic_static_routes };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::magic_create_route_request::MagicCreateRouteRequest = todo!();
 /// let response = create_routes(&api)
 ///     .with_account_id("account_id")
@@ -165,7 +165,7 @@ impl<'a> UpdateManyRoutesRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::magic_static_routes };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::magic_route_update_many_request::MagicRouteUpdateManyRequest = todo!();
 /// let response = update_many_routes(&api)
 ///     .with_account_id("account_id")
@@ -219,7 +219,7 @@ impl<'a> DeleteManyRoutesRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::magic_static_routes };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::magic_route_delete_many_request::MagicRouteDeleteManyRequest = todo!();
 /// let response = delete_many_routes(&api)
 ///     .with_account_id("account_id")
@@ -274,7 +274,7 @@ impl<'a> RouteDetailsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::magic_static_routes };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = route_details(&api)
 ///     .with_account_id("account_id")
 ///     .with_route_id("route_id")
@@ -336,7 +336,7 @@ impl<'a> UpdateRouteRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::magic_static_routes };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::magic_route_update_request::MagicRouteUpdateRequest = todo!();
 /// let response = update_route(&api)
 ///     .with_account_id("account_id")
@@ -392,7 +392,7 @@ impl<'a> DeleteRouteRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::magic_static_routes };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = delete_route(&api)
 ///     .with_account_id("account_id")
 ///     .with_route_id("route_id")

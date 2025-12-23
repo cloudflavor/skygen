@@ -55,7 +55,7 @@ impl<'a> ListZeroTrustGatewayRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zero_trust_gateway_locations };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = list_zero_trust_gateway(&api)
 ///     .with_account_id("account_id")
 ///     .send()
@@ -104,7 +104,7 @@ impl<'a> CreateZeroTrustGatewayRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zero_trust_gateway_locations };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = create_zero_trust_gateway(&api)
 ///     .with_account_id("account_id")
@@ -159,7 +159,7 @@ impl<'a> LocationDetailsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zero_trust_gateway_locations };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = location_details(&api)
 ///     .with_account_id("account_id")
 ///     .with_location_id("location_id")
@@ -218,7 +218,7 @@ impl<'a> UpdateZeroTrustGatewayRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zero_trust_gateway_locations };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = update_zero_trust_gateway(&api)
 ///     .with_account_id("account_id")
@@ -274,7 +274,7 @@ impl<'a> DeleteZeroTrustGatewayRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zero_trust_gateway_locations };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = delete_zero_trust_gateway(&api)
 ///     .with_account_id("account_id")
 ///     .with_location_id("location_id")

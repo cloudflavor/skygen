@@ -63,7 +63,7 @@ impl<'a> CertificateListHostnameAssociationsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::api_shield_client_certificates_for_a_zone };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = certificate_list_hostname_associations(&api)
 ///     .with_zone_id("zone_id")
 ///     .with_mtls_certificate_id("mtls_certificate_id")
@@ -121,7 +121,7 @@ impl<'a> CertificatePutHostnameAssociationsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::api_shield_client_certificates_for_a_zone };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::tls_certificates_and_hostnames_hostname_association::TlsCertificatesAndHostnamesHostnameAssociation = todo!();
 /// let response = certificate_put_hostname_associations(&api)
 ///     .with_zone_id("zone_id")
@@ -196,7 +196,7 @@ impl<'a> CertificateListClientCertificatesRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::api_shield_client_certificates_for_a_zone };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = certificate_list_client_certificates(&api)
 ///     .with_zone_id("zone_id")
 ///     .with_status("status")
@@ -257,7 +257,7 @@ impl<'a> CertificateCreateClientCertificateRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::api_shield_client_certificates_for_a_zone };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = certificate_create_client_certificate(&api)
 ///     .with_zone_id("zone_id")
@@ -316,7 +316,7 @@ impl<'a> CertificateClientCertificateDetailsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::api_shield_client_certificates_for_a_zone };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = certificate_client_certificate_details(&api)
 ///     .with_zone_id("zone_id")
 ///     .with_client_certificate_id("client_certificate_id")
@@ -374,7 +374,7 @@ impl<'a> CertificateDeleteClientCertificateRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::api_shield_client_certificates_for_a_zone };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = certificate_delete_client_certificate(&api)
 ///     .with_zone_id("zone_id")
 ///     .with_client_certificate_id("client_certificate_id")
@@ -432,7 +432,7 @@ impl<'a> CertificateEditClientCertificateRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::api_shield_client_certificates_for_a_zone };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = certificate_edit_client_certificate(&api)
 ///     .with_zone_id("zone_id")
 ///     .with_client_certificate_id("client_certificate_id")

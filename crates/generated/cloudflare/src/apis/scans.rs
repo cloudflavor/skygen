@@ -54,7 +54,7 @@ impl<'a> ConfigFetchRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::scans };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = config_fetch(&api)
 ///     .with_account_id("account_id")
 ///     .send()
@@ -106,7 +106,7 @@ impl<'a> ConfigCreateRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::scans };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = config_create(&api)
 ///     .with_account_id("account_id")
@@ -159,7 +159,7 @@ impl<'a> DeleteScansRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::scans };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = delete_scans(&api)
 ///     .with_account_id("account_id")
 ///     .with_config_id("config_id")
@@ -218,7 +218,7 @@ impl<'a> PostConfigUpdateRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::scans };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = post_config_update(&api)
 ///     .with_account_id("account_id")
@@ -272,7 +272,7 @@ impl<'a> GetOpenPortsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::scans };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = get_open_ports(&api)
 ///     .with_account_id("account_id")
 ///     .with_config_id("config_id")

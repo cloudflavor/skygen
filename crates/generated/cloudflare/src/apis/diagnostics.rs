@@ -61,7 +61,7 @@ impl<'a> TracerouteRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::diagnostics };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = traceroute(&api)
 ///     .with_account_id("account_id")

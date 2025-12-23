@@ -53,7 +53,7 @@ impl<'a> ListAvailablePageRulesRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::available_page_rules_settings };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = list_available_page_rules(&api)
 ///     .with_zone_id("zone_id")
 ///     .send()

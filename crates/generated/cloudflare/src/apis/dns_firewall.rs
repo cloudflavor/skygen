@@ -66,7 +66,7 @@ impl<'a> ListDnsFirewallClustersRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::dns_firewall };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = list_dns_firewall_clusters(&api)
 ///     .with_account_id("account_id")
 ///     .with_page("page")
@@ -120,7 +120,7 @@ impl<'a> CreateDnsFirewallClusterRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::dns_firewall };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::dns_firewall_dns_firewall_cluster_post::DnsFirewallDnsFirewallClusterPost = todo!();
 /// let response = create_dns_firewall_cluster(&api)
 ///     .with_account_id("account_id")
@@ -175,7 +175,7 @@ impl<'a> ClusterDetailsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::dns_firewall };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = cluster_details(&api)
 ///     .with_account_id("account_id")
 ///     .with_dns_firewall_id("dns_firewall_id")
@@ -229,7 +229,7 @@ impl<'a> DeleteDnsFirewallClusterRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::dns_firewall };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = delete_dns_firewall_cluster(&api)
 ///     .with_account_id("account_id")
 ///     .with_dns_firewall_id("dns_firewall_id")
@@ -291,7 +291,7 @@ impl<'a> UpdateDnsFirewallClusterRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::dns_firewall };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::dns_firewall_dns_firewall_cluster_patch::DnsFirewallDnsFirewallClusterPatch = todo!();
 /// let response = update_dns_firewall_cluster(&api)
 ///     .with_account_id("account_id")
@@ -347,7 +347,7 @@ impl<'a> ShowDnsFirewallClusterRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::dns_firewall };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = show_dns_firewall_cluster(&api)
 ///     .with_account_id("account_id")
 ///     .with_dns_firewall_id("dns_firewall_id")
@@ -409,7 +409,7 @@ impl<'a> UpdateDnsFirewallClusterPatchRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::dns_firewall };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::dns_firewall_dns_firewall_reverse_dns_patch::DnsFirewallDnsFirewallReverseDnsPatch = todo!();
 /// let response = update_dns_firewall_cluster_patch(&api)
 ///     .with_account_id("account_id")

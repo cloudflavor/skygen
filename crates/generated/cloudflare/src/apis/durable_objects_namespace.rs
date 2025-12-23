@@ -56,7 +56,7 @@ impl<'a> ListNamespacesRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::durable_objects_namespace };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = list_namespaces(&api)
 ///     .with_account_id("account_id")
 ///     .send()
@@ -119,7 +119,7 @@ impl<'a> ListObjectsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::durable_objects_namespace };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = list_objects(&api)
 ///     .with_account_id("account_id")
 ///     .with_id("id")

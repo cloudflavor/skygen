@@ -58,7 +58,7 @@ impl<'a> ListAllProfilesRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::dlp_profiles };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = list_all_profiles(&api)
 ///     .with_account_id("account_id")
 ///     .with_all("all")
@@ -114,7 +114,7 @@ impl<'a> CreateCustomProfilesRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::dlp_profiles };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::dlp_new_custom_profile::DlpNewCustomProfile = todo!();
 /// let response = create_custom_profiles(&api)
 ///     .with_account_id("account_id")
@@ -169,7 +169,7 @@ impl<'a> GetCustomProfileRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::dlp_profiles };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = get_custom_profile(&api)
 ///     .with_account_id("account_id")
 ///     .with_profile_id("profile_id")
@@ -231,7 +231,7 @@ impl<'a> UpdateCustomProfileRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::dlp_profiles };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::dlp_custom_profile_update::DlpCustomProfileUpdate = todo!();
 /// let response = update_custom_profile(&api)
 ///     .with_account_id("account_id")
@@ -287,7 +287,7 @@ impl<'a> DeleteCustomProfileRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::dlp_profiles };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = delete_custom_profile(&api)
 ///     .with_account_id("account_id")
 ///     .with_profile_id("profile_id")
@@ -341,7 +341,7 @@ impl<'a> GetPredefinedProfileRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::dlp_profiles };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = get_predefined_profile(&api)
 ///     .with_account_id("account_id")
 ///     .with_profile_id("profile_id")
@@ -403,7 +403,7 @@ impl<'a> UpdatePredefinedProfileRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::dlp_profiles };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::dlp_predefined_profile_update::DlpPredefinedProfileUpdate = todo!();
 /// let response = update_predefined_profile(&api)
 ///     .with_account_id("account_id")
@@ -459,7 +459,7 @@ impl<'a> GetDlpProfileRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::dlp_profiles };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = get_dlp_profile(&api)
 ///     .with_account_id("account_id")
 ///     .with_profile_id("profile_id")

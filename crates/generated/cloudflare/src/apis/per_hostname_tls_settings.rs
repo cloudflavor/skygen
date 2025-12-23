@@ -67,7 +67,7 @@ impl<'a> ListRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::per_hostname_tls_settings };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = list(&api)
 ///     .with_zone_id("zone_id")
 ///     .with_setting_id("setting_id")
@@ -135,7 +135,7 @@ impl<'a> PutRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::per_hostname_tls_settings };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = put(&api)
 ///     .with_zone_id("zone_id")
@@ -200,7 +200,7 @@ impl<'a> DeleteRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::per_hostname_tls_settings };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = delete(&api)
 ///     .with_zone_id("zone_id")
 ///     .with_setting_id("setting_id")

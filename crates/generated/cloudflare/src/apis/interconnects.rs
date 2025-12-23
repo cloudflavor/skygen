@@ -73,7 +73,7 @@ impl<'a> ListInterconnectsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::interconnects };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = list_interconnects(&api)
 ///     .with_account_id("account_id")
 ///     .with_site("site")
@@ -127,7 +127,7 @@ impl<'a> CreateInterconnectRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::interconnects };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::nsc_interconnect_create::NscInterconnectCreate = todo!();
 /// let response = create_interconnect(&api)
 ///     .with_account_id("account_id")
@@ -180,7 +180,7 @@ impl<'a> InterconnectRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::interconnects };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = interconnect(&api)
 ///     .with_account_id("account_id")
 ///     .with_icon("icon")
@@ -232,7 +232,7 @@ impl<'a> InterconnectDeleteRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::interconnects };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = interconnect_delete(&api)
 ///     .with_account_id("account_id")
 ///     .with_icon("icon")
@@ -284,7 +284,7 @@ impl<'a> InterconnectLoaRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::interconnects };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = interconnect_loa(&api)
 ///     .with_account_id("account_id")
 ///     .with_icon("icon")
@@ -336,7 +336,7 @@ impl<'a> InterconnectStatusRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::interconnects };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = interconnect_status(&api)
 ///     .with_account_id("account_id")
 ///     .with_icon("icon")

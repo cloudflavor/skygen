@@ -84,7 +84,7 @@ impl<'a> AigConfigListDatasetRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::ai_gateway_datasets };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = aig_config_list_dataset(&api)
 ///     .with_account_id("account_id")
 ///     .with_gateway_id("gateway_id")
@@ -148,7 +148,7 @@ impl<'a> AigConfigCreateDatasetRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::ai_gateway_datasets };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = aig_config_create_dataset(&api)
 ///     .with_account_id("account_id")
@@ -208,7 +208,7 @@ impl<'a> AigConfigFetchDatasetRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::ai_gateway_datasets };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = aig_config_fetch_dataset(&api)
 ///     .with_account_id("account_id")
 ///     .with_gateway_id("gateway_id")
@@ -274,7 +274,7 @@ impl<'a> AigConfigUpdateDatasetRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::ai_gateway_datasets };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = aig_config_update_dataset(&api)
 ///     .with_account_id("account_id")
@@ -335,7 +335,7 @@ impl<'a> AigConfigDeleteDatasetRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::ai_gateway_datasets };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = aig_config_delete_dataset(&api)
 ///     .with_account_id("account_id")
 ///     .with_gateway_id("gateway_id")

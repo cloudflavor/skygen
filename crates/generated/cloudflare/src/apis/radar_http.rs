@@ -120,7 +120,7 @@ impl<'a> GetHttpSummaryRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::radar_http };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = get_http_summary(&api)
 ///     .with_name("name")
 ///     .with_date_range("dateRange")
@@ -246,7 +246,7 @@ impl<'a> GetHttpSummaryGetRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::radar_http };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = get_http_summary_get(&api)
 ///     .with_name("name")
 ///     .with_date_range("dateRange")
@@ -372,7 +372,7 @@ impl<'a> GetHttpSummaryGet3Request<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::radar_http };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = get_http_summary_get_3(&api)
 ///     .with_name("name")
 ///     .with_date_range("dateRange")
@@ -498,7 +498,7 @@ impl<'a> GetHttpSummaryGet4Request<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::radar_http };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = get_http_summary_get_4(&api)
 ///     .with_name("name")
 ///     .with_date_range("dateRange")
@@ -624,7 +624,7 @@ impl<'a> GetHttpSummaryGet5Request<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::radar_http };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = get_http_summary_get_5(&api)
 ///     .with_name("name")
 ///     .with_date_range("dateRange")
@@ -750,7 +750,7 @@ impl<'a> GetHttpSummaryGet6Request<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::radar_http };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = get_http_summary_get_6(&api)
 ///     .with_name("name")
 ///     .with_date_range("dateRange")
@@ -881,7 +881,7 @@ impl<'a> GetHttpSummaryGet7Request<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::radar_http };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = get_http_summary_get_7(&api)
 ///     .with_name("name")
 ///     .with_date_range("dateRange")
@@ -1008,7 +1008,7 @@ impl<'a> GetHttpSummaryGet8Request<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::radar_http };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = get_http_summary_get_8(&api)
 ///     .with_name("name")
 ///     .with_date_range("dateRange")
@@ -1149,7 +1149,7 @@ impl<'a> GetHttpTimeseriesRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::radar_http };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = get_http_timeseries(&api)
 ///     .with_agg_interval("aggInterval")
 ///     .with_name("name")
@@ -1284,7 +1284,7 @@ impl<'a> GetHttpTimeseriesGroupRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::radar_http };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = get_http_timeseries_group(&api)
 ///     .with_agg_interval("aggInterval")
 ///     .with_name("name")
@@ -1427,7 +1427,7 @@ impl<'a> GetHttpTimeseriesGroupGetRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::radar_http };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = get_http_timeseries_group_get(&api)
 ///     .with_agg_interval("aggInterval")
 ///     .with_name("name")
@@ -1570,7 +1570,7 @@ impl<'a> GetHttpTimeseriesGroupGet3Request<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::radar_http };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = get_http_timeseries_group_get_3(&api)
 ///     .with_agg_interval("aggInterval")
 ///     .with_name("name")
@@ -1704,7 +1704,7 @@ impl<'a> GetHttpTimeseriesGroupGet4Request<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::radar_http };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = get_http_timeseries_group_get_4(&api)
 ///     .with_agg_interval("aggInterval")
 ///     .with_name("name")
@@ -1840,7 +1840,7 @@ impl<'a> GetHttpTimeseriesGroupGet5Request<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::radar_http };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = get_http_timeseries_group_get_5(&api)
 ///     .with_agg_interval("aggInterval")
 ///     .with_name("name")
@@ -1976,7 +1976,7 @@ impl<'a> GetHttpTimeseriesGroupGet6Request<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::radar_http };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = get_http_timeseries_group_get_6(&api)
 ///     .with_agg_interval("aggInterval")
 ///     .with_name("name")
@@ -2109,7 +2109,7 @@ impl<'a> GetHttpTimeseriesGroupGet7Request<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::radar_http };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = get_http_timeseries_group_get_7(&api)
 ///     .with_agg_interval("aggInterval")
 ///     .with_name("name")
@@ -2241,7 +2241,7 @@ impl<'a> GetHttpTimeseriesGroupGet8Request<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::radar_http };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = get_http_timeseries_group_get_8(&api)
 ///     .with_agg_interval("aggInterval")
 ///     .with_name("name")
@@ -2382,7 +2382,7 @@ impl<'a> GetHttpTimeseriesGroupGet9Request<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::radar_http };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = get_http_timeseries_group_get_9(&api)
 ///     .with_agg_interval("aggInterval")
 ///     .with_name("name")
@@ -2516,7 +2516,7 @@ impl<'a> GetHttpTimeseriesGroupGet10Request<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::radar_http };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = get_http_timeseries_group_get_10(&api)
 ///     .with_agg_interval("aggInterval")
 ///     .with_name("name")
@@ -2653,7 +2653,7 @@ impl<'a> GetHttpTopAsesRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::radar_http };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = get_http_top_ases(&api)
 ///     .with_limit("limit")
 ///     .with_name("name")
@@ -2796,7 +2796,7 @@ impl<'a> GetHttpTopAsesGetRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::radar_http };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = get_http_top_ases_get(&api)
 ///     .with_bot_class("bot_class")
 ///     .with_limit("limit")
@@ -2939,7 +2939,7 @@ impl<'a> GetHttpTopAsesGet3Request<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::radar_http };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = get_http_top_ases_get_3(&api)
 ///     .with_browser_family("browser_family")
 ///     .with_limit("limit")
@@ -3082,7 +3082,7 @@ impl<'a> GetHttpTopAsesGet4Request<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::radar_http };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = get_http_top_ases_get_4(&api)
 ///     .with_device_type("device_type")
 ///     .with_limit("limit")
@@ -3225,7 +3225,7 @@ impl<'a> GetHttpTopAsesGet5Request<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::radar_http };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = get_http_top_ases_get_5(&api)
 ///     .with_http_protocol("http_protocol")
 ///     .with_limit("limit")
@@ -3368,7 +3368,7 @@ impl<'a> GetHttpTopAsesGet6Request<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::radar_http };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = get_http_top_ases_get_6(&api)
 ///     .with_http_version("http_version")
 ///     .with_limit("limit")
@@ -3511,7 +3511,7 @@ impl<'a> GetHttpTopAsesGet7Request<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::radar_http };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = get_http_top_ases_get_7(&api)
 ///     .with_ip_version("ip_version")
 ///     .with_limit("limit")
@@ -3650,7 +3650,7 @@ impl<'a> GetHttpTopAsesGet8Request<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::radar_http };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = get_http_top_ases_get_8(&api)
 ///     .with_os("os")
 ///     .with_limit("limit")
@@ -3793,7 +3793,7 @@ impl<'a> GetHttpTopAsesGet9Request<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::radar_http };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = get_http_top_ases_get_9(&api)
 ///     .with_tls_version("tls_version")
 ///     .with_limit("limit")
@@ -3931,7 +3931,7 @@ impl<'a> GetHttpTopBrowsersRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::radar_http };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = get_http_top_browsers(&api)
 ///     .with_limit("limit")
 ///     .with_name("name")
@@ -4064,7 +4064,7 @@ impl<'a> GetHttpTopBrowserRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::radar_http };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = get_http_top_browser(&api)
 ///     .with_limit("limit")
 ///     .with_name("name")
@@ -4201,7 +4201,7 @@ impl<'a> GetHttpTopLocationsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::radar_http };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = get_http_top_locations(&api)
 ///     .with_limit("limit")
 ///     .with_name("name")
@@ -4344,7 +4344,7 @@ impl<'a> GetHttpTopLocationsGetRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::radar_http };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = get_http_top_locations_get(&api)
 ///     .with_bot_class("bot_class")
 ///     .with_limit("limit")
@@ -4487,7 +4487,7 @@ impl<'a> GetHttpTopLocationsGet3Request<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::radar_http };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = get_http_top_locations_get_3(&api)
 ///     .with_browser_family("browser_family")
 ///     .with_limit("limit")
@@ -4630,7 +4630,7 @@ impl<'a> GetHttpTopLocationsGet4Request<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::radar_http };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = get_http_top_locations_get_4(&api)
 ///     .with_device_type("device_type")
 ///     .with_limit("limit")
@@ -4773,7 +4773,7 @@ impl<'a> GetHttpTopLocationsGet5Request<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::radar_http };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = get_http_top_locations_get_5(&api)
 ///     .with_http_protocol("http_protocol")
 ///     .with_limit("limit")
@@ -4916,7 +4916,7 @@ impl<'a> GetHttpTopLocationsGet6Request<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::radar_http };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = get_http_top_locations_get_6(&api)
 ///     .with_http_version("http_version")
 ///     .with_limit("limit")
@@ -5059,7 +5059,7 @@ impl<'a> GetHttpTopLocationsGet7Request<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::radar_http };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = get_http_top_locations_get_7(&api)
 ///     .with_ip_version("ip_version")
 ///     .with_limit("limit")
@@ -5198,7 +5198,7 @@ impl<'a> GetHttpTopLocationsGet8Request<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::radar_http };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = get_http_top_locations_get_8(&api)
 ///     .with_os("os")
 ///     .with_limit("limit")
@@ -5341,7 +5341,7 @@ impl<'a> GetHttpTopLocationsGet9Request<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::radar_http };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = get_http_top_locations_get_9(&api)
 ///     .with_tls_version("tls_version")
 ///     .with_limit("limit")

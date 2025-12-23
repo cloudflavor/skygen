@@ -21,7 +21,7 @@
 //! # Usage
 //! ```no_run
 //! use cloudflare::{ApiClient, apis};
-//! let api = ApiClient::builder("https://api.example.com")
+//! let api = ApiClient::builder()
 //!     .build()
 //!     .expect("client");
 //! let _ = apis::access_application_scoped_policies::list_access_app_policies(&api)
@@ -90,20 +90,20 @@ pub struct ApiClient {
 }
 
 impl ApiClient {
-    pub fn new(base_url: impl Into<String>) -> Self {
-        ApiClientBuilder::new(base_url)
+    pub fn new() -> Self {
+        ApiClientBuilder::new()
             .build()
             .expect("failed to build HTTP client")
     }
 
-    pub fn builder(base_url: impl Into<String>) -> ApiClientBuilder {
-        ApiClientBuilder::new(base_url)
+    pub fn builder() -> ApiClientBuilder {
+        ApiClientBuilder::new()
     }
 
-    pub fn with_client(client: Client, base_url: impl Into<String>) -> Self {
+    pub fn with_client(client: Client) -> Self {
         Self {
             inner: client,
-            base_url: base_url.into(),
+            base_url: "https://api.cloudflare.com/client/v4".to_string(),
             auth_token: None,
             api_key: None,
             default_headers: HeaderMap::new(),
@@ -162,9 +162,9 @@ pub struct ApiClientBuilder {
 }
 
 impl ApiClientBuilder {
-    pub fn new(base_url: impl Into<String>) -> Self {
+    pub fn new() -> Self {
         Self {
-            base_url: base_url.into(),
+            base_url: "https://api.cloudflare.com/client/v4".to_string(),
             client_builder: ClientBuilder::new(),
             auth_token: None,
             api_key: None,

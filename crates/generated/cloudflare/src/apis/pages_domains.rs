@@ -64,7 +64,7 @@ impl<'a> GetDomainsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::pages_domains };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = get_domains(&api)
 ///     .with_account_id("account_id")
 ///     .with_project_name("project_name")
@@ -123,7 +123,7 @@ impl<'a> AddDomainRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::pages_domains };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::pages_domains_post::PagesDomainsPost = todo!();
 /// let response = add_domain(&api)
 ///     .with_account_id("account_id")
@@ -185,7 +185,7 @@ impl<'a> GetDomainRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::pages_domains };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = get_domain(&api)
 ///     .with_account_id("account_id")
 ///     .with_project_name("project_name")
@@ -246,7 +246,7 @@ impl<'a> DeleteDomainRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::pages_domains };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = delete_domain(&api)
 ///     .with_account_id("account_id")
 ///     .with_project_name("project_name")
@@ -307,7 +307,7 @@ impl<'a> PatchDomainRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::pages_domains };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = patch_domain(&api)
 ///     .with_account_id("account_id")
 ///     .with_project_name("project_name")

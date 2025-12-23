@@ -57,7 +57,7 @@ impl<'a> GetDeviceSettingsZeroRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zero_trust_accounts };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = get_device_settings_zero(&api)
 ///     .with_account_id("account_id")
 ///     .send()
@@ -109,7 +109,7 @@ impl<'a> UpdateDeviceSettingsZeroRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zero_trust_accounts };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::teams_devices_zero_trust_account_device_settings::TeamsDevicesZeroTrustAccountDeviceSettings = todo!();
 /// let response = update_device_settings_zero(&api)
 ///     .with_account_id("account_id")
@@ -158,7 +158,7 @@ impl<'a> DeleteDeviceSettingsZeroRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zero_trust_accounts };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = delete_device_settings_zero(&api)
 ///     .with_account_id("account_id")
 ///     .send()
@@ -210,7 +210,7 @@ impl<'a> PatchDeviceSettingsZeroRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zero_trust_accounts };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::teams_devices_zero_trust_account_device_settings::TeamsDevicesZeroTrustAccountDeviceSettings = todo!();
 /// let response = patch_device_settings_zero(&api)
 ///     .with_account_id("account_id")
@@ -255,7 +255,7 @@ impl<'a> GetZeroTrustInformationRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zero_trust_accounts };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = get_zero_trust_information(&api)
 ///     .with_account_id("account_id")
 ///     .send()
@@ -298,7 +298,7 @@ impl<'a> CreateZeroTrustRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zero_trust_accounts };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = create_zero_trust(&api)
 ///     .with_account_id("account_id")
 ///     .send()
@@ -345,7 +345,7 @@ impl<'a> GetZeroTrustConfigurationRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zero_trust_accounts };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = get_zero_trust_configuration(&api)
 ///     .with_account_id("account_id")
 ///     .send()
@@ -400,7 +400,7 @@ impl<'a> UpdateZeroTrustConfigurationRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zero_trust_accounts };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::zero_trust_gateway_gateway_account_settings::ZeroTrustGatewayGatewayAccountSettings = todo!();
 /// let response = update_zero_trust_configuration(&api)
 ///     .with_account_id("account_id")
@@ -457,7 +457,7 @@ impl<'a> PatchZeroTrustConfigurationRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zero_trust_accounts };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::zero_trust_gateway_gateway_account_settings::ZeroTrustGatewayGatewayAccountSettings = todo!();
 /// let response = patch_zero_trust_configuration(&api)
 ///     .with_account_id("account_id")
@@ -506,7 +506,7 @@ impl<'a> GetZeroTrustCertificateRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zero_trust_accounts };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = get_zero_trust_certificate(&api)
 ///     .with_account_id("account_id")
 ///     .send()
@@ -550,7 +550,7 @@ impl<'a> GetLoggingSettingsZeroRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zero_trust_accounts };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = get_logging_settings_zero(&api)
 ///     .with_account_id("account_id")
 ///     .send()
@@ -602,7 +602,7 @@ impl<'a> UpdateLoggingSettingsZeroRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zero_trust_accounts };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::zero_trust_gateway_gateway_account_logging_settings::ZeroTrustGatewayGatewayAccountLoggingSettings = todo!();
 /// let response = update_logging_settings_zero(&api)
 ///     .with_account_id("account_id")

@@ -60,7 +60,7 @@ impl<'a> ListProxyEndpointsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zero_trust_gateway_proxy_endpoints };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = list_proxy_endpoints(&api)
 ///     .with_account_id("account_id")
 ///     .send()
@@ -117,7 +117,7 @@ impl<'a> CreateProxyEndpointRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zero_trust_gateway_proxy_endpoints };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = create_proxy_endpoint(&api)
 ///     .with_account_id("account_id")
@@ -175,7 +175,7 @@ impl<'a> EndpointDetailsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zero_trust_gateway_proxy_endpoints };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = endpoint_details(&api)
 ///     .with_account_id("account_id")
 ///     .with_proxy_endpoint_id("proxy_endpoint_id")
@@ -229,7 +229,7 @@ impl<'a> DeleteProxyEndpointRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zero_trust_gateway_proxy_endpoints };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = delete_proxy_endpoint(&api)
 ///     .with_account_id("account_id")
 ///     .with_proxy_endpoint_id("proxy_endpoint_id")
@@ -293,7 +293,7 @@ impl<'a> UpdateProxyEndpointRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zero_trust_gateway_proxy_endpoints };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = update_proxy_endpoint(&api)
 ///     .with_account_id("account_id")

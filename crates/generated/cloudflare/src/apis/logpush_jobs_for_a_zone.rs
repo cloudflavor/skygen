@@ -69,7 +69,7 @@ impl<'a> ZonesLogpushDatasetsDatasetRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::logpush_jobs_for_a_zone };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = zones_logpush_datasets_dataset(&api)
 ///     .with_zone_id("zone_id")
 ///     .with_dataset_id("dataset_id")
@@ -123,7 +123,7 @@ impl<'a> ZonesLogpushDatasetsDatasetGetRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::logpush_jobs_for_a_zone };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = zones_logpush_datasets_dataset_get(&api)
 ///     .with_zone_id("zone_id")
 ///     .with_dataset_id("dataset_id")
@@ -169,7 +169,7 @@ impl<'a> ZonesLogpushJobsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::logpush_jobs_for_a_zone };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = zones_logpush_jobs(&api)
 ///     .with_zone_id("zone_id")
 ///     .send()
@@ -217,7 +217,7 @@ impl<'a> ZonesLogpushJobsPostRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::logpush_jobs_for_a_zone };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = zones_logpush_jobs_post(&api)
 ///     .with_zone_id("zone_id")
@@ -269,7 +269,7 @@ impl<'a> ZonesLogpushJobsJobRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::logpush_jobs_for_a_zone };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = zones_logpush_jobs_job(&api)
 ///     .with_zone_id("zone_id")
 ///     .with_job_id("job_id")
@@ -325,7 +325,7 @@ impl<'a> ZonesLogpushJobsJobPutRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::logpush_jobs_for_a_zone };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = zones_logpush_jobs_job_put(&api)
 ///     .with_zone_id("zone_id")
@@ -378,7 +378,7 @@ impl<'a> ZonesLogpushJobsJobDeleteRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::logpush_jobs_for_a_zone };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = zones_logpush_jobs_job_delete(&api)
 ///     .with_zone_id("zone_id")
 ///     .with_job_id("job_id")
@@ -428,7 +428,7 @@ impl<'a> ZonesLogpushOwnershipRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::logpush_jobs_for_a_zone };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = zones_logpush_ownership(&api)
 ///     .with_zone_id("zone_id")
@@ -482,7 +482,7 @@ impl<'a> ZonesLogpushOwnershipValidateRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::logpush_jobs_for_a_zone };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = zones_logpush_ownership_validate(&api)
 ///     .with_zone_id("zone_id")
@@ -538,7 +538,7 @@ impl<'a> ZonesLogpushValidateDestinationRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::logpush_jobs_for_a_zone };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = zones_logpush_validate_destination(&api)
 ///     .with_zone_id("zone_id")
@@ -594,7 +594,7 @@ impl<'a> ZonesLogpushValidateDestinationPostRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::logpush_jobs_for_a_zone };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = zones_logpush_validate_destination_post(&api)
 ///     .with_zone_id("zone_id")
@@ -647,7 +647,7 @@ impl<'a> ZonesLogpushValidateOriginRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::logpush_jobs_for_a_zone };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = zones_logpush_validate_origin(&api)
 ///     .with_zone_id("zone_id")

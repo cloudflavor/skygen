@@ -90,7 +90,7 @@ impl<'a> GetAiBotsSummaryRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::radar_ai_bots };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = get_ai_bots_summary(&api)
 ///     .with_name("name")
 ///     .with_date_range("dateRange")
@@ -189,7 +189,7 @@ impl<'a> GetAiBotsTimeseriesRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::radar_ai_bots };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = get_ai_bots_timeseries(&api)
 ///     .with_agg_interval("aggInterval")
 ///     .with_name("name")

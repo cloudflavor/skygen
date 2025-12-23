@@ -76,7 +76,7 @@ impl<'a> ListHistoryRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::notification_history };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = list_history(&api)
 ///     .with_account_id("account_id")
 ///     .with_per_page("per_page")

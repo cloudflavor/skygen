@@ -68,7 +68,7 @@ impl<'a> ListRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::accounts };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = list(&api)
 ///     .with_name("name")
 ///     .with_page("page")
@@ -110,7 +110,7 @@ impl<'a> AccountCreationRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::accounts };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::iam_create_account::IamCreateAccount = todo!();
 /// let response = account_creation(&api)
 ///     .with_body(body)
@@ -154,7 +154,7 @@ impl<'a> DetailsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::accounts };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = details(&api)
 ///     .with_account_id("account_id")
 ///     .send()
@@ -205,7 +205,7 @@ impl<'a> UpdateRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::accounts };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::iam_components_schemas_account::IamComponentsSchemasAccount = todo!();
 /// let response = update(&api)
 ///     .with_account_id("account_id")
@@ -250,7 +250,7 @@ impl<'a> AccountDeletionRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::accounts };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = account_deletion(&api)
 ///     .with_account_id("account_id")
 ///     .send()

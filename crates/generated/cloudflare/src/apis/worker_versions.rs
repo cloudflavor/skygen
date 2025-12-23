@@ -79,7 +79,7 @@ impl<'a> ListVersionsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::worker_versions };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = list_versions(&api)
 ///     .with_account_id("account_id")
 ///     .with_script_name("script_name")
@@ -136,7 +136,7 @@ impl<'a> UploadVersionRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::worker_versions };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = upload_version(&api)
 ///     .with_account_id("account_id")
 ///     .with_script_name("script_name")
@@ -194,7 +194,7 @@ impl<'a> GetVersionDetailRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::worker_versions };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = get_version_detail(&api)
 ///     .with_account_id("account_id")
 ///     .with_script_name("script_name")

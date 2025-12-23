@@ -61,7 +61,7 @@ impl<'a> ClipVideosGivenStartRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::stream_video_clipping };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::stream_video_clip_standard::StreamVideoClipStandard = todo!();
 /// let response = clip_videos_given_start(&api)
 ///     .with_account_id("account_id")

@@ -56,7 +56,7 @@ impl<'a> GetAllSettingsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zone_settings };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = get_all_settings(&api)
 ///     .with_zone_id("zone_id")
 ///     .send()
@@ -107,7 +107,7 @@ impl<'a> EditSettingsInfoRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zone_settings };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::zones_multiple_settings::ZonesMultipleSettings = todo!();
 /// let response = edit_settings_info(&api)
 ///     .with_zone_id("zone_id")
@@ -152,7 +152,7 @@ impl<'a> CacheSettingsGetAegisRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zone_settings };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = cache_settings_get_aegis(&api)
 ///     .with_zone_id("zone_id")
 ///     .send()
@@ -203,7 +203,7 @@ impl<'a> CacheSettingsChangeAegisRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zone_settings };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = cache_settings_change_aegis(&api)
 ///     .with_zone_id("zone_id")
@@ -249,7 +249,7 @@ impl<'a> GetFontsSettingRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zone_settings };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = get_fonts_setting(&api)
 ///     .with_zone_id("zone_id")
 ///     .send()
@@ -298,7 +298,7 @@ impl<'a> ChangeFontsSettingRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zone_settings };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = change_fonts_setting(&api)
 ///     .with_zone_id("zone_id")
@@ -347,7 +347,7 @@ impl<'a> CacheSettingsGetOriginRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zone_settings };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = cache_settings_get_origin(&api)
 ///     .with_zone_id("zone_id")
 ///     .send()
@@ -402,7 +402,7 @@ impl<'a> CacheSettingsChangeOriginRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zone_settings };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = cache_settings_change_origin(&api)
 ///     .with_zone_id("zone_id")
@@ -451,7 +451,7 @@ impl<'a> CacheSettingsGetOriginGetRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zone_settings };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = cache_settings_get_origin_get(&api)
 ///     .with_zone_id("zone_id")
 ///     .send()
@@ -506,7 +506,7 @@ impl<'a> CacheSettingsChangeOriginPatchRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zone_settings };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = cache_settings_change_origin_patch(&api)
 ///     .with_zone_id("zone_id")
@@ -555,7 +555,7 @@ impl<'a> GetSpeedBrainSettingRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zone_settings };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = get_speed_brain_setting(&api)
 ///     .with_zone_id("zone_id")
 ///     .send()
@@ -605,7 +605,7 @@ impl<'a> ChangeSpeedBrainSettingRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zone_settings };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = change_speed_brain_setting(&api)
 ///     .with_zone_id("zone_id")
@@ -657,7 +657,7 @@ impl<'a> GetSingleSettingRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zone_settings };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = get_single_setting(&api)
 ///     .with_zone_id("zone_id")
 ///     .with_setting_id("setting_id")
@@ -716,7 +716,7 @@ impl<'a> EditSingleSettingRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zone_settings };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::zones_zone_settings_single_request::ZonesZoneSettingsSingleRequest = todo!();
 /// let response = edit_single_setting(&api)
 ///     .with_zone_id("zone_id")

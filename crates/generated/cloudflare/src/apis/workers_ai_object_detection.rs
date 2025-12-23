@@ -58,7 +58,7 @@ impl<'a> PostRunCfFacebookRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_ai_object_detection };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = post_run_cf_facebook(&api)
 ///     .with_account_id("account_id")
 ///     .with_queue_request("queueRequest")
@@ -109,7 +109,7 @@ impl<'a> PostRunCfFacebookPostRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_ai_object_detection };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = post_run_cf_facebook_post(&api)
 ///     .with_account_id("account_id")
 ///     .with_queue_request("queueRequest")
@@ -160,7 +160,7 @@ impl<'a> PostRunCfFacebookPost3Request<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_ai_object_detection };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = post_run_cf_facebook_post_3(&api)
 ///     .with_account_id("account_id")
 ///     .with_queue_request("queueRequest")

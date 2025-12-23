@@ -65,7 +65,7 @@ impl<'a> PostRunCfBaaiRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_ai_text_embeddings };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = post_run_cf_baai(&api)
 ///     .with_account_id("account_id")
@@ -125,7 +125,7 @@ impl<'a> PostRunCfBaaiPostRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_ai_text_embeddings };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = post_run_cf_baai_post(&api)
 ///     .with_account_id("account_id")
@@ -182,7 +182,7 @@ impl<'a> PostRunCfBaaiPost3Request<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_ai_text_embeddings };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = post_run_cf_baai_post_3(&api)
 ///     .with_account_id("account_id")
@@ -242,7 +242,7 @@ impl<'a> PostRunCfBaaiPost4Request<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_ai_text_embeddings };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = post_run_cf_baai_post_4(&api)
 ///     .with_account_id("account_id")

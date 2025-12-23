@@ -67,7 +67,7 @@ impl<'a> CreateSiteRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::web_analytics };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::rum_create_site_request::RumCreateSiteRequest = todo!();
 /// let response = create_site(&api)
 ///     .with_account_id("account_id")
@@ -128,7 +128,7 @@ impl<'a> ListSitesRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::web_analytics };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = list_sites(&api)
 ///     .with_account_id("account_id")
 ///     .with_per_page("per_page")
@@ -184,7 +184,7 @@ impl<'a> GetSiteRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::web_analytics };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = get_site(&api)
 ///     .with_account_id("account_id")
 ///     .with_site_id("site_id")
@@ -246,7 +246,7 @@ impl<'a> UpdateSiteRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::web_analytics };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::rum_update_site_request::RumUpdateSiteRequest = todo!();
 /// let response = update_site(&api)
 ///     .with_account_id("account_id")
@@ -302,7 +302,7 @@ impl<'a> DeleteSiteRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::web_analytics };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = delete_site(&api)
 ///     .with_account_id("account_id")
 ///     .with_site_id("site_id")
@@ -364,7 +364,7 @@ impl<'a> CreateRuleRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::web_analytics };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::rum_create_rule_request::RumCreateRuleRequest = todo!();
 /// let response = create_rule(&api)
 ///     .with_account_id("account_id")
@@ -434,7 +434,7 @@ impl<'a> UpdateRuleRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::web_analytics };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::rum_create_rule_request::RumCreateRuleRequest = todo!();
 /// let response = update_rule(&api)
 ///     .with_account_id("account_id")
@@ -497,7 +497,7 @@ impl<'a> DeleteRuleRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::web_analytics };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = delete_rule(&api)
 ///     .with_account_id("account_id")
 ///     .with_ruleset_id("ruleset_id")
@@ -552,7 +552,7 @@ impl<'a> ListRulesRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::web_analytics };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = list_rules(&api)
 ///     .with_account_id("account_id")
 ///     .with_ruleset_id("ruleset_id")
@@ -614,7 +614,7 @@ impl<'a> ModifyRulesRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::web_analytics };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::rum_modify_rules_request::RumModifyRulesRequest = todo!();
 /// let response = modify_rules(&api)
 ///     .with_account_id("account_id")
@@ -660,7 +660,7 @@ impl<'a> GetRumStatusRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::web_analytics };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = get_rum_status(&api)
 ///     .with_zone_id("zone_id")
 ///     .send()
@@ -711,7 +711,7 @@ impl<'a> ToggleRumRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::web_analytics };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::rum_toggle_rum_request::RumToggleRumRequest = todo!();
 /// let response = toggle_rum(&api)
 ///     .with_zone_id("zone_id")

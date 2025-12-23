@@ -85,7 +85,7 @@ impl<'a> GetTcpResetsTimeoutsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::radar_tcp_resets_and_timeouts };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = get_tcp_resets_timeouts(&api)
 ///     .with_name("name")
 ///     .with_date_range("dateRange")
@@ -178,7 +178,7 @@ impl<'a> GetTcpResetsTimeoutsGetRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::radar_tcp_resets_and_timeouts };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = get_tcp_resets_timeouts_get(&api)
 ///     .with_agg_interval("aggInterval")
 ///     .with_name("name")

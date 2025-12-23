@@ -58,7 +58,7 @@ impl<'a> ListCertificatesRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zone_level_authenticated_origin_pulls };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = list_certificates(&api)
 ///     .with_zone_id("zone_id")
 ///     .send()
@@ -115,7 +115,7 @@ impl<'a> UploadCertificateRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zone_level_authenticated_origin_pulls };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = upload_certificate(&api)
 ///     .with_zone_id("zone_id")
@@ -164,7 +164,7 @@ impl<'a> GetEnablementSettingRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zone_level_authenticated_origin_pulls };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = get_enablement_setting(&api)
 ///     .with_zone_id("zone_id")
 ///     .send()
@@ -219,7 +219,7 @@ impl<'a> SetEnablementRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zone_level_authenticated_origin_pulls };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = set_enablement(&api)
 ///     .with_zone_id("zone_id")
@@ -277,7 +277,7 @@ impl<'a> GetCertificateDetailsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zone_level_authenticated_origin_pulls };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = get_certificate_details(&api)
 ///     .with_zone_id("zone_id")
 ///     .with_certificate_id("certificate_id")
@@ -334,7 +334,7 @@ impl<'a> DeleteCertificateRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zone_level_authenticated_origin_pulls };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = delete_certificate(&api)
 ///     .with_zone_id("zone_id")
 ///     .with_certificate_id("certificate_id")

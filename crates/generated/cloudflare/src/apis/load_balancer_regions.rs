@@ -72,7 +72,7 @@ impl<'a> ListRegionsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::load_balancer_regions };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = list_regions(&api)
 ///     .with_account_id("account_id")
 ///     .with_subdivision_code("subdivision_code")
@@ -128,7 +128,7 @@ impl<'a> GetRegionRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::load_balancer_regions };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = get_region(&api)
 ///     .with_account_id("account_id")
 ///     .with_region_id("region_id")

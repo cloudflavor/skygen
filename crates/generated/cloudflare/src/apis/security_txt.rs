@@ -55,7 +55,7 @@ impl<'a> GetRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::security_txt };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = get(&api)
 ///     .with_zone_id("zone_id")
 ///     .send()
@@ -108,7 +108,7 @@ impl<'a> UpdateSecurityTxtRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::security_txt };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::security_center_security_txt::SecurityCenterSecurityTxt = todo!();
 /// let response = update_security_txt(&api)
 ///     .with_zone_id("zone_id")
@@ -155,7 +155,7 @@ impl<'a> DeleteRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::security_txt };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = delete(&api)
 ///     .with_zone_id("zone_id")
 ///     .send()

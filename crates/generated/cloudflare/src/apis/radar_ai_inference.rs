@@ -75,7 +75,7 @@ impl<'a> GetAiInferenceSummaryRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::radar_ai_inference };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = get_ai_inference_summary(&api)
 ///     .with_name("name")
 ///     .with_date_range("dateRange")
@@ -147,7 +147,7 @@ impl<'a> GetAiInferenceSummaryGetRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::radar_ai_inference };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = get_ai_inference_summary_get(&api)
 ///     .with_name("name")
 ///     .with_date_range("dateRange")
@@ -228,7 +228,7 @@ impl<'a> GetAiInferenceTimeseriesRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::radar_ai_inference };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = get_ai_inference_timeseries(&api)
 ///     .with_agg_interval("aggInterval")
 ///     .with_name("name")
@@ -310,7 +310,7 @@ impl<'a> GetAiInferenceTimeseriesGetRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::radar_ai_inference };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = get_ai_inference_timeseries_get(&api)
 ///     .with_agg_interval("aggInterval")
 ///     .with_name("name")

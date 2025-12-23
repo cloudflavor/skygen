@@ -55,7 +55,7 @@ impl<'a> ListRegistrationsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::registrations };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = list_registrations(&api)
 ///     .with_account_id("account_id")
 ///     .send()
@@ -107,7 +107,7 @@ impl<'a> RevokeRegistrationsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::registrations };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = revoke_registrations(&api)
 ///     .with_account_id("account_id")
 ///     .with_id("id")
@@ -160,7 +160,7 @@ impl<'a> UnrevokeRegistrationsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::registrations };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = unrevoke_registrations(&api)
 ///     .with_account_id("account_id")
 ///     .with_id("id")
@@ -214,7 +214,7 @@ impl<'a> RegistrationRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::registrations };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = registration(&api)
 ///     .with_account_id("account_id")
 ///     .with_registration_id("registration_id")
@@ -268,7 +268,7 @@ impl<'a> RegistrationDeleteRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::registrations };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = registration_delete(&api)
 ///     .with_account_id("account_id")
 ///     .with_registration_id("registration_id")

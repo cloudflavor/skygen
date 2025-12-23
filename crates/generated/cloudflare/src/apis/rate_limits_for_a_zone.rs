@@ -63,7 +63,7 @@ impl<'a> ListRateLimitsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::rate_limits_for_a_zone };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = list_rate_limits(&api)
 ///     .with_zone_id("zone_id")
 ///     .with_page("page")
@@ -116,7 +116,7 @@ impl<'a> CreateRateLimitRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::rate_limits_for_a_zone };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = create_rate_limit(&api)
 ///     .with_zone_id("zone_id")
@@ -171,7 +171,7 @@ impl<'a> GetRateLimitRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::rate_limits_for_a_zone };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = get_rate_limit(&api)
 ///     .with_zone_id("zone_id")
 ///     .with_rate_limit_id("rate_limit_id")
@@ -233,7 +233,7 @@ impl<'a> UpdateRateLimitRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::rate_limits_for_a_zone };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = update_rate_limit(&api)
 ///     .with_zone_id("zone_id")
@@ -289,7 +289,7 @@ impl<'a> DeleteRateLimitRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::rate_limits_for_a_zone };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = delete_rate_limit(&api)
 ///     .with_zone_id("zone_id")
 ///     .with_rate_limit_id("rate_limit_id")

@@ -55,7 +55,7 @@ impl<'a> KeyListRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::calls_turn_keys };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = key_list(&api)
 ///     .with_account_id("account_id")
 ///     .send()
@@ -107,7 +107,7 @@ impl<'a> KeyCreateRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::calls_turn_keys };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::calls_turn_key_editable_fields::CallsTurnKeyEditableFields = todo!();
 /// let response = key_create(&api)
 ///     .with_account_id("account_id")
@@ -162,7 +162,7 @@ impl<'a> RetrieveTurnKeyDetailsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::calls_turn_keys };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = retrieve_turn_key_details(&api)
 ///     .with_account_id("account_id")
 ///     .with_key_id("key_id")
@@ -224,7 +224,7 @@ impl<'a> UpdateTurnKeyRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::calls_turn_keys };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::calls_turn_key_editable_fields::CallsTurnKeyEditableFields = todo!();
 /// let response = update_turn_key(&api)
 ///     .with_account_id("account_id")
@@ -280,7 +280,7 @@ impl<'a> DeleteTurnKeyRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::calls_turn_keys };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = delete_turn_key(&api)
 ///     .with_account_id("account_id")
 ///     .with_key_id("key_id")

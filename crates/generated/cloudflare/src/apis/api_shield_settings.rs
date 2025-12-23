@@ -60,7 +60,7 @@ impl<'a> RetrieveInformationAboutSpecificRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::api_shield_settings };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = retrieve_information_about_specific(&api)
 ///     .with_zone_id("zone_id")
 ///     .with_properties("properties")
@@ -116,7 +116,7 @@ impl<'a> SetConfigurationPropertiesRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::api_shield_settings };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::api_shield_configuration::ApiShieldConfiguration = todo!();
 /// let response = set_configuration_properties(&api)
 ///     .with_zone_id("zone_id")

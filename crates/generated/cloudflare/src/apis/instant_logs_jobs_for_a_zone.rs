@@ -53,7 +53,7 @@ impl<'a> ZonesLogpushEdgeJobsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::instant_logs_jobs_for_a_zone };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = zones_logpush_edge_jobs(&api)
 ///     .with_zone_id("zone_id")
 ///     .send()
@@ -101,7 +101,7 @@ impl<'a> ZonesLogpushEdgeJobsPostRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::instant_logs_jobs_for_a_zone };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = zones_logpush_edge_jobs_post(&api)
 ///     .with_zone_id("zone_id")

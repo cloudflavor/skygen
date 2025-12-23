@@ -67,7 +67,7 @@ impl<'a> IpsecTunnelsListIpsecRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::magic_i_psec_tunnels };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = ipsec_tunnels_list_ipsec(&api)
 ///     .with_account_id("account_id")
 ///     .with_x_magic_new_hc_target("x-magic-new-hc-target")
@@ -128,7 +128,7 @@ impl<'a> IpsecTunnelsCreateIpsecRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::magic_i_psec_tunnels };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::magic_ipsec_tunnel_add_request::MagicIpsecTunnelAddRequest = todo!();
 /// let response = ipsec_tunnels_create_ipsec(&api)
 ///     .with_account_id("account_id")
@@ -188,7 +188,7 @@ impl<'a> IpsecTunnelsUpdateMultipleRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::magic_i_psec_tunnels };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = ipsec_tunnels_update_multiple(&api)
 ///     .with_account_id("account_id")
@@ -249,7 +249,7 @@ impl<'a> IpsecTunnelsListIpsecGetRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::magic_i_psec_tunnels };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = ipsec_tunnels_list_ipsec_get(&api)
 ///     .with_account_id("account_id")
 ///     .with_ipsec_tunnel_id("ipsec_tunnel_id")
@@ -317,7 +317,7 @@ impl<'a> IpsecTunnelsUpdateIpsecRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::magic_i_psec_tunnels };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::magic_ipsec_tunnel_add_single_request::MagicIpsecTunnelAddSingleRequest = todo!();
 /// let response = ipsec_tunnels_update_ipsec(&api)
 ///     .with_account_id("account_id")
@@ -379,7 +379,7 @@ impl<'a> IpsecTunnelsDeleteIpsecRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::magic_i_psec_tunnels };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = ipsec_tunnels_delete_ipsec(&api)
 ///     .with_account_id("account_id")
 ///     .with_ipsec_tunnel_id("ipsec_tunnel_id")
@@ -434,7 +434,7 @@ impl<'a> IpsecTunnelsGeneratePreRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::magic_i_psec_tunnels };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = ipsec_tunnels_generate_pre(&api)
 ///     .with_account_id("account_id")
 ///     .with_ipsec_tunnel_id("ipsec_tunnel_id")

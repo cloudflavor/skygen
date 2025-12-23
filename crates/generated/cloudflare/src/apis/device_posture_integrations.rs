@@ -58,7 +58,7 @@ impl<'a> ListDevicePostureIntegrationsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::device_posture_integrations };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = list_device_posture_integrations(&api)
 ///     .with_account_id("account_id")
 ///     .send()
@@ -115,7 +115,7 @@ impl<'a> CreateDevicePostureIntegrationRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::device_posture_integrations };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = create_device_posture_integration(&api)
 ///     .with_account_id("account_id")
@@ -172,7 +172,7 @@ impl<'a> IntegrationDetailsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::device_posture_integrations };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = integration_details(&api)
 ///     .with_account_id("account_id")
 ///     .with_integration_id("integration_id")
@@ -226,7 +226,7 @@ impl<'a> DeleteDevicePostureIntegrationRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::device_posture_integrations };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = delete_device_posture_integration(&api)
 ///     .with_account_id("account_id")
 ///     .with_integration_id("integration_id")
@@ -290,7 +290,7 @@ impl<'a> UpdateDevicePostureIntegrationRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::device_posture_integrations };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = update_device_posture_integration(&api)
 ///     .with_account_id("account_id")

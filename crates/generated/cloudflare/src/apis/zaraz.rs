@@ -58,7 +58,7 @@ impl<'a> ZonesZarazConfigRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zaraz };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = zones_zaraz_config(&api)
 ///     .with_zone_id("zone_id")
 ///     .send()
@@ -110,7 +110,7 @@ impl<'a> ZonesZarazConfigPutRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zaraz };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::zaraz_zaraz_config_body::ZarazZarazConfigBody = todo!();
 /// let response = zones_zaraz_config_put(&api)
 ///     .with_zone_id("zone_id")
@@ -156,7 +156,7 @@ impl<'a> ZonesZarazDefaultRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zaraz };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = zones_zaraz_default(&api)
 ///     .with_zone_id("zone_id")
 ///     .send()
@@ -200,7 +200,7 @@ impl<'a> ZonesZarazExportRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zaraz };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = zones_zaraz_export(&api)
 ///     .with_zone_id("zone_id")
 ///     .send()
@@ -264,7 +264,7 @@ impl<'a> ZonesZarazHistoryRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zaraz };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = zones_zaraz_history(&api)
 ///     .with_zone_id("zone_id")
 ///     .with_offset("offset")
@@ -317,7 +317,7 @@ impl<'a> ZonesZarazHistoryPutRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zaraz };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: i64 = todo!();
 /// let response = zones_zaraz_history_put(&api)
 ///     .with_zone_id("zone_id")
@@ -371,7 +371,7 @@ impl<'a> ZonesZarazConfigHistoryRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zaraz };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = zones_zaraz_config_history(&api)
 ///     .with_zone_id("zone_id")
 ///     .with_ids("ids")
@@ -420,7 +420,7 @@ impl<'a> ZonesZarazPublishRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zaraz };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: String = todo!();
 /// let response = zones_zaraz_publish(&api)
 ///     .with_zone_id("zone_id")
@@ -466,7 +466,7 @@ impl<'a> ZonesZarazWorkflowRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zaraz };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = zones_zaraz_workflow(&api)
 ///     .with_zone_id("zone_id")
 ///     .send()
@@ -518,7 +518,7 @@ impl<'a> ZonesZarazWorkflowPutRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zaraz };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::zaraz_zaraz_workflow::ZarazZarazWorkflow = todo!();
 /// let response = zones_zaraz_workflow_put(&api)
 ///     .with_zone_id("zone_id")

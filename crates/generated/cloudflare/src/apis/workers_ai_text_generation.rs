@@ -62,7 +62,7 @@ impl<'a> PostRunCfDeepseekRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_ai_text_generation };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = post_run_cf_deepseek(&api)
 ///     .with_account_id("account_id")
@@ -119,7 +119,7 @@ impl<'a> PostRunCfDeepseekPostRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_ai_text_generation };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = post_run_cf_deepseek_post(&api)
 ///     .with_account_id("account_id")
@@ -176,7 +176,7 @@ impl<'a> PostRunCfDefogRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_ai_text_generation };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = post_run_cf_defog(&api)
 ///     .with_account_id("account_id")
@@ -233,7 +233,7 @@ impl<'a> PostRunCfFblgitRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_ai_text_generation };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = post_run_cf_fblgit(&api)
 ///     .with_account_id("account_id")
@@ -290,7 +290,7 @@ impl<'a> PostRunCfGoogleRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_ai_text_generation };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = post_run_cf_google(&api)
 ///     .with_account_id("account_id")
@@ -347,7 +347,7 @@ impl<'a> PostRunCfGooglePostRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_ai_text_generation };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = post_run_cf_google_post(&api)
 ///     .with_account_id("account_id")
@@ -404,7 +404,7 @@ impl<'a> PostRunCfGooglePost3Request<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_ai_text_generation };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = post_run_cf_google_post_3(&api)
 ///     .with_account_id("account_id")
@@ -461,7 +461,7 @@ impl<'a> PostRunCfMetaRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_ai_text_generation };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = post_run_cf_meta(&api)
 ///     .with_account_id("account_id")
@@ -518,7 +518,7 @@ impl<'a> PostRunCfMetaPostRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_ai_text_generation };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = post_run_cf_meta_post(&api)
 ///     .with_account_id("account_id")
@@ -575,7 +575,7 @@ impl<'a> PostRunCfMetaPost3Request<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_ai_text_generation };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = post_run_cf_meta_post_3(&api)
 ///     .with_account_id("account_id")
@@ -632,7 +632,7 @@ impl<'a> PostRunCfMetaPost4Request<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_ai_text_generation };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = post_run_cf_meta_post_4(&api)
 ///     .with_account_id("account_id")
@@ -689,7 +689,7 @@ impl<'a> PostRunCfMetaPost5Request<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_ai_text_generation };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = post_run_cf_meta_post_5(&api)
 ///     .with_account_id("account_id")
@@ -746,7 +746,7 @@ impl<'a> PostRunCfMetaPost6Request<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_ai_text_generation };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = post_run_cf_meta_post_6(&api)
 ///     .with_account_id("account_id")
@@ -803,7 +803,7 @@ impl<'a> PostRunCfMetaPost7Request<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_ai_text_generation };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = post_run_cf_meta_post_7(&api)
 ///     .with_account_id("account_id")
@@ -860,7 +860,7 @@ impl<'a> PostRunCfMetaPost8Request<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_ai_text_generation };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = post_run_cf_meta_post_8(&api)
 ///     .with_account_id("account_id")
@@ -917,7 +917,7 @@ impl<'a> PostRunCfMetaPost9Request<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_ai_text_generation };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = post_run_cf_meta_post_9(&api)
 ///     .with_account_id("account_id")
@@ -974,7 +974,7 @@ impl<'a> PostRunCfMetaPost10Request<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_ai_text_generation };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = post_run_cf_meta_post_10(&api)
 ///     .with_account_id("account_id")
@@ -1031,7 +1031,7 @@ impl<'a> PostRunCfMetaPost11Request<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_ai_text_generation };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = post_run_cf_meta_post_11(&api)
 ///     .with_account_id("account_id")
@@ -1088,7 +1088,7 @@ impl<'a> PostRunCfMetaPost12Request<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_ai_text_generation };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = post_run_cf_meta_post_12(&api)
 ///     .with_account_id("account_id")
@@ -1145,7 +1145,7 @@ impl<'a> PostRunCfMetaPost13Request<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_ai_text_generation };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = post_run_cf_meta_post_13(&api)
 ///     .with_account_id("account_id")
@@ -1202,7 +1202,7 @@ impl<'a> PostRunCfMetaPost14Request<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_ai_text_generation };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = post_run_cf_meta_post_14(&api)
 ///     .with_account_id("account_id")
@@ -1259,7 +1259,7 @@ impl<'a> PostRunCfMetaPost15Request<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_ai_text_generation };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = post_run_cf_meta_post_15(&api)
 ///     .with_account_id("account_id")
@@ -1319,7 +1319,7 @@ impl<'a> PostRunCfMetaPost16Request<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_ai_text_generation };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = post_run_cf_meta_post_16(&api)
 ///     .with_account_id("account_id")
@@ -1376,7 +1376,7 @@ impl<'a> PostRunCfMicrosoftRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_ai_text_generation };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = post_run_cf_microsoft(&api)
 ///     .with_account_id("account_id")
@@ -1433,7 +1433,7 @@ impl<'a> PostRunCfMistralRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_ai_text_generation };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = post_run_cf_mistral(&api)
 ///     .with_account_id("account_id")
@@ -1490,7 +1490,7 @@ impl<'a> PostRunCfMistralPostRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_ai_text_generation };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = post_run_cf_mistral_post(&api)
 ///     .with_account_id("account_id")
@@ -1547,7 +1547,7 @@ impl<'a> PostRunCfMistralaiRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_ai_text_generation };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = post_run_cf_mistralai(&api)
 ///     .with_account_id("account_id")
@@ -1604,7 +1604,7 @@ impl<'a> PostRunCfOpenchatRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_ai_text_generation };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = post_run_cf_openchat(&api)
 ///     .with_account_id("account_id")
@@ -1661,7 +1661,7 @@ impl<'a> PostRunCfQwenRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_ai_text_generation };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = post_run_cf_qwen(&api)
 ///     .with_account_id("account_id")
@@ -1718,7 +1718,7 @@ impl<'a> PostRunCfQwenPostRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_ai_text_generation };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = post_run_cf_qwen_post(&api)
 ///     .with_account_id("account_id")
@@ -1775,7 +1775,7 @@ impl<'a> PostRunCfQwenPost3Request<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_ai_text_generation };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = post_run_cf_qwen_post_3(&api)
 ///     .with_account_id("account_id")
@@ -1832,7 +1832,7 @@ impl<'a> PostRunCfQwenPost4Request<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_ai_text_generation };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = post_run_cf_qwen_post_4(&api)
 ///     .with_account_id("account_id")
@@ -1889,7 +1889,7 @@ impl<'a> PostRunCfQwenPost5Request<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_ai_text_generation };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = post_run_cf_qwen_post_5(&api)
 ///     .with_account_id("account_id")
@@ -1946,7 +1946,7 @@ impl<'a> PostRunCfQwenPost6Request<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_ai_text_generation };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = post_run_cf_qwen_post_6(&api)
 ///     .with_account_id("account_id")
@@ -2003,7 +2003,7 @@ impl<'a> PostRunCfTheblokeRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_ai_text_generation };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = post_run_cf_thebloke(&api)
 ///     .with_account_id("account_id")
@@ -2060,7 +2060,7 @@ impl<'a> PostRunCfTiiuaeRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_ai_text_generation };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = post_run_cf_tiiuae(&api)
 ///     .with_account_id("account_id")
@@ -2117,7 +2117,7 @@ impl<'a> PostRunCfTinyllamaRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_ai_text_generation };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = post_run_cf_tinyllama(&api)
 ///     .with_account_id("account_id")
@@ -2174,7 +2174,7 @@ impl<'a> PostRunHfGoogleRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_ai_text_generation };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = post_run_hf_google(&api)
 ///     .with_account_id("account_id")
@@ -2231,7 +2231,7 @@ impl<'a> PostRunHfMetaRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_ai_text_generation };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = post_run_hf_meta(&api)
 ///     .with_account_id("account_id")
@@ -2288,7 +2288,7 @@ impl<'a> PostRunHfMistralRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_ai_text_generation };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = post_run_hf_mistral(&api)
 ///     .with_account_id("account_id")
@@ -2345,7 +2345,7 @@ impl<'a> PostRunHfMistralaiRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_ai_text_generation };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = post_run_hf_mistralai(&api)
 ///     .with_account_id("account_id")
@@ -2402,7 +2402,7 @@ impl<'a> PostRunHfNexusflowRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_ai_text_generation };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = post_run_hf_nexusflow(&api)
 ///     .with_account_id("account_id")
@@ -2459,7 +2459,7 @@ impl<'a> PostRunHfNousresearchRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_ai_text_generation };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = post_run_hf_nousresearch(&api)
 ///     .with_account_id("account_id")
@@ -2516,7 +2516,7 @@ impl<'a> PostRunHfTheblokeRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_ai_text_generation };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = post_run_hf_thebloke(&api)
 ///     .with_account_id("account_id")
@@ -2573,7 +2573,7 @@ impl<'a> PostRunHfTheblokePostRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_ai_text_generation };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = post_run_hf_thebloke_post(&api)
 ///     .with_account_id("account_id")
@@ -2630,7 +2630,7 @@ impl<'a> PostRunHfTheblokePost3Request<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_ai_text_generation };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = post_run_hf_thebloke_post_3(&api)
 ///     .with_account_id("account_id")
@@ -2687,7 +2687,7 @@ impl<'a> PostRunHfTheblokePost4Request<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_ai_text_generation };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = post_run_hf_thebloke_post_4(&api)
 ///     .with_account_id("account_id")
@@ -2744,7 +2744,7 @@ impl<'a> PostRunHfTheblokePost5Request<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_ai_text_generation };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = post_run_hf_thebloke_post_5(&api)
 ///     .with_account_id("account_id")
@@ -2801,7 +2801,7 @@ impl<'a> PostRunHfTheblokePost6Request<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_ai_text_generation };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = post_run_hf_thebloke_post_6(&api)
 ///     .with_account_id("account_id")
@@ -2858,7 +2858,7 @@ impl<'a> PostRunHfTheblokePost7Request<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_ai_text_generation };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = post_run_hf_thebloke_post_7(&api)
 ///     .with_account_id("account_id")
@@ -2915,7 +2915,7 @@ impl<'a> PostRunHfTheblokePost8Request<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_ai_text_generation };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = post_run_hf_thebloke_post_8(&api)
 ///     .with_account_id("account_id")

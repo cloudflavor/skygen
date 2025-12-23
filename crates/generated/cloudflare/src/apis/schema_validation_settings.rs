@@ -56,7 +56,7 @@ impl<'a> GetSettingsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::schema_validation_settings };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = get_settings(&api)
 ///     .with_zone_id("zone_id")
 ///     .send()
@@ -109,7 +109,7 @@ impl<'a> UpdateSettingsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::schema_validation_settings };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::api_shield_global_setting_change_base::ApiShieldGlobalSettingChangeBase = todo!();
 /// let response = update_settings(&api)
 ///     .with_zone_id("zone_id")
@@ -164,7 +164,7 @@ impl<'a> EditSettingsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::schema_validation_settings };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::api_shield_global_setting_change_base::ApiShieldGlobalSettingChangeBase = todo!();
 /// let response = edit_settings(&api)
 ///     .with_zone_id("zone_id")
@@ -211,7 +211,7 @@ impl<'a> ListPerOperationSettingsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::schema_validation_settings };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = list_per_operation_settings(&api)
 ///     .with_zone_id("zone_id")
 ///     .send()
@@ -264,7 +264,7 @@ impl<'a> BulkEditPerOperationRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::schema_validation_settings };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = bulk_edit_per_operation(&api)
 ///     .with_zone_id("zone_id")
@@ -317,7 +317,7 @@ impl<'a> GetPerOperationSettingRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::schema_validation_settings };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = get_per_operation_setting(&api)
 ///     .with_zone_id("zone_id")
 ///     .with_operation_id("operation_id")
@@ -377,7 +377,7 @@ impl<'a> UpdatePerOperationSettingRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::schema_validation_settings };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::api_shield_per_operation_setting_change_base::ApiShieldPerOperationSettingChangeBase = todo!();
 /// let response = update_per_operation_setting(&api)
 ///     .with_zone_id("zone_id")
@@ -431,7 +431,7 @@ impl<'a> DeletePerOperationSettingRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::schema_validation_settings };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = delete_per_operation_setting(&api)
 ///     .with_zone_id("zone_id")
 ///     .with_operation_id("operation_id")

@@ -63,7 +63,7 @@ impl<'a> ListWaitingRoomsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::waiting_room };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = list_waiting_rooms(&api)
 ///     .with_account_id("account_id")
 ///     .send()
@@ -106,7 +106,7 @@ impl<'a> ListWaitingRoomsGetRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::waiting_room };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = list_waiting_rooms_get(&api)
 ///     .with_zone_id("zone_id")
 ///     .send()
@@ -157,7 +157,7 @@ impl<'a> CreateWaitingRoomRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::waiting_room };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::waitingroom_query_waitingroom::WaitingroomQueryWaitingroom = todo!();
 /// let response = create_waiting_room(&api)
 ///     .with_zone_id("zone_id")
@@ -228,7 +228,7 @@ impl<'a> CreateCustomWaitingRoomRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::waiting_room };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::waitingroom_query_preview::WaitingroomQueryPreview = todo!();
 /// let response = create_custom_waiting_room(&api)
 ///     .with_zone_id("zone_id")
@@ -272,7 +272,7 @@ impl<'a> GetSettingsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::waiting_room };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = get_settings(&api)
 ///     .with_zone_id("zone_id")
 ///     .send()
@@ -322,7 +322,7 @@ impl<'a> UpdateSettingsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::waiting_room };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::waitingroom_zone_settings::WaitingroomZoneSettings = todo!();
 /// let response = update_settings(&api)
 ///     .with_zone_id("zone_id")
@@ -374,7 +374,7 @@ impl<'a> PatchSettingsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::waiting_room };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::waitingroom_zone_settings::WaitingroomZoneSettings = todo!();
 /// let response = patch_settings(&api)
 ///     .with_zone_id("zone_id")
@@ -429,7 +429,7 @@ impl<'a> DetailsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::waiting_room };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = details(&api)
 ///     .with_zone_id("zone_id")
 ///     .with_waiting_room_id("waiting_room_id")
@@ -491,7 +491,7 @@ impl<'a> UpdateWaitingRoomRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::waiting_room };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::waitingroom_query_waitingroom::WaitingroomQueryWaitingroom = todo!();
 /// let response = update_waiting_room(&api)
 ///     .with_zone_id("zone_id")
@@ -547,7 +547,7 @@ impl<'a> DeleteWaitingRoomRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::waiting_room };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = delete_waiting_room(&api)
 ///     .with_zone_id("zone_id")
 ///     .with_waiting_room_id("waiting_room_id")
@@ -609,7 +609,7 @@ impl<'a> PatchWaitingRoomRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::waiting_room };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::waitingroom_query_waitingroom::WaitingroomQueryWaitingroom = todo!();
 /// let response = patch_waiting_room(&api)
 ///     .with_zone_id("zone_id")
@@ -665,7 +665,7 @@ impl<'a> ListEventsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::waiting_room };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = list_events(&api)
 ///     .with_zone_id("zone_id")
 ///     .with_waiting_room_id("waiting_room_id")
@@ -727,7 +727,7 @@ impl<'a> CreateEventRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::waiting_room };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::waitingroom_query_event::WaitingroomQueryEvent = todo!();
 /// let response = create_event(&api)
 ///     .with_zone_id("zone_id")
@@ -789,7 +789,7 @@ impl<'a> EventDetailsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::waiting_room };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = event_details(&api)
 ///     .with_zone_id("zone_id")
 ///     .with_waiting_room_id("waiting_room_id")
@@ -858,7 +858,7 @@ impl<'a> UpdateEventRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::waiting_room };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::waitingroom_query_event::WaitingroomQueryEvent = todo!();
 /// let response = update_event(&api)
 ///     .with_zone_id("zone_id")
@@ -921,7 +921,7 @@ impl<'a> DeleteEventRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::waiting_room };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = delete_event(&api)
 ///     .with_zone_id("zone_id")
 ///     .with_waiting_room_id("waiting_room_id")
@@ -990,7 +990,7 @@ impl<'a> PatchEventRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::waiting_room };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::waitingroom_query_event::WaitingroomQueryEvent = todo!();
 /// let response = patch_event(&api)
 ///     .with_zone_id("zone_id")
@@ -1053,7 +1053,7 @@ impl<'a> PreviewActiveEventDetailsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::waiting_room };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = preview_active_event_details(&api)
 ///     .with_zone_id("zone_id")
 ///     .with_waiting_room_id("waiting_room_id")
@@ -1108,7 +1108,7 @@ impl<'a> ListWaitingRoomRulesRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::waiting_room };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = list_waiting_room_rules(&api)
 ///     .with_zone_id("zone_id")
 ///     .with_waiting_room_id("waiting_room_id")
@@ -1170,7 +1170,7 @@ impl<'a> CreateWaitingRoomRuleRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::waiting_room };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::waitingroom_create_rule::WaitingroomCreateRule = todo!();
 /// let response = create_waiting_room_rule(&api)
 ///     .with_zone_id("zone_id")
@@ -1234,7 +1234,7 @@ impl<'a> ReplaceWaitingRoomRulesRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::waiting_room };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::waitingroom_update_rules::WaitingroomUpdateRules = todo!();
 /// let response = replace_waiting_room_rules(&api)
 ///     .with_zone_id("zone_id")
@@ -1296,7 +1296,7 @@ impl<'a> DeleteWaitingRoomRuleRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::waiting_room };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = delete_waiting_room_rule(&api)
 ///     .with_zone_id("zone_id")
 ///     .with_waiting_room_id("waiting_room_id")
@@ -1365,7 +1365,7 @@ impl<'a> PatchWaitingRoomRuleRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::waiting_room };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::waitingroom_patch_rule::WaitingroomPatchRule = todo!();
 /// let response = patch_waiting_room_rule(&api)
 ///     .with_zone_id("zone_id")
@@ -1431,7 +1431,7 @@ impl<'a> GetWaitingRoomStatusRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::waiting_room };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = get_waiting_room_status(&api)
 ///     .with_zone_id("zone_id")
 ///     .with_waiting_room_id("waiting_room_id")

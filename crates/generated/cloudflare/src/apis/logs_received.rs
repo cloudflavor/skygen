@@ -58,7 +58,7 @@ impl<'a> ZonesLogsControlRetentionRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::logs_received };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = zones_logs_control_retention(&api)
 ///     .with_zone_id("zone_id")
 ///     .send()
@@ -113,7 +113,7 @@ impl<'a> ZonesLogsControlRetentionPostRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::logs_received };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::logcontrol_retention_flag::LogcontrolRetentionFlag = todo!();
 /// let response = zones_logs_control_retention_post(&api)
 ///     .with_zone_id("zone_id")
@@ -177,7 +177,7 @@ impl<'a> ZonesLogsRayidsRayRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::logs_received };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = zones_logs_rayids_ray(&api)
 ///     .with_zone_id("zone_id")
 ///     .with_ray_id("ray_id")
@@ -253,7 +253,7 @@ impl<'a> ZonesLogsReceivedRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::logs_received };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = zones_logs_received(&api)
 ///     .with_zone_id("zone_id")
 ///     .with_start("start")
@@ -303,7 +303,7 @@ impl<'a> ZonesLogsReceivedFieldsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::logs_received };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = zones_logs_received_fields(&api)
 ///     .with_zone_id("zone_id")
 ///     .send()

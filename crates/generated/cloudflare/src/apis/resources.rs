@@ -123,7 +123,7 @@ impl<'a> CatalogListRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::resources };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = catalog_list(&api)
 ///     .with_account_id("account_id")
 ///     .with_provider_id("provider_id")
@@ -228,7 +228,7 @@ impl<'a> CatalogExportRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::resources };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = catalog_export(&api)
 ///     .with_account_id("account_id")
 ///     .with_provider_id("provider_id")
@@ -292,7 +292,7 @@ impl<'a> CatalogPolicyPreviewRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::resources };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::mcn_resources_catalog_policy_preview_request::McnResourcesCatalogPolicyPreviewRequest = todo!();
 /// let response = catalog_policy_preview(&api)
 ///     .with_account_id("account_id")
@@ -352,7 +352,7 @@ impl<'a> CatalogReadRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::resources };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = catalog_read(&api)
 ///     .with_account_id("account_id")
 ///     .with_resource_id("resource_id")

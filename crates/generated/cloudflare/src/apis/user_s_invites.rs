@@ -45,7 +45,7 @@ impl<'a> ListInvitationsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::user_s_invites };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = list_invitations(&api)
 ///     .send()
 ///     .await?;
@@ -87,7 +87,7 @@ impl<'a> InvitationDetailsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::user_s_invites };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = invitation_details(&api)
 ///     .with_invite_id("invite_id")
 ///     .send()
@@ -138,7 +138,7 @@ impl<'a> RespondInvitationRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::user_s_invites };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = respond_invitation(&api)
 ///     .with_invite_id("invite_id")

@@ -67,7 +67,7 @@ impl<'a> AggregateAnalyticsGetCurrentRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::spectrum_analytics };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = aggregate_analytics_get_current(&api)
 ///     .with_zone_id("zone_id")
 ///     .with_app_id("appID")
@@ -151,7 +151,7 @@ impl<'a> GetRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::spectrum_analytics };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = get(&api)
 ///     .with_zone_id("zone_id")
 ///     .with_dimensions("dimensions")
@@ -235,7 +235,7 @@ impl<'a> SummaryGetAnalyticsSummaryRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::spectrum_analytics };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = summary_get_analytics_summary(&api)
 ///     .with_zone_id("zone_id")
 ///     .with_dimensions("dimensions")

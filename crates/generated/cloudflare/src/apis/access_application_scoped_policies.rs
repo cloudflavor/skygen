@@ -63,7 +63,7 @@ impl<'a> ListAccessAppPoliciesRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::access_application_scoped_policies };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = list_access_app_policies(&api)
 ///     .with_account_id("account_id")
 ///     .with_app_id("app_id")
@@ -125,7 +125,7 @@ impl<'a> CreateAccessPolicyRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::access_application_scoped_policies };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::access_app_policy_request::AccessAppPolicyRequest = todo!();
 /// let response = create_access_policy(&api)
 ///     .with_account_id("account_id")
@@ -187,7 +187,7 @@ impl<'a> GetAccessPolicyRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::access_application_scoped_policies };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = get_access_policy(&api)
 ///     .with_account_id("account_id")
 ///     .with_app_id("app_id")
@@ -256,7 +256,7 @@ impl<'a> UpdateAccessPolicyRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::access_application_scoped_policies };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::access_app_policy_request::AccessAppPolicyRequest = todo!();
 /// let response = update_access_policy(&api)
 ///     .with_account_id("account_id")
@@ -319,7 +319,7 @@ impl<'a> DeleteAccessPolicyRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::access_application_scoped_policies };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = delete_access_policy(&api)
 ///     .with_account_id("account_id")
 ///     .with_app_id("app_id")
@@ -380,7 +380,7 @@ impl<'a> ConvertReusableRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::access_application_scoped_policies };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = convert_reusable(&api)
 ///     .with_account_id("account_id")
 ///     .with_app_id("app_id")

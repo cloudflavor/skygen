@@ -56,7 +56,7 @@ impl<'a> RetrieveDiscoveredOperationsAsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::api_shield_api_discovery };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = retrieve_discovered_operations_as(&api)
 ///     .with_zone_id("zone_id")
 ///     .send()
@@ -105,7 +105,7 @@ impl<'a> RetrieveDiscoveredOperationsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::api_shield_api_discovery };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = retrieve_discovered_operations(&api)
 ///     .with_zone_id("zone_id")
 ///     .send()
@@ -160,7 +160,7 @@ impl<'a> PatchDiscoveredOperationsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::api_shield_api_discovery };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::api_shield_api_discovery_patch_multiple_request::ApiShieldApiDiscoveryPatchMultipleRequest = todo!();
 /// let response = patch_discovered_operations(&api)
 ///     .with_zone_id("zone_id")
@@ -223,7 +223,7 @@ impl<'a> PatchDiscoveredOperationRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::api_shield_api_discovery };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = patch_discovered_operation(&api)
 ///     .with_zone_id("zone_id")

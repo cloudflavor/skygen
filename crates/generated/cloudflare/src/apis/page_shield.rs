@@ -61,7 +61,7 @@ impl<'a> GetSettingsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::page_shield };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = get_settings(&api)
 ///     .with_zone_id("zone_id")
 ///     .send()
@@ -109,7 +109,7 @@ impl<'a> UpdateSettingsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::page_shield };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = update_settings(&api)
 ///     .with_zone_id("zone_id")
@@ -215,7 +215,7 @@ impl<'a> ListConnectionsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::page_shield };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = list_connections(&api)
 ///     .with_zone_id("zone_id")
 ///     .with_exclude_urls("exclude_urls")
@@ -280,7 +280,7 @@ impl<'a> GetConnectionRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::page_shield };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = get_connection(&api)
 ///     .with_zone_id("zone_id")
 ///     .with_connection_id("connection_id")
@@ -395,7 +395,7 @@ impl<'a> ListCookiesRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::page_shield };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = list_cookies(&api)
 ///     .with_zone_id("zone_id")
 ///     .with_hosts("hosts")
@@ -462,7 +462,7 @@ impl<'a> GetCookieRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::page_shield };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = get_cookie(&api)
 ///     .with_zone_id("zone_id")
 ///     .with_cookie_id("cookie_id")
@@ -507,7 +507,7 @@ impl<'a> ListPoliciesRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::page_shield };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = list_policies(&api)
 ///     .with_zone_id("zone_id")
 ///     .send()
@@ -556,7 +556,7 @@ impl<'a> CreatePolicyRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::page_shield };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::page_shield_policy::PageShieldPolicy = todo!();
 /// let response = create_policy(&api)
 ///     .with_zone_id("zone_id")
@@ -611,7 +611,7 @@ impl<'a> GetPolicyRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::page_shield };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = get_policy(&api)
 ///     .with_zone_id("zone_id")
 ///     .with_policy_id("policy_id")
@@ -670,7 +670,7 @@ impl<'a> UpdatePolicyRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::page_shield };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = update_policy(&api)
 ///     .with_zone_id("zone_id")
@@ -726,7 +726,7 @@ impl<'a> DeletePolicyRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::page_shield };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = delete_policy(&api)
 ///     .with_zone_id("zone_id")
 ///     .with_policy_id("policy_id")
@@ -836,7 +836,7 @@ impl<'a> ListScriptsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::page_shield };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = list_scripts(&api)
 ///     .with_zone_id("zone_id")
 ///     .with_exclude_urls("exclude_urls")
@@ -902,7 +902,7 @@ impl<'a> GetScriptRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::page_shield };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = get_script(&api)
 ///     .with_zone_id("zone_id")
 ///     .with_script_id("script_id")

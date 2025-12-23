@@ -52,7 +52,7 @@ impl<'a> GetRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::url_normalization };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = get(&api)
 ///     .with_zone_id("zone_id")
 ///     .send()
@@ -103,7 +103,7 @@ impl<'a> UpdateUrlNormalizationRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::url_normalization };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::rulesets_url_normalization::RulesetsUrlNormalization = todo!();
 /// let response = update_url_normalization(&api)
 ///     .with_zone_id("zone_id")
@@ -149,7 +149,7 @@ impl<'a> DeleteRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::url_normalization };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = delete(&api)
 ///     .with_zone_id("zone_id")
 ///     .send()

@@ -61,7 +61,7 @@ impl<'a> RegistrationOverrideCodesRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::warp_teams_device_api_other };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = registration_override_codes(&api)
 ///     .with_account_id("account_id")
 ///     .with_registration_id("registration_id")

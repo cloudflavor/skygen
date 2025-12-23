@@ -56,7 +56,7 @@ impl<'a> ListPacketCaptureRequestsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::magic_pcap_collection };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = list_packet_capture_requests(&api)
 ///     .with_account_id("account_id")
 ///     .send()
@@ -107,7 +107,7 @@ impl<'a> CreatePcapRequestRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::magic_pcap_collection };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::magic_visibility_pcaps_pcaps_request_pcap::MagicVisibilityPcapsPcapsRequestPcap = todo!();
 /// let response = create_pcap_request(&api)
 ///     .with_account_id("account_id")
@@ -153,7 +153,7 @@ impl<'a> ListPcaPsBucketRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::magic_pcap_collection };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = list_pca_ps_bucket(&api)
 ///     .with_account_id("account_id")
 ///     .send()
@@ -205,7 +205,7 @@ impl<'a> AddBucketsFullPacketRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::magic_pcap_collection };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::magic_visibility_pcaps_pcaps_ownership_request::MagicVisibilityPcapsPcapsOwnershipRequest = todo!();
 /// let response = add_buckets_full_packet(&api)
 ///     .with_account_id("account_id")
@@ -262,7 +262,7 @@ impl<'a> ValidateBucketsFullPacketRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::magic_pcap_collection };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::magic_visibility_pcaps_pcaps_ownership_validate_request::MagicVisibilityPcapsPcapsOwnershipValidateRequest = todo!();
 /// let response = validate_buckets_full_packet(&api)
 ///     .with_account_id("account_id")
@@ -317,7 +317,7 @@ impl<'a> DeleteBucketsFullPacketRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::magic_pcap_collection };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = delete_buckets_full_packet(&api)
 ///     .with_account_id("account_id")
 ///     .with_ownership_id("ownership_id")
@@ -368,7 +368,7 @@ impl<'a> GetPcapRequestRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::magic_pcap_collection };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = get_pcap_request(&api)
 ///     .with_account_id("account_id")
 ///     .with_pcap_id("pcap_id")
@@ -422,7 +422,7 @@ impl<'a> DownloadSimplePcapRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::magic_pcap_collection };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = download_simple_pcap(&api)
 ///     .with_account_id("account_id")
 ///     .with_pcap_id("pcap_id")
@@ -476,7 +476,7 @@ impl<'a> StopFullPcapRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::magic_pcap_collection };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = stop_full_pcap(&api)
 ///     .with_account_id("account_id")
 ///     .with_pcap_id("pcap_id")

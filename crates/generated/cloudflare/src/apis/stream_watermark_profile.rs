@@ -55,7 +55,7 @@ impl<'a> ListWatermarkProfilesRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::stream_watermark_profile };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = list_watermark_profiles(&api)
 ///     .with_account_id("account_id")
 ///     .send()
@@ -99,7 +99,7 @@ impl<'a> CreateWatermarkProfilesBasicRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::stream_watermark_profile };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = create_watermark_profiles_basic(&api)
 ///     .with_account_id("account_id")
 ///     .send()
@@ -152,7 +152,7 @@ impl<'a> DetailsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::stream_watermark_profile };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = details(&api)
 ///     .with_account_id("account_id")
 ///     .with_identifier("identifier")
@@ -206,7 +206,7 @@ impl<'a> DeleteWatermarkProfilesRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::stream_watermark_profile };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = delete_watermark_profiles(&api)
 ///     .with_account_id("account_id")
 ///     .with_identifier("identifier")

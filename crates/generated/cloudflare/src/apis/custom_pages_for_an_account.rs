@@ -57,7 +57,7 @@ impl<'a> ListCustomPagesRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::custom_pages_for_an_account };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = list_custom_pages(&api)
 ///     .with_account_identifier("account_identifier")
 ///     .send()
@@ -110,7 +110,7 @@ impl<'a> GetCustomPageRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::custom_pages_for_an_account };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = get_custom_page(&api)
 ///     .with_account_identifier("account_identifier")
 ///     .with_identifier("identifier")
@@ -169,7 +169,7 @@ impl<'a> UpdateCustomPageRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::custom_pages_for_an_account };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = update_custom_page(&api)
 ///     .with_account_identifier("account_identifier")

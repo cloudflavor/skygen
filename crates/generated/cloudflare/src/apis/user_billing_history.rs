@@ -76,7 +76,7 @@ impl<'a> DeprecatedBillingHistoryDetailsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::user_billing_history };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = deprecated_billing_history_details(&api)
 ///     .with_page("page")
 ///     .with_per_page("per_page")

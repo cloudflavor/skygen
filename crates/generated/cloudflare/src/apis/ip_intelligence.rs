@@ -62,7 +62,7 @@ impl<'a> GetIpOverviewRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::ip_intelligence };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = get_ip_overview(&api)
 ///     .with_account_id("account_id")
 ///     .with_ipv4("ipv4")

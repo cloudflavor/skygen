@@ -61,7 +61,7 @@ impl<'a> UrlscannerGetResponseTextRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::url_scanner };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = urlscanner_get_response_text(&api)
 ///     .with_account_id("account_id")
 ///     .with_response_id("response_id")
@@ -191,7 +191,7 @@ impl<'a> UrlscannerSearchScansRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::url_scanner };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = urlscanner_search_scans(&api)
 ///     .with_account_id("account_id")
 ///     .with_scan_id("scan_id")
@@ -259,7 +259,7 @@ impl<'a> UrlscannerCreateScanRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::url_scanner };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = urlscanner_create_scan(&api)
 ///     .with_account_id("account_id")
@@ -319,7 +319,7 @@ impl<'a> UrlscannerGetScanRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::url_scanner };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = urlscanner_get_scan(&api)
 ///     .with_account_id("account_id")
 ///     .with_scan_id("scan_id")
@@ -374,7 +374,7 @@ impl<'a> UrlscannerGetScanHarRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::url_scanner };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = urlscanner_get_scan_har(&api)
 ///     .with_account_id("account_id")
 ///     .with_scan_id("scan_id")
@@ -433,7 +433,7 @@ impl<'a> UrlscannerGetScanScreenshotRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::url_scanner };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = urlscanner_get_scan_screenshot(&api)
 ///     .with_account_id("account_id")
 ///     .with_scan_id("scan_id")

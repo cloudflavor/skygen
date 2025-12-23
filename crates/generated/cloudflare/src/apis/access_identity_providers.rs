@@ -64,7 +64,7 @@ impl<'a> ListAccessIdentityProvidersRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::access_identity_providers };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = list_access_identity_providers(&api)
 ///     .with_account_id("account_id")
 ///     .with_scim_enabled("scim_enabled")
@@ -120,7 +120,7 @@ impl<'a> AddAccessIdentityProviderRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::access_identity_providers };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::access_identity_providers::AccessIdentityProviders = todo!();
 /// let response = add_access_identity_provider(&api)
 ///     .with_account_id("account_id")
@@ -175,7 +175,7 @@ impl<'a> GetAccessIdentityProviderRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::access_identity_providers };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = get_access_identity_provider(&api)
 ///     .with_account_id("account_id")
 ///     .with_identity_provider_id("identity_provider_id")
@@ -237,7 +237,7 @@ impl<'a> UpdateAccessIdentityProviderRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::access_identity_providers };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::access_identity_providers::AccessIdentityProviders = todo!();
 /// let response = update_access_identity_provider(&api)
 ///     .with_account_id("account_id")
@@ -293,7 +293,7 @@ impl<'a> DeleteAccessIdentityProviderRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::access_identity_providers };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = delete_access_identity_provider(&api)
 ///     .with_account_id("account_id")
 ///     .with_identity_provider_id("identity_provider_id")
@@ -362,7 +362,7 @@ impl<'a> ListScimGroupResourcesRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::access_identity_providers };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = list_scim_group_resources(&api)
 ///     .with_account_id("account_id")
 ///     .with_identity_provider_id("identity_provider_id")
@@ -444,7 +444,7 @@ impl<'a> ListScimResourcesRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::access_identity_providers };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = list_scim_resources(&api)
 ///     .with_account_id("account_id")
 ///     .with_identity_provider_id("identity_provider_id")

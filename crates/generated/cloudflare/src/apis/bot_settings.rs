@@ -52,7 +52,7 @@ impl<'a> ManagementGetConfigRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::bot_settings };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = management_get_config(&api)
 ///     .with_zone_id("zone_id")
 ///     .send()
@@ -149,7 +149,7 @@ impl<'a> ManagementUpdateConfigRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::bot_settings };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::bot_management_config_single::BotManagementConfigSingle = todo!();
 /// let response = management_update_config(&api)
 ///     .with_zone_id("zone_id")

@@ -53,7 +53,7 @@ impl<'a> DetailsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::dnssec };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = details(&api)
 ///     .with_zone_id("zone_id")
 ///     .send()
@@ -96,7 +96,7 @@ impl<'a> DeleteDnssecRecordsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::dnssec };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = delete_dnssec_records(&api)
 ///     .with_zone_id("zone_id")
 ///     .send()
@@ -144,7 +144,7 @@ impl<'a> EditDnssecStatusRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::dnssec };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = edit_dnssec_status(&api)
 ///     .with_zone_id("zone_id")

@@ -65,7 +65,7 @@ impl<'a> AclsListAclsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::magic_site_ac_ls };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = acls_list_acls(&api)
 ///     .with_account_id("account_id")
 ///     .with_site_id("site_id")
@@ -127,7 +127,7 @@ impl<'a> AclsCreateAclRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::magic_site_ac_ls };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::magic_acls_add_single_request::MagicAclsAddSingleRequest = todo!();
 /// let response = acls_create_acl(&api)
 ///     .with_account_id("account_id")
@@ -189,7 +189,7 @@ impl<'a> AclsAclDetailsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::magic_site_ac_ls };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = acls_acl_details(&api)
 ///     .with_account_id("account_id")
 ///     .with_site_id("site_id")
@@ -258,7 +258,7 @@ impl<'a> AclsUpdateAclRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::magic_site_ac_ls };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::magic_acl_update_request::MagicAclUpdateRequest = todo!();
 /// let response = acls_update_acl(&api)
 ///     .with_account_id("account_id")
@@ -321,7 +321,7 @@ impl<'a> AclsDeleteAclRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::magic_site_ac_ls };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = acls_delete_acl(&api)
 ///     .with_account_id("account_id")
 ///     .with_site_id("site_id")
@@ -390,7 +390,7 @@ impl<'a> AclsPatchAclRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::magic_site_ac_ls };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::magic_acl_update_request::MagicAclUpdateRequest = todo!();
 /// let response = acls_patch_acl(&api)
 ///     .with_account_id("account_id")

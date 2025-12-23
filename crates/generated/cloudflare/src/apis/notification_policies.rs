@@ -59,7 +59,7 @@ impl<'a> ListNotificationPoliciesRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::notification_policies };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = list_notification_policies(&api)
 ///     .with_account_id("account_id")
 ///     .send()
@@ -111,7 +111,7 @@ impl<'a> CreateNotificationPolicyRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::notification_policies };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = create_notification_policy(&api)
 ///     .with_account_id("account_id")
@@ -166,7 +166,7 @@ impl<'a> GetNotificationPolicyRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::notification_policies };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = get_notification_policy(&api)
 ///     .with_account_id("account_id")
 ///     .with_policy_id("policy_id")
@@ -225,7 +225,7 @@ impl<'a> UpdateNotificationPolicyRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::notification_policies };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = update_notification_policy(&api)
 ///     .with_account_id("account_id")
@@ -281,7 +281,7 @@ impl<'a> DeleteNotificationPolicyRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::notification_policies };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = delete_notification_policy(&api)
 ///     .with_account_id("account_id")
 ///     .with_policy_id("policy_id")

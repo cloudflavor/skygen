@@ -54,7 +54,7 @@ impl<'a> ListRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::calls_apps };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = list(&api)
 ///     .with_account_id("account_id")
 ///     .send()
@@ -105,7 +105,7 @@ impl<'a> CreateNewAppRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::calls_apps };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::calls_app_editable_fields::CallsAppEditableFields = todo!();
 /// let response = create_new_app(&api)
 ///     .with_account_id("account_id")
@@ -160,7 +160,7 @@ impl<'a> RetrieveAppDetailsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::calls_apps };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = retrieve_app_details(&api)
 ///     .with_account_id("account_id")
 ///     .with_app_id("app_id")
@@ -222,7 +222,7 @@ impl<'a> UpdateAppDetailsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::calls_apps };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::calls_app_editable_fields::CallsAppEditableFields = todo!();
 /// let response = update_app_details(&api)
 ///     .with_account_id("account_id")
@@ -278,7 +278,7 @@ impl<'a> DeleteAppRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::calls_apps };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = delete_app(&api)
 ///     .with_account_id("account_id")
 ///     .with_app_id("app_id")

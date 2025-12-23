@@ -67,7 +67,7 @@ impl<'a> GetDayReportRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::botnet_threat_feed };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = get_day_report(&api)
 ///     .with_account_id("account_id")
 ///     .with_asn_id("asn_id")
@@ -122,7 +122,7 @@ impl<'a> GetFullReportRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::botnet_threat_feed };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = get_full_report(&api)
 ///     .with_account_id("account_id")
 ///     .with_asn_id("asn_id")
@@ -170,7 +170,7 @@ impl<'a> ListAsnRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::botnet_threat_feed };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = list_asn(&api)
 ///     .with_account_id("account_id")
 ///     .send()
@@ -223,7 +223,7 @@ impl<'a> DeleteAsnRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::botnet_threat_feed };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = delete_asn(&api)
 ///     .with_account_id("account_id")
 ///     .with_asn_id("asn_id")

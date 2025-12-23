@@ -64,7 +64,7 @@ impl<'a> CreateMiscategorizationRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::miscategorization };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::intel_miscategorization::IntelMiscategorization = todo!();
 /// let response = create_miscategorization(&api)
 ///     .with_account_id("account_id")

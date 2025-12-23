@@ -76,7 +76,7 @@ impl<'a> ResourcesRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::account_load_balancer_search };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = resources(&api)
 ///     .with_account_id("account_id")
 ///     .with_query("query")

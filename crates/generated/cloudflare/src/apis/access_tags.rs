@@ -53,7 +53,7 @@ impl<'a> ListTagsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::access_tags };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = list_tags(&api)
 ///     .with_account_id("account_id")
 ///     .send()
@@ -101,7 +101,7 @@ impl<'a> CreateTagRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::access_tags };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = create_tag(&api)
 ///     .with_account_id("account_id")
@@ -156,7 +156,7 @@ impl<'a> GetTagRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::access_tags };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = get_tag(&api)
 ///     .with_account_id("account_id")
 ///     .with_tag_name("tag_name")
@@ -217,7 +217,7 @@ impl<'a> UpdateTagRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::access_tags };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::access_tag_without_app_count::AccessTagWithoutAppCount = todo!();
 /// let response = update_tag(&api)
 ///     .with_account_id("account_id")
@@ -273,7 +273,7 @@ impl<'a> DeleteTagRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::access_tags };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = delete_tag(&api)
 ///     .with_account_id("account_id")
 ///     .with_tag_name("tag_name")

@@ -56,7 +56,7 @@ impl<'a> WafProductApiLeakedRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::leaked_credential_checks };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = waf_product_api_leaked(&api)
 ///     .with_zone_id("zone_id")
 ///     .send()
@@ -111,7 +111,7 @@ impl<'a> WafProductApiLeakedPostRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::leaked_credential_checks };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::waf_product_api_bundle_status::WafProductApiBundleStatus = todo!();
 /// let response = waf_product_api_leaked_post(&api)
 ///     .with_zone_id("zone_id")
@@ -160,7 +160,7 @@ impl<'a> WafProductApiLeakedGetRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::leaked_credential_checks };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = waf_product_api_leaked_get(&api)
 ///     .with_zone_id("zone_id")
 ///     .send()
@@ -215,7 +215,7 @@ impl<'a> WafProductApiLeakedPost3Request<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::leaked_credential_checks };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::waf_product_api_bundle_custom_detection::WafProductApiBundleCustomDetection = todo!();
 /// let response = waf_product_api_leaked_post_3(&api)
 ///     .with_zone_id("zone_id")
@@ -278,7 +278,7 @@ impl<'a> WafProductApiLeakedPutRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::leaked_credential_checks };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::waf_product_api_bundle_custom_detection::WafProductApiBundleCustomDetection = todo!();
 /// let response = waf_product_api_leaked_put(&api)
 ///     .with_zone_id("zone_id")
@@ -334,7 +334,7 @@ impl<'a> WafProductApiLeakedDeleteRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::leaked_credential_checks };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = waf_product_api_leaked_delete(&api)
 ///     .with_zone_id("zone_id")
 ///     .with_detection_id("detection_id")

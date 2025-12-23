@@ -54,7 +54,7 @@ impl<'a> ListCustomNameserversRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::account_level_custom_nameservers };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = list_custom_nameservers(&api)
 ///     .with_account_id("account_id")
 ///     .send()
@@ -103,7 +103,7 @@ impl<'a> AddCustomNameserverRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::account_level_custom_nameservers };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::dns_custom_nameservers_custom_ns_input::DnsCustomNameserversCustomNsInput = todo!();
 /// let response = add_custom_nameserver(&api)
 ///     .with_account_id("account_id")
@@ -156,7 +156,7 @@ impl<'a> DeleteCustomNameserverRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::account_level_custom_nameservers };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = delete_custom_nameserver(&api)
 ///     .with_account_id("account_id")
 ///     .with_custom_ns_id("custom_ns_id")

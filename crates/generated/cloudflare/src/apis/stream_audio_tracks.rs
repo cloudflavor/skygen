@@ -64,7 +64,7 @@ impl<'a> ListAudioTracksRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::stream_audio_tracks };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = list_audio_tracks(&api)
 ///     .with_account_id("account_id")
 ///     .with_identifier("identifier")
@@ -126,7 +126,7 @@ impl<'a> AddAudioTrackRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::stream_audio_tracks };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::stream_copy_audio_track::StreamCopyAudioTrack = todo!();
 /// let response = add_audio_track(&api)
 ///     .with_account_id("account_id")
@@ -188,7 +188,7 @@ impl<'a> DeleteRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::stream_audio_tracks };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = delete(&api)
 ///     .with_account_id("account_id")
 ///     .with_identifier("identifier")
@@ -257,7 +257,7 @@ impl<'a> EditAudioTracksRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::stream_audio_tracks };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::stream_edit_audio_track::StreamEditAudioTrack = todo!();
 /// let response = edit_audio_tracks(&api)
 ///     .with_account_id("account_id")

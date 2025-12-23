@@ -59,7 +59,7 @@ impl<'a> MtlsAuthenticationListMtlsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::access_m_tls_authentication };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = mtls_authentication_list_mtls(&api)
 ///     .with_account_id("account_id")
 ///     .send()
@@ -111,7 +111,7 @@ impl<'a> MtlsAuthenticationAddMtlsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::access_m_tls_authentication };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = mtls_authentication_add_mtls(&api)
 ///     .with_account_id("account_id")
@@ -160,7 +160,7 @@ impl<'a> MtlsAuthenticationListMtlsGetRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::access_m_tls_authentication };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = mtls_authentication_list_mtls_get(&api)
 ///     .with_account_id("account_id")
 ///     .send()
@@ -217,7 +217,7 @@ impl<'a> MtlsAuthenticationUpdateMtlsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::access_m_tls_authentication };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = mtls_authentication_update_mtls(&api)
 ///     .with_account_id("account_id")
@@ -272,7 +272,7 @@ impl<'a> MtlsAuthenticationGetMtlsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::access_m_tls_authentication };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = mtls_authentication_get_mtls(&api)
 ///     .with_account_id("account_id")
 ///     .with_certificate_id("certificate_id")
@@ -331,7 +331,7 @@ impl<'a> MtlsAuthenticationUpdateMtlsPutRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::access_m_tls_authentication };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = mtls_authentication_update_mtls_put(&api)
 ///     .with_account_id("account_id")
@@ -389,7 +389,7 @@ impl<'a> MtlsAuthenticationDeleteMtlsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::access_m_tls_authentication };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = mtls_authentication_delete_mtls(&api)
 ///     .with_account_id("account_id")
 ///     .with_certificate_id("certificate_id")

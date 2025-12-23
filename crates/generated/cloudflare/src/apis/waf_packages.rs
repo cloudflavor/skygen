@@ -86,7 +86,7 @@ impl<'a> ListWafPackagesRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::waf_packages };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = list_waf_packages(&api)
 ///     .with_zone_id("zone_id")
 ///     .with_page("page")
@@ -147,7 +147,7 @@ impl<'a> GetWafPackageRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::waf_packages };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = get_waf_package(&api)
 ///     .with_zone_id("zone_id")
 ///     .with_package_id("package_id")
@@ -211,7 +211,7 @@ impl<'a> UpdateWafPackageRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::waf_packages };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = update_waf_package(&api)
 ///     .with_zone_id("zone_id")

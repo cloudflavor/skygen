@@ -74,7 +74,7 @@ impl<'a> ListAccessApplicationsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::access_applications };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = list_access_applications(&api)
 ///     .with_account_id("account_id")
 ///     .with_name("name")
@@ -127,7 +127,7 @@ impl<'a> AddApplicationRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::access_applications };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::access_app_request::AccessAppRequest = todo!();
 /// let response = add_application(&api)
 ///     .with_account_id("account_id")
@@ -182,7 +182,7 @@ impl<'a> GetAccessApplicationRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::access_applications };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = get_access_application(&api)
 ///     .with_account_id("account_id")
 ///     .with_app_id("app_id")
@@ -241,7 +241,7 @@ impl<'a> UpdateAccessApplicationRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::access_applications };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::access_app_request::AccessAppRequest = todo!();
 /// let response = update_access_application(&api)
 ///     .with_account_id("account_id")
@@ -297,7 +297,7 @@ impl<'a> DeleteAccessApplicationRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::access_applications };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = delete_access_application(&api)
 ///     .with_account_id("account_id")
 ///     .with_app_id("app_id")
@@ -351,7 +351,7 @@ impl<'a> RevokeServiceTokensRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::access_applications };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = revoke_service_tokens(&api)
 ///     .with_account_id("account_id")
 ///     .with_app_id("app_id")
@@ -413,7 +413,7 @@ impl<'a> PutUpdateAccessApplicationRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::access_applications };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::access_app_settings_request::AccessAppSettingsRequest = todo!();
 /// let response = put_update_access_application(&api)
 ///     .with_account_id("account_id")
@@ -477,7 +477,7 @@ impl<'a> PatchUpdateAccessApplicationRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::access_applications };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::access_app_settings_request::AccessAppSettingsRequest = todo!();
 /// let response = patch_update_access_application(&api)
 ///     .with_account_id("account_id")
@@ -533,7 +533,7 @@ impl<'a> TestAccessPoliciesRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::access_applications };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = test_access_policies(&api)
 ///     .with_account_id("account_id")
 ///     .with_app_id("app_id")

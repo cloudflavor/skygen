@@ -78,7 +78,7 @@ impl<'a> ListNamespacesRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_kv_namespace };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = list_namespaces(&api)
 ///     .with_account_id("account_id")
 ///     .with_page("page")
@@ -137,7 +137,7 @@ impl<'a> CreateNamespaceRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_kv_namespace };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::workers_kv_create_rename_namespace_body::WorkersKvCreateRenameNamespaceBody = todo!();
 /// let response = create_namespace(&api)
 ///     .with_account_id("account_id")
@@ -192,7 +192,7 @@ impl<'a> GetNamespaceRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_kv_namespace };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = get_namespace(&api)
 ///     .with_account_id("account_id")
 ///     .with_namespace_id("namespace_id")
@@ -254,7 +254,7 @@ impl<'a> RenameNamespaceRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_kv_namespace };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::workers_kv_create_rename_namespace_body::WorkersKvCreateRenameNamespaceBody = todo!();
 /// let response = rename_namespace(&api)
 ///     .with_account_id("account_id")
@@ -310,7 +310,7 @@ impl<'a> RemoveNamespaceRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_kv_namespace };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = remove_namespace(&api)
 ///     .with_account_id("account_id")
 ///     .with_namespace_id("namespace_id")
@@ -372,7 +372,7 @@ impl<'a> WriteMultipleKeyValueRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_kv_namespace };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::workers_kv_bulk_write::WorkersKvBulkWrite = todo!();
 /// let response = write_multiple_key_value(&api)
 ///     .with_account_id("account_id")
@@ -436,7 +436,7 @@ impl<'a> DeleteMultipleKeyValueRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_kv_namespace };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::workers_kv_bulk_delete::WorkersKvBulkDelete = todo!();
 /// let response = delete_multiple_key_value(&api)
 ///     .with_account_id("account_id")
@@ -500,7 +500,7 @@ impl<'a> DeleteMultipleKeyValuePostRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_kv_namespace };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::workers_kv_bulk_delete::WorkersKvBulkDelete = todo!();
 /// let response = delete_multiple_key_value_post(&api)
 ///     .with_account_id("account_id")
@@ -564,7 +564,7 @@ impl<'a> GetMultipleKeyValueRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_kv_namespace };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = get_multiple_key_value(&api)
 ///     .with_account_id("account_id")
@@ -635,7 +635,7 @@ impl<'a> ListNamespaceSKeysRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_kv_namespace };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = list_namespace_s_keys(&api)
 ///     .with_account_id("account_id")
 ///     .with_namespace_id("namespace_id")
@@ -698,7 +698,7 @@ impl<'a> ReadMetadataKeyRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_kv_namespace };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = read_metadata_key(&api)
 ///     .with_account_id("account_id")
 ///     .with_namespace_id("namespace_id")
@@ -759,7 +759,7 @@ impl<'a> ReadKeyValuePairRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_kv_namespace };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = read_key_value_pair(&api)
 ///     .with_account_id("account_id")
 ///     .with_namespace_id("namespace_id")
@@ -830,7 +830,7 @@ impl<'a> WriteKeyValuePairRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_kv_namespace };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = write_key_value_pair(&api)
 ///     .with_account_id("account_id")
 ///     .with_namespace_id("namespace_id")
@@ -893,7 +893,7 @@ impl<'a> DeleteKeyValuePairRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_kv_namespace };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = delete_key_value_pair(&api)
 ///     .with_account_id("account_id")
 ///     .with_namespace_id("namespace_id")

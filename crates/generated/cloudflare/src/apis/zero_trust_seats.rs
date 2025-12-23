@@ -61,7 +61,7 @@ impl<'a> UpdateSeatRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zero_trust_seats };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::access_seats_definition::AccessSeatsDefinition = todo!();
 /// let response = update_seat(&api)
 ///     .with_account_id("account_id")

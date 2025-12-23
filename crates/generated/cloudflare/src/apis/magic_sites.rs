@@ -60,7 +60,7 @@ impl<'a> ListSitesRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::magic_sites };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = list_sites(&api)
 ///     .with_account_id("account_id")
 ///     .with_connectorid("connectorid")
@@ -113,7 +113,7 @@ impl<'a> CreateSiteRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::magic_sites };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::magic_sites_add_single_request::MagicSitesAddSingleRequest = todo!();
 /// let response = create_site(&api)
 ///     .with_account_id("account_id")
@@ -173,7 +173,7 @@ impl<'a> SiteDetailsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::magic_sites };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = site_details(&api)
 ///     .with_account_id("account_id")
 ///     .with_site_id("site_id")
@@ -236,7 +236,7 @@ impl<'a> UpdateSiteRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::magic_sites };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::magic_site_update_request::MagicSiteUpdateRequest = todo!();
 /// let response = update_site(&api)
 ///     .with_account_id("account_id")
@@ -292,7 +292,7 @@ impl<'a> DeleteSiteRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::magic_sites };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = delete_site(&api)
 ///     .with_account_id("account_id")
 ///     .with_site_id("site_id")
@@ -354,7 +354,7 @@ impl<'a> PatchSiteRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::magic_sites };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::magic_site_update_request::MagicSiteUpdateRequest = todo!();
 /// let response = patch_site(&api)
 ///     .with_account_id("account_id")

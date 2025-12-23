@@ -56,7 +56,7 @@ impl<'a> GetDeliveryMechanismEligibilityRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::notification_mechanism_eligibility };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = get_delivery_mechanism_eligibility(&api)
 ///     .with_account_id("account_id")
 ///     .send()

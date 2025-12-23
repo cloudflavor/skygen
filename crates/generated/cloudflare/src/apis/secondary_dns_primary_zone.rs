@@ -57,7 +57,7 @@ impl<'a> ConfigurationDetailsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::secondary_dns_primary_zone };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = configuration_details(&api)
 ///     .with_zone_id("zone_id")
 ///     .send()
@@ -109,7 +109,7 @@ impl<'a> CreatePrimaryConfigurationRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::secondary_dns_primary_zone };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::secondary_dns_single_request_outgoing::SecondaryDnsSingleRequestOutgoing = todo!();
 /// let response = create_primary_configuration(&api)
 ///     .with_zone_id("zone_id")
@@ -163,7 +163,7 @@ impl<'a> UpdatePrimaryConfigurationRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::secondary_dns_primary_zone };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::secondary_dns_single_request_outgoing::SecondaryDnsSingleRequestOutgoing = todo!();
 /// let response = update_primary_configuration(&api)
 ///     .with_zone_id("zone_id")
@@ -212,7 +212,7 @@ impl<'a> DeletePrimaryConfigurationRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::secondary_dns_primary_zone };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = delete_primary_configuration(&api)
 ///     .with_zone_id("zone_id")
 ///     .send()
@@ -259,7 +259,7 @@ impl<'a> DisableOutgoingTransfersRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::secondary_dns_primary_zone };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = disable_outgoing_transfers(&api)
 ///     .with_zone_id("zone_id")
 ///     .send()
@@ -306,7 +306,7 @@ impl<'a> EnableOutgoingTransfersRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::secondary_dns_primary_zone };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = enable_outgoing_transfers(&api)
 ///     .with_zone_id("zone_id")
 ///     .send()
@@ -353,7 +353,7 @@ impl<'a> ForceDnsNotifyRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::secondary_dns_primary_zone };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = force_dns_notify(&api)
 ///     .with_zone_id("zone_id")
 ///     .send()
@@ -400,7 +400,7 @@ impl<'a> GetOutgoingTransferStatusRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::secondary_dns_primary_zone };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = get_outgoing_transfer_status(&api)
 ///     .with_zone_id("zone_id")
 ///     .send()

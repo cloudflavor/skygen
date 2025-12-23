@@ -53,7 +53,7 @@ impl<'a> ListDnsSettingsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::dns_settings_for_an_account };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = list_dns_settings(&api)
 ///     .with_account_id("account_id")
 ///     .send()
@@ -105,7 +105,7 @@ impl<'a> UpdateDnsSettingsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::dns_settings_for_an_account };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::dns_settings_account_settings::DnsSettingsAccountSettings = todo!();
 /// let response = update_dns_settings(&api)
 ///     .with_account_id("account_id")

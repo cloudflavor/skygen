@@ -54,7 +54,7 @@ impl<'a> ListVectorizeIndexesRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::vectorize_beta_deprecated };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = list_vectorize_indexes(&api)
 ///     .with_account_id("account_id")
 ///     .send()
@@ -106,7 +106,7 @@ impl<'a> CreateVectorizeIndexRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::vectorize_beta_deprecated };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::vectorize_create_index_request::VectorizeCreateIndexRequest = todo!();
 /// let response = create_vectorize_index(&api)
 ///     .with_account_id("account_id")
@@ -161,7 +161,7 @@ impl<'a> GetVectorizeIndexRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::vectorize_beta_deprecated };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = get_vectorize_index(&api)
 ///     .with_account_id("account_id")
 ///     .with_index_name("index_name")
@@ -223,7 +223,7 @@ impl<'a> UpdateVectorizeIndexRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::vectorize_beta_deprecated };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::vectorize_update_index_request::VectorizeUpdateIndexRequest = todo!();
 /// let response = update_vectorize_index(&api)
 ///     .with_account_id("account_id")
@@ -279,7 +279,7 @@ impl<'a> DeleteVectorizeIndexRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::vectorize_beta_deprecated };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = delete_vectorize_index(&api)
 ///     .with_account_id("account_id")
 ///     .with_index_name("index_name")
@@ -341,7 +341,7 @@ impl<'a> DeleteVectorsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::vectorize_beta_deprecated };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::vectorize_index_delete_vectors_by_id_request::VectorizeIndexDeleteVectorsByIdRequest = todo!();
 /// let response = delete_vectors(&api)
 ///     .with_account_id("account_id")
@@ -405,7 +405,7 @@ impl<'a> GetVectorsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::vectorize_beta_deprecated };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::vectorize_index_get_vectors_by_id_request::VectorizeIndexGetVectorsByIdRequest = todo!();
 /// let response = get_vectors(&api)
 ///     .with_account_id("account_id")
@@ -461,7 +461,7 @@ impl<'a> InsertVectorRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::vectorize_beta_deprecated };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = insert_vector(&api)
 ///     .with_account_id("account_id")
 ///     .with_index_name("index_name")
@@ -523,7 +523,7 @@ impl<'a> QueryVectorRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::vectorize_beta_deprecated };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::vectorize_index_query_request::VectorizeIndexQueryRequest = todo!();
 /// let response = query_vector(&api)
 ///     .with_account_id("account_id")
@@ -579,7 +579,7 @@ impl<'a> UpsertVectorRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::vectorize_beta_deprecated };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = upsert_vector(&api)
 ///     .with_account_id("account_id")
 ///     .with_index_name("index_name")

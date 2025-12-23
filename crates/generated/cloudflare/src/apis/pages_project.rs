@@ -55,7 +55,7 @@ impl<'a> GetProjectsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::pages_project };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = get_projects(&api)
 ///     .with_account_id("account_id")
 ///     .send()
@@ -107,7 +107,7 @@ impl<'a> CreateProjectRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::pages_project };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::pages_project_object::PagesProjectObject = todo!();
 /// let response = create_project(&api)
 ///     .with_account_id("account_id")
@@ -162,7 +162,7 @@ impl<'a> GetProjectRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::pages_project };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = get_project(&api)
 ///     .with_account_id("account_id")
 ///     .with_project_name("project_name")
@@ -216,7 +216,7 @@ impl<'a> DeleteProjectRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::pages_project };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = delete_project(&api)
 ///     .with_account_id("account_id")
 ///     .with_project_name("project_name")
@@ -278,7 +278,7 @@ impl<'a> UpdateProjectRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::pages_project };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::pages_project_patch::PagesProjectPatch = todo!();
 /// let response = update_project(&api)
 ///     .with_account_id("account_id")

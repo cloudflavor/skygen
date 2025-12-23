@@ -59,7 +59,7 @@ impl<'a> ListPagerDutyServicesRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::notification_destinations_with_pager_duty };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = list_pager_duty_services(&api)
 ///     .with_account_id("account_id")
 ///     .send()
@@ -106,7 +106,7 @@ impl<'a> DeletePagerDutyServicesRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::notification_destinations_with_pager_duty };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = delete_pager_duty_services(&api)
 ///     .with_account_id("account_id")
 ///     .send()
@@ -153,7 +153,7 @@ impl<'a> ConnectPagerDutyRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::notification_destinations_with_pager_duty };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = connect_pager_duty(&api)
 ///     .with_account_id("account_id")
 ///     .send()
@@ -206,7 +206,7 @@ impl<'a> ConnectPagerDutyTokenRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::notification_destinations_with_pager_duty };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = connect_pager_duty_token(&api)
 ///     .with_account_id("account_id")
 ///     .with_token_id("token_id")

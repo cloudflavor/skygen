@@ -68,7 +68,7 @@ impl<'a> UpdateMultipleOperationLevelRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::api_shield_schema_validation_2_0 };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::api_shield_operation_schema_validation_settings_multiple_request::ApiShieldOperationSchemaValidationSettingsMultipleRequest = todo!();
 /// let response = update_multiple_operation_level(&api)
 ///     .with_zone_id("zone_id")
@@ -123,7 +123,7 @@ impl<'a> RetrieveOperationLevelSettingsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::api_shield_schema_validation_2_0 };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = retrieve_operation_level_settings(&api)
 ///     .with_zone_id("zone_id")
 ///     .with_operation_id("operation_id")
@@ -187,7 +187,7 @@ impl<'a> UpdateOperationLevelSettingsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::api_shield_schema_validation_2_0 };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::api_shield_operation_schema_validation_settings_modify_request::ApiShieldOperationSchemaValidationSettingsModifyRequest = todo!();
 /// let response = update_operation_level_settings(&api)
 ///     .with_zone_id("zone_id")
@@ -237,7 +237,7 @@ impl<'a> RetrieveLevelSettingsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::api_shield_schema_validation_2_0 };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = retrieve_level_settings(&api)
 ///     .with_zone_id("zone_id")
 ///     .send()
@@ -292,7 +292,7 @@ impl<'a> UpdateLevelSettingsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::api_shield_schema_validation_2_0 };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::api_shield_zone_schema_validation_settings_put::ApiShieldZoneSchemaValidationSettingsPut = todo!();
 /// let response = update_level_settings(&api)
 ///     .with_zone_id("zone_id")
@@ -349,7 +349,7 @@ impl<'a> PatchLevelSettingsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::api_shield_schema_validation_2_0 };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::api_shield_zone_schema_validation_settings_patch::ApiShieldZoneSchemaValidationSettingsPatch = todo!();
 /// let response = patch_level_settings(&api)
 ///     .with_zone_id("zone_id")
@@ -398,7 +398,7 @@ impl<'a> RetrieveInformationAboutAllRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::api_shield_schema_validation_2_0 };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = retrieve_information_about_all(&api)
 ///     .with_zone_id("zone_id")
 ///     .with_validation_enabled("validation_enabled")
@@ -444,7 +444,7 @@ impl<'a> PostSchemaRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::api_shield_schema_validation_2_0 };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = post_schema(&api)
 ///     .with_zone_id("zone_id")
 ///     .send()
@@ -489,7 +489,7 @@ impl<'a> RetrieveSchemaHostsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::api_shield_schema_validation_2_0 };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = retrieve_schema_hosts(&api)
 ///     .with_zone_id("zone_id")
 ///     .send()
@@ -540,7 +540,7 @@ impl<'a> RetrieveInformationAboutSpecificRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::api_shield_schema_validation_2_0 };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = retrieve_information_about_specific(&api)
 ///     .with_zone_id("zone_id")
 ///     .with_schema_id("schema_id")
@@ -594,7 +594,7 @@ impl<'a> DeleteSchemaRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::api_shield_schema_validation_2_0 };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = delete_schema(&api)
 ///     .with_zone_id("zone_id")
 ///     .with_schema_id("schema_id")
@@ -654,7 +654,7 @@ impl<'a> EnableValidationSchemaRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::api_shield_schema_validation_2_0 };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = enable_validation_schema(&api)
 ///     .with_zone_id("zone_id")
@@ -715,7 +715,7 @@ impl<'a> ExtractOperationsSchemaRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::api_shield_schema_validation_2_0 };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = extract_operations_schema(&api)
 ///     .with_zone_id("zone_id")
 ///     .with_schema_id("schema_id")

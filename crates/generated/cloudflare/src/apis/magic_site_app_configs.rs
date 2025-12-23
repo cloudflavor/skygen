@@ -63,7 +63,7 @@ impl<'a> ListAppConfigsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::magic_site_app_configs };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = list_app_configs(&api)
 ///     .with_account_id("account_id")
 ///     .with_site_id("site_id")
@@ -125,7 +125,7 @@ impl<'a> AddAppConfigRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::magic_site_app_configs };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::magic_app_config_add_single_request::MagicAppConfigAddSingleRequest = todo!();
 /// let response = add_app_config(&api)
 ///     .with_account_id("account_id")
@@ -195,7 +195,7 @@ impl<'a> UpdateAppConfigRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::magic_site_app_configs };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::magic_app_config_update_request::MagicAppConfigUpdateRequest = todo!();
 /// let response = update_app_config(&api)
 ///     .with_account_id("account_id")
@@ -258,7 +258,7 @@ impl<'a> DeleteAppConfigRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::magic_site_app_configs };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = delete_app_config(&api)
 ///     .with_account_id("account_id")
 ///     .with_site_id("site_id")
@@ -327,7 +327,7 @@ impl<'a> PatchAppConfigRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::magic_site_app_configs };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::magic_app_config_update_request::MagicAppConfigUpdateRequest = todo!();
 /// let response = patch_app_config(&api)
 ///     .with_account_id("account_id")

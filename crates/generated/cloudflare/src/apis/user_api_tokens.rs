@@ -67,7 +67,7 @@ impl<'a> ListTokensRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::user_api_tokens };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = list_tokens(&api)
 ///     .with_page("page")
 ///     .with_per_page("per_page")
@@ -108,7 +108,7 @@ impl<'a> CreateTokenRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::user_api_tokens };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::iam_create_payload::IamCreatePayload = todo!();
 /// let response = create_token(&api)
 ///     .with_body(body)
@@ -144,7 +144,7 @@ impl<'a> PermissionGroupsListPermissionRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::user_api_tokens };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = permission_groups_list_permission(&api)
 ///     .send()
 ///     .await?;
@@ -180,7 +180,7 @@ impl<'a> VerifyTokenRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::user_api_tokens };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = verify_token(&api)
 ///     .send()
 ///     .await?;
@@ -222,7 +222,7 @@ impl<'a> TokenDetailsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::user_api_tokens };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = token_details(&api)
 ///     .with_token_id("token_id")
 ///     .send()
@@ -270,7 +270,7 @@ impl<'a> UpdateTokenRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::user_api_tokens };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::iam_token_body::IamTokenBody = todo!();
 /// let response = update_token(&api)
 ///     .with_token_id("token_id")
@@ -315,7 +315,7 @@ impl<'a> DeleteTokenRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::user_api_tokens };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = delete_token(&api)
 ///     .with_token_id("token_id")
 ///     .send()
@@ -366,7 +366,7 @@ impl<'a> RollTokenRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::user_api_tokens };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = roll_token(&api)
 ///     .with_token_id("token_id")

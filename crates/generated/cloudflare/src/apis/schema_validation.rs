@@ -61,7 +61,7 @@ impl<'a> ListSchemasPaginatedRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::schema_validation };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = list_schemas_paginated(&api)
 ///     .with_zone_id("zone_id")
 ///     .with_validation_enabled("validation_enabled")
@@ -115,7 +115,7 @@ impl<'a> CreateSchemaRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::schema_validation };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = create_schema(&api)
 ///     .with_zone_id("zone_id")
@@ -162,7 +162,7 @@ impl<'a> ListSchemaHostsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::schema_validation };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = list_schema_hosts(&api)
 ///     .with_zone_id("zone_id")
 ///     .send()
@@ -213,7 +213,7 @@ impl<'a> GetSchemaRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::schema_validation };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = get_schema(&api)
 ///     .with_zone_id("zone_id")
 ///     .with_schema_id("schema_id")
@@ -265,7 +265,7 @@ impl<'a> DeleteSchemaRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::schema_validation };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = delete_schema(&api)
 ///     .with_zone_id("zone_id")
 ///     .with_schema_id("schema_id")
@@ -325,7 +325,7 @@ impl<'a> EditSchemaRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::schema_validation };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = edit_schema(&api)
 ///     .with_zone_id("zone_id")
@@ -386,7 +386,7 @@ impl<'a> ExtractOperationsSchemaRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::schema_validation };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = extract_operations_schema(&api)
 ///     .with_zone_id("zone_id")
 ///     .with_schema_id("schema_id")

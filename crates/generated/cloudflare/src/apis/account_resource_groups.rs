@@ -79,7 +79,7 @@ impl<'a> GroupListRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::account_resource_groups };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = group_list(&api)
 ///     .with_account_id("account_id")
 ///     .with_id("id")
@@ -138,7 +138,7 @@ impl<'a> GroupCreateRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::account_resource_groups };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::iam_request_create_resource_group::IamRequestCreateResourceGroup = todo!();
 /// let response = group_create(&api)
 ///     .with_account_id("account_id")
@@ -193,7 +193,7 @@ impl<'a> GroupDetailsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::account_resource_groups };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = group_details(&api)
 ///     .with_account_id("account_id")
 ///     .with_resource_group_id("resource_group_id")
@@ -255,7 +255,7 @@ impl<'a> GroupUpdateRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::account_resource_groups };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::iam_request_update_resource_group::IamRequestUpdateResourceGroup = todo!();
 /// let response = group_update(&api)
 ///     .with_account_id("account_id")
@@ -311,7 +311,7 @@ impl<'a> GroupDeleteRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::account_resource_groups };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = group_delete(&api)
 ///     .with_account_id("account_id")
 ///     .with_resource_group_id("resource_group_id")

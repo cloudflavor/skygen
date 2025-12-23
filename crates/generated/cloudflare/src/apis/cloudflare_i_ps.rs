@@ -51,7 +51,7 @@ impl<'a> IpsCloudflareIpDetailsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::cloudflare_i_ps };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = ips_cloudflare_ip_details(&api)
 ///     .with_networks("networks")
 ///     .send()

@@ -55,7 +55,7 @@ impl<'a> ListKeylessSslConfigurationsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::keyless_ssl_for_a_zone };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = list_keyless_ssl_configurations(&api)
 ///     .with_zone_id("zone_id")
 ///     .send()
@@ -105,7 +105,7 @@ impl<'a> CreateKeylessSslConfigurationRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::keyless_ssl_for_a_zone };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = create_keyless_ssl_configuration(&api)
 ///     .with_zone_id("zone_id")
@@ -162,7 +162,7 @@ impl<'a> GetKeylessSslConfigurationRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::keyless_ssl_for_a_zone };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = get_keyless_ssl_configuration(&api)
 ///     .with_zone_id("zone_id")
 ///     .with_keyless_certificate_id("keyless_certificate_id")
@@ -214,7 +214,7 @@ impl<'a> DeleteKeylessSslConfigurationRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::keyless_ssl_for_a_zone };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = delete_keyless_ssl_configuration(&api)
 ///     .with_zone_id("zone_id")
 ///     .with_keyless_certificate_id("keyless_certificate_id")
@@ -278,7 +278,7 @@ impl<'a> EditKeylessSslConfigurationRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::keyless_ssl_for_a_zone };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = edit_keyless_ssl_configuration(&api)
 ///     .with_zone_id("zone_id")

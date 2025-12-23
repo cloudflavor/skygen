@@ -72,7 +72,7 @@ impl<'a> GetRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zero_trust_users };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = get(&api)
 ///     .with_account_id("account_id")
 ///     .with_name("name")
@@ -128,7 +128,7 @@ impl<'a> GetActiveSessionsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zero_trust_users };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = get_active_sessions(&api)
 ///     .with_account_id("account_id")
 ///     .with_user_id("user_id")
@@ -188,7 +188,7 @@ impl<'a> GetActiveSessionRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zero_trust_users };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = get_active_session(&api)
 ///     .with_account_id("account_id")
 ///     .with_user_id("user_id")
@@ -243,7 +243,7 @@ impl<'a> GetFailedLoginsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zero_trust_users };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = get_failed_logins(&api)
 ///     .with_account_id("account_id")
 ///     .with_user_id("user_id")
@@ -297,7 +297,7 @@ impl<'a> GetLastSeenIdentityRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zero_trust_users };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = get_last_seen_identity(&api)
 ///     .with_account_id("account_id")
 ///     .with_user_id("user_id")

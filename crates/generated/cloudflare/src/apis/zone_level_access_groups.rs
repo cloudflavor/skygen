@@ -53,7 +53,7 @@ impl<'a> ListAccessGroupsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zone_level_access_groups };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = list_access_groups(&api)
 ///     .with_zone_id("zone_id")
 ///     .send()
@@ -101,7 +101,7 @@ impl<'a> CreateAccessGroupRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zone_level_access_groups };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = create_access_group(&api)
 ///     .with_zone_id("zone_id")
@@ -153,7 +153,7 @@ impl<'a> GetAccessGroupRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zone_level_access_groups };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = get_access_group(&api)
 ///     .with_zone_id("zone_id")
 ///     .with_group_id("group_id")
@@ -209,7 +209,7 @@ impl<'a> UpdateAccessGroupRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zone_level_access_groups };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = update_access_group(&api)
 ///     .with_zone_id("zone_id")
@@ -265,7 +265,7 @@ impl<'a> DeleteAccessGroupRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zone_level_access_groups };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = delete_access_group(&api)
 ///     .with_zone_id("zone_id")
 ///     .with_group_id("group_id")

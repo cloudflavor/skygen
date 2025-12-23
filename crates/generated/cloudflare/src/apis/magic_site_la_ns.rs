@@ -65,7 +65,7 @@ impl<'a> LansListLansRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::magic_site_la_ns };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = lans_list_lans(&api)
 ///     .with_account_id("account_id")
 ///     .with_site_id("site_id")
@@ -127,7 +127,7 @@ impl<'a> LansCreateLanRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::magic_site_la_ns };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::magic_lans_add_single_request::MagicLansAddSingleRequest = todo!();
 /// let response = lans_create_lan(&api)
 ///     .with_account_id("account_id")
@@ -189,7 +189,7 @@ impl<'a> LansLanDetailsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::magic_site_la_ns };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = lans_lan_details(&api)
 ///     .with_account_id("account_id")
 ///     .with_site_id("site_id")
@@ -258,7 +258,7 @@ impl<'a> LansUpdateLanRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::magic_site_la_ns };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::magic_lan_update_request::MagicLanUpdateRequest = todo!();
 /// let response = lans_update_lan(&api)
 ///     .with_account_id("account_id")
@@ -321,7 +321,7 @@ impl<'a> LansDeleteLanRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::magic_site_la_ns };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = lans_delete_lan(&api)
 ///     .with_account_id("account_id")
 ///     .with_site_id("site_id")
@@ -390,7 +390,7 @@ impl<'a> LansPatchLanRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::magic_site_la_ns };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::magic_lan_update_request::MagicLanUpdateRequest = todo!();
 /// let response = lans_patch_lan(&api)
 ///     .with_account_id("account_id")

@@ -71,7 +71,7 @@ impl<'a> EndpointsListColosRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::dex_synthetic_application_monitoring };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = endpoints_list_colos(&api)
 ///     .with_account_id("account_id")
 ///     .with_from("from")
@@ -142,7 +142,7 @@ impl<'a> DevicesLiveStatusRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::dex_synthetic_application_monitoring };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = devices_live_status(&api)
 ///     .with_account_id("account_id")
 ///     .with_device_id("device_id")
@@ -253,7 +253,7 @@ impl<'a> FleetStatusDevicesRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::dex_synthetic_application_monitoring };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = fleet_status_devices(&api)
 ///     .with_account_id("account_id")
 ///     .with_to("to")
@@ -317,7 +317,7 @@ impl<'a> FleetStatusLiveRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::dex_synthetic_application_monitoring };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = fleet_status_live(&api)
 ///     .with_account_id("account_id")
 ///     .with_since_minutes("since_minutes")
@@ -385,7 +385,7 @@ impl<'a> FleetStatusOverTimeRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::dex_synthetic_application_monitoring };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = fleet_status_over_time(&api)
 ///     .with_account_id("account_id")
 ///     .with_to("to")
@@ -467,7 +467,7 @@ impl<'a> EndpointsHttpTestDetailsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::dex_synthetic_application_monitoring };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = endpoints_http_test_details(&api)
 ///     .with_account_id("account_id")
 ///     .with_test_id("test_id")
@@ -546,7 +546,7 @@ impl<'a> EndpointsHttpTestPercentilesRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::dex_synthetic_application_monitoring };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = endpoints_http_test_percentiles(&api)
 ///     .with_account_id("account_id")
 ///     .with_test_id("test_id")
@@ -620,7 +620,7 @@ impl<'a> EndpointsListTestsOverviewRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::dex_synthetic_application_monitoring };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = endpoints_list_tests_overview(&api)
 ///     .with_account_id("account_id")
 ///     .with_colo("colo")
@@ -682,7 +682,7 @@ impl<'a> EndpointsTestsUniqueDevicesRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::dex_synthetic_application_monitoring };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = endpoints_tests_unique_devices(&api)
 ///     .with_account_id("account_id")
 ///     .with_test_name("testName")
@@ -737,7 +737,7 @@ impl<'a> EndpointsTracerouteTestResultRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::dex_synthetic_application_monitoring };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = endpoints_traceroute_test_result(&api)
 ///     .with_account_id("account_id")
 ///     .with_test_result_id("test_result_id")
@@ -818,7 +818,7 @@ impl<'a> EndpointsTracerouteTestDetailsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::dex_synthetic_application_monitoring };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = endpoints_traceroute_test_details(&api)
 ///     .with_account_id("account_id")
 ///     .with_test_id("test_id")
@@ -899,7 +899,7 @@ impl<'a> EndpointsTracerouteTestNetworkRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::dex_synthetic_application_monitoring };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = endpoints_traceroute_test_network(&api)
 ///     .with_account_id("account_id")
 ///     .with_test_id("test_id")
@@ -979,7 +979,7 @@ impl<'a> EndpointsTracerouteTestPercentilesRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::dex_synthetic_application_monitoring };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = endpoints_traceroute_test_percentiles(&api)
 ///     .with_account_id("account_id")
 ///     .with_test_id("test_id")

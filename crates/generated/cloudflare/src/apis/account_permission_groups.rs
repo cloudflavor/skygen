@@ -82,7 +82,7 @@ impl<'a> GroupListRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::account_permission_groups };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = group_list(&api)
 ///     .with_account_id("account_id")
 ///     .with_id("id")
@@ -140,7 +140,7 @@ impl<'a> GroupDetailsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::account_permission_groups };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = group_details(&api)
 ///     .with_account_id("account_id")
 ///     .with_permission_group_id("permission_group_id")

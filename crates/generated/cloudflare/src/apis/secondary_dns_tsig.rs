@@ -58,7 +58,7 @@ impl<'a> ListTsiGsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::secondary_dns_tsig };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = list_tsi_gs(&api)
 ///     .with_account_id("account_id")
 ///     .send()
@@ -110,7 +110,7 @@ impl<'a> CreateTsigRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::secondary_dns_tsig };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::secondary_dns_tsig::SecondaryDnsTsig = todo!();
 /// let response = create_tsig(&api)
 ///     .with_account_id("account_id")
@@ -165,7 +165,7 @@ impl<'a> DetailsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::secondary_dns_tsig };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = details(&api)
 ///     .with_account_id("account_id")
 ///     .with_tsig_id("tsig_id")
@@ -224,7 +224,7 @@ impl<'a> UpdateTsigRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::secondary_dns_tsig };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::secondary_dns_tsig::SecondaryDnsTsig = todo!();
 /// let response = update_tsig(&api)
 ///     .with_account_id("account_id")
@@ -280,7 +280,7 @@ impl<'a> DeleteTsigRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::secondary_dns_tsig };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = delete_tsig(&api)
 ///     .with_account_id("account_id")
 ///     .with_tsig_id("tsig_id")

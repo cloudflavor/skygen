@@ -70,7 +70,7 @@ impl<'a> GetReportsDatasetsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::radar_datasets };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = get_reports_datasets(&api)
 ///     .with_limit("limit")
 ///     .with_offset("offset")
@@ -123,7 +123,7 @@ impl<'a> PostReportsDatasetDownloadRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::radar_datasets };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = post_reports_dataset_download(&api)
 ///     .with_format("format")
@@ -168,7 +168,7 @@ impl<'a> GetReportsDatasetDownloadRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::radar_datasets };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = get_reports_dataset_download(&api)
 ///     .with_alias("alias")
 ///     .send()

@@ -71,7 +71,7 @@ impl<'a> ListCnisRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::cn_is };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = list_cnis(&api)
 ///     .with_account_id("account_id")
 ///     .with_slot("slot")
@@ -121,7 +121,7 @@ impl<'a> CreateCniRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::cn_is };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::nsc_cni_create::NscCniCreate = todo!();
 /// let response = create_cni(&api)
 ///     .with_account_id("account_id")
@@ -171,7 +171,7 @@ impl<'a> CniRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::cn_is };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = cni(&api)
 ///     .with_account_id("account_id")
 ///     .with_cni("cni")
@@ -225,7 +225,7 @@ impl<'a> UpdateCniRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::cn_is };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: NscCni = todo!();
 /// let response = update_cni(&api)
 ///     .with_account_id("account_id")
@@ -276,7 +276,7 @@ impl<'a> CniDeleteRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::cn_is };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = cni_delete(&api)
 ///     .with_account_id("account_id")
 ///     .with_cni("cni")

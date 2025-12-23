@@ -54,7 +54,7 @@ impl<'a> ListShortLivedCertificateRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::access_short_lived_certificate_c_as };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = list_short_lived_certificate(&api)
 ///     .with_account_id("account_id")
 ///     .send()
@@ -107,7 +107,7 @@ impl<'a> GetShortLivedCertificateRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::access_short_lived_certificate_c_as };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = get_short_lived_certificate(&api)
 ///     .with_account_id("account_id")
 ///     .with_app_id("app_id")
@@ -161,7 +161,7 @@ impl<'a> CreateShortLivedCertificateRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::access_short_lived_certificate_c_as };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = create_short_lived_certificate(&api)
 ///     .with_account_id("account_id")
 ///     .with_app_id("app_id")
@@ -215,7 +215,7 @@ impl<'a> DeleteShortLivedCertificateRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::access_short_lived_certificate_c_as };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = delete_short_lived_certificate(&api)
 ///     .with_account_id("account_id")
 ///     .with_app_id("app_id")

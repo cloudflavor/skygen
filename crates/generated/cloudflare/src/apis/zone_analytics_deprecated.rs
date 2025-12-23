@@ -69,7 +69,7 @@ impl<'a> GetAnalyticsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zone_analytics_deprecated };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = get_analytics(&api)
 ///     .with_zone_identifier("zone_identifier")
 ///     .with_until("until")
@@ -134,7 +134,7 @@ impl<'a> GetDashboardRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zone_analytics_deprecated };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = get_dashboard(&api)
 ///     .with_zone_identifier("zone_identifier")
 ///     .with_until("until")

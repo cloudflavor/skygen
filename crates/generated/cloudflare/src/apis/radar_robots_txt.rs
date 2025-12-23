@@ -71,7 +71,7 @@ impl<'a> GetRobotsTxtTopRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::radar_robots_txt };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = get_robots_txt_top(&api)
 ///     .with_limit("limit")
 ///     .with_name("name")
@@ -151,7 +151,7 @@ impl<'a> GetRobotsTxtTopGetRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::radar_robots_txt };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = get_robots_txt_top_get(&api)
 ///     .with_limit("limit")
 ///     .with_name("name")

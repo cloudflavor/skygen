@@ -158,7 +158,7 @@ impl<'a> InfraTargetsListRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::infrastructure_access_targets };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = infra_targets_list(&api)
 ///     .with_account_id("account_id")
 ///     .with_hostname("hostname")
@@ -231,7 +231,7 @@ impl<'a> InfraTargetsPostRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::infrastructure_access_targets };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = infra_targets_post(&api)
 ///     .with_account_id("account_id")
@@ -288,7 +288,7 @@ impl<'a> InfraTargetsPutBatchRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::infrastructure_access_targets };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: Vec<std::collections::BTreeMap<String, serde_json::Value>> = todo!();
 /// let response = infra_targets_put_batch(&api)
 ///     .with_account_id("account_id")
@@ -345,7 +345,7 @@ impl<'a> InfraTargetsDeleteBatchRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::infrastructure_access_targets };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = infra_targets_delete_batch(&api)
 ///     .with_account_id("account_id")
@@ -402,7 +402,7 @@ impl<'a> InfraTargetsDeleteBatchPostRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::infrastructure_access_targets };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = infra_targets_delete_batch_post(&api)
 ///     .with_account_id("account_id")
@@ -455,7 +455,7 @@ impl<'a> InfraTargetsGetRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::infrastructure_access_targets };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = infra_targets_get(&api)
 ///     .with_account_id("account_id")
 ///     .with_target_id("target_id")
@@ -515,7 +515,7 @@ impl<'a> InfraTargetsPutRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::infrastructure_access_targets };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = infra_targets_put(&api)
 ///     .with_account_id("account_id")
@@ -569,7 +569,7 @@ impl<'a> InfraTargetsDeleteRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::infrastructure_access_targets };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = infra_targets_delete(&api)
 ///     .with_account_id("account_id")
 ///     .with_target_id("target_id")

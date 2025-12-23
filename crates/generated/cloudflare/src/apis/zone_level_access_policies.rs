@@ -63,7 +63,7 @@ impl<'a> ListAccessPoliciesRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zone_level_access_policies };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = list_access_policies(&api)
 ///     .with_zone_id("zone_id")
 ///     .with_app_id("app_id")
@@ -122,7 +122,7 @@ impl<'a> CreateAccessPolicyRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zone_level_access_policies };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = create_access_policy(&api)
 ///     .with_zone_id("zone_id")
@@ -184,7 +184,7 @@ impl<'a> GetAccessPolicyRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zone_level_access_policies };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = get_access_policy(&api)
 ///     .with_zone_id("zone_id")
 ///     .with_app_id("app_id")
@@ -250,7 +250,7 @@ impl<'a> UpdateAccessPolicyRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zone_level_access_policies };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = update_access_policy(&api)
 ///     .with_zone_id("zone_id")
@@ -313,7 +313,7 @@ impl<'a> DeleteAccessPolicyRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zone_level_access_policies };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = delete_access_policy(&api)
 ///     .with_zone_id("zone_id")
 ///     .with_app_id("app_id")

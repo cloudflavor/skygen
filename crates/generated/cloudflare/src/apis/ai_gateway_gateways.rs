@@ -68,7 +68,7 @@ impl<'a> AigConfigListGatewayRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::ai_gateway_gateways };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = aig_config_list_gateway(&api)
 ///     .with_account_id("account_id")
 ///     .with_page("page")
@@ -123,7 +123,7 @@ impl<'a> AigConfigCreateGatewayRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::ai_gateway_gateways };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = aig_config_create_gateway(&api)
 ///     .with_account_id("account_id")
@@ -182,7 +182,7 @@ impl<'a> AigConfigGetGatewayRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::ai_gateway_gateways };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = aig_config_get_gateway(&api)
 ///     .with_account_id("account_id")
 ///     .with_gateway_id("gateway_id")
@@ -235,7 +235,7 @@ impl<'a> AigConfigFetchGatewayRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::ai_gateway_gateways };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = aig_config_fetch_gateway(&api)
 ///     .with_account_id("account_id")
 ///     .with_id("id")
@@ -294,7 +294,7 @@ impl<'a> AigConfigUpdateGatewayRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::ai_gateway_gateways };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = aig_config_update_gateway(&api)
 ///     .with_account_id("account_id")
@@ -348,7 +348,7 @@ impl<'a> AigConfigDeleteGatewayRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::ai_gateway_gateways };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = aig_config_delete_gateway(&api)
 ///     .with_account_id("account_id")
 ///     .with_id("id")

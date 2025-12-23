@@ -56,7 +56,7 @@ impl<'a> ListLoadBalancersRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::load_balancers };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = list_load_balancers(&api)
 ///     .with_zone_id("zone_id")
 ///     .send()
@@ -104,7 +104,7 @@ impl<'a> CreateLoadBalancerRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::load_balancers };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = create_load_balancer(&api)
 ///     .with_zone_id("zone_id")
@@ -159,7 +159,7 @@ impl<'a> BalancerDetailsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::load_balancers };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = balancer_details(&api)
 ///     .with_zone_id("zone_id")
 ///     .with_load_balancer_id("load_balancer_id")
@@ -218,7 +218,7 @@ impl<'a> UpdateLoadBalancerRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::load_balancers };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = update_load_balancer(&api)
 ///     .with_zone_id("zone_id")
@@ -274,7 +274,7 @@ impl<'a> DeleteLoadBalancerRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::load_balancers };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = delete_load_balancer(&api)
 ///     .with_zone_id("zone_id")
 ///     .with_load_balancer_id("load_balancer_id")
@@ -333,7 +333,7 @@ impl<'a> PatchLoadBalancerRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::load_balancers };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = patch_load_balancer(&api)
 ///     .with_zone_id("zone_id")

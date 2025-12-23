@@ -56,7 +56,7 @@ impl<'a> GetConnectivitySettingsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zero_trust_connectivity_settings };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = get_connectivity_settings(&api)
 ///     .with_account_id("account_id")
 ///     .send()
@@ -111,7 +111,7 @@ impl<'a> PatchConnectivitySettingsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zero_trust_connectivity_settings };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = patch_connectivity_settings(&api)
 ///     .with_account_id("account_id")

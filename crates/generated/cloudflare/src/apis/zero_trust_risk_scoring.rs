@@ -55,7 +55,7 @@ impl<'a> DlpRiskScoreBehaviorsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zero_trust_risk_scoring };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = dlp_risk_score_behaviors(&api)
 ///     .with_account_id("account_id")
 ///     .send()
@@ -108,7 +108,7 @@ impl<'a> DlpRiskScoreBehaviorsPutRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zero_trust_risk_scoring };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::dlp_update_behaviors::DlpUpdateBehaviors = todo!();
 /// let response = dlp_risk_score_behaviors_put(&api)
 ///     .with_account_id("account_id")
@@ -155,7 +155,7 @@ impl<'a> DlpRiskScoreSummaryRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zero_trust_risk_scoring };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = dlp_risk_score_summary(&api)
 ///     .with_account_id("account_id")
 ///     .send()
@@ -206,7 +206,7 @@ impl<'a> DlpRiskScoreSummaryGetRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zero_trust_risk_scoring };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = dlp_risk_score_summary_get(&api)
 ///     .with_account_id("account_id")
 ///     .with_user_id("user_id")
@@ -258,7 +258,7 @@ impl<'a> DlpRiskScoreResetRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zero_trust_risk_scoring };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = dlp_risk_score_reset(&api)
 ///     .with_account_id("account_id")
 ///     .with_user_id("user_id")

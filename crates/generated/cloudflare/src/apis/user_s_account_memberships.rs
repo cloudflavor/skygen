@@ -83,7 +83,7 @@ impl<'a> ListMembershipsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::user_s_account_memberships };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = list_memberships(&api)
 ///     .with_account_name("account.name")
 ///     .with_page("page")
@@ -132,7 +132,7 @@ impl<'a> MembershipDetailsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::user_s_account_memberships };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = membership_details(&api)
 ///     .with_membership_id("membership_id")
 ///     .send()
@@ -180,7 +180,7 @@ impl<'a> UpdateMembershipRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::user_s_account_memberships };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = update_membership(&api)
 ///     .with_membership_id("membership_id")
@@ -225,7 +225,7 @@ impl<'a> DeleteMembershipRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::user_s_account_memberships };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = delete_membership(&api)
 ///     .with_membership_id("membership_id")
 ///     .send()

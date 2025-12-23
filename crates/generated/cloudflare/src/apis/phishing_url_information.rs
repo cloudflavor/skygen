@@ -66,7 +66,7 @@ impl<'a> GetResultsUrlScanRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::phishing_url_information };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = get_results_url_scan(&api)
 ///     .with_account_id("account_id")
 ///     .with_url_id("url_id")

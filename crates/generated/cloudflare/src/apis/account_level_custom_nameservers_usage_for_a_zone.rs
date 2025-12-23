@@ -55,7 +55,7 @@ impl<'a> GetCustomNameserverRelatedRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::account_level_custom_nameservers_usage_for_a_zone };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = get_custom_nameserver_related(&api)
 ///     .with_zone_id("zone_id")
 ///     .send()
@@ -110,7 +110,7 @@ impl<'a> SetCustomNameserverRelatedRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::account_level_custom_nameservers_usage_for_a_zone };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::dns_custom_nameservers_zone_metadata::DnsCustomNameserversZoneMetadata = todo!();
 /// let response = set_custom_nameserver_related(&api)
 ///     .with_zone_id("zone_id")

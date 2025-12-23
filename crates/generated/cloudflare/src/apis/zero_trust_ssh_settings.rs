@@ -58,7 +58,7 @@ impl<'a> GetAuditSshSettingsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zero_trust_ssh_settings };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = get_audit_ssh_settings(&api)
 ///     .with_account_id("account_id")
 ///     .send()
@@ -115,7 +115,7 @@ impl<'a> UpdateAuditSshSettingsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zero_trust_ssh_settings };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = update_audit_ssh_settings(&api)
 ///     .with_account_id("account_id")
@@ -166,7 +166,7 @@ impl<'a> RotateSshSeedRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zero_trust_ssh_settings };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = rotate_ssh_seed(&api)
 ///     .with_account_id("account_id")
 ///     .send()

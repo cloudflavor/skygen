@@ -61,7 +61,7 @@ impl<'a> ListMonitorsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::account_load_balancer_monitors };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = list_monitors(&api)
 ///     .with_account_id("account_id")
 ///     .send()
@@ -116,7 +116,7 @@ impl<'a> CreateMonitorRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::account_load_balancer_monitors };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::load_balancing_monitor_editable::LoadBalancingMonitorEditable = todo!();
 /// let response = create_monitor(&api)
 ///     .with_account_id("account_id")
@@ -171,7 +171,7 @@ impl<'a> MonitorDetailsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::account_load_balancer_monitors };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = monitor_details(&api)
 ///     .with_account_id("account_id")
 ///     .with_monitor_id("monitor_id")
@@ -233,7 +233,7 @@ impl<'a> UpdateMonitorRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::account_load_balancer_monitors };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::load_balancing_monitor_editable::LoadBalancingMonitorEditable = todo!();
 /// let response = update_monitor(&api)
 ///     .with_account_id("account_id")
@@ -289,7 +289,7 @@ impl<'a> DeleteMonitorRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::account_load_balancer_monitors };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = delete_monitor(&api)
 ///     .with_account_id("account_id")
 ///     .with_monitor_id("monitor_id")
@@ -351,7 +351,7 @@ impl<'a> PatchMonitorRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::account_load_balancer_monitors };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::load_balancing_monitor_editable::LoadBalancingMonitorEditable = todo!();
 /// let response = patch_monitor(&api)
 ///     .with_account_id("account_id")
@@ -415,7 +415,7 @@ impl<'a> PreviewMonitorRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::account_load_balancer_monitors };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::load_balancing_monitor_editable::LoadBalancingMonitorEditable = todo!();
 /// let response = preview_monitor(&api)
 ///     .with_account_id("account_id")
@@ -471,7 +471,7 @@ impl<'a> ListMonitorReferencesRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::account_load_balancer_monitors };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = list_monitor_references(&api)
 ///     .with_account_id("account_id")
 ///     .with_monitor_id("monitor_id")
@@ -525,7 +525,7 @@ impl<'a> PreviewResultRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::account_load_balancer_monitors };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = preview_result(&api)
 ///     .with_account_id("account_id")
 ///     .with_preview_id("preview_id")

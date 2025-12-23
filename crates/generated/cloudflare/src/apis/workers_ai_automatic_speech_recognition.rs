@@ -58,7 +58,7 @@ impl<'a> PostRunCfOpenaiRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_ai_automatic_speech_recognition };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = post_run_cf_openai(&api)
 ///     .with_account_id("account_id")
 ///     .with_queue_request("queueRequest")
@@ -116,7 +116,7 @@ impl<'a> PostRunCfOpenaiPostRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_ai_automatic_speech_recognition };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = post_run_cf_openai_post(&api)
 ///     .with_account_id("account_id")
@@ -169,7 +169,7 @@ impl<'a> PostRunCfOpenaiPost3Request<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_ai_automatic_speech_recognition };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = post_run_cf_openai_post_3(&api)
 ///     .with_account_id("account_id")
 ///     .with_queue_request("queueRequest")

@@ -62,7 +62,7 @@ impl<'a> ListRulesetsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::account_rulesets };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = list_rulesets(&api)
 ///     .with_account_id("account_id")
 ///     .with_cursor("cursor")
@@ -112,7 +112,7 @@ impl<'a> CreateRulesetRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::account_rulesets };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::rulesets_ruleset::RulesetsRuleset = todo!();
 /// let response = create_ruleset(&api)
 ///     .with_account_id("account_id")
@@ -167,7 +167,7 @@ impl<'a> EntrypointRulesetRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::account_rulesets };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = entrypoint_ruleset(&api)
 ///     .with_account_id("account_id")
 ///     .with_ruleset_phase("ruleset_phase")
@@ -226,7 +226,7 @@ impl<'a> UpdateEntrypointRulesetRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::account_rulesets };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::rulesets_ruleset::RulesetsRuleset = todo!();
 /// let response = update_entrypoint_ruleset(&api)
 ///     .with_account_id("account_id")
@@ -282,7 +282,7 @@ impl<'a> ListEntrypointRulesetVersionsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::account_rulesets };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = list_entrypoint_ruleset_versions(&api)
 ///     .with_account_id("account_id")
 ///     .with_ruleset_phase("ruleset_phase")
@@ -340,7 +340,7 @@ impl<'a> EntrypointRulesetVersionRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::account_rulesets };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = entrypoint_ruleset_version(&api)
 ///     .with_account_id("account_id")
 ///     .with_ruleset_phase("ruleset_phase")
@@ -395,7 +395,7 @@ impl<'a> RulesetRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::account_rulesets };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = ruleset(&api)
 ///     .with_account_id("account_id")
 ///     .with_ruleset_id("ruleset_id")
@@ -454,7 +454,7 @@ impl<'a> UpdateRulesetRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::account_rulesets };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::rulesets_ruleset::RulesetsRuleset = todo!();
 /// let response = update_ruleset(&api)
 ///     .with_account_id("account_id")
@@ -510,7 +510,7 @@ impl<'a> RulesetDeleteRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::account_rulesets };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = ruleset_delete(&api)
 ///     .with_account_id("account_id")
 ///     .with_ruleset_id("ruleset_id")
@@ -572,7 +572,7 @@ impl<'a> CreateRulesetRuleRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::account_rulesets };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::rulesets_request_rule::RulesetsRequestRule = todo!();
 /// let response = create_ruleset_rule(&api)
 ///     .with_account_id("account_id")
@@ -634,7 +634,7 @@ impl<'a> RulesetRuleRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::account_rulesets };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = ruleset_rule(&api)
 ///     .with_account_id("account_id")
 ///     .with_ruleset_id("ruleset_id")
@@ -703,7 +703,7 @@ impl<'a> UpdateRulesetRuleRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::account_rulesets };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::rulesets_request_rule::RulesetsRequestRule = todo!();
 /// let response = update_ruleset_rule(&api)
 ///     .with_account_id("account_id")
@@ -760,7 +760,7 @@ impl<'a> ListRulesetVersionsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::account_rulesets };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = list_ruleset_versions(&api)
 ///     .with_account_id("account_id")
 ///     .with_ruleset_id("ruleset_id")
@@ -820,7 +820,7 @@ impl<'a> RulesetVersionRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::account_rulesets };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = ruleset_version(&api)
 ///     .with_account_id("account_id")
 ///     .with_ruleset_id("ruleset_id")
@@ -881,7 +881,7 @@ impl<'a> RulesetVersionDeleteRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::account_rulesets };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = ruleset_version_delete(&api)
 ///     .with_account_id("account_id")
 ///     .with_ruleset_id("ruleset_id")
@@ -944,7 +944,7 @@ impl<'a> ListRulesetVersionRulesRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::account_rulesets };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = list_ruleset_version_rules(&api)
 ///     .with_account_id("account_id")
 ///     .with_ruleset_id("ruleset_id")

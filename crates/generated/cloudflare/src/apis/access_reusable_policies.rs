@@ -56,7 +56,7 @@ impl<'a> ListAccessReusablePoliciesRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::access_reusable_policies };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = list_access_reusable_policies(&api)
 ///     .with_account_id("account_id")
 ///     .send()
@@ -105,7 +105,7 @@ impl<'a> CreateAccessReusablePolicyRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::access_reusable_policies };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::access_policy_req::AccessPolicyReq = todo!();
 /// let response = create_access_reusable_policy(&api)
 ///     .with_account_id("account_id")
@@ -160,7 +160,7 @@ impl<'a> GetAccessReusablePolicyRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::access_reusable_policies };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = get_access_reusable_policy(&api)
 ///     .with_account_id("account_id")
 ///     .with_policy_id("policy_id")
@@ -219,7 +219,7 @@ impl<'a> UpdateAccessReusablePolicyRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::access_reusable_policies };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::access_policy_req::AccessPolicyReq = todo!();
 /// let response = update_access_reusable_policy(&api)
 ///     .with_account_id("account_id")
@@ -275,7 +275,7 @@ impl<'a> DeleteAccessReusablePolicyRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::access_reusable_policies };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = delete_access_reusable_policy(&api)
 ///     .with_account_id("account_id")
 ///     .with_policy_id("policy_id")

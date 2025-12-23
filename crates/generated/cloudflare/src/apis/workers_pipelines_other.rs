@@ -66,7 +66,7 @@ impl<'a> V4Request<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_pipelines_other };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = v4(&api)
 ///     .with_account_id("account_id")
 ///     .with_search("search")
@@ -119,7 +119,7 @@ impl<'a> V4PostRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_pipelines_other };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = v4_post(&api)
 ///     .with_account_id("account_id")
@@ -174,7 +174,7 @@ impl<'a> V4GetRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_pipelines_other };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = v4_get(&api)
 ///     .with_account_id("account_id")
 ///     .with_pipeline_name("pipeline_name")
@@ -235,7 +235,7 @@ impl<'a> V4PutRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_pipelines_other };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = v4_put(&api)
 ///     .with_account_id("account_id")
@@ -291,7 +291,7 @@ impl<'a> V4DeleteRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_pipelines_other };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = v4_delete(&api)
 ///     .with_account_id("account_id")
 ///     .with_pipeline_name("pipeline_name")

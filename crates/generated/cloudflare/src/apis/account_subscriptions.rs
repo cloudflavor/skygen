@@ -55,7 +55,7 @@ impl<'a> ListSubscriptionsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::account_subscriptions };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = list_subscriptions(&api)
 ///     .with_account_id("account_id")
 ///     .send()
@@ -107,7 +107,7 @@ impl<'a> CreateSubscriptionRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::account_subscriptions };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::bill_subs_api_subscription_v2::BillSubsApiSubscriptionV2 = todo!();
 /// let response = create_subscription(&api)
 ///     .with_account_id("account_id")
@@ -170,7 +170,7 @@ impl<'a> UpdateSubscriptionRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::account_subscriptions };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::bill_subs_api_subscription_v2::BillSubsApiSubscriptionV2 = todo!();
 /// let response = update_subscription(&api)
 ///     .with_account_id("account_id")
@@ -226,7 +226,7 @@ impl<'a> DeleteSubscriptionRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::account_subscriptions };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = delete_subscription(&api)
 ///     .with_account_id("account_id")
 ///     .with_subscription_identifier("subscription_identifier")

@@ -60,7 +60,7 @@ impl<'a> GetIndicatorFeedsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::custom_indicator_feeds };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = get_indicator_feeds(&api)
 ///     .with_account_id("account_id")
 ///     .send()
@@ -113,7 +113,7 @@ impl<'a> CreateIndicatorFeedsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::custom_indicator_feeds };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::custom_indicator_feeds_create_feed::CustomIndicatorFeedsCreateFeed = todo!();
 /// let response = create_indicator_feeds(&api)
 ///     .with_account_id("account_id")
@@ -168,7 +168,7 @@ impl<'a> AddPermissionRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::custom_indicator_feeds };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::custom_indicator_feeds_permissions_request::CustomIndicatorFeedsPermissionsRequest = todo!();
 /// let response = add_permission(&api)
 ///     .with_account_id("account_id")
@@ -223,7 +223,7 @@ impl<'a> RemovePermissionRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::custom_indicator_feeds };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::custom_indicator_feeds_permissions_request::CustomIndicatorFeedsPermissionsRequest = todo!();
 /// let response = remove_permission(&api)
 ///     .with_account_id("account_id")
@@ -270,7 +270,7 @@ impl<'a> ViewPermissionsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::custom_indicator_feeds };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = view_permissions(&api)
 ///     .with_account_id("account_id")
 ///     .send()
@@ -321,7 +321,7 @@ impl<'a> GetIndicatorFeedMetadataRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::custom_indicator_feeds };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = get_indicator_feed_metadata(&api)
 ///     .with_account_id("account_id")
 ///     .with_feed_id("feed_id")
@@ -381,7 +381,7 @@ impl<'a> UpdateIndicatorFeedMetadataRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::custom_indicator_feeds };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::custom_indicator_feeds_update_public_field_request::CustomIndicatorFeedsUpdatePublicFieldRequest = todo!();
 /// let response = update_indicator_feed_metadata(&api)
 ///     .with_account_id("account_id")
@@ -435,7 +435,7 @@ impl<'a> GetIndicatorFeedDataRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::custom_indicator_feeds };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = get_indicator_feed_data(&api)
 ///     .with_account_id("account_id")
 ///     .with_feed_id("feed_id")
@@ -487,7 +487,7 @@ impl<'a> UpdateIndicatorFeedDataRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::custom_indicator_feeds };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = update_indicator_feed_data(&api)
 ///     .with_account_id("account_id")
 ///     .with_feed_id("feed_id")
@@ -539,7 +539,7 @@ impl<'a> DownloadIndicatorFeedDataRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::custom_indicator_feeds };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = download_indicator_feed_data(&api)
 ///     .with_account_id("account_id")
 ///     .with_feed_id("feed_id")

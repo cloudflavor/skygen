@@ -55,7 +55,7 @@ impl<'a> ListBookmarkApplicationsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::access_bookmark_applications_deprecated };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = list_bookmark_applications(&api)
 ///     .with_account_id("account_id")
 ///     .send()
@@ -108,7 +108,7 @@ impl<'a> GetBookmarkApplicationRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::access_bookmark_applications_deprecated };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = get_bookmark_application(&api)
 ///     .with_account_id("account_id")
 ///     .with_bookmark_id("bookmark_id")
@@ -162,7 +162,7 @@ impl<'a> CreateBookmarkApplicationRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::access_bookmark_applications_deprecated };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = create_bookmark_application(&api)
 ///     .with_account_id("account_id")
 ///     .with_bookmark_id("bookmark_id")
@@ -216,7 +216,7 @@ impl<'a> UpdateBookmarkApplicationRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::access_bookmark_applications_deprecated };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = update_bookmark_application(&api)
 ///     .with_account_id("account_id")
 ///     .with_bookmark_id("bookmark_id")
@@ -270,7 +270,7 @@ impl<'a> DeleteBookmarkApplicationRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::access_bookmark_applications_deprecated };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = delete_bookmark_application(&api)
 ///     .with_account_id("account_id")
 ///     .with_bookmark_id("bookmark_id")

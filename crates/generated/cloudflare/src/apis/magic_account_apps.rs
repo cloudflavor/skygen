@@ -53,7 +53,7 @@ impl<'a> ListAppsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::magic_account_apps };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = list_apps(&api)
 ///     .with_account_id("account_id")
 ///     .send()
@@ -104,7 +104,7 @@ impl<'a> AddAppRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::magic_account_apps };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::magic_app_add_single_request::MagicAppAddSingleRequest = todo!();
 /// let response = add_app(&api)
 ///     .with_account_id("account_id")
@@ -167,7 +167,7 @@ impl<'a> UpdateAppRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::magic_account_apps };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::magic_app_update_request::MagicAppUpdateRequest = todo!();
 /// let response = update_app(&api)
 ///     .with_account_id("account_id")
@@ -223,7 +223,7 @@ impl<'a> DeleteAppRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::magic_account_apps };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = delete_app(&api)
 ///     .with_account_id("account_id")
 ///     .with_account_app_id("account_app_id")
@@ -285,7 +285,7 @@ impl<'a> PatchAppRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::magic_account_apps };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::magic_app_update_request::MagicAppUpdateRequest = todo!();
 /// let response = patch_app(&api)
 ///     .with_account_id("account_id")

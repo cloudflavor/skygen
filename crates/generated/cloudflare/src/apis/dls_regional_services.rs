@@ -57,7 +57,7 @@ impl<'a> HostnamesListRegionsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::dls_regional_services };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = hostnames_list_regions(&api)
 ///     .with_account_id("account_id")
 ///     .send()
@@ -104,7 +104,7 @@ impl<'a> HostnamesListHostnamesRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::dls_regional_services };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = hostnames_list_hostnames(&api)
 ///     .with_zone_id("zone_id")
 ///     .send()
@@ -158,7 +158,7 @@ impl<'a> HostnamesCreateHostnameRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::dls_regional_services };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = hostnames_create_hostname(&api)
 ///     .with_zone_id("zone_id")
@@ -213,7 +213,7 @@ impl<'a> HostnamesFetchHostnameRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::dls_regional_services };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = hostnames_fetch_hostname(&api)
 ///     .with_zone_id("zone_id")
 ///     .with_hostname("hostname")
@@ -267,7 +267,7 @@ impl<'a> HostnamesDeleteHostnameRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::dls_regional_services };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = hostnames_delete_hostname(&api)
 ///     .with_zone_id("zone_id")
 ///     .with_hostname("hostname")
@@ -328,7 +328,7 @@ impl<'a> HostnamesPatchHostnameRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::dls_regional_services };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = hostnames_patch_hostname(&api)
 ///     .with_zone_id("zone_id")

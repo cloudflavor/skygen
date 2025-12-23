@@ -54,7 +54,7 @@ impl<'a> ListDomainsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::registrar_domains };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = list_domains(&api)
 ///     .with_account_id("account_id")
 ///     .send()
@@ -107,7 +107,7 @@ impl<'a> GetDomainRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::registrar_domains };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = get_domain(&api)
 ///     .with_account_id("account_id")
 ///     .with_domain_name("domain_name")
@@ -169,7 +169,7 @@ impl<'a> UpdateDomainRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::registrar_domains };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::registrar_api_domain_update_properties::RegistrarApiDomainUpdateProperties = todo!();
 /// let response = update_domain(&api)
 ///     .with_account_id("account_id")

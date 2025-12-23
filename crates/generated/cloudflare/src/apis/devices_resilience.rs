@@ -56,7 +56,7 @@ impl<'a> RetrieveGlobalWarpOverrideRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::devices_resilience };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = retrieve_global_warp_override(&api)
 ///     .with_account_id("account_id")
 ///     .send()
@@ -111,7 +111,7 @@ impl<'a> SetGlobalWarpOverrideRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::devices_resilience };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::teams_devices_global_warp_override_request::TeamsDevicesGlobalWarpOverrideRequest = todo!();
 /// let response = set_global_warp_override(&api)
 ///     .with_account_id("account_id")

@@ -54,7 +54,7 @@ impl<'a> ListHealthChecksRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::health_checks };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = list_health_checks(&api)
 ///     .with_zone_id("zone_id")
 ///     .send()
@@ -105,7 +105,7 @@ impl<'a> CreateHealthCheckRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::health_checks };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::healthchecks_query_healthcheck::HealthchecksQueryHealthcheck = todo!();
 /// let response = create_health_check(&api)
 ///     .with_zone_id("zone_id")
@@ -159,7 +159,7 @@ impl<'a> CreatePreviewHealthCheckRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::health_checks };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::healthchecks_query_healthcheck::HealthchecksQueryHealthcheck = todo!();
 /// let response = create_preview_health_check(&api)
 ///     .with_zone_id("zone_id")
@@ -214,7 +214,7 @@ impl<'a> CheckPreviewDetailsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::health_checks };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = check_preview_details(&api)
 ///     .with_zone_id("zone_id")
 ///     .with_healthcheck_id("healthcheck_id")
@@ -268,7 +268,7 @@ impl<'a> DeletePreviewHealthCheckRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::health_checks };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = delete_preview_health_check(&api)
 ///     .with_zone_id("zone_id")
 ///     .with_healthcheck_id("healthcheck_id")
@@ -322,7 +322,7 @@ impl<'a> CheckDetailsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::health_checks };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = check_details(&api)
 ///     .with_zone_id("zone_id")
 ///     .with_healthcheck_id("healthcheck_id")
@@ -384,7 +384,7 @@ impl<'a> UpdateHealthCheckRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::health_checks };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::healthchecks_query_healthcheck::HealthchecksQueryHealthcheck = todo!();
 /// let response = update_health_check(&api)
 ///     .with_zone_id("zone_id")
@@ -440,7 +440,7 @@ impl<'a> DeleteHealthCheckRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::health_checks };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = delete_health_check(&api)
 ///     .with_zone_id("zone_id")
 ///     .with_healthcheck_id("healthcheck_id")
@@ -502,7 +502,7 @@ impl<'a> PatchHealthCheckRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::health_checks };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::healthchecks_query_healthcheck::HealthchecksQueryHealthcheck = todo!();
 /// let response = patch_health_check(&api)
 ///     .with_zone_id("zone_id")

@@ -59,7 +59,7 @@ impl<'a> ListAddressMapsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::ip_address_management_address_maps };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = list_address_maps(&api)
 ///     .with_account_id("account_id")
 ///     .send()
@@ -111,7 +111,7 @@ impl<'a> CreateAddressMapRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::ip_address_management_address_maps };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = create_address_map(&api)
 ///     .with_account_id("account_id")
@@ -166,7 +166,7 @@ impl<'a> MapDetailsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::ip_address_management_address_maps };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = map_details(&api)
 ///     .with_account_id("account_id")
 ///     .with_address_map_id("address_map_id")
@@ -220,7 +220,7 @@ impl<'a> DeleteAddressMapRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::ip_address_management_address_maps };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = delete_address_map(&api)
 ///     .with_account_id("account_id")
 ///     .with_address_map_id("address_map_id")
@@ -279,7 +279,7 @@ impl<'a> UpdateAddressMapRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::ip_address_management_address_maps };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = update_address_map(&api)
 ///     .with_account_id("account_id")
@@ -335,7 +335,7 @@ impl<'a> AddMembershipAddressMapRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::ip_address_management_address_maps };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = add_membership_address_map(&api)
 ///     .with_account_id("account_id")
 ///     .with_address_map_id("address_map_id")
@@ -389,7 +389,7 @@ impl<'a> RemoveMembershipAddressMapRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::ip_address_management_address_maps };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = remove_membership_address_map(&api)
 ///     .with_account_id("account_id")
 ///     .with_address_map_id("address_map_id")
@@ -449,7 +449,7 @@ impl<'a> AddIpAddressMapRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::ip_address_management_address_maps };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = add_ip_address_map(&api)
 ///     .with_account_id("account_id")
 ///     .with_address_map_id("address_map_id")
@@ -510,7 +510,7 @@ impl<'a> RemoveIpAddressMapRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::ip_address_management_address_maps };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = remove_ip_address_map(&api)
 ///     .with_account_id("account_id")
 ///     .with_address_map_id("address_map_id")
@@ -571,7 +571,7 @@ impl<'a> AddMembershipAddressMapPutRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::ip_address_management_address_maps };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = add_membership_address_map_put(&api)
 ///     .with_account_id("account_id")
 ///     .with_address_map_id("address_map_id")
@@ -632,7 +632,7 @@ impl<'a> RemoveMembershipAddressMapDeleteRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::ip_address_management_address_maps };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = remove_membership_address_map_delete(&api)
 ///     .with_account_id("account_id")
 ///     .with_address_map_id("address_map_id")

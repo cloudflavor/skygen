@@ -76,7 +76,7 @@ impl<'a> GetAccessAuthenticationLogsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::access_authentication_logs };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = get_access_authentication_logs(&api)
 ///     .with_account_id("account_id")
 ///     .with_limit("limit")

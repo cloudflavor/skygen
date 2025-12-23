@@ -54,7 +54,7 @@ impl<'a> DlpZtRiskScoreRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zero_trust_risk_scoring_integrations };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = dlp_zt_risk_score(&api)
 ///     .with_account_id("account_id")
 ///     .send()
@@ -107,7 +107,7 @@ impl<'a> DlpZtRiskScorePostRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zero_trust_risk_scoring_integrations };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::dlp_create_integration_body::DlpCreateIntegrationBody = todo!();
 /// let response = dlp_zt_risk_score_post(&api)
 ///     .with_account_id("account_id")
@@ -160,7 +160,7 @@ impl<'a> DlpZtRiskScoreGetRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zero_trust_risk_scoring_integrations };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = dlp_zt_risk_score_get(&api)
 ///     .with_account_id("account_id")
 ///     .with_reference_id("reference_id")
@@ -212,7 +212,7 @@ impl<'a> DlpZtRiskScoreGet3Request<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zero_trust_risk_scoring_integrations };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = dlp_zt_risk_score_get_3(&api)
 ///     .with_account_id("account_id")
 ///     .with_integration_id("integration_id")
@@ -274,7 +274,7 @@ impl<'a> DlpZtRiskScorePutRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zero_trust_risk_scoring_integrations };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::dlp_update_integration_body::DlpUpdateIntegrationBody = todo!();
 /// let response = dlp_zt_risk_score_put(&api)
 ///     .with_account_id("account_id")
@@ -328,7 +328,7 @@ impl<'a> DlpZtRiskScoreDeleteRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zero_trust_risk_scoring_integrations };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = dlp_zt_risk_score_delete(&api)
 ///     .with_account_id("account_id")
 ///     .with_integration_id("integration_id")

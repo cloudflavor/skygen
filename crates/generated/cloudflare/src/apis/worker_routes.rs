@@ -52,7 +52,7 @@ impl<'a> ListRoutesRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::worker_routes };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = list_routes(&api)
 ///     .with_zone_id("zone_id")
 ///     .send()
@@ -100,7 +100,7 @@ impl<'a> CreateRouteRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::worker_routes };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::workers_route::WorkersRoute = todo!();
 /// let response = create_route(&api)
 ///     .with_zone_id("zone_id")
@@ -155,7 +155,7 @@ impl<'a> GetRouteRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::worker_routes };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = get_route(&api)
 ///     .with_zone_id("zone_id")
 ///     .with_route_id("route_id")
@@ -214,7 +214,7 @@ impl<'a> UpdateRouteRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::worker_routes };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::workers_route::WorkersRoute = todo!();
 /// let response = update_route(&api)
 ///     .with_zone_id("zone_id")
@@ -270,7 +270,7 @@ impl<'a> DeleteRouteRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::worker_routes };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = delete_route(&api)
 ///     .with_zone_id("zone_id")
 ///     .with_route_id("route_id")

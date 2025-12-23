@@ -64,7 +64,7 @@ impl<'a> ListCertificatePacksRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::certificate_packs };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = list_certificate_packs(&api)
 ///     .with_zone_id("zone_id")
 ///     .with_status("status")
@@ -123,7 +123,7 @@ impl<'a> OrderAdvancedCertificateManagerRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::certificate_packs };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = order_advanced_certificate_manager(&api)
 ///     .with_zone_id("zone_id")
@@ -174,7 +174,7 @@ impl<'a> GetCertificatePackQuotasRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::certificate_packs };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = get_certificate_pack_quotas(&api)
 ///     .with_zone_id("zone_id")
 ///     .send()
@@ -227,7 +227,7 @@ impl<'a> GetCertificatePackRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::certificate_packs };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = get_certificate_pack(&api)
 ///     .with_zone_id("zone_id")
 ///     .with_certificate_pack_id("certificate_pack_id")
@@ -286,7 +286,7 @@ impl<'a> DeleteAdvancedCertificateManagerRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::certificate_packs };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = delete_advanced_certificate_manager(&api)
 ///     .with_zone_id("zone_id")
 ///     .with_certificate_pack_id("certificate_pack_id")
@@ -353,7 +353,7 @@ impl<'a> RestartValidationAdvancedCertificateRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::certificate_packs };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = restart_validation_advanced_certificate(&api)
 ///     .with_zone_id("zone_id")

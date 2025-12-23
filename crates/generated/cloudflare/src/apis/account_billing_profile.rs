@@ -53,7 +53,7 @@ impl<'a> DeprecatedBillingProfileDetailsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::account_billing_profile };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = deprecated_billing_profile_details(&api)
 ///     .with_account_id("account_id")
 ///     .send()

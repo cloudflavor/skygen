@@ -66,7 +66,7 @@ impl<'a> TestsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::access_policy_tester };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::access_policy_init_req::AccessPolicyInitReq = todo!();
 /// let response = tests(&api)
 ///     .with_account_id("account_id")
@@ -121,7 +121,7 @@ impl<'a> TestsGetUpdateRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::access_policy_tester };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = tests_get_update(&api)
 ///     .with_account_id("account_id")
 ///     .with_policy_test_id("policy_test_id")
@@ -190,7 +190,7 @@ impl<'a> TestsGetPageRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::access_policy_tester };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = tests_get_page(&api)
 ///     .with_account_id("account_id")
 ///     .with_policy_test_id("policy_test_id")

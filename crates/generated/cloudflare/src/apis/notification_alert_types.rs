@@ -56,7 +56,7 @@ impl<'a> GetAlertTypesRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::notification_alert_types };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = get_alert_types(&api)
 ///     .with_account_id("account_id")
 ///     .send()

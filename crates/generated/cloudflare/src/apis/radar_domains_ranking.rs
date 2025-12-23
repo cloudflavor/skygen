@@ -81,7 +81,7 @@ impl<'a> GetRankingDomainDetailsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::radar_domains_ranking };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = get_ranking_domain_details(&api)
 ///     .with_domain("domain")
 ///     .with_limit("limit")
@@ -174,7 +174,7 @@ impl<'a> GetRankingDomainTimeseriesRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::radar_domains_ranking };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = get_ranking_domain_timeseries(&api)
 ///     .with_limit("limit")
 ///     .with_ranking_type("rankingType")
@@ -255,7 +255,7 @@ impl<'a> GetRankingTopDomainsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::radar_domains_ranking };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = get_ranking_top_domains(&api)
 ///     .with_limit("limit")
 ///     .with_name("name")

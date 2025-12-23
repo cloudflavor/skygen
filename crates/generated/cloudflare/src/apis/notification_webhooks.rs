@@ -59,7 +59,7 @@ impl<'a> ListWebhooksRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::notification_webhooks };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = list_webhooks(&api)
 ///     .with_account_id("account_id")
 ///     .send()
@@ -111,7 +111,7 @@ impl<'a> CreateWebhookRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::notification_webhooks };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = create_webhook(&api)
 ///     .with_account_id("account_id")
@@ -166,7 +166,7 @@ impl<'a> GetWebhookRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::notification_webhooks };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = get_webhook(&api)
 ///     .with_account_id("account_id")
 ///     .with_webhook_id("webhook_id")
@@ -225,7 +225,7 @@ impl<'a> UpdateWebhookRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::notification_webhooks };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = update_webhook(&api)
 ///     .with_account_id("account_id")
@@ -281,7 +281,7 @@ impl<'a> DeleteWebhookRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::notification_webhooks };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = delete_webhook(&api)
 ///     .with_account_id("account_id")
 ///     .with_webhook_id("webhook_id")

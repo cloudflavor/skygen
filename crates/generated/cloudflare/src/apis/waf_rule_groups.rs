@@ -105,7 +105,7 @@ impl<'a> ListWafRuleGroupsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::waf_rule_groups };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = list_waf_rule_groups(&api)
 ///     .with_zone_id("zone_id")
 ///     .with_package_id("package_id")
@@ -175,7 +175,7 @@ impl<'a> GetWafRuleGroupRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::waf_rule_groups };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = get_waf_rule_group(&api)
 ///     .with_zone_id("zone_id")
 ///     .with_package_id("package_id")
@@ -246,7 +246,7 @@ impl<'a> UpdateWafRuleGroupRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::waf_rule_groups };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = update_waf_rule_group(&api)
 ///     .with_zone_id("zone_id")

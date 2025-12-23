@@ -63,7 +63,7 @@ impl<'a> NamespaceWorkerListRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_for_platforms };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = namespace_worker_list(&api)
 ///     .with_account_id("account_id")
 ///     .send()
@@ -118,7 +118,7 @@ impl<'a> NamespaceWorkerCreateRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_for_platforms };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = namespace_worker_create(&api)
 ///     .with_account_id("account_id")
@@ -173,7 +173,7 @@ impl<'a> NamespaceWorkerGetNamespaceRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_for_platforms };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = namespace_worker_get_namespace(&api)
 ///     .with_account_id("account_id")
 ///     .with_dispatch_namespace("dispatch_namespace")
@@ -227,7 +227,7 @@ impl<'a> NamespaceWorkerDeleteNamespaceRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_for_platforms };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = namespace_worker_delete_namespace(&api)
 ///     .with_account_id("account_id")
 ///     .with_dispatch_namespace("dispatch_namespace")
@@ -285,7 +285,7 @@ impl<'a> NamespaceWorkerScriptWorkerRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_for_platforms };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = namespace_worker_script_worker(&api)
 ///     .with_account_id("account_id")
 ///     .with_dispatch_namespace("dispatch_namespace")
@@ -342,7 +342,7 @@ impl<'a> NamespaceWorkerScriptUploadRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_for_platforms };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = namespace_worker_script_upload(&api)
 ///     .with_account_id("account_id")
 ///     .with_dispatch_namespace("dispatch_namespace")
@@ -404,7 +404,7 @@ impl<'a> NamespaceWorkerScriptDeleteRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_for_platforms };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = namespace_worker_script_delete(&api)
 ///     .with_account_id("account_id")
 ///     .with_dispatch_namespace("dispatch_namespace")
@@ -470,7 +470,7 @@ impl<'a> NamespaceWorkerScriptUpdateRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_for_platforms };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::workers_create_assets_upload_session_object::WorkersCreateAssetsUploadSessionObject = todo!();
 /// let response = namespace_worker_script_update(&api)
 ///     .with_account_id("account_id")
@@ -529,7 +529,7 @@ impl<'a> NamespaceWorkerGetScriptRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_for_platforms };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = namespace_worker_get_script(&api)
 ///     .with_account_id("account_id")
 ///     .with_dispatch_namespace("dispatch_namespace")
@@ -586,7 +586,7 @@ impl<'a> NamespaceWorkerGetScriptGetRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_for_platforms };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = namespace_worker_get_script_get(&api)
 ///     .with_account_id("account_id")
 ///     .with_dispatch_namespace("dispatch_namespace")
@@ -655,7 +655,7 @@ impl<'a> NamespaceWorkerPutScriptRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_for_platforms };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = namespace_worker_put_script(&api)
 ///     .with_account_id("account_id")
 ///     .with_dispatch_namespace("dispatch_namespace")
@@ -714,7 +714,7 @@ impl<'a> NamespaceWorkerListScriptRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_for_platforms };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = namespace_worker_list_script(&api)
 ///     .with_account_id("account_id")
 ///     .with_dispatch_namespace("dispatch_namespace")
@@ -776,7 +776,7 @@ impl<'a> NamespaceWorkerPutScriptPutRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_for_platforms };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::workers_secret::WorkersSecret = todo!();
 /// let response = namespace_worker_put_script_put(&api)
 ///     .with_account_id("account_id")
@@ -841,7 +841,7 @@ impl<'a> NamespaceWorkerGetScriptGet3Request<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_for_platforms };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = namespace_worker_get_script_get_3(&api)
 ///     .with_account_id("account_id")
 ///     .with_dispatch_namespace("dispatch_namespace")
@@ -907,7 +907,7 @@ impl<'a> NamespaceWorkerDeleteScriptRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_for_platforms };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = namespace_worker_delete_script(&api)
 ///     .with_account_id("account_id")
 ///     .with_dispatch_namespace("dispatch_namespace")
@@ -965,7 +965,7 @@ impl<'a> NamespaceWorkerGetScriptGet4Request<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_for_platforms };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = namespace_worker_get_script_get_4(&api)
 ///     .with_account_id("account_id")
 ///     .with_dispatch_namespace("dispatch_namespace")
@@ -1024,7 +1024,7 @@ impl<'a> NamespaceWorkerPatchScriptRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_for_platforms };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = namespace_worker_patch_script(&api)
 ///     .with_account_id("account_id")
 ///     .with_dispatch_namespace("dispatch_namespace")
@@ -1081,7 +1081,7 @@ impl<'a> NamespaceWorkerGetScriptGet5Request<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_for_platforms };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = namespace_worker_get_script_get_5(&api)
 ///     .with_account_id("account_id")
 ///     .with_dispatch_namespace("dispatch_namespace")
@@ -1145,7 +1145,7 @@ impl<'a> NamespaceWorkerPutScriptPut3Request<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_for_platforms };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::workers_tags::WorkersTags = todo!();
 /// let response = namespace_worker_put_script_put_3(&api)
 ///     .with_account_id("account_id")
@@ -1212,7 +1212,7 @@ impl<'a> NamespaceWorkerPutScriptPut4Request<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_for_platforms };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = namespace_worker_put_script_put_4(&api)
 ///     .with_account_id("account_id")
 ///     .with_dispatch_namespace("dispatch_namespace")
@@ -1278,7 +1278,7 @@ impl<'a> NamespaceWorkerDeleteScriptDeleteRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_for_platforms };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = namespace_worker_delete_script_delete(&api)
 ///     .with_account_id("account_id")
 ///     .with_dispatch_namespace("dispatch_namespace")

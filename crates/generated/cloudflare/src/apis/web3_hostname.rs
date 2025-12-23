@@ -55,7 +55,7 @@ impl<'a> ListWeb3HostnamesRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::web3_hostname };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = list_web3_hostnames(&api)
 ///     .with_zone_id("zone_id")
 ///     .send()
@@ -104,7 +104,7 @@ impl<'a> CreateWeb3HostnameRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::web3_hostname };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::web3_create_request::Web3CreateRequest = todo!();
 /// let response = create_web3_hostname(&api)
 ///     .with_zone_id("zone_id")
@@ -157,7 +157,7 @@ impl<'a> DetailsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::web3_hostname };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = details(&api)
 ///     .with_zone_id("zone_id")
 ///     .with_identifier("identifier")
@@ -209,7 +209,7 @@ impl<'a> DeleteWeb3HostnameRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::web3_hostname };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = delete_web3_hostname(&api)
 ///     .with_zone_id("zone_id")
 ///     .with_identifier("identifier")
@@ -269,7 +269,7 @@ impl<'a> EditWeb3HostnameRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::web3_hostname };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::web3_modify_request::Web3ModifyRequest = todo!();
 /// let response = edit_web3_hostname(&api)
 ///     .with_zone_id("zone_id")
@@ -323,7 +323,7 @@ impl<'a> IpfsUniversalPathGatewayRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::web3_hostname };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = ipfs_universal_path_gateway(&api)
 ///     .with_zone_id("zone_id")
 ///     .with_identifier("identifier")
@@ -383,7 +383,7 @@ impl<'a> UpdateIpfsUniversalPathRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::web3_hostname };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::web3_content_list_update_request::Web3ContentListUpdateRequest = todo!();
 /// let response = update_ipfs_universal_path(&api)
 ///     .with_zone_id("zone_id")
@@ -437,7 +437,7 @@ impl<'a> ListIpfsUniversalPathRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::web3_hostname };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = list_ipfs_universal_path(&api)
 ///     .with_zone_id("zone_id")
 ///     .with_identifier("identifier")
@@ -497,7 +497,7 @@ impl<'a> CreateIpfsUniversalPathRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::web3_hostname };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::web3_content_list_entry_create_request::Web3ContentListEntryCreateRequest = todo!();
 /// let response = create_ipfs_universal_path(&api)
 ///     .with_zone_id("zone_id")
@@ -555,7 +555,7 @@ impl<'a> IpfsUniversalPathGatewayGetRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::web3_hostname };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = ipfs_universal_path_gateway_get(&api)
 ///     .with_zone_id("zone_id")
 ///     .with_identifier("identifier")
@@ -620,7 +620,7 @@ impl<'a> EditIpfsUniversalPathRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::web3_hostname };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::web3_content_list_entry_create_request::Web3ContentListEntryCreateRequest = todo!();
 /// let response = edit_ipfs_universal_path(&api)
 ///     .with_zone_id("zone_id")
@@ -679,7 +679,7 @@ impl<'a> DeleteIpfsUniversalPathRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::web3_hostname };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = delete_ipfs_universal_path(&api)
 ///     .with_zone_id("zone_id")
 ///     .with_identifier("identifier")

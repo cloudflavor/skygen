@@ -55,7 +55,7 @@ impl<'a> ListApplicationTypeMappingsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zero_trust_gateway_application_and_application_type_mappings };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = list_application_type_mappings(&api)
 ///     .with_account_id("account_id")
 ///     .send()

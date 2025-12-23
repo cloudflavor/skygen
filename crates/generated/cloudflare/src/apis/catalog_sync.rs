@@ -62,7 +62,7 @@ impl<'a> SyncsListRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::catalog_sync };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = syncs_list(&api)
 ///     .with_account_id("account_id")
 ///     .send()
@@ -122,7 +122,7 @@ impl<'a> SyncsCreateRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::catalog_sync };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::mcn_create_catalog_sync_request::McnCreateCatalogSyncRequest = todo!();
 /// let response = syncs_create(&api)
 ///     .with_account_id("account_id")
@@ -177,7 +177,7 @@ impl<'a> SyncsPrebuiltPoliciesListRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::catalog_sync };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = syncs_prebuilt_policies_list(&api)
 ///     .with_account_id("account_id")
 ///     .with_destination_type("destination_type")
@@ -231,7 +231,7 @@ impl<'a> SyncsReadRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::catalog_sync };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = syncs_read(&api)
 ///     .with_account_id("account_id")
 ///     .with_sync_id("sync_id")
@@ -293,7 +293,7 @@ impl<'a> SyncsUpdateRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::catalog_sync };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::mcn_update_catalog_sync_request::McnUpdateCatalogSyncRequest = todo!();
 /// let response = syncs_update(&api)
 ///     .with_account_id("account_id")
@@ -354,7 +354,7 @@ impl<'a> SyncsDeleteRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::catalog_sync };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = syncs_delete(&api)
 ///     .with_account_id("account_id")
 ///     .with_sync_id("sync_id")
@@ -417,7 +417,7 @@ impl<'a> SyncsPatchRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::catalog_sync };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::mcn_update_catalog_sync_request::McnUpdateCatalogSyncRequest = todo!();
 /// let response = syncs_patch(&api)
 ///     .with_account_id("account_id")
@@ -473,7 +473,7 @@ impl<'a> SyncsRefreshRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::catalog_sync };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = syncs_refresh(&api)
 ///     .with_account_id("account_id")
 ///     .with_sync_id("sync_id")

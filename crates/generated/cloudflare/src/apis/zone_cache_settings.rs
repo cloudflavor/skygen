@@ -55,7 +55,7 @@ impl<'a> GetCacheReserveSettingRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zone_cache_settings };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = get_cache_reserve_setting(&api)
 ///     .with_zone_id("zone_id")
 ///     .send()
@@ -107,7 +107,7 @@ impl<'a> ChangeCacheReserveSettingRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zone_cache_settings };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = change_cache_reserve_setting(&api)
 ///     .with_zone_id("zone_id")
@@ -156,7 +156,7 @@ impl<'a> GetCacheReserveClearRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zone_cache_settings };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = get_cache_reserve_clear(&api)
 ///     .with_zone_id("zone_id")
 ///     .send()
@@ -203,7 +203,7 @@ impl<'a> StartCacheReserveClearRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zone_cache_settings };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = start_cache_reserve_clear(&api)
 ///     .with_zone_id("zone_id")
 ///     .send()
@@ -250,7 +250,7 @@ impl<'a> GetRegionalTieredCacheRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zone_cache_settings };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = get_regional_tiered_cache(&api)
 ///     .with_zone_id("zone_id")
 ///     .send()
@@ -305,7 +305,7 @@ impl<'a> ChangeRegionalTieredCacheRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zone_cache_settings };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = change_regional_tiered_cache(&api)
 ///     .with_zone_id("zone_id")
@@ -350,7 +350,7 @@ impl<'a> GetVariantsSettingRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zone_cache_settings };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = get_variants_setting(&api)
 ///     .with_zone_id("zone_id")
 ///     .send()
@@ -393,7 +393,7 @@ impl<'a> DeleteVariantsSettingRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zone_cache_settings };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = delete_variants_setting(&api)
 ///     .with_zone_id("zone_id")
 ///     .send()
@@ -444,7 +444,7 @@ impl<'a> ChangeVariantsSettingRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zone_cache_settings };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = change_variants_setting(&api)
 ///     .with_zone_id("zone_id")

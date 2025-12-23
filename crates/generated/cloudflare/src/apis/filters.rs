@@ -90,7 +90,7 @@ impl<'a> ListFiltersRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::filters };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = list_filters(&api)
 ///     .with_zone_id("zone_id")
 ///     .with_paused("paused")
@@ -148,7 +148,7 @@ impl<'a> CreateFiltersRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::filters };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = create_filters(&api)
 ///     .with_zone_id("zone_id")
@@ -201,7 +201,7 @@ impl<'a> UpdateFiltersRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::filters };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = update_filters(&api)
 ///     .with_zone_id("zone_id")
@@ -254,7 +254,7 @@ impl<'a> DeleteFiltersRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::filters };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = delete_filters(&api)
 ///     .with_zone_id("zone_id")
@@ -306,7 +306,7 @@ impl<'a> GetFilterRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::filters };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = get_filter(&api)
 ///     .with_zone_id("zone_id")
 ///     .with_filter_id("filter_id")
@@ -362,7 +362,7 @@ impl<'a> UpdateFilterRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::filters };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = update_filter(&api)
 ///     .with_zone_id("zone_id")
@@ -415,7 +415,7 @@ impl<'a> DeleteFilterRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::filters };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = delete_filter(&api)
 ///     .with_zone_id("zone_id")
 ///     .with_filter_id("filter_id")

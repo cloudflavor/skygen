@@ -79,7 +79,7 @@ impl<'a> ListDomainsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::worker_domain };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = list_domains(&api)
 ///     .with_account_id("account_id")
 ///     .with_zone_name("zone_name")
@@ -136,7 +136,7 @@ impl<'a> AttachDomainRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::worker_domain };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = attach_domain(&api)
 ///     .with_account_id("account_id")
@@ -191,7 +191,7 @@ impl<'a> GetDomainRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::worker_domain };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = get_domain(&api)
 ///     .with_account_id("account_id")
 ///     .with_domain_id("domain_id")
@@ -245,7 +245,7 @@ impl<'a> DetachDomainRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::worker_domain };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = detach_domain(&api)
 ///     .with_account_id("account_id")
 ///     .with_domain_id("domain_id")

@@ -77,7 +77,7 @@ impl<'a> ListDestinationAddressesRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::email_routing_destination_addresses };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = list_destination_addresses(&api)
 ///     .with_account_id("account_id")
 ///     .with_page("page")
@@ -136,7 +136,7 @@ impl<'a> CreateDestinationAddressRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::email_routing_destination_addresses };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::email_create_destination_address_properties::EmailCreateDestinationAddressProperties = todo!();
 /// let response = create_destination_address(&api)
 ///     .with_account_id("account_id")
@@ -193,7 +193,7 @@ impl<'a> GetDestinationAddressRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::email_routing_destination_addresses };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = get_destination_address(&api)
 ///     .with_account_id("account_id")
 ///     .with_destination_address_identifier("destination_address_identifier")
@@ -249,7 +249,7 @@ impl<'a> DeleteDestinationAddressRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::email_routing_destination_addresses };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = delete_destination_address(&api)
 ///     .with_account_id("account_id")
 ///     .with_destination_address_identifier("destination_address_identifier")

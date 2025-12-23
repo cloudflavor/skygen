@@ -109,7 +109,7 @@ impl<'a> ListLockdownRulesRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zone_lockdown };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = list_lockdown_rules(&api)
 ///     .with_zone_id("zone_id")
 ///     .with_page("page")
@@ -172,7 +172,7 @@ impl<'a> CreateLockdownRuleRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zone_lockdown };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = create_lockdown_rule(&api)
 ///     .with_zone_id("zone_id")
@@ -227,7 +227,7 @@ impl<'a> GetLockdownRuleRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zone_lockdown };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = get_lockdown_rule(&api)
 ///     .with_zone_id("zone_id")
 ///     .with_lock_downs_id("lock_downs_id")
@@ -289,7 +289,7 @@ impl<'a> UpdateLockdownRuleRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zone_lockdown };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = update_lockdown_rule(&api)
 ///     .with_zone_id("zone_id")
@@ -345,7 +345,7 @@ impl<'a> DeleteLockdownRuleRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zone_lockdown };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = delete_lockdown_rule(&api)
 ///     .with_zone_id("zone_id")
 ///     .with_lock_downs_id("lock_downs_id")

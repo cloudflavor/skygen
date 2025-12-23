@@ -55,7 +55,7 @@ impl<'a> ListAcLsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::secondary_dns_acl };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = list_ac_ls(&api)
 ///     .with_account_id("account_id")
 ///     .send()
@@ -110,7 +110,7 @@ impl<'a> CreateAclRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::secondary_dns_acl };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = create_acl(&api)
 ///     .with_account_id("account_id")
@@ -165,7 +165,7 @@ impl<'a> DetailsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::secondary_dns_acl };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = details(&api)
 ///     .with_account_id("account_id")
 ///     .with_acl_id("acl_id")
@@ -224,7 +224,7 @@ impl<'a> UpdateAclRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::secondary_dns_acl };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::secondary_dns_acl::SecondaryDnsAcl = todo!();
 /// let response = update_acl(&api)
 ///     .with_account_id("account_id")
@@ -280,7 +280,7 @@ impl<'a> DeleteAclRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::secondary_dns_acl };
-/// let api = ApiClient::builder("https://api.example.com").build().expect("client");
+/// let api = ApiClient::builder().build().expect("client");
 /// let response = delete_acl(&api)
 ///     .with_account_id("account_id")
 ///     .with_acl_id("acl_id")
