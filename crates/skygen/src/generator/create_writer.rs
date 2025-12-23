@@ -424,8 +424,6 @@ async fn generate_lib(
         tokio::fs::write(apis_dir.join(format!("{}.rs", module_name)), render)
             .await
             .with_context(|| format!("failed to write module {}", module_name))?;
-            ;
-
         api_modules.push(module_name);
     }
 
