@@ -15,4 +15,17 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type MagicVisibilityPcapsPcapsRequestPcap = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct MagicVisibilityPcapsPcapsRequestPcap {
+    pub byte_limit: Option<crate::models::magic_visibility_pcaps_pcaps_byte_limit::MagicVisibilityPcapsPcapsByteLimit>,
+    pub colo_name: crate::models::magic_visibility_pcaps_pcaps_colo_name::MagicVisibilityPcapsPcapsColoName,
+    pub destination_conf: crate::models::magic_visibility_pcaps_pcaps_destination_conf::MagicVisibilityPcapsPcapsDestinationConf,
+    pub filter_v1: Option<crate::models::magic_visibility_pcaps_pcaps_filter_v1::MagicVisibilityPcapsPcapsFilterV1>,
+    pub offset_time: Option<crate::models::magic_visibility_pcaps_pcaps_offset_time::MagicVisibilityPcapsPcapsOffsetTime>,
+    pub packet_limit: Option<crate::models::magic_visibility_pcaps_pcaps_packet_limit::MagicVisibilityPcapsPcapsPacketLimit>,
+    pub r#type: crate::models::magic_visibility_pcaps_pcaps_type::MagicVisibilityPcapsPcapsType,
+    pub system: crate::models::magic_visibility_pcaps_pcaps_system::MagicVisibilityPcapsPcapsSystem,
+    pub time_limit: serde_json::Value,
+}

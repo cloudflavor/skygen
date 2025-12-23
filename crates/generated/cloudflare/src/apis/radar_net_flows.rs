@@ -85,6 +85,7 @@ impl<'a> GetNetflowsSummaryRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::radar_net_flows };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_netflows_summary(&api)
 ///     .with_name("name")
@@ -184,6 +185,7 @@ impl<'a> GetNetflowsTimeseriesRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::radar_net_flows };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_netflows_timeseries(&api)
 ///     .with_agg_interval("aggInterval")
@@ -276,6 +278,7 @@ impl<'a> GetNetflowsTopAsesRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::radar_net_flows };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_netflows_top_ases(&api)
 ///     .with_limit("limit")
@@ -366,6 +369,7 @@ impl<'a> GetNetflowsTopLocationsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::radar_net_flows };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_netflows_top_locations(&api)
 ///     .with_limit("limit")

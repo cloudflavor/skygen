@@ -63,6 +63,7 @@ impl<'a> ListGreTunnelsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::magic_gre_tunnels };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = list_gre_tunnels(&api)
 ///     .with_account_id("account_id")
@@ -121,6 +122,7 @@ impl<'a> CreateGreTunnelsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::magic_gre_tunnels };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::magic_create_gre_tunnel_request::MagicCreateGreTunnelRequest = todo!();
 /// let response = create_gre_tunnels(&api)
@@ -178,6 +180,7 @@ impl<'a> UpdateMultipleGreTunnelsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::magic_gre_tunnels };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = update_multiple_gre_tunnels(&api)
@@ -239,6 +242,7 @@ impl<'a> ListGreTunnelDetailsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::magic_gre_tunnels };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = list_gre_tunnel_details(&api)
 ///     .with_account_id("account_id")
@@ -307,6 +311,7 @@ impl<'a> UpdateGreTunnelRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::magic_gre_tunnels };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::magic_gre_tunnel_update_request::MagicGreTunnelUpdateRequest = todo!();
 /// let response = update_gre_tunnel(&api)
@@ -369,6 +374,7 @@ impl<'a> DeleteGreTunnelRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::magic_gre_tunnels };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = delete_gre_tunnel(&api)
 ///     .with_account_id("account_id")

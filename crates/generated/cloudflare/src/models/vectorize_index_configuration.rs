@@ -15,4 +15,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type VectorizeIndexConfiguration = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct VectorizeIndexConfiguration {
+    pub dimensions: crate::models::vectorize_index_dimensions::VectorizeIndexDimensions,
+    pub metric: crate::models::vectorize_index_metric::VectorizeIndexMetric,
+    pub preset: crate::models::vectorize_index_preset::VectorizeIndexPreset,
+}

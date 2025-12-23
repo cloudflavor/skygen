@@ -73,6 +73,7 @@ impl<'a> ListTokensRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::account_owned_api_tokens };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = list_tokens(&api)
 ///     .with_account_id("account_id")
@@ -124,6 +125,7 @@ impl<'a> CreateTokenRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::account_owned_api_tokens };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::iam_create_payload::IamCreatePayload = todo!();
 /// let response = create_token(&api)
@@ -173,6 +175,7 @@ impl<'a> ListPermissionGroupsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::account_owned_api_tokens };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = list_permission_groups(&api)
 ///     .with_account_id("account_id")
@@ -217,6 +220,7 @@ impl<'a> VerifyTokenRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::account_owned_api_tokens };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = verify_token(&api)
 ///     .with_account_id("account_id")
@@ -267,6 +271,7 @@ impl<'a> TokenDetailsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::account_owned_api_tokens };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = token_details(&api)
 ///     .with_account_id("account_id")
@@ -323,6 +328,7 @@ impl<'a> UpdateTokenRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::account_owned_api_tokens };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::iam_token_body::IamTokenBody = todo!();
 /// let response = update_token(&api)
@@ -379,6 +385,7 @@ impl<'a> DeleteTokenRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::account_owned_api_tokens };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = delete_token(&api)
 ///     .with_account_id("account_id")
@@ -441,6 +448,7 @@ impl<'a> RollTokenRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::account_owned_api_tokens };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = roll_token(&api)

@@ -63,6 +63,7 @@ impl<'a> ListDeploymentsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::worker_deployments };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = list_deployments(&api)
 ///     .with_account_id("account_id")
@@ -130,6 +131,7 @@ impl<'a> CreateDeploymentRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::worker_deployments };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::workers_deployments_create_body::WorkersDeploymentsCreateBody = todo!();
 /// let response = create_deployment(&api)

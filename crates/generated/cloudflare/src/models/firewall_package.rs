@@ -15,4 +15,19 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type FirewallPackage = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct FirewallPackage {
+    pub action_mode: Option<crate::models::firewall_action_mode::FirewallActionMode>,
+    pub description: Option<serde_json::Value>,
+    pub detection_mode: Option<serde_json::Value>,
+    #[serde(flatten)]
+    pub firewall_package_definition:
+        crate::models::firewall_package_definition::FirewallPackageDefinition,
+    pub id: crate::models::firewall_identifier::FirewallIdentifier,
+    pub name: Option<serde_json::Value>,
+    pub sensitivity: Option<crate::models::firewall_sensitivity::FirewallSensitivity>,
+    pub status: Option<crate::models::firewall_status::FirewallStatus>,
+    pub zone_id: crate::models::firewall_identifier::FirewallIdentifier,
+}

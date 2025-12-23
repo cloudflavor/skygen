@@ -59,6 +59,7 @@ impl<'a> UploadLoaDocumentRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::ip_address_management_prefixes };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = upload_loa_document(&api)
 ///     .with_account_id("account_id")
@@ -112,6 +113,7 @@ impl<'a> DownloadLoaDocumentRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::ip_address_management_prefixes };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = download_loa_document(&api)
 ///     .with_account_id("account_id")
@@ -160,6 +162,7 @@ impl<'a> ListPrefixesRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::ip_address_management_prefixes };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = list_prefixes(&api)
 ///     .with_account_id("account_id")
@@ -212,6 +215,7 @@ impl<'a> AddPrefixRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::ip_address_management_prefixes };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = add_prefix(&api)
@@ -267,6 +271,7 @@ impl<'a> PrefixDetailsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::ip_address_management_prefixes };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = prefix_details(&api)
 ///     .with_account_id("account_id")
@@ -321,6 +326,7 @@ impl<'a> DeletePrefixRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::ip_address_management_prefixes };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = delete_prefix(&api)
 ///     .with_account_id("account_id")
@@ -380,6 +386,7 @@ impl<'a> UpdatePrefixDescriptionRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::ip_address_management_prefixes };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = update_prefix_description(&api)

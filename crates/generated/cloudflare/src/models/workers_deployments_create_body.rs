@@ -19,6 +19,8 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct WorkersDeploymentsCreateBody {
+    pub strategy: String,
+    pub versions: Vec<std::collections::BTreeMap<String, serde_json::Value>>,
     #[serde(flatten)]
     pub workers_deployments_base: crate::models::workers_deployments_base::WorkersDeploymentsBase,
 }

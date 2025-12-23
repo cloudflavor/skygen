@@ -15,4 +15,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type SpectrumConfigEdgeIps = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct SpectrumConfigEdgeIps {
+    pub connectivity: Option<String>,
+    pub ips: Option<Vec<String>>,
+    pub r#type: Option<String>,
+}

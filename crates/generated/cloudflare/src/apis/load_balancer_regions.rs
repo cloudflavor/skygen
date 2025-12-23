@@ -72,6 +72,7 @@ impl<'a> ListRegionsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::load_balancer_regions };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = list_regions(&api)
 ///     .with_account_id("account_id")
@@ -128,6 +129,7 @@ impl<'a> GetRegionRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::load_balancer_regions };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_region(&api)
 ///     .with_account_id("account_id")

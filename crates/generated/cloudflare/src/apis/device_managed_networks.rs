@@ -54,6 +54,7 @@ impl<'a> ListDeviceManagedNetworksRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::device_managed_networks };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = list_device_managed_networks(&api)
 ///     .with_account_id("account_id")
@@ -106,6 +107,7 @@ impl<'a> CreateDeviceManagedNetworkRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::device_managed_networks };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = create_device_managed_network(&api)
@@ -161,6 +163,7 @@ impl<'a> NetworkDetailsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::device_managed_networks };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = network_details(&api)
 ///     .with_account_id("account_id")
@@ -223,6 +226,7 @@ impl<'a> UpdateDeviceManagedNetworkRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::device_managed_networks };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = update_device_managed_network(&api)
@@ -279,6 +283,7 @@ impl<'a> DeleteDeviceManagedNetworkRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::device_managed_networks };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = delete_device_managed_network(&api)
 ///     .with_account_id("account_id")

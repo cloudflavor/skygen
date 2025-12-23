@@ -15,4 +15,30 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type AccessRule = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct AccessRule {
+    pub any_valid_service_token: std::collections::BTreeMap<String, serde_json::Value>,
+    pub auth_context: std::collections::BTreeMap<String, serde_json::Value>,
+    pub auth_method: std::collections::BTreeMap<String, serde_json::Value>,
+    pub azure_ad: std::collections::BTreeMap<String, serde_json::Value>,
+    pub certificate: std::collections::BTreeMap<String, serde_json::Value>,
+    pub common_name: std::collections::BTreeMap<String, serde_json::Value>,
+    pub device_posture: std::collections::BTreeMap<String, serde_json::Value>,
+    pub email: std::collections::BTreeMap<String, serde_json::Value>,
+    pub email_domain: std::collections::BTreeMap<String, serde_json::Value>,
+    pub email_list: std::collections::BTreeMap<String, serde_json::Value>,
+    pub everyone: std::collections::BTreeMap<String, serde_json::Value>,
+    pub external_evaluation: std::collections::BTreeMap<String, serde_json::Value>,
+    pub geo: std::collections::BTreeMap<String, serde_json::Value>,
+    pub github_organization: std::collections::BTreeMap<String, serde_json::Value>,
+    pub group: std::collections::BTreeMap<String, serde_json::Value>,
+    pub gsuite: std::collections::BTreeMap<String, serde_json::Value>,
+    pub ip: std::collections::BTreeMap<String, serde_json::Value>,
+    pub ip_list: std::collections::BTreeMap<String, serde_json::Value>,
+    pub login_method: std::collections::BTreeMap<String, serde_json::Value>,
+    pub okta: std::collections::BTreeMap<String, serde_json::Value>,
+    pub saml: std::collections::BTreeMap<String, serde_json::Value>,
+    pub service_token: std::collections::BTreeMap<String, serde_json::Value>,
+}

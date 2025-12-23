@@ -15,5 +15,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type DnsRecordsDnsRecordBatchPost =
-    crate::models::dns_records_dns_record_post::DnsRecordsDnsRecordPost;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct DnsRecordsDnsRecordBatchPost {
+    #[serde(flatten)]
+    pub dns_records_dns_record_post:
+        crate::models::dns_records_dns_record_post::DnsRecordsDnsRecordPost,
+}

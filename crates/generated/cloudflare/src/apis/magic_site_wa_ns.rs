@@ -65,6 +65,7 @@ impl<'a> WansListWansRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::magic_site_wa_ns };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = wans_list_wans(&api)
 ///     .with_account_id("account_id")
@@ -127,6 +128,7 @@ impl<'a> WansCreateWanRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::magic_site_wa_ns };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::magic_wans_add_single_request::MagicWansAddSingleRequest = todo!();
 /// let response = wans_create_wan(&api)
@@ -189,6 +191,7 @@ impl<'a> WansWanDetailsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::magic_site_wa_ns };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = wans_wan_details(&api)
 ///     .with_account_id("account_id")
@@ -258,6 +261,7 @@ impl<'a> WansUpdateWanRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::magic_site_wa_ns };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::magic_wan_update_request::MagicWanUpdateRequest = todo!();
 /// let response = wans_update_wan(&api)
@@ -321,6 +325,7 @@ impl<'a> WansDeleteWanRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::magic_site_wa_ns };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = wans_delete_wan(&api)
 ///     .with_account_id("account_id")
@@ -390,6 +395,7 @@ impl<'a> WansPatchWanRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::magic_site_wa_ns };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::magic_wan_update_request::MagicWanUpdateRequest = todo!();
 /// let response = wans_patch_wan(&api)

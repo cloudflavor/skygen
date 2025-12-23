@@ -75,6 +75,7 @@ impl<'a> ListCertificatesRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::origin_ca };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = list_certificates(&api)
 ///     .with_zone_id("zone_id")
@@ -123,6 +124,7 @@ impl<'a> CreateCertificateRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::origin_ca };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = create_certificate(&api)
@@ -169,6 +171,7 @@ impl<'a> GetCertificateRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::origin_ca };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_certificate(&api)
 ///     .with_certificate_id("certificate_id")
@@ -212,6 +215,7 @@ impl<'a> RevokeCertificateRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::origin_ca };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = revoke_certificate(&api)
 ///     .with_certificate_id("certificate_id")

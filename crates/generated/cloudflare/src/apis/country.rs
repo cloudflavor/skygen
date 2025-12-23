@@ -55,6 +55,7 @@ impl<'a> ReadRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::country };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = read(&api)
 ///     .with_account_id("account_id")

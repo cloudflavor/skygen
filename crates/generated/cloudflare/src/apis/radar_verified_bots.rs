@@ -90,6 +90,7 @@ impl<'a> GetVerifiedBotsTopRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::radar_verified_bots };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_verified_bots_top(&api)
 ///     .with_limit("limit")
@@ -181,6 +182,7 @@ impl<'a> GetVerifiedBotsTopGetRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::radar_verified_bots };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_verified_bots_top_get(&api)
 ///     .with_limit("limit")

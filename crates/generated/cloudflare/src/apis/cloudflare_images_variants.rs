@@ -55,6 +55,7 @@ impl<'a> ListVariantsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::cloudflare_images_variants };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = list_variants(&api)
 ///     .with_account_id("account_id")
@@ -110,6 +111,7 @@ impl<'a> CreateVariantRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::cloudflare_images_variants };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::images_image_variant_definition::ImagesImageVariantDefinition = todo!();
 /// let response = create_variant(&api)
@@ -165,6 +167,7 @@ impl<'a> VariantDetailsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::cloudflare_images_variants };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = variant_details(&api)
 ///     .with_account_id("account_id")
@@ -219,6 +222,7 @@ impl<'a> DeleteVariantRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::cloudflare_images_variants };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = delete_variant(&api)
 ///     .with_account_id("account_id")
@@ -281,6 +285,7 @@ impl<'a> UpdateVariantRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::cloudflare_images_variants };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::images_image_variant_patch_request::ImagesImageVariantPatchRequest = todo!();
 /// let response = update_variant(&api)

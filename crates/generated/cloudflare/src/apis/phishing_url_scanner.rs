@@ -61,6 +61,7 @@ impl<'a> SubmitSuspiciousUrlScanningRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::phishing_url_scanner };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::intel_url_param::IntelUrlParam = todo!();
 /// let response = submit_suspicious_url_scanning(&api)

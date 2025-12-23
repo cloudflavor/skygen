@@ -58,6 +58,7 @@ impl<'a> ListPeersRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::secondary_dns_peer };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = list_peers(&api)
 ///     .with_account_id("account_id")
@@ -110,6 +111,7 @@ impl<'a> CreatePeerRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::secondary_dns_peer };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = create_peer(&api)
@@ -165,6 +167,7 @@ impl<'a> DetailsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::secondary_dns_peer };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = details(&api)
 ///     .with_account_id("account_id")
@@ -224,6 +227,7 @@ impl<'a> UpdatePeerRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::secondary_dns_peer };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::secondary_dns_peer::SecondaryDnsPeer = todo!();
 /// let response = update_peer(&api)
@@ -280,6 +284,7 @@ impl<'a> DeletePeerRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::secondary_dns_peer };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = delete_peer(&api)
 ///     .with_account_id("account_id")

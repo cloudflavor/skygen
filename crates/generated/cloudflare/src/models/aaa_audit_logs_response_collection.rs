@@ -15,4 +15,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type AaaAuditLogsResponseCollection = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct AaaAuditLogsResponseCollection {
+    pub errors: Option<crate::models::aaa_messages::AaaMessages>,
+    pub messages: Option<crate::models::aaa_messages::AaaMessages>,
+    pub result: Option<Vec<crate::models::aaa_audit_logs::AaaAuditLogs>>,
+    pub success: Option<bool>,
+}

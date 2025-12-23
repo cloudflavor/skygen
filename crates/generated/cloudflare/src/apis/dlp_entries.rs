@@ -52,6 +52,7 @@ impl<'a> ListAllEntriesRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::dlp_entries };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = list_all_entries(&api)
 ///     .with_account_id("account_id")
@@ -101,6 +102,7 @@ impl<'a> CreateEntryRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::dlp_entries };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::dlp_new_entry::DlpNewEntry = todo!();
 /// let response = create_entry(&api)
@@ -156,6 +158,7 @@ impl<'a> GetDlpEntryRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::dlp_entries };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_dlp_entry(&api)
 ///     .with_account_id("account_id")
@@ -215,6 +218,7 @@ impl<'a> UpdateEntryRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::dlp_entries };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::dlp_entry_update::DlpEntryUpdate = todo!();
 /// let response = update_entry(&api)
@@ -271,6 +275,7 @@ impl<'a> DeleteEntryRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::dlp_entries };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = delete_entry(&api)
 ///     .with_account_id("account_id")

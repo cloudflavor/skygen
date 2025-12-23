@@ -51,6 +51,7 @@ impl<'a> ReadAllRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::dlp_datasets };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = read_all(&api)
 ///     .with_account_id("account_id")
@@ -98,6 +99,7 @@ impl<'a> CreateRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::dlp_datasets };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::dlp_new_dataset::DlpNewDataset = todo!();
 /// let response = create(&api)
@@ -151,6 +153,7 @@ impl<'a> ReadRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::dlp_datasets };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = read(&api)
 ///     .with_account_id("account_id")
@@ -208,6 +211,7 @@ impl<'a> UpdateRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::dlp_datasets };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::dlp_dataset_update::DlpDatasetUpdate = todo!();
 /// let response = update(&api)
@@ -264,6 +268,7 @@ impl<'a> DeleteRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::dlp_datasets };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = delete(&api)
 ///     .with_account_id("account_id")
@@ -316,6 +321,7 @@ impl<'a> CreateVersionRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::dlp_datasets };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = create_version(&api)
 ///     .with_account_id("account_id")
@@ -379,6 +385,7 @@ impl<'a> UploadVersionRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::dlp_datasets };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = upload_version(&api)
 ///     .with_account_id("account_id")
@@ -450,6 +457,7 @@ impl<'a> DefineColumnsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::dlp_datasets };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: Vec<crate::models::dlp_new_dataset_column::DlpNewDatasetColumn> = todo!();
 /// let response = define_columns(&api)
@@ -520,6 +528,7 @@ impl<'a> UploadDatasetColumnRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::dlp_datasets };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = upload_dataset_column(&api)
 ///     .with_account_id("account_id")

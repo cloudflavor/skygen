@@ -220,6 +220,7 @@ impl<'a> ListDnsRecordsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::dns_records_for_a_zone };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = list_dns_records(&api)
 ///     .with_zone_id("zone_id")
@@ -310,6 +311,7 @@ impl<'a> CreateDnsRecordRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::dns_records_for_a_zone };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::dns_records_dns_record_post::DnsRecordsDnsRecordPost = todo!();
 /// let response = create_dns_record(&api)
@@ -373,6 +375,7 @@ impl<'a> BatchDnsRecordsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::dns_records_for_a_zone };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::dns_records_dns_request_batch_object::DnsRecordsDnsRequestBatchObject = todo!();
 /// let response = batch_dns_records(&api)
@@ -421,6 +424,7 @@ impl<'a> ExportDnsRecordsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::dns_records_for_a_zone };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = export_dns_records(&api)
 ///     .with_zone_id("zone_id")
@@ -467,6 +471,7 @@ impl<'a> ImportDnsRecordsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::dns_records_for_a_zone };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = import_dns_records(&api)
 ///     .with_zone_id("zone_id")
@@ -510,6 +515,7 @@ impl<'a> ScanDnsRecordsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::dns_records_for_a_zone };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = scan_dns_records(&api)
 ///     .with_zone_id("zone_id")
@@ -561,6 +567,7 @@ impl<'a> RecordDetailsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::dns_records_for_a_zone };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = record_details(&api)
 ///     .with_zone_id("zone_id")
@@ -629,6 +636,7 @@ impl<'a> UpdateDnsRecordRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::dns_records_for_a_zone };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::dns_records_dns_record_post::DnsRecordsDnsRecordPost = todo!();
 /// let response = update_dns_record(&api)
@@ -683,6 +691,7 @@ impl<'a> DeleteDnsRecordRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::dns_records_for_a_zone };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = delete_dns_record(&api)
 ///     .with_zone_id("zone_id")
@@ -751,6 +760,7 @@ impl<'a> PatchDnsRecordRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::dns_records_for_a_zone };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::dns_records_dns_record_patch::DnsRecordsDnsRecordPatch = todo!();
 /// let response = patch_dns_record(&api)

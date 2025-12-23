@@ -93,6 +93,7 @@ impl<'a> ListIpAccessRulesRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::ip_access_rules_for_a_user };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = list_ip_access_rules(&api)
 ///     .with_mode("mode")
@@ -146,6 +147,7 @@ impl<'a> CreateIpAccessRuleRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::ip_access_rules_for_a_user };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = create_ip_access_rule(&api)
@@ -196,6 +198,7 @@ impl<'a> DeleteIpAccessRuleRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::ip_access_rules_for_a_user };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = delete_ip_access_rule(&api)
 ///     .with_rule_id("rule_id")
@@ -251,6 +254,7 @@ impl<'a> UpdateIpAccessRuleRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::ip_access_rules_for_a_user };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = update_ip_access_rule(&api)

@@ -15,4 +15,10 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type TeamsDevicesSchemasConfigRequest = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct TeamsDevicesSchemasConfigRequest {
+    pub sha256: Option<String>,
+    pub tls_sockaddr: String,
+}

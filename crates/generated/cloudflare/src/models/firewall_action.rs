@@ -15,4 +15,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type FirewallAction = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct FirewallAction {
+    pub mode: Option<crate::models::firewall_mode::FirewallMode>,
+    pub response: Option<crate::models::firewall_custom_response::FirewallCustomResponse>,
+    pub timeout: Option<crate::models::firewall_timeout::FirewallTimeout>,
+}

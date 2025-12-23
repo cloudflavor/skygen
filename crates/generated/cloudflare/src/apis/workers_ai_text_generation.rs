@@ -62,6 +62,7 @@ impl<'a> PostRunCfDeepseekRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_ai_text_generation };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = post_run_cf_deepseek(&api)
@@ -119,6 +120,7 @@ impl<'a> PostRunCfDeepseekPostRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_ai_text_generation };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = post_run_cf_deepseek_post(&api)
@@ -176,6 +178,7 @@ impl<'a> PostRunCfDefogRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_ai_text_generation };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = post_run_cf_defog(&api)
@@ -233,6 +236,7 @@ impl<'a> PostRunCfFblgitRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_ai_text_generation };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = post_run_cf_fblgit(&api)
@@ -290,6 +294,7 @@ impl<'a> PostRunCfGoogleRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_ai_text_generation };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = post_run_cf_google(&api)
@@ -347,6 +352,7 @@ impl<'a> PostRunCfGooglePostRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_ai_text_generation };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = post_run_cf_google_post(&api)
@@ -404,6 +410,7 @@ impl<'a> PostRunCfGooglePost3Request<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_ai_text_generation };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = post_run_cf_google_post_3(&api)
@@ -461,6 +468,7 @@ impl<'a> PostRunCfMetaRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_ai_text_generation };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = post_run_cf_meta(&api)
@@ -518,6 +526,7 @@ impl<'a> PostRunCfMetaPostRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_ai_text_generation };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = post_run_cf_meta_post(&api)
@@ -575,6 +584,7 @@ impl<'a> PostRunCfMetaPost3Request<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_ai_text_generation };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = post_run_cf_meta_post_3(&api)
@@ -632,6 +642,7 @@ impl<'a> PostRunCfMetaPost4Request<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_ai_text_generation };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = post_run_cf_meta_post_4(&api)
@@ -689,6 +700,7 @@ impl<'a> PostRunCfMetaPost5Request<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_ai_text_generation };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = post_run_cf_meta_post_5(&api)
@@ -746,6 +758,7 @@ impl<'a> PostRunCfMetaPost6Request<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_ai_text_generation };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = post_run_cf_meta_post_6(&api)
@@ -803,6 +816,7 @@ impl<'a> PostRunCfMetaPost7Request<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_ai_text_generation };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = post_run_cf_meta_post_7(&api)
@@ -860,6 +874,7 @@ impl<'a> PostRunCfMetaPost8Request<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_ai_text_generation };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = post_run_cf_meta_post_8(&api)
@@ -917,6 +932,7 @@ impl<'a> PostRunCfMetaPost9Request<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_ai_text_generation };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = post_run_cf_meta_post_9(&api)
@@ -974,6 +990,7 @@ impl<'a> PostRunCfMetaPost10Request<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_ai_text_generation };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = post_run_cf_meta_post_10(&api)
@@ -1031,6 +1048,7 @@ impl<'a> PostRunCfMetaPost11Request<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_ai_text_generation };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = post_run_cf_meta_post_11(&api)
@@ -1088,6 +1106,7 @@ impl<'a> PostRunCfMetaPost12Request<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_ai_text_generation };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = post_run_cf_meta_post_12(&api)
@@ -1145,6 +1164,7 @@ impl<'a> PostRunCfMetaPost13Request<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_ai_text_generation };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = post_run_cf_meta_post_13(&api)
@@ -1202,6 +1222,7 @@ impl<'a> PostRunCfMetaPost14Request<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_ai_text_generation };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = post_run_cf_meta_post_14(&api)
@@ -1259,6 +1280,7 @@ impl<'a> PostRunCfMetaPost15Request<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_ai_text_generation };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = post_run_cf_meta_post_15(&api)
@@ -1319,6 +1341,7 @@ impl<'a> PostRunCfMetaPost16Request<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_ai_text_generation };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = post_run_cf_meta_post_16(&api)
@@ -1376,6 +1399,7 @@ impl<'a> PostRunCfMicrosoftRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_ai_text_generation };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = post_run_cf_microsoft(&api)
@@ -1433,6 +1457,7 @@ impl<'a> PostRunCfMistralRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_ai_text_generation };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = post_run_cf_mistral(&api)
@@ -1490,6 +1515,7 @@ impl<'a> PostRunCfMistralPostRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_ai_text_generation };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = post_run_cf_mistral_post(&api)
@@ -1547,6 +1573,7 @@ impl<'a> PostRunCfMistralaiRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_ai_text_generation };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = post_run_cf_mistralai(&api)
@@ -1604,6 +1631,7 @@ impl<'a> PostRunCfOpenchatRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_ai_text_generation };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = post_run_cf_openchat(&api)
@@ -1661,6 +1689,7 @@ impl<'a> PostRunCfQwenRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_ai_text_generation };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = post_run_cf_qwen(&api)
@@ -1718,6 +1747,7 @@ impl<'a> PostRunCfQwenPostRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_ai_text_generation };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = post_run_cf_qwen_post(&api)
@@ -1775,6 +1805,7 @@ impl<'a> PostRunCfQwenPost3Request<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_ai_text_generation };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = post_run_cf_qwen_post_3(&api)
@@ -1832,6 +1863,7 @@ impl<'a> PostRunCfQwenPost4Request<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_ai_text_generation };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = post_run_cf_qwen_post_4(&api)
@@ -1889,6 +1921,7 @@ impl<'a> PostRunCfQwenPost5Request<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_ai_text_generation };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = post_run_cf_qwen_post_5(&api)
@@ -1946,6 +1979,7 @@ impl<'a> PostRunCfQwenPost6Request<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_ai_text_generation };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = post_run_cf_qwen_post_6(&api)
@@ -2003,6 +2037,7 @@ impl<'a> PostRunCfTheblokeRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_ai_text_generation };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = post_run_cf_thebloke(&api)
@@ -2060,6 +2095,7 @@ impl<'a> PostRunCfTiiuaeRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_ai_text_generation };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = post_run_cf_tiiuae(&api)
@@ -2117,6 +2153,7 @@ impl<'a> PostRunCfTinyllamaRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_ai_text_generation };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = post_run_cf_tinyllama(&api)
@@ -2174,6 +2211,7 @@ impl<'a> PostRunHfGoogleRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_ai_text_generation };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = post_run_hf_google(&api)
@@ -2231,6 +2269,7 @@ impl<'a> PostRunHfMetaRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_ai_text_generation };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = post_run_hf_meta(&api)
@@ -2288,6 +2327,7 @@ impl<'a> PostRunHfMistralRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_ai_text_generation };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = post_run_hf_mistral(&api)
@@ -2345,6 +2385,7 @@ impl<'a> PostRunHfMistralaiRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_ai_text_generation };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = post_run_hf_mistralai(&api)
@@ -2402,6 +2443,7 @@ impl<'a> PostRunHfNexusflowRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_ai_text_generation };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = post_run_hf_nexusflow(&api)
@@ -2459,6 +2501,7 @@ impl<'a> PostRunHfNousresearchRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_ai_text_generation };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = post_run_hf_nousresearch(&api)
@@ -2516,6 +2559,7 @@ impl<'a> PostRunHfTheblokeRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_ai_text_generation };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = post_run_hf_thebloke(&api)
@@ -2573,6 +2617,7 @@ impl<'a> PostRunHfTheblokePostRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_ai_text_generation };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = post_run_hf_thebloke_post(&api)
@@ -2630,6 +2675,7 @@ impl<'a> PostRunHfTheblokePost3Request<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_ai_text_generation };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = post_run_hf_thebloke_post_3(&api)
@@ -2687,6 +2733,7 @@ impl<'a> PostRunHfTheblokePost4Request<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_ai_text_generation };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = post_run_hf_thebloke_post_4(&api)
@@ -2744,6 +2791,7 @@ impl<'a> PostRunHfTheblokePost5Request<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_ai_text_generation };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = post_run_hf_thebloke_post_5(&api)
@@ -2801,6 +2849,7 @@ impl<'a> PostRunHfTheblokePost6Request<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_ai_text_generation };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = post_run_hf_thebloke_post_6(&api)
@@ -2858,6 +2907,7 @@ impl<'a> PostRunHfTheblokePost7Request<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_ai_text_generation };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = post_run_hf_thebloke_post_7(&api)
@@ -2915,6 +2965,7 @@ impl<'a> PostRunHfTheblokePost8Request<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_ai_text_generation };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = post_run_hf_thebloke_post_8(&api)

@@ -60,6 +60,7 @@ impl<'a> DetailsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::ssl_verification };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = details(&api)
 ///     .with_zone_id("zone_id")
@@ -125,6 +126,7 @@ impl<'a> EditSslCertificatePackRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::ssl_verification };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::tls_certificates_and_hostnames_components_schemas_validation_method::TlsCertificatesAndHostnamesComponentsSchemasValidationMethod = todo!();
 /// let response = edit_ssl_certificate_pack(&api)

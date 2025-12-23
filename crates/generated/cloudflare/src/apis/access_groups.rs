@@ -64,6 +64,7 @@ impl<'a> ListAccessGroupsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::access_groups };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = list_access_groups(&api)
 ///     .with_account_id("account_id")
@@ -115,6 +116,7 @@ impl<'a> CreateAccessGroupRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::access_groups };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = create_access_group(&api)
@@ -170,6 +172,7 @@ impl<'a> GetAccessGroupRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::access_groups };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_access_group(&api)
 ///     .with_account_id("account_id")
@@ -229,6 +232,7 @@ impl<'a> UpdateAccessGroupRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::access_groups };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = update_access_group(&api)
@@ -285,6 +289,7 @@ impl<'a> DeleteAccessGroupRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::access_groups };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = delete_access_group(&api)
 ///     .with_account_id("account_id")

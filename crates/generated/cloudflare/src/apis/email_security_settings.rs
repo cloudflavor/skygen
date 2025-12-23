@@ -121,6 +121,7 @@ impl<'a> ListAllowPoliciesRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::email_security_settings };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = list_allow_policies(&api)
 ///     .with_account_id("account_id")
@@ -187,6 +188,7 @@ impl<'a> CreateAllowPolicyRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::email_security_settings };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::email_security_create_allow_policy::EmailSecurityCreateAllowPolicy = todo!();
 /// let response = create_allow_policy(&api)
@@ -240,6 +242,7 @@ impl<'a> GetAllowPolicyRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::email_security_settings };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_allow_policy(&api)
 ///     .with_account_id("account_id")
@@ -292,6 +295,7 @@ impl<'a> DeleteAllowPolicyRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::email_security_settings };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = delete_allow_policy(&api)
 ///     .with_account_id("account_id")
@@ -352,6 +356,7 @@ impl<'a> UpdateAllowPolicyRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::email_security_settings };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::email_security_update_allow_policy::EmailSecurityUpdateAllowPolicy = todo!();
 /// let response = update_allow_policy(&api)
@@ -430,6 +435,7 @@ impl<'a> ListBlockedSendersRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::email_security_settings };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = list_blocked_senders(&api)
 ///     .with_account_id("account_id")
@@ -489,6 +495,7 @@ impl<'a> CreateBlockedSenderRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::email_security_settings };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::email_security_create_blocked_sender::EmailSecurityCreateBlockedSender = todo!();
 /// let response = create_blocked_sender(&api)
@@ -542,6 +549,7 @@ impl<'a> GetBlockedSenderRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::email_security_settings };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_blocked_sender(&api)
 ///     .with_account_id("account_id")
@@ -594,6 +602,7 @@ impl<'a> DeleteBlockedSenderRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::email_security_settings };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = delete_blocked_sender(&api)
 ///     .with_account_id("account_id")
@@ -654,6 +663,7 @@ impl<'a> UpdateBlockedSenderRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::email_security_settings };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::email_security_update_blocked_sender::EmailSecurityUpdateBlockedSender = todo!();
 /// let response = update_blocked_sender(&api)
@@ -744,6 +754,7 @@ impl<'a> ListDomainsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::email_security_settings };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = list_domains(&api)
 ///     .with_account_id("account_id")
@@ -805,6 +816,7 @@ impl<'a> DeleteDomainsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::email_security_settings };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: Vec<std::collections::BTreeMap<String, serde_json::Value>> = todo!();
 /// let response = delete_domains(&api)
@@ -858,6 +870,7 @@ impl<'a> GetDomainRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::email_security_settings };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_domain(&api)
 ///     .with_account_id("account_id")
@@ -910,6 +923,7 @@ impl<'a> DeleteDomainRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::email_security_settings };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = delete_domain(&api)
 ///     .with_account_id("account_id")
@@ -970,6 +984,7 @@ impl<'a> UpdateDomainRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::email_security_settings };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = update_domain(&api)
@@ -1050,6 +1065,7 @@ impl<'a> ListDisplayNamesRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::email_security_settings };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = list_display_names(&api)
 ///     .with_account_id("account_id")
@@ -1109,6 +1125,7 @@ impl<'a> CreateDisplayNameRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::email_security_settings };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::email_security_create_display_name::EmailSecurityCreateDisplayName = todo!();
 /// let response = create_display_name(&api)
@@ -1158,6 +1175,7 @@ impl<'a> GetDisplayNameRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::email_security_settings };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_display_name(&api)
 ///     .with_account_id("account_id")
@@ -1206,6 +1224,7 @@ impl<'a> DeleteDisplayNameRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::email_security_settings };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = delete_display_name(&api)
 ///     .with_account_id("account_id")
@@ -1262,6 +1281,7 @@ impl<'a> UpdateDisplayNameRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::email_security_settings };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = update_display_name(&api)
@@ -1347,6 +1367,7 @@ impl<'a> ListTrustedDomainsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::email_security_settings };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = list_trusted_domains(&api)
 ///     .with_account_id("account_id")
@@ -1407,6 +1428,7 @@ impl<'a> CreateTrustedDomainRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::email_security_settings };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::email_security_create_trusted_domain::EmailSecurityCreateTrustedDomain = todo!();
 /// let response = create_trusted_domain(&api)
@@ -1460,6 +1482,7 @@ impl<'a> GetTrustedDomainRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::email_security_settings };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_trusted_domain(&api)
 ///     .with_account_id("account_id")
@@ -1512,6 +1535,7 @@ impl<'a> DeleteTrustedDomainRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::email_security_settings };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = delete_trusted_domain(&api)
 ///     .with_account_id("account_id")
@@ -1572,6 +1596,7 @@ impl<'a> UpdateTrustedDomainRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::email_security_settings };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = update_trusted_domain(&api)

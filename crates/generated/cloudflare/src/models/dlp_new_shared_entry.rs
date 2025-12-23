@@ -15,4 +15,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type DlpNewSharedEntry = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct DlpNewSharedEntry {
+    pub enabled: bool,
+    pub entry_id: String,
+    pub entry_type: String,
+}

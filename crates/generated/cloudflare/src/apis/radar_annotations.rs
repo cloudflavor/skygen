@@ -85,6 +85,7 @@ impl<'a> GetAnnotationsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::radar_annotations };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_annotations(&api)
 ///     .with_limit("limit")
@@ -169,6 +170,7 @@ impl<'a> GetAnnotationsOutagesRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::radar_annotations };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_annotations_outages(&api)
 ///     .with_limit("limit")
@@ -239,6 +241,7 @@ impl<'a> GetAnnotationsOutagesTopRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::radar_annotations };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_annotations_outages_top(&api)
 ///     .with_limit("limit")

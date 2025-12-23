@@ -109,6 +109,7 @@ impl<'a> NetworksSubnetsListRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zero_trust_subnets };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = networks_subnets_list(&api)
 ///     .with_account_id("account_id")
@@ -181,6 +182,7 @@ impl<'a> NetworksSubnetUpdateCloudflareRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zero_trust_subnets };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = networks_subnet_update_cloudflare(&api)

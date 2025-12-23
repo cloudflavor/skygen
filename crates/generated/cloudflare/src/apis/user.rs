@@ -42,6 +42,7 @@ impl<'a> DetailsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::user };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = details(&api)
 ///     .send()
@@ -80,6 +81,7 @@ impl<'a> EditRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::user };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = edit(&api)

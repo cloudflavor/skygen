@@ -68,6 +68,7 @@ impl<'a> GetEventNotificationConfigsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::r2_bucket };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_event_notification_configs(&api)
 ///     .with_account_id("account_id")
@@ -130,6 +131,7 @@ impl<'a> GetEventNotificationConfigRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::r2_bucket };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_event_notification_config(&api)
 ///     .with_account_id("account_id")
@@ -201,6 +203,7 @@ impl<'a> PutEventNotificationConfigRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::r2_bucket };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = put_event_notification_config(&api)
@@ -273,6 +276,7 @@ impl<'a> EventNotificationDeleteConfigRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::r2_bucket };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = event_notification_delete_config(&api)
@@ -358,6 +362,7 @@ impl<'a> ListBucketsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::r2_bucket };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = list_buckets(&api)
 ///     .with_account_id("account_id")
@@ -421,6 +426,7 @@ impl<'a> CreateBucketRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::r2_bucket };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = create_bucket(&api)
@@ -482,6 +488,7 @@ impl<'a> GetBucketRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::r2_bucket };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_bucket(&api)
 ///     .with_account_id("account_id")
@@ -542,6 +549,7 @@ impl<'a> DeleteBucketRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::r2_bucket };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = delete_bucket(&api)
 ///     .with_account_id("account_id")
@@ -607,6 +615,7 @@ impl<'a> PatchBucketRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::r2_bucket };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = patch_bucket(&api)
 ///     .with_account_id("account_id")
@@ -668,6 +677,7 @@ impl<'a> GetBucketCorsPolicyRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::r2_bucket };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_bucket_cors_policy(&api)
 ///     .with_account_id("account_id")
@@ -736,6 +746,7 @@ impl<'a> PutBucketCorsPolicyRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::r2_bucket };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = put_bucket_cors_policy(&api)
@@ -798,6 +809,7 @@ impl<'a> DeleteBucketCorsPolicyRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::r2_bucket };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = delete_bucket_cors_policy(&api)
 ///     .with_account_id("account_id")
@@ -858,6 +870,7 @@ impl<'a> ListCustomDomainsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::r2_bucket };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = list_custom_domains(&api)
 ///     .with_account_id("account_id")
@@ -926,6 +939,7 @@ impl<'a> AddCustomDomainRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::r2_bucket };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::r2_add_custom_domain_request::R2AddCustomDomainRequest = todo!();
 /// let response = add_custom_domain(&api)
@@ -994,6 +1008,7 @@ impl<'a> GetCustomDomainSettingsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::r2_bucket };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_custom_domain_settings(&api)
 ///     .with_account_id("account_id")
@@ -1069,6 +1084,7 @@ impl<'a> EditCustomDomainSettingsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::r2_bucket };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::r2_edit_custom_domain_request::R2EditCustomDomainRequest = todo!();
 /// let response = edit_custom_domain_settings(&api)
@@ -1138,6 +1154,7 @@ impl<'a> DeleteCustomDomainRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::r2_bucket };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = delete_custom_domain(&api)
 ///     .with_account_id("account_id")
@@ -1199,6 +1216,7 @@ impl<'a> GetBucketPublicPolicyRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::r2_bucket };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_bucket_public_policy(&api)
 ///     .with_account_id("account_id")
@@ -1267,6 +1285,7 @@ impl<'a> PutBucketPublicPolicyRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::r2_bucket };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::r2_edit_managed_domain_request::R2EditManagedDomainRequest = todo!();
 /// let response = put_bucket_public_policy(&api)
@@ -1329,6 +1348,7 @@ impl<'a> GetBucketLifecycleConfigurationRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::r2_bucket };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_bucket_lifecycle_configuration(&api)
 ///     .with_account_id("account_id")
@@ -1399,6 +1419,7 @@ impl<'a> PutBucketLifecycleConfigurationRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::r2_bucket };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = put_bucket_lifecycle_configuration(&api)
@@ -1463,6 +1484,7 @@ impl<'a> GetBucketLockConfigurationRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::r2_bucket };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_bucket_lock_configuration(&api)
 ///     .with_account_id("account_id")
@@ -1531,6 +1553,7 @@ impl<'a> PutBucketLockConfigurationRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::r2_bucket };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = put_bucket_lock_configuration(&api)
@@ -1593,6 +1616,7 @@ impl<'a> GetBucketSippyConfigRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::r2_bucket };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_bucket_sippy_config(&api)
 ///     .with_account_id("account_id")
@@ -1658,6 +1682,7 @@ impl<'a> PutBucketSippyConfigRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::r2_bucket };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::r2_enable_sippy_aws::R2EnableSippyAws = todo!();
 /// let response = put_bucket_sippy_config(&api)
@@ -1720,6 +1745,7 @@ impl<'a> DeleteBucketSippyConfigRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::r2_bucket };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = delete_bucket_sippy_config(&api)
 ///     .with_account_id("account_id")
@@ -1777,6 +1803,7 @@ impl<'a> CreateTempAccessCredentialsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::r2_bucket };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::r2_temp_access_creds_request::R2TempAccessCredsRequest = todo!();
 /// let response = create_temp_access_credentials(&api)

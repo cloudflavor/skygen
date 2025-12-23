@@ -15,4 +15,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type FirewallCacheRulesComponentsSchemasActionParameters = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct FirewallCacheRulesComponentsSchemasActionParameters {
+    pub browser_ttl: Option<std::collections::BTreeMap<String, serde_json::Value>>,
+    pub cache_key: Option<std::collections::BTreeMap<String, serde_json::Value>>,
+    pub edge_ttl: Option<std::collections::BTreeMap<String, serde_json::Value>>,
+    pub origin_error_page_passthru: Option<bool>,
+    pub respect_strong_etags: Option<bool>,
+    pub serve_stale: Option<std::collections::BTreeMap<String, serde_json::Value>>,
+}

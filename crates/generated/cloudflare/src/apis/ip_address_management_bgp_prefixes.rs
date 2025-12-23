@@ -63,6 +63,7 @@ impl<'a> ListBgpPrefixesRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::ip_address_management_bgp_prefixes };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = list_bgp_prefixes(&api)
 ///     .with_account_id("account_id")
@@ -125,6 +126,7 @@ impl<'a> CreateBgpPrefixRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::ip_address_management_bgp_prefixes };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::addressing_bgp_prefix_create::AddressingBgpPrefixCreate = todo!();
 /// let response = create_bgp_prefix(&api)
@@ -187,6 +189,7 @@ impl<'a> FetchBgpPrefixRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::ip_address_management_bgp_prefixes };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = fetch_bgp_prefix(&api)
 ///     .with_account_id("account_id")
@@ -256,6 +259,7 @@ impl<'a> UpdateBgpPrefixRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::ip_address_management_bgp_prefixes };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::addressing_bgp_prefix_update_advertisement::AddressingBgpPrefixUpdateAdvertisement = todo!();
 /// let response = update_bgp_prefix(&api)

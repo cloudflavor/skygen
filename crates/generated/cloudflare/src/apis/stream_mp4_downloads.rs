@@ -63,6 +63,7 @@ impl<'a> MPDownloadsListRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::stream_mp4_downloads };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = m_p_downloads_list(&api)
 ///     .with_account_id("account_id")
@@ -117,6 +118,7 @@ impl<'a> MPDownloadsCreateRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::stream_mp4_downloads };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = m_p_downloads_create(&api)
 ///     .with_account_id("account_id")
@@ -171,6 +173,7 @@ impl<'a> MPDownloadsDeleteRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::stream_mp4_downloads };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = m_p_downloads_delete(&api)
 ///     .with_account_id("account_id")

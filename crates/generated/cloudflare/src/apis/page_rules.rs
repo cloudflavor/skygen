@@ -74,6 +74,7 @@ impl<'a> ListPageRulesRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::page_rules };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = list_page_rules(&api)
 ///     .with_zone_id("zone_id")
@@ -129,6 +130,7 @@ impl<'a> CreatePageRuleRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::page_rules };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = create_page_rule(&api)
@@ -181,6 +183,7 @@ impl<'a> GetPageRuleRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::page_rules };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_page_rule(&api)
 ///     .with_zone_id("zone_id")
@@ -240,6 +243,7 @@ impl<'a> UpdatePageRuleRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::page_rules };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = update_page_rule(&api)
@@ -296,6 +300,7 @@ impl<'a> DeletePageRuleRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::page_rules };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = delete_page_rule(&api)
 ///     .with_zone_id("zone_id")
@@ -358,6 +363,7 @@ impl<'a> EditPageRuleRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::page_rules };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = edit_page_rule(&api)

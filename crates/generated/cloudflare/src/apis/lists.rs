@@ -58,6 +58,7 @@ impl<'a> GetListsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::lists };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_lists(&api)
 ///     .with_account_id("account_id")
@@ -110,6 +111,7 @@ impl<'a> CreateListRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::lists };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = create_list(&api)
@@ -167,6 +169,7 @@ impl<'a> GetBulkOperationStatusRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::lists };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_bulk_operation_status(&api)
 ///     .with_account_id("account_id")
@@ -221,6 +224,7 @@ impl<'a> GetListRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::lists };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_list(&api)
 ///     .with_account_id("account_id")
@@ -283,6 +287,7 @@ impl<'a> UpdateListRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::lists };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = update_list(&api)
@@ -339,6 +344,7 @@ impl<'a> DeleteListRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::lists };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = delete_list(&api)
 ///     .with_account_id("account_id")
@@ -408,6 +414,7 @@ impl<'a> GetListItemsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::lists };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_list_items(&api)
 ///     .with_account_id("account_id")
@@ -475,6 +482,7 @@ impl<'a> CreateListItemsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::lists };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::lists_items_update_request_collection::ListsItemsUpdateRequestCollection = todo!();
 /// let response = create_list_items(&api)
@@ -541,6 +549,7 @@ impl<'a> UpdateAllListItemsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::lists };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::lists_items_update_request_collection::ListsItemsUpdateRequestCollection = todo!();
 /// let response = update_all_list_items(&api)
@@ -607,6 +616,7 @@ impl<'a> DeleteListItemsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::lists };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = delete_list_items(&api)
@@ -669,6 +679,7 @@ impl<'a> GetListItemRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::lists };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_list_item(&api)
 ///     .with_account_id("account_id")

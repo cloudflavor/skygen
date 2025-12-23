@@ -75,6 +75,7 @@ impl<'a> GetSearchGlobalRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::radar_search };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_search_global(&api)
 ///     .with_limit("limit")

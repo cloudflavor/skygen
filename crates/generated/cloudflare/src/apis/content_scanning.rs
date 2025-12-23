@@ -58,6 +58,7 @@ impl<'a> WafContentScanningDisableRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::content_scanning };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = waf_content_scanning_disable(&api)
 ///     .with_zone_id("zone_id")
@@ -105,6 +106,7 @@ impl<'a> WafContentScanningEnableRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::content_scanning };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = waf_content_scanning_enable(&api)
 ///     .with_zone_id("zone_id")
@@ -152,6 +154,7 @@ impl<'a> WafContentScanningListRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::content_scanning };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = waf_content_scanning_list(&api)
 ///     .with_zone_id("zone_id")
@@ -207,6 +210,7 @@ impl<'a> WafContentScanningAddRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::content_scanning };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: Vec<std::collections::BTreeMap<String, serde_json::Value>> = todo!();
 /// let response = waf_content_scanning_add(&api)
@@ -262,6 +266,7 @@ impl<'a> WafContentScanningDeleteRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::content_scanning };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = waf_content_scanning_delete(&api)
 ///     .with_zone_id("zone_id")
@@ -310,6 +315,7 @@ impl<'a> WafContentScanningGetRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::content_scanning };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = waf_content_scanning_get(&api)
 ///     .with_zone_id("zone_id")

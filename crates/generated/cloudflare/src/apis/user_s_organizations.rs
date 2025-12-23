@@ -82,6 +82,7 @@ impl<'a> ListOrganizationsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::user_s_organizations };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = list_organizations(&api)
 ///     .with_name("name")
@@ -132,6 +133,7 @@ impl<'a> OrganizationDetailsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::user_s_organizations };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = organization_details(&api)
 ///     .with_organization_id("organization_id")
@@ -176,6 +178,7 @@ impl<'a> LeaveOrganizationRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::user_s_organizations };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = leave_organization(&api)
 ///     .with_organization_id("organization_id")

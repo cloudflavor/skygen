@@ -114,6 +114,7 @@ impl<'a> ListInternalDnsViewsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::dns_internal_views_for_an_account };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = list_internal_dns_views(&api)
 ///     .with_account_id("account_id")
@@ -181,6 +182,7 @@ impl<'a> CreateInternalDnsViewsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::dns_internal_views_for_an_account };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::dns_settings_dns_view_post::DnsSettingsDnsViewPost = todo!();
 /// let response = create_internal_dns_views(&api)
@@ -236,6 +238,7 @@ impl<'a> GetInternalDnsViewRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::dns_internal_views_for_an_account };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_internal_dns_view(&api)
 ///     .with_account_id("account_id")
@@ -290,6 +293,7 @@ impl<'a> DeleteInternalDnsViewRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::dns_internal_views_for_an_account };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = delete_internal_dns_view(&api)
 ///     .with_account_id("account_id")
@@ -352,6 +356,7 @@ impl<'a> UpdateInternalDnsViewRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::dns_internal_views_for_an_account };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::dns_settings_dns_view_patch::DnsSettingsDnsViewPatch = todo!();
 /// let response = update_internal_dns_view(&api)

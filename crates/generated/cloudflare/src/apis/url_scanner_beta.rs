@@ -64,6 +64,7 @@ impl<'a> UrlscannerCreateScanBulkRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::url_scanner_beta };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: Vec<std::collections::BTreeMap<String, serde_json::Value>> = todo!();
 /// let response = urlscanner_create_scan_bulk(&api)
@@ -119,6 +120,7 @@ impl<'a> UrlscannerGetScanDomRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::url_scanner_beta };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = urlscanner_get_scan_dom(&api)
 ///     .with_account_id("account_id")
@@ -173,6 +175,7 @@ impl<'a> UrlscannerGetScanHarRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::url_scanner_beta };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = urlscanner_get_scan_har(&api)
 ///     .with_account_id("account_id")
@@ -227,6 +230,7 @@ impl<'a> UrlscannerGetResponseV2Request<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::url_scanner_beta };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = urlscanner_get_response_v2(&api)
 ///     .with_account_id("account_id")
@@ -281,6 +285,7 @@ impl<'a> UrlscannerGetScanV2Request<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::url_scanner_beta };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = urlscanner_get_scan_v2(&api)
 ///     .with_account_id("account_id")
@@ -336,6 +341,7 @@ impl<'a> UrlscannerCreateScanV2Request<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::url_scanner_beta };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = urlscanner_create_scan_v2(&api)
@@ -396,6 +402,7 @@ impl<'a> UrlscannerGetScanScreenshotRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::url_scanner_beta };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = urlscanner_get_scan_screenshot(&api)
 ///     .with_account_id("account_id")
@@ -455,6 +462,7 @@ impl<'a> UrlscannerSearchScansV2Request<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::url_scanner_beta };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = urlscanner_search_scans_v2(&api)
 ///     .with_account_id("account_id")

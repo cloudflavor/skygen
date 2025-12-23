@@ -19,6 +19,8 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct DlpNewDatasetColumn {
+    pub entry_id: String,
+    pub entry_name: String,
     pub header_name: String,
     pub num_cells: i64,
 }

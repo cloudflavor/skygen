@@ -58,6 +58,7 @@ impl<'a> GetYourZeroTrustRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zero_trust_organization };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_your_zero_trust(&api)
 ///     .with_account_id("account_id")
@@ -110,6 +111,7 @@ impl<'a> CreateYourZeroTrustRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zero_trust_organization };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = create_your_zero_trust(&api)
@@ -164,6 +166,7 @@ impl<'a> UpdateYourZeroTrustRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zero_trust_organization };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = update_your_zero_trust(&api)
@@ -213,6 +216,7 @@ impl<'a> GetYourZeroTrustGetRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zero_trust_organization };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_your_zero_trust_get(&api)
 ///     .with_account_id("account_id")
@@ -264,6 +268,7 @@ impl<'a> UpdateYourZeroTrustPutRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zero_trust_organization };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = update_your_zero_trust_put(&api)
@@ -323,6 +328,7 @@ impl<'a> RevokeAllAccessTokensRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zero_trust_organization };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = revoke_all_access_tokens(&api)

@@ -56,6 +56,7 @@ impl<'a> FetchWorkerSettingsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::worker_account_settings };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = fetch_worker_settings(&api)
 ///     .with_account_id("account_id")
@@ -111,6 +112,7 @@ impl<'a> CreateWorkerSettingsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::worker_account_settings };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::workers_account_settings::WorkersAccountSettings = todo!();
 /// let response = create_worker_settings(&api)

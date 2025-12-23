@@ -15,4 +15,19 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type DlpEntry = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct DlpEntry {
+    #[serde(flatten)]
+    pub dlp_custom_entry: crate::models::dlp_custom_entry::DlpCustomEntry,
+    #[serde(flatten)]
+    pub dlp_exact_data_entry: crate::models::dlp_exact_data_entry::DlpExactDataEntry,
+    #[serde(flatten)]
+    pub dlp_integration_entry: crate::models::dlp_integration_entry::DlpIntegrationEntry,
+    #[serde(flatten)]
+    pub dlp_predefined_entry: crate::models::dlp_predefined_entry::DlpPredefinedEntry,
+    #[serde(flatten)]
+    pub dlp_word_list_entry: crate::models::dlp_word_list_entry::DlpWordListEntry,
+    pub r#type: String,
+}

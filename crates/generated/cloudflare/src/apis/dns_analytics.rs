@@ -90,6 +90,7 @@ impl<'a> TableRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::dns_analytics };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = table(&api)
 ///     .with_zone_id("zone_id")
@@ -186,6 +187,7 @@ impl<'a> GetRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::dns_analytics };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get(&api)
 ///     .with_zone_id("zone_id")

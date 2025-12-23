@@ -15,4 +15,18 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type TlsCertificatesAndHostnamesSslpost = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct TlsCertificatesAndHostnamesSslpost {
+    pub bundle_method: Option<String>,
+    pub certificate_authority: Option<crate::models::tls_certificates_and_hostnames_certificate_authority::TlsCertificatesAndHostnamesCertificateAuthority>,
+    pub cloudflare_branding: Option<bool>,
+    pub custom_cert_bundle: Option<crate::models::tls_certificates_and_hostnames_custom_cert_bundle::TlsCertificatesAndHostnamesCustomCertBundle>,
+    pub custom_certificate: Option<String>,
+    pub custom_key: Option<String>,
+    pub method: Option<String>,
+    pub r#type: Option<String>,
+    pub settings: Option<crate::models::tls_certificates_and_hostnames_sslsettings::TlsCertificatesAndHostnamesSslsettings>,
+    pub wildcard: Option<bool>,
+}

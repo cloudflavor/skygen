@@ -55,6 +55,7 @@ impl<'a> ListHyperdriveRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::hyperdrive };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = list_hyperdrive(&api)
 ///     .with_account_id("account_id")
@@ -110,6 +111,7 @@ impl<'a> CreateHyperdriveRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::hyperdrive };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::hyperdrive_hyperdrive_config::HyperdriveHyperdriveConfig = todo!();
 /// let response = create_hyperdrive(&api)
@@ -165,6 +167,7 @@ impl<'a> GetRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::hyperdrive };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get(&api)
 ///     .with_account_id("account_id")
@@ -227,6 +230,7 @@ impl<'a> UpdateHyperdriveRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::hyperdrive };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::hyperdrive_hyperdrive_config::HyperdriveHyperdriveConfig = todo!();
 /// let response = update_hyperdrive(&api)
@@ -283,6 +287,7 @@ impl<'a> DeleteRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::hyperdrive };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = delete(&api)
 ///     .with_account_id("account_id")
@@ -345,6 +350,7 @@ impl<'a> PatchRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::hyperdrive };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::hyperdrive_hyperdrive_config_patch::HyperdriveHyperdriveConfigPatch = todo!();
 /// let response = patch(&api)

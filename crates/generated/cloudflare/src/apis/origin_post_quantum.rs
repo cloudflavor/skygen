@@ -56,6 +56,7 @@ impl<'a> ZoneCacheSettingsGetRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::origin_post_quantum };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = zone_cache_settings_get(&api)
 ///     .with_zone_id("zone_id")
@@ -111,6 +112,7 @@ impl<'a> ZoneCacheSettingsChangeRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::origin_post_quantum };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = zone_cache_settings_change(&api)

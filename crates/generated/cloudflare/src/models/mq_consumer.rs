@@ -15,4 +15,15 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type MqConsumer = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct MqConsumer {
+    pub consumer_id: Option<crate::models::mq_identifier::MqIdentifier>,
+    pub created_on: Option<String>,
+    pub queue_id: Option<crate::models::mq_identifier::MqIdentifier>,
+    pub r#type: Option<String>,
+    pub script: Option<crate::models::mq_script_name::MqScriptName>,
+    pub script_name: Option<crate::models::mq_script_name::MqScriptName>,
+    pub settings: Option<std::collections::BTreeMap<String, serde_json::Value>>,
+}

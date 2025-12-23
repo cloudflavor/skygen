@@ -15,4 +15,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type ApiShieldOperationFeatures = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct ApiShieldOperationFeatures {
+    pub api_routing: Option<std::collections::BTreeMap<String, serde_json::Value>>,
+    pub confidence_intervals: Option<std::collections::BTreeMap<String, serde_json::Value>>,
+    pub parameter_schemas: std::collections::BTreeMap<String, serde_json::Value>,
+    pub schema_info: Option<std::collections::BTreeMap<String, serde_json::Value>>,
+    pub thresholds: Option<std::collections::BTreeMap<String, serde_json::Value>>,
+}

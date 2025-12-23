@@ -85,6 +85,7 @@ impl<'a> ListFirewallRulesRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::firewall_rules };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = list_firewall_rules(&api)
 ///     .with_zone_id("zone_id")
@@ -142,6 +143,7 @@ impl<'a> CreateFirewallRulesRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::firewall_rules };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = create_firewall_rules(&api)
@@ -192,6 +194,7 @@ impl<'a> UpdateFirewallRulesRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::firewall_rules };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = update_firewall_rules(&api)
@@ -245,6 +248,7 @@ impl<'a> DeleteFirewallRulesRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::firewall_rules };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = delete_firewall_rules(&api)
@@ -295,6 +299,7 @@ impl<'a> UpdatePriorityFirewallRulesRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::firewall_rules };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = update_priority_firewall_rules(&api)
@@ -352,6 +357,7 @@ impl<'a> GetFirewallRuleRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::firewall_rules };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_firewall_rule(&api)
 ///     .with_zone_id("zone_id")
@@ -412,6 +418,7 @@ impl<'a> UpdateFirewallRuleRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::firewall_rules };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = update_firewall_rule(&api)
@@ -476,6 +483,7 @@ impl<'a> DeleteFirewallRuleRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::firewall_rules };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = delete_firewall_rule(&api)
@@ -540,6 +548,7 @@ impl<'a> UpdatePriorityFirewallRuleRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::firewall_rules };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = update_priority_firewall_rule(&api)

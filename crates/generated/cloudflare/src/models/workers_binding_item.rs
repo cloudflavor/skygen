@@ -15,4 +15,35 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type WorkersBindingItem = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct WorkersBindingItem {
+    pub algorithm: std::collections::BTreeMap<String, serde_json::Value>,
+    pub bucket_name: String,
+    pub certificate_id: String,
+    pub class_name: Option<String>,
+    pub dataset: String,
+    pub environment: Option<String>,
+    pub format: String,
+    pub id: String,
+    pub index_name: String,
+    pub json: String,
+    pub key_base64: Option<String>,
+    pub key_jwk: Option<std::collections::BTreeMap<String, serde_json::Value>>,
+    pub name: crate::models::workers_binding_name::WorkersBindingName,
+    pub namespace: String,
+    pub namespace_id:
+        Option<crate::models::workers_namespace_identifier::WorkersNamespaceIdentifier>,
+    pub outbound: Option<std::collections::BTreeMap<String, serde_json::Value>>,
+    pub pipeline: String,
+    pub queue_name: String,
+    pub r#type: String,
+    pub script_name: Option<String>,
+    pub secret_name: String,
+    pub service: String,
+    pub store_id: String,
+    pub text: String,
+    pub usages: Vec<String>,
+    pub workflow_name: String,
+}

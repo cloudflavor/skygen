@@ -95,6 +95,7 @@ impl<'a> ZonesGetRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zone };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = zones_get(&api)
 ///     .with_name("name")
@@ -143,6 +144,7 @@ impl<'a> ZonesPostRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zone };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = zones_post(&api)
@@ -185,6 +187,7 @@ impl<'a> ZonesGetGetRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zone };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = zones_get_get(&api)
 ///     .with_zone_id("zone_id")
@@ -228,6 +231,7 @@ impl<'a> ZonesDeleteRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zone };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = zones_delete(&api)
 ///     .with_zone_id("zone_id")
@@ -279,6 +283,7 @@ impl<'a> ZonesPatchRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zone };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = zones_patch(&api)
@@ -326,6 +331,7 @@ impl<'a> ZonesActivationCheckRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zone };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = zones_activation_check(&api)
 ///     .with_zone_id("zone_id")
@@ -416,6 +422,7 @@ impl<'a> PurgeRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zone };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::cache_purge_flex_purge_by_tags::CachePurgeFlexPurgeByTags = todo!();
 /// let response = purge(&api)

@@ -90,6 +90,7 @@ impl<'a> GetQualityIndexSummaryRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::radar_quality };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_quality_index_summary(&api)
 ///     .with_name("name")
@@ -191,6 +192,7 @@ impl<'a> GetQualityIndexTimeseriesRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::radar_quality };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_quality_index_timeseries(&api)
 ///     .with_agg_interval("aggInterval")
@@ -278,6 +280,7 @@ impl<'a> GetQualitySpeedHistogramRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::radar_quality };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_quality_speed_histogram(&api)
 ///     .with_name("name")
@@ -352,6 +355,7 @@ impl<'a> GetQualitySpeedSummaryRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::radar_quality };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_quality_speed_summary(&api)
 ///     .with_name("name")
@@ -439,6 +443,7 @@ impl<'a> GetQualitySpeedTopRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::radar_quality };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_quality_speed_top(&api)
 ///     .with_limit("limit")
@@ -529,6 +534,7 @@ impl<'a> GetQualitySpeedTopGetRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::radar_quality };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_quality_speed_top_get(&api)
 ///     .with_limit("limit")

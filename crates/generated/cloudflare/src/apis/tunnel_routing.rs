@@ -110,6 +110,7 @@ impl<'a> RouteListTunnelRoutesRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::tunnel_routing };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = route_list_tunnel_routes(&api)
 ///     .with_account_id("account_id")
@@ -173,6 +174,7 @@ impl<'a> RouteCreateTunnelRouteRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::tunnel_routing };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = route_create_tunnel_route(&api)
@@ -240,6 +242,7 @@ impl<'a> RouteGetTunnelRouteRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::tunnel_routing };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = route_get_tunnel_route(&api)
 ///     .with_account_id("account_id")
@@ -304,6 +307,7 @@ impl<'a> RouteCreateTunnelRoutePostRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::tunnel_routing };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = route_create_tunnel_route_post(&api)
@@ -375,6 +379,7 @@ impl<'a> RouteDeleteTunnelRouteRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::tunnel_routing };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = route_delete_tunnel_route(&api)
 ///     .with_account_id("account_id")
@@ -432,6 +437,7 @@ impl<'a> RouteUpdateTunnelRouteRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::tunnel_routing };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = route_update_tunnel_route(&api)
 ///     .with_account_id("account_id")
@@ -486,6 +492,7 @@ impl<'a> RouteGetTunnelRouteGetRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::tunnel_routing };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = route_get_tunnel_route_get(&api)
 ///     .with_account_id("account_id")
@@ -540,6 +547,7 @@ impl<'a> RouteDeleteTunnelRouteDeleteRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::tunnel_routing };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = route_delete_tunnel_route_delete(&api)
 ///     .with_account_id("account_id")
@@ -604,6 +612,7 @@ impl<'a> RouteUpdateTunnelRoutePatchRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::tunnel_routing };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = route_update_tunnel_route_patch(&api)

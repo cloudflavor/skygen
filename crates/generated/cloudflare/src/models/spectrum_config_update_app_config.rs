@@ -15,4 +15,24 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type SpectrumConfigUpdateAppConfig = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct SpectrumConfigUpdateAppConfig {
+    pub argo_smart_routing:
+        Option<crate::models::spectrum_config_argo_smart_routing::SpectrumConfigArgoSmartRouting>,
+    pub dns: crate::models::spectrum_config_dns::SpectrumConfigDns,
+    pub edge_ips: Option<crate::models::spectrum_config_edge_ips::SpectrumConfigEdgeIps>,
+    pub ip_firewall: crate::models::spectrum_config_ip_firewall::SpectrumConfigIpFirewall,
+    pub origin_direct:
+        Option<crate::models::spectrum_config_origin_direct::SpectrumConfigOriginDirect>,
+    pub origin_dns: Option<crate::models::spectrum_config_origin_dns::SpectrumConfigOriginDns>,
+    pub origin_port: Option<crate::models::spectrum_config_origin_port::SpectrumConfigOriginPort>,
+    pub protocol: crate::models::spectrum_config_protocol::SpectrumConfigProtocol,
+    pub proxy_protocol: crate::models::spectrum_config_proxy_protocol::SpectrumConfigProxyProtocol,
+    #[serde(flatten)]
+    pub spectrum_config_base_app_config:
+        crate::models::spectrum_config_base_app_config::SpectrumConfigBaseAppConfig,
+    pub tls: crate::models::spectrum_config_tls::SpectrumConfigTls,
+    pub traffic_type: crate::models::spectrum_config_traffic_type::SpectrumConfigTrafficType,
+}

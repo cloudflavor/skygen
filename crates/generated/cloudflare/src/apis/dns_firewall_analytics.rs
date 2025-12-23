@@ -99,6 +99,7 @@ impl<'a> TableRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::dns_firewall_analytics };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = table(&api)
 ///     .with_account_id("account_id")
@@ -202,6 +203,7 @@ impl<'a> GetRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::dns_firewall_analytics };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get(&api)
 ///     .with_account_id("account_id")

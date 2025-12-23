@@ -55,6 +55,7 @@ impl<'a> ListDevicesRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::physical_devices };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = list_devices(&api)
 ///     .with_account_id("account_id")
@@ -108,6 +109,7 @@ impl<'a> DeviceRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::physical_devices };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = device(&api)
 ///     .with_account_id("account_id")
@@ -162,6 +164,7 @@ impl<'a> DeviceDeleteRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::physical_devices };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = device_delete(&api)
 ///     .with_account_id("account_id")
@@ -216,6 +219,7 @@ impl<'a> RevokeDeviceRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::physical_devices };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = revoke_device(&api)
 ///     .with_account_id("account_id")
@@ -269,6 +273,7 @@ impl<'a> RegistrationsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::physical_devices };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = registrations(&api)
 ///     .with_account_id("account_id")

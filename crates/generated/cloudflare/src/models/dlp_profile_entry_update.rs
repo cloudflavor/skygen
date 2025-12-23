@@ -15,4 +15,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type DlpProfileEntryUpdate = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct DlpProfileEntryUpdate {
+    #[serde(flatten)]
+    pub dlp_new_custom_entry: crate::models::dlp_new_custom_entry::DlpNewCustomEntry,
+    pub enabled: bool,
+    pub entry_id: String,
+    pub name: String,
+    pub pattern: crate::models::dlp_pattern::DlpPattern,
+}

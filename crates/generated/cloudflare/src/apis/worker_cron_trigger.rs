@@ -62,6 +62,7 @@ impl<'a> GetCronTriggersRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::worker_cron_trigger };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_cron_triggers(&api)
 ///     .with_account_id("account_id")
@@ -124,6 +125,7 @@ impl<'a> UpdateCronTriggersRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::worker_cron_trigger };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: Vec<crate::models::workers_schedule::WorkersSchedule> = todo!();
 /// let response = update_cron_triggers(&api)

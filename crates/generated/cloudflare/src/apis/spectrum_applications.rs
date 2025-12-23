@@ -74,6 +74,7 @@ impl<'a> ListSpectrumApplicationsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::spectrum_applications };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = list_spectrum_applications(&api)
 ///     .with_zone_id("zone_id")
@@ -129,6 +130,7 @@ impl<'a> CreateSpectrumApplicationUsingRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::spectrum_applications };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::spectrum_config_update_app_config::SpectrumConfigUpdateAppConfig = todo!();
 /// let response = create_spectrum_application_using(&api)
@@ -183,6 +185,7 @@ impl<'a> GetSpectrumApplicationConfigurationRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::spectrum_applications };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_spectrum_application_configuration(&api)
 ///     .with_zone_id("zone_id")
@@ -244,6 +247,7 @@ impl<'a> UpdateSpectrumApplicationConfigurationRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::spectrum_applications };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::spectrum_config_update_app_config::SpectrumConfigUpdateAppConfig = todo!();
 /// let response = update_spectrum_application_configuration(&api)
@@ -302,6 +306,7 @@ impl<'a> DeleteSpectrumApplicationRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::spectrum_applications };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = delete_spectrum_application(&api)
 ///     .with_zone_id("zone_id")

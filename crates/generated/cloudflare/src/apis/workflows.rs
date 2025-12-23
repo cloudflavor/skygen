@@ -64,6 +64,7 @@ impl<'a> WorListWorkflowsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workflows };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = wor_list_workflows(&api)
 ///     .with_account_id("account_id")
@@ -118,6 +119,7 @@ impl<'a> WorGetWorkflowDetailsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workflows };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = wor_get_workflow_details(&api)
 ///     .with_account_id("account_id")
@@ -178,6 +180,7 @@ impl<'a> WorCreateModifyWorkflowRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workflows };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = wor_create_modify_workflow(&api)
@@ -234,6 +237,7 @@ impl<'a> WorDeleteWorkflowRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workflows };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = wor_delete_workflow(&api)
 ///     .with_account_id("account_id")
@@ -311,6 +315,7 @@ impl<'a> WorListWorkflowInstancesRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workflows };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = wor_list_workflow_instances(&api)
 ///     .with_account_id("account_id")
@@ -375,6 +380,7 @@ impl<'a> WorCreateNewWorkflowRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workflows };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = wor_create_new_workflow(&api)
@@ -436,6 +442,7 @@ impl<'a> WorBatchCreateWorkflowRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workflows };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: Vec<std::collections::BTreeMap<String, serde_json::Value>> = todo!();
 /// let response = wor_batch_create_workflow(&api)
@@ -494,6 +501,7 @@ impl<'a> WorBatchTerminateWorkflowRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workflows };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: Vec<serde_json::Value> = todo!();
 /// let response = wor_batch_terminate_workflow(&api)
@@ -548,6 +556,7 @@ impl<'a> WorStatusTerminateWorkflowRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workflows };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = wor_status_terminate_workflow(&api)
 ///     .with_account_id("account_id")
@@ -606,6 +615,7 @@ impl<'a> WorDescribeWorkflowInstanceRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workflows };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = wor_describe_workflow_instance(&api)
 ///     .with_account_id("account_id")
@@ -674,6 +684,7 @@ impl<'a> WorSendEventWorkflowRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workflows };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = wor_send_event_workflow(&api)
@@ -743,6 +754,7 @@ impl<'a> WorChangeStatusWorkflowRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workflows };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = wor_change_status_workflow(&api)
@@ -808,6 +820,7 @@ impl<'a> WorListWorkflowVersionsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workflows };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = wor_list_workflow_versions(&api)
 ///     .with_account_id("account_id")
@@ -868,6 +881,7 @@ impl<'a> WorDescribeWorkflowVersionsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workflows };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = wor_describe_workflow_versions(&api)
 ///     .with_account_id("account_id")

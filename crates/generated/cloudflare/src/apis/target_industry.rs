@@ -53,6 +53,7 @@ impl<'a> ListRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::target_industry };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = list(&api)
 ///     .with_account_id("account_id")

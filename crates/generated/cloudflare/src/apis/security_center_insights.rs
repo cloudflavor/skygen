@@ -56,6 +56,7 @@ impl<'a> IssueTypesRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::security_center_insights };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = issue_types(&api)
 ///     .with_account_id("account_id")
@@ -166,6 +167,7 @@ impl<'a> IssuesRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::security_center_insights };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = issues(&api)
 ///     .with_account_id("account_id")
@@ -279,6 +281,7 @@ impl<'a> IssueCountsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::security_center_insights };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = issue_counts(&api)
 ///     .with_account_id("account_id")
@@ -390,6 +393,7 @@ impl<'a> IssueCountsGetRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::security_center_insights };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = issue_counts_get(&api)
 ///     .with_account_id("account_id")
@@ -501,6 +505,7 @@ impl<'a> IssueCountsGet3Request<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::security_center_insights };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = issue_counts_get_3(&api)
 ///     .with_account_id("account_id")
@@ -571,6 +576,7 @@ impl<'a> ArchiveSecurityCenterInsightRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::security_center_insights };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = archive_security_center_insight(&api)
@@ -684,6 +690,7 @@ impl<'a> GetRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::security_center_insights };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get(&api)
 ///     .with_account_id("account_id")
@@ -797,6 +804,7 @@ impl<'a> InsightCountsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::security_center_insights };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = insight_counts(&api)
 ///     .with_account_id("account_id")
@@ -908,6 +916,7 @@ impl<'a> InsightCountsGetRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::security_center_insights };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = insight_counts_get(&api)
 ///     .with_account_id("account_id")
@@ -1019,6 +1028,7 @@ impl<'a> InsightCountsGet3Request<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::security_center_insights };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = insight_counts_get_3(&api)
 ///     .with_account_id("account_id")
@@ -1089,6 +1099,7 @@ impl<'a> ArchiveSecurityCenterInsightPutRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::security_center_insights };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = archive_security_center_insight_put(&api)
@@ -1201,6 +1212,7 @@ impl<'a> ZoneSecurityCenterInsightsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::security_center_insights };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = zone_security_center_insights(&api)
 ///     .with_zone_id("zone_id")
@@ -1314,6 +1326,7 @@ impl<'a> ZoneSecurityCenterInsightRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::security_center_insights };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = zone_security_center_insight(&api)
 ///     .with_zone_id("zone_id")
@@ -1425,6 +1438,7 @@ impl<'a> ZoneSecurityCenterInsightGetRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::security_center_insights };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = zone_security_center_insight_get(&api)
 ///     .with_zone_id("zone_id")
@@ -1538,6 +1552,7 @@ impl<'a> ZoneSecurityCenterInsightGet3Request<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::security_center_insights };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = zone_security_center_insight_get_3(&api)
 ///     .with_zone_id("zone_id")
@@ -1610,6 +1625,7 @@ impl<'a> ArchiveSecurityCenterInsightPut3Request<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::security_center_insights };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = archive_security_center_insight_put_3(&api)

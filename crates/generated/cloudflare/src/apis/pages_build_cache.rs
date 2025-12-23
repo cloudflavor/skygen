@@ -62,6 +62,7 @@ impl<'a> PurgeBuildCacheRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::pages_build_cache };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = purge_build_cache(&api)
 ///     .with_account_id("account_id")

@@ -64,6 +64,7 @@ impl<'a> EnableDisableHostnameClientRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::per_hostname_authenticated_origin_pull };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = enable_disable_hostname_client(&api)
@@ -111,6 +112,7 @@ impl<'a> ListCertificatesRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::per_hostname_authenticated_origin_pull };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = list_certificates(&api)
 ///     .with_zone_id("zone_id")
@@ -166,6 +168,7 @@ impl<'a> UploadHostnameClientCertificateRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::per_hostname_authenticated_origin_pull };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = upload_hostname_client_certificate(&api)
@@ -223,6 +226,7 @@ impl<'a> GetHostnameClientCertificateRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::per_hostname_authenticated_origin_pull };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_hostname_client_certificate(&api)
 ///     .with_zone_id("zone_id")
@@ -275,6 +279,7 @@ impl<'a> DeleteHostnameClientCertificateRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::per_hostname_authenticated_origin_pull };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = delete_hostname_client_certificate(&api)
 ///     .with_zone_id("zone_id")
@@ -329,6 +334,7 @@ impl<'a> GetHostnameStatusClientRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::per_hostname_authenticated_origin_pull };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_hostname_status_client(&api)
 ///     .with_zone_id("zone_id")

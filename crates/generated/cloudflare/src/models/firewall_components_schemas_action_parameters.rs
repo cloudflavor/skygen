@@ -15,4 +15,9 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type FirewallComponentsSchemasActionParameters = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct FirewallComponentsSchemasActionParameters {
+    pub from_value: Option<std::collections::BTreeMap<String, serde_json::Value>>,
+}

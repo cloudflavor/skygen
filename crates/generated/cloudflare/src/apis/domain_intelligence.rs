@@ -59,6 +59,7 @@ impl<'a> GetDomainDetailsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::domain_intelligence };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_domain_details(&api)
 ///     .with_account_id("account_id")
@@ -109,6 +110,7 @@ impl<'a> GetMultipleDomainDetailsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::domain_intelligence };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_multiple_domain_details(&api)
 ///     .with_account_id("account_id")

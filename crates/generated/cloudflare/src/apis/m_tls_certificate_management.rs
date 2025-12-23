@@ -63,6 +63,7 @@ impl<'a> ListMTlsCertificatesRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::m_tls_certificate_management };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = list_m_tls_certificates(&api)
 ///     .with_account_id("account_id")
@@ -115,6 +116,7 @@ impl<'a> UploadMTlsCertificateRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::m_tls_certificate_management };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = upload_m_tls_certificate(&api)
@@ -177,6 +179,7 @@ impl<'a> GetMTlsCertificateRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::m_tls_certificate_management };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_m_tls_certificate(&api)
 ///     .with_account_id("account_id")
@@ -238,6 +241,7 @@ impl<'a> DeleteMTlsCertificateRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::m_tls_certificate_management };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = delete_m_tls_certificate(&api)
 ///     .with_account_id("account_id")
@@ -292,6 +296,7 @@ impl<'a> ListMTlsCertificateRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::m_tls_certificate_management };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = list_m_tls_certificate(&api)
 ///     .with_account_id("account_id")

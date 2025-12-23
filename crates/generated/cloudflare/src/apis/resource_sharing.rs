@@ -57,6 +57,7 @@ impl<'a> SharesListRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::resource_sharing };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = shares_list(&api)
 ///     .with_account_id("account_id")
@@ -106,6 +107,7 @@ impl<'a> ShareCreateRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::resource_sharing };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::resource_sharing_create_share_request::ResourceSharingCreateShareRequest = todo!();
 /// let response = share_create(&api)
@@ -158,6 +160,7 @@ impl<'a> SharesGetRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::resource_sharing };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = shares_get(&api)
 ///     .with_account_id("account_id")
@@ -217,6 +220,7 @@ impl<'a> ShareUpdateRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::resource_sharing };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::resource_sharing_update_share_request::ResourceSharingUpdateShareRequest = todo!();
 /// let response = share_update(&api)
@@ -273,6 +277,7 @@ impl<'a> ShareDeleteRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::resource_sharing };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = share_delete(&api)
 ///     .with_account_id("account_id")
@@ -327,6 +332,7 @@ impl<'a> ShareRecipientsListRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::resource_sharing };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = share_recipients_list(&api)
 ///     .with_account_id("account_id")
@@ -387,6 +393,7 @@ impl<'a> ShareRecipientCreateRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::resource_sharing };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::resource_sharing_create_share_recipient_request::ResourceSharingCreateShareRecipientRequest = todo!();
 /// let response = share_recipient_create(&api)
@@ -449,6 +456,7 @@ impl<'a> ShareRecipientsGetRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::resource_sharing };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = share_recipients_get(&api)
 ///     .with_account_id("account_id")
@@ -510,6 +518,7 @@ impl<'a> ShareRecipientDeleteRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::resource_sharing };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = share_recipient_delete(&api)
 ///     .with_account_id("account_id")
@@ -565,6 +574,7 @@ impl<'a> ShareResourcesListRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::resource_sharing };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = share_resources_list(&api)
 ///     .with_account_id("account_id")
@@ -625,6 +635,7 @@ impl<'a> ShareResourceCreateRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::resource_sharing };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::resource_sharing_create_share_resource_request::ResourceSharingCreateShareResourceRequest = todo!();
 /// let response = share_resource_create(&api)
@@ -687,6 +698,7 @@ impl<'a> ShareResourcesGetRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::resource_sharing };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = share_resources_get(&api)
 ///     .with_account_id("account_id")
@@ -756,6 +768,7 @@ impl<'a> ShareResourceUpdateRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::resource_sharing };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::resource_sharing_update_share_resource_request::ResourceSharingUpdateShareResourceRequest = todo!();
 /// let response = share_resource_update(&api)
@@ -819,6 +832,7 @@ impl<'a> ShareResourceDeleteRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::resource_sharing };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = share_resource_delete(&api)
 ///     .with_account_id("account_id")
@@ -865,6 +879,7 @@ impl<'a> OrganizationSharesListRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::resource_sharing };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = organization_shares_list(&api)
 ///     .with_organization_id("organization_id")

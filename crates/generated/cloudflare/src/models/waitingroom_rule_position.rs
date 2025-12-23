@@ -15,4 +15,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type WaitingroomRulePosition = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct WaitingroomRulePosition {
+    pub after: Option<String>,
+    pub before: Option<String>,
+    pub index: Option<i64>,
+}

@@ -73,6 +73,7 @@ impl<'a> AigConfigListEvaluatorsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::ai_gateway_evaluations };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = aig_config_list_evaluators(&api)
 ///     .with_account_id("account_id")
@@ -153,6 +154,7 @@ impl<'a> AigConfigListEvaluationsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::ai_gateway_evaluations };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = aig_config_list_evaluations(&api)
 ///     .with_account_id("account_id")
@@ -217,6 +219,7 @@ impl<'a> AigConfigCreateEvaluationsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::ai_gateway_evaluations };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = aig_config_create_evaluations(&api)
@@ -277,6 +280,7 @@ impl<'a> AigConfigFetchEvaluationsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::ai_gateway_evaluations };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = aig_config_fetch_evaluations(&api)
 ///     .with_account_id("account_id")
@@ -336,6 +340,7 @@ impl<'a> AigConfigDeleteEvaluationsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::ai_gateway_evaluations };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = aig_config_delete_evaluations(&api)
 ///     .with_account_id("account_id")

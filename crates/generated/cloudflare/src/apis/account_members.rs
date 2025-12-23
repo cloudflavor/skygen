@@ -79,6 +79,7 @@ impl<'a> ListMembersRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::account_members };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = list_members(&api)
 ///     .with_account_id("account_id")
@@ -135,6 +136,7 @@ impl<'a> AddMemberRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::account_members };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::iam_create_member_with_roles::IamCreateMemberWithRoles = todo!();
 /// let response = add_member(&api)
@@ -190,6 +192,7 @@ impl<'a> MemberDetailsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::account_members };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = member_details(&api)
 ///     .with_account_id("account_id")
@@ -252,6 +255,7 @@ impl<'a> UpdateMemberRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::account_members };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::iam_update_member_with_roles::IamUpdateMemberWithRoles = todo!();
 /// let response = update_member(&api)
@@ -308,6 +312,7 @@ impl<'a> RemoveMemberRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::account_members };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = remove_member(&api)
 ///     .with_account_id("account_id")

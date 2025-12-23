@@ -71,6 +71,7 @@ impl<'a> GetDeploymentsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::pages_deployment };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_deployments(&api)
 ///     .with_account_id("account_id")
@@ -126,6 +127,7 @@ impl<'a> CreateDeploymentRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::pages_deployment };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = create_deployment(&api)
 ///     .with_account_id("account_id")
@@ -186,6 +188,7 @@ impl<'a> GetDeploymentInfoRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::pages_deployment };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_deployment_info(&api)
 ///     .with_account_id("account_id")
@@ -247,6 +250,7 @@ impl<'a> DeleteDeploymentRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::pages_deployment };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = delete_deployment(&api)
 ///     .with_account_id("account_id")
@@ -304,6 +308,7 @@ impl<'a> GetDeploymentLogsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::pages_deployment };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_deployment_logs(&api)
 ///     .with_account_id("account_id")
@@ -365,6 +370,7 @@ impl<'a> RetryDeploymentRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::pages_deployment };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = retry_deployment(&api)
 ///     .with_account_id("account_id")
@@ -422,6 +428,7 @@ impl<'a> RollbackDeploymentRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::pages_deployment };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = rollback_deployment(&api)
 ///     .with_account_id("account_id")

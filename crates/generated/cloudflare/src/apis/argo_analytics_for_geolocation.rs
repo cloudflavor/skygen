@@ -51,6 +51,7 @@ impl<'a> AtDifferentPoPsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::argo_analytics_for_geolocation };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = at_different_po_ps(&api)
 ///     .with_zone_id("zone_id")

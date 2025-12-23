@@ -95,6 +95,7 @@ impl<'a> GetEmailRoutingSummaryRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::radar_email_routing };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_email_routing_summary(&api)
 ///     .with_name("name")
@@ -191,6 +192,7 @@ impl<'a> GetEmailRoutingSummaryGetRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::radar_email_routing };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_email_routing_summary_get(&api)
 ///     .with_name("name")
@@ -287,6 +289,7 @@ impl<'a> GetEmailRoutingSummaryGet3Request<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::radar_email_routing };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_email_routing_summary_get_3(&api)
 ///     .with_name("name")
@@ -384,6 +387,7 @@ impl<'a> GetEmailRoutingSummaryGet4Request<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::radar_email_routing };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_email_routing_summary_get_4(&api)
 ///     .with_name("name")
@@ -481,6 +485,7 @@ impl<'a> GetEmailRoutingSummaryGet5Request<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::radar_email_routing };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_email_routing_summary_get_5(&api)
 ///     .with_name("name")
@@ -577,6 +582,7 @@ impl<'a> GetEmailRoutingSummaryGet6Request<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::radar_email_routing };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_email_routing_summary_get_6(&api)
 ///     .with_name("name")
@@ -682,6 +688,7 @@ impl<'a> GetEmailRoutingTimeseriesRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::radar_email_routing };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_email_routing_timeseries(&api)
 ///     .with_agg_interval("aggInterval")
@@ -788,6 +795,7 @@ impl<'a> GetEmailRoutingTimeseriesGetRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::radar_email_routing };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_email_routing_timeseries_get(&api)
 ///     .with_agg_interval("aggInterval")
@@ -896,6 +904,7 @@ impl<'a> GetEmailRoutingTimeseriesGet3Request<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::radar_email_routing };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_email_routing_timeseries_get_3(&api)
 ///     .with_agg_interval("aggInterval")
@@ -1004,6 +1013,7 @@ impl<'a> GetEmailRoutingTimeseriesGet4Request<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::radar_email_routing };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_email_routing_timeseries_get_4(&api)
 ///     .with_agg_interval("aggInterval")
@@ -1112,6 +1122,7 @@ impl<'a> GetEmailRoutingTimeseriesGet5Request<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::radar_email_routing };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_email_routing_timeseries_get_5(&api)
 ///     .with_agg_interval("aggInterval")
@@ -1220,6 +1231,7 @@ impl<'a> GetEmailRoutingTimeseriesGet6Request<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::radar_email_routing };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_email_routing_timeseries_get_6(&api)
 ///     .with_agg_interval("aggInterval")

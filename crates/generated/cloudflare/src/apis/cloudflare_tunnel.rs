@@ -112,6 +112,7 @@ impl<'a> ListCloudflareTunnelsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::cloudflare_tunnel };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = list_cloudflare_tunnels(&api)
 ///     .with_account_id("account_id")
@@ -174,6 +175,7 @@ impl<'a> CreateCloudflareTunnelRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::cloudflare_tunnel };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = create_cloudflare_tunnel(&api)
@@ -229,6 +231,7 @@ impl<'a> GetCloudflareTunnelRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::cloudflare_tunnel };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_cloudflare_tunnel(&api)
 ///     .with_account_id("account_id")
@@ -291,6 +294,7 @@ impl<'a> DeleteCloudflareTunnelRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::cloudflare_tunnel };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = delete_cloudflare_tunnel(&api)
@@ -355,6 +359,7 @@ impl<'a> UpdateCloudflareTunnelRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::cloudflare_tunnel };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = update_cloudflare_tunnel(&api)
@@ -411,6 +416,7 @@ impl<'a> ListCloudflareTunnelConnectionsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::cloudflare_tunnel };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = list_cloudflare_tunnel_connections(&api)
 ///     .with_account_id("account_id")
@@ -480,6 +486,7 @@ impl<'a> CleanUpCloudflareTunnelRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::cloudflare_tunnel };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = clean_up_cloudflare_tunnel(&api)
@@ -543,6 +550,7 @@ impl<'a> GetCloudflareTunnelConnectorRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::cloudflare_tunnel };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_cloudflare_tunnel_connector(&api)
 ///     .with_account_id("account_id")
@@ -606,6 +614,7 @@ impl<'a> GetCloudflareTunnelManagementRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::cloudflare_tunnel };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = get_cloudflare_tunnel_management(&api)
@@ -664,6 +673,7 @@ impl<'a> GetCloudflareTunnelTokenRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::cloudflare_tunnel };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_cloudflare_tunnel_token(&api)
 ///     .with_account_id("account_id")
@@ -768,6 +778,7 @@ impl<'a> ListAllTunnelsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::cloudflare_tunnel };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = list_all_tunnels(&api)
 ///     .with_account_id("account_id")
@@ -879,6 +890,7 @@ impl<'a> ListWarpConnectorTunnelsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::cloudflare_tunnel };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = list_warp_connector_tunnels(&api)
 ///     .with_account_id("account_id")
@@ -942,6 +954,7 @@ impl<'a> CreateWarpConnectorTunnelRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::cloudflare_tunnel };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = create_warp_connector_tunnel(&api)
@@ -997,6 +1010,7 @@ impl<'a> GetWarpConnectorTunnelRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::cloudflare_tunnel };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_warp_connector_tunnel(&api)
 ///     .with_account_id("account_id")
@@ -1059,6 +1073,7 @@ impl<'a> DeleteWarpConnectorTunnelRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::cloudflare_tunnel };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = delete_warp_connector_tunnel(&api)
@@ -1123,6 +1138,7 @@ impl<'a> UpdateWarpConnectorTunnelRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::cloudflare_tunnel };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = update_warp_connector_tunnel(&api)
@@ -1179,6 +1195,7 @@ impl<'a> GetWarpConnectorTunnelGetRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::cloudflare_tunnel };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_warp_connector_tunnel_get(&api)
 ///     .with_account_id("account_id")

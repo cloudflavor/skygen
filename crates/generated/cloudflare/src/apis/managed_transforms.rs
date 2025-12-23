@@ -15,13 +15,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-use crate::models::rulesets_response::RulesetsResponse;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct ListManagedTransformsRequest<'a> {
-    builder: ApiRequestBuilder<'a, RulesetsResponse>,
+    builder: ApiRequestBuilder<'a, serde_json::Value>,
 }
 
 impl<'a> ListManagedTransformsRequest<'a> {
@@ -35,7 +34,7 @@ impl<'a> ListManagedTransformsRequest<'a> {
         self.builder = self.builder.path_param("zone_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<RulesetsResponse> {
+    pub async fn send(self) -> ApiResult<serde_json::Value> {
         self.builder.send().await
     }
 }
@@ -52,6 +51,7 @@ impl<'a> ListManagedTransformsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::managed_transforms };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = list_managed_transforms(&api)
 ///     .with_zone_id("zone_id")
@@ -96,6 +96,7 @@ impl<'a> DeleteRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::managed_transforms };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = delete(&api)
 ///     .with_zone_id("zone_id")
@@ -108,7 +109,7 @@ pub fn delete(api: &ApiClient) -> DeleteRequest<'_> {
 
 #[derive(Debug)]
 pub struct UpdateManagedTransformsRequest<'a> {
-    builder: ApiRequestBuilder<'a, RulesetsResponse>,
+    builder: ApiRequestBuilder<'a, serde_json::Value>,
 }
 
 impl<'a> UpdateManagedTransformsRequest<'a> {
@@ -130,7 +131,7 @@ impl<'a> UpdateManagedTransformsRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<RulesetsResponse> {
+    pub async fn send(self) -> ApiResult<serde_json::Value> {
         self.builder.send().await
     }
 }
@@ -147,6 +148,7 @@ impl<'a> UpdateManagedTransformsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::managed_transforms };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::rulesets_managed_transforms::RulesetsManagedTransforms = todo!();
 /// let response = update_managed_transforms(&api)

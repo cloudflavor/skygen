@@ -15,4 +15,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type AccessSchemasIdentityProviders = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct AccessSchemasIdentityProviders {
+    #[serde(flatten)]
+    pub access_schemas_identity_provider:
+        crate::models::access_schemas_identity_provider::AccessSchemasIdentityProvider,
+    pub config: Option<serde_json::Value>,
+}

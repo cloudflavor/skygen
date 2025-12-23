@@ -70,6 +70,7 @@ impl<'a> AssetsUploadRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::worker_script };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = assets_upload(&api)
 ///     .with_account_id("account_id")
@@ -115,6 +116,7 @@ impl<'a> ListWorkersRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::worker_script };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = list_workers(&api)
 ///     .with_account_id("account_id")
@@ -168,6 +170,7 @@ impl<'a> DownloadWorkerRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::worker_script };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = download_worker(&api)
 ///     .with_account_id("account_id")
@@ -222,6 +225,7 @@ impl<'a> UploadWorkerModuleRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::worker_script };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = upload_worker_module(&api)
 ///     .with_account_id("account_id")
@@ -281,6 +285,7 @@ impl<'a> DeleteWorkerRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::worker_script };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = delete_worker(&api)
 ///     .with_account_id("account_id")
@@ -344,6 +349,7 @@ impl<'a> UpdateCreateAssetsUploadRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::worker_script };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::workers_create_assets_upload_session_object::WorkersCreateAssetsUploadSessionObject = todo!();
 /// let response = update_create_assets_upload(&api)
@@ -412,6 +418,7 @@ impl<'a> PutContentRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::worker_script };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = put_content(&api)
 ///     .with_account_id("account_id")
@@ -468,6 +475,7 @@ impl<'a> GetContentRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::worker_script };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_content(&api)
 ///     .with_account_id("account_id")
@@ -522,6 +530,7 @@ impl<'a> SettingsGetSettingsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::worker_script };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = settings_get_settings(&api)
 ///     .with_account_id("account_id")
@@ -584,6 +593,7 @@ impl<'a> SettingsPatchSettingsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::worker_script };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::workers_script_settings_item::WorkersScriptSettingsItem = todo!();
 /// let response = settings_patch_settings(&api)
@@ -640,6 +650,7 @@ impl<'a> ListScriptSecretsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::worker_script };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = list_script_secrets(&api)
 ///     .with_account_id("account_id")
@@ -699,6 +710,7 @@ impl<'a> PutScriptSecretRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::worker_script };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::workers_secret::WorkersSecret = todo!();
 /// let response = put_script_secret(&api)
@@ -761,6 +773,7 @@ impl<'a> GetScriptSecretRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::worker_script };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_script_secret(&api)
 ///     .with_account_id("account_id")
@@ -822,6 +835,7 @@ impl<'a> DeleteScriptSecretRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::worker_script };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = delete_script_secret(&api)
 ///     .with_account_id("account_id")
@@ -877,6 +891,7 @@ impl<'a> GetSettingsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::worker_script };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_settings(&api)
 ///     .with_account_id("account_id")
@@ -931,6 +946,7 @@ impl<'a> PatchSettingsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::worker_script };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = patch_settings(&api)
 ///     .with_account_id("account_id")
@@ -985,6 +1001,7 @@ impl<'a> GetSubdomainRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::worker_script };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_subdomain(&api)
 ///     .with_account_id("account_id")
@@ -1047,6 +1064,7 @@ impl<'a> PostSubdomainRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::worker_script };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = post_subdomain(&api)
@@ -1103,6 +1121,7 @@ impl<'a> DeleteSubdomainRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::worker_script };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = delete_subdomain(&api)
 ///     .with_account_id("account_id")
@@ -1157,6 +1176,7 @@ impl<'a> FetchUsageModelRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::worker_script };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = fetch_usage_model(&api)
 ///     .with_account_id("account_id")
@@ -1219,6 +1239,7 @@ impl<'a> UpdateUsageModelRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::worker_script };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::workers_usage_model_object::WorkersUsageModelObject = todo!();
 /// let response = update_usage_model(&api)

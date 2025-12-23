@@ -93,6 +93,7 @@ impl<'a> GetRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::dex_remote_commands };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get(&api)
 ///     .with_account_id("account_id")
@@ -153,6 +154,7 @@ impl<'a> PostRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::dex_remote_commands };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = post(&api)
@@ -217,6 +219,7 @@ impl<'a> EligibleDevicesRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::dex_remote_commands };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = eligible_devices(&api)
 ///     .with_account_id("account_id")
@@ -264,6 +267,7 @@ impl<'a> QuotaRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::dex_remote_commands };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = quota(&api)
 ///     .with_account_id("account_id")
@@ -323,6 +327,7 @@ impl<'a> CommandDownloadsFilenameRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::dex_remote_commands };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = command_downloads_filename(&api)
 ///     .with_account_id("account_id")

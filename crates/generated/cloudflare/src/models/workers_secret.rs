@@ -15,4 +15,16 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type WorkersSecret = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct WorkersSecret {
+    pub algorithm: std::collections::BTreeMap<String, serde_json::Value>,
+    pub format: String,
+    pub key_base64: Option<String>,
+    pub key_jwk: Option<std::collections::BTreeMap<String, serde_json::Value>>,
+    pub name: crate::models::workers_binding_name::WorkersBindingName,
+    pub r#type: String,
+    pub text: String,
+    pub usages: Vec<String>,
+}

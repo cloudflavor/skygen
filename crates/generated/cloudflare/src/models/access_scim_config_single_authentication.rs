@@ -15,4 +15,17 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type AccessScimConfigSingleAuthentication = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct AccessScimConfigSingleAuthentication {
+    pub authorization_url: String,
+    pub client_id: String,
+    pub client_secret: String,
+    pub password: String,
+    pub scheme: String,
+    pub scopes: Option<Vec<String>>,
+    pub token: String,
+    pub token_url: String,
+    pub user: String,
+}

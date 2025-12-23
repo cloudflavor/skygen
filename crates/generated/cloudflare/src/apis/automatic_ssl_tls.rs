@@ -56,6 +56,7 @@ impl<'a> DetectorAutomaticModeGetRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::automatic_ssl_tls };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = detector_automatic_mode_get(&api)
 ///     .with_zone_id("zone_id")
@@ -111,6 +112,7 @@ impl<'a> DetectorAutomaticModePatchRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::automatic_ssl_tls };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::cache_schemas_patch::CacheSchemasPatch = todo!();
 /// let response = detector_automatic_mode_patch(&api)

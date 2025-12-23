@@ -15,4 +15,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type R2SlurperSourceJobSchema = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct R2SlurperSourceJobSchema {
+    pub bucket: Option<String>,
+    pub endpoint: Option<String>,
+    pub jurisdiction: Option<crate::models::r2_slurper_jurisdiction::R2SlurperJurisdiction>,
+    pub secret: Option<serde_json::Value>,
+    pub vendor: Option<String>,
+}

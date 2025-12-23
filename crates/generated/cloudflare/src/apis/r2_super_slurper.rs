@@ -61,6 +61,7 @@ impl<'a> ListJobsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::r2_super_slurper };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = list_jobs(&api)
 ///     .with_account_id("account_id")
@@ -113,6 +114,7 @@ impl<'a> CreateJobRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::r2_super_slurper };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::r2_slurper_create_job_request::R2SlurperCreateJobRequest = todo!();
 /// let response = create_job(&api)
@@ -160,6 +162,7 @@ impl<'a> AbortAllJobsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::r2_super_slurper };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = abort_all_jobs(&api)
 ///     .with_account_id("account_id")
@@ -211,6 +214,7 @@ impl<'a> GetJobRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::r2_super_slurper };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_job(&api)
 ///     .with_account_id("account_id")
@@ -263,6 +267,7 @@ impl<'a> AbortJobRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::r2_super_slurper };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = abort_job(&api)
 ///     .with_account_id("account_id")
@@ -325,6 +330,7 @@ impl<'a> GetJobLogsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::r2_super_slurper };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_job_logs(&api)
 ///     .with_account_id("account_id")
@@ -379,6 +385,7 @@ impl<'a> PauseJobRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::r2_super_slurper };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = pause_job(&api)
 ///     .with_account_id("account_id")
@@ -431,6 +438,7 @@ impl<'a> GetJobProgressRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::r2_super_slurper };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_job_progress(&api)
 ///     .with_account_id("account_id")
@@ -483,6 +491,7 @@ impl<'a> ResumeJobRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::r2_super_slurper };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = resume_job(&api)
 ///     .with_account_id("account_id")
@@ -539,6 +548,7 @@ impl<'a> CheckSourceConnectivityRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::r2_super_slurper };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::r2_slurper_source_job_schema::R2SlurperSourceJobSchema = todo!();
 /// let response = check_source_connectivity(&api)
@@ -596,6 +606,7 @@ impl<'a> CheckTargetConnectivityRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::r2_super_slurper };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::r2_slurper_r2_target_schema::R2SlurperR2TargetSchema = todo!();
 /// let response = check_target_connectivity(&api)

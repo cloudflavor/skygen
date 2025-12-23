@@ -59,6 +59,7 @@ impl<'a> GetAsnOverviewRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::asn_intelligence };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_asn_overview(&api)
 ///     .with_account_id("account_id")
@@ -113,6 +114,7 @@ impl<'a> GetAsnSubnetsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::asn_intelligence };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_asn_subnets(&api)
 ///     .with_account_id("account_id")

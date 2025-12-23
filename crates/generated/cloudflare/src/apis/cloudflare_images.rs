@@ -67,6 +67,7 @@ impl<'a> ListImagesRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::cloudflare_images };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = list_images(&api)
 ///     .with_account_id("account_id")
@@ -113,6 +114,7 @@ impl<'a> UploadImageUrlRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::cloudflare_images };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = upload_image_url(&api)
 ///     .with_account_id("account_id")
@@ -157,6 +159,7 @@ impl<'a> UsageStatisticsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::cloudflare_images };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = usage_statistics(&api)
 ///     .with_account_id("account_id")
@@ -210,6 +213,7 @@ impl<'a> ImageDetailsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::cloudflare_images };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = image_details(&api)
 ///     .with_account_id("account_id")
@@ -264,6 +268,7 @@ impl<'a> DeleteImageRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::cloudflare_images };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = delete_image(&api)
 ///     .with_account_id("account_id")
@@ -326,6 +331,7 @@ impl<'a> UpdateImageRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::cloudflare_images };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::images_image_patch_request::ImagesImagePatchRequest = todo!();
 /// let response = update_image(&api)
@@ -382,6 +388,7 @@ impl<'a> BaseImageRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::cloudflare_images };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = base_image(&api)
 ///     .with_account_id("account_id")
@@ -442,6 +449,7 @@ impl<'a> ListImagesV2Request<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::cloudflare_images };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = list_images_v2(&api)
 ///     .with_account_id("account_id")
@@ -492,6 +500,7 @@ impl<'a> CreateAuthenticatedDirectUploadRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::cloudflare_images };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = create_authenticated_direct_upload(&api)
 ///     .with_account_id("account_id")

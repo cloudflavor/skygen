@@ -15,4 +15,10 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type ZonesZoneSettingsSingleRequest = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct ZonesZoneSettingsSingleRequest {
+    pub enabled: Option<crate::models::zones_ssl_recommender_enabled::ZonesSslRecommenderEnabled>,
+    pub value: Option<crate::models::zones_setting_value::ZonesSettingValue>,
+}

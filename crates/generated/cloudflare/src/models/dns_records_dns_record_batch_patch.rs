@@ -19,6 +19,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct DnsRecordsDnsRecordBatchPatch {
+    #[serde(flatten)]
     pub dns_records_dns_record_patch:
         crate::models::dns_records_dns_record_patch::DnsRecordsDnsRecordPatch,
     pub id: crate::models::dns_records_identifier::DnsRecordsIdentifier,

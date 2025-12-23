@@ -15,4 +15,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type FirewallActionParameters = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct FirewallActionParameters {
+    pub host_header: Option<String>,
+    pub origin: Option<std::collections::BTreeMap<String, serde_json::Value>>,
+    pub sni: Option<std::collections::BTreeMap<String, serde_json::Value>>,
+}

@@ -53,6 +53,7 @@ impl<'a> GetSubdomainRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::worker_subdomain };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_subdomain(&api)
 ///     .with_account_id("account_id")
@@ -105,6 +106,7 @@ impl<'a> CreateSubdomainRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::worker_subdomain };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::workers_schemas_subdomain::WorkersSchemasSubdomain = todo!();
 /// let response = create_subdomain(&api)

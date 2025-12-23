@@ -61,6 +61,7 @@ impl<'a> GetDomainHistoryRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::domain_history };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_domain_history(&api)
 ///     .with_account_id("account_id")

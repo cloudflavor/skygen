@@ -61,6 +61,7 @@ impl<'a> ListLiveInputsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::stream_live_inputs };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = list_live_inputs(&api)
 ///     .with_account_id("account_id")
@@ -117,6 +118,7 @@ impl<'a> CreateLiveInputRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::stream_live_inputs };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::stream_create_input_request::StreamCreateInputRequest = todo!();
 /// let response = create_live_input(&api)
@@ -172,6 +174,7 @@ impl<'a> RetrieveLiveInputRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::stream_live_inputs };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = retrieve_live_input(&api)
 ///     .with_account_id("account_id")
@@ -234,6 +237,7 @@ impl<'a> UpdateLiveInputRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::stream_live_inputs };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::stream_update_input_request::StreamUpdateInputRequest = todo!();
 /// let response = update_live_input(&api)
@@ -290,6 +294,7 @@ impl<'a> DeleteLiveInputRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::stream_live_inputs };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = delete_live_input(&api)
 ///     .with_account_id("account_id")
@@ -344,6 +349,7 @@ impl<'a> ListAllOutputsAssociatedRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::stream_live_inputs };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = list_all_outputs_associated(&api)
 ///     .with_account_id("account_id")
@@ -406,6 +412,7 @@ impl<'a> CreateNewOutputConnectedRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::stream_live_inputs };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::stream_create_output_request::StreamCreateOutputRequest = todo!();
 /// let response = create_new_output_connected(&api)
@@ -472,6 +479,7 @@ impl<'a> UpdateOutputRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::stream_live_inputs };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::stream_update_output_request::StreamUpdateOutputRequest = todo!();
 /// let response = update_output(&api)
@@ -531,6 +539,7 @@ impl<'a> DeleteOutputRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::stream_live_inputs };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = delete_output(&api)
 ///     .with_account_id("account_id")

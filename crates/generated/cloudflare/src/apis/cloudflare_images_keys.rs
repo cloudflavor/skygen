@@ -53,6 +53,7 @@ impl<'a> ListSigningKeysRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::cloudflare_images_keys };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = list_signing_keys(&api)
 ///     .with_account_id("account_id")
@@ -106,6 +107,7 @@ impl<'a> AddSigningKeyRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::cloudflare_images_keys };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = add_signing_key(&api)
 ///     .with_account_id("account_id")
@@ -161,6 +163,7 @@ impl<'a> DeleteSigningKeyRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::cloudflare_images_keys };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = delete_signing_key(&api)
 ///     .with_account_id("account_id")

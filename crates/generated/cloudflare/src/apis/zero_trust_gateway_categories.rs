@@ -55,6 +55,7 @@ impl<'a> ListCategoriesRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zero_trust_gateway_categories };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = list_categories(&api)
 ///     .with_account_id("account_id")

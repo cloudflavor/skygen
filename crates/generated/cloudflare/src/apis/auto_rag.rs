@@ -66,6 +66,7 @@ impl<'a> AirConfigAiSearchRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::auto_rag };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = air_config_ai_search(&api)
@@ -127,6 +128,7 @@ impl<'a> AutoragConfigSearchRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::auto_rag };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = autorag_config_search(&api)
@@ -181,6 +183,7 @@ impl<'a> AutoragConfigFullScanRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::auto_rag };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = autorag_config_full_scan(&api)
 ///     .with_account_id("account_id")

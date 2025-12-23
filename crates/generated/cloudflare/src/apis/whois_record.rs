@@ -55,6 +55,7 @@ impl<'a> GetWhoisRecordRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::whois_record };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_whois_record(&api)
 ///     .with_account_id("account_id")

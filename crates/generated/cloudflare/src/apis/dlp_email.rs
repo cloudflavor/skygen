@@ -54,6 +54,7 @@ impl<'a> ScannerGetMappingRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::dlp_email };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = scanner_get_mapping(&api)
 ///     .with_account_id("account_id")
@@ -107,6 +108,7 @@ impl<'a> ScannerCreateMappingRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::dlp_email };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::dlp_update_addin_account_mapping::DlpUpdateAddinAccountMapping = todo!();
 /// let response = scanner_create_mapping(&api)
@@ -153,6 +155,7 @@ impl<'a> ScannerListAllRulesRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::dlp_email };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = scanner_list_all_rules(&api)
 ///     .with_account_id("account_id")
@@ -203,6 +206,7 @@ impl<'a> ScannerCreateRuleRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::dlp_email };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::dlp_create_email_rule::DlpCreateEmailRule = todo!();
 /// let response = scanner_create_rule(&api)
@@ -255,6 +259,7 @@ impl<'a> ScannerUpdateRulePrioritiesRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::dlp_email };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::dlp_update_email_rule_priorities::DlpUpdateEmailRulePriorities = todo!();
 /// let response = scanner_update_rule_priorities(&api)
@@ -308,6 +313,7 @@ impl<'a> ScannerGetRuleRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::dlp_email };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = scanner_get_rule(&api)
 ///     .with_account_id("account_id")
@@ -368,6 +374,7 @@ impl<'a> ScannerUpdateRuleRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::dlp_email };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::dlp_create_email_rule::DlpCreateEmailRule = todo!();
 /// let response = scanner_update_rule(&api)
@@ -422,6 +429,7 @@ impl<'a> ScannerDeleteRuleRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::dlp_email };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = scanner_delete_rule(&api)
 ///     .with_account_id("account_id")

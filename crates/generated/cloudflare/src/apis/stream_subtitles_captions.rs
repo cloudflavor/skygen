@@ -64,6 +64,7 @@ impl<'a> ListCaptionsSubtitlesRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::stream_subtitles_captions };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = list_captions_subtitles(&api)
 ///     .with_account_id("account_id")
@@ -124,6 +125,7 @@ impl<'a> GetCaptionSubtitleLanguageRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::stream_subtitles_captions };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_caption_subtitle_language(&api)
 ///     .with_account_id("account_id")
@@ -185,6 +187,7 @@ impl<'a> UploadCaptionsSubtitlesRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::stream_subtitles_captions };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = upload_captions_subtitles(&api)
 ///     .with_account_id("account_id")
@@ -246,6 +249,7 @@ impl<'a> DeleteCaptionsSubtitlesRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::stream_subtitles_captions };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = delete_captions_subtitles(&api)
 ///     .with_account_id("account_id")
@@ -307,6 +311,7 @@ impl<'a> GenerateCaptionSubtitleLanguageRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::stream_subtitles_captions };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = generate_caption_subtitle_language(&api)
 ///     .with_account_id("account_id")
@@ -370,6 +375,7 @@ impl<'a> GetVttCaptionSubtitleRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::stream_subtitles_captions };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_vtt_caption_subtitle(&api)
 ///     .with_account_id("account_id")

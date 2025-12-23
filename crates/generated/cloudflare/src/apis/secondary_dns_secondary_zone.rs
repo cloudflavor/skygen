@@ -58,6 +58,7 @@ impl<'a> ForceAxfrRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::secondary_dns_secondary_zone };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = force_axfr(&api)
 ///     .with_zone_id("zone_id")
@@ -102,6 +103,7 @@ impl<'a> ConfigurationDetailsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::secondary_dns_secondary_zone };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = configuration_details(&api)
 ///     .with_zone_id("zone_id")
@@ -154,6 +156,7 @@ impl<'a> CreateSecondaryConfigurationRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::secondary_dns_secondary_zone };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::secondary_dns_dns_secondary_secondary_zone::SecondaryDnsDnsSecondarySecondaryZone = todo!();
 /// let response = create_secondary_configuration(&api)
@@ -208,6 +211,7 @@ impl<'a> UpdateSecondaryConfigurationRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::secondary_dns_secondary_zone };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::secondary_dns_dns_secondary_secondary_zone::SecondaryDnsDnsSecondarySecondaryZone = todo!();
 /// let response = update_secondary_configuration(&api)
@@ -257,6 +261,7 @@ impl<'a> DeleteSecondaryConfigurationRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::secondary_dns_secondary_zone };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = delete_secondary_configuration(&api)
 ///     .with_zone_id("zone_id")

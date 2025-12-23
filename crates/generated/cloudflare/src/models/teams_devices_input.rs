@@ -15,4 +15,50 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type TeamsDevicesInput = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct TeamsDevicesInput {
+    pub active_threats: Option<f64>,
+    pub certificate_id: String,
+    pub check_disks: Option<crate::models::teams_devices_check_disks::TeamsDevicesCheckDisks>,
+    pub check_private_key: bool,
+    pub cn: Option<String>,
+    pub compliance_status: String,
+    pub connection_id: String,
+    pub count_operator: String,
+    pub domain: Option<String>,
+    pub eid_last_seen: Option<String>,
+    pub enabled: bool,
+    pub exists: Option<bool>,
+    pub extended_key_usage: Option<
+        Vec<crate::models::teams_devices_extended_key_usage_enum::TeamsDevicesExtendedKeyUsageEnum>,
+    >,
+    pub id: String,
+    pub infected: Option<bool>,
+    pub is_active: Option<bool>,
+    pub issue_count: String,
+    pub last_seen: Option<String>,
+    pub locations: Option<std::collections::BTreeMap<String, serde_json::Value>>,
+    pub network_status: Option<String>,
+    pub operating_system: String,
+    pub operational_state: Option<String>,
+    pub operator: Option<String>,
+    pub os: Option<String>,
+    pub os_distro_name: Option<String>,
+    pub os_distro_revision: Option<String>,
+    pub os_version_extra: Option<String>,
+    pub overall: Option<String>,
+    pub path: String,
+    pub require_all: Option<crate::models::teams_devices_require_all::TeamsDevicesRequireAll>,
+    pub risk_level: Option<String>,
+    pub score: f64,
+    pub score_operator: Option<String>,
+    pub sensor_config: Option<String>,
+    pub sha256: Option<String>,
+    pub state: Option<String>,
+    pub thumbprint: Option<String>,
+    pub total_score: Option<f64>,
+    pub version: Option<String>,
+    pub version_operator: Option<String>,
+}

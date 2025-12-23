@@ -54,6 +54,7 @@ impl<'a> ListAccessApplicationsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zone_level_access_applications };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = list_access_applications(&api)
 ///     .with_zone_id("zone_id")
@@ -102,6 +103,7 @@ impl<'a> AddBookmarkApplicationRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zone_level_access_applications };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::access_apps::AccessApps = todo!();
 /// let response = add_bookmark_application(&api)
@@ -154,6 +156,7 @@ impl<'a> GetAccessApplicationRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zone_level_access_applications };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_access_application(&api)
 ///     .with_zone_id("zone_id")
@@ -210,6 +213,7 @@ impl<'a> UpdateBookmarkApplicationRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zone_level_access_applications };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::access_apps::AccessApps = todo!();
 /// let response = update_bookmark_application(&api)
@@ -263,6 +267,7 @@ impl<'a> DeleteAccessApplicationRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zone_level_access_applications };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = delete_access_application(&api)
 ///     .with_zone_id("zone_id")
@@ -317,6 +322,7 @@ impl<'a> RevokeServiceTokensRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zone_level_access_applications };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = revoke_service_tokens(&api)
 ///     .with_zone_id("zone_id")
@@ -379,6 +385,7 @@ impl<'a> PutUpdateAccessApplicationRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zone_level_access_applications };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::access_app_settings_request::AccessAppSettingsRequest = todo!();
 /// let response = put_update_access_application(&api)
@@ -443,6 +450,7 @@ impl<'a> PatchUpdateAccessApplicationRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zone_level_access_applications };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::access_app_settings_request::AccessAppSettingsRequest = todo!();
 /// let response = patch_update_access_application(&api)
@@ -499,6 +507,7 @@ impl<'a> TestAccessPoliciesRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zone_level_access_applications };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = test_access_policies(&api)
 ///     .with_zone_id("zone_id")

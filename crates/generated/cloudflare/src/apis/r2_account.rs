@@ -52,6 +52,7 @@ impl<'a> GetLevelMetricsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::r2_account };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_level_metrics(&api)
 ///     .with_account_id("account_id")

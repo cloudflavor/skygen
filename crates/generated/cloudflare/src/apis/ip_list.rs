@@ -53,6 +53,7 @@ impl<'a> GetIpListsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::ip_list };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_ip_lists(&api)
 ///     .with_account_id("account_id")

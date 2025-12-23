@@ -15,4 +15,16 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type ZonesSettingValue = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct ZonesSettingValue {
+    pub cache_by_device_type: bool,
+    pub cf: bool,
+    pub enabled: Option<bool>,
+    pub hostnames: Vec<String>,
+    pub pool_id: Option<String>,
+    pub strict_transport_security: Option<std::collections::BTreeMap<String, serde_json::Value>>,
+    pub wordpress: bool,
+    pub wp_plugin: bool,
+}

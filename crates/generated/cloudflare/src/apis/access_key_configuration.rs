@@ -52,6 +52,7 @@ impl<'a> GetAccessKeyConfigurationRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::access_key_configuration };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_access_key_configuration(&api)
 ///     .with_account_id("account_id")
@@ -100,6 +101,7 @@ impl<'a> UpdateAccessKeyConfigurationRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::access_key_configuration };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = update_access_key_configuration(&api)
@@ -149,6 +151,7 @@ impl<'a> RotateAccessKeysRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::access_key_configuration };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = rotate_access_keys(&api)
 ///     .with_account_id("account_id")

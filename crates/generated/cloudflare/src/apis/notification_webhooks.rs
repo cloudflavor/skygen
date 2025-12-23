@@ -59,6 +59,7 @@ impl<'a> ListWebhooksRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::notification_webhooks };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = list_webhooks(&api)
 ///     .with_account_id("account_id")
@@ -111,6 +112,7 @@ impl<'a> CreateWebhookRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::notification_webhooks };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = create_webhook(&api)
@@ -166,6 +168,7 @@ impl<'a> GetWebhookRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::notification_webhooks };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_webhook(&api)
 ///     .with_account_id("account_id")
@@ -225,6 +228,7 @@ impl<'a> UpdateWebhookRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::notification_webhooks };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = update_webhook(&api)
@@ -281,6 +285,7 @@ impl<'a> DeleteWebhookRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::notification_webhooks };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = delete_webhook(&api)
 ///     .with_account_id("account_id")

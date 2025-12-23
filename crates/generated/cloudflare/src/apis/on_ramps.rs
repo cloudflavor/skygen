@@ -82,6 +82,7 @@ impl<'a> OnrampsListRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::on_ramps };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = onramps_list(&api)
 ///     .with_account_id("account_id")
@@ -146,6 +147,7 @@ impl<'a> OnrampsCreateRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::on_ramps };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::mcn_create_onramp_request::McnCreateOnrampRequest = todo!();
 /// let response = onramps_create(&api)
@@ -196,6 +198,7 @@ impl<'a> OnrampsMwanAddrSpaceRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::on_ramps };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = onramps_mwan_addr_space(&api)
 ///     .with_account_id("account_id")
@@ -251,6 +254,7 @@ impl<'a> OnrampsMwanAddrSpacePutRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::on_ramps };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::mcn_update_magic_wan_address_space_request::McnUpdateMagicWanAddressSpaceRequest = todo!();
 /// let response = onramps_mwan_addr_space_put(&api)
@@ -308,6 +312,7 @@ impl<'a> OnrampsMwanAddrSpacePatchRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::on_ramps };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::mcn_update_magic_wan_address_space_request::McnUpdateMagicWanAddressSpaceRequest = todo!();
 /// let response = onramps_mwan_addr_space_patch(&api)
@@ -383,6 +388,7 @@ impl<'a> OnrampsReadRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::on_ramps };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = onramps_read(&api)
 ///     .with_account_id("account_id")
@@ -449,6 +455,7 @@ impl<'a> OnrampsUpdateRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::on_ramps };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::mcn_update_onramp_request::McnUpdateOnrampRequest = todo!();
 /// let response = onramps_update(&api)
@@ -515,6 +522,7 @@ impl<'a> OnrampsDeleteRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::on_ramps };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = onramps_delete(&api)
 ///     .with_account_id("account_id")
@@ -579,6 +587,7 @@ impl<'a> OnrampsPatchRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::on_ramps };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::mcn_update_onramp_request::McnUpdateOnrampRequest = todo!();
 /// let response = onramps_patch(&api)
@@ -635,6 +644,7 @@ impl<'a> OnrampsApplyRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::on_ramps };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = onramps_apply(&api)
 ///     .with_account_id("account_id")
@@ -689,6 +699,7 @@ impl<'a> OnrampsExportRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::on_ramps };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = onramps_export(&api)
 ///     .with_account_id("account_id")
@@ -743,6 +754,7 @@ impl<'a> OnrampsPlanRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::on_ramps };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = onramps_plan(&api)
 ///     .with_account_id("account_id")

@@ -77,6 +77,7 @@ impl<'a> ListVirtualNetworksRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::tunnel_virtual_network };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = list_virtual_networks(&api)
 ///     .with_account_id("account_id")
@@ -136,6 +137,7 @@ impl<'a> CreateVirtualNetworkRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::tunnel_virtual_network };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = create_virtual_network(&api)
@@ -199,6 +201,7 @@ impl<'a> GetRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::tunnel_virtual_network };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = get(&api)
@@ -255,6 +258,7 @@ impl<'a> DeleteRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::tunnel_virtual_network };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = delete(&api)
 ///     .with_account_id("account_id")
@@ -317,6 +321,7 @@ impl<'a> UpdateRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::tunnel_virtual_network };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = update(&api)

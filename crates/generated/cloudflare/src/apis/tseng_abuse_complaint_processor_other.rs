@@ -67,6 +67,7 @@ impl<'a> SubmitAbuseReportRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::tseng_abuse_complaint_processor_other };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::abuse_reports_submit_report_request::AbuseReportsSubmitReportRequest = todo!();
 /// let response = submit_abuse_report(&api)

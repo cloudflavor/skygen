@@ -82,6 +82,7 @@ impl<'a> ListHealthcheckEventsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::load_balancer_healthcheck_events };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = list_healthcheck_events(&api)
 ///     .with_until("until")

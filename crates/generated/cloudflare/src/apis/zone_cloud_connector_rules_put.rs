@@ -58,6 +58,7 @@ impl<'a> ConenctorRulesPutRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zone_cloud_connector_rules_put };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: Vec<crate::models::cloud_connector_rule::CloudConnectorRule> = todo!();
 /// let response = conenctor_rules_put(&api)

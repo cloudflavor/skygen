@@ -19,6 +19,8 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct MagicAppConfigAddSingleRequest {
+    pub account_app_id: crate::models::magic_account_app_id::MagicAccountAppId,
     pub breakout: Option<crate::models::magic_app_breakout::MagicAppBreakout>,
+    pub managed_app_id: crate::models::magic_managed_app_id::MagicManagedAppId,
     pub priority: Option<crate::models::magic_app_priority::MagicAppPriority>,
 }

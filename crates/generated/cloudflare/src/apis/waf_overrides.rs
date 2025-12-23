@@ -66,6 +66,7 @@ impl<'a> ListWafOverridesRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::waf_overrides };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = list_waf_overrides(&api)
 ///     .with_zone_id("zone_id")
@@ -122,6 +123,7 @@ impl<'a> CreateWafOverrideRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::waf_overrides };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = create_waf_override(&api)
@@ -179,6 +181,7 @@ impl<'a> GetWafOverrideRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::waf_overrides };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_waf_override(&api)
 ///     .with_zone_id("zone_id")
@@ -243,6 +246,7 @@ impl<'a> UpdateWafOverrideRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::waf_overrides };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = update_waf_override(&api)
@@ -301,6 +305,7 @@ impl<'a> DeleteWafOverrideRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::waf_overrides };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = delete_waf_override(&api)
 ///     .with_zone_id("zone_id")

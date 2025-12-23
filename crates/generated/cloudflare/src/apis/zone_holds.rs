@@ -52,6 +52,7 @@ impl<'a> ZonesHoldGetRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zone_holds };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = zones_hold_get(&api)
 ///     .with_zone_id("zone_id")
@@ -100,6 +101,7 @@ impl<'a> ZonesHoldPostRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zone_holds };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = zones_hold_post(&api)
 ///     .with_zone_id("zone_id")
@@ -150,6 +152,7 @@ impl<'a> ZonesHoldDeleteRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zone_holds };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = zones_hold_delete(&api)
 ///     .with_zone_id("zone_id")
@@ -203,6 +206,7 @@ impl<'a> ZonesHoldPatchRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zone_holds };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = zones_hold_patch(&api)

@@ -53,6 +53,7 @@ impl<'a> DetailsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::universal_ssl_settings_for_a_zone };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = details(&api)
 ///     .with_zone_id("zone_id")
@@ -105,6 +106,7 @@ impl<'a> EditUniversalSslSettingsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::universal_ssl_settings_for_a_zone };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::tls_certificates_and_hostnames_universal::TlsCertificatesAndHostnamesUniversal = todo!();
 /// let response = edit_universal_ssl_settings(&api)

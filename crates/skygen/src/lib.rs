@@ -16,18 +16,13 @@ pub mod generator;
 pub mod ir;
 pub mod transformer;
 
-use anyhow::{anyhow, Context, Result};
+use anyhow::{anyhow, Result};
 use include_dir::{include_dir, Dir};
 use openapiv3::OpenAPI;
-use serde::de::DeserializeOwned;
 use serde::Deserialize;
-use serde_json::Deserializer;
-use serde_yaml::Value as YamlValue;
 use std::path::{Path, PathBuf};
 use structopt::StructOpt;
-use transformer::{
-    clamp_overflowing_numeric_literals, fix_json_large_numbers, fix_yaml_large_numbers,
-};
+
 
 pub static TEMPLATES: Dir = include_dir!("$CARGO_MANIFEST_DIR/assets/templates");
 
@@ -83,81 +78,13 @@ pub async fn read_config(config_file: impl AsRef<Path>) -> Result<Config> {
 }
 
 pub(crate) async fn deserialize_data(data: &str) -> Result<OpenAPI> {
-    if let Ok(json_val) = serde_json::from_str::<serde_json::Value>(data) {
-        let fixed = fix_json_large_numbers(json_val);
-
-        return from_json_value(fixed).with_context(|| "failed to deserialize OpenAPI from JSON");
+    if let Ok(json) = serde_json::from_str(data) {
+        return Ok(json);
     }
-
-    if let Some(sanitized) = clamp_overflowing_numeric_literals(data) {
-        if let Ok(json_val) = serde_json::from_str::<serde_json::Value>(&sanitized) {
-            let fixed = fix_json_large_numbers(json_val);
-            return from_json_value(fixed)
-                .with_context(|| "failed to deserialize OpenAPI from JSON (sanitized)");
-        }
+    if let Ok(yaml) = serde_yaml::from_str(data) {
+        return Ok(yaml);
     }
-
-    let yaml_val = match serde_yaml::from_str::<serde_yaml::Value>(data) {
-        Ok(val) => val,
-        Err(original_err) => {
-            if let Some(sanitized) = clamp_overflowing_numeric_literals(data) {
-                serde_yaml::from_str::<serde_yaml::Value>(&sanitized).with_context(|| {
-                    "failed to parse YAML even after clamping overflowing integers"
-                })?
-            } else {
-                return Err(original_err).with_context(|| "failed to parse YAML");
-            }
-        }
-    };
-    let normalized_yaml = normalize_yaml_keys(yaml_val);
-    let fixed_yaml = fix_yaml_large_numbers(normalized_yaml);
-    let json_val: serde_json::Value =
-        serde_json::to_value(fixed_yaml).with_context(|| "failed to convert YAML to JSON value")?;
-    let fixed_json = fix_json_large_numbers(json_val);
-
-    from_json_value(fixed_json).with_context(|| "failed to deserialize OpenAPI from YAML->JSON")
+    Err(anyhow!("failed to deserialize OpenAPI spec"))
 }
 
-fn normalize_yaml_keys(value: YamlValue) -> YamlValue {
-    match value {
-        YamlValue::Mapping(map) => {
-            let normalized = map
-                .into_iter()
-                .map(|(key, val)| {
-                    let normalized_key = match key {
-                        YamlValue::String(s) => s,
-                        YamlValue::Number(n) => n.to_string(),
-                        YamlValue::Bool(b) => b.to_string(),
-                        YamlValue::Null => "null".to_string(),
-                        other => serde_yaml::to_string(&other)
-                            .unwrap_or_else(|_| format!("{other:?}"))
-                            .trim()
-                            .to_string(),
-                    };
-                    (YamlValue::String(normalized_key), normalize_yaml_keys(val))
-                })
-                .collect();
-            YamlValue::Mapping(normalized)
-        }
-        YamlValue::Sequence(seq) => {
-            YamlValue::Sequence(seq.into_iter().map(normalize_yaml_keys).collect())
-        }
-        other => other,
-    }
-}
 
-fn from_json_value<T>(value: serde_json::Value) -> Result<T>
-where
-    T: DeserializeOwned,
-{
-    let json_str = serde_json::to_string(&value)?;
-    let mut deserializer = Deserializer::from_str(&json_str);
-    serde_path_to_error::deserialize(&mut deserializer).map_err(|error| {
-        let path = error.path().to_string();
-        anyhow!(
-            "{} at {}",
-            error,
-            if path.is_empty() { "<root>" } else { &path }
-        )
-    })
-}

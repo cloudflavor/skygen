@@ -64,6 +64,7 @@ impl<'a> ListInterconnectsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::magic_interconnects };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = list_interconnects(&api)
 ///     .with_account_id("account_id")
@@ -122,6 +123,7 @@ impl<'a> UpdateMultipleInterconnectsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::magic_interconnects };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = update_multiple_interconnects(&api)
@@ -183,6 +185,7 @@ impl<'a> ListInterconnectDetailsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::magic_interconnects };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = list_interconnect_details(&api)
 ///     .with_account_id("account_id")
@@ -251,6 +254,7 @@ impl<'a> UpdateInterconnectRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::magic_interconnects };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::magic_interconnect_tunnel_update_request::MagicInterconnectTunnelUpdateRequest = todo!();
 /// let response = update_interconnect(&api)

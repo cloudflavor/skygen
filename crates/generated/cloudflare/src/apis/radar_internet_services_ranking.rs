@@ -69,6 +69,7 @@ impl<'a> GetRankingInternetServicesRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::radar_internet_services_ranking };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_ranking_internet_services(&api)
 ///     .with_limit("limit")
@@ -148,6 +149,7 @@ impl<'a> GetRankingInternetServicesGetRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::radar_internet_services_ranking };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_ranking_internet_services_get(&api)
 ///     .with_service_category("serviceCategory")
@@ -219,6 +221,7 @@ impl<'a> GetRankingTopInternetRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::radar_internet_services_ranking };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_ranking_top_internet(&api)
 ///     .with_service_category("serviceCategory")

@@ -116,6 +116,7 @@ impl<'a> ListAccessScimUpdateRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::access_scim_update_logs };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = list_access_scim_update(&api)
 ///     .with_account_id("account_id")

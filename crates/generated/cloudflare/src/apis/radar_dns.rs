@@ -110,6 +110,7 @@ impl<'a> GetDnsSummaryRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::radar_dns };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_dns_summary(&api)
 ///     .with_name("name")
@@ -224,6 +225,7 @@ impl<'a> GetDnsSummaryGetRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::radar_dns };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_dns_summary_get(&api)
 ///     .with_name("name")
@@ -338,6 +340,7 @@ impl<'a> GetDnsSummaryGet3Request<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::radar_dns };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_dns_summary_get_3(&api)
 ///     .with_name("name")
@@ -452,6 +455,7 @@ impl<'a> GetDnsSummaryGet4Request<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::radar_dns };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_dns_summary_get_4(&api)
 ///     .with_name("name")
@@ -566,6 +570,7 @@ impl<'a> GetDnsSummaryGet5Request<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::radar_dns };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_dns_summary_get_5(&api)
 ///     .with_name("name")
@@ -680,6 +685,7 @@ impl<'a> GetDnsSummaryGet6Request<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::radar_dns };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_dns_summary_get_6(&api)
 ///     .with_name("name")
@@ -789,6 +795,7 @@ impl<'a> GetDnsSummaryGet7Request<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::radar_dns };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_dns_summary_get_7(&api)
 ///     .with_name("name")
@@ -902,6 +909,7 @@ impl<'a> GetDnsSummaryGet8Request<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::radar_dns };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_dns_summary_get_8(&api)
 ///     .with_name("name")
@@ -1016,6 +1024,7 @@ impl<'a> GetDnsSummaryGet9Request<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::radar_dns };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_dns_summary_get_9(&api)
 ///     .with_name("name")
@@ -1130,6 +1139,7 @@ impl<'a> GetDnsSummaryGet10Request<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::radar_dns };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_dns_summary_get_10(&api)
 ///     .with_name("name")
@@ -1249,6 +1259,7 @@ impl<'a> GetDnsTimeseriesRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::radar_dns };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_dns_timeseries(&api)
 ///     .with_agg_interval("aggInterval")
@@ -1370,6 +1381,7 @@ impl<'a> GetDnsTimeseriesGroupRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::radar_dns };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_dns_timeseries_group(&api)
 ///     .with_agg_interval("aggInterval")
@@ -1491,6 +1503,7 @@ impl<'a> GetDnsTimeseriesGroupGetRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::radar_dns };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_dns_timeseries_group_get(&api)
 ///     .with_agg_interval("aggInterval")
@@ -1612,6 +1625,7 @@ impl<'a> GetDnsTimeseriesGroupGet3Request<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::radar_dns };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_dns_timeseries_group_get_3(&api)
 ///     .with_agg_interval("aggInterval")
@@ -1733,6 +1747,7 @@ impl<'a> GetDnsTimeseriesGroupGet4Request<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::radar_dns };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_dns_timeseries_group_get_4(&api)
 ///     .with_agg_interval("aggInterval")
@@ -1854,6 +1869,7 @@ impl<'a> GetDnsTimeseriesGroupGet5Request<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::radar_dns };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_dns_timeseries_group_get_5(&api)
 ///     .with_agg_interval("aggInterval")
@@ -1978,6 +1994,7 @@ impl<'a> GetDnsTimeseriesGroupGet6Request<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::radar_dns };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_dns_timeseries_group_get_6(&api)
 ///     .with_agg_interval("aggInterval")
@@ -2094,6 +2111,7 @@ impl<'a> GetDnsTimeseriesGroupGet7Request<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::radar_dns };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_dns_timeseries_group_get_7(&api)
 ///     .with_agg_interval("aggInterval")
@@ -2214,6 +2232,7 @@ impl<'a> GetDnsTimeseriesGroupGet8Request<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::radar_dns };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_dns_timeseries_group_get_8(&api)
 ///     .with_agg_interval("aggInterval")
@@ -2338,6 +2357,7 @@ impl<'a> GetDnsTimeseriesGroupGet9Request<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::radar_dns };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_dns_timeseries_group_get_9(&api)
 ///     .with_agg_interval("aggInterval")
@@ -2459,6 +2479,7 @@ impl<'a> GetDnsTimeseriesGroupGet10Request<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::radar_dns };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_dns_timeseries_group_get_10(&api)
 ///     .with_agg_interval("aggInterval")
@@ -2559,6 +2580,7 @@ impl<'a> GetDnsTopAsesRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::radar_dns };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_dns_top_ases(&api)
 ///     .with_limit("limit")
@@ -2655,6 +2677,7 @@ impl<'a> GetDnsTopLocationsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::radar_dns };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_dns_top_locations(&api)
 ///     .with_limit("limit")

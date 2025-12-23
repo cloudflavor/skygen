@@ -59,6 +59,7 @@ impl<'a> DoHealthCheckRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::health_check };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = do_health_check(&api)
 ///     .with_account_id("account_id")

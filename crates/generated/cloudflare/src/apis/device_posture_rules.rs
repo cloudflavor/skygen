@@ -55,6 +55,7 @@ impl<'a> ListDevicePostureRulesRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::device_posture_rules };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = list_device_posture_rules(&api)
 ///     .with_account_id("account_id")
@@ -107,6 +108,7 @@ impl<'a> CreateDevicePostureRuleRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::device_posture_rules };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = create_device_posture_rule(&api)
@@ -162,6 +164,7 @@ impl<'a> DetailsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::device_posture_rules };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = details(&api)
 ///     .with_account_id("account_id")
@@ -224,6 +227,7 @@ impl<'a> UpdateDevicePostureRuleRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::device_posture_rules };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = update_device_posture_rule(&api)
@@ -280,6 +284,7 @@ impl<'a> DeleteDevicePostureRuleRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::device_posture_rules };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = delete_device_posture_rule(&api)
 ///     .with_account_id("account_id")

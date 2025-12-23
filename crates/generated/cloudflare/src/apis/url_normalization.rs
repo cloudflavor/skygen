@@ -15,13 +15,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-use crate::models::rulesets_response::RulesetsResponse;
 use crate::{ApiClient, ApiRequestBuilder, ApiResult};
 use reqwest::Method;
 
 #[derive(Debug)]
 pub struct GetRequest<'a> {
-    builder: ApiRequestBuilder<'a, RulesetsResponse>,
+    builder: ApiRequestBuilder<'a, serde_json::Value>,
 }
 
 impl<'a> GetRequest<'a> {
@@ -35,7 +34,7 @@ impl<'a> GetRequest<'a> {
         self.builder = self.builder.path_param("zone_id", value);
         self
     }
-    pub async fn send(self) -> ApiResult<RulesetsResponse> {
+    pub async fn send(self) -> ApiResult<serde_json::Value> {
         self.builder.send().await
     }
 }
@@ -52,6 +51,7 @@ impl<'a> GetRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::url_normalization };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get(&api)
 ///     .with_zone_id("zone_id")
@@ -64,7 +64,7 @@ pub fn get(api: &ApiClient) -> GetRequest<'_> {
 
 #[derive(Debug)]
 pub struct UpdateUrlNormalizationRequest<'a> {
-    builder: ApiRequestBuilder<'a, RulesetsResponse>,
+    builder: ApiRequestBuilder<'a, serde_json::Value>,
 }
 
 impl<'a> UpdateUrlNormalizationRequest<'a> {
@@ -86,7 +86,7 @@ impl<'a> UpdateUrlNormalizationRequest<'a> {
         self.builder = self.builder.json_body(body).expect("body serialization");
         self
     }
-    pub async fn send(self) -> ApiResult<RulesetsResponse> {
+    pub async fn send(self) -> ApiResult<serde_json::Value> {
         self.builder.send().await
     }
 }
@@ -103,6 +103,7 @@ impl<'a> UpdateUrlNormalizationRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::url_normalization };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::rulesets_url_normalization::RulesetsUrlNormalization = todo!();
 /// let response = update_url_normalization(&api)
@@ -149,6 +150,7 @@ impl<'a> DeleteRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::url_normalization };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = delete(&api)
 ///     .with_zone_id("zone_id")

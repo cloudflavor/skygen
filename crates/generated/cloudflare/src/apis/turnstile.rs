@@ -73,6 +73,7 @@ impl<'a> AccountsTurnstileWidgetsListRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::turnstile };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = accounts_turnstile_widgets_list(&api)
 ///     .with_account_id("account_id")
@@ -152,6 +153,7 @@ impl<'a> AccountsTurnstileWidgetCreateRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::turnstile };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = accounts_turnstile_widget_create(&api)
@@ -213,6 +215,7 @@ impl<'a> AccountsTurnstileWidgetGetRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::turnstile };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = accounts_turnstile_widget_get(&api)
 ///     .with_account_id("account_id")
@@ -275,6 +278,7 @@ impl<'a> AccountsTurnstileWidgetUpdateRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::turnstile };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = accounts_turnstile_widget_update(&api)
@@ -333,6 +337,7 @@ impl<'a> AccountsTurnstileWidgetDeleteRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::turnstile };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = accounts_turnstile_widget_delete(&api)
 ///     .with_account_id("account_id")
@@ -400,6 +405,7 @@ impl<'a> AccountsTurnstileWidgetRotateRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::turnstile };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = accounts_turnstile_widget_rotate(&api)

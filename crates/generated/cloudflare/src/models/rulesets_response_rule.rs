@@ -15,4 +15,10 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type RulesetsResponseRule = crate::models::rulesets_request_rule::RulesetsRequestRule;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct RulesetsResponseRule {
+    #[serde(flatten)]
+    pub rulesets_request_rule: crate::models::rulesets_request_rule::RulesetsRequestRule,
+}

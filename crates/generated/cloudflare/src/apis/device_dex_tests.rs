@@ -58,6 +58,7 @@ impl<'a> TestDetailsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::device_dex_tests };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = test_details(&api)
 ///     .with_account_id("account_id")
@@ -113,6 +114,7 @@ impl<'a> TestCreateDeviceDexRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::device_dex_tests };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::digital_experience_monitoring_device_dex_test_schemas_http::DigitalExperienceMonitoringDeviceDexTestSchemasHttp = todo!();
 /// let response = test_create_device_dex(&api)
@@ -168,6 +170,7 @@ impl<'a> TestGetDeviceDexRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::device_dex_tests };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = test_get_device_dex(&api)
 ///     .with_account_id("account_id")
@@ -230,6 +233,7 @@ impl<'a> TestUpdateDeviceDexRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::device_dex_tests };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::digital_experience_monitoring_device_dex_test_schemas_http::DigitalExperienceMonitoringDeviceDexTestSchemasHttp = todo!();
 /// let response = test_update_device_dex(&api)
@@ -286,6 +290,7 @@ impl<'a> TestDeleteDeviceDexRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::device_dex_tests };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = test_delete_device_dex(&api)
 ///     .with_account_id("account_id")

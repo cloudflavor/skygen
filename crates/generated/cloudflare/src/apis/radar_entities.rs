@@ -75,6 +75,7 @@ impl<'a> GetEntitiesAsnListRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::radar_entities };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_entities_asn_list(&api)
 ///     .with_limit("limit")
@@ -127,6 +128,7 @@ impl<'a> GetEntitiesAsnRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::radar_entities };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_entities_asn(&api)
 ///     .with_ip("ip")
@@ -176,6 +178,7 @@ impl<'a> GetEntitiesAsnGetRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::radar_entities };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_entities_asn_get(&api)
 ///     .with_asn("asn")
@@ -230,6 +233,7 @@ impl<'a> GetAsnsRelRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::radar_entities };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_asns_rel(&api)
 ///     .with_asn("asn")
@@ -279,6 +283,7 @@ impl<'a> GetEntitiesIpRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::radar_entities };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_entities_ip(&api)
 ///     .with_ip("ip")
@@ -337,6 +342,7 @@ impl<'a> GetEntitiesLocationsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::radar_entities };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_entities_locations(&api)
 ///     .with_limit("limit")
@@ -389,6 +395,7 @@ impl<'a> GetEntitiesLocationRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::radar_entities };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_entities_location(&api)
 ///     .with_location("location")

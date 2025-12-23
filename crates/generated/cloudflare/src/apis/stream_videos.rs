@@ -96,6 +96,7 @@ impl<'a> ListVideosRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::stream_videos };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = list_videos(&api)
 ///     .with_account_id("account_id")
@@ -172,6 +173,7 @@ impl<'a> InitiateVideoUploadsUsingRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::stream_videos };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = initiate_video_uploads_using(&api)
 ///     .with_account_id("account_id")
@@ -234,6 +236,7 @@ impl<'a> UploadVideosUrlRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::stream_videos };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::stream_video_copy_request::StreamVideoCopyRequest = todo!();
 /// let response = upload_videos_url(&api)
@@ -297,6 +300,7 @@ impl<'a> UploadVideosDirectUploadRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::stream_videos };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::stream_direct_upload_request::StreamDirectUploadRequest = todo!();
 /// let response = upload_videos_direct_upload(&api)
@@ -352,6 +356,7 @@ impl<'a> StorageUsageRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::stream_videos };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = storage_usage(&api)
 ///     .with_account_id("account_id")
@@ -406,6 +411,7 @@ impl<'a> RetrieveVideoDetailsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::stream_videos };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = retrieve_video_details(&api)
 ///     .with_account_id("account_id")
@@ -468,6 +474,7 @@ impl<'a> UpdateVideoDetailsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::stream_videos };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::stream_video_update::StreamVideoUpdate = todo!();
 /// let response = update_video_details(&api)
@@ -524,6 +531,7 @@ impl<'a> DeleteVideoRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::stream_videos };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = delete_video(&api)
 ///     .with_account_id("account_id")
@@ -578,6 +586,7 @@ impl<'a> RetreieveEmbedCodeHtmlRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::stream_videos };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = retreieve_embed_code_html(&api)
 ///     .with_account_id("account_id")
@@ -640,6 +649,7 @@ impl<'a> CreateSignedUrlTokensRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::stream_videos };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::stream_signed_token_request::StreamSignedTokenRequest = todo!();
 /// let response = create_signed_url_tokens(&api)

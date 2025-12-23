@@ -55,6 +55,7 @@ impl<'a> AccessGatewayCaListRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::gateway_ca };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = access_gateway_ca_list(&api)
 ///     .with_account_id("account_id")
@@ -99,6 +100,7 @@ impl<'a> AccessGatewayCaAddRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::gateway_ca };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = access_gateway_ca_add(&api)
 ///     .with_account_id("account_id")
@@ -152,6 +154,7 @@ impl<'a> AccessGatewayCaDeleteRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::gateway_ca };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = access_gateway_ca_delete(&api)
 ///     .with_account_id("account_id")

@@ -55,6 +55,7 @@ impl<'a> ListServiceTokensRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zone_level_access_service_tokens };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = list_service_tokens(&api)
 ///     .with_zone_id("zone_id")
@@ -104,6 +105,7 @@ impl<'a> CreateServiceTokenRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zone_level_access_service_tokens };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = create_service_token(&api)
@@ -159,6 +161,7 @@ impl<'a> GetServiceTokenRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zone_level_access_service_tokens };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_service_token(&api)
 ///     .with_zone_id("zone_id")
@@ -218,6 +221,7 @@ impl<'a> UpdateServiceTokenRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zone_level_access_service_tokens };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = update_service_token(&api)
@@ -274,6 +278,7 @@ impl<'a> DeleteServiceTokenRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zone_level_access_service_tokens };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = delete_service_token(&api)
 ///     .with_zone_id("zone_id")

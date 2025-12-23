@@ -19,6 +19,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct DlpEntryUpdate {
+    #[serde(flatten)]
     pub dlp_entry_update_type: crate::models::dlp_entry_update_type::DlpEntryUpdateType,
     pub enabled: bool,
 }

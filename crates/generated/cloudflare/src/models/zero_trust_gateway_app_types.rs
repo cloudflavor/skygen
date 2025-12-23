@@ -15,4 +15,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type ZeroTrustGatewayAppTypes = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct ZeroTrustGatewayAppTypes {
+    pub application_type_id: Option<crate::models::zero_trust_gateway_app_type_id::ZeroTrustGatewayAppTypeId>,
+    pub created_at: Option<crate::models::zero_trust_gateway_timestamp::ZeroTrustGatewayTimestamp>,
+    pub description: Option<String>,
+    pub id: Option<serde_json::Value>,
+    pub name: Option<crate::models::zero_trust_gateway_app_types_components_schemas_name::ZeroTrustGatewayAppTypesComponentsSchemasName>,
+}

@@ -20,10 +20,18 @@ use serde::{Deserialize, Serialize};
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct DnsRecordsDnsRecordResponse {
     pub comment_modified_on: Option<String>,
+    pub content: Option<String>,
     pub created_on: String,
+    pub data: Option<std::collections::BTreeMap<String, serde_json::Value>>,
+    #[serde(flatten)]
+    pub dns_records_dns_record_shared_fields:
+        crate::models::dns_records_dns_record_shared_fields::DnsRecordsDnsRecordSharedFields,
     pub id: crate::models::dns_records_identifier::DnsRecordsIdentifier,
     pub meta: std::collections::BTreeMap<String, serde_json::Value>,
     pub modified_on: String,
+    pub priority: Option<crate::models::dns_records_priority::DnsRecordsPriority>,
     pub proxiable: bool,
+    pub r#type: Option<String>,
+    pub settings: Option<serde_json::Value>,
     pub tags_modified_on: Option<String>,
 }

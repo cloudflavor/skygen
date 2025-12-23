@@ -15,4 +15,24 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type FirewallConfigRulesComponentsSchemasActionParameters = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct FirewallConfigRulesComponentsSchemasActionParameters {
+    pub automatic_https_rewrites: Option<bool>,
+    pub autominify: Option<std::collections::BTreeMap<String, serde_json::Value>>,
+    pub bic: Option<bool>,
+    pub disable_apps: Option<bool>,
+    pub disable_railgun: Option<bool>,
+    pub disable_zaraz: Option<bool>,
+    pub email_obfuscation: Option<bool>,
+    pub hotlink_protection: Option<bool>,
+    pub mirage: Option<bool>,
+    pub opportunistic_encryption: Option<bool>,
+    pub polish: Option<String>,
+    pub rocket_loader: Option<bool>,
+    pub security_level: Option<String>,
+    pub server_side_excludes: Option<bool>,
+    pub ssl: Option<String>,
+    pub sxg: Option<bool>,
+}

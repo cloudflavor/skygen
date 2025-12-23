@@ -75,6 +75,7 @@ impl<'a> ListSslConfigurationsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::custom_ssl_for_a_zone };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = list_ssl_configurations(&api)
 ///     .with_zone_id("zone_id")
@@ -131,6 +132,7 @@ impl<'a> CreateSslConfigurationRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::custom_ssl_for_a_zone };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = create_ssl_configuration(&api)
@@ -185,6 +187,7 @@ impl<'a> RePrioritizeSslCertificatesRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::custom_ssl_for_a_zone };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = re_prioritize_ssl_certificates(&api)
@@ -238,6 +241,7 @@ impl<'a> ConfigurationDetailsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::custom_ssl_for_a_zone };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = configuration_details(&api)
 ///     .with_zone_id("zone_id")
@@ -292,6 +296,7 @@ impl<'a> DeleteSslConfigurationRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::custom_ssl_for_a_zone };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = delete_ssl_configuration(&api)
 ///     .with_zone_id("zone_id")
@@ -354,6 +359,7 @@ impl<'a> EditSslConfigurationRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::custom_ssl_for_a_zone };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = edit_ssl_configuration(&api)

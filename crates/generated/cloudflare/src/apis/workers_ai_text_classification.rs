@@ -65,6 +65,7 @@ impl<'a> PostRunCfBaaiRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_ai_text_classification };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = post_run_cf_baai(&api)
@@ -125,6 +126,7 @@ impl<'a> PostRunCfHuggingfaceRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_ai_text_classification };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = post_run_cf_huggingface(&api)

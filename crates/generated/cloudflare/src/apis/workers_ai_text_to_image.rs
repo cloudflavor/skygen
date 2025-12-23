@@ -65,6 +65,7 @@ impl<'a> PostRunCfBlackRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_ai_text_to_image };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = post_run_cf_black(&api)
@@ -125,6 +126,7 @@ impl<'a> PostRunCfBytedanceRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_ai_text_to_image };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = post_run_cf_bytedance(&api)
@@ -185,6 +187,7 @@ impl<'a> PostRunCfLykonRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_ai_text_to_image };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = post_run_cf_lykon(&api)
@@ -245,6 +248,7 @@ impl<'a> PostRunCfRunwaymlRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_ai_text_to_image };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = post_run_cf_runwayml(&api)
@@ -305,6 +309,7 @@ impl<'a> PostRunCfRunwaymlPostRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_ai_text_to_image };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = post_run_cf_runwayml_post(&api)
@@ -365,6 +370,7 @@ impl<'a> PostRunCfStabilityaiRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_ai_text_to_image };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = post_run_cf_stabilityai(&api)

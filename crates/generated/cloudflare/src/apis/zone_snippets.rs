@@ -50,6 +50,7 @@ impl<'a> GetRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zone_snippets };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get(&api)
 ///     .with_zone_id("zone_id")
@@ -92,6 +93,7 @@ impl<'a> SnippetRulesRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zone_snippets };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = snippet_rules(&api)
 ///     .with_zone_id("zone_id")
@@ -141,6 +143,7 @@ impl<'a> SnippetRulesPutRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zone_snippets };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = snippet_rules_put(&api)
@@ -188,6 +191,7 @@ impl<'a> SnippetRulesDeleteRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zone_snippets };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = snippet_rules_delete(&api)
 ///     .with_zone_id("zone_id")
@@ -236,6 +240,7 @@ impl<'a> SnippetRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zone_snippets };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = snippet(&api)
 ///     .with_zone_id("zone_id")
@@ -285,6 +290,7 @@ impl<'a> SnippetPutRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zone_snippets };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = snippet_put(&api)
 ///     .with_zone_id("zone_id")
@@ -337,6 +343,7 @@ impl<'a> SnippetDeleteRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zone_snippets };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = snippet_delete(&api)
 ///     .with_zone_id("zone_id")
@@ -389,6 +396,7 @@ impl<'a> SnippetContentRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zone_snippets };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = snippet_content(&api)
 ///     .with_zone_id("zone_id")

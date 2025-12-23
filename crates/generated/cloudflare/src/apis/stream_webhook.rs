@@ -54,6 +54,7 @@ impl<'a> ViewWebhooksRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::stream_webhook };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = view_webhooks(&api)
 ///     .with_account_id("account_id")
@@ -106,6 +107,7 @@ impl<'a> CreateWebhooksRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::stream_webhook };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::stream_webhook_request::StreamWebhookRequest = todo!();
 /// let response = create_webhooks(&api)
@@ -152,6 +154,7 @@ impl<'a> DeleteWebhooksRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::stream_webhook };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = delete_webhooks(&api)
 ///     .with_account_id("account_id")

@@ -54,6 +54,7 @@ impl<'a> ListRulesRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::magic_network_monitoring_rules };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = list_rules(&api)
 ///     .with_account_id("account_id")
@@ -105,6 +106,7 @@ impl<'a> CreateRulesRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::magic_network_monitoring_rules };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = create_rules(&api)
@@ -158,6 +160,7 @@ impl<'a> UpdateRulesRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::magic_network_monitoring_rules };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = update_rules(&api)
@@ -213,6 +216,7 @@ impl<'a> GetRuleRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::magic_network_monitoring_rules };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_rule(&api)
 ///     .with_account_id("account_id")
@@ -267,6 +271,7 @@ impl<'a> DeleteRuleRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::magic_network_monitoring_rules };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = delete_rule(&api)
 ///     .with_account_id("account_id")
@@ -329,6 +334,7 @@ impl<'a> UpdateRuleRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::magic_network_monitoring_rules };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = update_rule(&api)
@@ -385,6 +391,7 @@ impl<'a> UpdateAdvertisementRuleRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::magic_network_monitoring_rules };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = update_advertisement_rule(&api)
 ///     .with_account_id("account_id")

@@ -15,4 +15,15 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type DnsRecordsDnsRecordWithData = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct DnsRecordsDnsRecordWithData {
+    pub content: Option<String>,
+    pub data: Option<std::collections::BTreeMap<String, serde_json::Value>>,
+    #[serde(flatten)]
+    pub dns_records_dns_record_shared_fields:
+        crate::models::dns_records_dns_record_shared_fields::DnsRecordsDnsRecordSharedFields,
+    pub priority: Option<crate::models::dns_records_priority::DnsRecordsPriority>,
+    pub r#type: Option<String>,
+}

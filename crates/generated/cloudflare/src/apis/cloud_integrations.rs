@@ -81,6 +81,7 @@ impl<'a> ProvidersListRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::cloud_integrations };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = providers_list(&api)
 ///     .with_account_id("account_id")
@@ -145,6 +146,7 @@ impl<'a> ProvidersCreateRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::cloud_integrations };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::mcn_create_provider_request::McnCreateProviderRequest = todo!();
 /// let response = providers_create(&api)
@@ -195,6 +197,7 @@ impl<'a> ProvidersDiscoverAllRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::cloud_integrations };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = providers_discover_all(&api)
 ///     .with_account_id("account_id")
@@ -253,6 +256,7 @@ impl<'a> ProvidersReadRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::cloud_integrations };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = providers_read(&api)
 ///     .with_account_id("account_id")
@@ -316,6 +320,7 @@ impl<'a> ProvidersUpdateRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::cloud_integrations };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::mcn_update_provider_request::McnUpdateProviderRequest = todo!();
 /// let response = providers_update(&api)
@@ -372,6 +377,7 @@ impl<'a> ProvidersDeleteRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::cloud_integrations };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = providers_delete(&api)
 ///     .with_account_id("account_id")
@@ -434,6 +440,7 @@ impl<'a> ProvidersPatchRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::cloud_integrations };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::mcn_update_provider_request::McnUpdateProviderRequest = todo!();
 /// let response = providers_patch(&api)
@@ -495,6 +502,7 @@ impl<'a> ProvidersDiscoverRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::cloud_integrations };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = providers_discover(&api)
 ///     .with_account_id("account_id")
@@ -550,6 +558,7 @@ impl<'a> ProvidersInitialSetupRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::cloud_integrations };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = providers_initial_setup(&api)
 ///     .with_account_id("account_id")

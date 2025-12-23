@@ -50,6 +50,7 @@ impl<'a> SearchAuthorRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_ai };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = search_author(&api)
 ///     .with_account_id("account_id")
@@ -97,6 +98,7 @@ impl<'a> GetModelSchemaRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_ai };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_model_schema(&api)
 ///     .with_account_id("account_id")
@@ -175,6 +177,7 @@ impl<'a> SearchModelRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_ai };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = search_model(&api)
 ///     .with_account_id("account_id")
@@ -244,6 +247,7 @@ impl<'a> PostRunModelRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_ai };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = post_run_model(&api)
@@ -289,6 +293,7 @@ impl<'a> SearchTaskRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_ai };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = search_task(&api)
 ///     .with_account_id("account_id")
@@ -331,6 +336,7 @@ impl<'a> PostMarkdownRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::workers_ai };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = post_markdown(&api)
 ///     .with_account_id("account_id")

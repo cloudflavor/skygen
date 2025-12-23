@@ -57,6 +57,7 @@ impl<'a> ListZeroTrustCertificatesRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zero_trust_certificates };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = list_zero_trust_certificates(&api)
 ///     .with_account_id("account_id")
@@ -111,6 +112,7 @@ impl<'a> CreateZeroTrustCertificateRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zero_trust_certificates };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::zero_trust_gateway_generate_cert_request::ZeroTrustGatewayGenerateCertRequest = todo!();
 /// let response = create_zero_trust_certificate(&api)
@@ -166,6 +168,7 @@ impl<'a> CertificateDetailsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zero_trust_certificates };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = certificate_details(&api)
 ///     .with_account_id("account_id")
@@ -220,6 +223,7 @@ impl<'a> DeleteZeroTrustCertificateRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zero_trust_certificates };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = delete_zero_trust_certificate(&api)
 ///     .with_account_id("account_id")
@@ -274,6 +278,7 @@ impl<'a> ActivateZeroTrustCertificateRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zero_trust_certificates };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = activate_zero_trust_certificate(&api)
 ///     .with_account_id("account_id")
@@ -328,6 +333,7 @@ impl<'a> DeactivateZeroTrustCertificateRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zero_trust_certificates };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = deactivate_zero_trust_certificate(&api)
 ///     .with_account_id("account_id")

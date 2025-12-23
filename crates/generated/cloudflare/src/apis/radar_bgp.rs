@@ -125,6 +125,7 @@ impl<'a> GetBgpHijacksEventsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::radar_bgp };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_bgp_hijacks_events(&api)
 ///     .with_page("page")
@@ -222,6 +223,7 @@ impl<'a> GetBgpIpsTimeseriesRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::radar_bgp };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_bgp_ips_timeseries(&api)
 ///     .with_name("name")
@@ -327,6 +329,7 @@ impl<'a> GetBgpRouteLeakRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::radar_bgp };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_bgp_route_leak(&api)
 ///     .with_page("page")
@@ -400,6 +403,7 @@ impl<'a> GetBgpRoutesAsnsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::radar_bgp };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_bgp_routes_asns(&api)
 ///     .with_location("location")
@@ -461,6 +465,7 @@ impl<'a> GetBgpPfx2asMoasRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::radar_bgp };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_bgp_pfx2as_moas(&api)
 ///     .with_origin("origin")
@@ -526,6 +531,7 @@ impl<'a> GetBgpPfx2asRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::radar_bgp };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_bgp_pfx2as(&api)
 ///     .with_prefix("prefix")
@@ -577,6 +583,7 @@ impl<'a> GetBgpRoutesRealtimeRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::radar_bgp };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_bgp_routes_realtime(&api)
 ///     .with_prefix("prefix")
@@ -630,6 +637,7 @@ impl<'a> GetBgpRoutesStatsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::radar_bgp };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_bgp_routes_stats(&api)
 ///     .with_asn("asn")
@@ -714,6 +722,7 @@ impl<'a> GetBgpTimeseriesRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::radar_bgp };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_bgp_timeseries(&api)
 ///     .with_agg_interval("aggInterval")
@@ -804,6 +813,7 @@ impl<'a> GetBgpTopAsesRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::radar_bgp };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_bgp_top_ases(&api)
 ///     .with_limit("limit")
@@ -864,6 +874,7 @@ impl<'a> GetBgpTopAsnsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::radar_bgp };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_bgp_top_asns(&api)
 ///     .with_country("country")
@@ -943,6 +954,7 @@ impl<'a> GetBgpTopPrefixesRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::radar_bgp };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_bgp_top_prefixes(&api)
 ///     .with_limit("limit")

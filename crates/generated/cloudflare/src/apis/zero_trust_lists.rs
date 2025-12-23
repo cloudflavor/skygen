@@ -62,6 +62,7 @@ impl<'a> ListZeroTrustListsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zero_trust_lists };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = list_zero_trust_lists(&api)
 ///     .with_account_id("account_id")
@@ -112,6 +113,7 @@ impl<'a> CreateZeroTrustListRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zero_trust_lists };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = create_zero_trust_list(&api)
@@ -167,6 +169,7 @@ impl<'a> ListDetailsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zero_trust_lists };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = list_details(&api)
 ///     .with_account_id("account_id")
@@ -226,6 +229,7 @@ impl<'a> UpdateZeroTrustListRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zero_trust_lists };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = update_zero_trust_list(&api)
@@ -282,6 +286,7 @@ impl<'a> DeleteZeroTrustListRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zero_trust_lists };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = delete_zero_trust_list(&api)
 ///     .with_account_id("account_id")
@@ -344,6 +349,7 @@ impl<'a> PatchZeroTrustListRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zero_trust_lists };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = patch_zero_trust_list(&api)
@@ -400,6 +406,7 @@ impl<'a> ListItemsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zero_trust_lists };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = list_items(&api)
 ///     .with_account_id("account_id")

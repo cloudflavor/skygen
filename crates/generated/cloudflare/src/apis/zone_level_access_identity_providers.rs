@@ -59,6 +59,7 @@ impl<'a> ListAccessIdentityProvidersRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zone_level_access_identity_providers };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = list_access_identity_providers(&api)
 ///     .with_zone_id("zone_id")
@@ -114,6 +115,7 @@ impl<'a> AddAccessIdentityProviderRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zone_level_access_identity_providers };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::access_schemas_identity_providers::AccessSchemasIdentityProviders = todo!();
 /// let response = add_access_identity_provider(&api)
@@ -169,6 +171,7 @@ impl<'a> GetAccessIdentityProviderRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zone_level_access_identity_providers };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_access_identity_provider(&api)
 ///     .with_zone_id("zone_id")
@@ -231,6 +234,7 @@ impl<'a> UpdateAccessIdentityProviderRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zone_level_access_identity_providers };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::access_schemas_identity_providers::AccessSchemasIdentityProviders = todo!();
 /// let response = update_access_identity_provider(&api)
@@ -287,6 +291,7 @@ impl<'a> DeleteAccessIdentityProviderRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zone_level_access_identity_providers };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = delete_access_identity_provider(&api)
 ///     .with_zone_id("zone_id")

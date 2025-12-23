@@ -65,6 +65,7 @@ impl<'a> GetAdvertisementStatusRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::ip_address_management_dynamic_advertisement };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_advertisement_status(&api)
 ///     .with_account_id("account_id")
@@ -127,6 +128,7 @@ impl<'a> UpdatePrefixDynamicAdvertisementRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::ip_address_management_dynamic_advertisement };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = update_prefix_dynamic_advertisement(&api)

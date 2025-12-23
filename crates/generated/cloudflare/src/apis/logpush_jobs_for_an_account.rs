@@ -69,6 +69,7 @@ impl<'a> AccountsLogpushDatasetsDatasetRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::logpush_jobs_for_an_account };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = accounts_logpush_datasets_dataset(&api)
 ///     .with_account_id("account_id")
@@ -125,6 +126,7 @@ impl<'a> AccountsLogpushDatasetsDatasetGetRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::logpush_jobs_for_an_account };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = accounts_logpush_datasets_dataset_get(&api)
 ///     .with_account_id("account_id")
@@ -172,6 +174,7 @@ impl<'a> AccountsLogpushJobsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::logpush_jobs_for_an_account };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = accounts_logpush_jobs(&api)
 ///     .with_account_id("account_id")
@@ -221,6 +224,7 @@ impl<'a> AccountsLogpushJobsPostRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::logpush_jobs_for_an_account };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = accounts_logpush_jobs_post(&api)
@@ -276,6 +280,7 @@ impl<'a> AccountsLogpushJobsJobRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::logpush_jobs_for_an_account };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = accounts_logpush_jobs_job(&api)
 ///     .with_account_id("account_id")
@@ -335,6 +340,7 @@ impl<'a> AccountsLogpushJobsJobPutRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::logpush_jobs_for_an_account };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = accounts_logpush_jobs_job_put(&api)
@@ -391,6 +397,7 @@ impl<'a> AccountsLogpushJobsJobDeleteRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::logpush_jobs_for_an_account };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = accounts_logpush_jobs_job_delete(&api)
 ///     .with_account_id("account_id")
@@ -443,6 +450,7 @@ impl<'a> AccountsLogpushOwnershipRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::logpush_jobs_for_an_account };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = accounts_logpush_ownership(&api)
@@ -497,6 +505,7 @@ impl<'a> AccountsLogpushOwnershipValidateRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::logpush_jobs_for_an_account };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = accounts_logpush_ownership_validate(&api)
@@ -553,6 +562,7 @@ impl<'a> DeleteLogpushValidateDestinationRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::logpush_jobs_for_an_account };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = delete_logpush_validate_destination(&api)
@@ -609,6 +619,7 @@ impl<'a> DeleteLogpushValidateDestinationPostRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::logpush_jobs_for_an_account };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = delete_logpush_validate_destination_post(&api)
@@ -665,6 +676,7 @@ impl<'a> AccountsLogpushValidateOriginRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::logpush_jobs_for_an_account };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = accounts_logpush_validate_origin(&api)

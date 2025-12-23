@@ -62,6 +62,7 @@ impl<'a> GetConfigurationRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::cloudflare_tunnel_configuration };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_configuration(&api)
 ///     .with_account_id("account_id")
@@ -124,6 +125,7 @@ impl<'a> PutConfigurationRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::cloudflare_tunnel_configuration };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = put_configuration(&api)

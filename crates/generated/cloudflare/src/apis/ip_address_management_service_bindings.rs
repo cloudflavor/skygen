@@ -63,6 +63,7 @@ impl<'a> ListServiceBindingsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::ip_address_management_service_bindings };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = list_service_bindings(&api)
 ///     .with_account_id("account_id")
@@ -125,6 +126,7 @@ impl<'a> CreateServiceBindingRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::ip_address_management_service_bindings };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::addressing_create_binding_request::AddressingCreateBindingRequest = todo!();
 /// let response = create_service_binding(&api)
@@ -187,6 +189,7 @@ impl<'a> GetServiceBindingRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::ip_address_management_service_bindings };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_service_binding(&api)
 ///     .with_account_id("account_id")
@@ -248,6 +251,7 @@ impl<'a> DeleteServiceBindingRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::ip_address_management_service_bindings };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = delete_service_binding(&api)
 ///     .with_account_id("account_id")
@@ -297,6 +301,7 @@ impl<'a> ListServicesRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::ip_address_management_service_bindings };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = list_services(&api)
 ///     .with_account_id("account_id")

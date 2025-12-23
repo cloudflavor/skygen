@@ -81,6 +81,7 @@ impl<'a> ListSlotsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::slots };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = list_slots(&api)
 ///     .with_account_id("account_id")
@@ -135,6 +136,7 @@ impl<'a> SlotRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::slots };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = slot(&api)
 ///     .with_account_id("account_id")

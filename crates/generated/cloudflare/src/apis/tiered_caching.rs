@@ -53,6 +53,7 @@ impl<'a> GetTieredCachingSettingRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::tiered_caching };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_tiered_caching_setting(&api)
 ///     .with_zone_id("zone_id")
@@ -102,6 +103,7 @@ impl<'a> PatchTieredCachingSettingRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::tiered_caching };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::cache_rules_patch::CacheRulesPatch = todo!();
 /// let response = patch_tiered_caching_setting(&api)

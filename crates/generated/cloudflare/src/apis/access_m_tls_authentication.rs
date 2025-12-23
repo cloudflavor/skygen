@@ -59,6 +59,7 @@ impl<'a> MtlsAuthenticationListMtlsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::access_m_tls_authentication };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = mtls_authentication_list_mtls(&api)
 ///     .with_account_id("account_id")
@@ -111,6 +112,7 @@ impl<'a> MtlsAuthenticationAddMtlsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::access_m_tls_authentication };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = mtls_authentication_add_mtls(&api)
@@ -160,6 +162,7 @@ impl<'a> MtlsAuthenticationListMtlsGetRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::access_m_tls_authentication };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = mtls_authentication_list_mtls_get(&api)
 ///     .with_account_id("account_id")
@@ -217,6 +220,7 @@ impl<'a> MtlsAuthenticationUpdateMtlsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::access_m_tls_authentication };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = mtls_authentication_update_mtls(&api)
@@ -272,6 +276,7 @@ impl<'a> MtlsAuthenticationGetMtlsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::access_m_tls_authentication };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = mtls_authentication_get_mtls(&api)
 ///     .with_account_id("account_id")
@@ -331,6 +336,7 @@ impl<'a> MtlsAuthenticationUpdateMtlsPutRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::access_m_tls_authentication };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = mtls_authentication_update_mtls_put(&api)
@@ -389,6 +395,7 @@ impl<'a> MtlsAuthenticationDeleteMtlsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::access_m_tls_authentication };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = mtls_authentication_delete_mtls(&api)
 ///     .with_account_id("account_id")

@@ -15,4 +15,27 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type TlsCertificatesAndHostnamesSsl = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct TlsCertificatesAndHostnamesSsl {
+    pub bundle_method: Option<String>,
+    pub certificate_authority: Option<crate::models::tls_certificates_and_hostnames_certificate_authority::TlsCertificatesAndHostnamesCertificateAuthority>,
+    pub custom_certificate: Option<String>,
+    pub custom_csr_id: Option<String>,
+    pub custom_key: Option<String>,
+    pub expires_on: Option<String>,
+    pub hosts: Option<Vec<String>>,
+    pub id: Option<String>,
+    pub issuer: Option<String>,
+    pub method: Option<String>,
+    pub r#type: Option<String>,
+    pub serial_number: Option<String>,
+    pub settings: Option<crate::models::tls_certificates_and_hostnames_sslsettings::TlsCertificatesAndHostnamesSslsettings>,
+    pub signature: Option<String>,
+    pub status: Option<String>,
+    pub uploaded_on: Option<String>,
+    pub validation_errors: Option<Vec<std::collections::BTreeMap<String, serde_json::Value>>>,
+    pub validation_records: Option<Vec<crate::models::tls_certificates_and_hostnames_validation_record::TlsCertificatesAndHostnamesValidationRecord>>,
+    pub wildcard: Option<bool>,
+}

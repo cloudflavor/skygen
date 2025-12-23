@@ -62,6 +62,7 @@ impl<'a> FallthroughRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::api_shield_waf_expression_templates };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::api_shield_request_expression_templates_fallthrough::ApiShieldRequestExpressionTemplatesFallthrough = todo!();
 /// let response = fallthrough(&api)

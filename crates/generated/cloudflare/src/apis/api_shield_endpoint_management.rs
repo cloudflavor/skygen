@@ -60,6 +60,7 @@ impl<'a> RetrieveInformationAboutAllRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::api_shield_endpoint_management };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = retrieve_information_about_all(&api)
 ///     .with_zone_id("zone_id")
@@ -113,6 +114,7 @@ impl<'a> AddOperationsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::api_shield_endpoint_management };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: Vec<crate::models::api_shield_basic_operation::ApiShieldBasicOperation> = todo!();
 /// let response = add_operations(&api)
@@ -170,6 +172,7 @@ impl<'a> DeleteMultipleOperationsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::api_shield_endpoint_management };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: Vec<crate::models::api_shield_object_with_operation_id::ApiShieldObjectWithOperationId> = todo!();
 /// let response = delete_multiple_operations(&api)
@@ -227,6 +230,7 @@ impl<'a> AddOperationRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::api_shield_endpoint_management };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::api_shield_basic_operation::ApiShieldBasicOperation = todo!();
 /// let response = add_operation(&api)
@@ -280,6 +284,7 @@ impl<'a> RetrieveInformationAboutOperationRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::api_shield_endpoint_management };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = retrieve_information_about_operation(&api)
 ///     .with_zone_id("zone_id")
@@ -334,6 +339,7 @@ impl<'a> DeleteOperationRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::api_shield_endpoint_management };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = delete_operation(&api)
 ///     .with_zone_id("zone_id")
@@ -382,6 +388,7 @@ impl<'a> RetrieveOperationsFeaturesAsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::api_shield_endpoint_management };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = retrieve_operations_features_as(&api)
 ///     .with_zone_id("zone_id")

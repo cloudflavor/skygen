@@ -79,6 +79,7 @@ impl<'a> GetLeakedCredentialChecksRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::radar_leaked_credential_checks };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_leaked_credential_checks(&api)
 ///     .with_name("name")
@@ -155,6 +156,7 @@ impl<'a> GetLeakedCredentialChecksGetRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::radar_leaked_credential_checks };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_leaked_credential_checks_get(&api)
 ///     .with_name("name")
@@ -238,6 +240,7 @@ impl<'a> GetLeakedCredentialChecksGet3Request<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::radar_leaked_credential_checks };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_leaked_credential_checks_get_3(&api)
 ///     .with_agg_interval("aggInterval")
@@ -322,6 +325,7 @@ impl<'a> GetLeakedCredentialChecksGet4Request<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::radar_leaked_credential_checks };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_leaked_credential_checks_get_4(&api)
 ///     .with_agg_interval("aggInterval")

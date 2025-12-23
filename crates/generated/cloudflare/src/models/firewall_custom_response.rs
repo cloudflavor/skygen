@@ -15,4 +15,10 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type FirewallCustomResponse = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct FirewallCustomResponse {
+    pub body: Option<crate::models::firewall_body::FirewallBody>,
+    pub content_type: Option<crate::models::firewall_content_type::FirewallContentType>,
+}

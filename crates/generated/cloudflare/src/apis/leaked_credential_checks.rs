@@ -56,6 +56,7 @@ impl<'a> WafProductApiLeakedRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::leaked_credential_checks };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = waf_product_api_leaked(&api)
 ///     .with_zone_id("zone_id")
@@ -111,6 +112,7 @@ impl<'a> WafProductApiLeakedPostRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::leaked_credential_checks };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::waf_product_api_bundle_status::WafProductApiBundleStatus = todo!();
 /// let response = waf_product_api_leaked_post(&api)
@@ -160,6 +162,7 @@ impl<'a> WafProductApiLeakedGetRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::leaked_credential_checks };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = waf_product_api_leaked_get(&api)
 ///     .with_zone_id("zone_id")
@@ -215,6 +218,7 @@ impl<'a> WafProductApiLeakedPost3Request<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::leaked_credential_checks };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::waf_product_api_bundle_custom_detection::WafProductApiBundleCustomDetection = todo!();
 /// let response = waf_product_api_leaked_post_3(&api)
@@ -278,6 +282,7 @@ impl<'a> WafProductApiLeakedPutRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::leaked_credential_checks };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::waf_product_api_bundle_custom_detection::WafProductApiBundleCustomDetection = todo!();
 /// let response = waf_product_api_leaked_put(&api)
@@ -334,6 +339,7 @@ impl<'a> WafProductApiLeakedDeleteRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::leaked_credential_checks };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = waf_product_api_leaked_delete(&api)
 ///     .with_zone_id("zone_id")

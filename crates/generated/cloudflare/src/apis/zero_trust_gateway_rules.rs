@@ -55,6 +55,7 @@ impl<'a> ListZeroTrustGatewayRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zero_trust_gateway_rules };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = list_zero_trust_gateway(&api)
 ///     .with_account_id("account_id")
@@ -107,6 +108,7 @@ impl<'a> CreateZeroTrustGatewayRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zero_trust_gateway_rules };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = create_zero_trust_gateway(&api)
@@ -162,6 +164,7 @@ impl<'a> RuleDetailsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zero_trust_gateway_rules };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = rule_details(&api)
 ///     .with_account_id("account_id")
@@ -224,6 +227,7 @@ impl<'a> UpdateZeroTrustGatewayRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zero_trust_gateway_rules };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = update_zero_trust_gateway(&api)
@@ -280,6 +284,7 @@ impl<'a> DeleteZeroTrustGatewayRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zero_trust_gateway_rules };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = delete_zero_trust_gateway(&api)
 ///     .with_account_id("account_id")
@@ -336,6 +341,7 @@ impl<'a> ResetExpirationZeroTrustRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zero_trust_gateway_rules };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = reset_expiration_zero_trust(&api)
 ///     .with_account_id("account_id")

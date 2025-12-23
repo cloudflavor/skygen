@@ -50,6 +50,7 @@ impl<'a> LimitsGetRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::dlp_settings };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = limits_get(&api)
 ///     .with_account_id("account_id")
@@ -108,6 +109,7 @@ impl<'a> PatternValidateRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::dlp_settings };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::dlp_regex_validation_query::DlpRegexValidationQuery = todo!();
 /// let response = pattern_validate(&api)
@@ -152,6 +154,7 @@ impl<'a> PayloadLogGetRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::dlp_settings };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = payload_log_get(&api)
 ///     .with_account_id("account_id")
@@ -202,6 +205,7 @@ impl<'a> PayloadLogPutRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::dlp_settings };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::dlp_payload_log_setting_update::DlpPayloadLogSettingUpdate = todo!();
 /// let response = payload_log_put(&api)

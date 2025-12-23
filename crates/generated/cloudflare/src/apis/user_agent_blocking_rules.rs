@@ -78,6 +78,7 @@ impl<'a> ListAgentBlockingRulesRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::user_agent_blocking_rules };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = list_agent_blocking_rules(&api)
 ///     .with_zone_id("zone_id")
@@ -135,6 +136,7 @@ impl<'a> CreateAgentBlockingRuleRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::user_agent_blocking_rules };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = create_agent_blocking_rule(&api)
@@ -190,6 +192,7 @@ impl<'a> GetAgentBlockingRuleRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::user_agent_blocking_rules };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_agent_blocking_rule(&api)
 ///     .with_zone_id("zone_id")
@@ -252,6 +255,7 @@ impl<'a> UpdateAgentBlockingRuleRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::user_agent_blocking_rules };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = update_agent_blocking_rule(&api)
@@ -308,6 +312,7 @@ impl<'a> DeleteAgentBlockingRuleRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::user_agent_blocking_rules };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = delete_agent_blocking_rule(&api)
 ///     .with_zone_id("zone_id")

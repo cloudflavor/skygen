@@ -52,6 +52,7 @@ impl<'a> QueuesListRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::queue };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = queues_list(&api)
 ///     .with_account_id("account_id")
@@ -102,6 +103,7 @@ impl<'a> QueuesCreateRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::queue };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = queues_create(&api)
@@ -154,6 +156,7 @@ impl<'a> QueuesGetRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::queue };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = queues_get(&api)
 ///     .with_account_id("account_id")
@@ -209,6 +212,7 @@ impl<'a> QueuesUpdateRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::queue };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::mq_queue::MqQueue = todo!();
 /// let response = queues_update(&api)
@@ -265,6 +269,7 @@ impl<'a> QueuesDeleteRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::queue };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = queues_delete(&api)
 ///     .with_account_id("account_id")
@@ -323,6 +328,7 @@ impl<'a> QueuesUpdatePartialRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::queue };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::mq_queue::MqQueue = todo!();
 /// let response = queues_update_partial(&api)
@@ -379,6 +385,7 @@ impl<'a> QueuesListConsumersRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::queue };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = queues_list_consumers(&api)
 ///     .with_account_id("account_id")
@@ -437,6 +444,7 @@ impl<'a> QueuesCreateConsumerRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::queue };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::mq_consumer::MqConsumer = todo!();
 /// let response = queues_create_consumer(&api)
@@ -504,6 +512,7 @@ impl<'a> QueuesUpdateConsumerRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::queue };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::mq_consumer::MqConsumer = todo!();
 /// let response = queues_update_consumer(&api)
@@ -567,6 +576,7 @@ impl<'a> QueuesDeleteConsumerRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::queue };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = queues_delete_consumer(&api)
 ///     .with_account_id("account_id")
@@ -626,6 +636,7 @@ impl<'a> QueuesPushMessageRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::queue };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::mq_queue_message::MqQueueMessage = todo!();
 /// let response = queues_push_message(&api)
@@ -689,6 +700,7 @@ impl<'a> QueuesAckMessagesRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::queue };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = queues_ack_messages(&api)
@@ -749,6 +761,7 @@ impl<'a> QueuesPushMessagesRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::queue };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::mq_queue_batch::MqQueueBatch = todo!();
 /// let response = queues_push_messages(&api)
@@ -812,6 +825,7 @@ impl<'a> QueuesPullMessagesRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::queue };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = queues_pull_messages(&api)
@@ -868,6 +882,7 @@ impl<'a> QueuesPurgeGetRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::queue };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = queues_purge_get(&api)
 ///     .with_account_id("account_id")
@@ -929,6 +944,7 @@ impl<'a> QueuesPurgeRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::queue };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = queues_purge(&api)

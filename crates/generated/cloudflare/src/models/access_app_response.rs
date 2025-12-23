@@ -15,4 +15,37 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type AccessAppResponse = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct AccessAppResponse {
+    #[serde(flatten)]
+    pub access_app_launcher_props: crate::models::access_app_launcher_props::AccessAppLauncherProps,
+    #[serde(flatten)]
+    pub access_app_resp_embedded_policies:
+        crate::models::access_app_resp_embedded_policies::AccessAppRespEmbeddedPolicies,
+    #[serde(flatten)]
+    pub access_basic_app_response_props:
+        crate::models::access_basic_app_response_props::AccessBasicAppResponseProps,
+    #[serde(flatten)]
+    pub access_biso_props: crate::models::access_biso_props::AccessBisoProps,
+    #[serde(flatten)]
+    pub access_bookmark_props: crate::models::access_bookmark_props::AccessBookmarkProps,
+    #[serde(flatten)]
+    pub access_infra_app_resp_embedded_policies:
+        crate::models::access_infra_app_resp_embedded_policies::AccessInfraAppRespEmbeddedPolicies,
+    #[serde(flatten)]
+    pub access_infra_props: crate::models::access_infra_props::AccessInfraProps,
+    #[serde(flatten)]
+    pub access_rdp_props: crate::models::access_rdp_props::AccessRdpProps,
+    #[serde(flatten)]
+    pub access_saas_props: crate::models::access_saas_props::AccessSaasProps,
+    #[serde(flatten)]
+    pub access_self_hosted_props: crate::models::access_self_hosted_props::AccessSelfHostedProps,
+    #[serde(flatten)]
+    pub access_ssh_props: crate::models::access_ssh_props::AccessSshProps,
+    #[serde(flatten)]
+    pub access_vnc_props: crate::models::access_vnc_props::AccessVncProps,
+    #[serde(flatten)]
+    pub access_warp_props: crate::models::access_warp_props::AccessWarpProps,
+}

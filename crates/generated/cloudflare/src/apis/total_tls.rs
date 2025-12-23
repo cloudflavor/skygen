@@ -52,6 +52,7 @@ impl<'a> SettingsDetailsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::total_tls };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = settings_details(&api)
 ///     .with_zone_id("zone_id")
@@ -100,6 +101,7 @@ impl<'a> EnableDisableTotalTlsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::total_tls };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = enable_disable_total_tls(&api)

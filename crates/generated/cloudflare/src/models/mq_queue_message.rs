@@ -19,5 +19,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct MqQueueMessage {
+    pub body: Option<serde_json::Value>,
+    pub content_type: Option<String>,
     pub delay_seconds: Option<f64>,
 }

@@ -51,6 +51,7 @@ impl<'a> GetArgoSmartRoutingRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::argo_smart_routing };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_argo_smart_routing(&api)
 ///     .with_zone_id("zone_id")
@@ -100,6 +101,7 @@ impl<'a> PatchArgoSmartRoutingRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::argo_smart_routing };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::argo_config_patch::ArgoConfigPatch = todo!();
 /// let response = patch_argo_smart_routing(&api)

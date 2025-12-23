@@ -19,7 +19,11 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct HyperdriveHyperdriveOrigin {
+    pub access_client_id: String,
+    pub access_client_secret: String,
+    pub host: String,
     #[serde(flatten)]
     pub hyperdrive_hyperdrive_database:
         crate::models::hyperdrive_hyperdrive_database::HyperdriveHyperdriveDatabase,
+    pub port: i64,
 }

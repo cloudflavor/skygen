@@ -54,6 +54,7 @@ impl<'a> ListAvailablePlansRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zone_rate_plan };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = list_available_plans(&api)
 ///     .with_zone_id("zone_id")
@@ -107,6 +108,7 @@ impl<'a> AvailablePlanDetailsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zone_rate_plan };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = available_plan_details(&api)
 ///     .with_zone_id("zone_id")
@@ -152,6 +154,7 @@ impl<'a> ListAvailableRatePlansRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zone_rate_plan };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = list_available_rate_plans(&api)
 ///     .with_zone_id("zone_id")

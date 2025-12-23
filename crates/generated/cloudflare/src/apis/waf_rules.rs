@@ -110,6 +110,7 @@ impl<'a> ListWafRulesRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::waf_rules };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = list_waf_rules(&api)
 ///     .with_zone_id("zone_id")
@@ -181,6 +182,7 @@ impl<'a> GetWafRuleRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::waf_rules };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_waf_rule(&api)
 ///     .with_zone_id("zone_id")
@@ -252,6 +254,7 @@ impl<'a> UpdateWafRuleRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::waf_rules };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = update_waf_rule(&api)

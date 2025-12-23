@@ -15,4 +15,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type RulesetsRequestRule = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct RulesetsRequestRule {
+    pub action: Option<serde_json::Value>,
+    pub action_parameters: Option<serde_json::Value>,
+    pub description: Option<serde_json::Value>,
+    #[serde(flatten)]
+    pub rulesets_rule: crate::models::rulesets_rule::RulesetsRule,
+}

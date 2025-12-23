@@ -90,6 +90,7 @@ impl<'a> ListCustomHostnamesRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::custom_hostname_for_a_zone };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = list_custom_hostnames(&api)
 ///     .with_zone_id("zone_id")
@@ -148,6 +149,7 @@ impl<'a> CreateCustomHostnameRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::custom_hostname_for_a_zone };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = create_custom_hostname(&api)
@@ -201,6 +203,7 @@ impl<'a> DetailsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::custom_hostname_for_a_zone };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = details(&api)
 ///     .with_zone_id("zone_id")
@@ -253,6 +256,7 @@ impl<'a> DeleteCustomHostnameAnyRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::custom_hostname_for_a_zone };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = delete_custom_hostname_any(&api)
 ///     .with_zone_id("zone_id")
@@ -315,6 +319,7 @@ impl<'a> EditCustomHostnameRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::custom_hostname_for_a_zone };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = edit_custom_hostname(&api)
@@ -387,6 +392,7 @@ impl<'a> EditCustomCertificateCustomRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::custom_hostname_for_a_zone };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::tls_certificates_and_hostnames_custom_cert_and_key::TlsCertificatesAndHostnamesCustomCertAndKey = todo!();
 /// let response = edit_custom_certificate_custom(&api)
@@ -453,6 +459,7 @@ impl<'a> DeleteSingleCertificateKeyRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::custom_hostname_for_a_zone };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = delete_single_certificate_key(&api)
 ///     .with_zone_id("zone_id")

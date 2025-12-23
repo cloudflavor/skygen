@@ -64,6 +64,7 @@ impl<'a> ListPrefixDelegationsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::ip_address_management_prefix_delegation };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = list_prefix_delegations(&api)
 ///     .with_account_id("account_id")
@@ -123,6 +124,7 @@ impl<'a> CreatePrefixDelegationRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::ip_address_management_prefix_delegation };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = create_prefix_delegation(&api)
@@ -185,6 +187,7 @@ impl<'a> DeletePrefixDelegationRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::ip_address_management_prefix_delegation };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = delete_prefix_delegation(&api)
 ///     .with_account_id("account_id")

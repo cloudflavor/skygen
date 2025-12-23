@@ -15,4 +15,16 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type TeamsDevicesConfigRequest = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct TeamsDevicesConfigRequest {
+    pub access_client_id: Option<String>,
+    pub access_client_secret: Option<String>,
+    pub api_url: String,
+    pub auth_url: String,
+    pub client_id: String,
+    pub client_key: String,
+    pub client_secret: String,
+    pub customer_id: String,
+}

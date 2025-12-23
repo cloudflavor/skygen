@@ -66,6 +66,7 @@ impl<'a> ListDevicesRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::devices };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = list_devices(&api)
 ///     .with_account_id("account_id")
@@ -110,6 +111,7 @@ impl<'a> ListDeviceSettingsPoliciesRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::devices };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = list_device_settings_policies(&api)
 ///     .with_account_id("account_id")
@@ -154,6 +156,7 @@ impl<'a> GetDefaultDeviceSettingsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::devices };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_default_device_settings(&api)
 ///     .with_account_id("account_id")
@@ -206,6 +209,7 @@ impl<'a> CreateDeviceSettingsPolicyRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::devices };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = create_device_settings_policy(&api)
@@ -260,6 +264,7 @@ impl<'a> UpdateDefaultDeviceSettingsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::devices };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = update_default_device_settings(&api)
@@ -309,6 +314,7 @@ impl<'a> GetSplitTunnelExcludeRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::devices };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_split_tunnel_exclude(&api)
 ///     .with_account_id("account_id")
@@ -364,6 +370,7 @@ impl<'a> SetSplitTunnelExcludeRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::devices };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: Vec<crate::models::teams_devices_split_tunnel::TeamsDevicesSplitTunnel> = todo!();
 /// let response = set_split_tunnel_exclude(&api)
@@ -413,6 +420,7 @@ impl<'a> GetLocalDomainFallbackRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::devices };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_local_domain_fallback(&api)
 ///     .with_account_id("account_id")
@@ -468,6 +476,7 @@ impl<'a> SetLocalDomainFallbackRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::devices };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: Vec<crate::models::teams_devices_fallback_domain::TeamsDevicesFallbackDomain> = todo!();
 /// let response = set_local_domain_fallback(&api)
@@ -517,6 +526,7 @@ impl<'a> GetSplitTunnelIncludeRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::devices };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_split_tunnel_include(&api)
 ///     .with_account_id("account_id")
@@ -574,6 +584,7 @@ impl<'a> SetSplitTunnelIncludeRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::devices };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: Vec<crate::models::teams_devices_split_tunnel_include::TeamsDevicesSplitTunnelInclude> = todo!();
 /// let response = set_split_tunnel_include(&api)
@@ -629,6 +640,7 @@ impl<'a> GetDeviceSettingsPolicyRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::devices };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_device_settings_policy(&api)
 ///     .with_account_id("account_id")
@@ -683,6 +695,7 @@ impl<'a> DeleteDeviceSettingsPolicyRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::devices };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = delete_device_settings_policy(&api)
 ///     .with_account_id("account_id")
@@ -745,6 +758,7 @@ impl<'a> UpdateDeviceSettingsPolicyRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::devices };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = update_device_settings_policy(&api)
@@ -801,6 +815,7 @@ impl<'a> GetSplitTunnelExcludeGetRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::devices };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_split_tunnel_exclude_get(&api)
 ///     .with_account_id("account_id")
@@ -863,6 +878,7 @@ impl<'a> SetSplitTunnelExcludePutRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::devices };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: Vec<crate::models::teams_devices_split_tunnel::TeamsDevicesSplitTunnel> = todo!();
 /// let response = set_split_tunnel_exclude_put(&api)
@@ -919,6 +935,7 @@ impl<'a> GetLocalDomainFallbackGetRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::devices };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_local_domain_fallback_get(&api)
 ///     .with_account_id("account_id")
@@ -981,6 +998,7 @@ impl<'a> SetLocalDomainFallbackPutRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::devices };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: Vec<crate::models::teams_devices_fallback_domain::TeamsDevicesFallbackDomain> = todo!();
 /// let response = set_local_domain_fallback_put(&api)
@@ -1037,6 +1055,7 @@ impl<'a> GetSplitTunnelIncludeGetRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::devices };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_split_tunnel_include_get(&api)
 ///     .with_account_id("account_id")
@@ -1101,6 +1120,7 @@ impl<'a> SetSplitTunnelIncludePutRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::devices };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: Vec<crate::models::teams_devices_split_tunnel_include::TeamsDevicesSplitTunnelInclude> = todo!();
 /// let response = set_split_tunnel_include_put(&api)
@@ -1158,6 +1178,7 @@ impl<'a> RevokeDevicesRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::devices };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::teams_devices_revoke_devices_request::TeamsDevicesRevokeDevicesRequest = todo!();
 /// let response = revoke_devices(&api)
@@ -1214,6 +1235,7 @@ impl<'a> UnrevokeDevicesRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::devices };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::teams_devices_unrevoke_devices_request::TeamsDevicesUnrevokeDevicesRequest = todo!();
 /// let response = unrevoke_devices(&api)
@@ -1273,6 +1295,7 @@ impl<'a> DeviceDetailsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::devices };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = device_details(&api)
 ///     .with_account_id("account_id")
@@ -1329,6 +1352,7 @@ impl<'a> ListAdminOverrideCodeRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::devices };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = list_admin_override_code(&api)
 ///     .with_account_id("account_id")
@@ -1377,6 +1401,7 @@ impl<'a> GetPolicyCertificatesRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::devices };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_policy_certificates(&api)
 ///     .with_zone_id("zone_id")
@@ -1432,6 +1457,7 @@ impl<'a> UpdatePolicyCertificatesRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::devices };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::teams_devices_devices_policy_certificates::TeamsDevicesDevicesPolicyCertificates = todo!();
 /// let response = update_policy_certificates(&api)

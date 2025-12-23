@@ -90,6 +90,7 @@ impl<'a> GetEmailSecuritySummaryRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::radar_email_security };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_email_security_summary(&api)
 ///     .with_name("name")
@@ -180,6 +181,7 @@ impl<'a> GetEmailSecuritySummaryGetRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::radar_email_security };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_email_security_summary_get(&api)
 ///     .with_name("name")
@@ -271,6 +273,7 @@ impl<'a> GetEmailSecuritySummaryGet3Request<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::radar_email_security };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_email_security_summary_get_3(&api)
 ///     .with_name("name")
@@ -367,6 +370,7 @@ impl<'a> GetEmailSecuritySummaryGet4Request<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::radar_email_security };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_email_security_summary_get_4(&api)
 ///     .with_name("name")
@@ -463,6 +467,7 @@ impl<'a> GetEmailSecuritySummaryGet5Request<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::radar_email_security };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_email_security_summary_get_5(&api)
 ///     .with_name("name")
@@ -554,6 +559,7 @@ impl<'a> GetEmailSecuritySummaryGet6Request<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::radar_email_security };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_email_security_summary_get_6(&api)
 ///     .with_name("name")
@@ -650,6 +656,7 @@ impl<'a> GetEmailSecuritySummaryGet7Request<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::radar_email_security };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_email_security_summary_get_7(&api)
 ///     .with_name("name")
@@ -750,6 +757,7 @@ impl<'a> GetEmailSecuritySummaryGet8Request<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::radar_email_security };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_email_security_summary_get_8(&api)
 ///     .with_name("name")
@@ -842,6 +850,7 @@ impl<'a> GetEmailSecuritySummaryGet9Request<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::radar_email_security };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_email_security_summary_get_9(&api)
 ///     .with_name("name")
@@ -941,6 +950,7 @@ impl<'a> GetEmailSecurityTimeseriesRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::radar_email_security };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_email_security_timeseries(&api)
 ///     .with_agg_interval("aggInterval")
@@ -1041,6 +1051,7 @@ impl<'a> GetEmailSecurityTimeseriesGetRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::radar_email_security };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_email_security_timeseries_get(&api)
 ///     .with_agg_interval("aggInterval")
@@ -1143,6 +1154,7 @@ impl<'a> GetEmailSecurityTimeseriesGet3Request<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::radar_email_security };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_email_security_timeseries_get_3(&api)
 ///     .with_agg_interval("aggInterval")
@@ -1250,6 +1262,7 @@ impl<'a> GetEmailSecurityTimeseriesGet4Request<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::radar_email_security };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_email_security_timeseries_get_4(&api)
 ///     .with_agg_interval("aggInterval")
@@ -1358,6 +1371,7 @@ impl<'a> GetEmailSecurityTimeseriesGet5Request<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::radar_email_security };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_email_security_timeseries_get_5(&api)
 ///     .with_agg_interval("aggInterval")
@@ -1461,6 +1475,7 @@ impl<'a> GetEmailSecurityTimeseriesGet6Request<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::radar_email_security };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_email_security_timeseries_get_6(&api)
 ///     .with_agg_interval("aggInterval")
@@ -1568,6 +1583,7 @@ impl<'a> GetEmailSecurityTimeseriesGet7Request<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::radar_email_security };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_email_security_timeseries_get_7(&api)
 ///     .with_agg_interval("aggInterval")
@@ -1676,6 +1692,7 @@ impl<'a> GetEmailSecurityTimeseriesGet8Request<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::radar_email_security };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_email_security_timeseries_get_8(&api)
 ///     .with_agg_interval("aggInterval")
@@ -1779,6 +1796,7 @@ impl<'a> GetEmailSecurityTimeseriesGet9Request<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::radar_email_security };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_email_security_timeseries_get_9(&api)
 ///     .with_agg_interval("aggInterval")
@@ -1887,6 +1905,7 @@ impl<'a> GetEmailSecurityTopRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::radar_email_security };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_email_security_top(&api)
 ///     .with_limit("limit")
@@ -2005,6 +2024,7 @@ impl<'a> GetEmailSecurityTopGetRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::radar_email_security };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_email_security_top_get(&api)
 ///     .with_malicious("malicious")
@@ -2124,6 +2144,7 @@ impl<'a> GetEmailSecurityTopGet3Request<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::radar_email_security };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_email_security_top_get_3(&api)
 ///     .with_spam("spam")
@@ -2243,6 +2264,7 @@ impl<'a> GetEmailSecurityTopGet4Request<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::radar_email_security };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_email_security_top_get_4(&api)
 ///     .with_spoof("spoof")

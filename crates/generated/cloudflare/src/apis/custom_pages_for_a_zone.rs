@@ -54,6 +54,7 @@ impl<'a> ListCustomPagesRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::custom_pages_for_a_zone };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = list_custom_pages(&api)
 ///     .with_zone_identifier("zone_identifier")
@@ -107,6 +108,7 @@ impl<'a> GetCustomPageRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::custom_pages_for_a_zone };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_custom_page(&api)
 ///     .with_zone_identifier("zone_identifier")
@@ -166,6 +168,7 @@ impl<'a> UpdateCustomPageRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::custom_pages_for_a_zone };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = update_custom_page(&api)

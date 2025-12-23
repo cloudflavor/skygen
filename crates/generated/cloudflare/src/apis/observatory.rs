@@ -60,6 +60,7 @@ impl<'a> SpeedGetAvailabilitiesRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::observatory };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = speed_get_availabilities(&api)
 ///     .with_zone_id("zone_id")
@@ -103,6 +104,7 @@ impl<'a> SpeedListPagesRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::observatory };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = speed_list_pages(&api)
 ///     .with_zone_id("zone_id")
@@ -171,6 +173,7 @@ impl<'a> SpeedListTestHistoryRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::observatory };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = speed_list_test_history(&api)
 ///     .with_zone_id("zone_id")
@@ -235,6 +238,7 @@ impl<'a> SpeedCreateTestRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::observatory };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = speed_create_test(&api)
@@ -296,6 +300,7 @@ impl<'a> SpeedDeleteTestsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::observatory };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = speed_delete_tests(&api)
 ///     .with_zone_id("zone_id")
@@ -357,6 +362,7 @@ impl<'a> SpeedGetTestRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::observatory };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = speed_get_test(&api)
 ///     .with_zone_id("zone_id")
@@ -442,6 +448,7 @@ impl<'a> SpeedListPageTrendRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::observatory };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = speed_list_page_trend(&api)
 ///     .with_zone_id("zone_id")
@@ -504,6 +511,7 @@ impl<'a> SpeedGetScheduledTestRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::observatory };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = speed_get_scheduled_test(&api)
 ///     .with_zone_id("zone_id")
@@ -564,6 +572,7 @@ impl<'a> SpeedCreateScheduledTestRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::observatory };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = speed_create_scheduled_test(&api)
 ///     .with_zone_id("zone_id")
@@ -624,6 +633,7 @@ impl<'a> SpeedDeleteTestScheduleRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::observatory };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = speed_delete_test_schedule(&api)
 ///     .with_zone_id("zone_id")

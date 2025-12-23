@@ -53,6 +53,7 @@ impl<'a> UpdateReadRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::cron };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = update_read(&api)
 ///     .with_account_id("account_id")
@@ -98,6 +99,7 @@ impl<'a> UpdateRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::cron };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = update(&api)
 ///     .with_account_id("account_id")
@@ -143,6 +145,7 @@ impl<'a> UpdatePatchRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::cron };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = update_patch(&api)
 ///     .with_account_id("account_id")

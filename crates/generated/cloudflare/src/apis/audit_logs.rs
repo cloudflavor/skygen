@@ -113,6 +113,7 @@ impl<'a> GetAuditLogsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::audit_logs };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_audit_logs(&api)
 ///     .with_account_id("account_id")
@@ -403,6 +404,7 @@ impl<'a> V2GetAuditLogsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::audit_logs };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = v2_get_audit_logs(&api)
 ///     .with_account_id("account_id")
@@ -547,6 +549,7 @@ impl<'a> GetAuditLogsGetRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::audit_logs };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_audit_logs_get(&api)
 ///     .with_id("id")

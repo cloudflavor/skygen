@@ -15,4 +15,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type TeamsDevicesSplitTunnel = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct TeamsDevicesSplitTunnel {
+    pub address: crate::models::teams_devices_split_tunnel_address::TeamsDevicesSplitTunnelAddress,
+    pub description: Option<
+        crate::models::teams_devices_split_tunnel_description::TeamsDevicesSplitTunnelDescription,
+    >,
+    pub host: crate::models::teams_devices_split_tunnel_host::TeamsDevicesSplitTunnelHost,
+}

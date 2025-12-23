@@ -85,6 +85,7 @@ impl<'a> GroupListRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::account_user_groups };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = group_list(&api)
 ///     .with_account_id("account_id")
@@ -143,6 +144,7 @@ impl<'a> GroupCreateRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::account_user_groups };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::iam_create_user_group_body::IamCreateUserGroupBody = todo!();
 /// let response = group_create(&api)
@@ -198,6 +200,7 @@ impl<'a> GroupDetailsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::account_user_groups };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = group_details(&api)
 ///     .with_account_id("account_id")
@@ -260,6 +263,7 @@ impl<'a> GroupUpdateRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::account_user_groups };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::iam_update_user_group_body::IamUpdateUserGroupBody = todo!();
 /// let response = group_update(&api)
@@ -316,6 +320,7 @@ impl<'a> GroupDeleteRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::account_user_groups };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = group_delete(&api)
 ///     .with_account_id("account_id")
@@ -380,6 +385,7 @@ impl<'a> GroupMemberListRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::account_user_groups };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = group_member_list(&api)
 ///     .with_account_id("account_id")
@@ -444,6 +450,7 @@ impl<'a> GroupMemberCreateRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::account_user_groups };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: Vec<std::collections::BTreeMap<String, serde_json::Value>> = todo!();
 /// let response = group_member_create(&api)
@@ -508,6 +515,7 @@ impl<'a> GroupMembersUpdateRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::account_user_groups };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: Vec<std::collections::BTreeMap<String, serde_json::Value>> = todo!();
 /// let response = group_members_update(&api)
@@ -570,6 +578,7 @@ impl<'a> GroupMemberDeleteRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::account_user_groups };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = group_member_delete(&api)
 ///     .with_account_id("account_id")

@@ -54,6 +54,7 @@ impl<'a> ListSigningKeysRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::stream_signing_keys };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = list_signing_keys(&api)
 ///     .with_account_id("account_id")
@@ -98,6 +99,7 @@ impl<'a> CreateSigningKeysRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::stream_signing_keys };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = create_signing_keys(&api)
 ///     .with_account_id("account_id")
@@ -151,6 +153,7 @@ impl<'a> DeleteSigningKeysRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::stream_signing_keys };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = delete_signing_keys(&api)
 ///     .with_account_id("account_id")

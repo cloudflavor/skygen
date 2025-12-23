@@ -53,6 +53,7 @@ impl<'a> UuidGetRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::dcv_delegation };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = uuid_get(&api)
 ///     .with_zone_id("zone_id")

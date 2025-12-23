@@ -15,4 +15,10 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type ZonesTarget = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct ZonesTarget {
+    pub constraint: Option<crate::models::zones_string_constraint::ZonesStringConstraint>,
+    pub target: Option<serde_json::Value>,
+}

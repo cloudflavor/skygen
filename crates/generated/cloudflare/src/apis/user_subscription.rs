@@ -45,6 +45,7 @@ impl<'a> GetSubscriptionsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::user_subscription };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_subscriptions(&api)
 ///     .send()
@@ -95,6 +96,7 @@ impl<'a> UpdateSubscriptionRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::user_subscription };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::bill_subs_api_subscription_v2::BillSubsApiSubscriptionV2 = todo!();
 /// let response = update_subscription(&api)
@@ -141,6 +143,7 @@ impl<'a> DeleteSubscriptionRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::user_subscription };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = delete_subscription(&api)
 ///     .with_identifier("identifier")

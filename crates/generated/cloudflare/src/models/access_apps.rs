@@ -15,4 +15,30 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type AccessApps = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct AccessApps {
+    #[serde(flatten)]
+    pub access_schemas_app_launcher_props:
+        crate::models::access_schemas_app_launcher_props::AccessSchemasAppLauncherProps,
+    #[serde(flatten)]
+    pub access_schemas_basic_app_response_props:
+        crate::models::access_schemas_basic_app_response_props::AccessSchemasBasicAppResponseProps,
+    #[serde(flatten)]
+    pub access_schemas_biso_props: crate::models::access_schemas_biso_props::AccessSchemasBisoProps,
+    #[serde(flatten)]
+    pub access_schemas_bookmark_props:
+        crate::models::access_schemas_bookmark_props::AccessSchemasBookmarkProps,
+    #[serde(flatten)]
+    pub access_schemas_saas_props: crate::models::access_schemas_saas_props::AccessSchemasSaasProps,
+    #[serde(flatten)]
+    pub access_schemas_self_hosted_props:
+        crate::models::access_schemas_self_hosted_props::AccessSchemasSelfHostedProps,
+    #[serde(flatten)]
+    pub access_schemas_ssh_props: crate::models::access_schemas_ssh_props::AccessSchemasSshProps,
+    #[serde(flatten)]
+    pub access_schemas_vnc_props: crate::models::access_schemas_vnc_props::AccessSchemasVncProps,
+    #[serde(flatten)]
+    pub access_schemas_warp_props: crate::models::access_schemas_warp_props::AccessSchemasWarpProps,
+}

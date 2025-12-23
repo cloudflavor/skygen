@@ -57,6 +57,7 @@ impl<'a> GetSmartTieredCacheRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::smart_tiered_cache };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_smart_tiered_cache(&api)
 ///     .with_zone_id("zone_id")
@@ -104,6 +105,7 @@ impl<'a> DeleteSmartTieredCacheRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::smart_tiered_cache };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = delete_smart_tiered_cache(&api)
 ///     .with_zone_id("zone_id")
@@ -159,6 +161,7 @@ impl<'a> PatchSmartTieredCacheRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::smart_tiered_cache };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::cache_rules_smart_tiered_cache_patch::CacheRulesSmartTieredCachePatch = todo!();
 /// let response = patch_smart_tiered_cache(&api)

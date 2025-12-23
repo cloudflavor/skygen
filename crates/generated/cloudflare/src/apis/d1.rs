@@ -67,6 +67,7 @@ impl<'a> CloudflareD1ListDatabasesRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::d1 };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = cloudflare_d1_list_databases(&api)
 ///     .with_account_id("account_id")
@@ -122,6 +123,7 @@ impl<'a> CloudflareD1CreateDatabaseRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::d1 };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = cloudflare_d1_create_database(&api)
@@ -177,6 +179,7 @@ impl<'a> CloudflareD1GetDatabaseRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::d1 };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = cloudflare_d1_get_database(&api)
 ///     .with_account_id("account_id")
@@ -239,6 +242,7 @@ impl<'a> CloudflareD1UpdateDatabaseRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::d1 };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::d1_database_update_request_body::D1DatabaseUpdateRequestBody = todo!();
 /// let response = cloudflare_d1_update_database(&api)
@@ -295,6 +299,7 @@ impl<'a> CloudflareD1DeleteDatabaseRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::d1 };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = cloudflare_d1_delete_database(&api)
 ///     .with_account_id("account_id")
@@ -357,6 +362,7 @@ impl<'a> CloudflareD1UpdatePartialRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::d1 };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::d1_database_update_partial_request_body::D1DatabaseUpdatePartialRequestBody = todo!();
 /// let response = cloudflare_d1_update_partial(&api)
@@ -423,6 +429,7 @@ impl<'a> CloudflareD1ExportDatabaseRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::d1 };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = cloudflare_d1_export_database(&api)
@@ -488,6 +495,7 @@ impl<'a> CloudflareD1ImportDatabaseRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::d1 };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = cloudflare_d1_import_database(&api)
@@ -552,6 +560,7 @@ impl<'a> CloudflareD1QueryDatabaseRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::d1 };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = cloudflare_d1_query_database(&api)
@@ -616,6 +625,7 @@ impl<'a> CloudflareD1RawDatabaseRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::d1 };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = cloudflare_d1_raw_database(&api)

@@ -54,6 +54,7 @@ impl<'a> GetFallbackOriginCustomRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::custom_hostname_fallback_origin_for_a_zone };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_fallback_origin_custom(&api)
 ///     .with_zone_id("zone_id")
@@ -107,6 +108,7 @@ impl<'a> UpdateFallbackOriginCustomRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::custom_hostname_fallback_origin_for_a_zone };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = update_fallback_origin_custom(&api)
@@ -154,6 +156,7 @@ impl<'a> DeleteFallbackOriginCustomRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::custom_hostname_fallback_origin_for_a_zone };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = delete_fallback_origin_custom(&api)
 ///     .with_zone_id("zone_id")

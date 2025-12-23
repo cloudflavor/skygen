@@ -92,6 +92,7 @@ impl<'a> ListGetRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::event };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = list_get(&api)
 ///     .with_account_id("account_id")
@@ -160,6 +161,7 @@ impl<'a> ListRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::event };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = list(&api)
@@ -217,6 +219,7 @@ impl<'a> CreateRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::event };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = create(&api)
@@ -275,6 +278,7 @@ impl<'a> CreateBulkRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::event };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = create_bulk(&api)
@@ -335,6 +339,7 @@ impl<'a> TagDeleteRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::event };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = tag_delete(&api)
@@ -396,6 +401,7 @@ impl<'a> TagCreateRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::event };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = tag_create(&api)
@@ -456,6 +462,7 @@ impl<'a> RawReadDsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::event };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = raw_read_ds(&api)
 ///     .with_account_id("account_id")
@@ -516,6 +523,7 @@ impl<'a> ReferenceDeleteRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::event };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = reference_delete(&api)
@@ -577,6 +585,7 @@ impl<'a> ReferenceCreateRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::event };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = reference_create(&api)
@@ -631,6 +640,7 @@ impl<'a> ReadRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::event };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = read(&api)
 ///     .with_account_id("account_id")
@@ -690,6 +700,7 @@ impl<'a> UpdateRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::event };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = update(&api)
@@ -746,6 +757,7 @@ impl<'a> DeleteRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::event };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = delete(&api)
 ///     .with_account_id("account_id")
@@ -805,6 +817,7 @@ impl<'a> UpdatePatchRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::event };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = update_patch(&api)
@@ -866,6 +879,7 @@ impl<'a> InsightCreateRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::event };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = insight_create(&api)
@@ -926,6 +940,7 @@ impl<'a> InsightReadRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::event };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = insight_read(&api)
 ///     .with_account_id("account_id")
@@ -992,6 +1007,7 @@ impl<'a> InsightUpdateRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::event };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = insight_update(&api)
@@ -1053,6 +1069,7 @@ impl<'a> InsightDeleteRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::event };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = insight_delete(&api)
 ///     .with_account_id("account_id")
@@ -1119,6 +1136,7 @@ impl<'a> InsightUpdatePatchRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::event };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = insight_update_patch(&api)
@@ -1180,6 +1198,7 @@ impl<'a> RawReadRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::event };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = raw_read(&api)
 ///     .with_account_id("account_id")
@@ -1246,6 +1265,7 @@ impl<'a> RawUpdateRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::event };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = raw_update(&api)
@@ -1314,6 +1334,7 @@ impl<'a> RawUpdatePatchRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::event };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = raw_update_patch(&api)

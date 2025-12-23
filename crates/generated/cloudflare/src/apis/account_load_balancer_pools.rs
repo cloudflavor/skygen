@@ -66,6 +66,7 @@ impl<'a> ListPoolsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::account_load_balancer_pools };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = list_pools(&api)
 ///     .with_account_id("account_id")
@@ -119,6 +120,7 @@ impl<'a> CreatePoolRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::account_load_balancer_pools };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = create_pool(&api)
@@ -173,6 +175,7 @@ impl<'a> PatchPoolsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::account_load_balancer_pools };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = patch_pools(&api)
@@ -228,6 +231,7 @@ impl<'a> PoolDetailsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::account_load_balancer_pools };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = pool_details(&api)
 ///     .with_account_id("account_id")
@@ -287,6 +291,7 @@ impl<'a> UpdatePoolRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::account_load_balancer_pools };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = update_pool(&api)
@@ -343,6 +348,7 @@ impl<'a> DeletePoolRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::account_load_balancer_pools };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = delete_pool(&api)
 ///     .with_account_id("account_id")
@@ -402,6 +408,7 @@ impl<'a> PatchPoolRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::account_load_balancer_pools };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: serde_json::Value = todo!();
 /// let response = patch_pool(&api)
@@ -458,6 +465,7 @@ impl<'a> PoolHealthDetailsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::account_load_balancer_pools };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = pool_health_details(&api)
 ///     .with_account_id("account_id")
@@ -520,6 +528,7 @@ impl<'a> PreviewPoolRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::account_load_balancer_pools };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::load_balancing_monitor_editable::LoadBalancingMonitorEditable = todo!();
 /// let response = preview_pool(&api)
@@ -576,6 +585,7 @@ impl<'a> ListPoolReferencesRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::account_load_balancer_pools };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = list_pool_references(&api)
 ///     .with_account_id("account_id")

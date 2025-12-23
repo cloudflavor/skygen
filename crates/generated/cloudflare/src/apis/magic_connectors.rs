@@ -61,6 +61,7 @@ impl<'a> MconnConnectorListRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::magic_connectors };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = mconn_connector_list(&api)
 ///     .with_account_id("account_id")
@@ -111,6 +112,7 @@ impl<'a> MconnConnectorCreateRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::magic_connectors };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::mconn_customer_connector_create_request::MconnCustomerConnectorCreateRequest = todo!();
 /// let response = mconn_connector_create(&api)
@@ -164,6 +166,7 @@ impl<'a> MconnConnectorFetchRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::magic_connectors };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = mconn_connector_fetch(&api)
 ///     .with_account_id("account_id")
@@ -224,6 +227,7 @@ impl<'a> MconnConnectorReplaceRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::magic_connectors };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::mconn_customer_connector_update_request::MconnCustomerConnectorUpdateRequest = todo!();
 /// let response = mconn_connector_replace(&api)
@@ -278,6 +282,7 @@ impl<'a> MconnConnectorDeleteRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::magic_connectors };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = mconn_connector_delete(&api)
 ///     .with_account_id("account_id")
@@ -338,6 +343,7 @@ impl<'a> MconnConnectorUpdateRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::magic_connectors };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::mconn_customer_connector_update_request::MconnCustomerConnectorUpdateRequest = todo!();
 /// let response = mconn_connector_update(&api)
@@ -412,6 +418,7 @@ impl<'a> MconnConnectorTelemetryEventsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::magic_connectors };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = mconn_connector_telemetry_events(&api)
 ///     .with_account_id("account_id")
@@ -470,6 +477,7 @@ impl<'a> MconnConnectorTelemetryEventsGetRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::magic_connectors };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = mconn_connector_telemetry_events_get(&api)
 ///     .with_account_id("account_id")
@@ -532,6 +540,7 @@ impl<'a> MconnConnectorTelemetryEventsGet3Request<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::magic_connectors };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = mconn_connector_telemetry_events_get_3(&api)
 ///     .with_account_id("account_id")
@@ -608,6 +617,7 @@ impl<'a> MconnConnectorTelemetrySnapshotsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::magic_connectors };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = mconn_connector_telemetry_snapshots(&api)
 ///     .with_account_id("account_id")
@@ -666,6 +676,7 @@ impl<'a> MconnConnectorTelemetrySnapshotsGetRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::magic_connectors };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = mconn_connector_telemetry_snapshots_get(&api)
 ///     .with_account_id("account_id")
@@ -722,6 +733,7 @@ impl<'a> MconnConnectorTelemetrySnapshotsGet3Request<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::magic_connectors };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = mconn_connector_telemetry_snapshots_get_3(&api)
 ///     .with_account_id("account_id")

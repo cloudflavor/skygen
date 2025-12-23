@@ -58,6 +58,7 @@ impl<'a> ListCustomPagesRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::access_custom_pages };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = list_custom_pages(&api)
 ///     .with_account_id("account_id")
@@ -109,6 +110,7 @@ impl<'a> CreateCustomPageRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::access_custom_pages };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::access_custom_page::AccessCustomPage = todo!();
 /// let response = create_custom_page(&api)
@@ -164,6 +166,7 @@ impl<'a> GetCustomPageRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::access_custom_pages };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_custom_page(&api)
 ///     .with_account_id("account_id")
@@ -222,6 +225,7 @@ impl<'a> UpdateCustomPageRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::access_custom_pages };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::access_custom_page::AccessCustomPage = todo!();
 /// let response = update_custom_page(&api)
@@ -278,6 +282,7 @@ impl<'a> DeleteCustomPageRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::access_custom_pages };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = delete_custom_page(&api)
 ///     .with_account_id("account_id")

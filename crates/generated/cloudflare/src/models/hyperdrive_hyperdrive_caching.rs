@@ -15,4 +15,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type HyperdriveHyperdriveCaching = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct HyperdriveHyperdriveCaching {
+    #[serde(flatten)]
+    pub hyperdrive_hyperdrive_caching_common:
+        crate::models::hyperdrive_hyperdrive_caching_common::HyperdriveHyperdriveCachingCommon,
+    pub max_age: Option<i64>,
+    pub stale_while_revalidate: Option<i64>,
+}

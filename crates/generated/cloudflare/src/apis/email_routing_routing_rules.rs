@@ -70,6 +70,7 @@ impl<'a> ListRoutingRulesRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::email_routing_routing_rules };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = list_routing_rules(&api)
 ///     .with_zone_id("zone_id")
@@ -125,6 +126,7 @@ impl<'a> CreateRoutingRuleRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::email_routing_routing_rules };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::email_create_rule_properties::EmailCreateRuleProperties = todo!();
 /// let response = create_routing_rule(&api)
@@ -174,6 +176,7 @@ impl<'a> GetCatchAllRuleRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::email_routing_routing_rules };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_catch_all_rule(&api)
 ///     .with_zone_id("zone_id")
@@ -229,6 +232,7 @@ impl<'a> UpdateCatchAllRuleRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::email_routing_routing_rules };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::email_update_catch_all_rule_properties::EmailUpdateCatchAllRuleProperties = todo!();
 /// let response = update_catch_all_rule(&api)
@@ -284,6 +288,7 @@ impl<'a> GetRoutingRuleRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::email_routing_routing_rules };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_routing_rule(&api)
 ///     .with_zone_id("zone_id")
@@ -346,6 +351,7 @@ impl<'a> UpdateRoutingRuleRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::email_routing_routing_rules };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::email_update_rule_properties::EmailUpdateRuleProperties = todo!();
 /// let response = update_routing_rule(&api)
@@ -402,6 +408,7 @@ impl<'a> DeleteRoutingRuleRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::email_routing_routing_rules };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = delete_routing_rule(&api)
 ///     .with_zone_id("zone_id")

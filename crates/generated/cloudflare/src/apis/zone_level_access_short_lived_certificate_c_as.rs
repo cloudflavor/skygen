@@ -53,6 +53,7 @@ impl<'a> ListShortLivedCertificateRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zone_level_access_short_lived_certificate_c_as };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = list_short_lived_certificate(&api)
 ///     .with_zone_id("zone_id")
@@ -103,6 +104,7 @@ impl<'a> GetShortLivedCertificateRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zone_level_access_short_lived_certificate_c_as };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_short_lived_certificate(&api)
 ///     .with_zone_id("zone_id")
@@ -154,6 +156,7 @@ impl<'a> CreateShortLivedCertificateRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zone_level_access_short_lived_certificate_c_as };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = create_short_lived_certificate(&api)
 ///     .with_zone_id("zone_id")
@@ -208,6 +211,7 @@ impl<'a> DeleteShortLivedCertificateRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::zone_level_access_short_lived_certificate_c_as };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = delete_short_lived_certificate(&api)
 ///     .with_zone_id("zone_id")

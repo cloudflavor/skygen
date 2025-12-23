@@ -63,6 +63,7 @@ impl<'a> ListRolesRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::account_roles };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = list_roles(&api)
 ///     .with_account_id("account_id")
@@ -115,6 +116,7 @@ impl<'a> RoleDetailsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::account_roles };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = role_details(&api)
 ///     .with_account_id("account_id")

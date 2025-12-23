@@ -62,6 +62,7 @@ impl<'a> CloudforceOnePriorityListRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::priority_intelligence_requirements_pir };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::cloudforce_one_requests_priority_list::CloudforceOneRequestsPriorityList = todo!();
 /// let response = cloudforce_one_priority_list(&api)
@@ -117,6 +118,7 @@ impl<'a> CloudforceOnePriorityNewRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::priority_intelligence_requirements_pir };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::cloudforce_one_requests_priority_edit::CloudforceOneRequestsPriorityEdit = todo!();
 /// let response = cloudforce_one_priority_new(&api)
@@ -164,6 +166,7 @@ impl<'a> CloudforceOnePriorityQuotaRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::priority_intelligence_requirements_pir };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = cloudforce_one_priority_quota(&api)
 ///     .with_account_id("account_id")
@@ -215,6 +218,7 @@ impl<'a> CloudforceOnePriorityGetRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::priority_intelligence_requirements_pir };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = cloudforce_one_priority_get(&api)
 ///     .with_account_id("account_id")
@@ -275,6 +279,7 @@ impl<'a> CloudforceOnePriorityUpdateRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::priority_intelligence_requirements_pir };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::cloudforce_one_requests_priority_edit::CloudforceOneRequestsPriorityEdit = todo!();
 /// let response = cloudforce_one_priority_update(&api)
@@ -329,6 +334,7 @@ impl<'a> CloudforceOnePriorityDeleteRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::priority_intelligence_requirements_pir };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = cloudforce_one_priority_delete(&api)
 ///     .with_account_id("account_id")

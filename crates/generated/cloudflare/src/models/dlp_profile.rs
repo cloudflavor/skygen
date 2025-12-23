@@ -15,4 +15,15 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type DlpProfile = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct DlpProfile {
+    #[serde(flatten)]
+    pub dlp_custom_profile: crate::models::dlp_custom_profile::DlpCustomProfile,
+    #[serde(flatten)]
+    pub dlp_integration_profile: crate::models::dlp_integration_profile::DlpIntegrationProfile,
+    #[serde(flatten)]
+    pub dlp_predefined_profile: crate::models::dlp_predefined_profile::DlpPredefinedProfile,
+    pub r#type: String,
+}

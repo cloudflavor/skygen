@@ -65,6 +65,7 @@ impl<'a> GetScriptContentRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::worker_environment };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_script_content(&api)
 ///     .with_account_id("account_id")
@@ -134,6 +135,7 @@ impl<'a> PutScriptContentRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::worker_environment };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = put_script_content(&api)
 ///     .with_account_id("account_id")
@@ -193,6 +195,7 @@ impl<'a> ScriptEnvironmentGetSettingsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::worker_environment };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = script_environment_get_settings(&api)
 ///     .with_account_id("account_id")
@@ -255,6 +258,7 @@ impl<'a> ScriptEnvironmentPatchSettingsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::worker_environment };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: WorkersScriptSettingsResponse = todo!();
 /// let response = script_environment_patch_settings(&api)

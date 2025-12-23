@@ -1,4 +1,0 @@
-- Rewrite schema pipeline: build registry of component and inline schemas, generate deterministic Rust models for every referenced response/body.
-- Update param type resolution so API builders return concrete models instead of serde_json::Value; only fall back to Value when no schema exists.
-- Extend builder methods (with_account_id, with_zone_id, etc.) for all path/query/header params and ensure doc examples reflect those setters.
-- Regenerate Cloudflare + Exoscale SDKs after the refactor and run cargo fmt/check to verify typed responses compile.

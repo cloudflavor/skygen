@@ -60,6 +60,7 @@ impl<'a> QuotaRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::secrets_store };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = quota(&api)
 ///     .with_account_id("account_id")
@@ -107,6 +108,7 @@ impl<'a> ListRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::secrets_store };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = list(&api)
 ///     .with_account_id("account_id")
@@ -162,6 +164,7 @@ impl<'a> CreateRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::secrets_store };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: Vec<crate::models::secrets_store_create_store_object::SecretsStoreCreateStoreObject> = todo!();
 /// let response = create(&api)
@@ -217,6 +220,7 @@ impl<'a> DeleteRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::secrets_store };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = delete(&api)
 ///     .with_account_id("account_id")
@@ -271,6 +275,7 @@ impl<'a> ListGetRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::secrets_store };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = list_get(&api)
 ///     .with_account_id("account_id")
@@ -335,6 +340,7 @@ impl<'a> SecretCreateRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::secrets_store };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: Vec<crate::models::secrets_store_create_secret_object::SecretsStoreCreateSecretObject> = todo!();
 /// let response = secret_create(&api)
@@ -401,6 +407,7 @@ impl<'a> DeleteBulkRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::secrets_store };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: Vec<crate::models::secrets_store_delete_secret_object::SecretsStoreDeleteSecretObject> = todo!();
 /// let response = delete_bulk(&api)
@@ -463,6 +470,7 @@ impl<'a> GetRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::secrets_store };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get(&api)
 ///     .with_account_id("account_id")
@@ -524,6 +532,7 @@ impl<'a> SecretDeleteRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::secrets_store };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = secret_delete(&api)
 ///     .with_account_id("account_id")
@@ -593,6 +602,7 @@ impl<'a> PatchRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::secrets_store };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::secrets_store_patch_secret_object::SecretsStorePatchSecretObject = todo!();
 /// let response = patch(&api)
@@ -664,6 +674,7 @@ impl<'a> DuplicateRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::secrets_store };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::secrets_store_duplicate_secret_object::SecretsStoreDuplicateSecretObject = todo!();
 /// let response = duplicate(&api)

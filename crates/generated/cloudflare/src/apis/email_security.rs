@@ -131,6 +131,7 @@ impl<'a> InvestigateRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::email_security };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = investigate(&api)
 ///     .with_account_id("account_id")
@@ -199,6 +200,7 @@ impl<'a> PostBulkMessageMoveRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::email_security };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = post_bulk_message_move(&api)
@@ -254,6 +256,7 @@ impl<'a> PostPreviewRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::email_security };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = post_preview(&api)
@@ -309,6 +312,7 @@ impl<'a> PostReleaseRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::email_security };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: Vec<crate::models::email_security_postfix_id::EmailSecurityPostfixId> = todo!();
 /// let response = post_release(&api)
@@ -362,6 +366,7 @@ impl<'a> GetMessageRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::email_security };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_message(&api)
 ///     .with_account_id("account_id")
@@ -416,6 +421,7 @@ impl<'a> GetMessageDetectionsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::email_security };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_message_detections(&api)
 ///     .with_account_id("account_id")
@@ -476,6 +482,7 @@ impl<'a> PostMessageMoveRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::email_security };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = post_message_move(&api)
@@ -532,6 +539,7 @@ impl<'a> GetMessagePreviewRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::email_security };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_message_preview(&api)
 ///     .with_account_id("account_id")
@@ -586,6 +594,7 @@ impl<'a> GetMessageRawRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::email_security };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_message_raw(&api)
 ///     .with_account_id("account_id")
@@ -646,6 +655,7 @@ impl<'a> PostReclassifyRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::email_security };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = post_reclassify(&api)
@@ -700,6 +710,7 @@ impl<'a> GetMessageTraceRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::email_security };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_message_trace(&api)
 ///     .with_account_id("account_id")
@@ -798,6 +809,7 @@ impl<'a> SubmissionsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::email_security };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = submissions(&api)
 ///     .with_account_id("account_id")

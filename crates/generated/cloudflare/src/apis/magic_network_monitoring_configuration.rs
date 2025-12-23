@@ -52,6 +52,7 @@ impl<'a> ListConfigurationRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::magic_network_monitoring_configuration };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = list_configuration(&api)
 ///     .with_account_id("account_id")
@@ -103,6 +104,7 @@ impl<'a> CreateConfigurationRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::magic_network_monitoring_configuration };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = create_configuration(&api)
@@ -156,6 +158,7 @@ impl<'a> UpdateEntireConfigurationRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::magic_network_monitoring_configuration };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = update_entire_configuration(&api)
@@ -202,6 +205,7 @@ impl<'a> DeleteConfigurationRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::magic_network_monitoring_configuration };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = delete_configuration(&api)
 ///     .with_account_id("account_id")
@@ -254,6 +258,7 @@ impl<'a> UpdateConfigurationFieldsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::magic_network_monitoring_configuration };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: std::collections::BTreeMap<String, serde_json::Value> = todo!();
 /// let response = update_configuration_fields(&api)
@@ -300,6 +305,7 @@ impl<'a> ListRulesConfigurationRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::magic_network_monitoring_configuration };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = list_rules_configuration(&api)
 ///     .with_account_id("account_id")

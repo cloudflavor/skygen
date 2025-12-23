@@ -20,10 +20,12 @@
 //!
 //! # Usage
 //! ```no_run
-//! use cloudflare::{ApiClient, apis};
+//! use cloudflare::{ApiClient, apis, dns_records_for_a_zone};
+//!
 //! let api = ApiClient::builder()
 //!     .build()
 //!     .expect("client");
+//!
 //! let _ = apis::access_application_scoped_policies::list_access_app_policies(&api)
 //!     .path_param("id", "example")
 //!     .send()

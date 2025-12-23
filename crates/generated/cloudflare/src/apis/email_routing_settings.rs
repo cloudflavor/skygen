@@ -54,6 +54,7 @@ impl<'a> GetEmailRoutingSettingsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::email_routing_settings };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = get_email_routing_settings(&api)
 ///     .with_zone_id("zone_id")
@@ -98,6 +99,7 @@ impl<'a> DisableEmailRoutingRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::email_routing_settings };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = disable_email_routing(&api)
 ///     .with_zone_id("zone_id")
@@ -146,6 +148,7 @@ impl<'a> DnsSettingsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::email_routing_settings };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = dns_settings(&api)
 ///     .with_zone_id("zone_id")
@@ -198,6 +201,7 @@ impl<'a> EnableEmailRoutingDnsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::email_routing_settings };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::email_email_setting_dns_request_body::EmailEmailSettingDnsRequestBody = todo!();
 /// let response = enable_email_routing_dns(&api)
@@ -251,6 +255,7 @@ impl<'a> DisableEmailRoutingDnsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::email_routing_settings };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::email_email_setting_dns_request_body::EmailEmailSettingDnsRequestBody = todo!();
 /// let response = disable_email_routing_dns(&api)
@@ -304,6 +309,7 @@ impl<'a> UnlockEmailRoutingDnsRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::email_routing_settings };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::email_email_setting_dns_request_body::EmailEmailSettingDnsRequestBody = todo!();
 /// let response = unlock_email_routing_dns(&api)
@@ -350,6 +356,7 @@ impl<'a> EnableEmailRoutingRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::email_routing_settings };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = enable_email_routing(&api)
 ///     .with_zone_id("zone_id")

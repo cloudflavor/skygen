@@ -15,4 +15,19 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub type BotManagementConfigSingle = serde_json::Value;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct BotManagementConfigSingle {
+    pub auto_update_model: Option<crate::models::bot_management_auto_update_model::BotManagementAutoUpdateModel>,
+    #[serde(flatten)]
+    pub bot_management_base_config: crate::models::bot_management_base_config::BotManagementBaseConfig,
+    pub fight_mode: Option<crate::models::bot_management_fight_mode::BotManagementFightMode>,
+    pub optimize_wordpress: Option<crate::models::bot_management_optimize_wordpress::BotManagementOptimizeWordpress>,
+    pub sbfm_definitely_automated: Option<crate::models::bot_management_sbfm_definitely_automated::BotManagementSbfmDefinitelyAutomated>,
+    pub sbfm_likely_automated: Option<crate::models::bot_management_sbfm_likely_automated::BotManagementSbfmLikelyAutomated>,
+    pub sbfm_static_resource_protection: Option<crate::models::bot_management_sbfm_static_resource_protection::BotManagementSbfmStaticResourceProtection>,
+    pub sbfm_verified_bots: Option<crate::models::bot_management_sbfm_verified_bots::BotManagementSbfmVerifiedBots>,
+    pub stale_zone_configuration: Option<serde_json::Value>,
+    pub suppress_session_score: Option<crate::models::bot_management_suppress_session_score::BotManagementSuppressSessionScore>,
+}

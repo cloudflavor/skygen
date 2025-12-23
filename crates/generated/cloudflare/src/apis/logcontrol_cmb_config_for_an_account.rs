@@ -57,6 +57,7 @@ impl<'a> AccountsLogsControlCmbRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::logcontrol_cmb_config_for_an_account };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = accounts_logs_control_cmb(&api)
 ///     .with_account_id("account_id")
@@ -112,6 +113,7 @@ impl<'a> AccountsLogsControlCmbPostRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::logcontrol_cmb_config_for_an_account };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// # let body: crate::models::logcontrol_cmb_config::LogcontrolCmbConfig = todo!();
 /// let response = accounts_logs_control_cmb_post(&api)
@@ -161,6 +163,7 @@ impl<'a> AccountsLogsControlCmbDeleteRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::logcontrol_cmb_config_for_an_account };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = accounts_logs_control_cmb_delete(&api)
 ///     .with_account_id("account_id")

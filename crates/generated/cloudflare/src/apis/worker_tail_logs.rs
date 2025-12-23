@@ -62,6 +62,7 @@ impl<'a> AccountsWorkersScriptsScriptRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::worker_tail_logs };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = accounts_workers_scripts_script(&api)
 ///     .with_account_id("account_id")
@@ -116,6 +117,7 @@ impl<'a> StartTailRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::worker_tail_logs };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = start_tail(&api)
 ///     .with_account_id("account_id")
@@ -176,6 +178,7 @@ impl<'a> DeleteTailRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::worker_tail_logs };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = delete_tail(&api)
 ///     .with_account_id("account_id")

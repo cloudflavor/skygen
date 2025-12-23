@@ -56,6 +56,7 @@ impl<'a> FlowsGenerateAuthenticationTokenRequest<'a> {
 /// # Example
 /// ```no_run
 /// use cloudflare::{ ApiClient, apis::magic_network_monitoring_vpc_flow_logs };
+///
 /// let api = ApiClient::builder().build().expect("client");
 /// let response = flows_generate_authentication_token(&api)
 ///     .with_account_id("account_id")
