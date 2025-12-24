@@ -14,14 +14,10 @@
 
 pub mod resolver;
 
-use anyhow::Result;
 use core::fmt;
-use include_dir::{include_dir, Dir};
 use serde::Deserialize;
-use std::path::{Path, PathBuf};
+use std::path::PathBuf;
 use structopt::StructOpt;
-
-pub static TEMPLATES: Dir = include_dir!("$CARGO_MANIFEST_DIR/assets/templates");
 
 #[derive(StructOpt)]
 pub struct Cli {
@@ -67,27 +63,14 @@ pub struct Config {
     authors: Vec<String>,
 }
 
-pub async fn read_config(config_file: impl AsRef<Path>) -> Result<Config> {
-    let resp = tokio::fs::read_to_string(&config_file).await?;
-    let config: Config = toml::from_str(resp.as_str())?;
-
-    Ok(config)
-}
-
 #[derive(Debug)]
 pub enum ResolverError {
     InvalidRef(String),
     PointerEscape(String),
-    MissingTarget(String),
-    TypeMismatch {
-        ref_: String,
-        expected: &'static str,
-    },
+    MissingTarget { ref_: String, path: String },
+    TypeMismatch { ref_: String, expected: String },
     CycleDetected(String),
-    MaxDeptExceeded {
-        ref_: String,
-        depth: usize,
-    },
+    MaxDeptExceeded { ref_: String, depth: usize },
 }
 
 impl fmt::Display for ResolverError {
@@ -95,7 +78,9 @@ impl fmt::Display for ResolverError {
         match self {
             Self::InvalidRef(r) => write!(f, "invalid $ref: {r}"),
             Self::PointerEscape(seg) => write!(f, "invalid JSON pointer escape in segment: {seg}"),
-            Self::MissingTarget(r) => write!(f, "unresolved $ref target: {r}"),
+            Self::MissingTarget { ref_, path } => {
+                write!(f, "could not find $ref: {ref_} for path: {path}")
+            }
             Self::TypeMismatch { ref_, expected } => {
                 write!(f, "resolved $ref {ref_} is not a {expected}")
             }
