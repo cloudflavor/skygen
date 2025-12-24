@@ -1,5 +1,5 @@
 use crate::ResolverError;
-use anyhow::{anyhow, Result};
+use anyhow::Result;
 use serde_json::Value;
 use std::collections::HashSet;
 
@@ -57,13 +57,12 @@ impl Resolver {
         let mut target = &self.root;
 
         for token in tokens {
-            target = target.get(&token).ok_or_else(|| {
-                anyhow!(
-                    "could not find path '{}' in document for ref '{}'",
-                    token,
-                    ref_str
-                )
-            })?;
+            target = target
+                .get(&token)
+                .ok_or_else(|| ResolverError::MissingTarget {
+                    ref_: ref_str.to_string(),
+                    path: token,
+                })?;
         }
         let resolved = self.walk(target, visited)?;
 
