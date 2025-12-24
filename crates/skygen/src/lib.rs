@@ -12,17 +12,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub mod generator;
-pub mod ir;
-pub mod transformers;
+pub mod resolver;
 
-use anyhow::{anyhow, Result};
+use anyhow::Result;
+use core::fmt;
 use include_dir::{include_dir, Dir};
-use openapiv3::OpenAPI;
 use serde::Deserialize;
 use std::path::{Path, PathBuf};
 use structopt::StructOpt;
-
 
 pub static TEMPLATES: Dir = include_dir!("$CARGO_MANIFEST_DIR/assets/templates");
 
@@ -48,8 +45,8 @@ pub enum Commands {
 #[derive(StructOpt)]
 pub struct GenerateArgs {
     /// OpenAPIv3 Spec file to generate the SDK from
-    #[structopt(short = "s", long = "spec-file")]
-    pub schema: String,
+    #[structopt(short = "s", long = "schema")]
+    pub schema: PathBuf,
 
     /// The output directory where the generated bindings will be placed
     #[structopt(short = "o", long = "output-dir")]
@@ -77,14 +74,37 @@ pub async fn read_config(config_file: impl AsRef<Path>) -> Result<Config> {
     Ok(config)
 }
 
-pub(crate) async fn deserialize_data(data: &str) -> Result<OpenAPI> {
-    if let Ok(json) = serde_json::from_str(data) {
-        return Ok(json);
-    }
-    if let Ok(yaml) = serde_yaml::from_str(data) {
-        return Ok(yaml);
-    }
-    Err(anyhow!("failed to deserialize OpenAPI spec"))
+#[derive(Debug)]
+pub enum ResolverError {
+    InvalidRef(String),
+    PointerEscape(String),
+    MissingTarget(String),
+    TypeMismatch {
+        ref_: String,
+        expected: &'static str,
+    },
+    CycleDetected(String),
+    MaxDeptExceeded {
+        ref_: String,
+        depth: usize,
+    },
 }
 
+impl fmt::Display for ResolverError {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        match self {
+            Self::InvalidRef(r) => write!(f, "invalid $ref: {r}"),
+            Self::PointerEscape(seg) => write!(f, "invalid JSON pointer escape in segment: {seg}"),
+            Self::MissingTarget(r) => write!(f, "unresolved $ref target: {r}"),
+            Self::TypeMismatch { ref_, expected } => {
+                write!(f, "resolved $ref {ref_} is not a {expected}")
+            }
+            Self::CycleDetected(r) => write!(f, "cycle detected while resolving $ref: {r}"),
+            Self::MaxDeptExceeded { ref_, depth } => {
+                write!(f, "max resolution depth {ref_} exceeded at {depth}")
+            }
+        }
+    }
+}
 
+impl std::error::Error for ResolverError {}

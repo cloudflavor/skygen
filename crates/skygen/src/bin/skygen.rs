@@ -12,15 +12,15 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-use anyhow::Result;
-use skygen::generator::create_writer;
-use skygen::Cli;
+use anyhow::{bail, Context};
+use skygen::resolver::resolve::Resolver;
 use structopt::StructOpt;
+use tokio::fs;
 use tracing_subscriber::EnvFilter;
 
 #[tokio::main]
-async fn main() -> Result<()> {
-    let opts = Cli::from_args();
+async fn main() -> anyhow::Result<()> {
+    let opts = skygen::Cli::from_args();
 
     let opts_level = opts.log_level;
     let env_filter = EnvFilter::new(opts_level.as_str());
@@ -34,8 +34,28 @@ async fn main() -> Result<()> {
 
     match opts.commands {
         skygen::Commands::Generate(args) => {
-            let config = skygen::read_config(args.config).await?;
-            create_writer::generate(&config, args.schema, args.output).await?
+            let extension = &args
+                .schema
+                .extension()
+                .and_then(|s| s.to_str())
+                .with_context(|| "failed to parse schema file extension")?;
+
+            let c = fs::read_to_string(&args.config).await?;
+            let _config: skygen::Config = toml::from_str(c.as_str())?;
+            let d = fs::read(&args.schema).await?;
+
+            let schema_json: serde_json::Value = match extension.to_lowercase().as_str() {
+                "yaml" | "yml" => {
+                    serde_yaml::from_slice(d.as_slice()).context("failed to parse YAML")?
+                }
+                "json" => serde_json::from_slice(d.as_slice()).context("failed to parse json")?,
+                _ => bail!("unsupported file extension: {extension}"),
+            };
+
+            let resolver = Resolver::new(schema_json.clone());
+            let resolved_schema = resolver.resolve().expect("faile to resolve refs");
+
+            println!("{:#?}", resolved_schema.as_object());
         }
     }
 
