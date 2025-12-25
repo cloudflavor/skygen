@@ -13,7 +13,7 @@
 // limitations under the License.
 
 use anyhow::{bail, Context};
-use skygen::resolver::resolve::Resolver;
+use skygen::generator::project::create_scaffolding;
 use structopt::StructOpt;
 use tokio::fs;
 use tracing_subscriber::EnvFilter;
@@ -41,21 +41,27 @@ async fn main() -> anyhow::Result<()> {
                 .with_context(|| "failed to parse schema file extension")?;
 
             let c = fs::read_to_string(&args.config).await?;
-            let _config: skygen::Config = toml::from_str(c.as_str())?;
-            let d = fs::read(&args.schema).await?;
+            let config: skygen::Config = toml::from_str(c.as_str())?;
+            let d = fs::read_to_string(&args.schema).await?;
+            // NOTE: This surfaces in the DigitalOcean OpenAPI spec where the assigned int
+            // overflows what the deserializer can handle so we clamp it to u64::MAX;
+            // If sanitization becomes a habbit in the other specs, move this to a fn
+            let safe_data = d.replace("18446744073709552000", "18446744073709551615");
 
             let schema_json: serde_json::Value = match extension.to_lowercase().as_str() {
-                "yaml" | "yml" => {
-                    serde_yaml::from_slice(d.as_slice()).context("failed to parse YAML")?
-                }
-                "json" => serde_json::from_slice(d.as_slice()).context("failed to parse json")?,
+                "yaml" | "yml" => serde_yaml::from_str(safe_data.as_str())
+                    .with_context(|| "failed to parse YAML")?,
+                "json" => serde_json::from_str(safe_data.as_str())
+                    .with_context(|| "failed to parse json")?,
                 _ => bail!("unsupported file extension: {extension}"),
             };
 
-            let resolver = Resolver::new(schema_json.clone());
-            let resolved_schema = resolver.resolve().expect("faile to resolve refs");
+            let _spec: openapiv3::OpenAPI = serde_json::from_value(schema_json)
+                .with_context(|| "failed to conver into OpenAPIv3 spec")?;
 
-            println!("{:#?}", resolved_schema.as_object());
+            create_scaffolding(&args.output, config)
+                .await
+                .with_context(|| "failed to create project scaffolding")?;
         }
     }
 
