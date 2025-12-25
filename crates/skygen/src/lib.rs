@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+pub mod generator;
 pub mod resolver;
 
 use core::fmt;
@@ -57,10 +58,14 @@ pub struct GenerateArgs {
 pub struct Config {
     name: String,
     version: String,
+    edition: Option<String>,
     description: String,
+    lib_status: String,
     keywords: Vec<String>,
     api_url: String,
     authors: Vec<String>,
+    include_only: Option<Vec<String>>,
+    exclude: Option<Vec<String>>,
 }
 
 #[derive(Debug)]
