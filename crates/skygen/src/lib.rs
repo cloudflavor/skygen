@@ -16,9 +16,12 @@ pub mod generator;
 pub mod resolver;
 
 use core::fmt;
+use include_dir::{include_dir, Dir};
 use serde::Deserialize;
 use std::path::PathBuf;
 use structopt::StructOpt;
+
+pub static TEMPLATES: Dir = include_dir!("$CARGO_MANIFEST_DIR/assets/templates");
 
 #[derive(StructOpt)]
 pub struct Cli {

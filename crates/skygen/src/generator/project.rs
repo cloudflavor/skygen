@@ -13,58 +13,36 @@
 // limitations under the License.
 
 use crate::Config;
-use anyhow::Result;
+use anyhow::{Context, Result};
 use std::path::Path;
 use std::process::Command;
 use tokio::fs;
 
 fn generate_cargo_config(config: Config) -> Result<String> {
-    let deps = [r#""#];
-    let kw = [
-        config.keywords,
-        vec![
-            "api".to_string(),
-            "openapiv3".to_string(),
-            "openapi".to_string(),
-            "sdk".to_string(),
-        ],
-    ]
-    .concat();
-    let kw_str = serde_json::to_string(&kw)?;
-    let authors = serde_json::to_string(&config.authors)?;
-    let cargo = format!(
-        r#"[package]
-name = "{name}" 
-edition = "{edition}"
-version = "{version}"
-authors = {authors}
-license = "Apache-2.0"
-description = "{description}"
-repository = "https://cloudflavor.io/projects/skygen"
-readme = "README.md"
+    let cargo_tpl = crate::TEMPLATES
+        .get_file("cargo.toml.tera")
+        .with_context(|| "failed to open cargo tera template")?;
+    let contents = cargo_tpl
+        .contents_utf8()
+        .with_context(|| "failed to read cargo tera template")?;
 
-[badge.maintenance]
-status = "{status}"
+    let mut tera = tera::Tera::default();
+    tera.add_raw_template("cargo.toml.tera", contents)?;
 
-categories = [
-    "web-programming::http-client", 
-    "api-bindings"
-]
+    let mut context = tera::Context::new();
+    context.insert("crate_name", &config.name);
+    context.insert("description", &config.description);
+    context.insert("version", &config.version);
+    context.insert("edition", &config.edition);
+    context.insert("lib_status", &config.lib_status);
+    context.insert("keywords", &config.keywords);
+    context.insert("authors", &config.authors);
 
-keywords = {key_words}
+    let render = tera
+        .render("cargo.toml.tera", &context)
+        .with_context(|| "failed to render tera template")?;
 
-[dependencies]
-"#,
-        name = config.name,
-        edition = config.edition.unwrap_or("2021".to_string()),
-        version = config.version,
-        authors = authors,
-        description = config.description,
-        status = config.lib_status,
-        key_words = kw_str,
-    );
-
-    Ok(cargo)
+    Ok(render)
 }
 
 pub async fn create_scaffolding(root_dir: impl AsRef<Path>, config: Config) -> Result<()> {
