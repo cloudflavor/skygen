@@ -17,7 +17,7 @@ pub mod resolver;
 
 use core::fmt;
 use include_dir::{include_dir, Dir};
-use serde::Deserialize;
+use serde::{Deserialize, Serialize};
 use std::path::PathBuf;
 use structopt::StructOpt;
 
@@ -57,9 +57,9 @@ pub struct GenerateArgs {
     pub config: PathBuf,
 }
 
-#[derive(Debug, Deserialize)]
+#[derive(Debug, Deserialize, Serialize)]
 pub struct Config {
-    name: String,
+    crate_name: String,
     version: String,
     edition: Option<String>,
     description: String,

@@ -16,53 +16,90 @@ use crate::Config;
 use anyhow::{Context, Result};
 use std::path::Path;
 use std::process::Command;
+use tera::{Context as TeraContext, Tera};
 use tokio::fs;
 
-fn generate_cargo_config(config: Config) -> Result<String> {
-    let cargo_tpl = crate::TEMPLATES
-        .get_file("cargo.toml.tera")
-        .with_context(|| "failed to open cargo tera template")?;
-    let contents = cargo_tpl
-        .contents_utf8()
-        .with_context(|| "failed to read cargo tera template")?;
-
-    let mut tera = tera::Tera::default();
-    tera.add_raw_template("cargo.toml.tera", contents)?;
-
-    let mut context = tera::Context::new();
-    context.insert("crate_name", &config.name);
-    context.insert("description", &config.description);
-    context.insert("version", &config.version);
-    context.insert("edition", &config.edition);
-    context.insert("lib_status", &config.lib_status);
-    context.insert("keywords", &config.keywords);
-    context.insert("authors", &config.authors);
-
-    let render = tera
-        .render("cargo.toml.tera", &context)
-        .with_context(|| "failed to render tera template")?;
-
-    Ok(render)
+pub struct RenderPlan {
+    template: &'static str,
+    out_rel: &'static str,
+    extra: fn(&mut TeraContext),
 }
 
-pub async fn create_scaffolding(root_dir: impl AsRef<Path>, config: Config) -> Result<()> {
-    let src_dir = root_dir.as_ref().join("src");
+fn noop(_: &mut tera::Context) {}
+
+async fn render_templates(
+    tera: &tera::Tera,
+    root: &Path,
+    base: &tera::Context,
+    plans: &[RenderPlan],
+) -> Result<()> {
+    for p in plans {
+        let mut ctx = base.clone();
+        (p.extra)(&mut ctx);
+
+        let data = tera.render(p.template, &ctx)?;
+        let out = root.join(p.out_rel);
+
+        fs::write(out, data).await?;
+    }
+
+    Ok(())
+}
+
+pub async fn bootstrap_lib(config: &Config, out_dir: impl AsRef<Path>) -> Result<()> {
+    create_dirs(out_dir.as_ref())
+        .await
+        .with_context(|| "failed to create project directories")?;
+
+    let mut tera = Tera::default();
+    for name in ["cargo.toml.tera", "lib.rs.tera", "mod.rs.tera"] {
+        let f = crate::TEMPLATES
+            .get_file(name)
+            .with_context(|| "failed to fetch template")?;
+        tera.add_raw_template(
+            name,
+            f.contents_utf8()
+                .with_context(|| "failed to fetch utf8 contents from template")?,
+        )?;
+    }
+
+    let mut base_ctx = TeraContext::new();
+    base_ctx.insert("config", config);
+
+    let plans = [
+        RenderPlan {
+            template: "cargo.toml.tera",
+            out_rel: "Cargo.toml",
+            extra: noop,
+        },
+        RenderPlan {
+            template: "lib.rs.tera",
+            out_rel: "src/lib.rs",
+            extra: noop,
+        },
+        RenderPlan {
+            template: "mod.rs.tera",
+            out_rel: "src/apis/mod.rs",
+            extra: noop,
+        },
+        RenderPlan {
+            template: "mod.rs.tera",
+            out_rel: "src/models/mod.rs",
+            extra: noop,
+        },
+    ];
+
+    render_templates(&tera, out_dir.as_ref(), &base_ctx, &plans).await?;
+
+    Ok(())
+}
+
+async fn create_dirs(root_dir: &Path) -> Result<()> {
+    let src_dir = root_dir.join("src");
 
     for path in [&src_dir, &src_dir.join("apis"), &src_dir.join("models")] {
         fs::create_dir_all(path).await?;
     }
-
-    for path in [
-        &src_dir.join("lib.rs"),
-        &src_dir.join("apis").join("mod.rs"),
-        &src_dir.join("models").join("mod.rs"),
-    ] {
-        fs::File::create(&path).await?;
-    }
-
-    let toml_data = generate_cargo_config(config)?;
-
-    fs::write(root_dir.as_ref().join("Cargo.toml"), &toml_data).await?;
 
     Ok(())
 }
