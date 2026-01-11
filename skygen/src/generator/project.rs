@@ -103,23 +103,8 @@ pub async fn bootstrap_lib(config: &Config, out_dir: impl AsRef<Path>) -> Result
             extra: noop,
         },
         RenderPlan {
-            template: "lib/default_client.rs",
-            out_rel: "src/default_client.rs",
-            extra: noop,
-        },
-        RenderPlan {
             template: "lib/errors.rs",
             out_rel: "src/errors.rs",
-            extra: noop,
-        },
-        RenderPlan {
-            template: "lib/transport.rs",
-            out_rel: "src/transport.rs",
-            extra: noop,
-        },
-        RenderPlan {
-            template: "lib/transport_reqwest.rs",
-            out_rel: "src/transport_reqwest.rs",
             extra: noop,
         },
     ];
