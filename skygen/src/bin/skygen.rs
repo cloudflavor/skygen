@@ -13,7 +13,7 @@
 // limitations under the License.
 
 use anyhow::{bail, Context};
-use skygen::generator::project::bootstrap_lib;
+use skygen::generator::project::{bootstrap_lib, format_crate};
 use structopt::StructOpt;
 use tokio::fs;
 use tracing_subscriber::EnvFilter;
@@ -58,7 +58,12 @@ async fn main() -> anyhow::Result<()> {
 
             // let _spec: openapiv3::OpenAPI = serde_json::from_value(schema_json)
             //     .with_context(|| "failed to conver into OpenAPIv3 spec")?;
-            bootstrap_lib(&config, args.output).await?;
+            bootstrap_lib(&config, &args.output)
+                .await
+                .with_context(|| "failed to bootstrap library")?;
+
+            format_crate(&args.output.as_path())
+                .with_context(|| "failed to format the generated crate")?;
         }
     }
 

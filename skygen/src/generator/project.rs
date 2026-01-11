@@ -16,6 +16,7 @@ use crate::Config;
 use anyhow::{Context, Result};
 use std::path::Path;
 use std::process::Command;
+use taplo::formatter;
 use tera::{Context as TeraContext, Tera};
 use tokio::fs;
 
@@ -37,7 +38,11 @@ async fn render_templates(
         let mut ctx = base.clone();
         (p.extra)(&mut ctx);
 
-        let data = tera.render(p.template, &ctx)?;
+        let mut data = tera.render(p.template, &ctx)?;
+        // NOTE: avoid using the taplo CLI for formatting the Cargo.toml file after tera rendering
+        if p.out_rel == "Cargo.toml" {
+            data = formatter::format(&data, formatter::Options::default());
+        }
         let out = root.join(p.out_rel);
 
         fs::write(out, data).await?;
@@ -62,6 +67,7 @@ pub async fn bootstrap_lib(config: &Config, out_dir: impl AsRef<Path>) -> Result
         let f = crate::ASSETS
             .get_file(name)
             .with_context(|| "failed to fetch template")?;
+
         tera.add_raw_template(
             name,
             f.contents_utf8()
@@ -140,17 +146,11 @@ async fn create_dirs(root_dir: &Path) -> Result<()> {
     Ok(())
 }
 
-pub fn format_crate(path: impl AsRef<Path>) -> Result<()> {
+pub fn format_crate(path: &Path) -> Result<()> {
     Command::new("cargo")
-        .arg("format")
+        .arg("fmt")
         .current_dir(path)
         .status()?;
-
-    Ok(())
-}
-
-pub fn format_cargo(path: impl AsRef<Path>) -> Result<()> {
-    Command::new("taplo").current_dir(&path).status()?;
 
     Ok(())
 }
