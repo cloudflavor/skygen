@@ -22,20 +22,11 @@ pub enum Error {
     /// Underlying network stack errors (DNS, TLS, timeouts, protocol).
     Transport(Box<dyn std::error::Error + Send + Sync>),
 
-    /// Errors constructing HTTP requests (URI, headers, builder).
-    Http(http::Error),
-
     /// Non-success responses from the API.
     Api(ApiError),
 
     /// JSON (de)serialization.
     Serialization(serde_json::Error),
-}
-
-impl From<http::Error> for Error {
-    fn from(e: http::Error) -> Self {
-        Self::Http(e)
-    }
 }
 
 impl From<serde_json::Error> for Error {
@@ -52,7 +43,7 @@ impl From<reqwest::Error> for Error {
 
 #[derive(Debug, Clone)]
 pub struct ApiError {
-    pub status: http::StatusCode,
+    pub status: reqwest::StatusCode,
     pub request_id: Option<String>,
     pub content_type: Option<String>,
     pub body: Vec<u8>,

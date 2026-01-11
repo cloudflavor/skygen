@@ -16,42 +16,63 @@
 // limitations under the License.
 
 use crate::errors::{Error, Result};
-use crate::transport::{HttpTransport, Request, Response};
-use http::Uri;
-use std::sync::Arc;
+use reqwest::redirect::Policy;
+use reqwest::{Client as ReqwestClient, ClientBuilder, Request, Response, Url};
 
 #[derive(Clone)]
-pub struct Client<T: HttpTransport> {
-    base: Uri,
-    transport: Arc<T>,
+pub struct Client {
+    base: Url,
+    inner: ReqwestClient,
 }
 
-impl<T: HttpTransport> Client<T> {
-    pub fn new(base: Uri, transport: T) -> Self {
-        Self {
-            base,
-            transport: Arc::new(transport),
-        }
+impl Client {
+    /// Build a client pointed at the provider’s default base URL.
+    pub fn with_default_transport() -> Result<Self> {
+        let base =
+            reqwest::Url::parse(crate::API_URL).map_err(|e| Error::Transport(Box::new(e)))?;
+
+        let inner = Self::builder()
+            .build()
+            .map_err(|e| Error::Transport(Box::new(e)))?;
+
+        Ok(Self { base, inner })
     }
 
-    pub fn base(&self) -> &Uri {
+    /// Override the base URL / transport if desired.
+    pub fn new(base: reqwest::Url, inner: reqwest::Client) -> Self {
+        Self { base, inner }
+    }
+
+    pub fn base(&self) -> &Url {
         &self.base
     }
 
-    pub fn transport(&self) -> &T {
-        &self.transport
+    pub fn builder() -> ClientBuilder {
+        ReqwestClient::builder().redirect(Policy::none())
     }
 
     /// Join `path_and_query` (starting with '/') to the base URL.
     ///
     /// Example: "/client/v4/zones?per_page=50"
-    pub fn join_url(&self, path_and_query: &str) -> Result<Uri> {
+    pub fn join_url(&self, path_and_query: &str) -> Result<Url> {
         self.base
             .join(path_and_query)
             .map_err(|e| Error::Transport(Box::new(e)))
     }
 
     pub async fn send(&self, req: Request) -> Result<Response> {
-        self.transport.call(req).await
+        #[cfg(feature = "tracing")]
+        {
+            tracing::debug!(method = %req.method(), url = %req.url(), "sending request");
+        }
+
+        let resp = self.inner.execute(req).await?;
+
+        #[cfg(feature = "tracing")]
+        {
+            tracing::debug!(status = %resp.status(), "received response");
+        }
+
+        Ok(resp)
     }
 }

@@ -20,24 +20,15 @@ compile_error!(r#"features "rustls" and "native-tls" are mutually exclusive"#);
 
 pub mod apis;
 pub mod client;
-#[cfg(feature="default-client")]
-pub mod default_client;
 pub mod errors;
 pub mod models;
-pub mod transport;
-#[cfg(feature="default-client")]
-pub mod transport_reqwest;
 
-const CLOUDFLARE_API_URL: &str = "{{ config.api_url }}";
+const API_URL: &str = "{{ config.api_url }}";
 
 #[allow(unused_imports)]
 pub mod prelude {
     pub use crate::apis::*;
     pub use crate::client::*;
-    #[cfg(feature="default-client")]
-    pub use crate::default_client::*;
     pub use crate::errors::*;
     pub use crate::models::*;
-    #[cfg(feature="default-client")]
-    pub use crate::transport_reqwest::*;
 }
